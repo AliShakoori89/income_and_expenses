@@ -1,19 +1,28 @@
+import 'package:device_preview/device_preview.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'pages/home_page.dart';
+import 'package:get/get.dart';
+import 'package:income_and_expenses/routes/route_helper.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    DevicePreview(
+      enabled: !kReleaseMode,
+      builder: (context) => MyApp(), // Wrap your app
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Income and Expenses',
-      home: MyHomePage(),
+      initialRoute: RouteHelper.getInitial(),
+      getPages: RouteHelper.routes,
     );
   }
 }
