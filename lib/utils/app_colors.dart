@@ -10,4 +10,15 @@ class AppColors{
   static const Color appBarColor = Color.fromRGBO(245,245,245,1.00);
   //#424242
   static const Color appBarTitleColor = Color.fromRGBO(66,66,66,1.00);
+
+  static const List colorList = [
+    const Color.fromRGBO(200, 230, 201, 1),
+    const Color.fromRGBO(225, 190, 231, 1),
+    const Color.fromRGBO(255, 236, 179, 1),
+    const Color.fromRGBO(248, 187, 208, 1),
+    const Color.fromRGBO(178, 235, 242, 1),
+    const Color.fromRGBO(255, 205, 210, 1),
+    const Color.fromRGBO(197, 202, 233, 1),
+  ];
+
 }

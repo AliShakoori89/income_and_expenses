@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:income_and_expenses/utils/app_colors.dart';
 import 'package:income_and_expenses/utils/app_text_field.dart';
 import 'package:income_and_expenses/utils/dimensions.dart';
-import 'package:income_and_expenses/widgets/widget.dart';
 
 class AddExpensePage extends StatefulWidget {
   const AddExpensePage({Key? key}) : super(key: key);

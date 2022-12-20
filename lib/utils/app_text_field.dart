@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:income_and_expenses/widgets/widget.dart';
+import 'package:income_and_expenses/utils/category_icon_list.dart';
+import 'package:income_and_expenses/utils/widget.dart';
 
 class AppTextField extends StatefulWidget {
 
@@ -41,17 +42,7 @@ class _AppTextFieldState extends State<AppTextField> {
           widget.clickable == true ? showModalBottomSheet(
               context: context,
               builder: (context) {
-                return GridView.count(
-                  crossAxisCount: 3,
-                  children: List.generate(5, (index) {
-                    return Center(
-                      child: Text(
-                        'Item $index',
-                        style: Theme.of(context).textTheme.headline5,
-                      ),
-                    );
-                  }),
-                );
+                return CategoryIconList();
               }):
               null;
         },
