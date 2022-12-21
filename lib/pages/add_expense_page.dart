@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:income_and_expenses/utils/app_button.dart';
 import 'package:income_and_expenses/utils/app_colors.dart';
 import 'package:income_and_expenses/utils/app_text_field.dart';
+import 'package:income_and_expenses/utils/arrow_back_icon.dart';
 import 'package:income_and_expenses/utils/dimensions.dart';
 
 class AddExpensePage extends StatefulWidget {
@@ -25,11 +26,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
         backgroundColor: AppColors.appBarColor,
         title: Text("Add new",
         style: TextStyle(color: AppColors.appBarTitleColor),),
-        leading: GestureDetector(
-            child: Icon(Icons.arrow_back, color: AppColors.appBarTitleColor,),
-        onTap: (){
-            Navigator.of(context).pop();
-        }),
+        leading: ArrowBackIcon(),
       ),
       bottomSheet: AppButton(),
       body: Container(

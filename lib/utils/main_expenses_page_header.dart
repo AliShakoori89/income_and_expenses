@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:income_and_expenses/routes/route_helper.dart';
+import 'package:income_and_expenses/utils/app_colors.dart';
 import 'package:income_and_expenses/utils/dimensions.dart';
 
 class MainExpensesPageHeader extends StatelessWidget {
@@ -22,9 +25,14 @@ class MainExpensesPageHeader extends StatelessWidget {
         ),
         Row(
           children: [
-            Icon(Icons.search,
-              size: Dimensions.iconSize24,
-              color: Color.fromRGBO(66,66,66,1.00),),
+            GestureDetector(
+              onTap: (){
+                Get.toNamed(RouteHelper.getSearchPage());
+              },
+              child: Icon(Icons.search,
+                size: Dimensions.iconSize24,
+                color: AppColors.appBarTitleColor,),
+            ),
             SizedBox(width: Dimensions.width20,),
             Container(
               width: Dimensions.width30,

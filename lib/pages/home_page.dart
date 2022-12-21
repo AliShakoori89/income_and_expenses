@@ -1,11 +1,11 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
-import 'package:circular_reveal_animation/circular_reveal_animation.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
-import 'package:income_and_expenses/pages/add_expense_page.dart';
+import 'package:get/get.dart';
 import 'package:income_and_expenses/pages/main_expenses_page.dart';
+import 'package:income_and_expenses/routes/route_helper.dart';
 import 'package:income_and_expenses/utils/app_colors.dart';
 import 'package:income_and_expenses/utils/dimensions.dart';
 
@@ -131,10 +131,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
           _borderRadiusAnimationController.reset();
           _borderRadiusAnimationController.forward();
           _fabAnimationController.forward();
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const AddExpensePage()),
-          );
+          Get.toNamed(RouteHelper.getAddPage());
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

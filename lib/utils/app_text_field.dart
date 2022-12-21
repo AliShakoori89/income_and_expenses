@@ -32,8 +32,10 @@ class _AppTextFieldState extends State<AppTextField> {
       child: TextFormField(
         readOnly: widget.clickable == true ? true : false,
         controller: widget.controller,
-        maxLines: widget.labelText == "توضیحات" ? 6 : 1,
+        keyboardType: widget.labelText == "هزینه" ? TextInputType.number : null,
+        maxLines: widget.labelText == "توضیحات" ? 6 : null,
         decoration: textInputDecoration.copyWith(
+          suffixText: "تومان",
           labelText: widget.labelText,
           labelStyle: TextStyle(
             color: AppColors.labelColor
