@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:income_and_expenses/utils/app_colors.dart';
 import 'package:income_and_expenses/utils/category_icon_list.dart';
 import 'package:income_and_expenses/utils/widget.dart';
 
@@ -31,8 +32,13 @@ class _AppTextFieldState extends State<AppTextField> {
       child: TextFormField(
         readOnly: widget.clickable == true ? true : false,
         controller: widget.controller,
+        maxLines: widget.labelText == "توضیحات" ? 6 : 1,
         decoration: textInputDecoration.copyWith(
-            labelText: widget.labelText,),
+          labelText: widget.labelText,
+          labelStyle: TextStyle(
+            color: AppColors.labelColor
+          )
+        ),
         onChanged: (val) {
           setState(() {
             val = widget.controller.text;

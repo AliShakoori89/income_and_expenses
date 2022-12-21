@@ -1,12 +1,12 @@
 class AppConst{
   static const List iconsImage = [
     "card-pos.svg",
-    "cup-straw-2-fill.svg",
+    "Burger and cola.svg",
     "driving.svg",
     "gift.svg",
     "health.svg",
     "receipt-item.svg",
-    "setting.svg",
+    "repairs.svg",
   ];
 
   static const List iconsName = [

@@ -6,10 +6,10 @@ const textInputDecoration = InputDecoration(
     borderSide: BorderSide(color: Color(0xff4e76fa), width: 2),
   ),
   enabledBorder: OutlineInputBorder(
-    // borderSide: BorderSide(color: Color(0xFFee7b64), width: 2),
+    borderSide: BorderSide(color: Color(0xffb5b5b7), width: 1),
   ),
   errorBorder: OutlineInputBorder(
-    // borderSide: BorderSide(color: Color(0xFFee7b64), width: 2),
+    borderSide: BorderSide(color: Color(0xffb5b5b7), width: 1),
   ),
 );
 

@@ -34,19 +34,29 @@ class _CategoryIconListState extends State<CategoryIconList> {
               crossAxisCount: 3,
               shrinkWrap: true,
               children: List.generate(7, (index) {
-                return Column(
-                  children: [
-                    Container(
-                      margin: EdgeInsets.all(Dimensions.width10),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: AppColors.colorList[index]
+                return GestureDetector(
+                  onTap: (){
+
+                  },
+                  child: Column(
+                    children: [
+                      Container(
+                        width: Dimensions.width45,
+                        height: Dimensions.width45,
+                        margin: EdgeInsets.all(Dimensions.width10),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: AppColors.colorList[index]
+                        ),
+                        child: Container(
+                          margin: EdgeInsets.all(Dimensions.width10 / 1.4),
+                          child: SvgPicture.asset(
+                              "assets/logos/${AppConst.iconsImage[index]}"),
+                        ),
                       ),
-                      child: SvgPicture.asset(
-                          "assets/logos/${AppConst.iconsImage[index]}"),
-                    ),
-                    Text(AppConst.iconsName[index])
-                  ],
+                      Text(AppConst.iconsName[index])
+                    ],
+                  ),
                 );
               }),
             ),

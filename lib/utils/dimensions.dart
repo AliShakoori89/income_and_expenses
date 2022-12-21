@@ -2,7 +2,9 @@ import 'package:get/get.dart';
 
 class Dimensions{
 
+  //834.9090909090909
   static double screenHeight = Get.context!.height;
+  //392.72727272727275
   static double screenWidth = Get.context!.width;
 
   static double pageViewContainer = screenHeight/3.84;
@@ -59,5 +61,10 @@ class Dimensions{
 
   //splash screen dimensions
   static double splashImg = screenHeight / 3.38;
+
+  //button height
+  static double buttonHeight = screenHeight / 20.85;
+  static double buttonWidth = screenWidth / 1.19;
+
 
 }
