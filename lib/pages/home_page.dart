@@ -5,6 +5,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:income_and_expenses/pages/main_expenses_page.dart';
+import 'package:income_and_expenses/pages/profile_page.dart';
 import 'package:income_and_expenses/routes/route_helper.dart';
 import 'package:income_and_expenses/utils/app_colors.dart';
 import 'package:income_and_expenses/utils/dimensions.dart';
@@ -23,7 +24,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     MainExpensesPage(),
     Container(child: Center(child: Text('Next page'))),
     Container(child: Center(child: Text('Next page page'))),
-    Container(child: Center(child: Text('Next page page page'))),
+    ProfilePage(),
   ];
 
   late AnimationController _fabAnimationController;

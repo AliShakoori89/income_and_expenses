@@ -14,6 +14,12 @@ class AppColors{
   static const Color appBarTitleColor = Color.fromRGBO(66,66,66,1.00);
   //#007BEF
   static const Color buttonColor = Color.fromRGBO(0,123,239,1.00);
+  //#212121
+  static const Color appBarProfileName = Color.fromRGBO(33,33,33,1.00);
+  //#EEEEEE
+  static const Color profileAppBarColor = Color.fromRGBO(238,238,238,1.00);
+  //#BDBDBD
+  static const Color settingMenuItem = Color.fromRGBO(189,189,189,1.00);
 
   static const List colorList = [
     const Color.fromRGBO(200, 230, 201, 1),
