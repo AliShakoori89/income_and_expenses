@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:income_and_expenses/utils/dimensions.dart';
 import 'package:persian_datetimepickers/persian_datetimepickers.dart';
 import 'package:shamsi_date/shamsi_date.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DatePickerCalendar extends StatefulWidget {
   DatePickerCalendar({Key? key}) : super(key: key);
 
   @override
-  State<DatePickerCalendar> createState() => _DatePickerCalendarState();
+  State<DatePickerCalendar> createState() => DatePickerCalendarState();
 }
 
-class _DatePickerCalendarState extends State<DatePickerCalendar> {
+class DatePickerCalendarState extends State<DatePickerCalendar> {
 
   DateTime? _pickedDate;
   var counter = 1 ;
@@ -77,11 +78,12 @@ class _DatePickerCalendarState extends State<DatePickerCalendar> {
     );
   }
 
-  String convertDateTime(DateTime now){
-  Gregorian g = Gregorian(now.year, now.month, now.day);
+  String convertDateTime(DateTime dateTime){
+  Gregorian g = Gregorian(dateTime.year, dateTime.month, dateTime.day);
     Jalali g2j1 = g.toJalali();
     print(g2j1.formatter.y + "/"+ g2j1.formatter.m+ "/"+g2j1.formatter.d);
     String date = g2j1.formatter.y + "/"+ g2j1.formatter.m+ "/"+g2j1.formatter.d;
+    setDate(date);
     return date;
   }
 
@@ -92,5 +94,10 @@ class _DatePickerCalendarState extends State<DatePickerCalendar> {
     print(g2j1.formatter.y + "/"+ g2j1.formatter.m+ "/"+g2j1.formatter.d);
     String date = g2j1.formatter.y + "/"+ g2j1.formatter.m+ "/"+g2j1.formatter.d;
     return date;
+  }
+
+  setDate(String date) async{
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('date', date);
   }
 }
