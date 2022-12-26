@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:income_and_expenses/bloc/set_date/bloc.dart';
+import 'package:income_and_expenses/bloc/set_date/event.dart';
+import 'package:income_and_expenses/bloc/set_date/state.dart';
 import 'package:income_and_expenses/utils/dimensions.dart';
 import 'package:persian_datetimepickers/persian_datetimepickers.dart';
 import 'package:shamsi_date/shamsi_date.dart';
@@ -19,6 +23,8 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
 
   @override
   Widget build(BuildContext context) {
+
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -64,7 +70,7 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                       ? convertDateTime(_pickedDate!)
                       : convertDateTime(now),
                       style:
-                          TextStyle(color: Color.fromRGBO(66, 66, 66, 1.00))),
+                      TextStyle(color: Color.fromRGBO(66, 66, 66, 1.00))),
                 ],
               ),
             ),
@@ -78,12 +84,17 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
     );
   }
 
+
   String convertDateTime(DateTime dateTime){
   Gregorian g = Gregorian(dateTime.year, dateTime.month, dateTime.day);
     Jalali g2j1 = g.toJalali();
     print(g2j1.formatter.y + "/"+ g2j1.formatter.m+ "/"+g2j1.formatter.d);
     String date = g2j1.formatter.y + "/"+ g2j1.formatter.m+ "/"+g2j1.formatter.d;
-    setDate(date);
+  final Datedate = BlocProvider.of<SetDateBloc>(context);
+    Datedate.add(WriteDateEvent(
+      date: date
+      ));
+    Datedate.add(ReadDateEvent());
     return date;
   }
 
@@ -94,10 +105,5 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
     print(g2j1.formatter.y + "/"+ g2j1.formatter.m+ "/"+g2j1.formatter.d);
     String date = g2j1.formatter.y + "/"+ g2j1.formatter.m+ "/"+g2j1.formatter.d;
     return date;
-  }
-
-  setDate(String date) async{
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('date', date);
   }
 }

@@ -21,8 +21,8 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
       ReadDateEvent event, Emitter<SetDateState> emit) async {
     try {
       emit(state.copyWith(status: SetDateStatus.loading));
-      final String date =
-      await setDateRepository.readDate();
+      final String date = await setDateRepository.readDate();
+      print("222    :::  "+date);
       emit(
         state.copyWith(
           status: SetDateStatus.success,
@@ -38,7 +38,9 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
       WriteDateEvent event, Emitter<SetDateState> emit) async {
     try {
       emit(state.copyWith(status: SetDateStatus.loading));
+      print("111    :::  "+event.date);
       await setDateRepository.writeDate(event.date);
+      await setDateRepository.readDate();
 
       emit(
         state.copyWith(

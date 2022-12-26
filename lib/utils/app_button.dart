@@ -8,19 +8,20 @@ class AppButton extends StatelessWidget {
   final String category;
   final String expense;
   final String description;
-  // final String date;
+  final String date;
 
   const AppButton({Key? key,
     required this.category,
     required this.expense,
     required this.description,
-    // required this.date
+    required this.date
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
+        print("final                                 "+date);
       },
       child: Container(
         margin: EdgeInsets.only(

@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:income_and_expenses/bloc/set_date/bloc.dart';
+import 'package:income_and_expenses/bloc/set_date/event.dart';
+import 'package:income_and_expenses/bloc/set_date/state.dart';
 import 'package:income_and_expenses/utils/app_button.dart';
 import 'package:income_and_expenses/utils/app_colors.dart';
 import 'package:income_and_expenses/utils/app_text_field.dart';
@@ -16,15 +20,12 @@ class AddExpensePage extends StatefulWidget {
 
 class _AddExpensePageState extends State<AddExpensePage> {
 
-  // late String? date;
-  //
-  // @override
-  // void initState() async{
-  //   // TODO: implement initState
-  //   super.initState();
-  //   final prefs = await SharedPreferences.getInstance();
-  //   date = prefs.getString('date');
-  // }
+  @override
+  void initState() {
+    print("starrrt");
+    BlocProvider.of<SetDateBloc>(context).add(ReadDateEvent());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +33,8 @@ class _AddExpensePageState extends State<AddExpensePage> {
     late TextEditingController categoryController = TextEditingController();
     late TextEditingController expensesController = TextEditingController();
     late TextEditingController descriptionController = TextEditingController();
+
+
 
     return Scaffold(
       appBar: AppBar(
@@ -41,12 +44,14 @@ class _AddExpensePageState extends State<AddExpensePage> {
         style: TextStyle(color: AppColors.appBarTitleColor),),
         leading: ArrowBackIcon(),
       ),
-      bottomSheet: AppButton(
-        // date: DatePickerCalendarState().convertDateTime(now),
+      bottomSheet: BlocBuilder<SetDateBloc, SetDateState>(builder: (context, state) {
+        print("888  ;;;;   "+ state.date);
+    return AppButton(
+        date: state.date,
         category: categoryController.text,
         expense: expensesController.text,
         description: descriptionController.text,
-      ),
+      );}),
       body: Container(
         margin: EdgeInsets.only(
           left: Dimensions.width30,
