@@ -1,12 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:income_and_expenses/bloc/expense_bloc/event.dart';
-import 'package:income_and_expenses/bloc/expense_bloc/state.dart';
 import 'package:income_and_expenses/bloc/set_date/event.dart';
 import 'package:income_and_expenses/bloc/set_date/state.dart';
 import 'package:income_and_expenses/repository/date_time_repository.dart';
-import 'package:income_and_expenses/repository/expense_repository.dart';
-
-import '../../model/expense_model.dart';
 
 class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
 
@@ -15,6 +10,7 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
   SetDateBloc(this.setDateRepository) : super( const SetDateState()){
     on<ReadDateEvent>(_mapReadDateEventToState);
     on<WriteDateEvent>(_mapWriteDateEventToState);
+    on<AddNextDate>(_mapAddNextDateEventToState);
   }
 
   void _mapReadDateEventToState(
@@ -22,7 +18,6 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
     try {
       emit(state.copyWith(status: SetDateStatus.loading));
       final String date = await setDateRepository.readDate();
-      print("222    :::  "+date);
       emit(
         state.copyWith(
           status: SetDateStatus.success,
@@ -38,9 +33,24 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
       WriteDateEvent event, Emitter<SetDateState> emit) async {
     try {
       emit(state.copyWith(status: SetDateStatus.loading));
-      print("111    :::  "+event.date);
       await setDateRepository.writeDate(event.date);
       await setDateRepository.readDate();
+
+      emit(
+        state.copyWith(
+          status: SetDateStatus.success,
+        ),
+      );
+    } catch (error) {
+      emit(state.copyWith(status: SetDateStatus.error));
+    }
+  }
+
+  void _mapAddNextDateEventToState(
+      AddNextDate event, Emitter<SetDateState> emit) async {
+    try {
+      emit(state.copyWith(status: SetDateStatus.loading));
+      await setDateRepository.addToDate(event.date);
 
       emit(
         state.copyWith(

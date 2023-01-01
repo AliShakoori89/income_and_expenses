@@ -35,7 +35,7 @@ class _AppTextFieldState extends State<AppTextField> {
         keyboardType: widget.labelText == "هزینه" ? TextInputType.number : null,
         maxLines: widget.labelText == "توضیحات" ? 6 : null,
         decoration: textInputDecoration.copyWith(
-          suffixText: "تومان",
+          suffixText: widget.labelText == "هزینه" ? "تومان" : "",
           labelText: widget.labelText,
           labelStyle: TextStyle(
             color: AppColors.labelColor
@@ -50,30 +50,24 @@ class _AppTextFieldState extends State<AppTextField> {
           widget.clickable == true ? showModalBottomSheet(
               context: context,
               builder: (context) {
-                return CategoryIconList();
+                return CategoryIconList(controller: widget.controller);
               }):
               null;
         },
         validator: (val) {
-          // if(widget.icon == Icons.email){
-          //   return RegExp(
-          //       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-          //       .hasMatch(val!)
-          //       ? null
-          //       : "لطفا فرم درست ایمیل خود را وارد تمایید.";
-          // } if(widget.icon == Icons.person){
-          //   if (val!.isNotEmpty) {
-          //     return null;
-          //   } else {
-          //     return "لطفا قسمت نام و نام خانوادگی را تکمیل نمایید.";
-          //   }
-          // }else{
-          //   if (val!.length < 6) {
-          //     return "رمز عبور نباید کنتر از 6 کاراکتر باشد.";
-          //   } else {
-          //     return null;
-          //   }
-          // }
+          if(widget.labelText == "دسته بندی"){
+            if (val!.isNotEmpty){
+              return null;
+            }else {
+              return "لطفا دسته بندی مورد نظر را انتخاب نمایید.";
+            }
+          } if(widget.labelText == "هزینه"){
+            if (val!.isNotEmpty) {
+              return null;
+            } else {
+              return "لطفا هزینه مربوطه را وارد نمایید.";
+            }
+          }
         },
       ),
     );

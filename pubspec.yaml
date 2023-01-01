@@ -43,6 +43,7 @@ dependencies:
   animated_bottom_navigation_bar: ^1.1.0
   circular_reveal_animation: ^2.0.1
   shamsi_date: ^1.0.1
+  intl: ^0.17.0
   flutter_svg: ^1.1.6
   sqflite: ^2.2.2
   path_provider: ^2.0.11

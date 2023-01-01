@@ -22,7 +22,6 @@ class _AddExpensePageState extends State<AddExpensePage> {
 
   @override
   void initState() {
-    print("starrrt");
     BlocProvider.of<SetDateBloc>(context).add(ReadDateEvent());
     super.initState();
   }
@@ -34,7 +33,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
     late TextEditingController expensesController = TextEditingController();
     late TextEditingController descriptionController = TextEditingController();
 
-
+    final formKey = GlobalKey<FormState>();
 
     return Scaffold(
       appBar: AppBar(
@@ -44,45 +43,49 @@ class _AddExpensePageState extends State<AddExpensePage> {
         style: TextStyle(color: AppColors.appBarTitleColor),),
         leading: ArrowBackIcon(),
       ),
+      resizeToAvoidBottomInset: false,
       bottomSheet: BlocBuilder<SetDateBloc, SetDateState>(builder: (context, state) {
-        print("888  ;;;;   "+ state.date);
     return AppButton(
         date: state.date,
         category: categoryController.text,
         expense: expensesController.text,
         description: descriptionController.text,
+        formKey: formKey
       );}),
       body: Container(
         margin: EdgeInsets.only(
           left: Dimensions.width30,
           right: Dimensions.width30
         ),
-        child: Column(
-          children: [
-            SizedBox(height: Dimensions.height20,),
-            DatePickerCalendar(),
-            SizedBox(height: Dimensions.height20,),
-            AppTextField(
-              labelText: "دسته بندی",
-              error: "لطفا ایمیل را به درستی وارد کنید.",
-              controller: categoryController,
-              clickable: true
-            ),
-            SizedBox(height: Dimensions.height30,),
-            AppTextField(
-              labelText: "هزینه",
-              error: "لطفا ایمیل را به درستی وارد کنید.",
-              controller: expensesController,
-              clickable: false
-            ),
-            SizedBox(height: Dimensions.height30,),
-            AppTextField(
-              labelText: "توضیحات",
-              error: "لطفا ایمیل را به درستی وارد کنید.",
-              controller: descriptionController,
-              clickable: false
-            ),
-          ],
+        child: Form(
+          key: formKey,
+          child: Column(
+            children: [
+              SizedBox(height: Dimensions.height20,),
+              DatePickerCalendar(),
+              SizedBox(height: Dimensions.height20,),
+              AppTextField(
+                labelText: "دسته بندی",
+                error: "لطفا ایمیل را به درستی وارد کنید.",
+                controller: categoryController,
+                clickable: true
+              ),
+              SizedBox(height: Dimensions.height30,),
+              AppTextField(
+                labelText: "هزینه",
+                error: "لطفا ایمیل را به درستی وارد کنید.",
+                controller: expensesController,
+                clickable: false
+              ),
+              SizedBox(height: Dimensions.height30,),
+              AppTextField(
+                labelText: "توضیحات",
+                error: "لطفا ایمیل را به درستی وارد کنید.",
+                controller: descriptionController,
+                clickable: false
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -1,4 +1,3 @@
-import 'package:income_and_expenses/model/expense_model.dart';
 
 abstract class SetDateEvent{
   @override
@@ -8,9 +7,19 @@ abstract class SetDateEvent{
 class ReadDateEvent extends SetDateEvent {}
 
 class WriteDateEvent extends SetDateEvent {
-  final String date;
+  final DateTime date;
 
   WriteDateEvent(
+      {required this.date});
+
+  @override
+  List<Object> get props => [date];
+}
+
+class AddNextDate extends SetDateEvent{
+  final DateTime date;
+
+  AddNextDate(
       {required this.date});
 
   @override

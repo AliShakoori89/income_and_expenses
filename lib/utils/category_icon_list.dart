@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:income_and_expenses/utils/app_colors.dart';
 import 'package:income_and_expenses/utils/app_const.dart';
 import 'package:income_and_expenses/utils/dimensions.dart';
 
-class CategoryIconList extends StatefulWidget {
-  CategoryIconList({Key? key}) : super(key: key);
+class CategoryIconList extends StatelessWidget {
 
-  @override
-  State<CategoryIconList> createState() => _CategoryIconListState();
-}
+  TextEditingController controller;
 
-class _CategoryIconListState extends State<CategoryIconList> {
+  CategoryIconList({Key? key, required this.controller}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +34,8 @@ class _CategoryIconListState extends State<CategoryIconList> {
               children: List.generate(7, (index) {
                 return GestureDetector(
                   onTap: (){
-
+                    controller.text = AppConst.iconsName[index];
+                    Get.back();
                   },
                   child: Column(
                     children: [
