@@ -4,7 +4,7 @@ class ExpenseModel {
   String? expenseCategory;
   String? expense;
   String? description;
-  String? useTime;
+  String? iconType;
 
 
   ExpenseModel({
@@ -13,6 +13,7 @@ class ExpenseModel {
     this.expenseCategory,
     this.expense,
     this.description,
+    this.iconType
   });
 
   static const String tableName = "my_table";
@@ -24,7 +25,7 @@ class ExpenseModel {
       "expenseCategory": expenseCategory,
       "expense": expense,
       "description": description,
-      "useTime": useTime,
+      "iconType": iconType
     };
   }
 
@@ -35,6 +36,7 @@ class ExpenseModel {
       expenseCategory: parsedJson['expenseCategory'],
       expense: parsedJson['expense'],
       description: parsedJson['description'],
+      iconType: parsedJson['iconType']
     );
   }
 }

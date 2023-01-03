@@ -18,12 +18,12 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
       FetchExpensesEvent event, Emitter<ExpenseState> emit) async {
     try {
       emit(state.copyWith(status: ExpenseStatus.loading));
-      final List<ExpenseModel> medicines =
+      final List<ExpenseModel> expenses =
       await expenseRepository.getAllExpensesRepo();
       emit(
         state.copyWith(
           status: ExpenseStatus.success,
-          medicines: medicines,
+          expenses: expenses,
         ),
       );
     } catch (error) {
@@ -36,12 +36,12 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     try {
       emit(state.copyWith(status: ExpenseStatus.loading));
       await expenseRepository.addExpenseRepo(event.expenseModel);
-      final List<ExpenseModel> medicines = await expenseRepository
+      final List<ExpenseModel> expenses = await expenseRepository
           .getAllExpensesRepo();
       emit(
         state.copyWith(
           status: ExpenseStatus.success,
-          medicines: medicines,
+          expenses: expenses,
         ),
       );
     } catch (error) {

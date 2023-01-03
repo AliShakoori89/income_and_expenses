@@ -10,7 +10,8 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
   SetDateBloc(this.setDateRepository) : super( const SetDateState()){
     on<ReadDateEvent>(_mapReadDateEventToState);
     on<WriteDateEvent>(_mapWriteDateEventToState);
-    on<AddNextDate>(_mapAddNextDateEventToState);
+    on<AddToDate>(_mapAddNextDateEventToState);
+    on<ReduceDate>(_mapReduceDateEventToState);
   }
 
   void _mapReadDateEventToState(
@@ -47,10 +48,26 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
   }
 
   void _mapAddNextDateEventToState(
-      AddNextDate event, Emitter<SetDateState> emit) async {
+      AddToDate event, Emitter<SetDateState> emit) async {
     try {
       emit(state.copyWith(status: SetDateStatus.loading));
       await setDateRepository.addToDate(event.date);
+
+      emit(
+        state.copyWith(
+          status: SetDateStatus.success,
+        ),
+      );
+    } catch (error) {
+      emit(state.copyWith(status: SetDateStatus.error));
+    }
+  }
+
+  void _mapReduceDateEventToState(
+      ReduceDate event, Emitter<SetDateState> emit) async {
+    try {
+      emit(state.copyWith(status: SetDateStatus.loading));
+      await setDateRepository.reduceDate(event.date);
 
       emit(
         state.copyWith(

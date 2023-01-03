@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 class AppColors{
-  static const Color backGroundColor = Color.fromRGBO(253, 253, 253, 1.0);
   static const Color mainColor = Color.fromRGBO(120, 111, 192, 1);
   static const Color backGroundMainColor = Color.fromRGBO(241, 241, 241, 1.0);
   static const Color iconBackGroundMainColor = Color.fromRGBO(166, 165, 165, 1.0);
@@ -20,6 +19,28 @@ class AppColors{
   static const Color profileAppBarColor = Color.fromRGBO(238,238,238,1.00);
   //#BDBDBD
   static const Color settingMenuItem = Color.fromRGBO(189,189,189,1.00);
+  //#757575
+  static const Color calenderBoxIconColor = Color.fromRGBO(117, 117, 117, 1.00);
+  //#FFFFFF
+  static const Color backGroundColor = Color.fromRGBO(255, 255, 255, 1.00);
+  //#E0E0E0
+  static const Color mainPageCardBorderColor = Color.fromRGBO(224, 224, 224, 1.00);
+  //#e53935
+  static const Color expensesDigitColor = Color.fromRGBO(229, 57, 53, 1.00);
+  //#616161
+  static const Color mainPageFirstContainerFontColor = Color.fromRGBO(	97, 97, 97, 1.00);
+  //#00897B
+  static const Color balanceDigitColor = Color.fromRGBO(0, 137, 123, 1.00);
+
+  static const Color calenderBoxColor = Color.fromRGBO(245, 245, 245, 1.00);
+
+  static const Color snackBarColor = Color.fromRGBO(255, 248, 225, 1.0);
+
+
+
+  static const Color arrowIconColor = Color.fromRGBO(0, 0, 0, 0.54);
+
+  static const Color dateColor = Color.fromRGBO(66, 66, 66, 1.00);
 
   static const List colorList = [
     const Color.fromRGBO(200, 230, 201, 1),
@@ -29,6 +50,8 @@ class AppColors{
     const Color.fromRGBO(178, 235, 242, 1),
     const Color.fromRGBO(255, 205, 210, 1),
     const Color.fromRGBO(197, 202, 233, 1),
+    const Color.fromRGBO(255, 236, 179, 1),
+    const Color.fromRGBO(248, 187, 208, 1),
   ];
 
 }

@@ -6,24 +6,22 @@ import 'package:income_and_expenses/utils/widget.dart';
 class AppTextField extends StatefulWidget {
 
   final String labelText;
-  final String error;
   final bool clickable;
   final TextEditingController controller;
 
   const AppTextField({Key? key,
     required this.labelText,
-    required this.error,
     required this.clickable,
     required this.controller}) : super(key: key);
 
   @override
   State<AppTextField> createState() =>
-      _AppTextFieldState(labelText, error, clickable, controller);
+      _AppTextFieldState(labelText, clickable, controller);
 }
 
 class _AppTextFieldState extends State<AppTextField> {
 
-  _AppTextFieldState(labelText, error, clickable, controller);
+  _AppTextFieldState(labelText, clickable, controller);
 
   @override
   Widget build(BuildContext context) {

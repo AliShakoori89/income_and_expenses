@@ -31,7 +31,7 @@ class CategoryIconList extends StatelessWidget {
               scrollDirection: Axis.vertical,
               crossAxisCount: 3,
               shrinkWrap: true,
-              children: List.generate(7, (index) {
+              children: List.generate(AppConst.iconsName.length, (index) {
                 return GestureDetector(
                   onTap: (){
                     controller.text = AppConst.iconsName[index];

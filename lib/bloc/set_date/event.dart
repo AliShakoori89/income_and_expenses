@@ -16,10 +16,20 @@ class WriteDateEvent extends SetDateEvent {
   List<Object> get props => [date];
 }
 
-class AddNextDate extends SetDateEvent{
+class AddToDate extends SetDateEvent{
   final DateTime date;
 
-  AddNextDate(
+  AddToDate(
+      {required this.date});
+
+  @override
+  List<Object> get props => [date];
+}
+
+class ReduceDate extends SetDateEvent{
+  final DateTime date;
+
+  ReduceDate(
       {required this.date});
 
   @override

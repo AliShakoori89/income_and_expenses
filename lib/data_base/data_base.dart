@@ -15,6 +15,7 @@ class DatabaseHelper {
   static const columnExpenseCategory = 'expenseCategory';
   static const columnExpense = 'expense';
   static const columnDescription = 'description';
+  static const columnIconType = 'iconType';
 
   DatabaseHelper._privateConstructor();
 
@@ -38,7 +39,8 @@ class DatabaseHelper {
         '$columnExpenseDate TEXT,'
         '$columnExpenseCategory TEXT,'
         '$columnExpense TEXT,'
-        '$columnDescription TEXT'
+        '$columnDescription TEXT,'
+        '$columnIconType Text'
         ')'
     );
   }
@@ -52,7 +54,7 @@ class DatabaseHelper {
   Future<List<ExpenseModel>> getAllMedicines() async {
     var dbMedicine = await database;
     var listMap = await dbMedicine
-        .rawQuery('SELECT DISTINCT * FROM my_table GROUP BY medicineName');
+        .rawQuery('SELECT DISTINCT * FROM my_table');
     var listMedicines = <ExpenseModel>[];
     for (Map<String, dynamic> m in listMap) {
       listMedicines.add(ExpenseModel.fromJson(m));
