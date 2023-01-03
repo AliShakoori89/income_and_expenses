@@ -118,9 +118,9 @@ class _AddExpensePageState extends State<AddExpensePage> {
             }else if(categoryController.text == "تعمیرات"){
               expense.iconType = "assets/logos/repairs.svg";
             }else if(categoryController.text == "تفریح"){
-              expense.iconType = "assets/logos/Games and multimedia.svg";
+              expense.iconType = "assets/logos/games and multimedia.svg";
             }else if(categoryController.text == "سایر"){
-              expense.iconType = "assets/logos/Group 30.svg";
+              expense.iconType = "assets/logos/group 30.svg";
             }
 
 

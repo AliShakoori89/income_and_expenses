@@ -7,8 +7,8 @@ class AppConst{
     "health.svg",
     "receipt-item.svg",
     "repairs.svg",
-    "Games and multimedia.svg",
-    "Group 30.svg"
+    "games and multimedia.svg",
+    "group 30.svg"
   ];
 
   static const List iconsName = [
