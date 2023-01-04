@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:income_and_expenses/bloc/set_date/event.dart';
-import 'package:income_and_expenses/bloc/set_date/state.dart';
+import 'package:income_and_expenses/bloc/set_date_bloc/event.dart';
+import 'package:income_and_expenses/bloc/set_date_bloc/state.dart';
 import 'package:income_and_expenses/repository/date_time_repository.dart';
 
 class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {

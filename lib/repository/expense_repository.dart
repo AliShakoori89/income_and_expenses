@@ -13,7 +13,6 @@ class ExpenseRepository {
   }
 
   Future<bool> addExpenseRepo(ExpenseModel expenseModel) async {
-    print('save save save save save save ' + expenseModel.description.toString());
     return await helper.saveExpense(expenseModel);
   }
 }

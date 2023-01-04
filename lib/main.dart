@@ -4,10 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:income_and_expenses/bloc/expense_bloc/bloc.dart';
-import 'package:income_and_expenses/bloc/set_date/bloc.dart';
+import 'package:income_and_expenses/bloc/set_date_bloc/bloc.dart';
+import 'package:income_and_expenses/repository/cash_repository.dart';
 import 'package:income_and_expenses/repository/date_time_repository.dart';
 import 'package:income_and_expenses/repository/expense_repository.dart';
 import 'package:income_and_expenses/routes/route_helper.dart';
+
+import 'bloc/cash_bloc/bloc.dart';
 
 void main() {
   runApp(
@@ -31,6 +34,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
             create: (BuildContext context) =>
                 SetDateBloc(SetDateRepository())),
+        BlocProvider(
+            create: (BuildContext context) =>
+                CashBloc(CashRepository())),
       ],
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,

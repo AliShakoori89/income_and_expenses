@@ -115,25 +115,31 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+
+    bool keyboardIsOpen = MediaQuery.of(context).viewInsets.bottom != 0;
+
     return Scaffold(
       extendBody: true,
       body: pages[_bottomNavIndex],
-      floatingActionButton: FloatingActionButton(
-        backgroundColor:AppColors.mainColor,
-        elevation: 0,
-        // HexColor('#FFA400'),
-        child: Icon(
-          Icons.add,
-          color: Colors.white,
-          size: Dimensions.iconSize30,
+      floatingActionButton: Visibility(
+        visible: !keyboardIsOpen,
+        child: FloatingActionButton(
+          backgroundColor:AppColors.mainColor,
+          elevation: 0,
+          // HexColor('#FFA400'),
+          child: Icon(
+            Icons.add,
+            color: Colors.white,
+            size: Dimensions.iconSize30,
+          ),
+          onPressed: () {
+            _fabAnimationController.reset();
+            _borderRadiusAnimationController.reset();
+            _borderRadiusAnimationController.forward();
+            _fabAnimationController.forward();
+            Get.toNamed(RouteHelper.getAddPage());
+          },
         ),
-        onPressed: () {
-          _fabAnimationController.reset();
-          _borderRadiusAnimationController.reset();
-          _borderRadiusAnimationController.forward();
-          _fabAnimationController.forward();
-          Get.toNamed(RouteHelper.getAddPage());
-        },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: AnimatedBottomNavigationBar.builder(

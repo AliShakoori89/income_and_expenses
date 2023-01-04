@@ -3,7 +3,7 @@ import 'package:income_and_expenses/model/expense_model.dart';
 
 enum ExpenseStatus { initial, success, error, loading }
 
-extension MedicineStatusX on ExpenseStatus {
+extension ExpenseStatusX on ExpenseStatus {
   bool get isInitial => this == ExpenseStatus.initial;
   bool get isSuccess => this == ExpenseStatus.success;
   bool get isError => this == ExpenseStatus.error;

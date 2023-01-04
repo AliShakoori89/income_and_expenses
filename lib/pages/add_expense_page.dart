@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:income_and_expenses/bloc/expense_bloc/bloc.dart';
 import 'package:income_and_expenses/bloc/expense_bloc/event.dart';
-import 'package:income_and_expenses/bloc/set_date/bloc.dart';
-import 'package:income_and_expenses/bloc/set_date/event.dart';
-import 'package:income_and_expenses/bloc/set_date/state.dart';
+import 'package:income_and_expenses/bloc/set_date_bloc/bloc.dart';
+import 'package:income_and_expenses/bloc/set_date_bloc/event.dart';
+import 'package:income_and_expenses/bloc/set_date_bloc/state.dart';
 import 'package:income_and_expenses/model/expense_model.dart';
 import 'package:income_and_expenses/routes/route_helper.dart';
 import 'package:income_and_expenses/utils/app_colors.dart';
@@ -13,6 +13,9 @@ import 'package:income_and_expenses/utils/app_text_field.dart';
 import 'package:income_and_expenses/utils/arrow_back_icon.dart';
 import 'package:income_and_expenses/utils/date_picker_calendar.dart';
 import 'package:income_and_expenses/utils/dimensions.dart';
+
+import '../bloc/cash_bloc/bloc.dart';
+import '../bloc/cash_bloc/event.dart';
 
 class AddExpensePage extends StatefulWidget {
   const AddExpensePage({Key? key}) : super(key: key);
@@ -98,6 +101,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
           if (formKey.currentState!.validate()) {
             late ExpenseModel expense = ExpenseModel();
             final expenseBloc = BlocProvider.of<ExpenseBloc>(context);
+            final cashBloc = BlocProvider.of<CashBloc>(context);
 
             expense.expenseDate = state.date;
             expense.expenseCategory = categoryController.text;
@@ -123,6 +127,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
               expense.iconType = "assets/logos/group 30.svg";
             }
 
+            cashBloc.add(AllExpensesEvent(date: state.date, expense: expensesController.text));
 
             expenseBloc.add(AddExpenseEvent(expenseModel: expense));
 

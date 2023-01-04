@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:income_and_expenses/model/expense_model.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseHelper {
@@ -52,8 +53,8 @@ class DatabaseHelper {
   }
 
   Future<List<ExpenseModel>> getAllMedicines() async {
-    var dbMedicine = await database;
-    var listMap = await dbMedicine
+    var dbExpense = await database;
+    var listMap = await dbExpense
         .rawQuery('SELECT DISTINCT * FROM my_table');
     var listMedicines = <ExpenseModel>[];
     for (Map<String, dynamic> m in listMap) {

@@ -10,7 +10,7 @@ class SetDateRepository {
     final prefs = await SharedPreferences.getInstance();
     Gregorian g = Gregorian(date.year, date.month, date.day);
     Jalali g2j1 = g.toJalali();
-    String dateString = "${g2j1.formatter.y}/${g2j1.formatter.m}/${g2j1.formatter.d}";
+    String dateString = "${g2j1.formatter.y}-${g2j1.formatter.m}-${g2j1.formatter.d}";
     await prefs.setString('date', dateString);
   }
 
@@ -21,7 +21,7 @@ class SetDateRepository {
     if(date == null){
       Gregorian g = Gregorian(now.year, now.month, now.day);
       Jalali g2j1 = g.toJalali();
-      String dateString = "${g2j1.formatter.y}/${g2j1.formatter.m}/${g2j1.formatter.d}";
+      String dateString = "${g2j1.formatter.y}-${g2j1.formatter.m}-${g2j1.formatter.d}";
       return dateString;
     }else{
       return date;

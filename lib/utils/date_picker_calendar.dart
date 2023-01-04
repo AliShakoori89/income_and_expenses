@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:income_and_expenses/bloc/set_date/bloc.dart';
-import 'package:income_and_expenses/bloc/set_date/event.dart';
-import 'package:income_and_expenses/bloc/set_date/state.dart';
+import 'package:income_and_expenses/bloc/set_date_bloc/bloc.dart';
+import 'package:income_and_expenses/bloc/set_date_bloc/event.dart';
+import 'package:income_and_expenses/bloc/set_date_bloc/state.dart';
 import 'package:income_and_expenses/utils/app_colors.dart';
 import 'package:income_and_expenses/utils/dimensions.dart';
 import 'package:intl/intl.dart';
