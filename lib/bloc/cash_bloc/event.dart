@@ -16,15 +16,3 @@ class AddCashEvent extends CashEvent {
   @override
   List<Object> get props => [cash];
 }
-
-class AllExpensesEvent extends CashEvent {
-
-  final String date;
-  final String expense;
-
-  AllExpensesEvent(
-      {required this.date, required this.expense});
-
-  @override
-  List<Object> get props => [date, expense];
-}

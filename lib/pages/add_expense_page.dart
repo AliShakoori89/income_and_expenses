@@ -14,9 +14,6 @@ import 'package:income_and_expenses/utils/arrow_back_icon.dart';
 import 'package:income_and_expenses/utils/date_picker_calendar.dart';
 import 'package:income_and_expenses/utils/dimensions.dart';
 
-import '../bloc/cash_bloc/bloc.dart';
-import '../bloc/cash_bloc/event.dart';
-
 class AddExpensePage extends StatefulWidget {
   const AddExpensePage({Key? key}) : super(key: key);
 
@@ -101,7 +98,6 @@ class _AddExpensePageState extends State<AddExpensePage> {
           if (formKey.currentState!.validate()) {
             late ExpenseModel expense = ExpenseModel();
             final expenseBloc = BlocProvider.of<ExpenseBloc>(context);
-            final cashBloc = BlocProvider.of<CashBloc>(context);
 
             expense.expenseDate = state.date;
             expense.expenseCategory = categoryController.text;
@@ -126,8 +122,6 @@ class _AddExpensePageState extends State<AddExpensePage> {
             }else if(categoryController.text == "سایر"){
               expense.iconType = "assets/logos/group 30.svg";
             }
-
-            cashBloc.add(AllExpensesEvent(date: state.date, expense: expensesController.text));
 
             expenseBloc.add(AddExpenseEvent(expenseModel: expense));
 

@@ -10,10 +10,4 @@ class CashRepository {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getString('cash');
   }
-
-  Future<String?> allExpenses(String date, String expense) async {
-    DateTime time = DateTime.parse(date);
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getString('cash');
-  }
 }
