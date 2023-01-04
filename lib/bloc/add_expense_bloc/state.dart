@@ -10,9 +10,9 @@ extension ExpenseStatusX on ExpenseStatus {
   bool get isLoading => this == ExpenseStatus.loading;
 }
 
-class ExpenseState extends Equatable {
+class AddExpenseState extends Equatable {
 
-  const ExpenseState({
+  const AddExpenseState({
     this.status = ExpenseStatus.initial,
     List<ExpenseModel>? expenses,
   }): expenses = expenses ?? const [];
@@ -24,11 +24,11 @@ class ExpenseState extends Equatable {
   // TODO: implement props
   List<Object> get props => [status, expenses];
 
-  ExpenseState copyWith({
+  AddExpenseState copyWith({
     ExpenseStatus? status,
     List<ExpenseModel>? expenses
   }) {
-    return ExpenseState(
+    return AddExpenseState(
       status: status ?? this.status,
       expenses: expenses ?? this.expenses,
     );

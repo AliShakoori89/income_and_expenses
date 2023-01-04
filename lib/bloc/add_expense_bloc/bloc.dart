@@ -1,21 +1,21 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:income_and_expenses/bloc/expense_bloc/event.dart';
-import 'package:income_and_expenses/bloc/expense_bloc/state.dart';
+import 'package:income_and_expenses/bloc/add_expense_bloc/event.dart';
+import 'package:income_and_expenses/bloc/add_expense_bloc/state.dart';
 import 'package:income_and_expenses/repository/expense_repository.dart';
 
 import '../../model/expense_model.dart';
 
-class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
+class AddExpenseBloc extends Bloc<AddExpenseEvent, AddExpenseState> {
 
   ExpenseRepository expenseRepository = ExpenseRepository();
 
-  ExpenseBloc(this.expenseRepository) : super( const ExpenseState()){
+  AddExpenseBloc(this.expenseRepository) : super( const AddExpenseState()){
     on<FetchExpensesEvent>(_mapFetchExpensesEventToState);
-    on<AddExpenseEvent>(_mapAddExpenseEventToState);
+    on<AddOneByOneExpenseEvent>(_mapAddExpenseEventToState);
   }
 
   void _mapFetchExpensesEventToState(
-      FetchExpensesEvent event, Emitter<ExpenseState> emit) async {
+      FetchExpensesEvent event, Emitter<AddExpenseState> emit) async {
     try {
       emit(state.copyWith(status: ExpenseStatus.loading));
       final List<ExpenseModel> expenses =
@@ -32,7 +32,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
   }
 
   void _mapAddExpenseEventToState(
-      AddExpenseEvent event, Emitter<ExpenseState> emit) async {
+      AddOneByOneExpenseEvent event, Emitter<AddExpenseState> emit) async {
     try {
       emit(state.copyWith(status: ExpenseStatus.loading));
       await expenseRepository.addExpenseRepo(event.expenseModel);

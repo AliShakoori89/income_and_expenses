@@ -1,17 +1,17 @@
 import 'package:income_and_expenses/model/expense_model.dart';
 
-abstract class ExpenseEvent{
+abstract class AddExpenseEvent{
   @override
   List<Object> get props => [];
 }
 
-class FetchExpensesEvent extends ExpenseEvent {}
+class FetchExpensesEvent extends AddExpenseEvent {}
 
-class AddExpenseEvent extends ExpenseEvent {
+class AddOneByOneExpenseEvent extends AddExpenseEvent {
 
   final ExpenseModel expenseModel;
 
-  AddExpenseEvent(
+  AddOneByOneExpenseEvent(
       {required this.expenseModel});
 
   @override

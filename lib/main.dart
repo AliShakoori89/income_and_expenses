@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:income_and_expenses/bloc/expense_bloc/bloc.dart';
+import 'package:income_and_expenses/bloc/add_expense_bloc/bloc.dart';
 import 'package:income_and_expenses/bloc/set_date_bloc/bloc.dart';
 import 'package:income_and_expenses/repository/cash_repository.dart';
 import 'package:income_and_expenses/repository/date_time_repository.dart';
@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(
             create: (BuildContext context) =>
-                ExpenseBloc(ExpenseRepository())),
+                AddExpenseBloc(ExpenseRepository())),
         BlocProvider(
             create: (BuildContext context) =>
                 SetDateBloc(SetDateRepository())),

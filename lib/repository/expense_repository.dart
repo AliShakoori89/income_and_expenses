@@ -15,4 +15,8 @@ class ExpenseRepository {
   Future<bool> addExpenseRepo(ExpenseModel expenseModel) async {
     return await helper.saveExpense(expenseModel);
   }
+
+  calculateExpenseRepo(String date) async {
+    return await helper.calculateTotalExpenses(date);
+  }
 }

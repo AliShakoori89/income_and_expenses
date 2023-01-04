@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:income_and_expenses/bloc/expense_bloc/bloc.dart';
-import 'package:income_and_expenses/bloc/expense_bloc/event.dart';
-import 'package:income_and_expenses/bloc/expense_bloc/state.dart';
+import 'package:income_and_expenses/bloc/add_expense_bloc/bloc.dart';
+import 'package:income_and_expenses/bloc/add_expense_bloc/event.dart';
+import 'package:income_and_expenses/bloc/add_expense_bloc/state.dart';
 import 'package:income_and_expenses/utils/app_colors.dart';
 import 'package:income_and_expenses/utils/cashContainer.dart';
 import 'package:income_and_expenses/utils/date_picker_calendar.dart';
@@ -23,7 +23,7 @@ class _MainExpensesPageState extends State<MainExpensesPage> {
   @override
   void initState() {
 
-    final expensesBloc = BlocProvider.of<ExpenseBloc>(context);
+    final expensesBloc = BlocProvider.of<AddExpenseBloc>(context);
     expensesBloc.add(FetchExpensesEvent());
 
     super.initState();
@@ -95,7 +95,7 @@ class _MainExpensesPageState extends State<MainExpensesPage> {
                             SizedBox(
                               height: Dimensions.height20,
                             ),
-                            BlocBuilder<ExpenseBloc, ExpenseState>(builder: (context, state) {
+                            BlocBuilder<AddExpenseBloc, AddExpenseState>(builder: (context, state) {
                             return state.status.isLoading
                                   ? const Center(child: CircularProgressIndicator())
                                   : state.status.isSuccess

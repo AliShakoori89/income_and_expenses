@@ -62,4 +62,11 @@ class DatabaseHelper {
     }
     return listMedicines;
   }
+
+  calculateTotalExpenses(String date) async {
+    var dbExpense = await database;
+    var result = await dbExpense.rawQuery("SELECT SUM(" + columnExpense + ") FROM my_table WHERE "
+        + columnExpenseDate + " ='" + date + "'", null );
+    print(result.toList());
+  }
 }
