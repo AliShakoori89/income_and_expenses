@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:income_and_expenses/model/expense_model.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseHelper {
@@ -39,7 +38,7 @@ class DatabaseHelper {
         '$columnId INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,'
         '$columnExpenseDate TEXT,'
         '$columnExpenseCategory TEXT,'
-        '$columnExpense TEXT,'
+        '$columnExpense INTEGER,'
         '$columnDescription TEXT,'
         '$columnIconType Text'
         ')'
@@ -52,21 +51,22 @@ class DatabaseHelper {
     return true;
   }
 
-  Future<List<ExpenseModel>> getAllMedicines() async {
+  Future<List<ExpenseModel>> getAllExpenses() async {
     var dbExpense = await database;
     var listMap = await dbExpense
         .rawQuery('SELECT DISTINCT * FROM my_table');
     var listMedicines = <ExpenseModel>[];
     for (Map<String, dynamic> m in listMap) {
+      print(m);
       listMedicines.add(ExpenseModel.fromJson(m));
     }
     return listMedicines;
   }
 
-  calculateTotalExpenses(String date) async {
+  Future<String> calculateTotalExpenses(String? date) async {
     var dbExpense = await database;
-    var result = await dbExpense.rawQuery("SELECT SUM(" + columnExpense + ") FROM my_table WHERE "
-        + columnExpenseDate + " ='" + date + "'", null );
-    print(result.toList());
+    var result = await dbExpense.rawQuery("SELECT SUM($columnExpense) FROM my_table WHERE $columnExpenseDate ='$date'");
+    print("reeeeeeeeeeeeeeeeeeeeeeeeeesult $result");
+    return "yes";
   }
 }

@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:income_and_expenses/bloc/calculate_expense_bloc/bloc.dart';
+import 'package:income_and_expenses/bloc/calculate_expense_bloc/state.dart';
 import 'package:income_and_expenses/bloc/cash_bloc/bloc.dart';
 import 'package:income_and_expenses/bloc/cash_bloc/state.dart';
-import 'package:income_and_expenses/bloc/add_expense_bloc/bloc.dart';
-import 'package:income_and_expenses/bloc/add_expense_bloc/state.dart';
 import 'package:income_and_expenses/utils/app_colors.dart';
 import 'package:income_and_expenses/utils/dimensions.dart';
 import 'package:income_and_expenses/utils/widget.dart';
 import 'package:persian_number_utility/persian_number_utility.dart';
 
+import '../bloc/calculate_expense_bloc/event.dart';
 import '../bloc/cash_bloc/event.dart';
 
 class CashContainer extends StatefulWidget {
@@ -25,6 +26,9 @@ class _CashContainerState extends State<CashContainer> {
 
     final cashBloc = BlocProvider.of<CashBloc>(context);
     cashBloc.add(FetchCashEvent());
+
+    final calculateExpenseBloc = BlocProvider.of<CalculateExpenseBloc>(context);
+    calculateExpenseBloc.add(SumExpenseByMonthEvent());
 
     super.initState();
   }
@@ -67,24 +71,27 @@ class _CashContainerState extends State<CashContainer> {
                         fontWeight: FontWeight.w400)),
               ],
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                    "assets/main_page_first_container_logo/balance.png"),
-                SizedBox(height: Dimensions.height10,),
-                Text("48,000".toPersianDigit(),
-                    style: TextStyle(
-                        color: AppColors.balanceDigitColor,
-                        fontSize: Dimensions.font18)),
-                Text("موجودی",
-                    style: TextStyle(
-                        color: AppColors
-                            .mainPageFirstContainerFontColor,
-                        fontSize: Dimensions.font16,
-                        fontWeight: FontWeight.w400)),
-              ],
-            ),
+            BlocBuilder<CalculateExpenseBloc, CalculateExpenseState>(builder: (context, state) {
+              return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                        "assets/main_page_first_container_logo/balance.png"),
+                    SizedBox(
+                      height: Dimensions.height10,
+                    ),
+                    Text(state.expenses,
+                        style: TextStyle(
+                            color: AppColors.balanceDigitColor,
+                            fontSize: Dimensions.font18)),
+                    Text("موجودی",
+                        style: TextStyle(
+                            color: AppColors.mainPageFirstContainerFontColor,
+                            fontSize: Dimensions.font16,
+                            fontWeight: FontWeight.w400)),
+                  ]);
+            }),
+
             GestureDetector(
               onTap: (){
                 showDialog(

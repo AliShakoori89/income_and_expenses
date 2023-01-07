@@ -55,7 +55,7 @@ class SetDateRepository {
                 textDirection: TextDirection.rtl));
       }else{
         Gregorian g = Gregorian(date.year, date.month, date.day+1);
-        String datePlus = "${g.formatter.y}/${g.formatter.m}/${g.formatter.d}";
+        String datePlus = "${g.formatter.y}-${g.formatter.m}-${g.formatter.d}";
         await prefs.setString('date', datePlus);
         return datePlus;
       }
@@ -83,7 +83,7 @@ class SetDateRepository {
                 textDirection: TextDirection.rtl));
       }else{
         Gregorian g = Gregorian(date.year, date.month, date.day+1);
-        String datePlus = "${g.formatter.y}/${g.formatter.m}/${g.formatter.d}";
+        String datePlus = "${g.formatter.y}-${g.formatter.m}-${g.formatter.d}";
         await prefs.setString('date', datePlus);
         return datePlus;
       }
@@ -105,7 +105,7 @@ class SetDateRepository {
               textDirection: TextDirection.rtl));
     }
     Gregorian g = Gregorian(date.year, date.month, date.day-1);
-    String datePlus = "${g.formatter.y}/${g.formatter.m}/${g.formatter.d}";
+    String datePlus = "${g.formatter.y}-${g.formatter.m}-${g.formatter.d}";
     await prefs.setString('date', datePlus);
     return datePlus;
   }

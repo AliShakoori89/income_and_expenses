@@ -1,13 +1,13 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:income_and_expenses/bloc/calculate_expense_bloc/event.dart';
 import 'package:income_and_expenses/bloc/calculate_expense_bloc/state.dart';
-import 'package:income_and_expenses/repository/expense_repository.dart';
+import 'package:income_and_expenses/repository/calculate_Espense_repository.dart';
 
 class CalculateExpenseBloc extends Bloc<CalculateExpenseEvent, CalculateExpenseState> {
 
-  ExpenseRepository expenseRepository = ExpenseRepository();
+  CalculateExpensesRepository calculateExpensesRepository = CalculateExpensesRepository();
 
-  CalculateExpenseBloc(this.expenseRepository) : super( const CalculateExpenseState()){
+  CalculateExpenseBloc(this.calculateExpensesRepository) : super( const CalculateExpenseState()){
     on<SumExpenseByMonthEvent>(_mapSumExpenseByMonthEventToState);
   }
 
@@ -15,7 +15,7 @@ class CalculateExpenseBloc extends Bloc<CalculateExpenseEvent, CalculateExpenseS
       SumExpenseByMonthEvent event, Emitter<CalculateExpenseState> emit) async {
     try {
       emit(state.copyWith(status: CalculateExpenseStatus.loading));
-      String calculateExpense = await expenseRepository.calculateExpenseRepo(event.date);
+      String calculateExpense = await calculateExpensesRepository.calculateExpenseRepo();
       emit(
         state.copyWith(
           status: CalculateExpenseStatus.success,

@@ -2,7 +2,7 @@ class ExpenseModel {
   int? id;
   String? expenseDate;
   String? expenseCategory;
-  String? expense;
+  int? expense;
   String? description;
   String? iconType;
 

@@ -24,6 +24,7 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
 
   @override
   void initState() {
+
     BlocProvider.of<SetDateBloc>(context)
         .add(ReadDateEvent());
     super.initState();
@@ -48,7 +49,7 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                       .add(ReduceDate(date: _pickedDate!));
                 }else{
                   String dateWithT = state.date;
-                  DateTime start = DateFormat("yyyy/MM/dd").parse(dateWithT);
+                  DateTime start = DateFormat("yyyy-MM-dd").parse(dateWithT);
                   BlocProvider.of<SetDateBloc>(context)
                       .add(ReduceDate(date: start));
                   BlocProvider.of<SetDateBloc>(context)
@@ -107,7 +108,7 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                       .add(AddToDate(date: _pickedDate!));
                 }else{
                   String dateWithT = state.date;
-                  DateTime start = DateFormat("yyyy/MM/dd").parse(dateWithT);
+                  DateTime start = DateFormat("yyyy-MM-dd").parse(dateWithT);
                   BlocProvider.of<SetDateBloc>(context)
                       .add(AddToDate(date: start));
                   BlocProvider.of<SetDateBloc>(context)

@@ -101,7 +101,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
 
             expense.expenseDate = state.date;
             expense.expenseCategory = categoryController.text;
-            expense.expense = expensesController.text;
+            expense.expense = int.parse(expensesController.text);
             expense.description = descriptionController.text;
             if(categoryController.text == "خرید اقلام"){
               expense.iconType = "assets/logos/card-pos.svg";

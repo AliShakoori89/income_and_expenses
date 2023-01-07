@@ -4,6 +4,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:income_and_expenses/bloc/add_expense_bloc/bloc.dart';
 import 'package:income_and_expenses/bloc/add_expense_bloc/event.dart';
 import 'package:income_and_expenses/bloc/add_expense_bloc/state.dart';
+import 'package:income_and_expenses/bloc/set_date_bloc/bloc.dart';
+import 'package:income_and_expenses/bloc/set_date_bloc/event.dart';
 import 'package:income_and_expenses/utils/app_colors.dart';
 import 'package:income_and_expenses/utils/cashContainer.dart';
 import 'package:income_and_expenses/utils/date_picker_calendar.dart';
@@ -25,6 +27,9 @@ class _MainExpensesPageState extends State<MainExpensesPage> {
 
     final expensesBloc = BlocProvider.of<AddExpenseBloc>(context);
     expensesBloc.add(FetchExpensesEvent());
+
+    BlocProvider.of<SetDateBloc>(context)
+        .add(WriteDateEvent(date: DateTime.now()));
 
     super.initState();
   }
@@ -114,7 +119,7 @@ class _MainExpensesPageState extends State<MainExpensesPage> {
                                                             .spaceBetween,
                                                     children: [
                                                       Text(
-                                                          "-${state.expenses[index].expense!.toPersianDigit()}",
+                                                          "-${state.expenses[index].expense!.toString().toPersianDigit()}",
                                                           style: TextStyle(
                                                               fontSize:
                                                                   Dimensions.font17,

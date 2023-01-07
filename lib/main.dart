@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:income_and_expenses/bloc/add_expense_bloc/bloc.dart';
+import 'package:income_and_expenses/bloc/calculate_expense_bloc/bloc.dart';
 import 'package:income_and_expenses/bloc/set_date_bloc/bloc.dart';
+import 'package:income_and_expenses/repository/calculate_Espense_repository.dart';
 import 'package:income_and_expenses/repository/cash_repository.dart';
 import 'package:income_and_expenses/repository/date_time_repository.dart';
 import 'package:income_and_expenses/repository/expense_repository.dart';
@@ -37,6 +39,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
             create: (BuildContext context) =>
                 CashBloc(CashRepository())),
+        BlocProvider(
+            create: (BuildContext context) =>
+                CalculateExpenseBloc(CalculateExpensesRepository())),
       ],
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
