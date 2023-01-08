@@ -14,22 +14,26 @@ class CalculateExpenseState extends Equatable {
   const CalculateExpenseState({
     this.status = CalculateExpenseStatus.initial,
     String? expenses,
-  }): expenses = expenses ?? '';
+    String? spent,
+  }): expenses = expenses ?? "", spent = spent ?? "";
 
   final CalculateExpenseStatus status;
   final String expenses;
+  final String spent;
 
   @override
   // TODO: implement props
-  List<Object> get props => [status, expenses];
+  List<Object> get props => [status, expenses, spent];
 
   CalculateExpenseState copyWith({
     CalculateExpenseStatus? status,
-    String? expenses
+    String? expenses,
+    String? spent
   }) {
     return CalculateExpenseState(
       status: status ?? this.status,
       expenses: expenses ?? this.expenses,
+      spent: spent ?? this.spent,
     );
   }
 }

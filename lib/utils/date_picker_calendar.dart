@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:income_and_expenses/bloc/add_expense_bloc/bloc.dart';
+import 'package:income_and_expenses/bloc/add_expense_bloc/event.dart';
 import 'package:income_and_expenses/bloc/set_date_bloc/bloc.dart';
 import 'package:income_and_expenses/bloc/set_date_bloc/event.dart';
 import 'package:income_and_expenses/bloc/set_date_bloc/state.dart';
@@ -27,6 +29,7 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
 
     BlocProvider.of<SetDateBloc>(context)
         .add(ReadDateEvent());
+
     super.initState();
   }
 
@@ -54,6 +57,8 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                       .add(ReduceDate(date: start));
                   BlocProvider.of<SetDateBloc>(context)
                       .add(ReadDateEvent());
+                  final expensesBloc = BlocProvider.of<AddExpenseBloc>(context);
+                  expensesBloc.add(FetchExpensesEvent());
                 }
               },
               child: const Icon(
@@ -72,6 +77,8 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                       .add(WriteDateEvent(date: _pickedDate!));
                   BlocProvider.of<SetDateBloc>(context)
                       .add(ReadDateEvent());
+                  final expensesBloc = BlocProvider.of<AddExpenseBloc>(context);
+                  expensesBloc.add(FetchExpensesEvent());
                 });
               },
               child: Container(
@@ -113,6 +120,8 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                       .add(AddToDate(date: start));
                   BlocProvider.of<SetDateBloc>(context)
                       .add(ReadDateEvent());
+                  final expensesBloc = BlocProvider.of<AddExpenseBloc>(context);
+                  expensesBloc.add(FetchExpensesEvent());
                 }
               },
               child: const Icon(

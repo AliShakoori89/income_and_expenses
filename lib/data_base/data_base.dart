@@ -1,8 +1,13 @@
 import 'dart:io';
+import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
 import 'package:income_and_expenses/model/expense_model.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:persian_number_utility/persian_number_utility.dart';
 import 'package:sqflite/sqflite.dart';
+
+import '../utils/app_colors.dart';
 
 class DatabaseHelper {
   DatabaseHelper();
@@ -51,10 +56,12 @@ class DatabaseHelper {
     return true;
   }
 
-  Future<List<ExpenseModel>> getAllExpenses() async {
+  Future<List<ExpenseModel>> getAllExpenses(String date) async {
     var dbExpense = await database;
+    print("11111   "+columnExpenseDate);
     var listMap = await dbExpense
-        .rawQuery('SELECT DISTINCT * FROM my_table');
+        .rawQuery('SELECT * FROM my_table where $columnExpenseDate = $date');
+    print("222222   "+ listMap.toString());
     var listMedicines = <ExpenseModel>[];
     for (Map<String, dynamic> m in listMap) {
       print(m);
@@ -66,7 +73,31 @@ class DatabaseHelper {
   Future<String> calculateTotalExpenses(String? date) async {
     var dbExpense = await database;
     var result = await dbExpense.rawQuery("SELECT SUM($columnExpense) FROM my_table WHERE $columnExpenseDate ='$date'");
-    print("reeeeeeeeeeeeeeeeeeeeeeeeeesult $result");
-    return "yes";
+    Object? value = result[0]["SUM($columnExpense)"];
+    print("EEEEEEEEEEEEEEE   "+value.toString());
+    return value.toString();
+  }
+
+  Future<String> calculateSpent(String? date, String? cash) async {
+    late String spent;
+    var dbExpense = await database;
+    var result = await dbExpense.rawQuery("SELECT SUM($columnExpense) FROM my_table WHERE $columnExpenseDate ='$date'");
+    Object? value = result[0]["SUM($columnExpense)"];
+    if(cash == null){
+      Get.rawSnackbar(
+        backgroundColor: AppColors.snackBarColor,
+      snackPosition: SnackPosition.TOP,
+      titleText: Text("توجه",
+      textDirection: TextDirection.rtl),
+        messageText: Text('برای نمایش موجودی، مقدار ورودی را وارد نمایید! ',
+            textDirection: TextDirection.rtl)
+      );
+      spent = "0".toPersianDigit();
+    }else{
+      spent = (int.parse(cash) - int.parse(value.toString())).toString();
+      print("EEEEEEEEEEEEEEE   "+value.toString());
+    }
+
+    return spent.toString();
   }
 }

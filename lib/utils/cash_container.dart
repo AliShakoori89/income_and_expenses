@@ -28,7 +28,8 @@ class _CashContainerState extends State<CashContainer> {
     cashBloc.add(FetchCashEvent());
 
     final calculateExpenseBloc = BlocProvider.of<CalculateExpenseBloc>(context);
-    calculateExpenseBloc.add(SumExpenseByMonthEvent());
+    calculateExpenseBloc.add(SumExpensePerMonthEvent());
+    calculateExpenseBloc.add(CalculateSpentPerMonthEvent());
 
     super.initState();
   }
@@ -53,24 +54,28 @@ class _CashContainerState extends State<CashContainer> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                    "assets/main_page_first_container_logo/expenses.png"),
-                SizedBox(height: Dimensions.height10,),
-                Text("-12،000".toPersianDigit(),
-                    style: TextStyle(
-                        color: AppColors.expensesDigitColor,
-                        fontSize: Dimensions.font18)),
-                Text("هزینه شده",
-                    style: TextStyle(
-                        color: AppColors
-                            .mainPageFirstContainerFontColor,
-                        fontSize: Dimensions.font16,
-                        fontWeight: FontWeight.w400)),
-              ],
-            ),
+            BlocBuilder<CalculateExpenseBloc, CalculateExpenseState>(
+                builder: (context, state) {
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                      "assets/main_page_first_container_logo/expenses.png"),
+                  SizedBox(
+                    height: Dimensions.height10,
+                  ),
+                  Text("-${state.expenses.toString().toPersianDigit().seRagham()}",
+                      style: TextStyle(
+                          color: AppColors.expensesDigitColor,
+                          fontSize: Dimensions.font18)),
+                  Text("هزینه شده",
+                      style: TextStyle(
+                          color: AppColors.mainPageFirstContainerFontColor,
+                          fontSize: Dimensions.font16,
+                          fontWeight: FontWeight.w400)),
+                ],
+              );
+            }),
             BlocBuilder<CalculateExpenseBloc, CalculateExpenseState>(builder: (context, state) {
               return Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -80,7 +85,7 @@ class _CashContainerState extends State<CashContainer> {
                     SizedBox(
                       height: Dimensions.height10,
                     ),
-                    Text(state.expenses,
+                    Text(state.spent.toPersianDigit().seRagham(),
                         style: TextStyle(
                             color: AppColors.balanceDigitColor,
                             fontSize: Dimensions.font18)),
@@ -129,6 +134,8 @@ class _CashContainerState extends State<CashContainer> {
                               .add(AddCashEvent(cash: cashController.text,));
                           BlocProvider.of<CashBloc>(context)
                               .add(FetchCashEvent());
+                          BlocProvider.of<CalculateExpenseBloc>(context)
+                              .add(CalculateSpentPerMonthEvent());
                           Navigator.of(ctx).pop();
                         },
                         child: Padding(
