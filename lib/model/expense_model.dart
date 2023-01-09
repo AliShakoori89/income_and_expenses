@@ -1,6 +1,7 @@
 class ExpenseModel {
   int? id;
   String? expenseDate;
+  String? expenseDateMonth;
   String? expenseCategory;
   int? expense;
   String? description;
@@ -10,6 +11,7 @@ class ExpenseModel {
   ExpenseModel({
     this.id,
     this.expenseDate,
+    this.expenseDateMonth,
     this.expenseCategory,
     this.expense,
     this.description,
@@ -22,6 +24,7 @@ class ExpenseModel {
     return {
       "id": id,
       "expenseDate": expenseDate,
+      "expenseDateMonth": expenseDateMonth,
       "expenseCategory": expenseCategory,
       "expense": expense,
       "description": description,
@@ -33,6 +36,7 @@ class ExpenseModel {
     return ExpenseModel(
       id: parsedJson['id'],
       expenseDate: parsedJson['expenseDate'],
+      expenseDateMonth: parsedJson['expenseDateMonth'],
       expenseCategory: parsedJson['expenseCategory'],
       expense: parsedJson['expense'],
       description: parsedJson['description'],

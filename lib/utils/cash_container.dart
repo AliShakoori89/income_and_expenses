@@ -64,7 +64,7 @@ class _CashContainerState extends State<CashContainer> {
                   SizedBox(
                     height: Dimensions.height10,
                   ),
-                  Text("-${state.expenses.toString().toPersianDigit().seRagham()}",
+                  Text(state.expenses.toString().toPersianDigit().seRagham(),
                       style: TextStyle(
                           color: AppColors.expensesDigitColor,
                           fontSize: Dimensions.font18)),

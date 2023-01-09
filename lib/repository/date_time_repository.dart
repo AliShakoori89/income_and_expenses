@@ -11,7 +11,23 @@ class SetDateRepository {
     Gregorian g = Gregorian(date.year, date.month, date.day);
     Jalali g2j1 = g.toJalali();
     String dateString = "${g2j1.formatter.y}-${g2j1.formatter.m}-${g2j1.formatter.d}";
+    String dateMonthString = "${g2j1.formatter.y}-${g2j1.formatter.m}";
+    await prefs.setString('dateMonth', dateMonthString);
     await prefs.setString('date', dateString);
+  }
+
+  Future<String> readDateMonth() async{
+    final prefs = await SharedPreferences.getInstance();
+    DateTime now = DateTime.now();
+    final String? date = prefs.getString('dateMonth');
+    if(date == null){
+      Gregorian g = Gregorian(now.year, now.month, now.day);
+      Jalali g2j1 = g.toJalali();
+      String dateMonthString = "${g2j1.formatter.y}-${g2j1.formatter.m}";
+      return dateMonthString;
+    }else{
+      return date;
+    }
   }
 
   Future<String> readDate() async{
@@ -26,16 +42,13 @@ class SetDateRepository {
     }else{
       return date;
     }
-
   }
 
   addToDate(DateTime date) async{
     final prefs = await SharedPreferences.getInstance();
     if(date.month <= 6){
       if(date.day == 31){
-        Get.snackbar(
-            "",
-            "",
+        Get.rawSnackbar(
             boxShadows: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.3),
@@ -61,9 +74,7 @@ class SetDateRepository {
       }
     }else{
       if(date.day == 30){
-        Get.snackbar(
-            "",
-            "",
+        Get.rawSnackbar(
             boxShadows: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.3),

@@ -100,6 +100,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
             final expenseBloc = BlocProvider.of<AddExpenseBloc>(context);
 
             expense.expenseDate = state.date;
+            expense.expenseDateMonth = state.dateMonth;
             expense.expenseCategory = categoryController.text;
             expense.expense = int.parse(expensesController.text);
             expense.description = descriptionController.text;

@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:income_and_expenses/model/expense_model.dart';
 
 enum SetDateStatus { initial, success, error, loading }
 
@@ -15,22 +14,26 @@ class SetDateState extends Equatable {
   const SetDateState({
     this.status = SetDateStatus.initial,
     String? date,
-  }): date = date ?? '';
+    String? dateMonth,
+  }): date = date ?? '' , dateMonth = dateMonth ?? '';
 
   final SetDateStatus status;
   final String date;
+  final String dateMonth;
 
   @override
   // TODO: implement props
-  List<Object> get props => [status, date];
+  List<Object> get props => [status, date, dateMonth];
 
   SetDateState copyWith({
     SetDateStatus? status,
-    String? date
+    String? date,
+    String? dateMonth
   }) {
     return SetDateState(
       status: status ?? this.status,
       date: date ?? this.date,
+      dateMonth: dateMonth ?? this.dateMonth
     );
   }
 }

@@ -19,10 +19,12 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
     try {
       emit(state.copyWith(status: SetDateStatus.loading));
       final String date = await setDateRepository.readDate();
+      final String dateMonth = await setDateRepository.readDateMonth();
       emit(
         state.copyWith(
           status: SetDateStatus.success,
           date: date,
+          dateMonth: dateMonth
         ),
       );
     } catch (error) {

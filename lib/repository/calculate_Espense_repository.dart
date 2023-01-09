@@ -11,16 +11,16 @@ class CalculateExpensesRepository {
 
   Future<String> calculateExpenseRepo() async {
     final prefs = await SharedPreferences.getInstance();
-    final String? date = prefs.getString('date');
-    print('daaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaate     $date');
-    return await helper.calculateTotalExpenses(date);
+    final String? dateMonth = prefs.getString('dateMonth');
+    print('daaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaate     $dateMonth');
+    return await helper.calculateTotalExpenses(dateMonth);
   }
 
   Future<String> calculateSpentRepo() async {
     final prefs = await SharedPreferences.getInstance();
-    final String? date = prefs.getString('date');
+    final String? dateMonth = prefs.getString('dateMonth');
     final String? cash = prefs.getString('cash');
-    print('daaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaate     $date'+ cash.toString());
-    return await helper.calculateSpent(date , cash);
+    print('daaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaate     $dateMonth'+ cash.toString());
+    return await helper.calculateSpent(dateMonth , cash);
   }
 }

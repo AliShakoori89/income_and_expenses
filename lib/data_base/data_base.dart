@@ -17,6 +17,7 @@ class DatabaseHelper {
   static const table = 'my_table';
   static const columnId = 'id';
   static const columnExpenseDate = 'expenseDate';
+  static const columnExpenseDateMonth = 'expenseDateMonth';
   static const columnExpenseCategory = 'expenseCategory';
   static const columnExpense = 'expense';
   static const columnDescription = 'description';
@@ -42,6 +43,7 @@ class DatabaseHelper {
     await db.execute('CREATE TABLE $table ('
         '$columnId INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,'
         '$columnExpenseDate TEXT,'
+        '$columnExpenseDateMonth TEXT,'
         '$columnExpenseCategory TEXT,'
         '$columnExpense INTEGER,'
         '$columnDescription TEXT,'
@@ -58,46 +60,44 @@ class DatabaseHelper {
 
   Future<List<ExpenseModel>> getAllExpenses(String date) async {
     var dbExpense = await database;
-    print("11111   "+columnExpenseDate);
     var listMap = await dbExpense
-        .rawQuery('SELECT * FROM my_table where $columnExpenseDate = $date');
-    print("222222   "+ listMap.toString());
+        .rawQuery('SELECT * FROM my_table WHERE $columnExpenseDate = "$date"');
     var listMedicines = <ExpenseModel>[];
     for (Map<String, dynamic> m in listMap) {
-      print(m);
       listMedicines.add(ExpenseModel.fromJson(m));
     }
     return listMedicines;
   }
 
-  Future<String> calculateTotalExpenses(String? date) async {
+  Future<String> calculateTotalExpenses(String? dateMonth) async {
     var dbExpense = await database;
-    var result = await dbExpense.rawQuery("SELECT SUM($columnExpense) FROM my_table WHERE $columnExpenseDate ='$date'");
+    var result = await dbExpense.rawQuery("SELECT SUM($columnExpense) FROM my_table WHERE $columnExpenseDateMonth ='$dateMonth'");
     Object? value = result[0]["SUM($columnExpense)"];
-    print("EEEEEEEEEEEEEEE   "+value.toString());
-    return value.toString();
+    if (value == null){
+      return '0';
+    }else{
+      return "$value";
+    }
   }
 
-  Future<String> calculateSpent(String? date, String? cash) async {
+  Future<String> calculateSpent(String? dateMonth, String? cash) async {
     late String spent;
     var dbExpense = await database;
-    var result = await dbExpense.rawQuery("SELECT SUM($columnExpense) FROM my_table WHERE $columnExpenseDate ='$date'");
+    var result = await dbExpense.rawQuery("SELECT SUM($columnExpense) FROM my_table WHERE $columnExpenseDateMonth ='$dateMonth'");
     Object? value = result[0]["SUM($columnExpense)"];
     if(cash == null){
       Get.rawSnackbar(
         backgroundColor: AppColors.snackBarColor,
       snackPosition: SnackPosition.TOP,
-      titleText: Text("توجه",
+      titleText: const Text("توجه",
       textDirection: TextDirection.rtl),
-        messageText: Text('برای نمایش موجودی، مقدار ورودی را وارد نمایید! ',
+        messageText: const Text('برای نمایش موجودی، مقدار ورودی را وارد نمایید! ',
             textDirection: TextDirection.rtl)
       );
       spent = "0".toPersianDigit();
     }else{
-      spent = (int.parse(cash) - int.parse(value.toString())).toString();
-      print("EEEEEEEEEEEEEEE   "+value.toString());
+        spent = value == null ? cash :(int.parse(cash) - int.parse(value.toString())).toString();
     }
-
     return spent.toString();
   }
 }
