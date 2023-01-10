@@ -5,7 +5,6 @@ import 'package:income_and_expenses/bloc/set_date_bloc/event.dart';
 import 'package:income_and_expenses/utils/cash_container.dart';
 import 'package:income_and_expenses/utils/date_picker_calendar.dart';
 import 'package:income_and_expenses/utils/dimensions.dart';
-import 'package:income_and_expenses/utils/main_expenses_page_header.dart';
 import '../utils/cash_container_per_date.dart';
 
 class MainExpensesPage extends StatefulWidget {
@@ -41,10 +40,10 @@ class _MainExpensesPageState extends State<MainExpensesPage> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                SizedBox(
-                  height: Dimensions.height10,
-                ),
-                const MainExpensesPageHeader(),
+                // SizedBox(
+                //   height: Dimensions.height10,
+                // ),
+                // const MainExpensesPageHeader(),
                 SizedBox(
                   height: Dimensions.height20,
                 ),

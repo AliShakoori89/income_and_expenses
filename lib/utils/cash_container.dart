@@ -6,6 +6,7 @@ import 'package:income_and_expenses/bloc/cash_bloc/bloc.dart';
 import 'package:income_and_expenses/bloc/cash_bloc/state.dart';
 import 'package:income_and_expenses/utils/app_colors.dart';
 import 'package:income_and_expenses/utils/dimensions.dart';
+import 'package:income_and_expenses/utils/language.dart';
 import 'package:income_and_expenses/utils/widget.dart';
 import 'package:persian_number_utility/persian_number_utility.dart';
 
@@ -68,7 +69,7 @@ class _CashContainerState extends State<CashContainer> {
                       style: TextStyle(
                           color: AppColors.expensesDigitColor,
                           fontSize: Dimensions.font18)),
-                  Text("هزینه شده",
+                  Text(AppLocale.expenses,
                       style: TextStyle(
                           color: AppColors.mainPageFirstContainerFontColor,
                           fontSize: Dimensions.font16,
@@ -89,7 +90,7 @@ class _CashContainerState extends State<CashContainer> {
                         style: TextStyle(
                             color: AppColors.balanceDigitColor,
                             fontSize: Dimensions.font18)),
-                    Text("موجودی",
+                    Text(AppLocale.spent,
                         style: TextStyle(
                             color: AppColors.mainPageFirstContainerFontColor,
                             fontSize: Dimensions.font16,
@@ -161,7 +162,7 @@ class _CashContainerState extends State<CashContainer> {
                               style: TextStyle(
                                   color: AppColors.appBarProfileName,
                                   fontSize: Dimensions.font18)),
-                          Text("ورودی",
+                          Text(AppLocale.cash,
                               style: TextStyle(
                                   color: AppColors
                                       .mainPageFirstContainerFontColor,

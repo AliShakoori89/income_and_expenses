@@ -2,17 +2,20 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 import 'package:get/get.dart';
 import 'package:income_and_expenses/bloc/add_expense_bloc/bloc.dart';
 import 'package:income_and_expenses/bloc/calculate_expense_bloc/bloc.dart';
+import 'package:income_and_expenses/bloc/change_language_bloc/bloc.dart';
 import 'package:income_and_expenses/bloc/set_date_bloc/bloc.dart';
 import 'package:income_and_expenses/repository/calculate_Espense_repository.dart';
 import 'package:income_and_expenses/repository/cash_repository.dart';
+import 'package:income_and_expenses/repository/change_language_repository.dart';
 import 'package:income_and_expenses/repository/date_time_repository.dart';
 import 'package:income_and_expenses/repository/expense_repository.dart';
 import 'package:income_and_expenses/routes/route_helper.dart';
-
 import 'bloc/cash_bloc/bloc.dart';
+import 'utils/language.dart';
 
 void main() {
   runApp(
@@ -23,8 +26,33 @@ void main() {
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+
+  final FlutterLocalization _localization = FlutterLocalization.instance;
+
+  @override
+  void initState() {
+    _localization.init(
+      mapLocales: [
+        const MapLocale('en', AppLocale.EN),
+        const MapLocale('fa', AppLocale.FA),
+      ],
+      initLanguageCode: 'fa',
+    );
+    _localization.onTranslatedLanguage = _onTranslatedLanguage;
+    super.initState();
+  }
+
+  void _onTranslatedLanguage(Locale? locale) {
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,8 +70,13 @@ class MyApp extends StatelessWidget {
         BlocProvider(
             create: (BuildContext context) =>
                 CalculateExpenseBloc(CalculateExpensesRepository())),
+        BlocProvider(
+            create: (BuildContext context) =>
+                ChangeLanguageBloc(ChangeLanguageRepository())),
       ],
       child: GetMaterialApp(
+        supportedLocales: _localization.supportedLocales,
+        localizationsDelegates: _localization.localizationsDelegates,
         debugShowCheckedModeBanner: false,
         title: 'Income and Expenses',
         initialRoute: RouteHelper.getInitial(),
