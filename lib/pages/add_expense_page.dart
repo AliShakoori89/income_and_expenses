@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 import 'package:get/get.dart';
 import 'package:income_and_expenses/bloc/add_expense_bloc/bloc.dart';
 import 'package:income_and_expenses/bloc/add_expense_bloc/event.dart';
@@ -13,6 +14,9 @@ import 'package:income_and_expenses/utils/app_text_field.dart';
 import 'package:income_and_expenses/utils/arrow_back_icon.dart';
 import 'package:income_and_expenses/utils/date_picker_calendar.dart';
 import 'package:income_and_expenses/utils/dimensions.dart';
+import 'package:persian_number_utility/persian_number_utility.dart';
+
+import '../utils/language.dart';
 
 class AddExpensePage extends StatefulWidget {
   const AddExpensePage({Key? key}) : super(key: key);
@@ -48,9 +52,9 @@ class _AddExpensePageState extends State<AddExpensePage> {
           fontSize: Dimensions.font24,
           fontWeight: FontWeight.w400
         ),
-        title: const Align(
+        title: Align(
             alignment: Alignment.centerRight,
-            child: Text("هزینه جدید")),
+            child: Text(AppLocale.newExpense.getString(context))),
         leading: const ArrowBackIcon(),
       ),
       resizeToAvoidBottomInset: false,
@@ -68,19 +72,19 @@ class _AddExpensePageState extends State<AddExpensePage> {
               DatePickerCalendar(),
               SizedBox(height: Dimensions.height20,),
               AppTextField(
-                labelText: "دسته بندی",
+                labelText: AppLocale.grouping.getString(context),
                 controller: categoryController,
                 clickable: true
               ),
               SizedBox(height: Dimensions.height30,),
               AppTextField(
-                labelText: "هزینه",
+                labelText: AppLocale.expense.getString(context),
                 controller: expensesController,
                 clickable: false
               ),
               SizedBox(height: Dimensions.height30,),
               AppTextField(
-                labelText: "توضیحات",
+                labelText: AppLocale.description.getString(context),
                 controller: descriptionController,
                 clickable: false
               ),
@@ -102,12 +106,12 @@ class _AddExpensePageState extends State<AddExpensePage> {
             expense.expenseDate = state.date;
             expense.expenseDateMonth = state.dateMonth;
             expense.expenseCategory = categoryController.text;
-            expense.expense = int.parse(expensesController.text);
+            expense.expense = int.parse(expensesController.text.toEnglishDigit());
             expense.description = descriptionController.text;
             if(categoryController.text == "خرید اقلام"){
-              expense.iconType = "assets/logos/card-pos.svg";
-            }else if(categoryController.text == "خوزاکی"){
-              expense.iconType = "assets/logos/burger and cola.svg";
+              expense.iconType = "assets/logos/card_pos.svg";
+            }else if(categoryController.text == "خوراکی"){
+              expense.iconType = "assets/logos/burger_and_cola.svg";
             }else if(categoryController.text == "حمل و نقل"){
               expense.iconType = "assets/logos/driving.svg";
             }else if(categoryController.text == "هدایا"){
@@ -115,13 +119,13 @@ class _AddExpensePageState extends State<AddExpensePage> {
             }else if(categoryController.text == "درمانی"){
               expense.iconType = "assets/logos/health.svg";
             }else if(categoryController.text == "اقساط و بدهی"){
-              expense.iconType = "assets/logos/receipt-item.svg";
+              expense.iconType = "assets/logos/receipt_item.svg";
             }else if(categoryController.text == "تعمیرات"){
               expense.iconType = "assets/logos/repairs.svg";
             }else if(categoryController.text == "تفریح"){
-              expense.iconType = "assets/logos/games and multimedia.svg";
+              expense.iconType = "assets/logos/games_and_multimedia.svg";
             }else if(categoryController.text == "سایر"){
-              expense.iconType = "assets/logos/group 30.svg";
+              expense.iconType = "assets/logos/group_30.svg";
             }
 
             expenseBloc.add(AddOneByOneExpenseEvent(expenseModel: expense));

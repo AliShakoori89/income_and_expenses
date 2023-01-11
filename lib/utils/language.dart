@@ -7,7 +7,7 @@ mixin AppLocale {
   static const String notExpenses = 'اطلاعاتی برای نمایش وجود ندارد!';
   static const String persianDigit = 'toPersianDigit()';
   static const String setting = 'تنظیمات';
-  static const String export = 'خروجی';
+  static const String export = 'PDF خروجی';
   static const String chooseCurrency = 'انتخاب واحد پول';
   static const String chooseLanguage = 'نتخاب زبان';
   static const String frequentlyAskedQuestions = 'سوالات متداول';
@@ -20,6 +20,7 @@ mixin AppLocale {
   static const String pleaseEnterYourBalanceAmount = "لطفا میزان موجودی خود را وارد نمایید:";
   static const String grouping = "دسته بندی";
   static const String expense = "هزینه";
+  static const String newExpense = "هزینه جدید";
   static const String description = "توضیحات";
   static const String addExpense = "اضافه کردن هزینه";
   static const String transportation = "حمل و نقل";
@@ -31,6 +32,7 @@ mixin AppLocale {
   static const String renovation = "تعمیرات";
   static const String pastime = "تفریح";
   static const String etcetera = "سایر";
+  static const String toman = "تومان";
 
 
 
@@ -42,8 +44,8 @@ mixin AppLocale {
     today: 'today',
     notExpenses: 'no information!',
     persianDigit: 'toPersianDigit()',
-    setting: 'setting',
-    export: 'export',
+    setting: 'Setting',
+    export: 'export PDF',
     chooseCurrency: 'chooseCurrency',
     chooseLanguage: 'chooseLanguage',
     frequentlyAskedQuestions: 'frequentlyAskedQuestions',
@@ -56,6 +58,7 @@ mixin AppLocale {
     pleaseEnterYourBalanceAmount: "Please enter your balance amount",
     grouping: 'grouping',
     expense: 'expense',
+    newExpense: "New Expense",
     description: 'description',
     addExpense: 'Add Expense',
     transportation: 'transportation',
@@ -66,8 +69,8 @@ mixin AppLocale {
     gifts: "gifts",
     renovation: "renovation",
     pastime: "pastime",
-    etcetera: 'etcetera'
-
+    etcetera: 'etcetera',
+    toman: 'dollar'
     };
 
   static const Map<String, dynamic> FA = {
@@ -91,6 +94,7 @@ mixin AppLocale {
     pleaseEnterYourBalanceAmount: "لطفا مقدار موجودی خود را وارد نمایید:",
     grouping: 'دسته بندی',
     expense: 'هزینه',
+    newExpense: "هزینه جدید",
     description: 'توضیحات',
     addExpense: 'اضافه کردن هزینه',
     transportation: 'حمل و نقل',
@@ -101,6 +105,7 @@ mixin AppLocale {
     gifts: "هدایا",
     renovation: "تعمیرات",
     pastime: "تفریح",
-    etcetera: 'سایر'
+    etcetera: 'سایر',
+    toman: 'تومان'
   };
 }

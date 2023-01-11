@@ -19,4 +19,15 @@ class ExpenseRepository {
   Future<bool> addExpenseRepo(ExpenseModel expenseModel) async {
     return await helper.saveExpense(expenseModel);
   }
+
+  addTodayExpensesRepo(int todayExpenses) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString('todayExpenses', todayExpenses.toString());
+  }
+
+  Future<String?> readTodayExpensesRepo() async {
+    final prefs = await SharedPreferences.getInstance();
+    final String? todayExpenses = prefs.getString('todayExpenses');
+    return todayExpenses;
+  }
 }

@@ -17,3 +17,16 @@ class AddOneByOneExpenseEvent extends AddExpenseEvent {
   @override
   List<Object> get props => [expenseModel];
 }
+
+class AddTodayExpensesEvent extends AddExpenseEvent {
+
+  final int todayExpenses;
+
+  AddTodayExpensesEvent(
+      {required this.todayExpenses});
+
+  @override
+  List<Object> get props => [todayExpenses];
+}
+
+class ReadTodayExpensesEvent extends AddExpenseEvent {}

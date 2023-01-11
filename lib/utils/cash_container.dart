@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 import 'package:income_and_expenses/bloc/calculate_expense_bloc/bloc.dart';
 import 'package:income_and_expenses/bloc/calculate_expense_bloc/state.dart';
 import 'package:income_and_expenses/bloc/cash_bloc/bloc.dart';
@@ -69,7 +70,7 @@ class _CashContainerState extends State<CashContainer> {
                       style: TextStyle(
                           color: AppColors.expensesDigitColor,
                           fontSize: Dimensions.font18)),
-                  Text(AppLocale.expenses,
+                  Text(AppLocale.expenses.getString(context),
                       style: TextStyle(
                           color: AppColors.mainPageFirstContainerFontColor,
                           fontSize: Dimensions.font16,
@@ -90,7 +91,7 @@ class _CashContainerState extends State<CashContainer> {
                         style: TextStyle(
                             color: AppColors.balanceDigitColor,
                             fontSize: Dimensions.font18)),
-                    Text(AppLocale.spent,
+                    Text(AppLocale.spent.getString(context),
                         style: TextStyle(
                             color: AppColors.mainPageFirstContainerFontColor,
                             fontSize: Dimensions.font16,
@@ -103,12 +104,12 @@ class _CashContainerState extends State<CashContainer> {
                 showDialog(
                   context: context,
                   builder: (ctx) => AlertDialog(
-                    title: Text("موجودی کل",
+                    title: Text(AppLocale.totalInventory.getString(context),
                     textDirection: TextDirection.rtl,
                     style: TextStyle(
                       fontSize: Dimensions.font16
                     ),),
-                    content: Text("لطفا میزان موجودی خود را وارد نمایید:",
+                    content: Text(AppLocale.pleaseEnterYourBalanceAmount.getString(context),
                         textDirection: TextDirection.rtl,
                         style: TextStyle(
                             fontSize: Dimensions.font14
@@ -123,14 +124,13 @@ class _CashContainerState extends State<CashContainer> {
                             controller: cashController,
                             decoration: textInputDecoration.copyWith(
                                 border: InputBorder.none,
-                              suffixText: "تومان"
+                              suffixText: AppLocale.toman.getString(context)
                             ),
                           ),
                         ),
                       ),
                       TextButton(
                         onPressed: () {
-                          print(cashController.text);
                           BlocProvider.of<CashBloc>(context)
                               .add(AddCashEvent(cash: cashController.text,));
                           BlocProvider.of<CashBloc>(context)
@@ -141,9 +141,9 @@ class _CashContainerState extends State<CashContainer> {
                         },
                         child: Padding(
                           padding: EdgeInsets.only(left: Dimensions.width10),
-                          child: const Align(
+                          child: Align(
                               alignment: Alignment.centerLeft,
-                              child: Text("ثبت")),
+                              child: Text(AppLocale.ok.getString(context))),
                         ),
                       ),
                     ],
@@ -162,7 +162,7 @@ class _CashContainerState extends State<CashContainer> {
                               style: TextStyle(
                                   color: AppColors.appBarProfileName,
                                   fontSize: Dimensions.font18)),
-                          Text(AppLocale.cash,
+                          Text(AppLocale.cash.getString(context),
                               style: TextStyle(
                                   color: AppColors
                                       .mainPageFirstContainerFontColor,

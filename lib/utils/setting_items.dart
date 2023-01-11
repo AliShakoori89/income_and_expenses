@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 import 'package:income_and_expenses/utils/app_colors.dart';
 import 'package:income_and_expenses/utils/dimensions.dart';
 
@@ -28,7 +29,7 @@ class SettingItems extends StatelessWidget {
               Icon(Icons.arrow_back_ios,
                   color: AppColors.settingMenuItem,
                   size: Dimensions.iconSize16),
-              Text(itemName,
+              Text(itemName.getString(context),
                 textDirection: TextDirection.rtl,
                 style: TextStyle(
                     fontWeight: FontWeight.w400,

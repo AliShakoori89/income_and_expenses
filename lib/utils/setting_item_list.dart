@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 import 'package:income_and_expenses/bloc/change_language_bloc/bloc.dart';
 import 'package:income_and_expenses/bloc/change_language_bloc/event.dart';
 import 'package:income_and_expenses/bloc/change_language_bloc/state.dart';
 import 'package:income_and_expenses/utils/app_colors.dart';
 import 'package:income_and_expenses/utils/dimensions.dart';
 
+import 'language.dart';
 import 'setting_items.dart';
 
 class SettingItemList extends StatefulWidget {
@@ -18,6 +20,7 @@ class SettingItemList extends StatefulWidget {
 class _SettingItemListState extends State<SettingItemList> {
 
   late TextEditingController languageController = TextEditingController();
+  final FlutterLocalization _localization = FlutterLocalization.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -31,14 +34,14 @@ class _SettingItemListState extends State<SettingItemList> {
         children: [
           const SettingItems(
             imagePath: "assets/profile_icons/export_to_pdf.png",
-            itemName: "خروجی PDF",
+            itemName: AppLocale.export,
           ),
           SizedBox(
             height: Dimensions.height30,
           ),
           const SettingItems(
             imagePath: "assets/profile_icons/choose_currency.png",
-            itemName: "انتخاب واحد پول",
+            itemName: AppLocale.chooseCurrency,
           ),
           SizedBox(
             height: Dimensions.height30,
@@ -49,18 +52,18 @@ class _SettingItemListState extends State<SettingItemList> {
                 context: context,
                 builder: (ctx) => AlertDialog(
                   title: Text(
-                    "انتخاب زبان",
+                    AppLocale.chooseLanguage.getString(context),
                     textDirection: TextDirection.rtl,
                     style: TextStyle(fontSize: Dimensions.font16),
                   ),
-                  content: Text("لطفا زبان مورد نظر خود را وارد نمایید:",
+                  content: Text(AppLocale.pleaseChooseYourLanguage.getString(context),
                       textDirection: TextDirection.rtl,
                       style: TextStyle(fontSize: Dimensions.font14)),
                   actions: <Widget>[
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        const Text("فارسی"),
+                        Text(AppLocale.persian.getString(context)),
                         BlocBuilder<ChangeLanguageBloc, ChangeLanguageState>(
                             builder: (context, state) {
                           return Checkbox(
@@ -72,6 +75,9 @@ class _SettingItemListState extends State<SettingItemList> {
                                 BlocProvider.of<ChangeLanguageBloc>(context)
                                     .add(ChangeToPersianLanguageTypeEvent(
                                         value: value!));
+                                print("persian");
+                                _localization.translate('fa');
+                                Navigator.of(ctx).pop();
                               });
                         })
                       ],
@@ -79,7 +85,7 @@ class _SettingItemListState extends State<SettingItemList> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        const Text("انگلیسی"),
+                        Text(AppLocale.english.getString(context)),
                         BlocBuilder<ChangeLanguageBloc, ChangeLanguageState>(
                             builder: (context, state) {
                           return Checkbox(
@@ -91,6 +97,9 @@ class _SettingItemListState extends State<SettingItemList> {
                                 BlocProvider.of<ChangeLanguageBloc>(context)
                                     .add(ChangeToEnglishLanguageTypeEvent(
                                         value: value!));
+                                print("english");
+                                _localization.translate('en');
+                                Navigator.of(ctx).pop();
                               });
                         }),
                       ],
@@ -101,7 +110,7 @@ class _SettingItemListState extends State<SettingItemList> {
             },
             child: const SettingItems(
               imagePath: "assets/profile_icons/choose_language.png",
-              itemName: "انتخاب زبان",
+              itemName: AppLocale.chooseLanguage,
             ),
           ),
           SizedBox(
@@ -109,14 +118,14 @@ class _SettingItemListState extends State<SettingItemList> {
           ),
           const SettingItems(
             imagePath: "assets/profile_icons/frequently_asked_questions.png",
-            itemName: "سوالات متداول",
+            itemName: AppLocale.frequentlyAskedQuestions,
           ),
           SizedBox(
             height: Dimensions.height30,
           ),
           const SettingItems(
             imagePath: "assets/profile_icons/logout.png",
-            itemName: "خروج",
+            itemName: AppLocale.exit,
           ),
         ],
       ),

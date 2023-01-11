@@ -12,6 +12,8 @@ class AddExpenseBloc extends Bloc<AddExpenseEvent, AddExpenseState> {
   AddExpenseBloc(this.expenseRepository) : super( const AddExpenseState()){
     on<FetchExpensesEvent>(_mapFetchExpensesEventToState);
     on<AddOneByOneExpenseEvent>(_mapAddExpenseEventToState);
+    on<AddTodayExpensesEvent>(_mapAddTodayExpensesEventToState);
+    on<ReadTodayExpensesEvent>(_mapReadTodayExpensesEventToState);
   }
 
   void _mapFetchExpensesEventToState(
@@ -39,6 +41,37 @@ class AddExpenseBloc extends Bloc<AddExpenseEvent, AddExpenseState> {
       emit(
         state.copyWith(
           status: ExpenseStatus.success,
+        ),
+      );
+    } catch (error) {
+      emit(state.copyWith(status: ExpenseStatus.error));
+    }
+  }
+
+  void _mapAddTodayExpensesEventToState(
+      AddTodayExpensesEvent event, Emitter<AddExpenseState> emit) async {
+    try {
+      emit(state.copyWith(status: ExpenseStatus.loading));
+      await expenseRepository.addTodayExpensesRepo(event.todayExpenses);
+      emit(
+        state.copyWith(
+          status: ExpenseStatus.success,
+        ),
+      );
+    } catch (error) {
+      emit(state.copyWith(status: ExpenseStatus.error));
+    }
+  }
+
+  void _mapReadTodayExpensesEventToState(
+      ReadTodayExpensesEvent event, Emitter<AddExpenseState> emit) async {
+    try {
+      emit(state.copyWith(status: ExpenseStatus.loading));
+      final String? todayExpenses = await expenseRepository.readTodayExpensesRepo();
+      emit(
+        state.copyWith(
+          status: ExpenseStatus.success,
+          todayExpenses: todayExpenses
         ),
       );
     } catch (error) {

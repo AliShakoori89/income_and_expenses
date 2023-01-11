@@ -20,6 +20,7 @@ class ChangeLanguageBloc extends Bloc<ChangeLanguageEvent, ChangeLanguageState> 
       changeLanguageRepository.changeLanguageRepository(event.value);
       final bool englishCheckBox =
       changeLanguageRepository.changeLanguageRepository(!event.value);
+      // changeLanguageRepository.changeToPersianLanguage();
       emit(
         state.copyWith(
           status: ChangeLanguageStatus.success,
@@ -40,6 +41,7 @@ class ChangeLanguageBloc extends Bloc<ChangeLanguageEvent, ChangeLanguageState> 
       changeLanguageRepository.changeLanguageRepository(!event.value);
       final bool englishCheckBox =
       changeLanguageRepository.changeLanguageRepository(event.value);
+      // changeLanguageRepository.changeToEnglishLanguage();
       emit(
         state.copyWith(
             status: ChangeLanguageStatus.success,
