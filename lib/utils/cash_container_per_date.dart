@@ -87,46 +87,53 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                     padding: EdgeInsets.only(
                         bottom: Dimensions.height20
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    child: Column(
                       children: [
-                        Text(
-                            "-${state.expenses[index].expense!.toString().toPersianDigit()}",
-                            style: TextStyle(
-                                fontSize: Dimensions.font17,
-                                color: AppColors.expensesDigitColor)),
+                        const Divider(
+                          thickness: 0.5,
+                          color: AppColors.iconUnSelectedBackGroundMainColor,
+                        ),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
+                            Text(
+                                "-${state.expenses[index].expense!.toString().toPersianDigit()}",
+                                style: TextStyle(
+                                    fontSize: Dimensions.font17,
+                                    color: AppColors.expensesDigitColor)),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                Text(state.expenses[index].description!,
-                                    style: TextStyle(
-                                        fontSize: Dimensions.font16,
-                                        fontWeight: FontWeight.w400,
-                                        color: AppColors.appBarProfileName)),
-                                Text(
-                                    state.expenses[index].expenseCategory!,
-                                    style: TextStyle(
-                                        fontSize: Dimensions.font17,
-                                        fontWeight: FontWeight.w400,
-                                        color: AppColors.mainPageFirstContainerFontColor))
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    Text(state.expenses[index].description!,
+                                        style: TextStyle(
+                                            fontSize: Dimensions.font16,
+                                            fontWeight: FontWeight.w400,
+                                            color: AppColors.appBarProfileName)),
+                                    Text(state.expenses[index].expenseCategory!.getString(context),
+                                        style: TextStyle(
+                                            fontSize: Dimensions.font17,
+                                            fontWeight: FontWeight.w400,
+                                            color: AppColors.mainPageFirstContainerFontColor))
+                                  ],
+                                ),
+                                SizedBox(
+                                  width: Dimensions.width10,
+                                ),
+                                Container(
+                                  width: Dimensions.width45,
+                                  height: Dimensions.width45,
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: AppColors.colorList[index]),
+                                  child: Container(
+                                    margin: EdgeInsets.all(Dimensions.width10 / 1.4),
+                                    child: SvgPicture.asset(state.expenses[index].iconType!),
+                                  ),
+                                ),
                               ],
-                            ),
-                            SizedBox(
-                              width: Dimensions.width10,
-                            ),
-                            Container(
-                              width: Dimensions.width45,
-                              height: Dimensions.width45,
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: AppColors.colorList[index]),
-                              child: Container(
-                                margin: EdgeInsets.all(Dimensions.width10 / 1.4),
-                                child: SvgPicture.asset(state.expenses[index].iconType!),
-                              ),
                             ),
                           ],
                         ),
@@ -136,7 +143,6 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                 },
                 itemCount: state.expenses.length,
               ),
-
             ],
           ) : Center(
             child: Text(

@@ -8,11 +8,11 @@ class ChangeLanguageBloc extends Bloc<ChangeLanguageEvent, ChangeLanguageState> 
   ChangeLanguageRepository changeLanguageRepository = ChangeLanguageRepository();
 
   ChangeLanguageBloc(this.changeLanguageRepository) : super( const ChangeLanguageState()){
-    on<ChangeToPersianLanguageTypeEvent>(_mapChangeLanguageTypeEventToState);
-    on<ChangeToEnglishLanguageTypeEvent>(_mapChangeToEnglishTypeEventToState);
+    on<ChangeToPersianLanguageTypeEvent>(_mapChangeToPersianLanguageTypeEventToState);
+    on<ChangeToEnglishLanguageTypeEvent>(_mapChangeToEnglishLanguageTypeEventToState);
   }
 
-  void _mapChangeLanguageTypeEventToState(
+  void _mapChangeToPersianLanguageTypeEventToState(
       ChangeToPersianLanguageTypeEvent event, Emitter<ChangeLanguageState> emit) async {
     try {
       emit(state.copyWith(status: ChangeLanguageStatus.loading));
@@ -20,7 +20,6 @@ class ChangeLanguageBloc extends Bloc<ChangeLanguageEvent, ChangeLanguageState> 
       changeLanguageRepository.changeLanguageRepository(event.value);
       final bool englishCheckBox =
       changeLanguageRepository.changeLanguageRepository(!event.value);
-      // changeLanguageRepository.changeToPersianLanguage();
       emit(
         state.copyWith(
           status: ChangeLanguageStatus.success,
@@ -33,7 +32,7 @@ class ChangeLanguageBloc extends Bloc<ChangeLanguageEvent, ChangeLanguageState> 
     }
   }
 
-  void _mapChangeToEnglishTypeEventToState(
+  void _mapChangeToEnglishLanguageTypeEventToState(
       ChangeToEnglishLanguageTypeEvent event, Emitter<ChangeLanguageState> emit) async {
     try {
       emit(state.copyWith(status: ChangeLanguageStatus.loading));
@@ -41,7 +40,6 @@ class ChangeLanguageBloc extends Bloc<ChangeLanguageEvent, ChangeLanguageState> 
       changeLanguageRepository.changeLanguageRepository(!event.value);
       final bool englishCheckBox =
       changeLanguageRepository.changeLanguageRepository(event.value);
-      // changeLanguageRepository.changeToEnglishLanguage();
       emit(
         state.copyWith(
             status: ChangeLanguageStatus.success,

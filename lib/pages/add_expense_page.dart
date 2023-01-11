@@ -146,9 +146,9 @@ class _AddExpensePageState extends State<AddExpensePage> {
             color: AppColors.buttonColor,
             borderRadius: BorderRadius.circular(Dimensions.radius20),
           ),
-          child: const Center(
-            child: Text("اضافه کردن هزینه",
-                style: TextStyle(color: AppColors.backGroundColor)),
+          child: Center(
+            child: Text(AppLocale.addExpense.getString(context),
+                style: const TextStyle(color: AppColors.backGroundColor)),
           ),
         ),
       );

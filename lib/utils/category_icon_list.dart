@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:income_and_expenses/utils/app_colors.dart';
 import 'package:income_and_expenses/utils/app_const.dart';
 import 'package:income_and_expenses/utils/dimensions.dart';
+import 'package:income_and_expenses/utils/language.dart';
 
 class CategoryIconList extends StatelessWidget {
 
@@ -17,8 +19,8 @@ class CategoryIconList extends StatelessWidget {
       children: [
         const Icon(Icons.linear_scale,
         color: AppColors.appBarTitleColor,),
-        const Text("دسته بندی ها",
-          style: TextStyle(
+        Text(AppLocale.grouping.getString(context),
+          style: const TextStyle(
               color: AppColors.appBarTitleColor,
               fontWeight: FontWeight.w500
           ),),
@@ -32,6 +34,9 @@ class CategoryIconList extends StatelessWidget {
               crossAxisCount: 3,
               shrinkWrap: true,
               children: List.generate(AppConst.iconsName.length, (index) {
+
+                var groupName = AppConst.iconsName[index];
+
                 return GestureDetector(
                   onTap: (){
                     controller.text = AppConst.iconsName[index];
@@ -53,7 +58,23 @@ class CategoryIconList extends StatelessWidget {
                               "assets/logos/${AppConst.iconsImage[index]}"),
                         ),
                       ),
-                      Text(AppConst.iconsName[index])
+                      Text(groupName == 'حمل و نقل'
+                          ? AppLocale.transportation.getString(context)
+                          : groupName == 'خوراکی'
+                          ? AppLocale.comestible.getString(context)
+                          : groupName == 'خرید اقلام'
+                          ? AppLocale.buyItems.getString(context)
+                          : groupName == 'اقساط و بدهی'
+                          ? AppLocale.installmentsAndDebt.getString(context)
+                          : groupName == 'درمانی'
+                          ? AppLocale.treatment.getString(context)
+                          : groupName == 'هدایا'
+                          ? AppLocale.gifts.getString(context)
+                          : groupName == 'تعمیرات'
+                          ? AppLocale.renovation.getString(context)
+                          : groupName == 'تفریح'
+                          ? AppLocale.pastime.getString(context)
+                          : AppLocale.etcetera.getString(context)),
                     ],
                   ),
                 );
@@ -63,5 +84,13 @@ class CategoryIconList extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  String groupName(String groupName){
+    String categoryName = '';
+    if(groupName == 'حمل و نقل') {
+      categoryName = "transportation";
+    }
+    return categoryName;
   }
 }

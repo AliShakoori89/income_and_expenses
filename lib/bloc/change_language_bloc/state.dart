@@ -15,25 +15,31 @@ class ChangeLanguageState extends Equatable {
     this.status = ChangeLanguageStatus.initial,
     bool? persianCheckBox,
     bool? englishCheckBox,
+    bool? readLanguageBoolean,
   }): persianCheckBox = persianCheckBox ?? true ,
-        englishCheckBox = englishCheckBox ?? false;
+        englishCheckBox = englishCheckBox ?? false,
+        readLanguageBoolean = readLanguageBoolean ?? false
+  ;
 
   final ChangeLanguageStatus status;
   final bool persianCheckBox;
   final bool englishCheckBox;
+  final bool readLanguageBoolean;
 
   @override
-  List<Object> get props => [status, persianCheckBox, englishCheckBox];
+  List<Object> get props => [status, persianCheckBox, englishCheckBox, readLanguageBoolean];
 
   ChangeLanguageState copyWith({
     ChangeLanguageStatus? status,
     bool? persianCheckBox,
-    bool? englishCheckBox
+    bool? englishCheckBox,
+    bool? readLanguageBoolean,
   }) {
     return ChangeLanguageState(
       status: status ?? this.status,
       persianCheckBox: persianCheckBox ?? this.persianCheckBox,
       englishCheckBox: englishCheckBox ?? this.englishCheckBox,
+      readLanguageBoolean: readLanguageBoolean ?? this.readLanguageBoolean,
     );
   }
 }
