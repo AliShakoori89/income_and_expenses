@@ -11,7 +11,7 @@ class AppConst{
     "group_30.svg"
   ];
 
-  static const List iconsName = [
+  static const List iconsPersianName = [
     "خرید اقلام",
     "خوراکی",
     "حمل و نقل",
@@ -21,5 +21,17 @@ class AppConst{
     "تعمیرات",
     "تفریح",
     "سایر"
+  ];
+
+  static const List iconsEnglishName = [
+    "buy items",
+    "comestible",
+    "transportation",
+    "gifts",
+    "treatment",
+    "installments and debt",
+    "renovation",
+    "pastime",
+    "etcetera"
   ];
 }

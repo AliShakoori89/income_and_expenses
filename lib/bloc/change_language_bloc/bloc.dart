@@ -10,6 +10,8 @@ class ChangeLanguageBloc extends Bloc<ChangeLanguageEvent, ChangeLanguageState> 
   ChangeLanguageBloc(this.changeLanguageRepository) : super( const ChangeLanguageState()){
     on<ChangeToPersianLanguageTypeEvent>(_mapChangeToPersianLanguageTypeEventToState);
     on<ChangeToEnglishLanguageTypeEvent>(_mapChangeToEnglishLanguageTypeEventToState);
+    on<WriteLanguageBooleanEvent>(_mapWriteLanguageBooleanEvenToState);
+    on<ReadLanguageBooleanEvent>(_mapReadLanguageBooleanEvenToState);
   }
 
   void _mapChangeToPersianLanguageTypeEventToState(
@@ -17,14 +19,12 @@ class ChangeLanguageBloc extends Bloc<ChangeLanguageEvent, ChangeLanguageState> 
     try {
       emit(state.copyWith(status: ChangeLanguageStatus.loading));
       final bool persianCheckBox =
-      changeLanguageRepository.changeLanguageRepository(event.value);
-      final bool englishCheckBox =
-      changeLanguageRepository.changeLanguageRepository(!event.value);
+      changeLanguageRepository.changeLanguageToPersianRepository(event.value);
+      changeLanguageRepository.writeLanguageBoolean(true);
       emit(
         state.copyWith(
           status: ChangeLanguageStatus.success,
           persianCheckBox: persianCheckBox,
-          englishCheckBox: englishCheckBox
         ),
       );
     } catch (error) {
@@ -36,15 +36,44 @@ class ChangeLanguageBloc extends Bloc<ChangeLanguageEvent, ChangeLanguageState> 
       ChangeToEnglishLanguageTypeEvent event, Emitter<ChangeLanguageState> emit) async {
     try {
       emit(state.copyWith(status: ChangeLanguageStatus.loading));
-      final bool persianCheckBox =
-      changeLanguageRepository.changeLanguageRepository(!event.value);
       final bool englishCheckBox =
-      changeLanguageRepository.changeLanguageRepository(event.value);
+      changeLanguageRepository.changeLanguageToEnglishRepository(event.value);
+      changeLanguageRepository.writeLanguageBoolean(false);
       emit(
         state.copyWith(
             status: ChangeLanguageStatus.success,
-            persianCheckBox: persianCheckBox,
-            englishCheckBox: englishCheckBox
+          englishCheckBox: englishCheckBox,
+        ),
+      );
+    } catch (error) {
+      emit(state.copyWith(status: ChangeLanguageStatus.error));
+    }
+  }
+
+  void _mapWriteLanguageBooleanEvenToState(
+      WriteLanguageBooleanEvent event, Emitter<ChangeLanguageState> emit) async {
+    try {
+      emit(state.copyWith(status: ChangeLanguageStatus.loading));
+      changeLanguageRepository.writeLanguageBoolean(false);
+      emit(
+        state.copyWith(
+          status: ChangeLanguageStatus.success,
+        ),
+      );
+    } catch (error) {
+      emit(state.copyWith(status: ChangeLanguageStatus.error));
+    }
+  }
+
+  void _mapReadLanguageBooleanEvenToState(
+      ReadLanguageBooleanEvent event, Emitter<ChangeLanguageState> emit) async {
+    try {
+      emit(state.copyWith(status: ChangeLanguageStatus.loading));
+      String? languageBoolean = await changeLanguageRepository.readLanguageBoolean();
+      emit(
+        state.copyWith(
+          status: ChangeLanguageStatus.success,
+          readLanguageBoolean: languageBoolean == "false" ? false : true
         ),
       );
     } catch (error) {

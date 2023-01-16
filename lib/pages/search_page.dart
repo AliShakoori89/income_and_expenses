@@ -37,7 +37,7 @@ class SearchPage extends StatelessWidget {
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
-                  children: List.generate(AppConst.iconsName.length, (index){
+                  children: List.generate(AppConst.iconsPersianName.length, (index){
                     return Container(
                       margin: EdgeInsets.all(Dimensions.width10),
                       decoration: BoxDecoration(
@@ -57,7 +57,7 @@ class SearchPage extends StatelessWidget {
                                 color: AppColors.labelColor,),
                               ),
                               SizedBox(width: Dimensions.width10 / 2,),
-                              Text("${AppConst.iconsName[index]}"),
+                              Text("${AppConst.iconsPersianName[index]}"),
                             ],
                           )),
                     );

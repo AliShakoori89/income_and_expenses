@@ -51,6 +51,8 @@ dependencies:
   flutter_bloc: ^8.1.1
   shared_preferences: ^2.0.15
   flutter_localization: ^0.1.9
+  permission_handler: ^10.2.0
+  downloads_path_provider_28: ^0.1.2
 
 dev_dependencies:
   flutter_test:

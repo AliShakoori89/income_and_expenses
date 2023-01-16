@@ -16,7 +16,7 @@ class ChangeLanguageState extends Equatable {
     bool? persianCheckBox,
     bool? englishCheckBox,
     bool? readLanguageBoolean,
-  }): persianCheckBox = persianCheckBox ?? true ,
+  }): persianCheckBox = persianCheckBox ?? true,
         englishCheckBox = englishCheckBox ?? false,
         readLanguageBoolean = readLanguageBoolean ?? false
   ;

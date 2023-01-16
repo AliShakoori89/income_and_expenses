@@ -1,3 +1,6 @@
+import 'dart:io';
+import 'dart:typed_data';
+import 'package:downloads_path_provider_28/downloads_path_provider_28.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localization/flutter_localization.dart';
@@ -6,7 +9,9 @@ import 'package:income_and_expenses/bloc/change_language_bloc/event.dart';
 import 'package:income_and_expenses/bloc/change_language_bloc/state.dart';
 import 'package:income_and_expenses/utils/app_colors.dart';
 import 'package:income_and_expenses/utils/dimensions.dart';
-
+import 'package:permission_handler/permission_handler.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:path/path.dart';
 import 'language.dart';
 import 'setting_items.dart';
 
@@ -32,9 +37,23 @@ class _SettingItemListState extends State<SettingItemList> {
       ),
       child: Column(
         children: [
-          const SettingItems(
-            imagePath: "assets/profile_icons/export_to_pdf.png",
-            itemName: AppLocale.export,
+          GestureDetector(
+            onTap: () async {
+              var status = await Permission.storage.status;
+              if (status.isDenied) {
+                await Permission.storage.request();
+                return;
+              }
+
+              File file = await _writeDBFileToDownloadFolder();
+              if (await file.length() > 0) { // not null safe
+                print("success");
+              }
+            },
+            child: SettingItems(
+              imagePath: "assets/profile_icons/export_to_pdf.png",
+              itemName: AppLocale.export,
+            ),
           ),
           SizedBox(
             height: Dimensions.height30,
@@ -66,7 +85,8 @@ class _SettingItemListState extends State<SettingItemList> {
                         Text(AppLocale.persian.getString(context)),
                         BlocBuilder<ChangeLanguageBloc, ChangeLanguageState>(
                             builder: (context, state) {
-                          return Checkbox(
+                          return
+                            Checkbox(
                               checkColor: Colors.white,
                               fillColor:
                                   MaterialStateProperty.resolveWith(getColor),
@@ -74,7 +94,11 @@ class _SettingItemListState extends State<SettingItemList> {
                               onChanged: (bool? value) {
                                 BlocProvider.of<ChangeLanguageBloc>(context)
                                     .add(ChangeToPersianLanguageTypeEvent(
-                                        value: value!));
+                                  value: true,
+                                ));
+                                BlocProvider.of<ChangeLanguageBloc>(context)
+                                    .add(ChangeToEnglishLanguageTypeEvent(
+                                    value: false));
                                 print("persian");
                                 _localization.translate('fa');
                                 Navigator.of(ctx).pop();
@@ -88,7 +112,8 @@ class _SettingItemListState extends State<SettingItemList> {
                         Text(AppLocale.english.getString(context)),
                         BlocBuilder<ChangeLanguageBloc, ChangeLanguageState>(
                             builder: (context, state) {
-                          return Checkbox(
+                          return
+                            Checkbox(
                               checkColor: Colors.white,
                               fillColor:
                                   MaterialStateProperty.resolveWith(getColor),
@@ -96,7 +121,11 @@ class _SettingItemListState extends State<SettingItemList> {
                               onChanged: (bool? value) {
                                 BlocProvider.of<ChangeLanguageBloc>(context)
                                     .add(ChangeToEnglishLanguageTypeEvent(
-                                        value: value!));
+                                    value: true));
+                                BlocProvider.of<ChangeLanguageBloc>(context)
+                                    .add(ChangeToPersianLanguageTypeEvent(
+                                  value: false,
+                                ));
                                 print("english");
                                 _localization.translate('en');
                                 Navigator.of(ctx).pop();
@@ -130,6 +159,25 @@ class _SettingItemListState extends State<SettingItemList> {
         ],
       ),
     );
+  }
+
+  Future<File> _writeDBFileToDownloadFolder() async {
+    String dbName = "doggie_database.db";
+    var databasesPath = await getDatabasesPath();
+    var innerPath = join(databasesPath, dbName);
+    print(innerPath);
+
+    Directory? tempDir = await DownloadsPathProvider.downloadsDirectory;
+    String? tempPath = tempDir?.path;
+
+    var dbFile = File(innerPath);
+    var filePath = '$tempPath/$dbName';
+    var dbFileBytes = dbFile.readAsBytesSync();
+    var bytes = ByteData.view(dbFileBytes.buffer);
+    final buffer = bytes.buffer;
+
+    return File(filePath).writeAsBytes(buffer.asUint8List(
+        dbFileBytes.offsetInBytes, dbFileBytes.lengthInBytes));
   }
 
   Color getColor(Set<MaterialState> states) {

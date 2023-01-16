@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:income_and_expenses/utils/app_colors.dart';
 import 'package:income_and_expenses/utils/category_icon_list.dart';
 import 'package:income_and_expenses/utils/widget.dart';
+
+import '../bloc/change_language_bloc/bloc.dart';
+import '../bloc/change_language_bloc/event.dart';
+import '../bloc/change_language_bloc/state.dart';
 
 class AppTextField extends StatefulWidget {
 
@@ -25,50 +30,57 @@ class _AppTextFieldState extends State<AppTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return Directionality(
-      textDirection: TextDirection.rtl,
-      child: TextFormField(
-        readOnly: widget.clickable == true ? true : false,
-        controller: widget.controller,
-        keyboardType: widget.labelText == "هزینه" ? TextInputType.number : null,
-        maxLines: widget.labelText == "توضیحات" ? 6 : null,
-        decoration: textInputDecoration.copyWith(
-          suffixText: widget.labelText == "هزینه" ? "تومان" : "",
-          labelText: widget.labelText,
-          labelStyle: TextStyle(
-            color: AppColors.labelColor
-          )
+
+    BlocProvider.of<ChangeLanguageBloc>(context).add(ReadLanguageBooleanEvent());
+
+    return BlocBuilder<ChangeLanguageBloc, ChangeLanguageState>(
+        builder: (context, state) {
+      bool lBool = state.readLanguageBoolean;
+      return Directionality(
+        textDirection: lBool == false ? TextDirection.rtl : TextDirection.ltr,
+        child: TextFormField(
+          readOnly: widget.clickable == true ? true : false,
+          controller: widget.controller,
+          keyboardType: widget.labelText == "هزینه" || widget.labelText == "expense" ? TextInputType.number : null,
+          maxLines: widget.labelText == "توضیحات" ? 6 : null,
+          decoration: textInputDecoration.copyWith(
+              suffixText: widget.labelText == "هزینه" || widget.labelText == "expense" ? "تومان" : "",
+              labelText: widget.labelText,
+              labelStyle: TextStyle(
+                  color: AppColors.labelColor
+              )
+          ),
+          onChanged: (val) {
+            setState(() {
+              val = widget.controller.text;
+            });
+          },
+          onTap: (){
+            widget.clickable == true ? showModalBottomSheet(
+                context: context,
+                builder: (context) {
+                  return CategoryIconList(controller: widget.controller);
+                }):
+            null;
+          },
+          validator: (val) {
+            if(widget.labelText == "دسته بندی"){
+              if (val!.isNotEmpty){
+                return null;
+              }else {
+                return "لطفا دسته بندی مورد نظر را انتخاب نمایید.";
+              }
+            } if(widget.labelText == "هزینه"){
+              if (val!.isNotEmpty) {
+                return null;
+              } else {
+                return "لطفا هزینه مربوطه را وارد نمایید.";
+              }
+            }
+          },
         ),
-        onChanged: (val) {
-          setState(() {
-            val = widget.controller.text;
-          });
-        },
-        onTap: (){
-          widget.clickable == true ? showModalBottomSheet(
-              context: context,
-              builder: (context) {
-                return CategoryIconList(controller: widget.controller);
-              }):
-              null;
-        },
-        validator: (val) {
-          if(widget.labelText == "دسته بندی"){
-            if (val!.isNotEmpty){
-              return null;
-            }else {
-              return "لطفا دسته بندی مورد نظر را انتخاب نمایید.";
-            }
-          } if(widget.labelText == "هزینه"){
-            if (val!.isNotEmpty) {
-              return null;
-            } else {
-              return "لطفا هزینه مربوطه را وارد نمایید.";
-            }
-          }
-        },
-      ),
-    );
+      );});
+
   }
 }
 

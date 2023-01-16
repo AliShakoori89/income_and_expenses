@@ -1,10 +1,12 @@
-
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ChangeLanguageRepository {
 
-  bool changeLanguageRepository(bool value){
-    value = !value;
+  bool changeLanguageToPersianRepository(bool value){
+    return value;
+  }
+
+  bool changeLanguageToEnglishRepository(bool value){
     return value;
   }
 
@@ -13,7 +15,7 @@ class ChangeLanguageRepository {
     prefs.setString('languageBoolean', languageBoolean.toString());
   }
 
-  Future<String?> readCashLanguageBoolean() async {
+  Future<String?> readLanguageBoolean() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getString('languageBoolean');
   }
