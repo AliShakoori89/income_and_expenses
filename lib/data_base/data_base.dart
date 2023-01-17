@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:income_and_expenses/model/expense_model.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:persian_number_utility/persian_number_utility.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../utils/app_colors.dart';
@@ -94,7 +93,7 @@ class DatabaseHelper {
         messageText: const Text('برای نمایش موجودی، مقدار ورودی را وارد نمایید! ',
             textDirection: TextDirection.rtl)
       );
-      spent = "0".toPersianDigit();
+      spent = "0";
     }else{
         spent = value == null ? cash :(int.parse(cash) - int.parse(value.toString())).toString();
     }

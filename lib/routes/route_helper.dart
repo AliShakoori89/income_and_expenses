@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:income_and_expenses/pages/add_expense_page.dart';
+import 'package:income_and_expenses/pages/frequently_asked_questions.dart';
 import 'package:income_and_expenses/pages/home_page.dart';
 import 'package:income_and_expenses/pages/search_page.dart';
 
@@ -8,11 +9,13 @@ class RouteHelper{
   static const String initial = "/";
   static const String addPage = "/addPage";
   static const String searchPage = "/searchPage";
+  static const String frequentlyAskedQuestions = "/frequentlyAskedQuestions";
 
 
   static String getInitial()=> initial;
   static String getAddPage()=> addPage;
   static String getSearchPage()=> searchPage;
+  static String getFrequentlyAskedQuestions()=> frequentlyAskedQuestions;
 
   static List<GetPage> routes = [
 
@@ -23,6 +26,9 @@ class RouteHelper{
         transition:  Transition.fadeIn),
 
     GetPage(name: searchPage , page: ()=> const SearchPage(),
+        transition:  Transition.fadeIn),
+
+    GetPage(name: frequentlyAskedQuestions , page: ()=> const FrequentlyAskedQuestions(),
         transition:  Transition.fadeIn),
   ];
 }

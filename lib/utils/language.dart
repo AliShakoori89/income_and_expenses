@@ -18,6 +18,7 @@ mixin AppLocale {
   static const String english = "انگلیسی";
   static const String totalInventory = "موجودی کل";
   static const String pleaseEnterYourBalanceAmount = "لطفا میزان موجودی خود را وارد نمایید:";
+  static const String chooseCurrencyQuestion = "لطفا واحد پول مورد نظر خود را انتخاب کنید:";
   static const String grouping = "دسته بندی";
   static const String expense = "هزینه";
   static const String newExpense = "هزینه جدید";
@@ -33,6 +34,7 @@ mixin AppLocale {
   static const String pastime = "تفریح";
   static const String etcetera = "سایر";
   static const String toman = "تومان";
+  static const String rial = "ریال";
 
 
 
@@ -46,11 +48,12 @@ mixin AppLocale {
     persianDigit: 'toPersianDigit()',
     setting: 'Setting',
     export: 'export PDF',
-    chooseCurrency: 'chooseCurrency',
-    chooseLanguage: 'chooseLanguage',
-    frequentlyAskedQuestions: 'frequentlyAskedQuestions',
+    chooseCurrency: 'Choose currency',
+    chooseCurrencyQuestion: 'Please choose currency',
+    chooseLanguage: 'Choose language',
+    frequentlyAskedQuestions: 'Frequently asked questions',
     exit: 'exit',
-    pleaseChooseYourLanguage: "Please Choose Your Language :",
+    pleaseChooseYourLanguage: "Please choose your language :",
     ok: "ok",
     persian: "Persian",
     english: "English",
@@ -70,7 +73,8 @@ mixin AppLocale {
     renovation: "renovation",
     pastime: "pastime",
     etcetera: 'etcetera',
-    toman: 'dollar'
+    toman: 'T',
+    rial: 'R'
     };
 
   static const Map<String, dynamic> FA = {
@@ -92,6 +96,7 @@ mixin AppLocale {
     english: "انگلیسی",
     totalInventory: "موجودی کل",
     pleaseEnterYourBalanceAmount: "لطفا مقدار موجودی خود را وارد نمایید:",
+    chooseCurrencyQuestion: 'لطفا واحد پول خود را انتخاب کنید:',
     grouping: 'دسته بندی',
     expense: 'هزینه',
     newExpense: "هزینه جدید",
@@ -106,6 +111,7 @@ mixin AppLocale {
     renovation: "تعمیرات",
     pastime: "تفریح",
     etcetera: 'سایر',
-    toman: 'تومان'
+    toman: 'تومان',
+    rial: 'ریال'
   };
 }
