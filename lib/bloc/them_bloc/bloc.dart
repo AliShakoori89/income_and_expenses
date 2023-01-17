@@ -1,13 +1,13 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:income_and_expenses/bloc/them_bloc/event.dart';
 import 'package:income_and_expenses/bloc/them_bloc/state.dart';
-import 'package:income_and_expenses/repository/date_time_repository.dart';
+import 'package:income_and_expenses/repository/theme_repository.dart';
 
 class ThemBloc extends Bloc<ThemEvent, ThemeState> {
 
-  SetDateRepository setDateRepository = SetDateRepository();
+  ChangeThemeRepository changeThemeRepository = ChangeThemeRepository();
 
-  ThemBloc(this.setDateRepository) : super( const ThemeState()){
+  ThemBloc(this.changeThemeRepository) : super( const ThemeState()){
     on<ReadThemeBooleanEvent>(_mapReadThemeBooleanEventToState);
     on<WriteThemeBooleanEvent>(_mapWriteThemeBooleanEventToState);
   }
@@ -16,13 +16,11 @@ class ThemBloc extends Bloc<ThemEvent, ThemeState> {
       ReadThemeBooleanEvent event, Emitter<ThemeState> emit) async {
     try {
       emit(state.copyWith(status: ThemeStatus.loading));
-      final String date = await setDateRepository.readDate();
-      final String dateMonth = await setDateRepository.readDateMonth();
+      final String? themeBoolean = await changeThemeRepository.readThemeBoolean();
       emit(
         state.copyWith(
           status: ThemeStatus.success,
-          date: date,
-          dateMonth: dateMonth
+          themeBoolean: themeBoolean,
         ),
       );
     } catch (error) {
@@ -34,8 +32,8 @@ class ThemBloc extends Bloc<ThemEvent, ThemeState> {
       WriteThemeBooleanEvent event, Emitter<ThemeState> emit) async {
     try {
       emit(state.copyWith(status: ThemeStatus.loading));
-      await setDateRepository.writeDate(event.date);
-      await setDateRepository.readDate();
+      await changeThemeRepository.writeThemeBoolean(event.themeBoolean);
+      await changeThemeRepository.readThemeBoolean();
 
       emit(
         state.copyWith(

@@ -12,7 +12,7 @@ import 'package:persian_datetimepickers/persian_datetimepickers.dart';
 
 
 class DatePickerCalendar extends StatefulWidget {
-  DatePickerCalendar({Key? key}) : super(key: key);
+  const DatePickerCalendar({Key? key}) : super(key: key);
 
   @override
   State<DatePickerCalendar> createState() => DatePickerCalendarState();
@@ -39,8 +39,8 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
     return BlocBuilder<SetDateBloc, SetDateState>(builder: (context, state) {
       return Container(
         margin: EdgeInsets.only(
-          left: Dimensions.width32 - Dimensions.width25,
-          right: Dimensions.width32 - Dimensions.width25
+            left: Dimensions.width32 - Dimensions.width25,
+            right: Dimensions.width32 - Dimensions.width25
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -131,8 +131,6 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
             ),
           ],
         ),
-      );
-
-    });
+      );});
   }
 }

@@ -8,11 +8,13 @@ import 'package:income_and_expenses/bloc/add_expense_bloc/bloc.dart';
 import 'package:income_and_expenses/bloc/calculate_expense_bloc/bloc.dart';
 import 'package:income_and_expenses/bloc/change_language_bloc/bloc.dart';
 import 'package:income_and_expenses/bloc/set_date_bloc/bloc.dart';
+import 'package:income_and_expenses/bloc/them_bloc/bloc.dart';
 import 'package:income_and_expenses/repository/calculate_Espense_repository.dart';
 import 'package:income_and_expenses/repository/cash_repository.dart';
 import 'package:income_and_expenses/repository/change_language_repository.dart';
 import 'package:income_and_expenses/repository/date_time_repository.dart';
 import 'package:income_and_expenses/repository/expense_repository.dart';
+import 'package:income_and_expenses/repository/theme_repository.dart';
 import 'package:income_and_expenses/routes/route_helper.dart';
 import 'bloc/cash_bloc/bloc.dart';
 import 'utils/language.dart';
@@ -73,6 +75,9 @@ class _MyAppState extends State<MyApp> {
         BlocProvider(
             create: (BuildContext context) =>
                 ChangeLanguageBloc(ChangeLanguageRepository())),
+        BlocProvider(
+            create: (BuildContext context) =>
+                ThemBloc(ChangeThemeRepository())),
       ],
       child: GetMaterialApp(
         supportedLocales: _localization.supportedLocales,

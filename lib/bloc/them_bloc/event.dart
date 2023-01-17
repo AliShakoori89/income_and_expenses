@@ -7,11 +7,11 @@ abstract class ThemEvent{
 class ReadThemeBooleanEvent extends ThemEvent {}
 
 class WriteThemeBooleanEvent extends ThemEvent {
-  final DateTime date;
+  final bool themeBoolean;
 
   WriteThemeBooleanEvent(
-      {required this.date});
+      {required this.themeBoolean});
 
   @override
-  List<Object> get props => [date];
+  List<Object> get props => [themeBoolean];
 }

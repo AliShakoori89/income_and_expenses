@@ -31,12 +31,14 @@ class AppColors{
   static const Color mainPageFirstContainerFontColor = Color.fromRGBO(	97, 97, 97, 1.00);
   //#00897B
   static const Color balanceDigitColor = Color.fromRGBO(0, 137, 123, 1.00);
+  // #484848
+  static const Color darkThemeColor = Color.fromRGBO(72, 72, 72, 1.00);
+  // #E0E0E0
+  static const Color darkThemeBorderColor = Color.fromRGBO(224, 224, 224, 1.00);
 
   static const Color calenderBoxColor = Color.fromRGBO(245, 245, 245, 1.00);
 
   static const Color snackBarColor = Color.fromRGBO(255, 248, 225, 1.0);
-
-
 
   static const Color arrowIconColor = Color.fromRGBO(0, 0, 0, 0.54);
 

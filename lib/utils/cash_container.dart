@@ -16,6 +16,9 @@ import 'package:persian_number_utility/persian_number_utility.dart';
 
 import '../bloc/calculate_expense_bloc/event.dart';
 import '../bloc/cash_bloc/event.dart';
+import '../bloc/them_bloc/bloc.dart';
+import '../bloc/them_bloc/event.dart';
+import '../bloc/them_bloc/state.dart';
 
 class CashContainer extends StatefulWidget {
   CashContainer({Key? key}) : super(key: key);
@@ -36,6 +39,8 @@ class _CashContainerState extends State<CashContainer> {
     calculateExpenseBloc.add(SumExpensePerMonthEvent());
     calculateExpenseBloc.add(CalculateSpentPerMonthEvent());
 
+    BlocProvider.of<ThemBloc>(context).add(ReadThemeBooleanEvent());
+
     super.initState();
   }
 
@@ -48,172 +53,180 @@ class _CashContainerState extends State<CashContainer> {
 
     BlocProvider.of<ChangeLanguageBloc>(context).add(ReadLanguageBooleanEvent());
 
-    return Container(
-      decoration: BoxDecoration(
-          border: Border.all(
-              color: AppColors.mainPageCardBorderColor),
-          borderRadius:
-          BorderRadius.circular(Dimensions.radius8)),
-      child: Container(
-        margin: EdgeInsets.only(
-            left: Dimensions.width30,
-            right: Dimensions.width30,
-            top: Dimensions.height10,
-            bottom: Dimensions.height10),
-        child: BlocBuilder<ChangeLanguageBloc, ChangeLanguageState>(
-            builder: (context, state) {
-              bool lBool = state.readLanguageBoolean;
-              return Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                BlocBuilder<CalculateExpenseBloc, CalculateExpenseState>(
-                    builder: (context, state) {
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+    BlocProvider.of<ThemBloc>(context).add(ReadThemeBooleanEvent());
+
+    return BlocBuilder<ThemBloc, ThemeState>(builder: (context, state) {
+
+      var themeBoolean = state.themeBoolean;
+
+      return Container(
+        decoration: BoxDecoration(
+            border: Border.all(
+                color: themeBoolean == "true"
+                    ? AppColors.mainPageCardBorderColor
+                    : AppColors.darkThemeBorderColor),
+            borderRadius:
+            BorderRadius.circular(Dimensions.radius8)),
+        child: Container(
+            margin: EdgeInsets.only(
+                left: Dimensions.width30,
+                right: Dimensions.width30,
+                top: Dimensions.height10,
+                bottom: Dimensions.height10),
+            child: BlocBuilder<ChangeLanguageBloc, ChangeLanguageState>(
+                builder: (context, state) {
+                  bool lBool = state.readLanguageBoolean;
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Image.asset(
-                          "assets/main_page_first_container_logo/expenses.png"),
-                      SizedBox(
-                        height: Dimensions.height10,
-                      ),
-                      Text(
-                          lBool == false
-                              ? state.expenses.toString().toPersianDigit().seRagham()
-                              : state.expenses.toString().seRagham(),
-                          style: TextStyle(
-                              color: AppColors.expensesDigitColor,
-                              fontSize: lBool == false
-                                  ? Dimensions.font18
-                                  : Dimensions.font14)),
-                      SizedBox(
-                        height: Dimensions.height10 / 2,
-                      ),
-                      Text(AppLocale.expenses.getString(context),
-                          style: TextStyle(
-                              color: AppColors.mainPageFirstContainerFontColor,
-                              fontSize: Dimensions.font16,
-                              fontWeight: FontWeight.w400)),
-                    ],
-                  );
-                }),
-                BlocBuilder<CalculateExpenseBloc, CalculateExpenseState>(
-                    builder: (context, state) {
-                  return Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                            "assets/main_page_first_container_logo/balance.png"),
-                        SizedBox(
-                          height: Dimensions.height10,
-                        ),
-                        Text(
-                            lBool == false
-                                ? state.spent.toString().toPersianDigit().seRagham()
-                                : state.spent.toString().seRagham(),
-                            style: TextStyle(
-                                color: AppColors.balanceDigitColor,
-                                fontSize: lBool == false
-                                    ? Dimensions.font18
-                                    : Dimensions.font14)),
-                        SizedBox(
-                          height: Dimensions.height10 / 2,
-                        ),
-                        Text(AppLocale.spent.getString(context),
-                            style: TextStyle(
-                                color:
-                                    AppColors.mainPageFirstContainerFontColor,
-                                fontSize: Dimensions.font16,
-                                fontWeight: FontWeight.w400)),
-                      ]);
-                }),
-                GestureDetector(onTap: () {
-                  showDialog(
-                    context: context,
-                    builder: (ctx) => AlertDialog(
-                      title: Text(
-                        AppLocale.totalInventory.getString(context),
-                        textDirection: TextDirection.rtl,
-                        style: TextStyle(fontSize: Dimensions.font16),
-                      ),
-                      content: Text(
-                          AppLocale.pleaseEnterYourBalanceAmount
-                              .getString(context),
-                          textDirection: TextDirection.rtl,
-                          style: TextStyle(fontSize: Dimensions.font14)),
-                      actions: <Widget>[
-                        Directionality(
-                          textDirection: TextDirection.rtl,
-                          child: SizedBox(
-                            height: Dimensions.height45,
-                            child: TextFormField(
-                              keyboardType: TextInputType.number,
-                              controller: cashController,
-                              decoration: textInputDecoration.copyWith(
-                                  border: InputBorder.none,
-                                  suffixText:
-                                      AppLocale.toman.getString(context)),
+                      BlocBuilder<CalculateExpenseBloc, CalculateExpenseState>(
+                          builder: (context, state) {
+                            return Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                    "assets/main_page_first_container_logo/expenses.png"),
+                                SizedBox(
+                                  height: Dimensions.height10,
+                                ),
+                                Text(
+                                    lBool == false
+                                        ? state.expenses.toString().toPersianDigit().seRagham()
+                                        : state.expenses.toString().seRagham(),
+                                    style: TextStyle(
+                                        color: AppColors.expensesDigitColor,
+                                        fontSize: lBool == false
+                                            ? Dimensions.font18
+                                            : Dimensions.font14)),
+                                SizedBox(
+                                  height: Dimensions.height10 / 2,
+                                ),
+                                Text(AppLocale.expenses.getString(context),
+                                    style: TextStyle(
+                                        color: AppColors.mainPageFirstContainerFontColor,
+                                        fontSize: Dimensions.font16,
+                                        fontWeight: FontWeight.w400)),
+                              ],
+                            );
+                          }),
+                      BlocBuilder<CalculateExpenseBloc, CalculateExpenseState>(
+                          builder: (context, state) {
+                            return Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Image.asset(
+                                      "assets/main_page_first_container_logo/balance.png"),
+                                  SizedBox(
+                                    height: Dimensions.height10,
+                                  ),
+                                  Text(
+                                      lBool == false
+                                          ? state.spent.toString().toPersianDigit().seRagham()
+                                          : state.spent.toString().seRagham(),
+                                      style: TextStyle(
+                                          color: AppColors.balanceDigitColor,
+                                          fontSize: lBool == false
+                                              ? Dimensions.font18
+                                              : Dimensions.font14)),
+                                  SizedBox(
+                                    height: Dimensions.height10 / 2,
+                                  ),
+                                  Text(AppLocale.spent.getString(context),
+                                      style: TextStyle(
+                                          color:
+                                          AppColors.mainPageFirstContainerFontColor,
+                                          fontSize: Dimensions.font16,
+                                          fontWeight: FontWeight.w400)),
+                                ]);
+                          }),
+                      GestureDetector(onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (ctx) => AlertDialog(
+                            title: Text(
+                              AppLocale.totalInventory.getString(context),
+                              textDirection: TextDirection.rtl,
+                              style: TextStyle(fontSize: Dimensions.font16),
                             ),
+                            content: Text(
+                                AppLocale.pleaseEnterYourBalanceAmount
+                                    .getString(context),
+                                textDirection: TextDirection.rtl,
+                                style: TextStyle(fontSize: Dimensions.font14)),
+                            actions: <Widget>[
+                              Directionality(
+                                textDirection: TextDirection.rtl,
+                                child: SizedBox(
+                                  height: Dimensions.height45,
+                                  child: TextFormField(
+                                    keyboardType: TextInputType.number,
+                                    controller: cashController,
+                                    decoration: textInputDecoration.copyWith(
+                                        border: InputBorder.none,
+                                        suffixText:
+                                        AppLocale.toman.getString(context)),
+                                  ),
+                                ),
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  BlocProvider.of<CashBloc>(context).add(AddCashEvent(
+                                    cash: cashController.text,
+                                  ));
+                                  BlocProvider.of<CashBloc>(context)
+                                      .add(FetchCashEvent());
+                                  BlocProvider.of<CalculateExpenseBloc>(context)
+                                      .add(CalculateSpentPerMonthEvent());
+                                  Navigator.of(ctx).pop();
+                                },
+                                child: Padding(
+                                  padding: EdgeInsets.only(left: Dimensions.width10),
+                                  child: Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(AppLocale.ok.getString(context))),
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            BlocProvider.of<CashBloc>(context).add(AddCashEvent(
-                              cash: cashController.text,
-                            ));
-                            BlocProvider.of<CashBloc>(context)
-                                .add(FetchCashEvent());
-                            BlocProvider.of<CalculateExpenseBloc>(context)
-                                .add(CalculateSpentPerMonthEvent());
-                            Navigator.of(ctx).pop();
-                          },
-                          child: Padding(
-                            padding: EdgeInsets.only(left: Dimensions.width10),
-                            child: Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text(AppLocale.ok.getString(context))),
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                }, child:
-                    BlocBuilder<CashBloc, CashState>(builder: (context, state) {
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                          "assets/main_page_first_container_logo/income.png"),
-                      SizedBox(
-                        height: Dimensions.height10,
-                      ),
-                      Text(
-                          state.cash == ''
-                              ? lBool == false
-                                  ? "0".toPersianDigit()
-                                  : "0"
-                              : lBool == false
-                                  ? state.cash.toPersianDigit().seRagham()
-                                  : state.cash.seRagham(),
-                          style: TextStyle(
-                              color: AppColors.appBarProfileName,
-                              fontSize: lBool == false
-                                  ? Dimensions.font18
-                                  : Dimensions.font14)),
-                      SizedBox(
-                        height: Dimensions.height10 / 2,
-                      ),
-                      Text(AppLocale.cash.getString(context),
-                          style: TextStyle(
-                              color: AppColors.mainPageFirstContainerFontColor,
-                              fontSize: Dimensions.font16,
-                              fontWeight: FontWeight.w400)),
+                        );
+                      }, child:
+                      BlocBuilder<CashBloc, CashState>(builder: (context, state) {
+                        return Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                                "assets/main_page_first_container_logo/income.png"),
+                            SizedBox(
+                              height: Dimensions.height10,
+                            ),
+                            Text(
+                                state.cash == ''
+                                    ? lBool == false
+                                    ? "0".toPersianDigit()
+                                    : "0"
+                                    : lBool == false
+                                    ? state.cash.toPersianDigit().seRagham()
+                                    : state.cash.seRagham(),
+                                style: TextStyle(
+                                    color: AppColors.appBarProfileName,
+                                    fontSize: lBool == false
+                                        ? Dimensions.font18
+                                        : Dimensions.font14)),
+                            SizedBox(
+                              height: Dimensions.height10 / 2,
+                            ),
+                            Text(AppLocale.cash.getString(context),
+                                style: TextStyle(
+                                    color: AppColors.mainPageFirstContainerFontColor,
+                                    fontSize: Dimensions.font16,
+                                    fontWeight: FontWeight.w400)),
+                          ],
+                        );
+                      })),
                     ],
                   );
-                })),
-              ],
-            );
-          })
-      ),
-    );
+                })
+        ),
+      );});
   }
 }

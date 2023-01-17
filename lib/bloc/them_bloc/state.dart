@@ -13,27 +13,23 @@ class ThemeState extends Equatable {
 
   const ThemeState({
     this.status = ThemeStatus.initial,
-    String? date,
-    String? dateMonth,
-  }): date = date ?? '' , dateMonth = dateMonth ?? '';
+    String? themeBoolean,
+  }): themeBoolean = themeBoolean ?? '' ;
 
   final ThemeStatus status;
-  final String date;
-  final String dateMonth;
+  final String themeBoolean;
 
   @override
   // TODO: implement props
-  List<Object> get props => [status, date, dateMonth];
+  List<Object> get props => [status, themeBoolean];
 
   ThemeState copyWith({
     ThemeStatus? status,
-    String? date,
-    String? dateMonth
+    String? themeBoolean,
   }) {
     return ThemeState(
       status: status ?? this.status,
-      date: date ?? this.date,
-      dateMonth: dateMonth ?? this.dateMonth
+      themeBoolean: themeBoolean ?? this.themeBoolean,
     );
   }
 }
