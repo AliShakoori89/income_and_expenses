@@ -11,16 +11,16 @@ import 'package:income_and_expenses/routes/route_helper.dart';
 import 'package:income_and_expenses/const/app_colors.dart';
 import 'package:income_and_expenses/const/dimensions.dart';
 import '../const/language.dart';
-import 'setting_items.dart';
+import '../utils/setting_items.dart';
 
-class SettingItemList extends StatefulWidget {
-  const SettingItemList({Key? key}) : super(key: key);
+class SettingPage extends StatefulWidget {
+  const SettingPage({Key? key}) : super(key: key);
 
   @override
-  State<SettingItemList> createState() => _SettingItemListState();
+  State<SettingPage> createState() => _SettingPageState();
 }
 
-class _SettingItemListState extends State<SettingItemList> {
+class _SettingPageState extends State<SettingPage> {
 
   late TextEditingController languageController = TextEditingController();
   final FlutterLocalization _localization = FlutterLocalization.instance;

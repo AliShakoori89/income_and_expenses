@@ -39,7 +39,7 @@ class _CashContainerState extends State<CashContainer> {
     calculateExpenseBloc.add(SumExpensePerMonthEvent());
     calculateExpenseBloc.add(CalculateSpentPerMonthEvent());
 
-    BlocProvider.of<ThemBloc>(context).add(ReadThemeBooleanEvent());
+    BlocProvider.of<ThemeBloc>(context).add(ReadThemeBooleanEvent());
 
     super.initState();
   }
@@ -53,9 +53,9 @@ class _CashContainerState extends State<CashContainer> {
 
     BlocProvider.of<ChangeLanguageBloc>(context).add(ReadLanguageBooleanEvent());
 
-    BlocProvider.of<ThemBloc>(context).add(ReadThemeBooleanEvent());
+    BlocProvider.of<ThemeBloc>(context).add(ReadThemeBooleanEvent());
 
-    return BlocBuilder<ThemBloc, ThemeState>(builder: (context, state) {
+    return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
 
       var themeBoolean = state.themeBoolean;
 
@@ -84,8 +84,11 @@ class _CashContainerState extends State<CashContainer> {
                             return Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Image.asset(
-                                    "assets/main_page_first_container_logo/expenses.png"),
+                                themeBoolean == "true"
+                                    ? Image.asset(
+                                    "assets/main_page_first_container_logo/expenses.png")
+                                    : Image.asset(
+                                    "assets/main_page_first_container_logo/darkExpenses.png"),
                                 SizedBox(
                                   height: Dimensions.height10,
                                 ),
@@ -103,7 +106,9 @@ class _CashContainerState extends State<CashContainer> {
                                 ),
                                 Text(AppLocale.expenses.getString(context),
                                     style: TextStyle(
-                                        color: AppColors.mainPageFirstContainerFontColor,
+                                        color: themeBoolean == "true"
+                                            ? AppColors.mainPageFirstContainerFontColor
+                                            : Colors.white,
                                         fontSize: Dimensions.font16,
                                         fontWeight: FontWeight.w400)),
                               ],
@@ -114,8 +119,11 @@ class _CashContainerState extends State<CashContainer> {
                             return Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Image.asset(
-                                      "assets/main_page_first_container_logo/balance.png"),
+                                  themeBoolean == "true"
+                                      ? Image.asset(
+                                      "assets/main_page_first_container_logo/balance.png")
+                                      : Image.asset(
+                                      "assets/main_page_first_container_logo/darkBalance.png"),
                                   SizedBox(
                                     height: Dimensions.height10,
                                   ),
@@ -134,7 +142,9 @@ class _CashContainerState extends State<CashContainer> {
                                   Text(AppLocale.spent.getString(context),
                                       style: TextStyle(
                                           color:
-                                          AppColors.mainPageFirstContainerFontColor,
+                                          themeBoolean == "true"
+                                              ? AppColors.mainPageFirstContainerFontColor
+                                              : Colors.white,
                                           fontSize: Dimensions.font16,
                                           fontWeight: FontWeight.w400)),
                                 ]);
@@ -194,8 +204,11 @@ class _CashContainerState extends State<CashContainer> {
                         return Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Image.asset(
-                                "assets/main_page_first_container_logo/income.png"),
+                            themeBoolean == "true"
+                                ? Image.asset(
+                                "assets/main_page_first_container_logo/income.png")
+                                : Image.asset(
+                                "assets/main_page_first_container_logo/darkIncome.png"),
                             SizedBox(
                               height: Dimensions.height10,
                             ),
@@ -208,7 +221,9 @@ class _CashContainerState extends State<CashContainer> {
                                     ? state.cash.toPersianDigit().seRagham()
                                     : state.cash.seRagham(),
                                 style: TextStyle(
-                                    color: AppColors.appBarProfileName,
+                                    color: themeBoolean == "true"
+                                        ? AppColors.appBarProfileName
+                                        : Colors.white,
                                     fontSize: lBool == false
                                         ? Dimensions.font18
                                         : Dimensions.font14)),
@@ -217,7 +232,9 @@ class _CashContainerState extends State<CashContainer> {
                             ),
                             Text(AppLocale.cash.getString(context),
                                 style: TextStyle(
-                                    color: AppColors.mainPageFirstContainerFontColor,
+                                    color: themeBoolean == "true"
+                                        ? AppColors.mainPageFirstContainerFontColor
+                                        : Colors.white,
                                     fontSize: Dimensions.font16,
                                     fontWeight: FontWeight.w400)),
                           ],

@@ -32,10 +32,10 @@ class _MainExpensesPageState extends State<MainExpensesPage> {
   @override
   Widget build(BuildContext context) {
 
-    BlocProvider.of<ThemBloc>(context)
+    BlocProvider.of<ThemeBloc>(context)
         .add(ReadThemeBooleanEvent());
 
-    return BlocBuilder<ThemBloc, ThemeState>(builder: (context, state) {
+    return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
       return Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: state.themeBoolean == "true"

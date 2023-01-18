@@ -4,7 +4,8 @@ import 'package:income_and_expenses/routes/route_helper.dart';
 import 'package:income_and_expenses/const/app_colors.dart';
 
 class ArrowBackIcon extends StatelessWidget {
-  const ArrowBackIcon({Key? key}) : super(key: key);
+  final String themeBoolean;
+  const ArrowBackIcon({Key? key , required this.themeBoolean}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +13,9 @@ class ArrowBackIcon extends StatelessWidget {
         onPressed: (){
           Get.toNamed(RouteHelper.getInitial());
         },
-        icon: const Icon(Icons.arrow_back,
-          color: AppColors.appBarTitleColor,));
+        icon: Icon(Icons.arrow_back,
+          color: themeBoolean == "false"
+              ? Colors.white
+              : AppColors.appBarTitleColor,));
   }
 }

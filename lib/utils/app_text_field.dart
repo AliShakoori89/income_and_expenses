@@ -13,20 +13,22 @@ class AppTextField extends StatefulWidget {
   final String labelText;
   final bool clickable;
   final TextEditingController controller;
+  final String themeBoolean;
 
   const AppTextField({Key? key,
     required this.labelText,
     required this.clickable,
-    required this.controller}) : super(key: key);
+    required this.controller,
+    required this.themeBoolean}) : super(key: key);
 
   @override
   State<AppTextField> createState() =>
-      _AppTextFieldState(labelText, clickable, controller);
+      _AppTextFieldState(labelText, clickable, controller, themeBoolean);
 }
 
 class _AppTextFieldState extends State<AppTextField> {
 
-  _AppTextFieldState(labelText, clickable, controller);
+  _AppTextFieldState(labelText, clickable, controller, themeBoolean);
 
   @override
   Widget build(BuildContext context) {
@@ -39,15 +41,27 @@ class _AppTextFieldState extends State<AppTextField> {
       return Directionality(
         textDirection: lBool == false ? TextDirection.rtl : TextDirection.ltr,
         child: TextFormField(
+          style: TextStyle(
+              color: widget.themeBoolean == "false"
+                  ? Colors.white70
+                  : AppColors.labelColor
+          ),
           readOnly: widget.clickable == true ? true : false,
           controller: widget.controller,
           keyboardType: widget.labelText == "هزینه" || widget.labelText == "expense" ? TextInputType.number : null,
           maxLines: widget.labelText == "توضیحات" ? 6 : null,
           decoration: textInputDecoration.copyWith(
               suffixText: widget.labelText == "هزینه" || widget.labelText == "expense" ? "تومان" : "",
+              suffixStyle: TextStyle(
+                  color: widget.themeBoolean == "false"
+                      ? Colors.white70
+                      : AppColors.labelColor
+              ),
               labelText: widget.labelText,
               labelStyle: TextStyle(
-                  color: AppColors.labelColor
+                  color: widget.themeBoolean == "false"
+                      ? Colors.white70
+                      : AppColors.labelColor
               )
           ),
           onChanged: (val) {

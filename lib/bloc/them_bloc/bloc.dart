@@ -3,11 +3,11 @@ import 'package:income_and_expenses/bloc/them_bloc/event.dart';
 import 'package:income_and_expenses/bloc/them_bloc/state.dart';
 import 'package:income_and_expenses/repository/theme_repository.dart';
 
-class ThemBloc extends Bloc<ThemEvent, ThemeState> {
+class ThemeBloc extends Bloc<ThemEvent, ThemeState> {
 
   ChangeThemeRepository changeThemeRepository = ChangeThemeRepository();
 
-  ThemBloc(this.changeThemeRepository) : super( const ThemeState()){
+  ThemeBloc(this.changeThemeRepository) : super( const ThemeState()){
     on<ReadThemeBooleanEvent>(_mapReadThemeBooleanEventToState);
     on<WriteThemeBooleanEvent>(_mapWriteThemeBooleanEventToState);
   }

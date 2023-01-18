@@ -25,10 +25,10 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   var _bottomNavIndex = 0; //default index of a first screen
 
   List pages = [
-    MainExpensesPage(),
-    Container(child: Center(child: Text('Next page'))),
-    Container(child: Center(child: Text('Next page page'))),
-    ProfilePage(),
+    const MainExpensesPage(),
+    Container(child: const Center(child: Text('Next page'))),
+    Container(child: const Center(child: Text('Next page page'))),
+    const ProfilePage(),
   ];
 
   late AnimationController _fabAnimationController;
@@ -56,20 +56,20 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     SystemChrome.setSystemUIOverlayStyle(systemTheme);
 
     _fabAnimationController = AnimationController(
-      duration: Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 500),
       vsync: this,
     );
     _borderRadiusAnimationController = AnimationController(
-      duration: Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 500),
       vsync: this,
     );
     fabCurve = CurvedAnimation(
       parent: _fabAnimationController,
-      curve: Interval(0.5, 1.0, curve: Curves.fastOutSlowIn),
+      curve: const Interval(0.5, 1.0, curve: Curves.fastOutSlowIn),
     );
     borderRadiusCurve = CurvedAnimation(
       parent: _borderRadiusAnimationController,
-      curve: Interval(0.5, 1.0, curve: Curves.fastOutSlowIn),
+      curve: const Interval(0.5, 1.0, curve: Curves.fastOutSlowIn),
     );
 
     fabAnimation = Tween<double>(begin: 0, end: 1).animate(fabCurve);
@@ -78,21 +78,21 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     );
 
     _hideBottomBarAnimationController = AnimationController(
-      duration: Duration(milliseconds: 200),
+      duration: const Duration(milliseconds: 200),
       vsync: this,
     );
 
     Future.delayed(
-      Duration(seconds: 1),
+      const Duration(seconds: 1),
           () => _fabAnimationController.forward(),
     );
     Future.delayed(
-      Duration(seconds: 1),
+      const Duration(seconds: 1),
           () => _borderRadiusAnimationController.forward(),
     );
 
-    BlocProvider.of<ThemBloc>(context)
-        .add(WriteThemeBooleanEvent(themeBoolean: true));
+    BlocProvider.of<ThemeBloc>(context)
+        .add(WriteThemeBooleanEvent(themeBoolean: false));
   }
 
   bool onScrollNotification(ScrollNotification notification) {

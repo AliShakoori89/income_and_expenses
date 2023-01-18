@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:income_and_expenses/const/app_colors.dart';
 import 'package:income_and_expenses/const/dimensions.dart';
-import 'package:income_and_expenses/utils/setting_item_list.dart';
+import 'package:income_and_expenses/pages/setting_page.dart';
 
 import '../const/language.dart';
 
@@ -25,7 +25,7 @@ class ProfilePage extends StatelessWidget {
             child: Text(AppLocale.setting.getString(context))),
       ),
       body: SafeArea(
-        child: SettingItemList(),
+        child: SettingPage(),
       ),
     );
   }

@@ -10,6 +10,9 @@ import 'package:income_and_expenses/const/dimensions.dart';
 import 'package:intl/intl.dart';
 import 'package:persian_datetimepickers/persian_datetimepickers.dart';
 
+import '../bloc/them_bloc/bloc.dart';
+import '../bloc/them_bloc/state.dart';
+
 
 class DatePickerCalendar extends StatefulWidget {
   const DatePickerCalendar({Key? key}) : super(key: key);
@@ -36,110 +39,120 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
   @override
   Widget build(BuildContext context) {
 
-    return BlocBuilder<SetDateBloc, SetDateState>(builder: (context, state) {
-      return Container(
-        width: double.infinity,
-        height: Dimensions.height30*1.5,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(),
-          borderRadius: BorderRadius.circular(Dimensions.radius8)
-        ),
-        child: Container(
+    return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
+
+      var themeBoolean = state.themeBoolean;
+
+      return BlocBuilder<SetDateBloc, SetDateState>(builder: (context, state) {
+        return Container(
+          width: double.infinity,
+          height: Dimensions.height30*1.5,
+          decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border.all(color: themeBoolean == "true"
+                  ? AppColors.mainPageCardBorderColor
+                  : AppColors.darkThemeBorderColor),
+              borderRadius: BorderRadius.circular(Dimensions.radius8)
+          ),
           margin: EdgeInsets.only(
-              left: Dimensions.width32 - Dimensions.width25,
-              right: Dimensions.width32 - Dimensions.width25
+              left: Dimensions.width32 - Dimensions.width30,
+              right: Dimensions.width32 - Dimensions.width30
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              GestureDetector(
-                onTap: () {
-                  if(_pickedDate != null){
-                    BlocProvider.of<SetDateBloc>(context)
-                        .add(ReduceDate(date: _pickedDate!));
-                  }else{
-                    String dateWithT = state.date;
-                    DateTime start = DateFormat("yyyy-MM-dd").parse(dateWithT);
-                    BlocProvider.of<SetDateBloc>(context)
-                        .add(ReduceDate(date: start));
-                    BlocProvider.of<SetDateBloc>(context)
-                        .add(ReadDateEvent());
-                    final expensesBloc = BlocProvider.of<AddExpenseBloc>(context);
-                    expensesBloc.add(FetchExpensesEvent());
-                  }
-                },
-                child: const Icon(
-                  Icons.arrow_back_ios,
-                  color: AppColors.arrowIconColor,
+          child: Container(
+            margin: EdgeInsets.only(
+                left: Dimensions.width10,
+                right: Dimensions.width10
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    if(_pickedDate != null){
+                      BlocProvider.of<SetDateBloc>(context)
+                          .add(ReduceDate(date: _pickedDate!));
+                    }else{
+                      String dateWithT = state.date;
+                      DateTime start = DateFormat("yyyy-MM-dd").parse(dateWithT);
+                      BlocProvider.of<SetDateBloc>(context)
+                          .add(ReduceDate(date: start));
+                      BlocProvider.of<SetDateBloc>(context)
+                          .add(ReadDateEvent());
+                      final expensesBloc = BlocProvider.of<AddExpenseBloc>(context);
+                      expensesBloc.add(FetchExpensesEvent());
+                    }
+                  },
+                  child: const Icon(
+                    Icons.arrow_back_ios,
+                    color: AppColors.arrowIconColor,
+                  ),
                 ),
-              ),
-              GestureDetector(
-                onTap: () async {
-                  final DateTime? date = await showPersianDatePicker(
-                    context: context,
-                  );
-                  setState(() {
-                    _pickedDate = date;
-                    BlocProvider.of<SetDateBloc>(context)
-                        .add(WriteDateEvent(date: _pickedDate!));
-                    BlocProvider.of<SetDateBloc>(context)
-                        .add(ReadDateEvent());
-                    final expensesBloc = BlocProvider.of<AddExpenseBloc>(context);
-                    expensesBloc.add(FetchExpensesEvent());
-                  });
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: AppColors.calenderBoxColor,
-                      borderRadius: BorderRadius.circular(15)),
-                  child: Padding(
-                      padding: EdgeInsets.only(
-                          top: Dimensions.height10,
-                          bottom: Dimensions.height10,
-                          left: Dimensions.width20,
-                          right: Dimensions.width20),
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.calendar_today,
-                            size: Dimensions.iconSize16,
-                            color: AppColors.calenderBoxIconColor,
-                          ),
-                          SizedBox(
-                            width: Dimensions.height10,
-                          ),
-                          Text(state.date,
-                              style: const TextStyle(
-                                  color: AppColors.appBarTitleColor)),
-                        ],
-                      )),
+                GestureDetector(
+                  onTap: () async {
+                    final DateTime? date = await showPersianDatePicker(
+                      context: context,
+                    );
+                    setState(() {
+                      _pickedDate = date;
+                      BlocProvider.of<SetDateBloc>(context)
+                          .add(WriteDateEvent(date: _pickedDate!));
+                      BlocProvider.of<SetDateBloc>(context)
+                          .add(ReadDateEvent());
+                      final expensesBloc = BlocProvider.of<AddExpenseBloc>(context);
+                      expensesBloc.add(FetchExpensesEvent());
+                    });
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: AppColors.calenderBoxColor,
+                        borderRadius: BorderRadius.circular(15)),
+                    child: Padding(
+                        padding: EdgeInsets.only(
+                            top: Dimensions.height10,
+                            bottom: Dimensions.height10,
+                            left: Dimensions.width20,
+                            right: Dimensions.width20),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.calendar_today,
+                              size: Dimensions.iconSize16,
+                              color: AppColors.calenderBoxIconColor,
+                            ),
+                            SizedBox(
+                              width: Dimensions.height10,
+                            ),
+                            Text(state.date,
+                                style: const TextStyle(
+                                    color: AppColors.appBarTitleColor)),
+                          ],
+                        )),
+                  ),
                 ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  if(_pickedDate != null){
-                    BlocProvider.of<SetDateBloc>(context)
-                        .add(AddToDate(date: _pickedDate!));
-                  }else{
-                    String dateWithT = state.date;
-                    DateTime start = DateFormat("yyyy-MM-dd").parse(dateWithT);
-                    BlocProvider.of<SetDateBloc>(context)
-                        .add(AddToDate(date: start));
-                    BlocProvider.of<SetDateBloc>(context)
-                        .add(ReadDateEvent());
-                    final expensesBloc = BlocProvider.of<AddExpenseBloc>(context);
-                    expensesBloc.add(FetchExpensesEvent());
-                  }
-                },
-                child: const Icon(
-                  Icons.arrow_forward_ios,
-                  color: AppColors.arrowIconColor,
+                GestureDetector(
+                  onTap: () {
+                    if(_pickedDate != null){
+                      BlocProvider.of<SetDateBloc>(context)
+                          .add(AddToDate(date: _pickedDate!));
+                    }else{
+                      String dateWithT = state.date;
+                      DateTime start = DateFormat("yyyy-MM-dd").parse(dateWithT);
+                      BlocProvider.of<SetDateBloc>(context)
+                          .add(AddToDate(date: start));
+                      BlocProvider.of<SetDateBloc>(context)
+                          .add(ReadDateEvent());
+                      final expensesBloc = BlocProvider.of<AddExpenseBloc>(context);
+                      expensesBloc.add(FetchExpensesEvent());
+                    }
+                  },
+                  child: const Icon(
+                    Icons.arrow_forward_ios,
+                    color: AppColors.arrowIconColor,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-      );});
+        );});});
   }
 }

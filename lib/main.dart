@@ -77,7 +77,7 @@ class _MyAppState extends State<MyApp> {
                 ChangeLanguageBloc(ChangeLanguageRepository())),
         BlocProvider(
             create: (BuildContext context) =>
-                ThemBloc(ChangeThemeRepository())),
+                ThemeBloc(ChangeThemeRepository())),
       ],
       child: GetMaterialApp(
         supportedLocales: _localization.supportedLocales,
