@@ -1,6 +1,6 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
-import 'package:income_and_expenses/utils/dimensions.dart';
+import 'package:income_and_expenses/const/dimensions.dart';
 
 class FrequentlyAskedQuestions extends StatelessWidget {
   const FrequentlyAskedQuestions({Key? key}) : super(key: key);

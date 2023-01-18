@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localization/flutter_localization.dart';
-import 'package:income_and_expenses/utils/app_colors.dart';
-import 'package:income_and_expenses/utils/dimensions.dart';
+import 'package:income_and_expenses/const/app_colors.dart';
+import 'package:income_and_expenses/const/dimensions.dart';
 
 class SettingItems extends StatelessWidget {
 

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localization/flutter_localization.dart';
-import 'package:income_and_expenses/utils/app_colors.dart';
-import 'package:income_and_expenses/utils/dimensions.dart';
+import 'package:income_and_expenses/const/app_colors.dart';
+import 'package:income_and_expenses/const/dimensions.dart';
 import 'package:income_and_expenses/utils/setting_item_list.dart';
 
-import '../utils/language.dart';
+import '../const/language.dart';
+
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);

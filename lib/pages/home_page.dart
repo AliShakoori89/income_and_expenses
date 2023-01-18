@@ -3,12 +3,16 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:income_and_expenses/pages/main_expenses_page.dart';
 import 'package:income_and_expenses/pages/profile_page.dart';
 import 'package:income_and_expenses/routes/route_helper.dart';
-import 'package:income_and_expenses/utils/app_colors.dart';
-import 'package:income_and_expenses/utils/dimensions.dart';
+import 'package:income_and_expenses/const/app_colors.dart';
+import 'package:income_and_expenses/const/dimensions.dart';
+
+import '../bloc/them_bloc/bloc.dart';
+import '../bloc/them_bloc/event.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key? key}) : super(key: key);
@@ -86,6 +90,9 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       Duration(seconds: 1),
           () => _borderRadiusAnimationController.forward(),
     );
+
+    BlocProvider.of<ThemBloc>(context)
+        .add(WriteThemeBooleanEvent(themeBoolean: false));
   }
 
   bool onScrollNotification(ScrollNotification notification) {

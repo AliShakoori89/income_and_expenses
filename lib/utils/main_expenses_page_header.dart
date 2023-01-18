@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:income_and_expenses/routes/route_helper.dart';
-import 'package:income_and_expenses/utils/app_colors.dart';
-import 'package:income_and_expenses/utils/dimensions.dart';
+import 'package:income_and_expenses/const/app_colors.dart';
+import 'package:income_and_expenses/const/dimensions.dart';
 
 class MainExpensesPageHeader extends StatelessWidget {
   const MainExpensesPageHeader({Key? key}) : super(key: key);

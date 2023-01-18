@@ -17,7 +17,7 @@ import 'package:income_and_expenses/repository/expense_repository.dart';
 import 'package:income_and_expenses/repository/theme_repository.dart';
 import 'package:income_and_expenses/routes/route_helper.dart';
 import 'bloc/cash_bloc/bloc.dart';
-import 'utils/language.dart';
+import 'const/language.dart';
 
 void main() {
   runApp(

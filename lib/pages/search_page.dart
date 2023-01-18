@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:income_and_expenses/utils/app_colors.dart';
-import 'package:income_and_expenses/utils/app_const.dart';
+import 'package:income_and_expenses/const/app_colors.dart';
+import 'package:income_and_expenses/const/app_const.dart';
 import 'package:income_and_expenses/utils/arrow_back_icon.dart';
-import 'package:income_and_expenses/utils/dimensions.dart';
+import 'package:income_and_expenses/const/dimensions.dart';
 import 'package:income_and_expenses/utils/search_text_field.dart';
 
 class SearchPage extends StatelessWidget {

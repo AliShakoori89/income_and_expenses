@@ -9,14 +9,14 @@ import 'package:income_and_expenses/bloc/set_date_bloc/event.dart';
 import 'package:income_and_expenses/bloc/set_date_bloc/state.dart';
 import 'package:income_and_expenses/model/expense_model.dart';
 import 'package:income_and_expenses/routes/route_helper.dart';
-import 'package:income_and_expenses/utils/app_colors.dart';
+import 'package:income_and_expenses/const/app_colors.dart';
 import 'package:income_and_expenses/utils/app_text_field.dart';
 import 'package:income_and_expenses/utils/arrow_back_icon.dart';
 import 'package:income_and_expenses/utils/date_picker_calendar.dart';
-import 'package:income_and_expenses/utils/dimensions.dart';
+import 'package:income_and_expenses/const/dimensions.dart';
 import 'package:persian_number_utility/persian_number_utility.dart';
 
-import '../utils/language.dart';
+import '../const/language.dart';
 
 class AddExpensePage extends StatefulWidget {
   const AddExpensePage({Key? key}) : super(key: key);
@@ -59,37 +59,41 @@ class _AddExpensePageState extends State<AddExpensePage> {
       ),
       resizeToAvoidBottomInset: false,
       bottomSheet: appButton(),
-      body: Container(
-        margin: EdgeInsets.only(
-          left: Dimensions.width30,
-          right: Dimensions.width30
-        ),
-        child: Form(
-          key: formKey,
-          child: Column(
-            children: [
-              SizedBox(height: Dimensions.height20,),
-              DatePickerCalendar(),
-              SizedBox(height: Dimensions.height20,),
-              AppTextField(
-                labelText: AppLocale.grouping.getString(context),
-                controller: categoryController,
-                clickable: true
+      body: Form(
+        key: formKey,
+        child: Column(
+          children: [
+            SizedBox(height: Dimensions.height20,),
+            DatePickerCalendar(),
+            SizedBox(height: Dimensions.height20,),
+            Container(
+              margin: EdgeInsets.only(
+                  left: Dimensions.width30,
+                  right: Dimensions.width30
               ),
-              SizedBox(height: Dimensions.height30,),
-              AppTextField(
-                labelText: AppLocale.expense.getString(context),
-                controller: expensesController,
-                clickable: false
+              child: Column(
+                children: [
+                  AppTextField(
+                      labelText: AppLocale.grouping.getString(context),
+                      controller: categoryController,
+                      clickable: true
+                  ),
+                  SizedBox(height: Dimensions.height30,),
+                  AppTextField(
+                      labelText: AppLocale.expense.getString(context),
+                      controller: expensesController,
+                      clickable: false
+                  ),
+                  SizedBox(height: Dimensions.height30,),
+                  AppTextField(
+                      labelText: AppLocale.description.getString(context),
+                      controller: descriptionController,
+                      clickable: false
+                  ),
+                ],
               ),
-              SizedBox(height: Dimensions.height30,),
-              AppTextField(
-                labelText: AppLocale.description.getString(context),
-                controller: descriptionController,
-                clickable: false
-              ),
-            ],
-          ),
+            )
+          ],
         ),
       ),
     );

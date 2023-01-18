@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:income_and_expenses/utils/dimensions.dart';
+import 'package:income_and_expenses/const/dimensions.dart';
 import 'package:income_and_expenses/utils/widget.dart';
 
 class SearchTextField extends StatelessWidget {

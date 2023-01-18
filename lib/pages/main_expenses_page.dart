@@ -5,10 +5,10 @@ import 'package:income_and_expenses/bloc/set_date_bloc/event.dart';
 import 'package:income_and_expenses/bloc/them_bloc/bloc.dart';
 import 'package:income_and_expenses/bloc/them_bloc/event.dart';
 import 'package:income_and_expenses/bloc/them_bloc/state.dart';
-import 'package:income_and_expenses/utils/app_colors.dart';
+import 'package:income_and_expenses/const/app_colors.dart';
 import 'package:income_and_expenses/utils/cash_container.dart';
 import 'package:income_and_expenses/utils/date_picker_calendar.dart';
-import 'package:income_and_expenses/utils/dimensions.dart';
+import 'package:income_and_expenses/const/dimensions.dart';
 import '../utils/cash_container_per_date.dart';
 
 class MainExpensesPage extends StatefulWidget {
@@ -25,9 +25,6 @@ class _MainExpensesPageState extends State<MainExpensesPage> {
 
     BlocProvider.of<SetDateBloc>(context)
         .add(WriteDateEvent(date: DateTime.now()));
-
-    BlocProvider.of<ThemBloc>(context)
-        .add(WriteThemeBooleanEvent(themeBoolean: true));
     
     super.initState();
   }

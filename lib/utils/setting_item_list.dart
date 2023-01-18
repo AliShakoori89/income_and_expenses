@@ -8,10 +8,9 @@ import 'package:income_and_expenses/bloc/change_language_bloc/bloc.dart';
 import 'package:income_and_expenses/bloc/change_language_bloc/event.dart';
 import 'package:income_and_expenses/bloc/change_language_bloc/state.dart';
 import 'package:income_and_expenses/routes/route_helper.dart';
-import 'package:income_and_expenses/utils/app_colors.dart';
-import 'package:income_and_expenses/utils/dimensions.dart';
-
-import 'language.dart';
+import 'package:income_and_expenses/const/app_colors.dart';
+import 'package:income_and_expenses/const/dimensions.dart';
+import '../const/language.dart';
 import 'setting_items.dart';
 
 class SettingItemList extends StatefulWidget {
@@ -39,7 +38,7 @@ class _SettingItemListState extends State<SettingItemList> {
           GestureDetector(
             onTap: () async {
             },
-            child: SettingItems(
+            child: const SettingItems(
               imagePath: "assets/profile_icons/export_to_pdf.png",
               itemName: AppLocale.export,
             ),
@@ -99,7 +98,7 @@ class _SettingItemListState extends State<SettingItemList> {
                 ),
               );
             },
-            child: SettingItems(
+            child: const SettingItems(
               imagePath: "assets/profile_icons/choose_currency.png",
               itemName: AppLocale.chooseCurrency,
             ),
@@ -191,8 +190,8 @@ class _SettingItemListState extends State<SettingItemList> {
             onTap: (){
               Get.toNamed(RouteHelper.getFrequentlyAskedQuestions());
             },
-            child: Center(
-              child: const SettingItems(
+            child: const Center(
+              child: SettingItems(
                 imagePath: "assets/profile_icons/frequently_asked_questions.png",
                 itemName: AppLocale.frequentlyAskedQuestions,
               ),

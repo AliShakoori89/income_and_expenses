@@ -6,7 +6,7 @@ import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
-import '../utils/app_colors.dart';
+import '../const/app_colors.dart';
 
 class DatabaseHelper {
   DatabaseHelper();
