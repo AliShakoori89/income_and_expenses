@@ -92,7 +92,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     );
 
     BlocProvider.of<ThemBloc>(context)
-        .add(WriteThemeBooleanEvent(themeBoolean: false));
+        .add(WriteThemeBooleanEvent(themeBoolean: true));
   }
 
   bool onScrollNotification(ScrollNotification notification) {
