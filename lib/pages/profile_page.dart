@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:income_and_expenses/const/app_colors.dart';
 import 'package:income_and_expenses/const/dimensions.dart';
-import 'package:income_and_expenses/pages/setting_page.dart';
-
+import 'package:income_and_expenses/utils/setting_item_list.dart';
+import '../bloc/them_bloc/bloc.dart';
+import '../bloc/them_bloc/event.dart';
+import '../bloc/them_bloc/state.dart';
 import '../const/language.dart';
 
 
@@ -12,21 +15,38 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
+
+    BlocProvider.of<ThemeBloc>(context).add(ReadThemeBooleanEvent());
+
+    return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
+
+      var themeBoolean = state.themeBoolean;
+
+      return Scaffold(
+        backgroundColor: themeBoolean == "false"
+            ? AppColors.darkThemeColor
+            : Colors.white,
       appBar: AppBar(
-        backgroundColor: AppColors.profileAppBarColor,
-        elevation: 0,
-        titleTextStyle: TextStyle(color: AppColors.appBarTitleColor,
+        backgroundColor: themeBoolean == "false"
+            ? AppColors.darkThemeColor
+            : AppColors.profileAppBarColor,
+        elevation: 1,
+        shadowColor: themeBoolean == "false"
+            ? Colors.white
+            : AppColors.darkThemeColor,
+        titleTextStyle: TextStyle(
+          color: themeBoolean == "false"
+              ? Colors.white
+              : AppColors.appBarTitleColor,
           fontSize: Dimensions.font20,
           fontWeight: FontWeight.w700,),
         title: Align(
             alignment: Alignment.centerRight,
             child: Text(AppLocale.setting.getString(context))),
       ),
-      body: SafeArea(
-        child: SettingPage(),
+      body: const SafeArea(
+        child: SettingItemList(),
       ),
-    );
+    );});
   }
 }

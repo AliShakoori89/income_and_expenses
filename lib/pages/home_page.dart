@@ -91,8 +91,8 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
           () => _borderRadiusAnimationController.forward(),
     );
 
-    BlocProvider.of<ThemeBloc>(context)
-        .add(WriteThemeBooleanEvent(themeBoolean: false));
+    // BlocProvider.of<ThemeBloc>(context)
+    //     .add(WriteThemeBooleanEvent(themeBoolean: true));
   }
 
   bool onScrollNotification(ScrollNotification notification) {

@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:income_and_expenses/const/app_colors.dart';
 import 'package:income_and_expenses/const/dimensions.dart';
+
+import '../bloc/them_bloc/bloc.dart';
+import '../bloc/them_bloc/event.dart';
+import '../bloc/them_bloc/state.dart';
 
 class SettingItems extends StatelessWidget {
 
@@ -13,7 +18,14 @@ class SettingItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+
+    BlocProvider.of<ThemeBloc>(context).add(ReadThemeBooleanEvent());
+
+    return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
+
+      var themeBoolean = state.themeBoolean;
+
+      return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
 
@@ -46,6 +58,6 @@ class SettingItems extends StatelessWidget {
             child: Image.asset(imagePath)),
 
       ],
-    );
+    );});
   }
 }

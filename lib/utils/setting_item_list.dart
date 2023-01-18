@@ -10,24 +10,34 @@ import 'package:income_and_expenses/bloc/change_language_bloc/state.dart';
 import 'package:income_and_expenses/routes/route_helper.dart';
 import 'package:income_and_expenses/const/app_colors.dart';
 import 'package:income_and_expenses/const/dimensions.dart';
+import '../bloc/them_bloc/bloc.dart';
+import '../bloc/them_bloc/event.dart';
+import '../bloc/them_bloc/state.dart';
 import '../const/language.dart';
-import '../utils/setting_items.dart';
+import 'setting_items.dart';
 
-class SettingPage extends StatefulWidget {
-  const SettingPage({Key? key}) : super(key: key);
+class SettingItemList extends StatefulWidget {
+  const SettingItemList({Key? key}) : super(key: key);
 
   @override
-  State<SettingPage> createState() => _SettingPageState();
+  State<SettingItemList> createState() => _SettingItemListState();
 }
 
-class _SettingPageState extends State<SettingPage> {
+class _SettingItemListState extends State<SettingItemList> {
 
   late TextEditingController languageController = TextEditingController();
   final FlutterLocalization _localization = FlutterLocalization.instance;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+
+    BlocProvider.of<ThemeBloc>(context).add(ReadThemeBooleanEvent());
+
+    return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
+
+      var themeBoolean = state.themeBoolean;
+
+      return Container(
       margin: EdgeInsets.only(
           top: Dimensions.height30,
           right: Dimensions.width20,
@@ -211,7 +221,7 @@ class _SettingPageState extends State<SettingPage> {
           ),
         ],
       ),
-    );
+    );});
   }
 
   Color getColor(Set<MaterialState> states) {
