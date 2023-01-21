@@ -57,12 +57,12 @@ class _CashContainerState extends State<CashContainer> {
 
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
 
-      var themeBoolean = state.themeBoolean;
+      var darkThemeBoolean = state.themeBoolean;
 
       return Container(
         decoration: BoxDecoration(
             border: Border.all(
-                color: themeBoolean == "true"
+                color: darkThemeBoolean == "false"
                     ? AppColors.mainPageCardBorderColor
                     : AppColors.darkThemeBorderColor),
             borderRadius:
@@ -84,7 +84,7 @@ class _CashContainerState extends State<CashContainer> {
                             return Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                themeBoolean == "true"
+                                darkThemeBoolean == "false"
                                     ? Image.asset(
                                     "assets/main_page_first_container_logo/expenses.png")
                                     : Image.asset(
@@ -106,7 +106,7 @@ class _CashContainerState extends State<CashContainer> {
                                 ),
                                 Text(AppLocale.expenses.getString(context),
                                     style: TextStyle(
-                                        color: themeBoolean == "true"
+                                        color: darkThemeBoolean == "false"
                                             ? AppColors.mainPageFirstContainerFontColor
                                             : Colors.white,
                                         fontSize: Dimensions.font16,
@@ -119,7 +119,7 @@ class _CashContainerState extends State<CashContainer> {
                             return Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  themeBoolean == "true"
+                                  darkThemeBoolean == "false"
                                       ? Image.asset(
                                       "assets/main_page_first_container_logo/balance.png")
                                       : Image.asset(
@@ -142,7 +142,7 @@ class _CashContainerState extends State<CashContainer> {
                                   Text(AppLocale.spent.getString(context),
                                       style: TextStyle(
                                           color:
-                                          themeBoolean == "true"
+                                          darkThemeBoolean == "false"
                                               ? AppColors.mainPageFirstContainerFontColor
                                               : Colors.white,
                                           fontSize: Dimensions.font16,
@@ -204,7 +204,7 @@ class _CashContainerState extends State<CashContainer> {
                         return Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            themeBoolean == "true"
+                            darkThemeBoolean == "false"
                                 ? Image.asset(
                                 "assets/main_page_first_container_logo/income.png")
                                 : Image.asset(
@@ -221,7 +221,7 @@ class _CashContainerState extends State<CashContainer> {
                                     ? state.cash.toPersianDigit().seRagham()
                                     : state.cash.seRagham(),
                                 style: TextStyle(
-                                    color: themeBoolean == "true"
+                                    color: darkThemeBoolean == "false"
                                         ? AppColors.appBarProfileName
                                         : Colors.white,
                                     fontSize: lBool == false
@@ -232,7 +232,7 @@ class _CashContainerState extends State<CashContainer> {
                             ),
                             Text(AppLocale.cash.getString(context),
                                 style: TextStyle(
-                                    color: themeBoolean == "true"
+                                    color: darkThemeBoolean == "false"
                                         ? AppColors.mainPageFirstContainerFontColor
                                         : Colors.white,
                                     fontSize: Dimensions.font16,

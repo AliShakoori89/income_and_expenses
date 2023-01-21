@@ -2,9 +2,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class ChangeThemeRepository {
 
-  writeThemeBoolean(bool languageBoolean) async {
+  writeThemeBoolean(bool themeBoolean) async {
     final prefs = await SharedPreferences.getInstance();
-    prefs.setString('ThemeBoolean', languageBoolean.toString());
+    prefs.setString('ThemeBoolean', themeBoolean.toString());
   }
 
   Future<String?> readThemeBoolean() async {

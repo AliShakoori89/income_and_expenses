@@ -40,14 +40,14 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
 
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
 
-      var themeBoolean = state.themeBoolean;
+      var darkThemeBoolean = state.themeBoolean;
 
       return Container(
           decoration: BoxDecoration(
-              color: themeBoolean == "true"
+              color: darkThemeBoolean == "false"
                   ? AppColors.backGroundColor
                   : AppColors.darkThemeColor,
-              border: Border.all(color: themeBoolean == "true"
+              border: Border.all(color: darkThemeBoolean == "false"
                   ? AppColors.mainPageCardBorderColor
                   : AppColors.darkThemeBorderColor),
               borderRadius: BorderRadius.circular(Dimensions.radius8)),
@@ -80,7 +80,7 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                               children: [
                                 Text(state.todayExpenses.toPersianDigit().seRagham(),
                                   style: TextStyle(
-                                      color: themeBoolean == "true"
+                                      color: darkThemeBoolean == "false"
                                           ? AppColors.appBarTitleColor
                                           : Colors.white,
                                       fontSize: Dimensions.font16),
@@ -88,7 +88,7 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                                 Text(
                                   AppLocale.today.getString(context),
                                   style: TextStyle(
-                                      color: themeBoolean == "true"
+                                      color: darkThemeBoolean == "false"
                                           ? AppColors.appBarTitleColor
                                           : Colors.white,
                                       fontSize: Dimensions.font12),
@@ -102,14 +102,14 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                                 Text(
                                   AppLocale.today.getString(context),
                                   style: TextStyle(
-                                      color: themeBoolean == "true"
+                                      color: darkThemeBoolean == "false"
                                           ? AppColors.appBarTitleColor
                                           : Colors.white,
                                       fontSize: Dimensions.font12),
                                 ),
                                 Text(state.todayExpenses.seRagham(),
                                   style: TextStyle(
-                                      color: themeBoolean == "true"
+                                      color: darkThemeBoolean == "false"
                                           ? AppColors.appBarTitleColor
                                           : Colors.white,
                                       fontSize: Dimensions.font14),
@@ -136,7 +136,7 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                                     children: [
                                       Divider(
                                         thickness: 0.5,
-                                        color: themeBoolean == "true"
+                                        color: darkThemeBoolean == "false"
                                             ? AppColors.iconUnSelectedBackGroundMainColor
                                             : Colors.white,
                                       ),
@@ -148,7 +148,7 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                                           Text("-${state.expenses[index].expense!.toString().toPersianDigit().seRagham()}",
                                               style: TextStyle(
                                                   fontSize: Dimensions.font17,
-                                                  color: themeBoolean == "true"
+                                                  color: darkThemeBoolean == "false"
                                                       ? AppColors.expensesDigitColor
                                                       : Colors.white)),
                                           Row(
@@ -162,7 +162,7 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                                                       style: TextStyle(
                                                           fontSize: Dimensions.font17,
                                                           fontWeight: FontWeight.w400,
-                                                          color: themeBoolean == "true"
+                                                          color: darkThemeBoolean == "false"
                                                               ? AppColors.mainPageFirstContainerFontColor
                                                               : Colors.white)),
                                                   Text(state.expenses[index].description!,
@@ -170,7 +170,7 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                                                           fontSize: Dimensions.font16,
                                                           fontWeight:
                                                           FontWeight.w400,
-                                                          color: themeBoolean == "true"
+                                                          color: darkThemeBoolean == "false"
                                                               ? AppColors.appBarProfileName
                                                               : Colors.white)),
                                                 ],
@@ -224,7 +224,7 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                                                       style: TextStyle(
                                                           fontSize: Dimensions.font14,
                                                           fontWeight: FontWeight.w700,
-                                                          color: themeBoolean == "true"
+                                                          color: darkThemeBoolean == "false"
                                                               ? AppColors.mainPageFirstContainerFontColor
                                                               : Colors.white)),
                                                   Text(
@@ -232,7 +232,7 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                                                       style: TextStyle(
                                                           fontSize: Dimensions.font12,
                                                           fontWeight: FontWeight.w400,
-                                                          color: themeBoolean == "true"
+                                                          color: darkThemeBoolean == "false"
                                                               ? AppColors.appBarProfileName
                                                               : Colors.white)),
                                                 ],
@@ -259,7 +259,7 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                             AppLocale.notExpenses.getString(context),
                             style: TextStyle(
                               fontSize: Dimensions.font20,
-                              color: themeBoolean == "true"
+                              color: darkThemeBoolean == "false"
                                   ? AppColors.calenderBoxIconColor
                                   : Colors.white,
                             ),
@@ -270,7 +270,7 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                           child: Text(
                               style: TextStyle(
                                 fontSize: Dimensions.font20,
-                                color: themeBoolean == "true"
+                                color: darkThemeBoolean == "false"
                                     ? AppColors.calenderBoxIconColor
                                     : Colors.white,
                               ),

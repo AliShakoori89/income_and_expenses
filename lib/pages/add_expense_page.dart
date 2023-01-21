@@ -52,37 +52,37 @@ class _AddExpensePageState extends State<AddExpensePage> {
 
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
 
-      var themeBoolean = state.themeBoolean;
+      var darkThemeBoolean = state.themeBoolean;
 
       return Scaffold(
       appBar: AppBar(
-        backgroundColor: themeBoolean == "false"
-            ? AppColors.darkThemeColor
-            : Colors.white,
+        backgroundColor: darkThemeBoolean == "false"
+            ? Colors.white
+            : AppColors.darkThemeColor,
         shadowColor: Colors.white,
         elevation: 1,
         titleTextStyle: TextStyle(
-            color: themeBoolean == "false"
-                ? Colors.white
-                : AppColors.appBarTitleColor,
+            color: darkThemeBoolean == "false"
+                ? AppColors.appBarTitleColor
+                : Colors.white,
           fontSize: Dimensions.font24,
           fontWeight: FontWeight.w400
         ),
         title: Align(
             alignment: Alignment.centerRight,
             child: Text(AppLocale.newExpense.getString(context))),
-        leading: ArrowBackIcon(themeBoolean: themeBoolean),
+        leading: ArrowBackIcon(themeBoolean: darkThemeBoolean),
       ),
-      backgroundColor: themeBoolean == "false"
-          ? AppColors.darkThemeColor
-          : Colors.white,
+      backgroundColor: darkThemeBoolean == "false"
+          ? Colors.white
+          : AppColors.darkThemeColor,
       resizeToAvoidBottomInset: false,
       bottomSheet: BlocBuilder<ChangeLanguageBloc, ChangeLanguageState>(
         builder: (context, state) {
 
       bool lBool = state.readLanguageBoolean;
 
-      return appButton(lBool.toString(), themeBoolean);}),
+      return appButton(lBool.toString(), darkThemeBoolean);}),
       body: Container(
         margin: EdgeInsets.only(
           left: Dimensions.width30,
@@ -101,21 +101,21 @@ class _AddExpensePageState extends State<AddExpensePage> {
                     labelText: AppLocale.grouping.getString(context),
                     controller: categoryController,
                     clickable: true,
-                    themeBoolean: themeBoolean,
+                    themeBoolean: darkThemeBoolean,
                 ),
                 SizedBox(height: Dimensions.height30,),
                 AppTextField(
                     labelText: AppLocale.expense.getString(context),
                     controller: expensesController,
                     clickable: false,
-                    themeBoolean: themeBoolean,
+                    themeBoolean: darkThemeBoolean,
                 ),
                 SizedBox(height: Dimensions.height30,),
                 AppTextField(
                     labelText: AppLocale.description.getString(context),
                     controller: descriptionController,
                     clickable: false,
-                    themeBoolean: themeBoolean,
+                    themeBoolean: darkThemeBoolean,
                 ),
               ],
               )
@@ -131,8 +131,8 @@ class _AddExpensePageState extends State<AddExpensePage> {
       return Container(
         width: double.infinity,
         color: themeBoolean == "false"
-            ? AppColors.darkThemeColor
-            : Colors.white,
+            ? Colors.white
+            : AppColors.darkThemeColor,
         child: GestureDetector(
           onTap: () {
             if (formKey.currentState!.validate()) {
@@ -141,6 +141,9 @@ class _AddExpensePageState extends State<AddExpensePage> {
 
               expense.expenseDate = state.date;
               expense.expenseDateMonth = state.dateMonth;
+
+              print("expenseDate    "+expense.expenseDate.toString());
+              print("expenseDateMonth    "+expense.expenseDateMonth.toString());
               expense.expenseCategory = categoryController.text;
               expense.expense = int.parse(expensesController.text.toEnglishDigit());
               expense.description = descriptionController.text;

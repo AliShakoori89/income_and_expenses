@@ -38,7 +38,7 @@ class _MainExpensesPageState extends State<MainExpensesPage> {
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
       return Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: state.themeBoolean == "true"
+        backgroundColor: state.themeBoolean == "false"
             ? Colors.white
             : AppColors.darkThemeColor,
         body: SafeArea(

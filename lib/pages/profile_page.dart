@@ -20,24 +20,24 @@ class ProfilePage extends StatelessWidget {
 
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
 
-      var themeBoolean = state.themeBoolean;
+      var darkThemeBoolean = state.themeBoolean;
 
       return Scaffold(
-        backgroundColor: themeBoolean == "false"
-            ? AppColors.darkThemeColor
-            : Colors.white,
-      appBar: AppBar(
-        backgroundColor: themeBoolean == "false"
-            ? AppColors.darkThemeColor
-            : AppColors.profileAppBarColor,
-        elevation: 1,
-        shadowColor: themeBoolean == "false"
+        backgroundColor: darkThemeBoolean == "false"
             ? Colors.white
             : AppColors.darkThemeColor,
+      appBar: AppBar(
+        backgroundColor: darkThemeBoolean == "false"
+            ? AppColors.profileAppBarColor
+            : AppColors.darkThemeColor,
+        elevation: 1,
+        shadowColor: darkThemeBoolean == "false"
+            ? AppColors.darkThemeColor
+            : Colors.white,
         titleTextStyle: TextStyle(
-          color: themeBoolean == "false"
-              ? Colors.white
-              : AppColors.appBarTitleColor,
+          color: darkThemeBoolean == "false"
+              ? AppColors.appBarTitleColor
+              : Colors.white,
           fontSize: Dimensions.font20,
           fontWeight: FontWeight.w700,),
         title: Align(

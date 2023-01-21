@@ -44,6 +44,8 @@ class AppColors{
 
   static const Color dateColor = Color.fromRGBO(66, 66, 66, 1.00);
 
+  static const Color lightColor = Color.fromRGBO(255, 148, 75, 1.0);
+
   static const List colorList = [
     const Color.fromRGBO(200, 230, 201, 1),
     const Color.fromRGBO(225, 190, 231, 1),

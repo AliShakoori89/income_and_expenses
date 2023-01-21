@@ -7,11 +7,11 @@ abstract class ThemEvent{
 class ReadThemeBooleanEvent extends ThemEvent {}
 
 class WriteThemeBooleanEvent extends ThemEvent {
-  final bool themeBoolean;
+  final bool darkThemeBoolean;
 
   WriteThemeBooleanEvent(
-      {required this.themeBoolean});
+      {required this.darkThemeBoolean});
 
   @override
-  List<Object> get props => [themeBoolean];
+  List<Object> get props => [darkThemeBoolean];
 }

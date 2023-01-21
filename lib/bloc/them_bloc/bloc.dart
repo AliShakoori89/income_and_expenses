@@ -32,7 +32,7 @@ class ThemeBloc extends Bloc<ThemEvent, ThemeState> {
       WriteThemeBooleanEvent event, Emitter<ThemeState> emit) async {
     try {
       emit(state.copyWith(status: ThemeStatus.loading));
-      await changeThemeRepository.writeThemeBoolean(event.themeBoolean);
+      await changeThemeRepository.writeThemeBoolean(event.darkThemeBoolean);
       await changeThemeRepository.readThemeBoolean();
 
       emit(

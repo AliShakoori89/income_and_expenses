@@ -92,7 +92,8 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                     final DateTime? date = await showPersianDatePicker(
                       context: context,
                     );
-                    setState(() {
+                    print("#################   "+date.toString());
+
                       _pickedDate = date;
                       BlocProvider.of<SetDateBloc>(context)
                           .add(WriteDateEvent(date: _pickedDate!));
@@ -100,7 +101,7 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                           .add(ReadDateEvent());
                       final expensesBloc = BlocProvider.of<AddExpenseBloc>(context);
                       expensesBloc.add(FetchExpensesEvent());
-                    });
+
                   },
                   child: Container(
                     decoration: BoxDecoration(

@@ -43,8 +43,8 @@ class _AppTextFieldState extends State<AppTextField> {
         child: TextFormField(
           style: TextStyle(
               color: widget.themeBoolean == "false"
-                  ? Colors.white70
-                  : AppColors.labelColor
+                  ? AppColors.labelColor
+                  : Colors.white70
           ),
           readOnly: widget.clickable == true ? true : false,
           controller: widget.controller,
@@ -54,14 +54,14 @@ class _AppTextFieldState extends State<AppTextField> {
               suffixText: widget.labelText == "هزینه" || widget.labelText == "expense" ? "تومان" : "",
               suffixStyle: TextStyle(
                   color: widget.themeBoolean == "false"
-                      ? Colors.white70
-                      : AppColors.labelColor
+                      ? AppColors.labelColor
+                      : Colors.white70
               ),
               labelText: widget.labelText,
               labelStyle: TextStyle(
                   color: widget.themeBoolean == "false"
-                      ? Colors.white70
-                      : AppColors.labelColor
+                      ? AppColors.labelColor
+                      : Colors.white70
               )
           ),
           onChanged: (val) {

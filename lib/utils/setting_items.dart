@@ -23,7 +23,7 @@ class SettingItems extends StatelessWidget {
 
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
 
-      var themeBoolean = state.themeBoolean;
+      var darkThemeBoolean = state.themeBoolean;
 
       return Row(
       mainAxisAlignment: MainAxisAlignment.end,
@@ -39,14 +39,18 @@ class SettingItems extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Icon(Icons.arrow_back_ios,
-                  color: AppColors.settingMenuItem,
+                  color: darkThemeBoolean == "false"
+                      ? Colors.white
+                      : AppColors.settingMenuItem,
                   size: Dimensions.iconSize16),
               Text(itemName.getString(context),
                 textDirection: TextDirection.rtl,
                 style: TextStyle(
                     fontWeight: FontWeight.w400,
                     fontSize: Dimensions.font16,
-                    color: AppColors.appBarProfileName,
+                    color: darkThemeBoolean == "false"
+                        ? AppColors.appBarProfileName
+                        : Colors.white,
                 ),),
 
             ],

@@ -15,7 +15,7 @@ class ArrowBackIcon extends StatelessWidget {
         },
         icon: Icon(Icons.arrow_back,
           color: themeBoolean == "false"
-              ? Colors.white
-              : AppColors.appBarTitleColor,));
+              ? AppColors.appBarTitleColor
+              : Colors.white,));
   }
 }

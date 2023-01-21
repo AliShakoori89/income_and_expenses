@@ -10,9 +10,11 @@ mixin AppLocale {
   static const String export = 'PDF خروجی';
   static const String chooseCurrency = 'انتخاب واحد پول';
   static const String chooseLanguage = 'نتخاب زبان';
+  static const String chooseTheme = 'نتخاب زمینه';
   static const String frequentlyAskedQuestions = 'سوالات متداول';
   static const String exit = 'خروج';
   static const String pleaseChooseYourLanguage = "لطفا زبان مورد نظر خود را وارد نمایید:";
+  static const String pleaseChooseYourTheme = "لطفا زمینه مورد نظر خود را وارد نمایید:";
   static const String ok = "ثبت";
   static const String persian = "فارسی";
   static const String english = "انگلیسی";
@@ -35,6 +37,7 @@ mixin AppLocale {
   static const String etcetera = "سایر";
   static const String toman = "تومان";
   static const String rial = "ریال";
+  static const String theme = "پس زمینه";
 
 
 
@@ -54,6 +57,8 @@ mixin AppLocale {
     frequentlyAskedQuestions: 'Frequently asked questions',
     exit: 'exit',
     pleaseChooseYourLanguage: "Please choose your language :",
+    chooseTheme: "Theme",
+    pleaseChooseYourTheme: "Choose theme :",
     ok: "ok",
     persian: "Persian",
     english: "English",
@@ -74,7 +79,8 @@ mixin AppLocale {
     pastime: "pastime",
     etcetera: 'etcetera',
     toman: 'T',
-    rial: 'R'
+    rial: 'R',
+    theme: "theme"
     };
 
   static const Map<String, dynamic> FA = {
@@ -91,6 +97,8 @@ mixin AppLocale {
     frequentlyAskedQuestions: 'سوالات متداول',
     exit: 'خروج',
     pleaseChooseYourLanguage: "لطفا زبان مورد نظر خود را وارد نمایید:",
+    chooseTheme: 'زمینه',
+    pleaseChooseYourTheme: "انتخاب زمینه:",
     ok: "ثبت",
     persian: "فارسی",
     english: "انگلیسی",
@@ -112,6 +120,7 @@ mixin AppLocale {
     pastime: "تفریح",
     etcetera: 'سایر',
     toman: 'تومان',
-    rial: 'ریال'
+    rial: 'ریال',
+    theme: 'پی زمینه'
   };
 }

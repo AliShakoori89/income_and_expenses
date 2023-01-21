@@ -35,7 +35,7 @@ class _SettingItemListState extends State<SettingItemList> {
 
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
 
-      var themeBoolean = state.themeBoolean;
+      var darkThemeBoolean = state.themeBoolean;
 
       return Container(
       margin: EdgeInsets.only(
@@ -48,10 +48,17 @@ class _SettingItemListState extends State<SettingItemList> {
           GestureDetector(
             onTap: () async {
             },
-            child: const SettingItems(
-              imagePath: "assets/profile_icons/export_to_pdf.png",
+            child: SettingItems(
+              imagePath: darkThemeBoolean == "false"
+                  ? "assets/profile_icons/export_to_pdf.png"
+                  : "assets/profile_icons/dark_export_to_pdf.png",
               itemName: AppLocale.export,
             ),
+          ),
+          Divider(
+            color: darkThemeBoolean == "false"
+                ? Colors.grey
+                : Colors.white,
           ),
           SizedBox(
             height: Dimensions.height30,
@@ -92,15 +99,14 @@ class _SettingItemListState extends State<SettingItemList> {
                         Text(AppLocale.rial.getString(context)),
                         BlocBuilder<ChangeLanguageBloc, ChangeLanguageState>(
                             builder: (context, state) {
-                              return
-                                Checkbox(
-                                    checkColor: Colors.white,
-                                    fillColor:
-                                    MaterialStateProperty.resolveWith(getColor),
-                                    value: state.englishCheckBox,
-                                    onChanged: (bool? value) {
-                                      Navigator.of(ctx).pop();
-                                    });
+                              return Checkbox(
+                                  checkColor: Colors.white,
+                                  fillColor:
+                                  MaterialStateProperty.resolveWith(getColor),
+                                  value: state.englishCheckBox,
+                                  onChanged: (bool? value) {
+                                    Navigator.of(ctx).pop();
+                                  });
                             }),
                       ],
                     ),
@@ -108,10 +114,17 @@ class _SettingItemListState extends State<SettingItemList> {
                 ),
               );
             },
-            child: const SettingItems(
-              imagePath: "assets/profile_icons/choose_currency.png",
+            child: SettingItems(
+              imagePath: darkThemeBoolean == "false"
+                  ? "assets/profile_icons/choose_currency.png"
+                  : "assets/profile_icons/dark_choose_currency.png",
               itemName: AppLocale.chooseCurrency,
             ),
+          ),
+          Divider(
+            color: darkThemeBoolean == "false"
+                ? Colors.grey
+                : Colors.white,
           ),
           SizedBox(
             height: Dimensions.height30,
@@ -188,10 +201,17 @@ class _SettingItemListState extends State<SettingItemList> {
                 ),
               );
             },
-            child: const SettingItems(
-              imagePath: "assets/profile_icons/choose_language.png",
+            child: SettingItems(
+              imagePath: darkThemeBoolean == "false"
+                  ? "assets/profile_icons/choose_language.png"
+                  : "assets/profile_icons/dark_choose_language.png",
               itemName: AppLocale.chooseLanguage,
             ),
+          ),
+          Divider(
+            color: darkThemeBoolean == "false"
+                ? Colors.grey
+                : Colors.white,
           ),
           SizedBox(
             height: Dimensions.height30,
@@ -200,12 +220,98 @@ class _SettingItemListState extends State<SettingItemList> {
             onTap: (){
               Get.toNamed(RouteHelper.getFrequentlyAskedQuestions());
             },
-            child: const Center(
+            child: Center(
               child: SettingItems(
-                imagePath: "assets/profile_icons/frequently_asked_questions.png",
+                imagePath: darkThemeBoolean == "false"
+                    ? "assets/profile_icons/frequently_asked_questions.png"
+                    : "assets/profile_icons/dark_frequently_asked_questions.png",
                 itemName: AppLocale.frequentlyAskedQuestions,
               ),
             ),
+          ),
+          Divider(
+            color: darkThemeBoolean == "false"
+                ? Colors.grey
+                : Colors.white,
+          ),
+          SizedBox(
+            height: Dimensions.height30,
+          ),
+          GestureDetector(
+            onTap: (){
+              showDialog(
+                context: context,
+                builder: (ctx) => AlertDialog(
+                  title: Text(
+                    AppLocale.chooseTheme.getString(context),
+                    textDirection: TextDirection.rtl,
+                    style: TextStyle(fontSize: Dimensions.font16),
+                  ),
+                  content: Text(AppLocale.pleaseChooseYourTheme.getString(context),
+                      textDirection: TextDirection.rtl,
+                      style: TextStyle(fontSize: Dimensions.font14)),
+                  actions: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Icon(Icons.dark_mode),
+                        BlocBuilder<ChangeLanguageBloc, ChangeLanguageState>(
+                            builder: (context, state) {
+                              return
+                                Checkbox(
+                                    checkColor: Colors.white,
+                                    fillColor:
+                                    MaterialStateProperty.resolveWith(getColor),
+                                    value: state.persianCheckBox,
+                                    onChanged: (bool? value) {
+                                      Navigator.of(ctx).pop();
+                                    });
+                            })
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Icon(Icons.light_mode,
+                        color: AppColors.lightColor),
+                        BlocBuilder<ChangeLanguageBloc, ChangeLanguageState>(
+                            builder: (context, state) {
+                              return
+                                Checkbox(
+                                    checkColor: Colors.white,
+                                    fillColor:
+                                    MaterialStateProperty.resolveWith(getColor),
+                                    value: state.englishCheckBox,
+                                    onChanged: (bool? value) {
+                                      BlocProvider.of<ChangeLanguageBloc>(context)
+                                          .add(ChangeToEnglishLanguageTypeEvent(
+                                          value: true));
+                                      BlocProvider.of<ChangeLanguageBloc>(context)
+                                          .add(ChangeToPersianLanguageTypeEvent(
+                                        value: false,
+                                      ));
+                                      print("english");
+                                      _localization.translate('en');
+                                      Navigator.of(ctx).pop();
+                                    });
+                            }),
+                      ],
+                    ),
+                  ],
+                ),
+              );
+            },
+            child: SettingItems(
+              imagePath: darkThemeBoolean == "false"
+                  ? "assets/profile_icons/dark_theme.png"
+                  : "assets/profile_icons/dark_theme.png",
+              itemName: AppLocale.theme,
+            ),
+          ),
+          Divider(
+            color: darkThemeBoolean == "false"
+                ? Colors.grey
+                : Colors.white,
           ),
           SizedBox(
             height: Dimensions.height30,
@@ -214,8 +320,10 @@ class _SettingItemListState extends State<SettingItemList> {
             onTap: (){
               exit(0);
             },
-            child: const SettingItems(
-              imagePath: "assets/profile_icons/logout.png",
+            child: SettingItems(
+              imagePath: darkThemeBoolean == "false"
+                  ? "assets/profile_icons/logout.png"
+                  : "assets/profile_icons/dark_logout.png",
               itemName: AppLocale.exit,
             ),
           ),

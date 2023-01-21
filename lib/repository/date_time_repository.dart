@@ -13,6 +13,7 @@ class SetDateRepository {
     String dateString = "${g2j1.formatter.y}-${g2j1.formatter.m}-${g2j1.formatter.d}";
     String dateMonthString = "${g2j1.formatter.y}-${g2j1.formatter.m}";
     await prefs.setString('dateMonth', dateMonthString);
+    print("!!!!!!!!!!!!!!!1  "+ dateString);
     await prefs.setString('date', dateString);
   }
 
