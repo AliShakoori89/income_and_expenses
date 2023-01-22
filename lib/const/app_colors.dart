@@ -35,6 +35,8 @@ class AppColors{
   static const Color darkThemeColor = Color.fromRGBO(21, 14, 66, 1.00);
   // #E0E0E0
   static const Color darkThemeBorderColor = Color.fromRGBO(224, 224, 224, 1.00);
+  // #BDBDBD
+  static const Color darkArrowButtonColor = Color.fromRGBO(189, 189, 189, 1.00);
 
   static const Color calenderBoxColor = Color.fromRGBO(245, 245, 245, 1.00);
 

@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localization/flutter_localization.dart';
@@ -251,51 +250,32 @@ class _SettingItemListState extends State<SettingItemList> {
                       textDirection: TextDirection.rtl,
                       style: TextStyle(fontSize: Dimensions.font14)),
                   actions: <Widget>[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Icon(Icons.dark_mode),
-                        BlocBuilder<ChangeLanguageBloc, ChangeLanguageState>(
-                            builder: (context, state) {
-                              return
-                                Checkbox(
-                                    checkColor: Colors.white,
-                                    fillColor:
-                                    MaterialStateProperty.resolveWith(getColor),
-                                    value: state.persianCheckBox,
-                                    onChanged: (bool? value) {
-                                      Navigator.of(ctx).pop();
-                                    });
-                            })
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Icon(Icons.light_mode,
-                        color: AppColors.lightColor),
-                        BlocBuilder<ChangeLanguageBloc, ChangeLanguageState>(
-                            builder: (context, state) {
-                              return
-                                Checkbox(
-                                    checkColor: Colors.white,
-                                    fillColor:
-                                    MaterialStateProperty.resolveWith(getColor),
-                                    value: state.englishCheckBox,
-                                    onChanged: (bool? value) {
-                                      BlocProvider.of<ChangeLanguageBloc>(context)
-                                          .add(ChangeToEnglishLanguageTypeEvent(
-                                          value: true));
-                                      BlocProvider.of<ChangeLanguageBloc>(context)
-                                          .add(ChangeToPersianLanguageTypeEvent(
-                                        value: false,
-                                      ));
-                                      print("english");
-                                      _localization.translate('en');
-                                      Navigator.of(ctx).pop();
-                                    });
-                            }),
-                      ],
+                    Container(
+                      margin: EdgeInsets.only(
+                        left: Dimensions.width45,
+                        right: Dimensions.width45,
+                        bottom: Dimensions.height15
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          GestureDetector(
+                            child: Icon(Icons.dark_mode),
+                            onTap: (){
+                            BlocProvider.of<ThemeBloc>(context)
+                                .add(WriteThemeBooleanEvent(darkThemeBoolean: true));
+                            Navigator.of(ctx).pop();}
+                          ),
+                          GestureDetector(
+                              child: Icon(Icons.light_mode ,
+                              color: AppColors.lightColor,),
+                          onTap: (){
+                            BlocProvider.of<ThemeBloc>(context)
+                                .add(WriteThemeBooleanEvent(darkThemeBoolean: false));
+                            Navigator.of(ctx).pop();
+                          }),
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -303,7 +283,7 @@ class _SettingItemListState extends State<SettingItemList> {
             },
             child: SettingItems(
               imagePath: darkThemeBoolean == "false"
-                  ? "assets/profile_icons/dark_theme.png"
+                  ? "assets/profile_icons/theme.png"
                   : "assets/profile_icons/dark_theme.png",
               itemName: AppLocale.theme,
             ),

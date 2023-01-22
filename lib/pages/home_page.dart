@@ -91,8 +91,8 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
           () => _borderRadiusAnimationController.forward(),
     );
 
-    BlocProvider.of<ThemeBloc>(context)
-        .add(WriteThemeBooleanEvent(darkThemeBoolean: true));
+    // BlocProvider.of<ThemeBloc>(context)
+    //     .add(WriteThemeBooleanEvent(darkThemeBoolean: true));
   }
 
   bool onScrollNotification(ScrollNotification notification) {
@@ -166,8 +166,8 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         splashSpeedInMilliseconds: 300,
         notchSmoothness: NotchSmoothness.defaultEdge,
         gapLocation: GapLocation.center,
-        leftCornerRadius: 32,
-        rightCornerRadius: 32,
+        // leftCornerRadius: 32,
+        // rightCornerRadius: 32,
         onTap: onTapNav,
         hideAnimationController: _hideBottomBarAnimationController,
       ),

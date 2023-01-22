@@ -149,10 +149,11 @@ class _CashContainerState extends State<CashContainer> {
                                           fontWeight: FontWeight.w400)),
                                 ]);
                           }),
-                      GestureDetector(onTap: () {
-                        showDialog(
-                          context: context,
-                          builder: (ctx) => AlertDialog(
+                      GestureDetector(
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (ctx) => AlertDialog(
                             title: Text(
                               AppLocale.totalInventory.getString(context),
                               textDirection: TextDirection.rtl,
