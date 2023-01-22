@@ -1,12 +1,21 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:income_and_expenses/const/dimensions.dart';
+
+import '../bloc/them_bloc/bloc.dart';
+import '../bloc/them_bloc/event.dart';
+import '../bloc/them_bloc/state.dart';
+import '../const/app_colors.dart';
 
 class FrequentlyAskedQuestions extends StatelessWidget {
   const FrequentlyAskedQuestions({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
+    BlocProvider.of<ThemeBloc>(context)
+        .add(ReadThemeBooleanEvent());
 
     var allQuestion = [
       "نحوه استفاده از برنامه به چه گونه می باشد؟",
@@ -22,28 +31,34 @@ class FrequentlyAskedQuestions extends StatelessWidget {
       "بله شما می توانید با کلیک بر روی گزینه ورودی ، مبلغ مورد نظر را پس از محاسبه وارد نمایید"
     ];
 
-    buildQuestion(double height, String question) {
+    buildQuestion(double height, String question, String darkThemeBoolean) {
       return SizedBox(
           height: height,
           child: Align(
             alignment: Alignment.centerRight,
             child: Text(question,
-                style: const TextStyle(
-                    fontWeight: FontWeight.w600
+                style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                  color: darkThemeBoolean == "false"
+                      ? Colors.black
+                      : Colors.white
                 ),
                 textDirection: TextDirection.rtl),
           ));
     }
 
-    buildCollapsed1(String question, String answer) {
+    buildCollapsed1(String question, String answer, String darkThemeBoolean) {
       return Align(
         alignment: Alignment.centerRight,
         child: Column(
           children: [
-            buildQuestion( Dimensions.height45, question),
+            buildQuestion( Dimensions.height45, question, darkThemeBoolean),
             Text(answer,
-                style: const TextStyle(
-                    fontWeight: FontWeight.w400),
+                style: TextStyle(
+                    fontWeight: FontWeight.w400,
+                    color: darkThemeBoolean == "false"
+                        ? Colors.black
+                        : Colors.white),
                 textDirection: TextDirection.rtl,
             )
           ],
@@ -51,14 +66,17 @@ class FrequentlyAskedQuestions extends StatelessWidget {
       );
     }
 
-    buildExpanded1(String question) {
-      return buildQuestion(Dimensions.height45, question);
+    buildExpanded1(String question, String darkThemeBoolean) {
+      return buildQuestion(Dimensions.height45, question, darkThemeBoolean);
     }
 
-    return Scaffold(
-      backgroundColor: Colors.white,
+    return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
+      return Scaffold(
+      backgroundColor: state.darkThemeBoolean == "false"
+          ? Colors.white
+          : AppColors.darkThemeColor,
       body: SafeArea(
-        child: ListView.builder(
+        child:  ListView.builder(
           itemCount: allQuestion.length,
           padding: const EdgeInsets.all(8),
           itemBuilder: (context, index){
@@ -68,17 +86,23 @@ class FrequentlyAskedQuestions extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
                   child: ScrollOnExpand(
                     child: Card(
+                      color: state.darkThemeBoolean == "false"
+                          ? Colors.white
+                          : AppColors.darkThemeColor,
                       clipBehavior: Clip.antiAlias,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Expandable(
-                            collapsed: buildCollapsed1(allQuestion[index], allAnswer[index]),
-                            expanded: buildExpanded1(allQuestion[index]),
+                            collapsed: buildCollapsed1(allQuestion[index], allAnswer[index] , state.darkThemeBoolean),
+                            expanded: buildExpanded1(allQuestion[index], state.darkThemeBoolean),
                           ),
-                          const Divider(
-                            height: 1,
-                          ),
+                          // Divider(
+                          //   height: 1,
+                          //   color: state.darkThemeBoolean == "false"
+                          //       ? Colors.grey
+                          //       : Colors.white,
+                          // ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
@@ -88,7 +112,10 @@ class FrequentlyAskedQuestions extends StatelessWidget {
                                   ExpandableController.of(context, required: true)!;
                                   return IconButton(onPressed: () {
                                     controller.toggle();
-                                  }, icon: const Icon(Icons.arrow_drop_down_outlined));
+                                  }, icon: Icon(Icons.arrow_drop_down_outlined,
+                                  color: state.darkThemeBoolean == "false"
+                                      ? Colors.black
+                                      : Colors.white));
                                 },
                               ),
                             ],
@@ -99,8 +126,8 @@ class FrequentlyAskedQuestions extends StatelessWidget {
                   ),
                 ));
           },
-        ),
+        )
       ),
-    );
+    );});
   }
 }

@@ -52,7 +52,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
 
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
 
-      var darkThemeBoolean = state.themeBoolean;
+      var darkThemeBoolean = state.darkThemeBoolean;
 
       return Scaffold(
       appBar: AppBar(
@@ -141,11 +141,9 @@ class _AddExpensePageState extends State<AddExpensePage> {
 
               expense.expenseDate = state.date;
               expense.expenseDateMonth = state.dateMonth;
-
-              print("expenseDate    "+expense.expenseDate.toString());
-              print("expenseDateMonth    "+expense.expenseDateMonth.toString());
               expense.expenseCategory = categoryController.text;
-              expense.expense = int.parse(expensesController.text.toEnglishDigit());
+              expense.tomanExpense = int.parse(expensesController.text.toEnglishDigit());
+              expense.rialExpense = int.parse("${expensesController.text.toEnglishDigit()}0");
               expense.description = descriptionController.text;
               if(languageBoolean == "false"){
                 if(categoryController.text == "خرید اقلام"){

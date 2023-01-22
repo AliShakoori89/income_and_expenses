@@ -23,8 +23,8 @@ class _MainExpensesPageState extends State<MainExpensesPage> {
   @override
   void initState() {
 
-    BlocProvider.of<SetDateBloc>(context)
-        .add(WriteDateEvent(date: DateTime.now()));
+    // BlocProvider.of<SetDateBloc>(context)
+    //     .add(WriteDateEvent(date: DateTime.now()));
     
     super.initState();
   }
@@ -32,13 +32,13 @@ class _MainExpensesPageState extends State<MainExpensesPage> {
   @override
   Widget build(BuildContext context) {
 
-    BlocProvider.of<ThemeBloc>(context)
-        .add(ReadThemeBooleanEvent());
+    // BlocProvider.of<ThemeBloc>(context)
+    //     .add(ReadThemeBooleanEvent());
 
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
       return Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: state.themeBoolean == "false"
+        backgroundColor: state.darkThemeBoolean == "false"
             ? Colors.white
             : AppColors.darkThemeColor,
         body: SafeArea(
@@ -57,7 +57,7 @@ class _MainExpensesPageState extends State<MainExpensesPage> {
                   SizedBox(
                     height: Dimensions.height20,
                   ),
-                  DatePickerCalendar(),
+                  const DatePickerCalendar(),
                   SizedBox(
                     height: Dimensions.height20,
                   ),

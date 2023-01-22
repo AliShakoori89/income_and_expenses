@@ -41,7 +41,7 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
 
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
 
-      var themeBoolean = state.themeBoolean;
+      var themeBoolean = state.darkThemeBoolean;
 
       return BlocBuilder<SetDateBloc, SetDateState>(builder: (context, state) {
         return Container(

@@ -20,7 +20,7 @@ class ProfilePage extends StatelessWidget {
 
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
 
-      var darkThemeBoolean = state.themeBoolean;
+      var darkThemeBoolean = state.darkThemeBoolean;
 
       return Scaffold(
         backgroundColor: darkThemeBoolean == "false"

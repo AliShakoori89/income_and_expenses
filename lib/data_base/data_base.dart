@@ -5,7 +5,6 @@ import 'package:income_and_expenses/model/expense_model.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
-
 import '../const/app_colors.dart';
 
 class DatabaseHelper {
@@ -18,7 +17,8 @@ class DatabaseHelper {
   static const columnExpenseDate = 'expenseDate';
   static const columnExpenseDateMonth = 'expenseDateMonth';
   static const columnExpenseCategory = 'expenseCategory';
-  static const columnExpense = 'expense';
+  static const columnTomanExpense = 'tomanExpense';
+  static const columnRialExpense = 'rialExpense';
   static const columnDescription = 'description';
   static const columnIconType = 'iconType';
 
@@ -44,7 +44,8 @@ class DatabaseHelper {
         '$columnExpenseDate TEXT,'
         '$columnExpenseDateMonth TEXT,'
         '$columnExpenseCategory TEXT,'
-        '$columnExpense INTEGER,'
+        '$columnTomanExpense INTEGER,'
+        '$columnRialExpense INTEGER,'
         '$columnDescription TEXT,'
         '$columnIconType Text'
         ')'
@@ -68,10 +69,10 @@ class DatabaseHelper {
     return listMedicines;
   }
 
-  Future<String> calculateTotalExpenses(String? dateMonth) async {
+  Future<String> calculateTotalTomanExpenses(String? dateMonth) async {
     var dbExpense = await database;
-    var result = await dbExpense.rawQuery("SELECT SUM($columnExpense) FROM my_table WHERE $columnExpenseDateMonth ='$dateMonth'");
-    Object? value = result[0]["SUM($columnExpense)"];
+    var result = await dbExpense.rawQuery("SELECT SUM($columnTomanExpense) FROM my_table WHERE $columnExpenseDateMonth ='$dateMonth'");
+    Object? value = result[0]["SUM($columnTomanExpense)"];
     if (value == null){
       return '0';
     }else{
@@ -79,11 +80,11 @@ class DatabaseHelper {
     }
   }
 
-  Future<String> calculateSpent(String? dateMonth, String? cash) async {
+  Future<String> calculateTomanSpent(String? dateMonth, String? cash) async {
     late String spent;
     var dbExpense = await database;
-    var result = await dbExpense.rawQuery("SELECT SUM($columnExpense) FROM my_table WHERE $columnExpenseDateMonth ='$dateMonth'");
-    Object? value = result[0]["SUM($columnExpense)"];
+    var result = await dbExpense.rawQuery("SELECT SUM($columnTomanExpense) FROM my_table WHERE $columnExpenseDateMonth ='$dateMonth'");
+    Object? value = result[0]["SUM($columnTomanExpense)"];
     if(cash == null){
       Get.rawSnackbar(
         backgroundColor: AppColors.snackBarColor,

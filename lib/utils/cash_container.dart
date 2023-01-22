@@ -16,6 +16,9 @@ import 'package:persian_number_utility/persian_number_utility.dart';
 
 import '../bloc/calculate_expense_bloc/event.dart';
 import '../bloc/cash_bloc/event.dart';
+import '../bloc/change_currency_bloc/bloc.dart';
+import '../bloc/change_currency_bloc/event.dart';
+import '../bloc/change_currency_bloc/state.dart';
 import '../bloc/them_bloc/bloc.dart';
 import '../bloc/them_bloc/event.dart';
 import '../bloc/them_bloc/state.dart';
@@ -32,14 +35,20 @@ class _CashContainerState extends State<CashContainer> {
   @override
   void initState() {
 
-    final cashBloc = BlocProvider.of<CashBloc>(context);
-    cashBloc.add(FetchCashEvent());
+    // final cashBloc = BlocProvider.of<CashBloc>(context);
+    // cashBloc.add(FetchCashEvent());
+    //
+    // final calculateExpenseBloc = BlocProvider.of<CalculateExpenseBloc>(context);
+    // calculateExpenseBloc.add(SumExpensePerMonthEvent());
+    // calculateExpenseBloc.add(CalculateSpentPerMonthEvent());
 
-    final calculateExpenseBloc = BlocProvider.of<CalculateExpenseBloc>(context);
-    calculateExpenseBloc.add(SumExpensePerMonthEvent());
-    calculateExpenseBloc.add(CalculateSpentPerMonthEvent());
-
-    BlocProvider.of<ThemeBloc>(context).add(ReadThemeBooleanEvent());
+    // BlocProvider.of<ThemeBloc>(context).add(ReadThemeBooleanEvent());
+    //
+    // BlocProvider.of<ChangeLanguageBloc>(context).add(ReadLanguageBooleanEvent());
+    //
+    // BlocProvider.of<ThemeBloc>(context).add(ReadThemeBooleanEvent());
+    //
+    // BlocProvider.of<ChangeCurrencyBloc>(context).add(ReadCurrencyBooleanEvent());
 
     super.initState();
   }
@@ -51,13 +60,11 @@ class _CashContainerState extends State<CashContainer> {
   @override
   Widget build(BuildContext context) {
 
-    BlocProvider.of<ChangeLanguageBloc>(context).add(ReadLanguageBooleanEvent());
 
-    BlocProvider.of<ThemeBloc>(context).add(ReadThemeBooleanEvent());
 
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
 
-      var darkThemeBoolean = state.themeBoolean;
+      var darkThemeBoolean = state.darkThemeBoolean;
 
       return Container(
         decoration: BoxDecoration(
@@ -76,7 +83,13 @@ class _CashContainerState extends State<CashContainer> {
             child: BlocBuilder<ChangeLanguageBloc, ChangeLanguageState>(
                 builder: (context, state) {
                   bool lBool = state.readLanguageBoolean;
-                  return Row(
+
+                  print("lBoollBoollBoollBoollBoollBool     "+lBool.toString());
+                  return BlocBuilder<ChangeCurrencyBloc, ChangeCurrencyState>(
+                      builder: (context, state) {
+
+                        bool currencyType = state.readCurrencyBoolean;
+                        return Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       BlocBuilder<CalculateExpenseBloc, CalculateExpenseState>(
@@ -92,15 +105,50 @@ class _CashContainerState extends State<CashContainer> {
                                 SizedBox(
                                   height: Dimensions.height10,
                                 ),
-                                Text(
-                                    lBool == false
-                                        ? state.expenses.toString().toPersianDigit().seRagham()
-                                        : state.expenses.toString().seRagham(),
-                                    style: TextStyle(
-                                        color: AppColors.expensesDigitColor,
-                                        fontSize: lBool == false
-                                            ? Dimensions.font18
-                                            : Dimensions.font14)),
+                                lBool == false
+                                    ? Row(
+                                  children: [
+                                    Text(state.expenses.toString() != ""
+                                        ? currencyType == true
+                                        ? AppLocale.rial.getString(context)
+                                        : AppLocale.toman.getString(context)
+                                        : '0'.toPersianDigit(),
+                                    style: const TextStyle(
+                                      color: Colors.white
+                                    )),
+                                    SizedBox(width: Dimensions.width10/3),
+                                    Text(
+                                        lBool == false
+                                            ? state.expenses.toString().toPersianDigit().seRagham()
+                                            : state.expenses.toString().seRagham(),
+                                        style: TextStyle(
+                                            color: AppColors.expensesDigitColor,
+                                            fontSize: lBool == false
+                                                ? Dimensions.font18
+                                                : Dimensions.font14)),
+                                  ],
+                                )
+                                    : Row(
+                                  children: [
+                                    Text(state.expenses.toString().seRagham(),
+                                        style: TextStyle(
+                                            color: AppColors.expensesDigitColor,
+                                            fontSize: lBool == false
+                                                ? Dimensions.font18
+                                                : Dimensions.font14)),
+                                    SizedBox(width: Dimensions.width10/3),
+                                    Text(state.expenses.toString() != ""
+                                            ? currencyType == true
+                                                ? AppLocale.toman
+                                                    .getString(context)
+                                                : AppLocale.toman
+                                                    .getString(context)
+                                            : '0',
+                                        style: const TextStyle(
+                                            color: Colors.white
+                                        )),
+                                  ],
+                                ) ,
                                 SizedBox(
                                   height: Dimensions.height10 / 2,
                                 ),
@@ -127,15 +175,43 @@ class _CashContainerState extends State<CashContainer> {
                                   SizedBox(
                                     height: Dimensions.height10,
                                   ),
-                                  Text(
-                                      lBool == false
-                                          ? state.spent.toString().toPersianDigit().seRagham()
-                                          : state.spent.toString().seRagham(),
-                                      style: TextStyle(
-                                          color: AppColors.balanceDigitColor,
-                                          fontSize: lBool == false
-                                              ? Dimensions.font18
-                                              : Dimensions.font14)),
+                                  lBool == false
+                                      ? Row(
+                                    children: [
+                                      Text(AppLocale.toman.getString(context),
+                                          style: const TextStyle(
+                                              color: Colors.white
+                                          )),
+                                      SizedBox(width: Dimensions.width10/3),
+                                      Text(
+                                          lBool == false
+                                              ? state.spent.toString().toPersianDigit().seRagham()
+                                              : state.spent.toString().seRagham(),
+                                          style: TextStyle(
+                                              color: AppColors.balanceDigitColor,
+                                              fontSize: lBool == false
+                                                  ? Dimensions.font18
+                                                  : Dimensions.font14)),
+                                    ],
+                                  )
+                                      : Row(
+                                    children: [
+                                      Text(
+                                          lBool == false
+                                              ? state.spent.toString().toPersianDigit().seRagham()
+                                              : state.spent.toString().seRagham(),
+                                          style: TextStyle(
+                                              color: AppColors.balanceDigitColor,
+                                              fontSize: lBool == false
+                                                  ? Dimensions.font18
+                                                  : Dimensions.font14)),
+                                      SizedBox(width: Dimensions.width10/3),
+                                      Text(AppLocale.toman.getString(context),
+                                          style: const TextStyle(
+                                              color: Colors.white
+                                          )),
+                                    ],
+                                  ),
                                   SizedBox(
                                     height: Dimensions.height10 / 2,
                                   ),
@@ -213,21 +289,55 @@ class _CashContainerState extends State<CashContainer> {
                             SizedBox(
                               height: Dimensions.height10,
                             ),
-                            Text(
-                                state.cash == ''
-                                    ? lBool == false
-                                    ? "0".toPersianDigit()
-                                    : "0"
-                                    : lBool == false
-                                    ? state.cash.toPersianDigit().seRagham()
-                                    : state.cash.seRagham(),
-                                style: TextStyle(
-                                    color: darkThemeBoolean == "false"
-                                        ? AppColors.appBarProfileName
-                                        : Colors.white,
-                                    fontSize: lBool == false
-                                        ? Dimensions.font18
-                                        : Dimensions.font14)),
+                            lBool == false
+                                ? Row(
+                              children: [
+                                Text(AppLocale.toman.getString(context),
+                                    style: const TextStyle(
+                                        color: Colors.white
+                                    )),
+                                SizedBox(width: Dimensions.width10/3),
+                                Text(
+                                    state.cash == ''
+                                        ? lBool == false
+                                        ? "0".toPersianDigit()
+                                        : "0"
+                                        : lBool == false
+                                        ? state.cash.toPersianDigit().seRagham()
+                                        : state.cash.seRagham(),
+                                    style: TextStyle(
+                                        color: darkThemeBoolean == "false"
+                                            ? AppColors.appBarProfileName
+                                            : Colors.white,
+                                        fontSize: lBool == false
+                                            ? Dimensions.font18
+                                            : Dimensions.font14)),
+                              ],
+                            )
+                                : Row(
+                              children: [
+                                Text(
+                                    state.cash == ''
+                                        ? lBool == false
+                                        ? "0".toPersianDigit()
+                                        : "0"
+                                        : lBool == false
+                                        ? state.cash.toPersianDigit().seRagham()
+                                        : state.cash.seRagham(),
+                                    style: TextStyle(
+                                        color: darkThemeBoolean == "false"
+                                            ? AppColors.appBarProfileName
+                                            : Colors.white,
+                                        fontSize: lBool == false
+                                            ? Dimensions.font18
+                                            : Dimensions.font14)),
+                                SizedBox(width: Dimensions.width10/3),
+                                Text(AppLocale.toman.getString(context),
+                                    style: const TextStyle(
+                                        color: Colors.white
+                                    )),
+                              ],
+                            ),
                             SizedBox(
                               height: Dimensions.height10 / 2,
                             ),
@@ -242,7 +352,7 @@ class _CashContainerState extends State<CashContainer> {
                         );
                       })),
                     ],
-                  );
+                  );});
                 })
         ),
       );});

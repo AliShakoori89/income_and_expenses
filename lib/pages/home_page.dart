@@ -11,6 +11,10 @@ import 'package:income_and_expenses/routes/route_helper.dart';
 import 'package:income_and_expenses/const/app_colors.dart';
 import 'package:income_and_expenses/const/dimensions.dart';
 
+import '../bloc/change_currency_bloc/bloc.dart';
+import '../bloc/change_currency_bloc/event.dart';
+import '../bloc/change_language_bloc/bloc.dart';
+import '../bloc/change_language_bloc/event.dart';
 import '../bloc/them_bloc/bloc.dart';
 import '../bloc/them_bloc/event.dart';
 
@@ -92,7 +96,13 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     );
 
     // BlocProvider.of<ThemeBloc>(context)
-    //     .add(WriteThemeBooleanEvent(darkThemeBoolean: true));
+    //     .add(WriteThemeBooleanEvent(darkThemeBoolean: false));
+
+    // BlocProvider.of<ChangeLanguageBloc>(context)
+    //     .add(WriteLanguageBooleanEvent(persianLanguageBoolean: true));
+
+    // BlocProvider.of<ChangeCurrencyBloc>(context)
+    //     .add(WriteCurrencyBooleanEvent(currencyBoolean: true));
   }
 
   bool onScrollNotification(ScrollNotification notification) {

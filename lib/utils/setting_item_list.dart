@@ -9,6 +9,9 @@ import 'package:income_and_expenses/bloc/change_language_bloc/state.dart';
 import 'package:income_and_expenses/routes/route_helper.dart';
 import 'package:income_and_expenses/const/app_colors.dart';
 import 'package:income_and_expenses/const/dimensions.dart';
+import '../bloc/change_currency_bloc/bloc.dart';
+import '../bloc/change_currency_bloc/event.dart';
+import '../bloc/change_currency_bloc/state.dart';
 import '../bloc/them_bloc/bloc.dart';
 import '../bloc/them_bloc/event.dart';
 import '../bloc/them_bloc/state.dart';
@@ -34,7 +37,7 @@ class _SettingItemListState extends State<SettingItemList> {
 
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
 
-      var darkThemeBoolean = state.themeBoolean;
+      var darkThemeBoolean = state.darkThemeBoolean;
 
       return Container(
       margin: EdgeInsets.only(
@@ -80,13 +83,17 @@ class _SettingItemListState extends State<SettingItemList> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Text(AppLocale.toman.getString(context)),
-                        BlocBuilder<ChangeLanguageBloc, ChangeLanguageState>(
+                        BlocBuilder<ChangeCurrencyBloc, ChangeCurrencyState>(
                           builder: (context, state) {
                             return Checkbox(
                               checkColor: Colors.white,
                               fillColor: MaterialStateProperty.resolveWith(getColor),
-                              value: state.persianCheckBox,
+                              value: state.readCurrencyBoolean,
                               onChanged: (bool? value) {
+                                BlocProvider.of<ChangeCurrencyBloc>(context)
+                                    .add(WriteCurrencyBooleanEvent(
+                                  currencyBoolean: true,
+                                ));
                                 Navigator.of(ctx).pop();
                               });
                           })
@@ -96,14 +103,18 @@ class _SettingItemListState extends State<SettingItemList> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Text(AppLocale.rial.getString(context)),
-                        BlocBuilder<ChangeLanguageBloc, ChangeLanguageState>(
+                        BlocBuilder<ChangeCurrencyBloc, ChangeCurrencyState>(
                             builder: (context, state) {
                               return Checkbox(
                                   checkColor: Colors.white,
                                   fillColor:
                                   MaterialStateProperty.resolveWith(getColor),
-                                  value: state.englishCheckBox,
+                                  value: state.readCurrencyBoolean,
                                   onChanged: (bool? value) {
+                                    BlocProvider.of<ChangeCurrencyBloc>(context)
+                                        .add(WriteCurrencyBooleanEvent(
+                                      currencyBoolean: false,
+                                    ));
                                     Navigator.of(ctx).pop();
                                   });
                             }),
