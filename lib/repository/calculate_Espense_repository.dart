@@ -15,10 +15,10 @@ class CalculateExpensesRepository {
     return await helper.calculateTotalTomanExpenses(dateMonth);
   }
 
-  Future<String> calculateSpentRepo() async {
+  Future<String> calculateCashRepo() async {
     final prefs = await SharedPreferences.getInstance();
     final String? dateMonth = prefs.getString('dateMonth');
-    final String? cash = prefs.getString('cash');
-    return await helper.calculateTomanSpent(dateMonth , cash);
+    final String? income = prefs.getString('income');
+    return await helper.calculateTomanCash(dateMonth , income);
   }
 }

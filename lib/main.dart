@@ -17,7 +17,7 @@ import 'package:income_and_expenses/repository/date_time_repository.dart';
 import 'package:income_and_expenses/repository/expense_repository.dart';
 import 'package:income_and_expenses/repository/theme_repository.dart';
 import 'package:income_and_expenses/routes/route_helper.dart';
-import 'bloc/cash_bloc/bloc.dart';
+import 'bloc/income_bloc/bloc.dart';
 import 'bloc/change_currency_bloc/bloc.dart';
 import 'const/language.dart';
 
@@ -71,7 +71,7 @@ class _MyAppState extends State<MyApp> {
                 SetDateBloc(SetDateRepository())),
         BlocProvider(
             create: (BuildContext context) =>
-                CashBloc(CashRepository())),
+                IncomeBloc(IncomeRepository())),
         BlocProvider(
             create: (BuildContext context) =>
                 CalculateExpenseBloc(CalculateExpensesRepository())),

@@ -1,13 +1,14 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-class CashRepository {
-  addCash(String cash) async {
+class IncomeRepository {
+
+  addIncome(String income) async {
     final prefs = await SharedPreferences.getInstance();
-    prefs.setString('cash', cash);
+    prefs.setString('income', income);
   }
 
-  Future<String?> readCash() async {
+  Future<String?> readIncome() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getString('cash');
+    return prefs.getString('income');
   }
 }

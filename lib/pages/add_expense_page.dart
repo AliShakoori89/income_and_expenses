@@ -48,7 +48,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
   @override
   Widget build(BuildContext context) {
 
-    BlocProvider.of<ChangeLanguageBloc>(context).add(ReadLanguageBooleanEvent());
+    // BlocProvider.of<ChangeLanguageBloc>(context).add(ReadLanguageBooleanEvent());
 
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
 

@@ -9,7 +9,6 @@ import 'package:income_and_expenses/const/app_colors.dart';
 import 'package:income_and_expenses/const/dimensions.dart';
 import 'package:intl/intl.dart';
 import 'package:persian_datetimepickers/persian_datetimepickers.dart';
-
 import '../bloc/them_bloc/bloc.dart';
 import '../bloc/them_bloc/state.dart';
 

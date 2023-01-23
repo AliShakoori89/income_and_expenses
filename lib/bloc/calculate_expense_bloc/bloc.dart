@@ -17,6 +17,7 @@ class CalculateExpenseBloc extends Bloc<CalculateExpenseEvent, CalculateExpenseS
     try {
       emit(state.copyWith(status: CalculateExpenseStatus.loading));
     String calculateExpense = await calculateExpensesRepository.calculateExpenseRepo();
+    print("*********  "+ calculateExpense.toString());
       emit(
         state.copyWith(
           status: CalculateExpenseStatus.success,
@@ -32,11 +33,11 @@ class CalculateExpenseBloc extends Bloc<CalculateExpenseEvent, CalculateExpenseS
       CalculateSpentPerMonthEvent event, Emitter<CalculateExpenseState> emit) async {
     try {
       emit(state.copyWith(status: CalculateExpenseStatus.loading));
-      String calculateSpent = await calculateExpensesRepository.calculateSpentRepo();
+      String calculateCash = await calculateExpensesRepository.calculateCashRepo();
       emit(
         state.copyWith(
           status: CalculateExpenseStatus.success,
-          spent: calculateSpent,
+          cash: calculateCash,
         ),
       );
     } catch (error) {

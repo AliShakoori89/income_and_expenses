@@ -1,7 +1,7 @@
 mixin AppLocale {
 
   static const String expenses = 'هزینه شده';
-  static const String spent = 'ورودی';
+  static const String income = 'ورودی';
   static const String cash = 'موجودی';
   static const String today = 'امروز';
   static const String notExpenses = 'اطلاعاتی برای نمایش وجود ندارد!';
@@ -45,7 +45,7 @@ mixin AppLocale {
   static const Map<String, dynamic> EN = {
     expenses: 'expenses',
     cash: 'cash',
-    spent: 'spent',
+    income: 'income',
     today: 'today',
     notExpenses: 'no information!',
     persianDigit: 'toPersianDigit()',
@@ -86,7 +86,7 @@ mixin AppLocale {
   static const Map<String, dynamic> FA = {
     expenses: 'هزینه شده',
     cash: 'موجودی',
-    spent: 'ورودی',
+    income: 'ورودی',
     today: 'امروز',
     notExpenses: 'اطلاعاتی برای نمایش وجود ندارد!',
     persianDigit: 'toPersianDigit()',

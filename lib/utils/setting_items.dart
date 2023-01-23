@@ -22,8 +22,8 @@ class SettingItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    BlocProvider.of<ThemeBloc>(context).add(ReadThemeBooleanEvent());
-    BlocProvider.of<ChangeLanguageBloc>(context).add(ReadLanguageBooleanEvent());
+    // BlocProvider.of<ThemeBloc>(context).add(ReadThemeBooleanEvent());
+    // BlocProvider.of<ChangeLanguageBloc>(context).add(ReadLanguageBooleanEvent());
 
     return BlocBuilder<ChangeLanguageBloc, ChangeLanguageState>(builder: (context, state){
 

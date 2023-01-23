@@ -1,16 +1,16 @@
 
-abstract class CashEvent{
+abstract class IncomeEvent{
   @override
   List<Object> get props => [];
 }
 
-class FetchCashEvent extends CashEvent {}
+class FetchIncomeEvent extends IncomeEvent {}
 
-class AddCashEvent extends CashEvent {
+class AddIncomeEvent extends IncomeEvent {
 
   final String cash;
 
-  AddCashEvent(
+  AddIncomeEvent(
       {required this.cash});
 
   @override
