@@ -3,6 +3,10 @@ abstract class CalculateExpenseEvent{
   List<Object> get props => [];
 }
 
-class SumExpensePerMonthEvent extends CalculateExpenseEvent {}
+class SumTomanExpensePerMonthEvent extends CalculateExpenseEvent {}
 
-class CalculateSpentPerMonthEvent extends CalculateExpenseEvent{}
+class CalculateTomanSpentPerMonthEvent extends CalculateExpenseEvent{}
+
+class SumRialExpensePerMonthEvent extends CalculateExpenseEvent {}
+
+class CalculateRialSpentPerMonthEvent extends CalculateExpenseEvent{}

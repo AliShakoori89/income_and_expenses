@@ -8,15 +8,17 @@ class CalculateExpenseBloc extends Bloc<CalculateExpenseEvent, CalculateExpenseS
   CalculateExpensesRepository calculateExpensesRepository = CalculateExpensesRepository();
 
   CalculateExpenseBloc(this.calculateExpensesRepository) : super( const CalculateExpenseState()){
-    on<SumExpensePerMonthEvent>(_mapSumExpenseByMonthEventToState);
-    on<CalculateSpentPerMonthEvent>(_mapCalculateSpentPerMonthEventToState);
+    on<SumTomanExpensePerMonthEvent>(_mapSumTomanExpenseByMonthEventToState);
+    on<SumRialExpensePerMonthEvent>(_mapSumRialExpenseByMonthEventToState);
+    on<CalculateTomanSpentPerMonthEvent>(_mapCalculateTomanSpentPerMonthEventToState);
+    on<CalculateRialSpentPerMonthEvent>(_mapCalculateRialSpentPerMonthEventToState);
   }
 
-  void _mapSumExpenseByMonthEventToState(
-      SumExpensePerMonthEvent event, Emitter<CalculateExpenseState> emit) async {
+  void _mapSumTomanExpenseByMonthEventToState(
+      SumTomanExpensePerMonthEvent event, Emitter<CalculateExpenseState> emit) async {
     try {
       emit(state.copyWith(status: CalculateExpenseStatus.loading));
-    String calculateExpense = await calculateExpensesRepository.calculateExpenseRepo();
+    String calculateExpense = await calculateExpensesRepository.calculateTomanExpenseRepo();
     print("*********  "+ calculateExpense.toString());
       emit(
         state.copyWith(
@@ -29,11 +31,44 @@ class CalculateExpenseBloc extends Bloc<CalculateExpenseEvent, CalculateExpenseS
     }
   }
 
-  void _mapCalculateSpentPerMonthEventToState(
-      CalculateSpentPerMonthEvent event, Emitter<CalculateExpenseState> emit) async {
+  void _mapSumRialExpenseByMonthEventToState(
+      SumRialExpensePerMonthEvent event, Emitter<CalculateExpenseState> emit) async {
     try {
       emit(state.copyWith(status: CalculateExpenseStatus.loading));
-      String calculateCash = await calculateExpensesRepository.calculateCashRepo();
+      String calculateExpense = await calculateExpensesRepository.calculateRialExpenseRepo();
+      print("*********  "+ calculateExpense.toString());
+      emit(
+        state.copyWith(
+          status: CalculateExpenseStatus.success,
+          expenses: calculateExpense,
+        ),
+      );
+    } catch (error) {
+      emit(state.copyWith(status: CalculateExpenseStatus.error));
+    }
+  }
+
+  void _mapCalculateTomanSpentPerMonthEventToState(
+      CalculateTomanSpentPerMonthEvent event, Emitter<CalculateExpenseState> emit) async {
+    try {
+      emit(state.copyWith(status: CalculateExpenseStatus.loading));
+      String calculateCash = await calculateExpensesRepository.calculateTomanCashRepo();
+      emit(
+        state.copyWith(
+          status: CalculateExpenseStatus.success,
+          cash: calculateCash,
+        ),
+      );
+    } catch (error) {
+      emit(state.copyWith(status: CalculateExpenseStatus.error));
+    }
+  }
+
+  void _mapCalculateRialSpentPerMonthEventToState(
+      CalculateRialSpentPerMonthEvent event, Emitter<CalculateExpenseState> emit) async {
+    try {
+      emit(state.copyWith(status: CalculateExpenseStatus.loading));
+      String calculateCash = await calculateExpensesRepository.calculateRialCashRepo();
       emit(
         state.copyWith(
           status: CalculateExpenseStatus.success,

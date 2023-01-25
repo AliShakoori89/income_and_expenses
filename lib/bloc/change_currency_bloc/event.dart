@@ -5,13 +5,13 @@ abstract class ChangeCurrencyEvent{
 
 class WriteCurrencyBooleanEvent extends ChangeCurrencyEvent {
 
-  final bool currencyBoolean;
+  final bool rialCurrencyBoolean;
 
   WriteCurrencyBooleanEvent(
-      {required this.currencyBoolean});
+      {required this.rialCurrencyBoolean});
 
   @override
-  List<Object> get props => [currencyBoolean];
+  List<Object> get props => [rialCurrencyBoolean];
 }
 
 class ReadCurrencyBooleanEvent extends ChangeCurrencyEvent{}

@@ -16,7 +16,7 @@ class ChangeCurrencyBloc extends Bloc<ChangeCurrencyEvent, ChangeCurrencyState> 
       WriteCurrencyBooleanEvent event, Emitter<ChangeCurrencyState> emit) async {
     try {
       emit(state.copyWith(status: ChangeCurrencyStatus.loading));
-      changeCurrencyRepository.writeCurrencyBoolean(false);
+      changeCurrencyRepository.writeRialCurrencyBoolean(event.rialCurrencyBoolean);
       emit(
         state.copyWith(
           status: ChangeCurrencyStatus.success,
@@ -31,11 +31,12 @@ class ChangeCurrencyBloc extends Bloc<ChangeCurrencyEvent, ChangeCurrencyState> 
       ReadCurrencyBooleanEvent event, Emitter<ChangeCurrencyState> emit) async {
     try {
       emit(state.copyWith(status: ChangeCurrencyStatus.loading));
-      String? CurrencyBoolean = await changeCurrencyRepository.readCurrencyBoolean();
+      String? currencyBoolean = await changeCurrencyRepository.readRialCurrencyBoolean();
+      print("Read Read Read    "+ currencyBoolean.toString());
       emit(
         state.copyWith(
           status: ChangeCurrencyStatus.success,
-          readCurrencyBoolean: CurrencyBoolean == "false" ? false : true
+          readCurrencyBoolean: currencyBoolean == "false" ? false : true
         ),
       );
     } catch (error) {

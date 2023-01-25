@@ -2,13 +2,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class ChangeCurrencyRepository {
 
-  writeCurrencyBoolean(bool currencyBoolean) async {
+  writeRialCurrencyBoolean(bool rialCurrencyBoolean) async {
     final prefs = await SharedPreferences.getInstance();
-    prefs.setString('CurrencyBoolean', currencyBoolean.toString());
+    print("11111   "+rialCurrencyBoolean.toString());
+    prefs.setString('rialCurrencyBoolean', rialCurrencyBoolean.toString());
   }
 
-  Future<String?> readCurrencyBoolean() async {
+  Future<String?> readRialCurrencyBoolean() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getString('CurrencyBoolean');
+    return prefs.getString('rialCurrencyBoolean');
   }
 }

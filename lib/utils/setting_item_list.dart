@@ -83,41 +83,33 @@ class _SettingItemListState extends State<SettingItemList> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Text(AppLocale.toman.getString(context)),
                         BlocBuilder<ChangeCurrencyBloc, ChangeCurrencyState>(
                           builder: (context, state) {
-                            return Checkbox(
-                              checkColor: Colors.white,
-                              fillColor: MaterialStateProperty.resolveWith(getColor),
-                              value: state.readCurrencyBoolean,
-                              onChanged: (bool? value) {
-                                BlocProvider.of<ChangeCurrencyBloc>(context)
-                                    .add(WriteCurrencyBooleanEvent(
-                                  currencyBoolean: true,
-                                ));
-                                Navigator.of(ctx).pop();
-                              });
+                            return TextButton(onPressed: (){
+                              BlocProvider.of<ChangeCurrencyBloc>(context)
+                                  .add(WriteCurrencyBooleanEvent(
+                                rialCurrencyBoolean: true,
+                              ));
+                              Navigator.of(ctx).pop();
+                            },
+                                child: Text(AppLocale.rial.getString(context)));
                           })
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Text(AppLocale.rial.getString(context)),
                         BlocBuilder<ChangeCurrencyBloc, ChangeCurrencyState>(
                             builder: (context, state) {
-                              return Checkbox(
-                                  checkColor: Colors.white,
-                                  fillColor:
-                                  MaterialStateProperty.resolveWith(getColor),
-                                  value: state.readCurrencyBoolean,
-                                  onChanged: (bool? value) {
+                              return TextButton(
+                                  onPressed: (){
                                     BlocProvider.of<ChangeCurrencyBloc>(context)
                                         .add(WriteCurrencyBooleanEvent(
-                                      currencyBoolean: false,
+                                      rialCurrencyBoolean: false,
                                     ));
                                     Navigator.of(ctx).pop();
-                                  });
+                                  },
+                                  child: Text(AppLocale.toman.getString(context)));
                             }),
                       ],
                     ),
