@@ -108,12 +108,12 @@ class _CashContainerState extends State<CashContainer> {
                                     ? Row(
                                   children: [
                                     Text(
-                                        state.expenses.toString().seRagham(),
+                                        state.tomanExpenses.toString().seRagham(),
                                         style: TextStyle(
                                             color: AppColors.expensesDigitColor,
                                             fontSize: Dimensions.font14)),
                                     SizedBox(width: Dimensions.width10 / 3),
-                                    Text(state.expenses == "" || state.expenses == "0"
+                                    Text(state.tomanExpenses == "" || state.tomanExpenses == "0"
                                         ? "".toPersianDigit()
                                         : rialCurrencyType == true
                                         ? AppLocale.rial.getString(context)
@@ -126,7 +126,7 @@ class _CashContainerState extends State<CashContainer> {
                                 )
                                     : Row(
                                   children: [
-                                    Text(state.expenses == "" || state.expenses == "0"
+                                    Text(state.tomanExpenses == "" || state.tomanExpenses == "0"
                                         ? ""
                                         : rialCurrencyType == true
                                         ? AppLocale.rial.getString(context)
@@ -137,7 +137,7 @@ class _CashContainerState extends State<CashContainer> {
                                                 : Colors.black
                                         )),
                                     SizedBox(width: Dimensions.width10/3),
-                                    Text(state.expenses.toString().toPersianDigit().seRagham(),
+                                    Text(state.tomanExpenses.toString().toPersianDigit().seRagham(),
                                         style: TextStyle(
                                             color: AppColors.expensesDigitColor,
                                             fontSize: Dimensions.font16)),
@@ -174,12 +174,12 @@ class _CashContainerState extends State<CashContainer> {
                                   persianLanguageType == false
                                       ? Row(
                                     children: [
-                                      Text(state.cash.toString().seRagham(),
+                                      Text(state.calculateTomanCash.toString().seRagham(),
                                           style: TextStyle(
                                               color: AppColors.balanceDigitColor,
                                               fontSize: Dimensions.font16)),
                                       SizedBox(width: Dimensions.width10/3),
-                                      Text(state.cash == "" || state.cash == "0"
+                                      Text(state.calculateTomanCash == "" || state.calculateTomanCash == "0"
                                           ? ""
                                           : rialCurrencyType == true
                                           ? AppLocale.rial.getString(context)
@@ -193,7 +193,7 @@ class _CashContainerState extends State<CashContainer> {
                                   )
                                       : Row(
                                     children: [
-                                      Text(state.cash == "" || state.cash == "0"
+                                      Text(state.calculateTomanCash == "" || state.calculateTomanCash == "0"
                                           ? "".toPersianDigit()
                                           : rialCurrencyType == true
                                           ? AppLocale.rial.getString(context)
@@ -204,7 +204,7 @@ class _CashContainerState extends State<CashContainer> {
                                                   : Colors.black
                                           )),
                                       SizedBox(width: Dimensions.width10/3),
-                                      Text(state.cash.toString().toPersianDigit().seRagham(),
+                                      Text(state.calculateTomanCash.toString().toPersianDigit().seRagham(),
                                           style: TextStyle(
                                               color: AppColors.balanceDigitColor,
                                               fontSize: Dimensions.font16)),

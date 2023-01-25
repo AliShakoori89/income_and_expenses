@@ -13,27 +13,38 @@ class CalculateExpenseState extends Equatable {
 
   const CalculateExpenseState({
     this.status = CalculateExpenseStatus.initial,
-    String? expenses,
-    String? cash,
-  }): expenses = expenses ?? "", cash = cash ?? "";
+    String? tomaExpenses,
+    String? rialExpenses,
+    String? calculateTomanCash,
+    String? calculateRialCash
+  }): tomanExpenses = tomaExpenses ?? "",
+      rialExpenses = rialExpenses ?? "",
+      calculateTomanCash = calculateTomanCash ?? "",
+      calculateRialCash = calculateRialCash ?? "";
 
   final CalculateExpenseStatus status;
-  final String expenses;
-  final String cash;
+  final String tomanExpenses;
+  final String rialExpenses;
+  final String calculateTomanCash;
+  final String calculateRialCash;
 
   @override
   // TODO: implement props
-  List<Object> get props => [status, expenses, cash];
+  List<Object> get props => [status, tomanExpenses, rialExpenses, calculateTomanCash, calculateRialCash];
 
   CalculateExpenseState copyWith({
     CalculateExpenseStatus? status,
-    String? expenses,
-    String? cash
+    String? tomanExpenses,
+    String? rialExpenses,
+    String? calculateTomanCash,
+    String? calculateRialCash
   }) {
     return CalculateExpenseState(
       status: status ?? this.status,
-      expenses: expenses ?? this.expenses,
-      cash: cash ?? this.cash,
+      tomaExpenses: tomanExpenses ?? this.tomanExpenses,
+      rialExpenses: rialExpenses ?? this.rialExpenses,
+      calculateTomanCash: calculateTomanCash ?? this.calculateTomanCash,
+      calculateRialCash: calculateRialCash ?? this.calculateRialCash
     );
   }
 }
