@@ -8,53 +8,15 @@ class ChangeLanguageBloc extends Bloc<ChangeLanguageEvent, ChangeLanguageState> 
   ChangeLanguageRepository changeLanguageRepository = ChangeLanguageRepository();
 
   ChangeLanguageBloc(this.changeLanguageRepository) : super( const ChangeLanguageState()){
-    on<ChangeToPersianLanguageTypeEvent>(_mapChangeToPersianLanguageTypeEventToState);
-    on<ChangeToEnglishLanguageTypeEvent>(_mapChangeToEnglishLanguageTypeEventToState);
     on<WriteLanguageBooleanEvent>(_mapWriteLanguageBooleanEvenToState);
     on<ReadLanguageBooleanEvent>(_mapReadLanguageBooleanEvenToState);
-  }
-
-  void _mapChangeToPersianLanguageTypeEventToState(
-      ChangeToPersianLanguageTypeEvent event, Emitter<ChangeLanguageState> emit) async {
-    try {
-      emit(state.copyWith(status: ChangeLanguageStatus.loading));
-      final bool persianCheckBox =
-      changeLanguageRepository.changeLanguageToPersianRepository(event.value);
-      changeLanguageRepository.writeLanguageBoolean(true);
-      emit(
-        state.copyWith(
-          status: ChangeLanguageStatus.success,
-          persianCheckBox: persianCheckBox,
-        ),
-      );
-    } catch (error) {
-      emit(state.copyWith(status: ChangeLanguageStatus.error));
-    }
-  }
-
-  void _mapChangeToEnglishLanguageTypeEventToState(
-      ChangeToEnglishLanguageTypeEvent event, Emitter<ChangeLanguageState> emit) async {
-    try {
-      emit(state.copyWith(status: ChangeLanguageStatus.loading));
-      final bool englishCheckBox =
-      changeLanguageRepository.changeLanguageToEnglishRepository(event.value);
-      changeLanguageRepository.writeLanguageBoolean(false);
-      emit(
-        state.copyWith(
-            status: ChangeLanguageStatus.success,
-          englishCheckBox: englishCheckBox,
-        ),
-      );
-    } catch (error) {
-      emit(state.copyWith(status: ChangeLanguageStatus.error));
-    }
   }
 
   void _mapWriteLanguageBooleanEvenToState(
       WriteLanguageBooleanEvent event, Emitter<ChangeLanguageState> emit) async {
     try {
       emit(state.copyWith(status: ChangeLanguageStatus.loading));
-      changeLanguageRepository.writeLanguageBoolean(false);
+      changeLanguageRepository.writeLanguageBoolean(event.persianLanguageBoolean);
       emit(
         state.copyWith(
           status: ChangeLanguageStatus.success,
@@ -73,7 +35,7 @@ class ChangeLanguageBloc extends Bloc<ChangeLanguageEvent, ChangeLanguageState> 
       emit(
         state.copyWith(
           status: ChangeLanguageStatus.success,
-          readLanguageBoolean: languageBoolean == "false" ? false : true
+          englishLanguageBoolean: languageBoolean == "false" ? false : true
         ),
       );
     } catch (error) {

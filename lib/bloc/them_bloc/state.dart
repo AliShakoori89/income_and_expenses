@@ -14,7 +14,7 @@ class ThemeState extends Equatable {
   const ThemeState({
     this.status = ThemeStatus.initial,
     String? themeBoolean,
-  }): darkThemeBoolean = themeBoolean ?? '' ;
+  }): darkThemeBoolean = themeBoolean ?? 'false' ;
 
   final ThemeStatus status;
   final String darkThemeBoolean;

@@ -31,15 +31,20 @@ class _AppTextFieldState extends State<AppTextField> {
   _AppTextFieldState(labelText, clickable, controller, themeBoolean);
 
   @override
-  Widget build(BuildContext context) {
-
+  void initState() {
     BlocProvider.of<ChangeLanguageBloc>(context).add(ReadLanguageBooleanEvent());
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
 
     return BlocBuilder<ChangeLanguageBloc, ChangeLanguageState>(
         builder: (context, state) {
-      bool lBool = state.readLanguageBoolean;
+      bool lBool = state.englishLanguageBoolean;
+      print("1111111111111   "+lBool.toString());
       return Directionality(
-        textDirection: lBool == false ? TextDirection.rtl : TextDirection.ltr,
+        textDirection: lBool == true ? TextDirection.rtl : TextDirection.ltr,
         child: TextFormField(
           style: TextStyle(
               color: widget.themeBoolean == "false"

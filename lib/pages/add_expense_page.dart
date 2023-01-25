@@ -48,85 +48,91 @@ class _AddExpensePageState extends State<AddExpensePage> {
   @override
   Widget build(BuildContext context) {
 
-    // BlocProvider.of<ChangeLanguageBloc>(context).add(ReadLanguageBooleanEvent());
-
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
 
       var darkThemeBoolean = state.darkThemeBoolean;
 
-      return Scaffold(
-      appBar: AppBar(
-        backgroundColor: darkThemeBoolean == "false"
-            ? Colors.white
-            : AppColors.darkThemeColor,
-        shadowColor: Colors.white,
-        elevation: 1,
-        titleTextStyle: TextStyle(
-            color: darkThemeBoolean == "false"
-                ? AppColors.appBarTitleColor
-                : Colors.white,
-          fontSize: Dimensions.font24,
-          fontWeight: FontWeight.w400
-        ),
-        title: Align(
-            alignment: Alignment.centerRight,
-            child: Text(AppLocale.newExpense.getString(context))),
-        leading: ArrowBackIcon(themeBoolean: darkThemeBoolean),
-      ),
-      backgroundColor: darkThemeBoolean == "false"
-          ? Colors.white
-          : AppColors.darkThemeColor,
-      resizeToAvoidBottomInset: false,
-      bottomSheet: BlocBuilder<ChangeLanguageBloc, ChangeLanguageState>(
-        builder: (context, state) {
+      return BlocBuilder<ChangeLanguageBloc, ChangeLanguageState>(
+          builder: (context, state) {
+            var lBool = state.englishLanguageBoolean;
 
-      bool lBool = state.readLanguageBoolean;
-
-      return appButton(lBool.toString(), darkThemeBoolean);}),
-      body: Container(
-        margin: EdgeInsets.only(
-          left: Dimensions.width30,
-          right: Dimensions.width30),
-        child: Form(
-          key: formKey,
-          child: Column(
-            children: [
-              SizedBox(height: Dimensions.height30,),
-              const DatePickerCalendar(),
-              SizedBox(height: Dimensions.height20,),
-            Column(
-              children: [
-                SizedBox(height: Dimensions.height10,),
-                AppTextField(
-                    labelText: AppLocale.grouping.getString(context),
-                    controller: categoryController,
-                    clickable: true,
-                    themeBoolean: darkThemeBoolean,
-                ),
-                SizedBox(height: Dimensions.height30,),
-                AppTextField(
-                    labelText: AppLocale.expense.getString(context),
-                    controller: expensesController,
-                    clickable: false,
-                    themeBoolean: darkThemeBoolean,
-                ),
-                SizedBox(height: Dimensions.height30,),
-                AppTextField(
-                    labelText: AppLocale.description.getString(context),
-                    controller: descriptionController,
-                    clickable: false,
-                    themeBoolean: darkThemeBoolean,
-                ),
-              ],
-              )
-            ],
+            return Scaffold(
+          appBar: AppBar(
+            backgroundColor: darkThemeBoolean == "false"
+                ? Colors.white
+                : AppColors.darkThemeColor,
+            shadowColor: Colors.white,
+            elevation: 1,
+            titleTextStyle: TextStyle(
+                color: darkThemeBoolean == "false"
+                    ? AppColors.appBarTitleColor
+                    : Colors.white,
+                fontSize: Dimensions.font24,
+                fontWeight: FontWeight.w400),
+            title: Align(
+                alignment: Alignment.centerRight,
+                child: Text(AppLocale.newExpense.getString(context))),
+            leading: ArrowBackIcon(themeBoolean: darkThemeBoolean),
           ),
-        ),
-      ),
-    );});
+          backgroundColor: darkThemeBoolean == "false"
+              ? Colors.white
+              : AppColors.darkThemeColor,
+          resizeToAvoidBottomInset: false,
+          bottomSheet: appButton(lBool, darkThemeBoolean),
+          body: Container(
+            margin: EdgeInsets.only(
+                left: Dimensions.width30, right: Dimensions.width30),
+            child: Form(
+              key: formKey,
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: Dimensions.height30,
+                  ),
+                  const DatePickerCalendar(),
+                  SizedBox(
+                    height: Dimensions.height20,
+                  ),
+                  Column(
+                    children: [
+                      SizedBox(
+                        height: Dimensions.height10,
+                      ),
+                      AppTextField(
+                        labelText: AppLocale.grouping.getString(context),
+                        controller: categoryController,
+                        clickable: true,
+                        themeBoolean: darkThemeBoolean,
+                      ),
+                      SizedBox(
+                        height: Dimensions.height30,
+                      ),
+                      AppTextField(
+                        labelText: AppLocale.expense.getString(context),
+                        controller: expensesController,
+                        clickable: false,
+                        themeBoolean: darkThemeBoolean,
+                      ),
+                      SizedBox(
+                        height: Dimensions.height30,
+                      ),
+                      AppTextField(
+                        labelText: AppLocale.description.getString(context),
+                        controller: descriptionController,
+                        clickable: false,
+                        themeBoolean: darkThemeBoolean,
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          ),
+        );
+      });});
   }
 
-  BlocBuilder<SetDateBloc, SetDateState> appButton(String languageBoolean, String themeBoolean) {
+  BlocBuilder<SetDateBloc, SetDateState> appButton(bool languageBoolean, String themeBoolean) {
     return BlocBuilder<SetDateBloc, SetDateState>(builder: (context, state) {
       return Container(
         width: double.infinity,
@@ -145,7 +151,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
               expense.tomanExpense = int.parse(expensesController.text.toEnglishDigit());
               expense.rialExpense = int.parse("${expensesController.text.toEnglishDigit()}0");
               expense.description = descriptionController.text;
-              if(languageBoolean == "false"){
+              if(languageBoolean != false){
                 if(categoryController.text == "خرید اقلام"){
                   expense.iconType = "assets/logos/card_pos.svg";
                 }else if(categoryController.text == "خوراکی"){

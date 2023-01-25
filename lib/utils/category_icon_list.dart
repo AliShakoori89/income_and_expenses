@@ -47,11 +47,11 @@ class CategoryIconList extends StatelessWidget {
 
                 return BlocBuilder<ChangeLanguageBloc, ChangeLanguageState>(
                     builder: (context, state) {
-                  bool lBool = state.readLanguageBoolean;
+                  bool lBool = state.englishLanguageBoolean;
 
                   return GestureDetector(
                     onTap: () {
-                      controller.text = lBool == false
+                      controller.text = lBool == true
                           ? AppConst.iconsPersianName[index]
                           : AppConst.iconsEnglishName[index];
                       Get.back();

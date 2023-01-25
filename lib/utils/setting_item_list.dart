@@ -5,7 +5,6 @@ import 'package:flutter_localization/flutter_localization.dart';
 import 'package:get/get.dart';
 import 'package:income_and_expenses/bloc/change_language_bloc/bloc.dart';
 import 'package:income_and_expenses/bloc/change_language_bloc/event.dart';
-import 'package:income_and_expenses/bloc/change_language_bloc/state.dart';
 import 'package:income_and_expenses/routes/route_helper.dart';
 import 'package:income_and_expenses/const/app_colors.dart';
 import 'package:income_and_expenses/const/dimensions.dart';
@@ -47,6 +46,7 @@ class _SettingItemListState extends State<SettingItemList> {
       ),
       child: Column(
         children: [
+          // export pdf
           GestureDetector(
             onTap: () async {
             },
@@ -65,6 +65,7 @@ class _SettingItemListState extends State<SettingItemList> {
           SizedBox(
             height: Dimensions.height30,
           ),
+          // choose currency
           GestureDetector(
             onTap: (){
               showDialog(
@@ -139,6 +140,7 @@ class _SettingItemListState extends State<SettingItemList> {
           SizedBox(
             height: Dimensions.height30,
           ),
+          // choose language
           GestureDetector(
             onTap: () {
               showDialog(
@@ -156,55 +158,22 @@ class _SettingItemListState extends State<SettingItemList> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Text(AppLocale.persian.getString(context)),
-                        BlocBuilder<ChangeLanguageBloc, ChangeLanguageState>(
-                            builder: (context, state) {
-                          return
-                            Checkbox(
-                              checkColor: Colors.white,
-                              fillColor:
-                                  MaterialStateProperty.resolveWith(getColor),
-                              value: state.persianCheckBox,
-                              onChanged: (bool? value) {
-                                BlocProvider.of<ChangeLanguageBloc>(context)
-                                    .add(ChangeToPersianLanguageTypeEvent(
-                                  value: true,
-                                ));
-                                BlocProvider.of<ChangeLanguageBloc>(context)
-                                    .add(ChangeToEnglishLanguageTypeEvent(
-                                    value: false));
-                                print("persian");
-                                _localization.translate('fa');
-                                Navigator.of(ctx).pop();
-                              });
-                        })
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Text(AppLocale.english.getString(context)),
-                        BlocBuilder<ChangeLanguageBloc, ChangeLanguageState>(
-                            builder: (context, state) {
-                          return
-                            Checkbox(
-                              checkColor: Colors.white,
-                              fillColor:
-                                  MaterialStateProperty.resolveWith(getColor),
-                              value: state.englishCheckBox,
-                              onChanged: (bool? value) {
-                                BlocProvider.of<ChangeLanguageBloc>(context)
-                                    .add(ChangeToEnglishLanguageTypeEvent(
-                                    value: true));
-                                BlocProvider.of<ChangeLanguageBloc>(context)
-                                    .add(ChangeToPersianLanguageTypeEvent(
-                                  value: false,
-                                ));
-                                print("english");
-                                _localization.translate('en');
-                                Navigator.of(ctx).pop();
-                              });
-                        }),
+                        TextButton(
+                          onPressed: (){
+                            BlocProvider.of<ChangeLanguageBloc>(context)
+                                .add(WriteLanguageBooleanEvent(persianLanguageBoolean: false));
+                            _localization.translate('en');
+                            Navigator.of(ctx).pop();
+                          },
+                          child: Text(AppLocale.english.getString(context)),),
+                        TextButton(
+                            onPressed: (){
+                              BlocProvider.of<ChangeLanguageBloc>(context)
+                                  .add(WriteLanguageBooleanEvent(persianLanguageBoolean: true));
+                              _localization.translate('fa');
+                              Navigator.of(ctx).pop();
+                            },
+                            child: Text(AppLocale.persian.getString(context)),),
                       ],
                     ),
                   ],
@@ -226,6 +195,7 @@ class _SettingItemListState extends State<SettingItemList> {
           SizedBox(
             height: Dimensions.height30,
           ),
+          // frequently asked question
           GestureDetector(
             onTap: (){
               Get.toNamed(RouteHelper.getFrequentlyAskedQuestions());
@@ -247,6 +217,7 @@ class _SettingItemListState extends State<SettingItemList> {
           SizedBox(
             height: Dimensions.height30,
           ),
+          // choose Theme
           GestureDetector(
             onTap: (){
               showDialog(
@@ -271,18 +242,23 @@ class _SettingItemListState extends State<SettingItemList> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           GestureDetector(
-                            child: Icon(Icons.dark_mode),
+                            child: const Icon(Icons.dark_mode),
                             onTap: (){
                             BlocProvider.of<ThemeBloc>(context)
                                 .add(WriteThemeBooleanEvent(darkThemeBoolean: true));
-                            Navigator.of(ctx).pop();}
+                            BlocProvider.of<ThemeBloc>(context)
+                                .add(ReadThemeBooleanEvent());
+                            Navigator.of(ctx).pop();
+                            }
                           ),
                           GestureDetector(
-                              child: Icon(Icons.light_mode ,
+                              child: const Icon(Icons.light_mode ,
                               color: AppColors.lightColor,),
                           onTap: (){
                             BlocProvider.of<ThemeBloc>(context)
                                 .add(WriteThemeBooleanEvent(darkThemeBoolean: false));
+                            BlocProvider.of<ThemeBloc>(context)
+                                .add(ReadThemeBooleanEvent());
                             Navigator.of(ctx).pop();
                           }),
                         ],
@@ -307,6 +283,7 @@ class _SettingItemListState extends State<SettingItemList> {
           SizedBox(
             height: Dimensions.height30,
           ),
+          // logout
           GestureDetector(
             onTap: (){
               exit(0);
