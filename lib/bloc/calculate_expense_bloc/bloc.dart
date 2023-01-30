@@ -8,24 +8,20 @@ class CalculateExpenseBloc extends Bloc<CalculateExpenseEvent, CalculateExpenseS
   CalculateExpensesRepository calculateExpensesRepository = CalculateExpensesRepository();
 
   CalculateExpenseBloc(this.calculateExpensesRepository) : super( const CalculateExpenseState()){
-    on<SumTomanExpensePerMonthEvent>(_mapSumTomanExpenseByMonthEventToState);
-    // on<SumRialExpensePerMonthEvent>(_mapSumRialExpenseByMonthEventToState);
-    on<CalculateTomanSpentPerMonthEvent>(_mapCalculateTomanSpentPerMonthEventToState);
-    // on<CalculateRialSpentPerMonthEvent>(_mapCalculateRialSpentPerMonthEventToState);
+    on<SumExpensePerMonthEvent>(_mapSumExpenseByMonthEventToState);
+    on<CalculateCashPerMonthEvent>(_mapCalculateCashPerMonthEventToState);
   }
 
-  void _mapSumTomanExpenseByMonthEventToState(
-      SumTomanExpensePerMonthEvent event, Emitter<CalculateExpenseState> emit) async {
+  void _mapSumExpenseByMonthEventToState(
+      SumExpensePerMonthEvent event, Emitter<CalculateExpenseState> emit) async {
     try {
       emit(state.copyWith(status: CalculateExpenseStatus.loading));
-    String tomanExpenses = await calculateExpensesRepository.calculateTomanExpenseRepo();
-    String rialExpenses = await calculateExpensesRepository.calculateRialExpenseRepo();
-    print("*********  "+ tomanExpenses.toString());
+    String expenses = await calculateExpensesRepository.calculateExpenseRepo();
+    print("*********  "+ expenses.toString());
       emit(
         state.copyWith(
           status: CalculateExpenseStatus.success,
-          tomanExpenses: tomanExpenses,
-          rialExpenses: rialExpenses
+          expenses: expenses,
         ),
       );
     } catch (error) {
@@ -33,54 +29,20 @@ class CalculateExpenseBloc extends Bloc<CalculateExpenseEvent, CalculateExpenseS
     }
   }
 
-  // void _mapSumRialExpenseByMonthEventToState(
-  //     SumRialExpensePerMonthEvent event, Emitter<CalculateExpenseState> emit) async {
-  //   try {
-  //     emit(state.copyWith(status: CalculateExpenseStatus.loading));
-  //     String calculateExpense = await calculateExpensesRepository.calculateRialExpenseRepo();
-  //     print("*********  "+ calculateExpense.toString());
-  //     emit(
-  //       state.copyWith(
-  //         status: CalculateExpenseStatus.success,
-  //         expenses: calculateExpense,
-  //       ),
-  //     );
-  //   } catch (error) {
-  //     emit(state.copyWith(status: CalculateExpenseStatus.error));
-  //   }
-  // }
-
-  void _mapCalculateTomanSpentPerMonthEventToState(
-      CalculateTomanSpentPerMonthEvent event, Emitter<CalculateExpenseState> emit) async {
+  void _mapCalculateCashPerMonthEventToState(
+      CalculateCashPerMonthEvent event, Emitter<CalculateExpenseState> emit) async {
     try {
       emit(state.copyWith(status: CalculateExpenseStatus.loading));
-      String calculateTomanCash = await calculateExpensesRepository.calculateTomanCashRepo();
-      String calculateRialCash = await calculateExpensesRepository.calculateRialCashRepo();
+      String calculateCash = await calculateExpensesRepository.calculateCashRepo();
       emit(
         state.copyWith(
           status: CalculateExpenseStatus.success,
-          calculateTomanCash: calculateTomanCash,
-          calculateRialCash: calculateRialCash
+          calculateCash: calculateCash,
         ),
       );
     } catch (error) {
       emit(state.copyWith(status: CalculateExpenseStatus.error));
     }
   }
-  //
-  // void _mapCalculateRialSpentPerMonthEventToState(
-  //     CalculateRialSpentPerMonthEvent event, Emitter<CalculateExpenseState> emit) async {
-  //   try {
-  //     emit(state.copyWith(status: CalculateExpenseStatus.loading));
-  //     String calculateCash = await calculateExpensesRepository.calculateRialCashRepo();
-  //     emit(
-  //       state.copyWith(
-  //         status: CalculateExpenseStatus.success,
-  //         cash: calculateCash,
-  //       ),
-  //     );
-  //   } catch (error) {
-  //     emit(state.copyWith(status: CalculateExpenseStatus.error));
-  //   }
-  // }
+
 }

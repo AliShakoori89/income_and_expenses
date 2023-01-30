@@ -17,6 +17,7 @@ import '../bloc/change_language_bloc/bloc.dart';
 import '../bloc/change_language_bloc/event.dart';
 import '../bloc/them_bloc/bloc.dart';
 import '../bloc/them_bloc/event.dart';
+import 'month_chart.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key? key}) : super(key: key);
@@ -30,8 +31,8 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
   List pages = [
     const MainExpensesPage(),
+    const MonthChart(),
     Container(child: const Center(child: Text('Next page'))),
-    Container(child: const Center(child: Text('Next page page'))),
     const ProfilePage(),
   ];
 
@@ -45,8 +46,8 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
   final iconList = <IconData>[
     Icons.home,
-    Icons.report,
-    Icons.call,
+    Icons.pie_chart,
+    Icons.bar_chart,
     Icons.person,
   ];
 

@@ -9,29 +9,18 @@ class CalculateExpensesRepository {
     helper = DatabaseHelper();
   }
 
-  Future<String> calculateTomanExpenseRepo() async {
+  Future<String> calculateExpenseRepo() async {
     final prefs = await SharedPreferences.getInstance();
     final String? dateMonth = prefs.getString('dateMonth');
-    return await helper.calculateTotalTomanExpenses(dateMonth);
+    return await helper.calculateTotalExpenses(dateMonth);
   }
 
-  Future<String> calculateRialExpenseRepo() async {
+  Future<String> calculateCashRepo() async {
     final prefs = await SharedPreferences.getInstance();
     final String? dateMonth = prefs.getString('dateMonth');
-    return await helper.calculateTotalRialExpenses(dateMonth);
-  }
-
-  Future<String> calculateTomanCashRepo() async {
-    final prefs = await SharedPreferences.getInstance();
-    final String? dateMonth = prefs.getString('dateMonth');
-    final String? income = prefs.getString('income');
-    return await helper.calculateTomanCash(dateMonth , income);
-  }
-
-  Future<String> calculateRialCashRepo() async {
-    final prefs = await SharedPreferences.getInstance();
-    final String? dateMonth = prefs.getString('dateMonth');
-    final String? income = prefs.getString('income');
-    return await helper.calculateRialCash(dateMonth , income);
+    var month = prefs.getString('month');
+    final String? income = prefs.getString('income$month');
+    print("calculateCashRepo calculateCashRepo calculateCashRepo          "'income$month');
+    return await helper.calculateCash(dateMonth , income);
   }
 }

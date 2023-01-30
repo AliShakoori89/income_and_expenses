@@ -14,7 +14,7 @@ class ChangeCurrencyState extends Equatable {
   const ChangeCurrencyState({
     this.status = ChangeCurrencyStatus.initial,
     bool? readCurrencyBoolean,
-  }): readCurrencyBoolean = readCurrencyBoolean ?? false
+  }): readCurrencyBoolean = readCurrencyBoolean ?? true
   ;
 
   final ChangeCurrencyStatus status;

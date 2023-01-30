@@ -148,8 +148,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
               expense.expenseDate = state.date;
               expense.expenseDateMonth = state.dateMonth;
               expense.expenseCategory = categoryController.text;
-              expense.tomanExpense = int.parse(expensesController.text.toEnglishDigit());
-              expense.rialExpense = int.parse("${expensesController.text.toEnglishDigit()}0");
+              expense.expense = int.parse(expensesController.text.toEnglishDigit());
               expense.description = descriptionController.text;
               if(languageBoolean != false){
                 if(categoryController.text == "خرید اقلام"){

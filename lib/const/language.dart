@@ -38,6 +38,8 @@ mixin AppLocale {
   static const String toman = "تومان";
   static const String rial = "ریال";
   static const String theme = "پس زمینه";
+  static const String expensePerYear = "هزینه در سال";
+
 
 
 
@@ -80,7 +82,8 @@ mixin AppLocale {
     etcetera: 'etcetera',
     toman: 'T',
     rial: 'R',
-    theme: "theme"
+    theme: "theme",
+    expensePerYear: "expense per year"
     };
 
   static const Map<String, dynamic> FA = {
@@ -121,6 +124,7 @@ mixin AppLocale {
     etcetera: 'سایر',
     toman: 'تومان',
     rial: 'ریال',
-    theme: 'پی زمینه'
+    theme: 'پی زمینه',
+    expensePerYear: "هزینه در سال"
   };
 }

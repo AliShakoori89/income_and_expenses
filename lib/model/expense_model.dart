@@ -3,8 +3,7 @@ class ExpenseModel {
   String? expenseDate;
   String? expenseDateMonth;
   String? expenseCategory;
-  int? tomanExpense;
-  int? rialExpense;
+  int? expense;
   String? description;
   String? iconType;
 
@@ -14,8 +13,7 @@ class ExpenseModel {
     this.expenseDate,
     this.expenseDateMonth,
     this.expenseCategory,
-    this.tomanExpense,
-    this.rialExpense,
+    this.expense,
     this.description,
     this.iconType
   });
@@ -28,8 +26,7 @@ class ExpenseModel {
       "expenseDate": expenseDate,
       "expenseDateMonth": expenseDateMonth,
       "expenseCategory": expenseCategory,
-      "tomanExpense": tomanExpense,
-      "rialExpense": rialExpense,
+      "expense": expense,
       "description": description,
       "iconType": iconType
     };
@@ -41,8 +38,7 @@ class ExpenseModel {
       expenseDate: parsedJson['expenseDate'],
       expenseDateMonth: parsedJson['expenseDateMonth'],
       expenseCategory: parsedJson['expenseCategory'],
-      tomanExpense: parsedJson['tomanExpense'],
-      rialExpense: parsedJson['rialExpense'],
+      expense: parsedJson['expense'],
       description: parsedJson['description'],
       iconType: parsedJson['iconType']
     );

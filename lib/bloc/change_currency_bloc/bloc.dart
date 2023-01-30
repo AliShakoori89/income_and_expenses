@@ -36,7 +36,7 @@ class ChangeCurrencyBloc extends Bloc<ChangeCurrencyEvent, ChangeCurrencyState> 
       emit(
         state.copyWith(
           status: ChangeCurrencyStatus.success,
-          readCurrencyBoolean: currencyBoolean == "false" ? false : true
+          readCurrencyBoolean: currencyBoolean == "true" ? true : false
         ),
       );
     } catch (error) {

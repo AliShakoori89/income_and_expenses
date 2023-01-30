@@ -17,8 +17,7 @@ class DatabaseHelper {
   static const columnExpenseDate = 'expenseDate';
   static const columnExpenseDateMonth = 'expenseDateMonth';
   static const columnExpenseCategory = 'expenseCategory';
-  static const columnTomanExpense = 'tomanExpense';
-  static const columnRialExpense = 'rialExpense';
+  static const columnExpense = 'expense';
   static const columnDescription = 'description';
   static const columnIconType = 'iconType';
 
@@ -44,8 +43,7 @@ class DatabaseHelper {
         '$columnExpenseDate TEXT,'
         '$columnExpenseDateMonth TEXT,'
         '$columnExpenseCategory TEXT,'
-        '$columnTomanExpense INTEGER,'
-        '$columnRialExpense INTEGER,'
+        '$columnExpense INTEGER,'
         '$columnDescription TEXT,'
         '$columnIconType Text'
         ')'
@@ -69,11 +67,10 @@ class DatabaseHelper {
     return listMedicines;
   }
 
-  Future<String> calculateTotalTomanExpenses(String? dateMonth) async {
+  Future<String> calculateTotalExpenses(String? dateMonth) async {
     var dbExpense = await database;
-    var result = await dbExpense.rawQuery("SELECT SUM($columnTomanExpense) FROM my_table WHERE $columnExpenseDateMonth ='$dateMonth'");
-    Object? value = result[0]["SUM($columnTomanExpense)"];
-    print("############  "+value.toString());
+    var result = await dbExpense.rawQuery("SELECT SUM($columnExpense) FROM my_table WHERE $columnExpenseDateMonth ='$dateMonth'");
+    Object? value = result[0]["SUM($columnExpense)"];
     if (value == null){
       return '0';
     }else{
@@ -81,23 +78,11 @@ class DatabaseHelper {
     }
   }
 
-  Future<String> calculateTotalRialExpenses(String? dateMonth) async {
-    var dbExpense = await database;
-    var result = await dbExpense.rawQuery("SELECT SUM($columnRialExpense) FROM my_table WHERE $columnExpenseDateMonth ='$dateMonth'");
-    Object? value = result[0]["SUM($columnRialExpense)"];
-    print("############  "+value.toString());
-    if (value == null){
-      return '0';
-    }else{
-      return "$value";
-    }
-  }
-
-  Future<String> calculateTomanCash(String? dateMonth, String? income) async {
+  Future<String> calculateCash(String? dateMonth, String? income) async {
     late String cash;
     var dbExpense = await database;
-    var result = await dbExpense.rawQuery("SELECT SUM($columnTomanExpense) FROM my_table WHERE $columnExpenseDateMonth ='$dateMonth'");
-    Object? value = result[0]["SUM($columnTomanExpense)"];
+    var result = await dbExpense.rawQuery("SELECT SUM($columnExpense) FROM my_table WHERE $columnExpenseDateMonth ='$dateMonth'");
+    Object? value = result[0]["SUM($columnExpense)"];
     if(income == null){
       Get.rawSnackbar(
         backgroundColor: AppColors.snackBarColor,
@@ -106,27 +91,6 @@ class DatabaseHelper {
       textDirection: TextDirection.rtl),
         messageText: const Text('برای نمایش موجودی، مقدار ورودی را وارد نمایید! ',
             textDirection: TextDirection.rtl)
-      );
-      cash = "0";
-    }else{
-      cash = value == null ? income :(int.parse(income) - int.parse(value.toString())).toString();
-    }
-    return cash.toString();
-  }
-
-  Future<String> calculateRialCash(String? dateMonth, String? income) async {
-    late String cash;
-    var dbExpense = await database;
-    var result = await dbExpense.rawQuery("SELECT SUM($columnRialExpense) FROM my_table WHERE $columnExpenseDateMonth ='$dateMonth'");
-    Object? value = result[0]["SUM($columnRialExpense)"];
-    if(income == null){
-      Get.rawSnackbar(
-          backgroundColor: AppColors.snackBarColor,
-          snackPosition: SnackPosition.TOP,
-          titleText: const Text("توجه",
-              textDirection: TextDirection.rtl),
-          messageText: const Text('برای نمایش موجودی، مقدار ورودی را وارد نمایید! ',
-              textDirection: TextDirection.rtl)
       );
       cash = "0";
     }else{

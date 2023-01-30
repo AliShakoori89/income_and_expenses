@@ -88,18 +88,22 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                 ),
                 GestureDetector(
                   onTap: () async {
+
                     final DateTime? date = await showPersianDatePicker(
                       context: context,
                     );
+                    _pickedDate = date;
+
+                    BlocProvider.of<SetDateBloc>(context)
+                        .add(WriteDateEvent(date: _pickedDate!));
+                    BlocProvider.of<SetDateBloc>(context)
+                        .add(ReadDateEvent());
+                    final expensesBloc = BlocProvider.of<AddExpenseBloc>(context);
+                    expensesBloc.add(FetchExpensesEvent());
+
+
                     print("#################   "+date.toString());
 
-                      _pickedDate = date;
-                      BlocProvider.of<SetDateBloc>(context)
-                          .add(WriteDateEvent(date: _pickedDate!));
-                      BlocProvider.of<SetDateBloc>(context)
-                          .add(ReadDateEvent());
-                      final expensesBloc = BlocProvider.of<AddExpenseBloc>(context);
-                      expensesBloc.add(FetchExpensesEvent());
 
                   },
                   child: Container(
