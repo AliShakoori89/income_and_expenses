@@ -3,21 +3,13 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:income_and_expenses/pages/main_expenses_page.dart';
 import 'package:income_and_expenses/pages/profile_page.dart';
 import 'package:income_and_expenses/routes/route_helper.dart';
 import 'package:income_and_expenses/const/app_colors.dart';
 import 'package:income_and_expenses/const/dimensions.dart';
-
-import '../bloc/change_currency_bloc/bloc.dart';
-import '../bloc/change_currency_bloc/event.dart';
-import '../bloc/change_language_bloc/bloc.dart';
-import '../bloc/change_language_bloc/event.dart';
-import '../bloc/them_bloc/bloc.dart';
-import '../bloc/them_bloc/event.dart';
-import 'month_chart.dart';
+import 'month_chart_page.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key? key}) : super(key: key);
@@ -95,15 +87,6 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       const Duration(seconds: 1),
           () => _borderRadiusAnimationController.forward(),
     );
-
-    // BlocProvider.of<ThemeBloc>(context)
-    //     .add(WriteThemeBooleanEvent(darkThemeBoolean: false));
-
-    // BlocProvider.of<ChangeLanguageBloc>(context)
-    //     .add(WriteLanguageBooleanEvent(persianLanguageBoolean: true));
-
-    // BlocProvider.of<ChangeCurrencyBloc>(context)
-    //     .add(WriteCurrencyBooleanEvent(currencyBoolean: true));
   }
 
   bool onScrollNotification(ScrollNotification notification) {
@@ -177,8 +160,6 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         splashSpeedInMilliseconds: 300,
         notchSmoothness: NotchSmoothness.defaultEdge,
         gapLocation: GapLocation.center,
-        // leftCornerRadius: 32,
-        // rightCornerRadius: 32,
         onTap: onTapNav,
         hideAnimationController: _hideBottomBarAnimationController,
       ),

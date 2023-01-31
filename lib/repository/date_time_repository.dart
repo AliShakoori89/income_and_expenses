@@ -13,7 +13,6 @@ class SetDateRepository {
     String dateString = "${g2j1.formatter.y}-${g2j1.formatter.m}-${g2j1.formatter.d}";
     String dateMonthString = "${g2j1.formatter.y}-${g2j1.formatter.m}";
     await prefs.setString('dateMonth', dateMonthString);
-    print("!!!!!!!!!!!!!!!1  "+ dateString);
     await prefs.setString('date', dateString);
   }
 
@@ -121,4 +120,15 @@ class SetDateRepository {
     await prefs.setString('date', datePlus);
     return datePlus;
   }
+
+  // Future<String?> selectDate(BuildContext context, DateTime date) async{
+  //   final prefs = await SharedPreferences.getInstance();
+  //   final DateTime? date = await showPersianDatePicker(
+  //     context: context,
+  //   );
+  //   Gregorian g = Gregorian(date!.year, date.month, date.day-1);
+  //   String selectedDate = "${g.formatter.y}-${g.formatter.m}-${g.formatter.d}";
+  //   await prefs.setString('date', selectedDate);
+  //   return selectedDate;
+  // }
 }

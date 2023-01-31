@@ -69,12 +69,12 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                   onTap: () {
                     if(_pickedDate != null){
                       BlocProvider.of<SetDateBloc>(context)
-                          .add(ReduceDate(date: _pickedDate!));
+                          .add(ReduceDateEvent(date: _pickedDate!));
                     }else{
                       String dateWithT = state.date;
                       DateTime start = DateFormat("yyyy-MM-dd").parse(dateWithT);
                       BlocProvider.of<SetDateBloc>(context)
-                          .add(ReduceDate(date: start));
+                          .add(ReduceDateEvent(date: start));
                       BlocProvider.of<SetDateBloc>(context)
                           .add(ReadDateEvent());
                       final expensesBloc = BlocProvider.of<AddExpenseBloc>(context);
@@ -92,19 +92,23 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                     final DateTime? date = await showPersianDatePicker(
                       context: context,
                     );
-                    _pickedDate = date;
+
+
+                    // String dateWithT = state.date;
+                    // DateTime start = DateFormat("yyyy-MM-dd").parse(dateWithT);
+                    //
+                    // BlocProvider.of<SetDateBloc>(context)
+                    //     .add(SelectDateEvent(context: context, date: start));
+                    //
+                    // print(state.date);
 
                     BlocProvider.of<SetDateBloc>(context)
-                        .add(WriteDateEvent(date: _pickedDate!));
+                        .add(WriteDateEvent(date: date!));
                     BlocProvider.of<SetDateBloc>(context)
                         .add(ReadDateEvent());
                     final expensesBloc = BlocProvider.of<AddExpenseBloc>(context);
                     expensesBloc.add(FetchExpensesEvent());
-
-
                     print("#################   "+date.toString());
-
-
                   },
                   child: Container(
                     decoration: BoxDecoration(
@@ -137,12 +141,12 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                   onTap: () {
                     if(_pickedDate != null){
                       BlocProvider.of<SetDateBloc>(context)
-                          .add(AddToDate(date: _pickedDate!));
+                          .add(AddToDateEvent(date: _pickedDate!));
                     }else{
                       String dateWithT = state.date;
                       DateTime start = DateFormat("yyyy-MM-dd").parse(dateWithT);
                       BlocProvider.of<SetDateBloc>(context)
-                          .add(AddToDate(date: start));
+                          .add(AddToDateEvent(date: start));
                       BlocProvider.of<SetDateBloc>(context)
                           .add(ReadDateEvent());
                       final expensesBloc = BlocProvider.of<AddExpenseBloc>(context);

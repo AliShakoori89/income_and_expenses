@@ -20,7 +20,6 @@ class CalculateExpensesRepository {
     final String? dateMonth = prefs.getString('dateMonth');
     var month = prefs.getString('month');
     final String? income = prefs.getString('income$month');
-    print("calculateCashRepo calculateCashRepo calculateCashRepo          "'income$month');
     return await helper.calculateCash(dateMonth , income);
   }
 }

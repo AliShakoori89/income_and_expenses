@@ -10,8 +10,8 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
   SetDateBloc(this.setDateRepository) : super( const SetDateState()){
     on<ReadDateEvent>(_mapReadDateEventToState);
     on<WriteDateEvent>(_mapWriteDateEventToState);
-    on<AddToDate>(_mapAddNextDateEventToState);
-    on<ReduceDate>(_mapReduceDateEventToState);
+    on<AddToDateEvent>(_mapAddNextDateEventToState);
+    on<ReduceDateEvent>(_mapReduceDateEventToState);
   }
 
   void _mapReadDateEventToState(
@@ -52,7 +52,7 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
   }
 
   void _mapAddNextDateEventToState(
-      AddToDate event, Emitter<SetDateState> emit) async {
+      AddToDateEvent event, Emitter<SetDateState> emit) async {
     try {
       emit(state.copyWith(status: SetDateStatus.loading));
       await setDateRepository.addToDate(event.date);
@@ -68,7 +68,7 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
   }
 
   void _mapReduceDateEventToState(
-      ReduceDate event, Emitter<SetDateState> emit) async {
+      ReduceDateEvent event, Emitter<SetDateState> emit) async {
     try {
       emit(state.copyWith(status: SetDateStatus.loading));
       await setDateRepository.reduceDate(event.date);
@@ -82,4 +82,23 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
       emit(state.copyWith(status: SetDateStatus.error));
     }
   }
+
+  // void _mapSelectDateEventToState(
+  //     SelectDateEvent event, Emitter<SetDateState> emit) async {
+  //   try {
+  //     emit(state.copyWith(status: SetDateStatus.loading));
+  //     var date = await setDateRepository.selectDate(event.context, event.date);
+  //     // final DateTime? date = await showPersianDatePicker(
+  //     //   context: context,
+  //     // );
+  //     emit(
+  //       state.copyWith(
+  //         status: SetDateStatus.success,
+  //         date: date.toString()
+  //       ),
+  //     );
+  //   } catch (error) {
+  //     emit(state.copyWith(status: SetDateStatus.error));
+  //   }
+  // }
 }

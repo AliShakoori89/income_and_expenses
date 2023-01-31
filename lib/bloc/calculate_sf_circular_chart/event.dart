@@ -3,4 +3,4 @@ abstract class CalculateSFCircularChartEvent{
   List<Object> get props => [];
 }
 
-class SumExpenseForCircularChartEvent extends CalculateSFCircularChartEvent{}
+class SumExpensesPerMonthForCircularChartEvent extends CalculateSFCircularChartEvent{}
