@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:income_and_expenses/bloc/set_date_bloc/event.dart';
 import 'package:income_and_expenses/bloc/set_date_bloc/state.dart';
 import 'package:income_and_expenses/repository/date_time_repository.dart';
+import 'package:persian_datetimepickers/persian_datetimepickers.dart';
 
 class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
 
@@ -12,6 +14,7 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
     on<WriteDateEvent>(_mapWriteDateEventToState);
     on<AddToDateEvent>(_mapAddNextDateEventToState);
     on<ReduceDateEvent>(_mapReduceDateEventToState);
+    on<SelectDateEvent>(_mapSelectDateEventToState);
   }
 
   void _mapReadDateEventToState(
@@ -83,22 +86,21 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
     }
   }
 
-  // void _mapSelectDateEventToState(
-  //     SelectDateEvent event, Emitter<SetDateState> emit) async {
-  //   try {
-  //     emit(state.copyWith(status: SetDateStatus.loading));
-  //     var date = await setDateRepository.selectDate(event.context, event.date);
-  //     // final DateTime? date = await showPersianDatePicker(
-  //     //   context: context,
-  //     // );
-  //     emit(
-  //       state.copyWith(
-  //         status: SetDateStatus.success,
-  //         date: date.toString()
-  //       ),
-  //     );
-  //   } catch (error) {
-  //     emit(state.copyWith(status: SetDateStatus.error));
-  //   }
-  // }
+  void _mapSelectDateEventToState(
+      SelectDateEvent event, Emitter<SetDateState> emit) async {
+    try {
+      emit(state.copyWith(status: SetDateStatus.loading));
+      await setDateRepository.selectDate(event.context);
+      // final DateTime? date = await showPersianDatePicker(
+      //   context: context,
+      // );
+      emit(
+        state.copyWith(
+          status: SetDateStatus.success,
+        ),
+      );
+    } catch (error) {
+      emit(state.copyWith(status: SetDateStatus.error));
+    }
+  }
 }

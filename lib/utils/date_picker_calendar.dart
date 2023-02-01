@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_linear_datepicker/flutter_datepicker.dart';
 import 'package:income_and_expenses/bloc/add_expense_bloc/bloc.dart';
 import 'package:income_and_expenses/bloc/add_expense_bloc/event.dart';
 import 'package:income_and_expenses/bloc/set_date_bloc/bloc.dart';
@@ -87,28 +88,16 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () async {
-
-                    final DateTime? date = await showPersianDatePicker(
-                      context: context,
-                    );
-
-
-                    // String dateWithT = state.date;
-                    // DateTime start = DateFormat("yyyy-MM-dd").parse(dateWithT);
-                    //
-                    // BlocProvider.of<SetDateBloc>(context)
-                    //     .add(SelectDateEvent(context: context, date: start));
-                    //
-                    // print(state.date);
-
+                  onTap: () {
                     BlocProvider.of<SetDateBloc>(context)
-                        .add(WriteDateEvent(date: date!));
+                        .add(SelectDateEvent(context: context));
                     BlocProvider.of<SetDateBloc>(context)
                         .add(ReadDateEvent());
-                    final expensesBloc = BlocProvider.of<AddExpenseBloc>(context);
-                    expensesBloc.add(FetchExpensesEvent());
-                    print("#################   "+date.toString());
+                    _pickedDate = DateTime.parse(state.date);
+                    print("*****************    "+_pickedDate.toString());
+                    BlocProvider.of<AddExpenseBloc>(context)
+                    .add(FetchExpensesEvent());
+                    print("#################   "+state.date.toString());
                   },
                   child: Container(
                     decoration: BoxDecoration(
@@ -149,8 +138,8 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                           .add(AddToDateEvent(date: start));
                       BlocProvider.of<SetDateBloc>(context)
                           .add(ReadDateEvent());
-                      final expensesBloc = BlocProvider.of<AddExpenseBloc>(context);
-                      expensesBloc.add(FetchExpensesEvent());
+                      BlocProvider.of<AddExpenseBloc>(context)
+                      .add(FetchExpensesEvent());
                     }
                   },
                   child: const Icon(
@@ -163,4 +152,6 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
           ),
         );});});
   }
+
+
 }

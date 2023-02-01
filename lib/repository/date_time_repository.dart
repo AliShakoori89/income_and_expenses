@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:persian_datetimepickers/persian_datetimepickers.dart';
 import 'package:shamsi_date/shamsi_date.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../const/app_colors.dart';
@@ -7,13 +8,19 @@ import '../const/app_colors.dart';
 class SetDateRepository {
 
   writeDate(DateTime date) async{
+    print(date.year);
     final prefs = await SharedPreferences.getInstance();
-    Gregorian g = Gregorian(date.year, date.month, date.day);
-    Jalali g2j1 = g.toJalali();
-    String dateString = "${g2j1.formatter.y}-${g2j1.formatter.m}-${g2j1.formatter.d}";
-    String dateMonthString = "${g2j1.formatter.y}-${g2j1.formatter.m}";
-    await prefs.setString('dateMonth', dateMonthString);
-    await prefs.setString('date', dateString);
+    if(date.year > 1900){
+      Gregorian g = Gregorian(date.year, date.month, date.day);
+      Jalali g2j1 = g.toJalali();
+      String dateString = "${g2j1.formatter.y}-${g2j1.formatter.m}-${g2j1.formatter.d}";
+      print("repositoryyyyyyyyyyyy   "+g2j1.formatter.y);
+      String dateMonthString = "${g2j1.formatter.y}-${g2j1.formatter.m}";
+      await prefs.setString('dateMonth', dateMonthString);
+      await prefs.setString('date', dateString);
+    }else{
+    await prefs.setString('dateMonth', "${date.year}-${date.month}-${date.day}");
+    await prefs.setString('date', "${date.year}-${date.month}-${date.day}");}
   }
 
   Future<String> readDateMonth() async{
@@ -121,14 +128,16 @@ class SetDateRepository {
     return datePlus;
   }
 
-  // Future<String?> selectDate(BuildContext context, DateTime date) async{
-  //   final prefs = await SharedPreferences.getInstance();
-  //   final DateTime? date = await showPersianDatePicker(
-  //     context: context,
-  //   );
-  //   Gregorian g = Gregorian(date!.year, date.month, date.day-1);
-  //   String selectedDate = "${g.formatter.y}-${g.formatter.m}-${g.formatter.d}";
-  //   await prefs.setString('date', selectedDate);
-  //   return selectedDate;
-  // }
+  selectDate(BuildContext context) async{
+    final prefs = await SharedPreferences.getInstance();
+    final DateTime? date = await showPersianDatePicker(
+      context: context,
+    );
+    print("selectDate selectDate selectDate             "+date.toString());
+    Gregorian g = Gregorian(date!.year, date!.month, date!.day);
+    Jalali g2j1 = g.toJalali();
+    String selectedDate = "${g2j1.formatter.y}-${g2j1.formatter.m}-${g2j1.formatter.d}";
+    print("selectDate selectDate selectDate             "+selectedDate);
+    await prefs.setString('date', selectedDate);
+  }
 }

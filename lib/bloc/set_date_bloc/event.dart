@@ -1,3 +1,6 @@
+
+import 'package:flutter/cupertino.dart';
+
 abstract class SetDateEvent{
   @override
   List<Object> get props => [];
@@ -35,11 +38,11 @@ class ReduceDateEvent extends SetDateEvent{
   List<Object> get props => [date];
 }
 
-// class SelectDateEvent extends SetDateEvent{
-//   final BuildContext context;
-//   final DateTime date;
-//
-//   SelectDateEvent({required this.context, required this.date});
-//   @override
-//   List<Object> get props => [context, date];
-// }
+class SelectDateEvent extends SetDateEvent{
+  final BuildContext context;
+
+  SelectDateEvent({required this.context});
+  @override
+  List<Object> get props => [context];
+}
+
