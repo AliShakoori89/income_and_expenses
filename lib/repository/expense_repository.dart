@@ -9,10 +9,11 @@ class ExpenseRepository {
     helper = DatabaseHelper();
   }
 
-  Future<List<ExpenseModel>> getAllExpensesRepo() async {
-    final prefs = await SharedPreferences.getInstance();
-    final String? date = prefs.getString('date');
-    return await helper.getAllExpenses(date!);
+  Future<List<ExpenseModel>> getAllExpensesRepo(String date) async {
+    // final prefs = await SharedPreferences.getInstance();
+    // final String? date = prefs.getString('dateMonth');
+    print("TTTTTTTT     "+date);
+    return await helper.getAllExpenses(date);
   }
 
   Future<bool> addExpenseRepo(ExpenseModel expenseModel) async {

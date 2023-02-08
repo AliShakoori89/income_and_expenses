@@ -15,25 +15,30 @@ class SetDateState extends Equatable {
     this.status = SetDateStatus.initial,
     String? date,
     String? dateMonth,
-  }): date = date ?? '' , dateMonth = dateMonth ?? '';
+    String? selectDate,
+  }): date = date ?? '' , dateMonth = dateMonth ?? '',
+        selectDate = selectDate ?? '';
 
   final SetDateStatus status;
   final String date;
   final String dateMonth;
+  final String selectDate;
 
   @override
   // TODO: implement props
-  List<Object> get props => [status, date, dateMonth];
+  List<Object> get props => [status, date, dateMonth, selectDate];
 
   SetDateState copyWith({
     SetDateStatus? status,
     String? date,
-    String? dateMonth
+    String? dateMonth,
+    String? selectDate
   }) {
     return SetDateState(
       status: status ?? this.status,
       date: date ?? this.date,
-      dateMonth: dateMonth ?? this.dateMonth
+      dateMonth: dateMonth ?? this.dateMonth,
+      selectDate: selectDate ?? this.selectDate
     );
   }
 }

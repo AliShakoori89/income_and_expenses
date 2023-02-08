@@ -5,7 +5,15 @@ abstract class AddExpenseEvent{
   List<Object> get props => [];
 }
 
-class FetchExpensesEvent extends AddExpenseEvent {}
+class FetchExpensesEvent extends AddExpenseEvent {
+  final String date;
+
+  FetchExpensesEvent(
+      {required this.date});
+
+  @override
+  List<Object> get props => [date];
+}
 
 class AddOneByOneExpenseEvent extends AddExpenseEvent {
 

@@ -14,7 +14,7 @@ class MainExpensesPageHeader extends StatelessWidget {
       children: [
         Row(
           children: [
-            Icon(Icons.add_chart),
+            const Icon(Icons.add_chart),
             SizedBox(width: Dimensions.width10,),
             Text("Kitty", style: TextStyle(
                 color: Colors.black,

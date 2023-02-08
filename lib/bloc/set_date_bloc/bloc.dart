@@ -1,9 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:income_and_expenses/bloc/set_date_bloc/event.dart';
 import 'package:income_and_expenses/bloc/set_date_bloc/state.dart';
 import 'package:income_and_expenses/repository/date_time_repository.dart';
-import 'package:persian_datetimepickers/persian_datetimepickers.dart';
 
 class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
 
@@ -90,13 +88,18 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
       SelectDateEvent event, Emitter<SetDateState> emit) async {
     try {
       emit(state.copyWith(status: SetDateStatus.loading));
-      await setDateRepository.selectDate(event.context);
-      // final DateTime? date = await showPersianDatePicker(
-      //   context: context,
-      // );
+      final String selectDate = await setDateRepository.selectDate(event.context);
+
+      print("EEEEEEEEEEEEEE   "+selectDate);
+      // final String date = await setDateRepository.readDate();
+      // final String dateMonth = await setDateRepository.readDateMonth();
+      // await setDateRepository.writeDate(DateTime.parse(date) , DateTime.parse(dateMonth));
       emit(
         state.copyWith(
           status: SetDateStatus.success,
+          // date: date,
+          // dateMonth: dateMonth,
+          selectDate: selectDate
         ),
       );
     } catch (error) {

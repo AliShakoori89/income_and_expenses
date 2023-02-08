@@ -7,15 +7,14 @@ import '../const/app_colors.dart';
 
 class SetDateRepository {
 
-  writeDate(DateTime date) async{
-    print(date.year);
+  writeDate(DateTime date , [DateTime? dateMonth]) async{
     final prefs = await SharedPreferences.getInstance();
     if(date.year > 1900){
       Gregorian g = Gregorian(date.year, date.month, date.day);
       Jalali g2j1 = g.toJalali();
       String dateString = "${g2j1.formatter.y}-${g2j1.formatter.m}-${g2j1.formatter.d}";
-      print("repositoryyyyyyyyyyyy   "+g2j1.formatter.y);
       String dateMonthString = "${g2j1.formatter.y}-${g2j1.formatter.m}";
+
       await prefs.setString('dateMonth', dateMonthString);
       await prefs.setString('date', dateString);
     }else{
@@ -123,9 +122,9 @@ class SetDateRepository {
               textDirection: TextDirection.rtl));
     }
     Gregorian g = Gregorian(date.year, date.month, date.day-1);
-    String datePlus = "${g.formatter.y}-${g.formatter.m}-${g.formatter.d}";
-    await prefs.setString('date', datePlus);
-    return datePlus;
+    String dateMines = "${g.formatter.y}-${g.formatter.m}-${g.formatter.d}";
+    await prefs.setString('date', dateMines);
+    return dateMines;
   }
 
   selectDate(BuildContext context) async{
@@ -133,11 +132,12 @@ class SetDateRepository {
     final DateTime? date = await showPersianDatePicker(
       context: context,
     );
-    print("selectDate selectDate selectDate             "+date.toString());
-    Gregorian g = Gregorian(date!.year, date!.month, date!.day);
+
+    Gregorian g = Gregorian(date!.year, date.month, date.day);
+
     Jalali g2j1 = g.toJalali();
     String selectedDate = "${g2j1.formatter.y}-${g2j1.formatter.m}-${g2j1.formatter.d}";
-    print("selectDate selectDate selectDate             "+selectedDate);
-    await prefs.setString('date', selectedDate);
+    print("WWWWWWWWWWWWWW    "+selectedDate);
+    return selectedDate;
   }
 }

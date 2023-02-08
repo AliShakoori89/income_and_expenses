@@ -7,9 +7,7 @@ import 'package:income_and_expenses/const/app_colors.dart';
 import 'package:income_and_expenses/const/app_const.dart';
 import 'package:income_and_expenses/const/dimensions.dart';
 import 'package:income_and_expenses/const/language.dart';
-
 import '../bloc/change_language_bloc/bloc.dart';
-import '../bloc/change_language_bloc/event.dart';
 import '../bloc/change_language_bloc/state.dart';
 
 class CategoryIconList extends StatelessWidget {

@@ -40,9 +40,10 @@ class ReduceDateEvent extends SetDateEvent{
 
 class SelectDateEvent extends SetDateEvent{
   final BuildContext context;
+  final DateTime selectDate;
 
-  SelectDateEvent({required this.context});
+  SelectDateEvent({required this.context, required this.selectDate});
   @override
-  List<Object> get props => [context];
+  List<Object> get props => [context, selectDate];
 }
 

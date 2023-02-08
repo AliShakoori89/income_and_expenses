@@ -70,10 +70,8 @@ class DatabaseHelper {
 
 
   Future<String> calculateTotalExpenses(String? dateMonth) async {
-
     var dbExpense = await database;
     var result = await dbExpense.rawQuery("SELECT SUM($columnExpense) FROM my_table WHERE $columnExpenseDateMonth ='$dateMonth'");
-
     Object? value = result[0]["SUM($columnExpense)"];
     if (value == null){
       return '0';

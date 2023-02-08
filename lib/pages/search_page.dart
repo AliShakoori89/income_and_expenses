@@ -29,7 +29,7 @@ class SearchPage extends StatelessWidget {
                   SearchTextField(searchController: searchController)
                 ],
               ),
-              Divider(
+              const Divider(
                 color: AppColors.labelColor,
               ),
               SizedBox(height: Dimensions.height10,),

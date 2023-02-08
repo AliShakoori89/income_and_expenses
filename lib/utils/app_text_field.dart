@@ -42,7 +42,6 @@ class _AppTextFieldState extends State<AppTextField> {
     return BlocBuilder<ChangeLanguageBloc, ChangeLanguageState>(
         builder: (context, state) {
       bool lBool = state.englishLanguageBoolean;
-      print("1111111111111   "+lBool.toString());
       return Directionality(
         textDirection: lBool == true ? TextDirection.rtl : TextDirection.ltr,
         child: TextFormField(

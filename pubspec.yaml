@@ -55,6 +55,7 @@ dependencies:
   syncfusion_flutter_charts: ^20.4.44
   datepicker_dropdown: ^0.0.7+3
   flutter_linear_datepicker: ^2.0.4
+  persian_datepicker:
 
 dev_dependencies:
   flutter_test:

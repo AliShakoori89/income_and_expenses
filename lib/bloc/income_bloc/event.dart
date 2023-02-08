@@ -4,7 +4,15 @@ abstract class IncomeEvent{
   List<Object> get props => [];
 }
 
-class FetchIncomeEvent extends IncomeEvent {}
+class FetchIncomeEvent extends IncomeEvent {
+  final String month;
+
+  FetchIncomeEvent(
+      {required this.month});
+
+  @override
+  List<Object> get props => [month];
+}
 
 class AddIncomeEvent extends IncomeEvent {
 

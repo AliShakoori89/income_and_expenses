@@ -30,15 +30,12 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
 
   @override
   void initState() {
-    final expensesBloc = BlocProvider.of<AddExpenseBloc>(context);
-    expensesBloc.add(FetchExpensesEvent());
+    // final expensesBloc = BlocProvider.of<AddExpenseBloc>(context);
+    // expensesBloc.add(FetchExpensesEvent());
     super.initState();
   }
   @override
   Widget build(BuildContext context) {
-
-    // BlocProvider.of<ChangeLanguageBloc>(context).add(ReadLanguageBooleanEvent());
-    // BlocProvider.of<ThemeBloc>(context).add(ReadThemeBooleanEvent());
 
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
 
@@ -72,8 +69,7 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                 child: BlocBuilder<AddExpenseBloc, AddExpenseState>(
                     builder: (context, state) {
                   int allTodayExpenses = 0;
-                  BlocProvider.of<AddExpenseBloc>(context)
-                      .add(ReadTodayExpensesEvent());
+                  BlocProvider.of<AddExpenseBloc>(context).add(ReadTodayExpensesEvent());
 
                   return state.status.isLoading
                       ? const Center(child: CircularProgressIndicator())

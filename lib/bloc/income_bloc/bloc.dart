@@ -30,7 +30,8 @@ class IncomeBloc extends Bloc<IncomeEvent, IncomeState> {
       FetchIncomeEvent event, Emitter<IncomeState> emit) async {
     try {
       emit(state.copyWith(status: IncomeStatus.loading));
-      final String? income = await incomeRepository.readIncome();
+      print("QQQQQQQQQQQQq    "+event.month);
+      final String? income = await incomeRepository.readIncome(event.month);
       emit(
         state.copyWith(
           status: IncomeStatus.success,
