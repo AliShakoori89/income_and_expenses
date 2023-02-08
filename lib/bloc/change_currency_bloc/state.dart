@@ -13,15 +13,15 @@ class ChangeCurrencyState extends Equatable {
 
   const ChangeCurrencyState({
     this.status = ChangeCurrencyStatus.initial,
-    bool? readCurrencyBoolean,
-  }): readCurrencyBoolean = readCurrencyBoolean ?? true
+    bool? rialCurrencyBoolean,
+  }): rialCurrencyBoolean = rialCurrencyBoolean ?? false
   ;
 
   final ChangeCurrencyStatus status;
-  final bool readCurrencyBoolean;
+  final bool rialCurrencyBoolean;
 
   @override
-  List<Object> get props => [status, readCurrencyBoolean];
+  List<Object> get props => [status, rialCurrencyBoolean];
 
   ChangeCurrencyState copyWith({
     ChangeCurrencyStatus? status,
@@ -29,7 +29,7 @@ class ChangeCurrencyState extends Equatable {
   }) {
     return ChangeCurrencyState(
       status: status ?? this.status,
-      readCurrencyBoolean: readCurrencyBoolean ?? this.readCurrencyBoolean,
+      rialCurrencyBoolean: readCurrencyBoolean ?? this.rialCurrencyBoolean,
     );
   }
 }

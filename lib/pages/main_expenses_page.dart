@@ -60,7 +60,7 @@ class _MainExpensesPageState extends State<MainExpensesPage> {
                   ),
                   Column(
                     children: [
-                      CashContainer(),
+                      const CashContainer(),
                       SizedBox(
                         height: Dimensions.width20,
                       ),

@@ -5,13 +5,13 @@ abstract class ChangeLanguageEvent{
 
 class WriteLanguageBooleanEvent extends ChangeLanguageEvent {
 
-  final bool persianLanguageBoolean;
+  final bool englishLanguageBoolean;
 
   WriteLanguageBooleanEvent(
-      {required this.persianLanguageBoolean});
+      {required this.englishLanguageBoolean});
 
   @override
-  List<Object> get props => [persianLanguageBoolean];
+  List<Object> get props => [englishLanguageBoolean];
 }
 
 class ReadLanguageBooleanEvent extends ChangeLanguageEvent{}

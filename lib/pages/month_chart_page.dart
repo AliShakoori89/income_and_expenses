@@ -21,7 +21,7 @@ class _MonthChartState extends State<MonthChart> {
 
   @override
   void initState() {
-    BlocProvider.of<CalculateSFCircularChartBloc>(context).add(SumExpensesPerMonthForCircularChartEvent());
+    // BlocProvider.of<CalculateSFCircularChartBloc>(context).add(SumExpensesPerMonthForCircularChartEvent());
     super.initState();
   }
 

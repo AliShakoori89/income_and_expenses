@@ -15,8 +15,7 @@ class ChangeLanguageState extends Equatable {
     this.status = ChangeLanguageStatus.initial,
     bool? englishLanguageBoolean,
   }):
-        englishLanguageBoolean = englishLanguageBoolean ?? false
-  ;
+        englishLanguageBoolean = englishLanguageBoolean ?? false;
 
   final ChangeLanguageStatus status;
   final bool englishLanguageBoolean;

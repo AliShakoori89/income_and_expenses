@@ -39,7 +39,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
 
   @override
   void initState() {
-    BlocProvider.of<SetDateBloc>(context).add(ReadDateEvent());
+    // BlocProvider.of<SetDateBloc>(context).add(ReadDateEvent());
     super.initState();
   }
 
@@ -52,7 +52,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
 
       return BlocBuilder<ChangeLanguageBloc, ChangeLanguageState>(
           builder: (context, state) {
-            var lBool = state.englishLanguageBoolean;
+            var englishLanguageBoolean = state.englishLanguageBoolean;
 
             return Scaffold(
           appBar: AppBar(
@@ -76,7 +76,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
               ? Colors.white
               : AppColors.darkThemeColor,
           resizeToAvoidBottomInset: false,
-          bottomSheet: appButton(lBool, darkThemeBoolean),
+          bottomSheet: appButton(englishLanguageBoolean, darkThemeBoolean),
           body: Container(
             margin: EdgeInsets.only(
                 left: Dimensions.width30, right: Dimensions.width30),
@@ -130,7 +130,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
       });});
   }
 
-  BlocBuilder<SetDateBloc, SetDateState> appButton(bool languageBoolean, String themeBoolean) {
+  BlocBuilder<SetDateBloc, SetDateState> appButton(bool englishLanguageBoolean, String themeBoolean) {
     return BlocBuilder<SetDateBloc, SetDateState>(builder: (context, state) {
       return Container(
         width: double.infinity,
@@ -144,31 +144,13 @@ class _AddExpensePageState extends State<AddExpensePage> {
               final expenseBloc = BlocProvider.of<AddExpenseBloc>(context);
 
               expense.expenseDate = state.date;
+
+              print("state.date            "+state.date);
               expense.expenseDateMonth = state.dateMonth;
               expense.expenseCategory = categoryController.text;
               expense.expense = int.parse(expensesController.text.toEnglishDigit());
               expense.description = descriptionController.text;
-              if(languageBoolean != false){
-                if(categoryController.text == "خرید اقلام"){
-                  expense.iconType = "assets/logos/card_pos.svg";
-                }else if(categoryController.text == "خوراکی"){
-                  expense.iconType = "assets/logos/burger_and_cola.svg";
-                }else if(categoryController.text == "حمل و نقل"){
-                  expense.iconType = "assets/logos/driving.svg";
-                }else if(categoryController.text == "هدایا"){
-                  expense.iconType = "assets/logos/gift.svg";
-                }else if(categoryController.text == "درمانی"){
-                  expense.iconType = "assets/logos/health.svg";
-                }else if(categoryController.text == "اقساط و بدهی"){
-                  expense.iconType = "assets/logos/receipt_item.svg";
-                }else if(categoryController.text == "تعمیرات"){
-                  expense.iconType = "assets/logos/repairs.svg";
-                }else if(categoryController.text == "تفریح"){
-                  expense.iconType = "assets/logos/games_and_multimedia.svg";
-                }else if(categoryController.text == "سایر"){
-                  expense.iconType = "assets/logos/group_30.svg";
-                }
-              }else{
+              if(englishLanguageBoolean != false){
                 if(categoryController.text == "buy items"){
                   expense.iconType = "assets/logos/card_pos.svg";
                 }else if(categoryController.text == "comestible"){
@@ -188,7 +170,26 @@ class _AddExpensePageState extends State<AddExpensePage> {
                 }else if(categoryController.text == "etcetera"){
                   expense.iconType = "assets/logos/group_30.svg";
                 }
-
+              }else{
+                if(categoryController.text == "خرید اقلام"){
+                  expense.iconType = "assets/logos/card_pos.svg";
+                }else if(categoryController.text == "خوراکی"){
+                  expense.iconType = "assets/logos/burger_and_cola.svg";
+                }else if(categoryController.text == "حمل و نقل"){
+                  expense.iconType = "assets/logos/driving.svg";
+                }else if(categoryController.text == "هدایا"){
+                  expense.iconType = "assets/logos/gift.svg";
+                }else if(categoryController.text == "درمانی"){
+                  expense.iconType = "assets/logos/health.svg";
+                }else if(categoryController.text == "اقساط و بدهی"){
+                  expense.iconType = "assets/logos/receipt_item.svg";
+                }else if(categoryController.text == "تعمیرات"){
+                  expense.iconType = "assets/logos/repairs.svg";
+                }else if(categoryController.text == "تفریح"){
+                  expense.iconType = "assets/logos/games_and_multimedia.svg";
+                }else if(categoryController.text == "سایر"){
+                  expense.iconType = "assets/logos/group_30.svg";
+                }
               }
 
               expenseBloc.add(AddOneByOneExpenseEvent(expenseModel: expense));

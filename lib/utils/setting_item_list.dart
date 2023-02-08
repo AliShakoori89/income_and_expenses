@@ -26,7 +26,6 @@ class SettingItemList extends StatefulWidget {
 
 class _SettingItemListState extends State<SettingItemList> {
 
-  late TextEditingController languageController = TextEditingController();
   final FlutterLocalization _localization = FlutterLocalization.instance;
 
   @override
@@ -153,7 +152,7 @@ class _SettingItemListState extends State<SettingItemList> {
                         TextButton(
                           onPressed: (){
                             BlocProvider.of<ChangeLanguageBloc>(context)
-                                .add(WriteLanguageBooleanEvent(persianLanguageBoolean: false));
+                                .add(WriteLanguageBooleanEvent(englishLanguageBoolean: true));
                             _localization.translate('en');
                             Navigator.of(ctx).pop();
                           },
@@ -161,7 +160,7 @@ class _SettingItemListState extends State<SettingItemList> {
                         TextButton(
                             onPressed: (){
                               BlocProvider.of<ChangeLanguageBloc>(context)
-                                  .add(WriteLanguageBooleanEvent(persianLanguageBoolean: true));
+                                  .add(WriteLanguageBooleanEvent(englishLanguageBoolean: false));
                               _localization.translate('fa');
                               Navigator.of(ctx).pop();
                             },

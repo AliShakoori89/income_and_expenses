@@ -57,12 +57,16 @@ class DatabaseHelper {
   }
 
   Future<List<ExpenseModel>> getAllExpenses(String date) async {
+    print("1111");
     var dbExpense = await database;
     var listMap = await dbExpense
         .rawQuery('SELECT * FROM my_table WHERE $columnExpenseDate = "$date"');
+    print("2222");
     var listMedicines = <ExpenseModel>[];
     for (Map<String, dynamic> m in listMap) {
+      print("3333");
       listMedicines.add(ExpenseModel.fromJson(m));
+      print("YYYY     "+listMedicines.toString());
     }
     return listMedicines;
   }

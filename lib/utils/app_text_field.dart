@@ -32,7 +32,7 @@ class _AppTextFieldState extends State<AppTextField> {
 
   @override
   void initState() {
-    BlocProvider.of<ChangeLanguageBloc>(context).add(ReadLanguageBooleanEvent());
+    // BlocProvider.of<ChangeLanguageBloc>(context).add(ReadLanguageBooleanEvent());
     super.initState();
   }
 
@@ -41,9 +41,11 @@ class _AppTextFieldState extends State<AppTextField> {
 
     return BlocBuilder<ChangeLanguageBloc, ChangeLanguageState>(
         builder: (context, state) {
-      bool lBool = state.englishLanguageBoolean;
+      bool englishLanguageBoolean = state.englishLanguageBoolean;
+
+      print("englishLanguageBoolean        "+state.englishLanguageBoolean.toString());
       return Directionality(
-        textDirection: lBool == true ? TextDirection.rtl : TextDirection.ltr,
+        textDirection: englishLanguageBoolean == true ? TextDirection.rtl : TextDirection.ltr,
         child: TextFormField(
           style: TextStyle(
               color: widget.themeBoolean == "false"

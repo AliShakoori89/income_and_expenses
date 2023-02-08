@@ -3,16 +3,39 @@ import 'package:income_and_expenses/bloc/set_date_bloc/event.dart';
 import 'package:income_and_expenses/bloc/set_date_bloc/state.dart';
 import 'package:income_and_expenses/repository/date_time_repository.dart';
 
+import '../../repository/calculate_Espense_repository.dart';
+import '../../repository/expense_repository.dart';
+import '../../repository/income_repository.dart';
+
 class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
 
   SetDateRepository setDateRepository = SetDateRepository();
 
   SetDateBloc(this.setDateRepository) : super( const SetDateState()){
+    on<InitialDateEvent>(_mapInitialDateEventToState);
     on<ReadDateEvent>(_mapReadDateEventToState);
     on<WriteDateEvent>(_mapWriteDateEventToState);
     on<AddToDateEvent>(_mapAddNextDateEventToState);
     on<ReduceDateEvent>(_mapReduceDateEventToState);
     on<SelectDateEvent>(_mapSelectDateEventToState);
+  }
+
+  void _mapInitialDateEventToState(
+      InitialDateEvent event, Emitter<SetDateState> emit) async {
+    try {
+      emit(state.copyWith(status: SetDateStatus.loading));
+      final String date = await setDateRepository.readDate();
+      final String dateMonth = await setDateRepository.readDateMonth();
+      emit(
+        state.copyWith(
+            status: SetDateStatus.success,
+            date: date,
+            dateMonth: dateMonth
+        ),
+      );
+    } catch (error) {
+      emit(state.copyWith(status: SetDateStatus.error));
+    }
   }
 
   void _mapReadDateEventToState(
@@ -89,17 +112,12 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
     try {
       emit(state.copyWith(status: SetDateStatus.loading));
       final String selectDate = await setDateRepository.selectDate(event.context);
-
-      print("EEEEEEEEEEEEEE   "+selectDate);
-      // final String date = await setDateRepository.readDate();
-      // final String dateMonth = await setDateRepository.readDateMonth();
-      // await setDateRepository.writeDate(DateTime.parse(date) , DateTime.parse(dateMonth));
       emit(
         state.copyWith(
           status: SetDateStatus.success,
-          // date: date,
+          date: selectDate,
           // dateMonth: dateMonth,
-          selectDate: selectDate
+          // selectDate: selectDate
         ),
       );
     } catch (error) {

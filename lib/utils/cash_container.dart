@@ -26,7 +26,7 @@ import '../bloc/them_bloc/event.dart';
 import '../bloc/them_bloc/state.dart';
 
 class CashContainer extends StatefulWidget {
-  CashContainer({Key? key}) : super(key: key);
+  const CashContainer({Key? key}) : super(key: key);
 
   @override
   State<CashContainer> createState() => _CashContainerState();
@@ -45,11 +45,7 @@ class _CashContainerState extends State<CashContainer> {
 
     // BlocProvider.of<CalculateExpenseBloc>(context).add(CalculateCashPerMonthEvent());
 
-    BlocProvider.of<ChangeLanguageBloc>(context).add(ReadLanguageBooleanEvent());
 
-    BlocProvider.of<ThemeBloc>(context).add(ReadThemeBooleanEvent());
-
-    BlocProvider.of<ChangeCurrencyBloc>(context).add(ReadCurrencyBooleanEvent());
 
     super.initState();
   }
@@ -67,9 +63,9 @@ class _CashContainerState extends State<CashContainer> {
 
       var dateTime = state.dateMonth;
 
-      BlocProvider.of<IncomeBloc>(context).add(FetchIncomeEvent(month: state.dateMonth));
-      BlocProvider.of<CalculateExpenseBloc>(context).add(SumExpensePerMonthEvent(dateMonth: state.dateMonth));
-      BlocProvider.of<CalculateExpenseBloc>(context).add(CalculateCashPerMonthEvent(dateMonth: state.dateMonth));
+      // BlocProvider.of<IncomeBloc>(context).add(FetchIncomeEvent(month: state.dateMonth));
+      // BlocProvider.of<CalculateExpenseBloc>(context).add(SumExpensePerMonthEvent(dateMonth: state.dateMonth));
+      // BlocProvider.of<CalculateExpenseBloc>(context).add(CalculateCashPerMonthEvent(dateMonth: state.dateMonth));
 
       print("dateTime dateTime dateTime dateTime      "+dateTime);
 
@@ -93,12 +89,14 @@ class _CashContainerState extends State<CashContainer> {
                 bottom: Dimensions.height10),
             child: BlocBuilder<ChangeLanguageBloc, ChangeLanguageState>(
                 builder: (context, state) {
-                  bool persianLanguageType = state.englishLanguageBoolean;
+                  bool englishLanguageBoolean = state.englishLanguageBoolean;
+
+                  print("!!!!!!!!!!!!     "+englishLanguageBoolean.toString());
 
                   return BlocBuilder<ChangeCurrencyBloc, ChangeCurrencyState>(
                       builder: (context, state) {
 
-                        bool rialCurrencyType = state.readCurrencyBoolean;
+                        bool rialCurrencyType = state.rialCurrencyBoolean;
 
                         return Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -116,48 +114,57 @@ class _CashContainerState extends State<CashContainer> {
                                 SizedBox(
                                   height: Dimensions.height10,
                                 ),
-                                persianLanguageType == false
+                                englishLanguageBoolean == false
                                     ? Row(
                                   children: [
-                                    Text(rialCurrencyType == true
-                                        ? ("${state.expenses}0").seRagham()
-                                        : state.expenses.toString().seRagham(),
-                                        style: TextStyle(
-                                            color: AppColors.expensesDigitColor,
-                                            fontSize: Dimensions.font14)),
-                                    SizedBox(width: Dimensions.width10 / 3),
-                                    Text(state.expenses == "" || state.expenses == "0"
-                                        ? "0"
-                                        : rialCurrencyType == true
+                                    Text(state.expenses != ""
+                                        ? rialCurrencyType == true
                                         ? AppLocale.rial.getString(context)
-                                        : AppLocale.toman.getString(context),
+                                        : AppLocale.toman.getString(context)
+                                        : ''.toPersianDigit(),
                                         style: TextStyle(
-                                            color: darkThemeBoolean == "true"
-                                                ? Colors.white
-                                                : AppColors.expensesDigitColor)),
+                                            color: darkThemeBoolean == "false"
+                                                ? Colors.black
+                                                : Colors.white
+                                        )),
+                                    SizedBox(width: Dimensions.width10/3),
+                                    Text(state.expenses != ""
+                                        ? rialCurrencyType == true
+                                        ? ('${state.expenses}0').toPersianDigit().seRagham()
+                                        : state.expenses.toString().toPersianDigit().seRagham()
+                                        : "0".toPersianDigit(),
+                                        style: TextStyle(
+                                            color: darkThemeBoolean == "false"
+                                                ? Colors.black
+                                                : Colors.white,
+                                            fontSize: Dimensions.font16)),
                                   ],
                                 )
                                     : Row(
                                   children: [
-                                    Text(state.expenses == "" || state.expenses == "0"
-                                        ? "0".toPersianDigit()
-                                        : rialCurrencyType == true
-                                        ? AppLocale.rial.getString(context)
-                                        : AppLocale.toman.getString(context),
+                                    Text(state.expenses != ""
+                                        ? rialCurrencyType == true
+                                        ? ("${state.expenses}0").seRagham()
+                                        : state.expenses.toString().seRagham()
+                                        : "0",
                                         style: TextStyle(
-                                            color: darkThemeBoolean == "true"
-                                                ? Colors.white
-                                                : Colors.black
-                                        )),
+                                            color: darkThemeBoolean == "false"
+                                                ? Colors.black
+                                                : Colors.white,
+                                            fontSize: Dimensions.font14)),
                                     SizedBox(width: Dimensions.width10/3),
-                                    Text(rialCurrencyType == true
-                                        ? ("${state.expenses}0").toPersianDigit().seRagham()
-                                        : state.expenses.toString().toPersianDigit().seRagham(),
+                                    Text(state.expenses.toString() != ""
+                                        ? rialCurrencyType == true
+                                        ? AppLocale.rial.getString(context)
+                                        : AppLocale.toman.getString(context)
+                                        : '',
                                         style: TextStyle(
-                                            color: AppColors.expensesDigitColor,
-                                            fontSize: Dimensions.font16)),
+                                          color: darkThemeBoolean == "false"
+                                              ? Colors.black
+                                              : Colors.white,
+                                        )),
                                   ],
-                                ) ,
+                                ),
                                 SizedBox(
                                   height: Dimensions.height10 / 2,
                                 ),
@@ -185,47 +192,55 @@ class _CashContainerState extends State<CashContainer> {
                                   SizedBox(
                                     height: Dimensions.height10,
                                   ),
-                                  persianLanguageType == false
+                                  englishLanguageBoolean == false
                                       ? Row(
                                     children: [
-                                      Text(rialCurrencyType == true
-                                          ? ("${state.calculateCash}0").seRagham()
-                                          : state.calculateCash.toString().seRagham(),
-                                          style: TextStyle(
-                                              color: AppColors.balanceDigitColor,
-                                              fontSize: Dimensions.font16)),
-                                      SizedBox(width: Dimensions.width10/3),
-                                      Text(state.calculateCash == "" || state.calculateCash == "0"
-                                          ? "0"
-                                          : rialCurrencyType == true
+                                      Text(state.calculateCash != ""
+                                          ? rialCurrencyType == true
                                           ? AppLocale.rial.getString(context)
-                                          : AppLocale.toman.getString(context),
+                                          : AppLocale.toman.getString(context)
+                                          : '',
                                           style: TextStyle(
-                                              color: darkThemeBoolean == "true"
-                                                  ? Colors.white
-                                                  : AppColors.balanceDigitColor
+                                              color: darkThemeBoolean == "false"
+                                                  ? Colors.black
+                                                  : Colors.white
                                           )),
+                                      SizedBox(width: Dimensions.width10/3),
+                                      Text(state.calculateCash != ""
+                                          ? rialCurrencyType == true
+                                          ? ('${state.calculateCash}0').toPersianDigit().seRagham()
+                                          : state.calculateCash.toString().toPersianDigit().seRagham()
+                                          : "0".toPersianDigit(),
+                                          style: TextStyle(
+                                              color: darkThemeBoolean == "false"
+                                                  ? AppColors.balanceDigitColor
+                                                  : Colors.white,
+                                              fontSize: Dimensions.font16)),
                                     ],
                                   )
                                       : Row(
                                     children: [
-                                      Text(state.calculateCash == "" || state.calculateCash == "0"
-                                          ? "0".toPersianDigit()
-                                          : rialCurrencyType == true
-                                          ? AppLocale.rial.getString(context)
-                                          : AppLocale.toman.getString(context),
+                                      Text(state.calculateCash.toString() != ""
+                                          ? rialCurrencyType == true
+                                          ? ("${state.calculateCash}0").seRagham()
+                                          : state.calculateCash.toString().seRagham()
+                                          : "0",
                                           style: TextStyle(
-                                              color:darkThemeBoolean == "true"
-                                                  ? Colors.white
-                                                  : Colors.black
-                                          )),
+                                              color: darkThemeBoolean == "false"
+                                                  ? Colors.black
+                                                  : Colors.white,
+                                              fontSize: Dimensions.font14)),
                                       SizedBox(width: Dimensions.width10/3),
-                                      Text(rialCurrencyType == true
-                                          ? ("${state.calculateCash}0").toPersianDigit().seRagham()
-                                          : state.calculateCash.toString().toPersianDigit().seRagham(),
+                                      Text(state.calculateCash.toString() != ""
+                                          ? rialCurrencyType == true
+                                          ? AppLocale.rial.getString(context)
+                                          : AppLocale.toman.getString(context)
+                                          : '',
                                           style: TextStyle(
-                                              color: AppColors.balanceDigitColor,
-                                              fontSize: Dimensions.font16)),
+                                            color: darkThemeBoolean == "false"
+                                                ? Colors.black
+                                                : Colors.white,
+                                          )),
                                     ],
                                   ),
                                   SizedBox(
@@ -306,23 +321,25 @@ class _CashContainerState extends State<CashContainer> {
                             SizedBox(
                               height: Dimensions.height10,
                             ),
-                            persianLanguageType == true
+                            englishLanguageBoolean == false
                                 ? Row(
                               children: [
-                                Text(state.income.toString() != ""
+                                Text(state.income != ""
                                     ? rialCurrencyType == true
                                     ? AppLocale.rial.getString(context)
                                     : AppLocale.toman.getString(context)
-                                    : '0'.toPersianDigit(),
+                                    : '',
                                     style: TextStyle(
                                         color: darkThemeBoolean == "false"
                                             ? Colors.black
                                             : Colors.white
                                     )),
                                 SizedBox(width: Dimensions.width10/3),
-                                Text(rialCurrencyType == true
+                                Text(state.income != ""
+                                    ? rialCurrencyType == true
                                     ? ('${state.income}0').toPersianDigit().seRagham()
-                                    : state.income.toString().toPersianDigit().seRagham(),
+                                    : state.income.toPersianDigit().seRagham()
+                                    : "0".toPersianDigit(),
                                     style: TextStyle(
                                         color: darkThemeBoolean == "false"
                                             ? Colors.black
@@ -332,20 +349,22 @@ class _CashContainerState extends State<CashContainer> {
                             )
                                 : Row(
                               children: [
-                                Text(rialCurrencyType == true
+                                Text(state.income != ""
+                                    ? rialCurrencyType == true
                                     ? ("${state.income}0").seRagham()
-                                    :state.income.toString().seRagham(),
+                                    : state.income.seRagham()
+                                    : "",
                                     style: TextStyle(
                                         color: darkThemeBoolean == "false"
                                             ? Colors.black
                                             : Colors.white,
                                         fontSize: Dimensions.font14)),
                                 SizedBox(width: Dimensions.width10/3),
-                                Text(state.income.toString() != ""
+                                Text(state.income != ""
                                     ? rialCurrencyType == true
                                     ? AppLocale.rial.getString(context)
                                     : AppLocale.toman.getString(context)
-                                    : '0',
+                                    : "0",
                                     style: TextStyle(
                                         color: darkThemeBoolean == "false"
                                             ? Colors.black

@@ -53,12 +53,12 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
               borderRadius: BorderRadius.circular(Dimensions.radius8)),
           child: BlocBuilder<ChangeLanguageBloc, ChangeLanguageState>(
               builder: (context, state) {
-            bool persianLanguageBoolean = state.englishLanguageBoolean;
+            bool englishLanguageBoolean = state.englishLanguageBoolean;
 
             return BlocBuilder<ChangeCurrencyBloc, ChangeCurrencyState>(
                 builder: (context, state) {
 
-              bool rialCurrencyType = state.readCurrencyBoolean;
+              bool rialCurrencyType = state.rialCurrencyBoolean;
 
               return Container(
                 margin: EdgeInsets.only(
@@ -77,7 +77,7 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                           ? state.expenses.isNotEmpty
                               ? Column(
                                   children: [
-                                    persianLanguageBoolean == true
+                                    englishLanguageBoolean == false
                                         ? Row(
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             children: [
@@ -150,7 +150,7 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                                                     ? AppColors.iconUnSelectedBackGroundMainColor
                                                     : Colors.white,
                                               ),
-                                              persianLanguageBoolean == true
+                                              englishLanguageBoolean == false
                                                   ? Row(
                                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                       children: [

@@ -16,7 +16,7 @@ class ChangeLanguageBloc extends Bloc<ChangeLanguageEvent, ChangeLanguageState> 
       WriteLanguageBooleanEvent event, Emitter<ChangeLanguageState> emit) async {
     try {
       emit(state.copyWith(status: ChangeLanguageStatus.loading));
-      changeLanguageRepository.writeLanguageBoolean(event.persianLanguageBoolean);
+      changeLanguageRepository.writeLanguageBoolean(event.englishLanguageBoolean);
       emit(
         state.copyWith(
           status: ChangeLanguageStatus.success,

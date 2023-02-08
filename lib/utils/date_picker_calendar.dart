@@ -31,18 +31,14 @@ class DatePickerCalendar extends StatefulWidget {
 class DatePickerCalendarState extends State<DatePickerCalendar> {
 
   final DateTime _pickedDate = DateTime.now();
-  var counter = 1 ;
-  DateTime now = DateTime.now();
-  DateTime date = DateTime.now();
 
-
-  @override
-  void initState() {
-
-    BlocProvider.of<SetDateBloc>(context).add(ReadDateEvent());
-
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //
+  //   BlocProvider.of<SetDateBloc>(context).add(ReadDateEvent());
+  //
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +76,7 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                       String dateWithT = state.date;
                       DateTime start = DateFormat("yyyy-MM-dd").parse(dateWithT);
                       BlocProvider.of<SetDateBloc>(context)
-                          .add(ReduceDateEvent(date: start));
+                          .add(ReduceDateEvent(date: start.toString()));
                       BlocProvider.of<SetDateBloc>(context)
                           .add(ReadDateEvent());
                       final expensesBloc = BlocProvider.of<AddExpenseBloc>(context);
@@ -102,13 +98,17 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () async{
+                  onTap:(){
                     // _pickedDate = DateTime.parse(state.date);
                     BlocProvider.of<SetDateBloc>(context)
-                        .add(SelectDateEvent(context: context, selectDate: _pickedDate));
+                        .add(SelectDateEvent(context: context, selectDate: _pickedDate.toString()));
+
+                    BlocProvider.of<SetDateBloc>(context)
+                        .add(InitialDateEvent());
+
                     // _selectDate(context, date);
-                    // BlocProvider.of<SetDateBloc>(context)
-                    //     .add(ReadDateEvent());
+                    BlocProvider.of<SetDateBloc>(context)
+                        .add(ReadDateEvent());
                     //
                     // BlocProvider.of<SetDateBloc>(context)
                     //     .add(WriteDateEvent(date: DateTime.parse(state.date)));
@@ -116,14 +116,17 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                     print("2222222     ${state.dateMonth}");
                     print("3333333     ${state.selectDate}");
                     print("4444444     ${_pickedDate}");
+
                     BlocProvider.of<CalculateExpenseBloc>(context)
                         .add(SumExpensePerMonthEvent(dateMonth : state.dateMonth));
                     BlocProvider.of<CalculateExpenseBloc>(context)
                         .add(CalculateCashPerMonthEvent(dateMonth : state.dateMonth.toString()));
                     BlocProvider.of<AddExpenseBloc>(context)
-                        .add(FetchExpensesEvent(date : state.selectDate));
-                    BlocProvider.of<IncomeBloc>(context)
-                        .add(FetchIncomeEvent(month: state.dateMonth.toString()));
+                        .add(FetchExpensesEvent(date : state.date));
+                    // BlocProvider.of<IncomeBloc>(context)
+                    //     .add(FetchIncomeEvent(month: state.dateMonth.toString()));
+                    // BlocProvider.of<SetDateBloc>(context)
+                    //     .add(ReadDateEvent());
                   },
                   child: Container(
                     decoration: BoxDecoration(
@@ -158,7 +161,7 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                       String dateWithT = state.date;
                       DateTime start = DateFormat("yyyy-MM-dd").parse(dateWithT);
                       BlocProvider.of<SetDateBloc>(context)
-                          .add(AddToDateEvent(date: start));
+                          .add(AddToDateEvent(date: start.toString()));
                       BlocProvider.of<SetDateBloc>(context)
                           .add(ReadDateEvent());
                       BlocProvider.of<AddExpenseBloc>(context)
