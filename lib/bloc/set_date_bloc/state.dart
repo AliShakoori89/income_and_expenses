@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:persian_datetime_picker/persian_datetime_picker.dart';
 
 enum SetDateStatus { initial, success, error, loading }
 
@@ -11,13 +12,14 @@ extension SetDateStatusX on SetDateStatus {
 
 class SetDateState extends Equatable {
 
-  const SetDateState({
+  SetDateState({
     this.status = SetDateStatus.initial,
     String? date,
     String? dateMonth,
     String? selectDate,
-  }): date = date ?? '' , dateMonth = dateMonth ?? '',
-        selectDate = selectDate ?? '';
+  }): date = date ?? '${Jalali.now().year}-${Jalali.now().month}-${Jalali.now().day}' ,
+        dateMonth = dateMonth ?? '${Jalali.now().year}-${Jalali.now().month}}',
+        selectDate = selectDate ?? '${Jalali.now().year}-${Jalali.now().month}-${Jalali.now().day}';
 
   final SetDateStatus status;
   final String date;

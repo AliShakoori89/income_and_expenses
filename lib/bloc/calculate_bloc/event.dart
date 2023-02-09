@@ -1,9 +1,9 @@
-abstract class CalculateExpenseEvent{
+abstract class CalculateEvent{
   @override
   List<Object> get props => [];
 }
 
-class SumExpensePerMonthEvent extends CalculateExpenseEvent {
+class SumExpensePerMonthEvent extends CalculateEvent {
   final String dateMonth;
 
   SumExpensePerMonthEvent(
@@ -13,7 +13,7 @@ class SumExpensePerMonthEvent extends CalculateExpenseEvent {
   List<Object> get props => [dateMonth];
 }
 
-class CalculateCashPerMonthEvent extends CalculateExpenseEvent{
+class CalculateCashPerMonthEvent extends CalculateEvent{
   final String dateMonth;
 
   CalculateCashPerMonthEvent(

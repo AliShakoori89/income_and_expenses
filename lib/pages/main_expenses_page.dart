@@ -22,10 +22,8 @@ class _MainExpensesPageState extends State<MainExpensesPage> {
 
   @override
   void initState() {
-
     // BlocProvider.of<SetDateBloc>(context)
-    //     .add(WriteDateEvent(date: DateTime.now()));
-    
+    //     .add(WriteDateFirstEvent(date: "${DateTime.now()}"));
     super.initState();
   }
 

@@ -5,12 +5,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:get/get.dart';
 import 'package:income_and_expenses/bloc/add_expense_bloc/bloc.dart';
-import 'package:income_and_expenses/bloc/calculate_expense_bloc/bloc.dart';
+import 'package:income_and_expenses/bloc/calculate_bloc/bloc.dart';
 import 'package:income_and_expenses/bloc/calculate_sf_circular_chart/bloc.dart';
 import 'package:income_and_expenses/bloc/change_language_bloc/bloc.dart';
 import 'package:income_and_expenses/bloc/set_date_bloc/bloc.dart';
 import 'package:income_and_expenses/bloc/them_bloc/bloc.dart';
-import 'package:income_and_expenses/repository/calculate_Espense_repository.dart';
+import 'package:income_and_expenses/repository/calculate_repository.dart';
 import 'package:income_and_expenses/repository/calculate_sf_circular_chart_repository.dart';
 import 'package:income_and_expenses/repository/income_repository.dart';
 import 'package:income_and_expenses/repository/change_currecy_repository.dart';
@@ -76,7 +76,7 @@ class _MyAppState extends State<MyApp> {
                 IncomeBloc(IncomeRepository())),
         BlocProvider(
             create: (BuildContext context) =>
-                CalculateExpenseBloc(CalculateExpensesRepository())),
+                CalculateBloc(CalculateRepository())),
         BlocProvider(
             create: (BuildContext context) =>
                 ChangeLanguageBloc(ChangeLanguageRepository())),

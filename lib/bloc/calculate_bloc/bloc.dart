@@ -1,19 +1,19 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:income_and_expenses/bloc/calculate_expense_bloc/event.dart';
-import 'package:income_and_expenses/bloc/calculate_expense_bloc/state.dart';
-import 'package:income_and_expenses/repository/calculate_Espense_repository.dart';
+import 'package:income_and_expenses/bloc/calculate_bloc/event.dart';
+import 'package:income_and_expenses/bloc/calculate_bloc/state.dart';
+import 'package:income_and_expenses/repository/calculate_repository.dart';
 
-class CalculateExpenseBloc extends Bloc<CalculateExpenseEvent, CalculateExpenseState> {
+class CalculateBloc extends Bloc<CalculateEvent, CalculateState> {
 
-  CalculateExpensesRepository calculateExpensesRepository = CalculateExpensesRepository();
+  CalculateRepository calculateExpensesRepository = CalculateRepository();
 
-  CalculateExpenseBloc(this.calculateExpensesRepository) : super( const CalculateExpenseState()){
+  CalculateBloc(this.calculateExpensesRepository) : super( const CalculateState()){
     on<SumExpensePerMonthEvent>(_mapSumExpenseByMonthEventToState);
     on<CalculateCashPerMonthEvent>(_mapCalculateCashPerMonthEventToState);
   }
 
   void _mapSumExpenseByMonthEventToState(
-      SumExpensePerMonthEvent event, Emitter<CalculateExpenseState> emit) async {
+      SumExpensePerMonthEvent event, Emitter<CalculateState> emit) async {
     try {
       emit(state.copyWith(status: CalculateExpenseStatus.loading));
     String expenses = await calculateExpensesRepository.calculateExpenseRepo(event.dateMonth);
@@ -29,7 +29,7 @@ class CalculateExpenseBloc extends Bloc<CalculateExpenseEvent, CalculateExpenseS
   }
 
   void _mapCalculateCashPerMonthEventToState(
-      CalculateCashPerMonthEvent event, Emitter<CalculateExpenseState> emit) async {
+      CalculateCashPerMonthEvent event, Emitter<CalculateState> emit) async {
     try {
       emit(state.copyWith(status: CalculateExpenseStatus.loading));
       String calculateCash = await calculateExpensesRepository.calculateCashRepo(event.dateMonth);

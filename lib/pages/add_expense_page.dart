@@ -150,7 +150,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
               expense.expenseCategory = categoryController.text;
               expense.expense = int.parse(expensesController.text.toEnglishDigit());
               expense.description = descriptionController.text;
-              if(englishLanguageBoolean != false){
+              if(englishLanguageBoolean == true){
                 if(categoryController.text == "buy items"){
                   expense.iconType = "assets/logos/card_pos.svg";
                 }else if(categoryController.text == "comestible"){

@@ -43,9 +43,8 @@ class _AppTextFieldState extends State<AppTextField> {
         builder: (context, state) {
       bool englishLanguageBoolean = state.englishLanguageBoolean;
 
-      print("englishLanguageBoolean        "+state.englishLanguageBoolean.toString());
       return Directionality(
-        textDirection: englishLanguageBoolean == true ? TextDirection.rtl : TextDirection.ltr,
+        textDirection: englishLanguageBoolean == false ? TextDirection.rtl : TextDirection.ltr,
         child: TextFormField(
           style: TextStyle(
               color: widget.themeBoolean == "false"

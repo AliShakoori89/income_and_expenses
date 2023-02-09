@@ -1,11 +1,11 @@
 import 'package:income_and_expenses/data_base/data_base.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class CalculateExpensesRepository {
+class CalculateRepository {
 
   late final DatabaseHelper helper;
 
-  CalculateExpensesRepository() {
+  CalculateRepository() {
     helper = DatabaseHelper();
   }
 

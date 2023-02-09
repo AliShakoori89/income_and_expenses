@@ -20,6 +20,16 @@ class WriteDateEvent extends SetDateEvent {
   List<Object> get props => [date];
 }
 
+class WriteDateFirstEvent extends SetDateEvent {
+  final String date;
+
+  WriteDateFirstEvent(
+      {required this.date});
+
+  @override
+  List<Object> get props => [date];
+}
+
 class AddToDateEvent extends SetDateEvent{
   final String date;
 
@@ -38,14 +48,5 @@ class ReduceDateEvent extends SetDateEvent{
 
   @override
   List<Object> get props => [date];
-}
-
-class SelectDateEvent extends SetDateEvent{
-  final BuildContext context;
-  final String selectDate;
-
-  SelectDateEvent({required this.context, required this.selectDate});
-  @override
-  List<Object> get props => [context, selectDate];
 }
 

@@ -49,7 +49,7 @@ class CategoryIconList extends StatelessWidget {
 
                   return GestureDetector(
                     onTap: () {
-                      controller.text = englishLanguageBoolean == true
+                      controller.text = englishLanguageBoolean == false
                           ? AppConst.iconsPersianName[index]
                           : AppConst.iconsEnglishName[index];
                       Get.back();

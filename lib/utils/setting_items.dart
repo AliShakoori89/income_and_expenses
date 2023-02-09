@@ -20,8 +20,6 @@ class SettingItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    BlocProvider.of<ChangeLanguageBloc>(context).add(ReadLanguageBooleanEvent());
-
     return BlocBuilder<ChangeLanguageBloc, ChangeLanguageState>(builder: (context, state) {
 
       var englishLanguageBoolean = state.englishLanguageBoolean;
@@ -30,7 +28,7 @@ class SettingItems extends StatelessWidget {
 
       var darkThemeBoolean = state.darkThemeBoolean;
 
-      return englishLanguageBoolean == false
+      return englishLanguageBoolean == true
           ? Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [

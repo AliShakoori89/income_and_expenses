@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localization/flutter_localization.dart';
-import 'package:income_and_expenses/bloc/calculate_expense_bloc/bloc.dart';
-import 'package:income_and_expenses/bloc/calculate_expense_bloc/state.dart';
+import 'package:income_and_expenses/bloc/calculate_bloc/bloc.dart';
+import 'package:income_and_expenses/bloc/calculate_bloc/state.dart';
 import 'package:income_and_expenses/bloc/income_bloc/bloc.dart';
 import 'package:income_and_expenses/bloc/income_bloc/state.dart';
 import 'package:income_and_expenses/bloc/change_language_bloc/bloc.dart';
@@ -13,7 +13,7 @@ import 'package:income_and_expenses/const/dimensions.dart';
 import 'package:income_and_expenses/const/language.dart';
 import 'package:income_and_expenses/utils/widget.dart';
 import 'package:persian_number_utility/persian_number_utility.dart';
-import '../bloc/calculate_expense_bloc/event.dart';
+import '../bloc/calculate_bloc/event.dart';
 import '../bloc/change_currency_bloc/event.dart';
 import '../bloc/change_language_bloc/event.dart';
 import '../bloc/income_bloc/event.dart';
@@ -57,7 +57,7 @@ class _CashContainerState extends State<CashContainer> {
   @override
   Widget build(BuildContext context) {
 
-    BlocProvider.of<SetDateBloc>(context).add(ReadDateEvent());
+    // BlocProvider.of<SetDateBloc>(context).add(ReadShamsiDateEvent());
 
     return BlocBuilder<SetDateBloc, SetDateState>(builder: (context, state) {
 
@@ -91,8 +91,6 @@ class _CashContainerState extends State<CashContainer> {
                 builder: (context, state) {
                   bool englishLanguageBoolean = state.englishLanguageBoolean;
 
-                  print("!!!!!!!!!!!!     "+englishLanguageBoolean.toString());
-
                   return BlocBuilder<ChangeCurrencyBloc, ChangeCurrencyState>(
                       builder: (context, state) {
 
@@ -101,8 +99,11 @@ class _CashContainerState extends State<CashContainer> {
                         return Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      BlocBuilder<CalculateExpenseBloc, CalculateExpenseState>(
+                      BlocBuilder<CalculateBloc, CalculateState>(
                           builder: (context, state) {
+
+                            String expenses = state.expenses;
+
                             return Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -117,7 +118,7 @@ class _CashContainerState extends State<CashContainer> {
                                 englishLanguageBoolean == false
                                     ? Row(
                                   children: [
-                                    Text(state.expenses != ""
+                                    Text(expenses != ""
                                         ? rialCurrencyType == true
                                         ? AppLocale.rial.getString(context)
                                         : AppLocale.toman.getString(context)
@@ -128,24 +129,24 @@ class _CashContainerState extends State<CashContainer> {
                                                 : Colors.white
                                         )),
                                     SizedBox(width: Dimensions.width10/3),
-                                    Text(state.expenses != ""
+                                    Text(expenses != ""
                                         ? rialCurrencyType == true
-                                        ? ('${state.expenses}0').toPersianDigit().seRagham()
-                                        : state.expenses.toString().toPersianDigit().seRagham()
+                                        ? ('${expenses}0').toPersianDigit().seRagham()
+                                        : expenses.toPersianDigit().seRagham()
                                         : "0".toPersianDigit(),
                                         style: TextStyle(
                                             color: darkThemeBoolean == "false"
-                                                ? Colors.black
+                                                ? AppColors.expensesDigitColor
                                                 : Colors.white,
                                             fontSize: Dimensions.font16)),
                                   ],
                                 )
                                     : Row(
                                   children: [
-                                    Text(state.expenses != ""
+                                    Text(expenses != ""
                                         ? rialCurrencyType == true
-                                        ? ("${state.expenses}0").seRagham()
-                                        : state.expenses.toString().seRagham()
+                                        ? ("${expenses}0").seRagham()
+                                        : expenses.seRagham()
                                         : "0",
                                         style: TextStyle(
                                             color: darkThemeBoolean == "false"
@@ -153,7 +154,7 @@ class _CashContainerState extends State<CashContainer> {
                                                 : Colors.white,
                                             fontSize: Dimensions.font14)),
                                     SizedBox(width: Dimensions.width10/3),
-                                    Text(state.expenses.toString() != ""
+                                    Text(expenses != ""
                                         ? rialCurrencyType == true
                                         ? AppLocale.rial.getString(context)
                                         : AppLocale.toman.getString(context)
@@ -178,7 +179,7 @@ class _CashContainerState extends State<CashContainer> {
                               ],
                             );
                           }),
-                      BlocBuilder<CalculateExpenseBloc, CalculateExpenseState>(
+                      BlocBuilder<CalculateBloc, CalculateState>(
                           builder: (context, state) {
 
                             return Column(
@@ -294,7 +295,7 @@ class _CashContainerState extends State<CashContainer> {
                                   ));
                                   BlocProvider.of<IncomeBloc>(context)
                                       .add(FetchIncomeEvent(month: dateTime));
-                                  BlocProvider.of<CalculateExpenseBloc>(context)
+                                  BlocProvider.of<CalculateBloc>(context)
                                       .add(CalculateCashPerMonthEvent(dateMonth: dateTime));
                                   Navigator.of(ctx).pop();
                                 },
