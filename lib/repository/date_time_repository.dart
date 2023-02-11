@@ -8,16 +8,10 @@ import '../const/app_colors.dart';
 
 class SetDateRepository {
 
-  writeDateFirst(String date , [String? dateMonth]) async{
-    print("DDDDDDD             "+date);
-    print("DDDDDDDDDDDDDDD             "+DateTime.parse(date).year.toString());
+  initialDate() async{
     final prefs = await SharedPreferences.getInstance();
-    Gregorian g = Gregorian(DateTime.parse(date).year, DateTime.parse(date).month, DateTime.parse(date).day);
-    print(g.toString());
-    Jalali g2j1 = g.toJalali();
-    print("shamsiii     "+g2j1.formatter.y);
-    String dateMonthString = "${Gregorian(DateTime.parse(date).year, DateTime.parse(date).month, DateTime.parse(date).day).toJalali().formatter.y}-${g2j1.formatter.m}";
-    String dateString = "${g2j1.formatter.y}-${g2j1.formatter.m}-${g2j1.formatter.d}";
+    String dateMonthString = '${Jalali.now().year}-${Jalali.now().month}';
+    String dateString = '${Jalali.now().year}-${Jalali.now().month}-${Jalali.now().day}';
     // if(DateTime.parse(date).year > 1900){
     //   String dateString = "${DateTime.parse(date).year}-${DateTime.parse(date).month}-${DateTime.parse(date).day}";
     //   String dateMonthString = "${DateTime.parse(date).year}-${DateTime.parse(date).month}";
@@ -34,16 +28,10 @@ class SetDateRepository {
   writeDate(String date , [String? dateMonth]) async{
     print("writeDate             "+date);
     final prefs = await SharedPreferences.getInstance();
-    if(DateTime.parse(date).year > 1900){
-      String dateString = "${DateTime.parse(date).year}-${DateTime.parse(date).month}-${DateTime.parse(date).day}";
-      String dateMonthString = "${DateTime.parse(date).year}-${DateTime.parse(date).month}";
-
-      await prefs.setString('dateMonth', dateMonthString);
-      await prefs.setString('date', dateString);
-    }else{
     await prefs.setString('dateMonth', "${DateTime.parse(date).year}-${DateTime.parse(date).month}");
-    await prefs.setString('date', "${DateTime.parse(date).year}-${DateTime.parse(date).month}-${DateTime.parse(date).day}");}
+    await prefs.setString('date', "${DateTime.parse(date).year}-${DateTime.parse(date).month}-${DateTime.parse(date).day}");
   }
+
 
   // Future<String> readDateMonth() async{
   //   final prefs = await SharedPreferences.getInstance();
@@ -61,10 +49,9 @@ class SetDateRepository {
 
   Future<String> readDateMonth() async{
     final prefs = await SharedPreferences.getInstance();
-    DateTime now = DateTime.now();
     final String? date = prefs.getString('dateMonth');
     if(date == null){
-      String dateMonthString = "${now.year}-${now.month}";
+      String dateMonthString = '${Jalali.now().year}-${Jalali.now().month}';
       return dateMonthString;
     }else{
       return date;
@@ -87,10 +74,10 @@ class SetDateRepository {
 
   Future<String> readDate() async{
     final prefs = await SharedPreferences.getInstance();
-    DateTime now = DateTime.now();
     final String? date = prefs.getString('date');
+    print("readDate          "+date!);
     if(date == null){
-      String dateString = "${now.year}-${now.month}-${now.day}";
+      String dateString = '${Jalali.now().year}-${Jalali.now().month}-${Jalali.now().day}';
       return dateString;
     }else{
       return date;

@@ -14,6 +14,8 @@ import '../bloc/change_currency_bloc/bloc.dart';
 import '../bloc/change_currency_bloc/event.dart';
 import '../bloc/change_language_bloc/bloc.dart';
 import '../bloc/change_language_bloc/event.dart';
+import '../bloc/set_date_bloc/bloc.dart';
+import '../bloc/set_date_bloc/event.dart';
 import '../bloc/them_bloc/bloc.dart';
 import '../bloc/them_bloc/event.dart';
 import 'month_chart_page.dart';

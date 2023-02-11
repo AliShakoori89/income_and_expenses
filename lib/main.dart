@@ -70,13 +70,13 @@ class _MyAppState extends State<MyApp> {
                 AddExpenseBloc(ExpenseRepository())),
         BlocProvider(
             create: (BuildContext context) =>
-                SetDateBloc(SetDateRepository())),
-        BlocProvider(
-            create: (BuildContext context) =>
-                IncomeBloc(IncomeRepository())),
-        BlocProvider(
-            create: (BuildContext context) =>
-                CalculateBloc(CalculateRepository())),
+                SetDateBloc(SetDateRepository(), CalculateRepository(), IncomeRepository())),
+        // BlocProvider(
+        //     create: (BuildContext context) =>
+        //         IncomeBloc(IncomeRepository())),
+        // BlocProvider(
+        //     create: (BuildContext context) =>
+        //         CalculateBloc(CalculateRepository())),
         BlocProvider(
             create: (BuildContext context) =>
                 ChangeLanguageBloc(ChangeLanguageRepository())),

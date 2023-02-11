@@ -74,12 +74,12 @@ class DatabaseHelper {
 
 
   Future<String> calculateTotalExpenses(String? dateMonth) async {
-    print("Secounddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
+    print("Secounddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd   "+dateMonth!);
     var dbExpense = await database;
     var result = await dbExpense.rawQuery("SELECT SUM($columnExpense) FROM my_table WHERE $columnExpenseDateMonth ='$dateMonth'");
     Object? value = result[0]["SUM($columnExpense)"];
     if (value == null){
-      return '0';
+      return '';
     }else{
       return "$value";
     }
@@ -99,7 +99,7 @@ class DatabaseHelper {
         messageText: const Text('برای نمایش موجودی، مقدار ورودی را وارد نمایید! ',
             textDirection: TextDirection.rtl)
       );
-      cash = "0";
+      cash = "";
     }else{
       cash = value == null ? income :(int.parse(income) - int.parse(value.toString())).toString();
     }

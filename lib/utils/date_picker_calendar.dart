@@ -32,13 +32,21 @@ class DatePickerCalendar extends StatefulWidget {
 class DatePickerCalendarState extends State<DatePickerCalendar> {
 
   String label = '';
-
+  Jalali picked = Jalali.now() ;
   String selectedDate = "";
 
   @override
   void initState() {
 
-    selectedDate = DateFormat('yyyy-MM-dd').format(DateTime.parse(Jalali.now().toJalaliDateTime()));
+    selectedDate = DateFormat('yyyy-MM').format(DateTime.parse(Jalali.now().toJalaliDateTime()));
+
+    BlocProvider.of<SetDateBloc>(context).add(FetchIncomeEvent(month: selectedDate));
+
+    BlocProvider.of<SetDateBloc>(context).add(ReadDateEvent());
+
+    BlocProvider.of<SetDateBloc>(context).add(SumExpensePerMonthEvent(dateMonth: selectedDate));
+
+    BlocProvider.of<SetDateBloc>(context).add(CalculateCashPerMonthEvent(dateMonth: selectedDate));
 
     super.initState();
   }
@@ -53,6 +61,7 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
       var themeBoolean = state.darkThemeBoolean;
 
       return BlocBuilder<SetDateBloc, SetDateState>(builder: (context, state) {
+
         return Container(
           width: double.infinity,
           height: Dimensions.height30*1.5,
@@ -112,13 +121,13 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                     //   initialDate: DateTime.now(),
                     // );
                     print("Jalali.now()             "+Jalali.now().toString());
-                    Jalali? picked = await showPersianDatePicker(
+                    picked = (await showPersianDatePicker(
                       context: context,
                       initialDate: Jalali.now(),
                       firstDate: Jalali(1385, 8),
                       lastDate: Jalali(1450, 9),
 
-                    );
+                    ))!;
                     if (picked != null && picked != selectedDate) {
                       setState(() {
                         label = picked.toJalaliDateTime();
@@ -129,17 +138,20 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                     print("1111111     ${picked}");
                     print("1111111     ${label}");
                     print("1111111     ${picked!.year}-${picked.month}");
+                    print("1111111     ${selectedDate}");
 
                     BlocProvider.of<SetDateBloc>(context)
                         .add(WriteDateEvent(date: "${picked.year}-${picked.month}-${picked.day}"));
-                    BlocProvider.of<CalculateBloc>(context)
-                        .add(SumExpensePerMonthEvent(dateMonth : "${picked!.year}-${picked.month}"));
-                    BlocProvider.of<CalculateBloc>(context)
+                    BlocProvider.of<SetDateBloc>(context)
+                        .add(ReadDateEvent());
+                    BlocProvider.of<SetDateBloc>(context)
+                        .add(FetchIncomeEvent(month : "${picked.year}-${picked.month}"));
+                    BlocProvider.of<SetDateBloc>(context)
+                        .add(SumExpensePerMonthEvent(dateMonth : "${picked.year}-${picked.month}"));
+                    BlocProvider.of<SetDateBloc>(context)
                         .add(CalculateCashPerMonthEvent(dateMonth : "${picked.year}-${picked.month}"));
                     BlocProvider.of<AddExpenseBloc>(context)
                         .add(FetchExpensesEvent(date : "${picked.year}-${picked.month}-${picked.day}"));
-                    // BlocProvider.of<IncomeBloc>(context)
-                    //     .add(FetchIncomeEvent(month: state.dateMonth.toString()));
 
                   },
                   child: Container(
@@ -162,7 +174,7 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                             SizedBox(
                               width: Dimensions.height10,
                             ),
-                            Text(state.date,
+                            Text("${picked.year}-${picked.month}-${picked.day}",
                                 style: const TextStyle(
                                     color: AppColors.appBarTitleColor)),
                           ],

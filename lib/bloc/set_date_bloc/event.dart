@@ -20,16 +20,6 @@ class WriteDateEvent extends SetDateEvent {
   List<Object> get props => [date];
 }
 
-class WriteDateFirstEvent extends SetDateEvent {
-  final String date;
-
-  WriteDateFirstEvent(
-      {required this.date});
-
-  @override
-  List<Object> get props => [date];
-}
-
 class AddToDateEvent extends SetDateEvent{
   final String date;
 
@@ -50,3 +40,44 @@ class ReduceDateEvent extends SetDateEvent{
   List<Object> get props => [date];
 }
 
+class SumExpensePerMonthEvent extends SetDateEvent {
+  final String dateMonth;
+
+  SumExpensePerMonthEvent(
+      {required this.dateMonth});
+
+  @override
+  List<Object> get props => [dateMonth];
+}
+
+class CalculateCashPerMonthEvent extends SetDateEvent{
+  final String dateMonth;
+
+  CalculateCashPerMonthEvent(
+      {required this.dateMonth});
+
+  @override
+  List<Object> get props => [dateMonth];
+}
+
+class FetchIncomeEvent extends SetDateEvent {
+  final String month;
+
+  FetchIncomeEvent(
+      {required this.month});
+
+  @override
+  List<Object> get props => [month];
+}
+
+class AddIncomeEvent extends SetDateEvent {
+
+  final String cash;
+  final String month;
+
+  AddIncomeEvent(
+      {required this.cash, required this.month});
+
+  @override
+  List<Object> get props => [cash, month];
+}

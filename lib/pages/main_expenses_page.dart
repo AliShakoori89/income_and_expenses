@@ -20,10 +20,14 @@ class MainExpensesPage extends StatefulWidget {
 
 class _MainExpensesPageState extends State<MainExpensesPage> {
 
+  String date = "";
+
   @override
   void initState() {
-    // BlocProvider.of<SetDateBloc>(context)
-    //     .add(WriteDateFirstEvent(date: "${DateTime.now()}"));
+
+    BlocProvider.of<SetDateBloc>(context)
+        .add(InitialDateEvent());
+
     super.initState();
   }
 

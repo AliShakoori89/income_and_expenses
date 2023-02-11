@@ -12,19 +12,28 @@ extension SetDateStatusX on SetDateStatus {
 
 class SetDateState extends Equatable {
 
-  SetDateState({
+  const SetDateState({
     this.status = SetDateStatus.initial,
     String? date,
     String? dateMonth,
     String? selectDate,
-  }): date = date ?? '${Jalali.now().year}-${Jalali.now().month}-${Jalali.now().day}' ,
-        dateMonth = dateMonth ?? '${Jalali.now().year}-${Jalali.now().month}}',
-        selectDate = selectDate ?? '${Jalali.now().year}-${Jalali.now().month}-${Jalali.now().day}';
+    String? expenses,
+    String? calculateCash,
+    String? income,
+  }): date = date ?? '' ,
+        dateMonth = dateMonth ?? '',
+        selectDate = selectDate ?? '',
+        expenses = expenses ?? "",
+        calculateCash = calculateCash ?? "",
+        income = income ?? '';
 
   final SetDateStatus status;
   final String date;
   final String dateMonth;
   final String selectDate;
+  final String expenses;
+  final String calculateCash;
+  final String income;
 
   @override
   // TODO: implement props
@@ -34,13 +43,19 @@ class SetDateState extends Equatable {
     SetDateStatus? status,
     String? date,
     String? dateMonth,
-    String? selectDate
+    String? selectDate,
+    String? expenses,
+    String? calculateCash,
+    String? income
   }) {
     return SetDateState(
       status: status ?? this.status,
       date: date ?? this.date,
       dateMonth: dateMonth ?? this.dateMonth,
-      selectDate: selectDate ?? this.selectDate
+      selectDate: selectDate ?? this.selectDate,
+      expenses: expenses ?? this.expenses,
+      calculateCash: calculateCash ?? this.calculateCash,
+      income: income ?? this.income,
     );
   }
 }

@@ -17,10 +17,9 @@ class CalculateRepository {
 
   Future<String> calculateCashRepo(String dateMonth) async {
     final prefs = await SharedPreferences.getInstance();
-
-    // final String? dateMonth = prefs.getString('dateMonth');
-    // var month = prefs.getString('month');
-    final String? income = prefs.getString('income$dateMonth');
-    return await helper.calculateCash(dateMonth.toString() , income);
+    final String income = prefs.getString('income$dateMonth') ?? "";
+    String cash = await helper.calculateCash(dateMonth.toString() , income);
+    print("cash             "+cash);
+    return cash;
   }
 }
