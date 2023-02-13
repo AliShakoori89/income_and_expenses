@@ -12,40 +12,16 @@ class SetDateRepository {
     final prefs = await SharedPreferences.getInstance();
     String dateMonthString = '${Jalali.now().year}-${Jalali.now().month}';
     String dateString = '${Jalali.now().year}-${Jalali.now().month}-${Jalali.now().day}';
-    // if(DateTime.parse(date).year > 1900){
-    //   String dateString = "${DateTime.parse(date).year}-${DateTime.parse(date).month}-${DateTime.parse(date).day}";
-    //   String dateMonthString = "${DateTime.parse(date).year}-${DateTime.parse(date).month}";
-    //
-    //   await prefs.setString('dateMonth', dateMonthString);
-    //   await prefs.setString('date', dateString);
-    // }else{
       await prefs.setString('dateMonth', dateMonthString);
       await prefs.setString('date', dateString);
-    // }
   }
 
 
   writeDate(String date , [String? dateMonth]) async{
-    print("writeDate             "+date);
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('dateMonth', "${DateTime.parse(date).year}-${DateTime.parse(date).month}");
     await prefs.setString('date', "${DateTime.parse(date).year}-${DateTime.parse(date).month}-${DateTime.parse(date).day}");
   }
-
-
-  // Future<String> readDateMonth() async{
-  //   final prefs = await SharedPreferences.getInstance();
-  //   DateTime now = DateTime.now();
-  //   final String? date = prefs.getString('dateMonth');
-  //   if(date == null){
-  //     Gregorian g = Gregorian(now.year, now.month, now.day);
-  //     Jalali g2j1 = g.toJalali();
-  //     String dateMonthString = "${g2j1.formatter.y}-${g2j1.formatter.m}";
-  //     return dateMonthString;
-  //   }else{
-  //     return date;
-  //   }
-  // }
 
   Future<String> readDateMonth() async{
     final prefs = await SharedPreferences.getInstance();
@@ -58,29 +34,14 @@ class SetDateRepository {
     }
   }
 
-  // Future<String> readDate() async{
-  //   final prefs = await SharedPreferences.getInstance();
-  //   DateTime now = DateTime.now();
-  //   final String? date = prefs.getString('date');
-  //   if(date == null){
-  //     Gregorian g = Gregorian(now.year, now.month, now.day);
-  //     Jalali g2j1 = g.toJalali();
-  //     String dateString = "${g2j1.formatter.y}-${g2j1.formatter.m}-${g2j1.formatter.d}";
-  //     return dateString;
-  //   }else{
-  //     return date;
-  //   }
-  // }
-
   Future<String> readDate() async{
     final prefs = await SharedPreferences.getInstance();
     final String? date = prefs.getString('date');
-    print("readDate          "+date!);
-    if(date == null){
+    if(date == ""){
       String dateString = '${Jalali.now().year}-${Jalali.now().month}-${Jalali.now().day}';
       return dateString;
     }else{
-      return date;
+      return date!;
     }
   }
 
@@ -108,7 +69,6 @@ class SetDateRepository {
                 textDirection: TextDirection.rtl));
       }else{
         String newDate = "${DateTime.parse(date).year}-${DateTime.parse(date).month}-${DateTime.parse(date).day+1}";
-        print("@@@@@@@@@@@@@@@@   "+newDate);
         await prefs.setString('date', newDate);
         return newDate;
       }
@@ -141,7 +101,6 @@ class SetDateRepository {
   }
 
   Future<String> reduceDate(String date) async{
-    print("reduceDate             "+date);
     final prefs = await SharedPreferences.getInstance();
     if(DateTime.parse(date).day == 1){
       Get.rawSnackbar(
@@ -156,7 +115,6 @@ class SetDateRepository {
               textDirection: TextDirection.rtl));
     }
     String newDate = "${DateTime.parse(date).year}-${DateTime.parse(date).month}-${DateTime.parse(date).day-1}";
-    print("@@@@@@@@@@@@@@@@   "+newDate);
     await prefs.setString('date', newDate);
     return newDate;
   }

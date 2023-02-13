@@ -1,28 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localization/flutter_localization.dart';
-import 'package:income_and_expenses/bloc/calculate_bloc/bloc.dart';
-import 'package:income_and_expenses/bloc/calculate_bloc/state.dart';
-import 'package:income_and_expenses/bloc/income_bloc/bloc.dart';
-import 'package:income_and_expenses/bloc/income_bloc/state.dart';
 import 'package:income_and_expenses/bloc/change_language_bloc/bloc.dart';
 import 'package:income_and_expenses/bloc/change_language_bloc/state.dart';
 import 'package:income_and_expenses/bloc/set_date_bloc/state.dart';
 import 'package:income_and_expenses/const/app_colors.dart';
 import 'package:income_and_expenses/const/dimensions.dart';
 import 'package:income_and_expenses/const/language.dart';
+import 'package:income_and_expenses/utils/date_picker_calendar.dart';
 import 'package:income_and_expenses/utils/widget.dart';
 import 'package:persian_number_utility/persian_number_utility.dart';
-import '../bloc/calculate_bloc/event.dart';
-import '../bloc/change_currency_bloc/event.dart';
-import '../bloc/change_language_bloc/event.dart';
-import '../bloc/income_bloc/event.dart';
 import '../bloc/change_currency_bloc/bloc.dart';
 import '../bloc/change_currency_bloc/state.dart';
 import '../bloc/set_date_bloc/bloc.dart';
 import '../bloc/set_date_bloc/event.dart';
 import '../bloc/them_bloc/bloc.dart';
-import '../bloc/them_bloc/event.dart';
 import '../bloc/them_bloc/state.dart';
 
 class CashContainer extends StatefulWidget {
@@ -34,23 +26,6 @@ class CashContainer extends StatefulWidget {
 
 class _CashContainerState extends State<CashContainer> {
 
-  @override
-  void initState() {
-
-    // BlocProvider.of<IncomeBloc>(context).add(FetchIncomeEvent());
-
-    // BlocProvider.of<SetDateBloc>(context).add(ReadDateEvent());
-
-    // BlocProvider.of<CalculateExpenseBloc>(context).add(SumExpensePerMonthEvent());
-
-    // BlocProvider.of<CalculateExpenseBloc>(context).add(CalculateCashPerMonthEvent());
-
-
-
-    super.initState();
-  }
-
-
 
   late TextEditingController cashController = TextEditingController();
 
@@ -60,8 +35,6 @@ class _CashContainerState extends State<CashContainer> {
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
 
       var darkThemeBoolean = state.darkThemeBoolean;
-
-      BlocProvider.of<SetDateBloc>(context).add(ReadDateEvent());
 
       return Container(
         decoration: BoxDecoration(
@@ -88,15 +61,6 @@ class _CashContainerState extends State<CashContainer> {
 
                         return BlocBuilder<SetDateBloc, SetDateState>(
                             builder: (context, state) {
-
-
-
-                              var dateTime = state.dateMonth;
-
-                              print("dateTime dateTime dateTime dateTime      $dateTime");
-                              // BlocProvider.of<SetDateBloc>(context).add(FetchIncomeEvent(month: state.dateMonth));
-                              // // BlocProvider.of<CalculateExpenseBloc>(context).add(SumExpensePerMonthEvent(dateMonth: state.dateMonth));
-                              // BlocProvider.of<SetDateBloc>(context).add(CalculateCashPerMonthEvent(dateMonth: state.dateMonth));
                               return Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
@@ -528,18 +492,16 @@ class _CashContainerState extends State<CashContainer> {
                                               ),
                                               TextButton(
                                                 onPressed: () {
-                                                  print(
-                                                      "datetimeeee          " + dateTime);
                                                   BlocProvider.of<SetDateBloc>(context)
                                                       .add(AddIncomeEvent(
                                                     cash: cashController.text,
-                                                    month: dateTime,
+                                                    month: "${DatePickerCalendarState().picked.year}-${DatePickerCalendarState().picked.month}",
                                                   ));
                                                   BlocProvider.of<SetDateBloc>(context)
-                                                      .add(FetchIncomeEvent(month: dateTime));
+                                                      .add(FetchIncomeEvent(month: "${DatePickerCalendarState().picked.year}-${DatePickerCalendarState().picked.month}"));
                                                   BlocProvider.of<SetDateBloc>(context)
                                                       .add(CalculateCashPerMonthEvent(
-                                                      dateMonth: dateTime));
+                                                      dateMonth: "${DatePickerCalendarState().picked.year}-${DatePickerCalendarState().picked.month}"));
                                                   Navigator.of(ctx).pop();
                                                 },
                                                 child: Padding(

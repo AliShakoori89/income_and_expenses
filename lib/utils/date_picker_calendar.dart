@@ -4,8 +4,6 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:income_and_expenses/bloc/add_expense_bloc/bloc.dart';
 import 'package:income_and_expenses/bloc/add_expense_bloc/event.dart';
-import 'package:income_and_expenses/bloc/income_bloc/bloc.dart';
-import 'package:income_and_expenses/bloc/income_bloc/event.dart';
 import 'package:income_and_expenses/bloc/set_date_bloc/bloc.dart';
 import 'package:income_and_expenses/bloc/set_date_bloc/event.dart';
 import 'package:income_and_expenses/bloc/set_date_bloc/state.dart';
@@ -13,13 +11,9 @@ import 'package:income_and_expenses/const/app_colors.dart';
 import 'package:income_and_expenses/const/dimensions.dart';
 import 'package:intl/intl.dart';
 import 'package:persian_datetime_picker/persian_datetime_picker.dart';
-import '../bloc/calculate_bloc/bloc.dart';
-import '../bloc/calculate_bloc/event.dart';
 import '../bloc/them_bloc/bloc.dart';
 import '../bloc/them_bloc/state.dart';
-import 'package:intl/intl.dart';
 
-import '../routes/route_helper.dart';
 
 
 class DatePickerCalendar extends StatefulWidget {
@@ -41,8 +35,6 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
     selectedDate = DateFormat('yyyy-MM').format(DateTime.parse(Jalali.now().toJalaliDateTime()));
 
     BlocProvider.of<SetDateBloc>(context).add(FetchIncomeEvent(month: selectedDate));
-
-    BlocProvider.of<SetDateBloc>(context).add(ReadDateEvent());
 
     BlocProvider.of<SetDateBloc>(context).add(SumExpensePerMonthEvent(dateMonth: selectedDate));
 
@@ -86,26 +78,12 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    // if(_pickedDate != null){
-                    //   String dateWithT = state.date;
-                    //   DateTime start = DateFormat("yyyy-MM-dd").parse(dateWithT);
-                    print("12 12 21 21 12 21    "+selectedDate);
                       BlocProvider.of<SetDateBloc>(context)
                           .add(ReduceDateEvent(date: state.date));
                       BlocProvider.of<SetDateBloc>(context)
                           .add(ReadDateEvent());
                       final expensesBloc = BlocProvider.of<AddExpenseBloc>(context);
-                      expensesBloc.add(FetchExpensesEvent(date: state.date));
-                    // }else{
-                    //   String dateWithT = state.date;
-                    //   DateTime start = DateFormat("yyyy-MM-dd").parse(dateWithT);
-                    //   BlocProvider.of<SetDateBloc>(context)
-                    //       .add(ReduceDateEvent(date: start));
-                    //   BlocProvider.of<SetDateBloc>(context)
-                    //       .add(ReadDateEvent());
-                    //   final expensesBloc = BlocProvider.of<AddExpenseBloc>(context);
-                    //   expensesBloc.add(FetchExpensesEvent());
-                    // }
+                      expensesBloc.add(FetchExpensesEvent(date: "${DateTime.parse(state.date).year}-${DateTime.parse(state.date).month}-${DateTime.parse(state.date).day-1}"));
                   },
                   child: const Icon(
                     Icons.arrow_back_ios,
@@ -115,12 +93,6 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                 GestureDetector(
 
                   onTap:() async{
-                    // _pickedDate = DateTime.parse(state.date);
-                    // final DateTime? date = await showPersianDatePicker(
-                    //   context: context,
-                    //   initialDate: DateTime.now(),
-                    // );
-                    print("Jalali.now()             "+Jalali.now().toString());
                     picked = (await showPersianDatePicker(
                       context: context,
                       initialDate: Jalali.now(),
@@ -135,23 +107,22 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                     }
 
                     if (!mounted) return;
-                    print("1111111     ${picked}");
-                    print("1111111     ${label}");
-                    print("1111111     ${picked!.year}-${picked.month}");
-                    print("1111111     ${selectedDate}");
+
+                    final String month = "${picked.year}-${picked.month}";
+                    final String date = "${picked.year}-${picked.month}-${picked.day}";
 
                     BlocProvider.of<SetDateBloc>(context)
-                        .add(WriteDateEvent(date: "${picked.year}-${picked.month}-${picked.day}"));
+                        .add(WriteDateEvent(date: date));
                     BlocProvider.of<SetDateBloc>(context)
                         .add(ReadDateEvent());
                     BlocProvider.of<SetDateBloc>(context)
-                        .add(FetchIncomeEvent(month : "${picked.year}-${picked.month}"));
+                        .add(FetchIncomeEvent(month : month));
                     BlocProvider.of<SetDateBloc>(context)
-                        .add(SumExpensePerMonthEvent(dateMonth : "${picked.year}-${picked.month}"));
+                        .add(SumExpensePerMonthEvent(dateMonth : month));
                     BlocProvider.of<SetDateBloc>(context)
-                        .add(CalculateCashPerMonthEvent(dateMonth : "${picked.year}-${picked.month}"));
+                        .add(CalculateCashPerMonthEvent(dateMonth : month));
                     BlocProvider.of<AddExpenseBloc>(context)
-                        .add(FetchExpensesEvent(date : "${picked.year}-${picked.month}-${picked.day}"));
+                        .add(FetchExpensesEvent(date : date));
 
                   },
                   child: Container(
@@ -174,7 +145,7 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                             SizedBox(
                               width: Dimensions.height10,
                             ),
-                            Text("${picked.year}-${picked.month}-${picked.day}",
+                            Text(state.date == "" ? "${picked.year}-${picked.month}-${picked.day}" : state.date,
                                 style: const TextStyle(
                                     color: AppColors.appBarTitleColor)),
                           ],
@@ -183,28 +154,12 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    // if(_pickedDate != null){
-                    //   String dateWithT = state.date;
-                    //   DateTime start = DateFormat("yyyy-MM-dd").parse(dateWithT);
-                    // var rediuseDate = DateTime.parse(selectedDate);
-                    // print(rediuseDate.day-1);
-                    // selectedDate = "${rediuseDate.year}-${rediuseDate.month}-${rediuseDate.day+1}";
                     BlocProvider.of<SetDateBloc>(context)
                         .add(AddToDateEvent(date: state.date));
                     BlocProvider.of<SetDateBloc>(context)
                         .add(ReadDateEvent());
-                    final expensesBloc = BlocProvider.of<AddExpenseBloc>(context);
-                    expensesBloc.add(FetchExpensesEvent(date: state.date));
-                    // }else{
-                    //   String dateWithT = state.date;
-                    //   DateTime start = DateFormat("yyyy-MM-dd").parse(dateWithT);
-                    //   BlocProvider.of<SetDateBloc>(context)
-                    //       .add(AddToDateEvent(date: start));
-                    //   BlocProvider.of<SetDateBloc>(context)
-                    //       .add(ReadDateEvent());
-                    //   BlocProvider.of<AddExpenseBloc>(context)
-                    //   .add(FetchExpensesEvent());
-                    // }
+                    BlocProvider.of<AddExpenseBloc>(context)
+                        .add(FetchExpensesEvent(date: "${DateTime.parse(state.date).year}-${DateTime.parse(state.date).month}-${DateTime.parse(state.date).day+1}"));
                   },
                   child: const Icon(
                     Icons.arrow_forward_ios,

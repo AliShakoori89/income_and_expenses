@@ -19,8 +19,6 @@ class CategoryIconList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    // BlocProvider.of<ChangeLanguageBloc>(context).add(ReadLanguageBooleanEvent());
-
     return Column(
       children: [
         const Icon(Icons.linear_scale,

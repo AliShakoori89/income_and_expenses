@@ -3,9 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:income_and_expenses/const/app_colors.dart';
 import 'package:income_and_expenses/utils/category_icon_list.dart';
 import 'package:income_and_expenses/utils/widget.dart';
-
 import '../bloc/change_language_bloc/bloc.dart';
-import '../bloc/change_language_bloc/event.dart';
 import '../bloc/change_language_bloc/state.dart';
 
 class AppTextField extends StatefulWidget {
@@ -29,12 +27,6 @@ class AppTextField extends StatefulWidget {
 class _AppTextFieldState extends State<AppTextField> {
 
   _AppTextFieldState(labelText, clickable, controller, themeBoolean);
-
-  @override
-  void initState() {
-    // BlocProvider.of<ChangeLanguageBloc>(context).add(ReadLanguageBooleanEvent());
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {

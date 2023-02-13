@@ -32,7 +32,6 @@ class ChangeCurrencyBloc extends Bloc<ChangeCurrencyEvent, ChangeCurrencyState> 
     try {
       emit(state.copyWith(status: ChangeCurrencyStatus.loading));
       String? currencyBoolean = await changeCurrencyRepository.readRialCurrencyBoolean();
-      print("Read Read Read    "+ currencyBoolean.toString());
       emit(
         state.copyWith(
           status: ChangeCurrencyStatus.success,

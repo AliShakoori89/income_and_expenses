@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import '../bloc/calculate_sf_circular_chart/bloc.dart';
-import '../bloc/calculate_sf_circular_chart/event.dart';
 import '../bloc/calculate_sf_circular_chart/state.dart';
 import '../bloc/them_bloc/bloc.dart';
 import '../bloc/them_bloc/state.dart';
@@ -18,12 +17,6 @@ class MonthChart extends StatefulWidget {
 }
 
 class _MonthChartState extends State<MonthChart> {
-
-  @override
-  void initState() {
-    // BlocProvider.of<CalculateSFCircularChartBloc>(context).add(SumExpensesPerMonthForCircularChartEvent());
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {

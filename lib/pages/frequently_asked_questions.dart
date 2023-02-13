@@ -97,12 +97,6 @@ class FrequentlyAskedQuestions extends StatelessWidget {
                             collapsed: buildCollapsed1(allQuestion[index], allAnswer[index] , state.darkThemeBoolean),
                             expanded: buildExpanded1(allQuestion[index], state.darkThemeBoolean),
                           ),
-                          // Divider(
-                          //   height: 1,
-                          //   color: state.darkThemeBoolean == "false"
-                          //       ? Colors.grey
-                          //       : Colors.white,
-                          // ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[

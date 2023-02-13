@@ -2,9 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:income_and_expenses/bloc/set_date_bloc/event.dart';
 import 'package:income_and_expenses/bloc/set_date_bloc/state.dart';
 import 'package:income_and_expenses/repository/date_time_repository.dart';
-
 import '../../repository/calculate_repository.dart';
-import '../../repository/expense_repository.dart';
 import '../../repository/income_repository.dart';
 
 class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
@@ -165,7 +163,6 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
       FetchIncomeEvent event, Emitter<SetDateState> emit) async {
     try {
       emit(state.copyWith(status: SetDateStatus.loading));
-      print("QQQQQQQQQQQQq    "+event.month);
       final String? income = await incomeRepository.readIncome(event.month);
       emit(
         state.copyWith(

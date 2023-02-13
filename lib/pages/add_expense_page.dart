@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:income_and_expenses/bloc/add_expense_bloc/bloc.dart';
 import 'package:income_and_expenses/bloc/add_expense_bloc/event.dart';
 import 'package:income_and_expenses/bloc/set_date_bloc/bloc.dart';
-import 'package:income_and_expenses/bloc/set_date_bloc/event.dart';
 import 'package:income_and_expenses/bloc/set_date_bloc/state.dart';
 import 'package:income_and_expenses/model/expense_model.dart';
 import 'package:income_and_expenses/routes/route_helper.dart';
@@ -35,13 +34,6 @@ class _AddExpensePageState extends State<AddExpensePage> {
   late TextEditingController descriptionController = TextEditingController();
 
   final formKey = GlobalKey<FormState>();
-
-
-  @override
-  void initState() {
-    // BlocProvider.of<SetDateBloc>(context).add(ReadDateEvent());
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -144,8 +136,6 @@ class _AddExpensePageState extends State<AddExpensePage> {
               final expenseBloc = BlocProvider.of<AddExpenseBloc>(context);
 
               expense.expenseDate = state.date;
-
-              print("state.date            "+state.date);
               expense.expenseDateMonth = state.dateMonth;
               expense.expenseCategory = categoryController.text;
               expense.expense = int.parse(expensesController.text.toEnglishDigit());
@@ -194,8 +184,6 @@ class _AddExpensePageState extends State<AddExpensePage> {
 
               expenseBloc.add(AddOneByOneExpenseEvent(expenseModel: expense));
 
-
-
               Get.toNamed(RouteHelper.getInitial());
             }
           },
@@ -204,7 +192,6 @@ class _AddExpensePageState extends State<AddExpensePage> {
                 left: Dimensions.width30,
                 right: Dimensions.width30,
                 bottom: Dimensions.height10),
-            // width: Dimensions.buttonWidth,
             height: Dimensions.buttonHeight,
             decoration: BoxDecoration(
               color: AppColors.buttonColor,

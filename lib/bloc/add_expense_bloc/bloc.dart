@@ -21,7 +21,6 @@ class AddExpenseBloc extends Bloc<AddExpenseEvent, AddExpenseState> {
     try {
       emit(state.copyWith(status: ExpenseStatus.loading));
 
-      print("RRRRRRRRR     "+event.date);
       final List<ExpenseModel> expenses =
       await expenseRepository.getAllExpensesRepo(event.date);
       emit(

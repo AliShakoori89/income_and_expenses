@@ -6,16 +6,13 @@ import 'package:income_and_expenses/bloc/add_expense_bloc/bloc.dart';
 import 'package:income_and_expenses/const/app_colors.dart';
 import 'package:income_and_expenses/const/dimensions.dart';
 import 'package:persian_number_utility/persian_number_utility.dart';
-
 import '../bloc/add_expense_bloc/event.dart';
 import '../bloc/add_expense_bloc/state.dart';
 import '../bloc/change_currency_bloc/bloc.dart';
 import '../bloc/change_currency_bloc/state.dart';
 import '../bloc/change_language_bloc/bloc.dart';
-import '../bloc/change_language_bloc/event.dart';
 import '../bloc/change_language_bloc/state.dart';
 import '../bloc/them_bloc/bloc.dart';
-import '../bloc/them_bloc/event.dart';
 import '../bloc/them_bloc/state.dart';
 import '../const/language.dart';
 
@@ -30,8 +27,7 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
 
   @override
   void initState() {
-    // final expensesBloc = BlocProvider.of<AddExpenseBloc>(context);
-    // expensesBloc.add(FetchExpensesEvent());
+
     super.initState();
   }
   @override

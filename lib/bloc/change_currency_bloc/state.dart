@@ -29,7 +29,7 @@ class ChangeCurrencyState extends Equatable {
   }) {
     return ChangeCurrencyState(
       status: status ?? this.status,
-      rialCurrencyBoolean: readCurrencyBoolean ?? this.rialCurrencyBoolean,
+      rialCurrencyBoolean: readCurrencyBoolean ?? rialCurrencyBoolean,
     );
   }
 }
