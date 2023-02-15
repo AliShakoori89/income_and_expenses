@@ -80,10 +80,8 @@ class _CashContainerState extends State<CashContainer> {
                                           Text(
                                               state.expenses != ""
                                                   ? rialCurrencyType == true
-                                                  ? AppLocale.rial
-                                                  .getString(context)
-                                                  : AppLocale.toman
-                                                  .getString(context)
+                                                  ? AppLocale.rial.getString(context)
+                                                  : AppLocale.toman.getString(context)
                                                   : ''.toPersianDigit(),
                                               style: TextStyle(
                                                   color: darkThemeBoolean == "false"
@@ -93,12 +91,8 @@ class _CashContainerState extends State<CashContainer> {
                                           Text(
                                               state.expenses != ""
                                                   ? rialCurrencyType == true
-                                                  ? ('${state.expenses}0')
-                                                  .toPersianDigit()
-                                                  .seRagham()
-                                                  : state.expenses
-                                                  .toPersianDigit()
-                                                  .seRagham()
+                                                  ? ('${state.expenses}0').toPersianDigit().seRagham()
+                                                  : state.expenses.toPersianDigit().seRagham()
                                                   : "0".toPersianDigit(),
                                               style: TextStyle(
                                                   color: darkThemeBoolean == "false"
@@ -148,37 +142,21 @@ class _CashContainerState extends State<CashContainer> {
                                             children: [
                                               Text(
                                                   state.calculateCash != ""
-                                                      ? rialCurrencyType ==
-                                                      true
-                                                      ? AppLocale.rial
-                                                      .getString(
-                                                      context)
-                                                      : AppLocale.toman
-                                                      .getString(
-                                                      context)
+                                                      ? rialCurrencyType == true
+                                                      ? AppLocale.rial.getString(context)
+                                                      : AppLocale.toman.getString(context)
                                                       : '',
                                                   style: TextStyle(
-                                                      color:
-                                                      darkThemeBoolean ==
-                                                          "false"
+                                                      color: darkThemeBoolean == "false"
                                                           ? Colors.black
-                                                          : Colors
-                                                          .white)),
+                                                          : Colors.white)),
                                               SizedBox(
-                                                  width:
-                                                  Dimensions.width10 / 3),
+                                                  width: Dimensions.width10 / 3),
                                               Text(
                                                   state.calculateCash != ""
-                                                      ? rialCurrencyType ==
-                                                      true
-                                                      ? ('${state.calculateCash}0')
-                                                      .toPersianDigit()
-                                                      .seRagham()
-                                                      : state
-                                                      .calculateCash
-                                                      .toString()
-                                                      .toPersianDigit()
-                                                      .seRagham()
+                                                      ? rialCurrencyType == true
+                                                      ? ('${state.calculateCash}0').toPersianDigit().seRagham()
+                                                      : state.calculateCash.toString().toPersianDigit().seRagham()
                                                       : "0".toPersianDigit(),
                                                   style: TextStyle(
                                                       color: darkThemeBoolean ==
@@ -194,19 +172,12 @@ class _CashContainerState extends State<CashContainer> {
                                             children: [
                                               Text(
                                                   state.calculateCash != ""
-                                                      ? rialCurrencyType ==
-                                                      true
-                                                      ? ("${state.calculateCash}0")
-                                                      .seRagham()
-                                                      : state
-                                                      .calculateCash
-                                                      .toString()
-                                                      .seRagham()
+                                                      ? rialCurrencyType == true
+                                                      ? ("${state.calculateCash}0").seRagham()
+                                                      : state.calculateCash.toString().seRagham()
                                                       : "0",
                                                   style: TextStyle(
-                                                      color:
-                                                      darkThemeBoolean ==
-                                                          "false"
+                                                      color: darkThemeBoolean == "false"
                                                           ? Colors.black
                                                           : Colors.white,
                                                       fontSize:
@@ -216,18 +187,12 @@ class _CashContainerState extends State<CashContainer> {
                                                   Dimensions.width10 / 3),
                                               Text(
                                                   state.calculateCash != ""
-                                                      ? rialCurrencyType ==
-                                                      true
-                                                      ? AppLocale.rial
-                                                      .getString(
-                                                      context)
-                                                      : AppLocale.toman
-                                                      .getString(
-                                                      context)
+                                                      ? rialCurrencyType == true
+                                                      ? AppLocale.rial.getString(context)
+                                                      : AppLocale.toman.getString(context)
                                                       : '',
                                                   style: TextStyle(
-                                                    color: darkThemeBoolean ==
-                                                        "false"
+                                                    color: darkThemeBoolean == "false"
                                                         ? Colors.black
                                                         : Colors.white,
                                                   )),
@@ -239,8 +204,7 @@ class _CashContainerState extends State<CashContainer> {
                                           Text(AppLocale.cash.getString(context),
                                               style: TextStyle(
                                                   color: darkThemeBoolean == "false"
-                                                      ? AppColors
-                                                      .mainPageFirstContainerFontColor
+                                                      ? AppColors.mainPageFirstContainerFontColor
                                                       : Colors.white,
                                                   fontSize: Dimensions.font16,
                                                   fontWeight: FontWeight.w400)),
@@ -252,8 +216,7 @@ class _CashContainerState extends State<CashContainer> {
                                       Text(AppLocale.expenses.getString(context),
                                           style: TextStyle(
                                               color: darkThemeBoolean == "false"
-                                                  ? AppColors
-                                                  .mainPageFirstContainerFontColor
+                                                  ? AppColors.mainPageFirstContainerFontColor
                                                   : Colors.white,
                                               fontSize: Dimensions.font16,
                                               fontWeight: FontWeight.w400)),
@@ -275,10 +238,8 @@ class _CashContainerState extends State<CashContainer> {
                                           Text(
                                               state.calculateCash != ""
                                                   ? rialCurrencyType == true
-                                                  ? AppLocale.rial
-                                                  .getString(context)
-                                                  : AppLocale.toman
-                                                  .getString(context)
+                                                  ? AppLocale.rial.getString(context)
+                                                  : AppLocale.toman.getString(context)
                                                   : ''.toPersianDigit(),
                                               style: TextStyle(
                                                   color: darkThemeBoolean == "false"
@@ -288,12 +249,8 @@ class _CashContainerState extends State<CashContainer> {
                                           Text(
                                               state.calculateCash != ""
                                                   ? rialCurrencyType == true
-                                                  ? ('${state.calculateCash}0')
-                                                  .toPersianDigit()
-                                                  .seRagham()
-                                                  : state.calculateCash
-                                                  .toPersianDigit()
-                                                  .seRagham()
+                                                  ? ('${state.calculateCash}0').toPersianDigit().seRagham()
+                                                  : state.calculateCash.toPersianDigit().seRagham()
                                                   : "0".toPersianDigit(),
                                               style: TextStyle(
                                                   color: darkThemeBoolean == "false"
@@ -307,8 +264,7 @@ class _CashContainerState extends State<CashContainer> {
                                           Text(
                                               state.expenses != ""
                                                   ? rialCurrencyType == true
-                                                  ? ("${state.expenses}0")
-                                                  .seRagham()
+                                                  ? ("${state.expenses}0").seRagham()
                                                   : state.expenses.seRagham()
                                                   : "0",
                                               style: TextStyle(
@@ -320,10 +276,8 @@ class _CashContainerState extends State<CashContainer> {
                                           Text(
                                               state.expenses != ""
                                                   ? rialCurrencyType == true
-                                                  ? AppLocale.rial
-                                                  .getString(context)
-                                                  : AppLocale.toman
-                                                  .getString(context)
+                                                  ? AppLocale.rial.getString(context)
+                                                  : AppLocale.toman.getString(context)
                                                   : '',
                                               style: TextStyle(
                                                 color: darkThemeBoolean == "false"
@@ -343,65 +297,40 @@ class _CashContainerState extends State<CashContainer> {
                                             children: [
                                               Text(
                                                   state.calculateCash != ""
-                                                      ? rialCurrencyType ==
-                                                      true
-                                                      ? AppLocale.rial
-                                                      .getString(
-                                                      context)
-                                                      : AppLocale.toman
-                                                      .getString(
-                                                      context)
+                                                      ? rialCurrencyType == true
+                                                      ? AppLocale.rial.getString(context)
+                                                      : AppLocale.toman.getString(context)
                                                       : '',
                                                   style: TextStyle(
                                                       color:
-                                                      darkThemeBoolean ==
-                                                          "false"
+                                                      darkThemeBoolean == "false"
                                                           ? Colors.black
-                                                          : Colors
-                                                          .white)),
+                                                          : Colors.white)),
                                               SizedBox(
-                                                  width:
-                                                  Dimensions.width10 / 3),
+                                                  width: Dimensions.width10 / 3),
                                               Text(
                                                   state.calculateCash != ""
-                                                      ? rialCurrencyType ==
-                                                      true
-                                                      ? ('${state.calculateCash}0')
-                                                      .toPersianDigit()
-                                                      .seRagham()
-                                                      : state
-                                                      .calculateCash
-                                                      .toString()
-                                                      .toPersianDigit()
-                                                      .seRagham()
+                                                      ? rialCurrencyType == true
+                                                      ? ('${state.calculateCash}0').toPersianDigit().seRagham()
+                                                      : state.calculateCash.toString().toPersianDigit().seRagham()
                                                       : "0".toPersianDigit(),
                                                   style: TextStyle(
-                                                      color: darkThemeBoolean ==
-                                                          "false"
-                                                          ? AppColors
-                                                          .balanceDigitColor
+                                                      color: darkThemeBoolean == "false"
+                                                          ? AppColors.balanceDigitColor
                                                           : Colors.white,
-                                                      fontSize:
-                                                      Dimensions.font16)),
+                                                      fontSize: Dimensions.font16)),
                                             ],
                                           )
                                               : Row(
                                             children: [
                                               Text(
                                                   state.calculateCash != ""
-                                                      ? rialCurrencyType ==
-                                                      true
-                                                      ? ("${state.calculateCash}0")
-                                                      .seRagham()
-                                                      : state
-                                                      .calculateCash
-                                                      .toString()
-                                                      .seRagham()
+                                                      ? rialCurrencyType == true
+                                                      ? ("${state.calculateCash}0").seRagham()
+                                                      : state.calculateCash.toString().seRagham()
                                                       : "0",
                                                   style: TextStyle(
-                                                      color:
-                                                      darkThemeBoolean ==
-                                                          "false"
+                                                      color: darkThemeBoolean == "false"
                                                           ? Colors.black
                                                           : Colors.white,
                                                       fontSize:
@@ -411,14 +340,9 @@ class _CashContainerState extends State<CashContainer> {
                                                   Dimensions.width10 / 3),
                                               Text(
                                                   state.calculateCash != ""
-                                                      ? rialCurrencyType ==
-                                                      true
-                                                      ? AppLocale.rial
-                                                      .getString(
-                                                      context)
-                                                      : AppLocale.toman
-                                                      .getString(
-                                                      context)
+                                                      ? rialCurrencyType == true
+                                                      ? AppLocale.rial.getString(context)
+                                                      : AppLocale.toman.getString(context)
                                                       : '',
                                                   style: TextStyle(
                                                     color: darkThemeBoolean ==
@@ -434,8 +358,7 @@ class _CashContainerState extends State<CashContainer> {
                                           Text(AppLocale.cash.getString(context),
                                               style: TextStyle(
                                                   color: darkThemeBoolean == "false"
-                                                      ? AppColors
-                                                      .mainPageFirstContainerFontColor
+                                                      ? AppColors.mainPageFirstContainerFontColor
                                                       : Colors.white,
                                                   fontSize: Dimensions.font16,
                                                   fontWeight: FontWeight.w400)),
@@ -447,8 +370,7 @@ class _CashContainerState extends State<CashContainer> {
                                       Text(AppLocale.cash.getString(context),
                                           style: TextStyle(
                                               color: darkThemeBoolean == "false"
-                                                  ? AppColors
-                                                  .mainPageFirstContainerFontColor
+                                                  ? AppColors.mainPageFirstContainerFontColor
                                                   : Colors.white,
                                               fontSize: Dimensions.font16,
                                               fontWeight: FontWeight.w400)),
@@ -495,13 +417,15 @@ class _CashContainerState extends State<CashContainer> {
                                                   BlocProvider.of<SetDateBloc>(context)
                                                       .add(AddIncomeEvent(
                                                     cash: cashController.text,
-                                                    month: "${DatePickerCalendarState().picked.year}-${DatePickerCalendarState().picked.month}",
+                                                    month: DatePickerCalendarState().month
                                                   ));
                                                   BlocProvider.of<SetDateBloc>(context)
-                                                      .add(FetchIncomeEvent(month: "${DatePickerCalendarState().picked.year}-${DatePickerCalendarState().picked.month}"));
+                                                      .add(FetchIncomeEvent(month: DatePickerCalendarState().month)
+                                                  );
                                                   BlocProvider.of<SetDateBloc>(context)
                                                       .add(CalculateCashPerMonthEvent(
-                                                      dateMonth: "${DatePickerCalendarState().picked.year}-${DatePickerCalendarState().picked.month}"));
+                                                      dateMonth: DatePickerCalendarState().month
+                                                  ));
                                                   Navigator.of(ctx).pop();
                                                 },
                                                 child: Padding(

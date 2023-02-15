@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:income_and_expenses/bloc/add_expense_bloc/bloc.dart';
-import 'package:income_and_expenses/bloc/add_expense_bloc/event.dart';
 import 'package:income_and_expenses/bloc/set_date_bloc/bloc.dart';
 import 'package:income_and_expenses/bloc/set_date_bloc/event.dart';
 import 'package:income_and_expenses/bloc/set_date_bloc/state.dart';
@@ -29,6 +25,9 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
   Jalali picked = Jalali.now() ;
   String selectedDate = "";
 
+  String month = "${Jalali.now().year}-${Jalali.now().month}";
+  String date = "${Jalali.now().year}-${Jalali.now().month}-${Jalali.now().day}";
+
   @override
   void initState() {
 
@@ -45,8 +44,6 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
 
   @override
   Widget build(BuildContext context) {
-
-
 
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
 
@@ -78,12 +75,13 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
               children: [
                 GestureDetector(
                   onTap: () {
+                    date = "${DateTime.parse(date).year}-${DateTime.parse(date).month}-${DateTime.parse(date).day-1}";
                       BlocProvider.of<SetDateBloc>(context)
                           .add(ReduceDateEvent(date: state.date));
                       BlocProvider.of<SetDateBloc>(context)
                           .add(ReadDateEvent());
-                      final expensesBloc = BlocProvider.of<AddExpenseBloc>(context);
-                      expensesBloc.add(FetchExpensesEvent(date: "${DateTime.parse(state.date).year}-${DateTime.parse(state.date).month}-${DateTime.parse(state.date).day-1}"));
+                      BlocProvider.of<SetDateBloc>(context)
+                          .add(FetchExpensesEvent(date: date));
                   },
                   child: const Icon(
                     Icons.arrow_back_ios,
@@ -108,8 +106,12 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
 
                     if (!mounted) return;
 
-                    final String month = "${picked.year}-${picked.month}";
-                    final String date = "${picked.year}-${picked.month}-${picked.day}";
+                    setState(() {
+                      month = "${picked.year}-${picked.month}";
+                      date =
+                      "${picked.year}-${picked.month}-${picked.day}"
+                      ;
+                    });
 
                     BlocProvider.of<SetDateBloc>(context)
                         .add(WriteDateEvent(date: date));
@@ -121,7 +123,7 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                         .add(SumExpensePerMonthEvent(dateMonth : month));
                     BlocProvider.of<SetDateBloc>(context)
                         .add(CalculateCashPerMonthEvent(dateMonth : month));
-                    BlocProvider.of<AddExpenseBloc>(context)
+                    BlocProvider.of<SetDateBloc>(context)
                         .add(FetchExpensesEvent(date : date));
 
                   },
@@ -145,7 +147,7 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                             SizedBox(
                               width: Dimensions.height10,
                             ),
-                            Text(state.date == "" ? "${picked.year}-${picked.month}-${picked.day}" : state.date,
+                            Text(date,
                                 style: const TextStyle(
                                     color: AppColors.appBarTitleColor)),
                           ],
@@ -154,12 +156,14 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                 ),
                 GestureDetector(
                   onTap: () {
+                    date = "${DateTime.parse(date).year}-${DateTime.parse(date).month}-${DateTime.parse(date).day+1}";
                     BlocProvider.of<SetDateBloc>(context)
-                        .add(AddToDateEvent(date: state.date));
+                        .add(AddToDateEvent(date: date));
                     BlocProvider.of<SetDateBloc>(context)
                         .add(ReadDateEvent());
-                    BlocProvider.of<AddExpenseBloc>(context)
-                        .add(FetchExpensesEvent(date: "${DateTime.parse(state.date).year}-${DateTime.parse(state.date).month}-${DateTime.parse(state.date).day+1}"));
+
+                    BlocProvider.of<SetDateBloc>(context)
+                        .add(FetchExpensesEvent(date: date));
                   },
                   child: const Icon(
                     Icons.arrow_forward_ios,

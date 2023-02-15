@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:get/get.dart';
-import 'package:income_and_expenses/bloc/add_expense_bloc/bloc.dart';
-import 'package:income_and_expenses/bloc/add_expense_bloc/event.dart';
 import 'package:income_and_expenses/bloc/set_date_bloc/bloc.dart';
 import 'package:income_and_expenses/bloc/set_date_bloc/state.dart';
 import 'package:income_and_expenses/model/expense_model.dart';
@@ -16,6 +14,7 @@ import 'package:income_and_expenses/const/dimensions.dart';
 import 'package:persian_number_utility/persian_number_utility.dart';
 import '../bloc/change_language_bloc/bloc.dart';
 import '../bloc/change_language_bloc/state.dart';
+import '../bloc/set_date_bloc/event.dart';
 import '../bloc/them_bloc/bloc.dart';
 import '../bloc/them_bloc/state.dart';
 import '../const/language.dart';
@@ -37,6 +36,8 @@ class _AddExpensePageState extends State<AddExpensePage> {
 
   @override
   Widget build(BuildContext context) {
+
+    BlocProvider.of<SetDateBloc>(context).add(InitialDateEvent());
 
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
 
@@ -133,7 +134,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
           onTap: () {
             if (formKey.currentState!.validate()) {
               late ExpenseModel expense = ExpenseModel();
-              final expenseBloc = BlocProvider.of<AddExpenseBloc>(context);
+              final setDateBloc = BlocProvider.of<SetDateBloc>(context);
 
               expense.expenseDate = state.date;
               expense.expenseDateMonth = state.dateMonth;
@@ -182,7 +183,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
                 }
               }
 
-              expenseBloc.add(AddOneByOneExpenseEvent(expenseModel: expense));
+              setDateBloc.add(AddOneByOneExpenseEvent(expenseModel: expense));
 
               Get.toNamed(RouteHelper.getInitial());
             }

@@ -2,19 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:income_and_expenses/bloc/add_expense_bloc/bloc.dart';
+import 'package:income_and_expenses/bloc/set_date_bloc/bloc.dart';
+import 'package:income_and_expenses/bloc/set_date_bloc/state.dart';
 import 'package:income_and_expenses/const/app_colors.dart';
 import 'package:income_and_expenses/const/dimensions.dart';
 import 'package:persian_number_utility/persian_number_utility.dart';
-import '../bloc/add_expense_bloc/event.dart';
-import '../bloc/add_expense_bloc/state.dart';
 import '../bloc/change_currency_bloc/bloc.dart';
 import '../bloc/change_currency_bloc/state.dart';
 import '../bloc/change_language_bloc/bloc.dart';
 import '../bloc/change_language_bloc/state.dart';
+import '../bloc/set_date_bloc/event.dart';
 import '../bloc/them_bloc/bloc.dart';
 import '../bloc/them_bloc/state.dart';
 import '../const/language.dart';
+import 'date_picker_calendar.dart';
 
 class CashContainerPerDate extends StatefulWidget {
   const CashContainerPerDate({Key? key}) : super(key: key);
@@ -27,7 +28,7 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
 
   @override
   void initState() {
-
+    BlocProvider.of<SetDateBloc>(context).add(FetchExpensesEvent(date: DatePickerCalendarState().date));
     super.initState();
   }
   @override
@@ -62,15 +63,15 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                     bottom: Dimensions.height15,
                     right: Dimensions.width15,
                     left: Dimensions.width15),
-                child: BlocBuilder<AddExpenseBloc, AddExpenseState>(
+                child: BlocBuilder<SetDateBloc, SetDateState>(
                     builder: (context, state) {
                   int allTodayExpenses = 0;
-                  BlocProvider.of<AddExpenseBloc>(context).add(ReadTodayExpensesEvent());
+                  BlocProvider.of<SetDateBloc>(context).add(ReadTodayExpensesEvent());
 
                   return state.status.isLoading
                       ? const Center(child: CircularProgressIndicator())
                       : state.status.isSuccess
-                          ? state.expenses.isNotEmpty
+                          ? state.expensesDetails.isNotEmpty
                               ? Column(
                                   children: [
                                     englishLanguageBoolean == false
@@ -129,10 +130,10 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                                       shrinkWrap: true,
                                       itemBuilder: (context, index) {
                                         allTodayExpenses +=
-                                            state.expenses[index].expense!;
-                                        BlocProvider.of<AddExpenseBloc>(context)
+                                            state.expensesDetails[index].expense!;
+                                        BlocProvider.of<SetDateBloc>(context)
                                             .add(AddTodayExpensesEvent(
-                                                todayExpenses:
+                                                todayExpensesDetails:
                                                     allTodayExpenses));
 
                                         return Padding(
@@ -151,8 +152,8 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                       children: [
                                                         Text( rialCurrencyType == true
-                                                            ? "-${("${state.expenses[index].expense!}0").toPersianDigit().seRagham()}"
-                                                            : "-${state.expenses[index].expense!.toString().toPersianDigit().seRagham()}",
+                                                            ? "-${("${state.expensesDetails[index].expense!}0").toPersianDigit().seRagham()}"
+                                                            : "-${state.expensesDetails[index].expense!.toString().toPersianDigit().seRagham()}",
                                                             style: TextStyle(
                                                                 fontSize: Dimensions.font17,
                                                                 color: darkThemeBoolean == "false"
@@ -166,14 +167,14 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                                                               crossAxisAlignment:
                                                                   CrossAxisAlignment.end,
                                                               children: [
-                                                                Text(state.expenses[index].expenseCategory!.getString(context),
+                                                                Text(state.expensesDetails[index].expenseCategory!.getString(context),
                                                                     style: TextStyle(
                                                                         fontSize: Dimensions.font17,
                                                                         fontWeight: FontWeight.w400,
                                                                         color: darkThemeBoolean == "false"
                                                                             ? AppColors.mainPageFirstContainerFontColor
                                                                             : Colors.white)),
-                                                                Text(state.expenses[index].description!,
+                                                                Text(state.expensesDetails[index].description!,
                                                                     style: TextStyle(
                                                                         fontSize: Dimensions.font16,
                                                                         fontWeight: FontWeight.w400,
@@ -194,7 +195,7 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                                                               child: Container(
                                                                 margin: EdgeInsets.all(Dimensions.width10 / 1.4),
                                                                 child: SvgPicture
-                                                                    .asset(state.expenses[index].iconType!),
+                                                                    .asset(state.expensesDetails[index].iconType!),
                                                               ),
                                                             ),
                                                           ],
@@ -215,7 +216,7 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                                                                   color: AppColors.colorList[index]),
                                                               child: Container(
                                                                 margin: EdgeInsets.all(Dimensions.width10 / 1.4),
-                                                                child: SvgPicture.asset(state.expenses[index].iconType!),
+                                                                child: SvgPicture.asset(state.expensesDetails[index].iconType!),
                                                               ),
                                                             ),
                                                             SizedBox(
@@ -225,7 +226,7 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                                                               crossAxisAlignment:
                                                                   CrossAxisAlignment.start,
                                                               children: [
-                                                                Text((state.expenses[index].expenseCategory!).getString(context),
+                                                                Text((state.expensesDetails[index].expenseCategory!).getString(context),
                                                                     style: TextStyle(
                                                                         fontSize: Dimensions.font14,
                                                                         fontWeight: FontWeight.w700,
@@ -233,7 +234,7 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                                                                             ? AppColors.mainPageFirstContainerFontColor
                                                                             : Colors.white)),
                                                                 Text(
-                                                                    state.expenses[index].description!,
+                                                                    state.expensesDetails[index].description!,
                                                                     style: TextStyle(
                                                                         fontSize: Dimensions.font12,
                                                                         fontWeight: FontWeight.w400,
@@ -246,8 +247,8 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                                                           ],
                                                         ),
                                                         Text(rialCurrencyType == true
-                                                            ? "-${("${state.expenses[index].expense!}0").seRagham()}"
-                                                            : "-${state.expenses[index].expense!.toString().seRagham()}",
+                                                            ? "-${("${state.expensesDetails[index].expense!}0").seRagham()}"
+                                                            : "-${state.expensesDetails[index].expense!.toString().seRagham()}",
                                                             style: TextStyle(
                                                                 fontSize: Dimensions.font14,
                                                                 color: AppColors.expensesDigitColor)),
@@ -257,7 +258,7 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                                           ),
                                         );
                                       },
-                                      itemCount: state.expenses.length,
+                                      itemCount: state.expensesDetails.length,
                                     ),
                                   ],
                                 )

@@ -1,3 +1,5 @@
+import '../../model/expense_model.dart';
+
 abstract class SetDateEvent{
   @override
   List<Object> get props => [];
@@ -78,3 +80,37 @@ class AddIncomeEvent extends SetDateEvent {
   @override
   List<Object> get props => [cash, month];
 }
+
+class FetchExpensesEvent extends SetDateEvent {
+  final String date;
+
+  FetchExpensesEvent(
+      {required this.date});
+
+  @override
+  List<Object> get props => [date];
+}
+
+class AddOneByOneExpenseEvent extends SetDateEvent {
+
+  final ExpenseModel expenseModel;
+
+  AddOneByOneExpenseEvent(
+      {required this.expenseModel});
+
+  @override
+  List<Object> get props => [expenseModel];
+}
+
+class AddTodayExpensesEvent extends SetDateEvent {
+
+  final int todayExpensesDetails;
+
+  AddTodayExpensesEvent(
+      {required this.todayExpensesDetails});
+
+  @override
+  List<Object> get props => [todayExpensesDetails];
+}
+
+class ReadTodayExpensesEvent extends SetDateEvent {}

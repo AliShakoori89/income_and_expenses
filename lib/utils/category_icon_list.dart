@@ -30,8 +30,6 @@ class CategoryIconList extends StatelessWidget {
           ),),
         Expanded(
           child: SizedBox(
-            // width: Dimensions.width45*5,
-            // height: Dimensions.height45*5,
             child: GridView.count(
               padding: EdgeInsets.all(Dimensions.width30),
               scrollDirection: Axis.vertical,

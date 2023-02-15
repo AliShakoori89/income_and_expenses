@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:get/get.dart';
-import 'package:income_and_expenses/bloc/add_expense_bloc/bloc.dart';
 import 'package:income_and_expenses/bloc/calculate_sf_circular_chart/bloc.dart';
 import 'package:income_and_expenses/bloc/change_language_bloc/bloc.dart';
 import 'package:income_and_expenses/bloc/set_date_bloc/bloc.dart';
@@ -13,7 +12,6 @@ import 'package:income_and_expenses/repository/income_repository.dart';
 import 'package:income_and_expenses/repository/change_currecy_repository.dart';
 import 'package:income_and_expenses/repository/change_language_repository.dart';
 import 'package:income_and_expenses/repository/date_time_repository.dart';
-import 'package:income_and_expenses/repository/expense_repository.dart';
 import 'package:income_and_expenses/repository/theme_repository.dart';
 import 'package:income_and_expenses/routes/route_helper.dart';
 import 'bloc/change_currency_bloc/bloc.dart';
@@ -61,9 +59,6 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
-            create: (BuildContext context) =>
-                AddExpenseBloc(ExpenseRepository())),
         BlocProvider(
             create: (BuildContext context) =>
                 SetDateBloc(SetDateRepository(), CalculateRepository(), IncomeRepository())),

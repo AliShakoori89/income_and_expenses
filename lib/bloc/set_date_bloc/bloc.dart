@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:income_and_expenses/bloc/set_date_bloc/event.dart';
 import 'package:income_and_expenses/bloc/set_date_bloc/state.dart';
 import 'package:income_and_expenses/repository/date_time_repository.dart';
+import '../../model/expense_model.dart';
 import '../../repository/calculate_repository.dart';
 import '../../repository/income_repository.dart';
 
@@ -22,6 +23,10 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
     on<FetchIncomeEvent>(_mapFetchIncomeEventToState);
     on<SumExpensePerMonthEvent>(_mapSumExpenseByMonthEventToState);
     on<CalculateCashPerMonthEvent>(_mapCalculateCashPerMonthEventToState);
+    on<FetchExpensesEvent>(_mapFetchExpensesEventToState);
+    on<AddOneByOneExpenseEvent>(_mapAddExpenseEventToState);
+    on<AddTodayExpensesEvent>(_mapAddTodayExpensesEventToState);
+    on<ReadTodayExpensesEvent>(_mapReadTodayExpensesEventToState);
   }
 
   void _mapReadDateEventToState(
@@ -168,6 +173,70 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
         state.copyWith(
           status: SetDateStatus.success,
           income: income,
+        ),
+      );
+    } catch (error) {
+      emit(state.copyWith(status: SetDateStatus.error));
+    }
+  }
+
+  void _mapFetchExpensesEventToState(
+      FetchExpensesEvent event, Emitter<SetDateState> emit) async {
+    try {
+      emit(state.copyWith(status: SetDateStatus.loading));
+
+      final List<ExpenseModel> expensesDetails =
+      await setDateRepository.getAllExpensesRepo(event.date);
+      emit(
+        state.copyWith(
+          status: SetDateStatus.success,
+          expensesDetails: expensesDetails,
+        ),
+      );
+    } catch (error) {
+      emit(state.copyWith(status: SetDateStatus.error));
+    }
+  }
+
+  void _mapAddExpenseEventToState(
+      AddOneByOneExpenseEvent event, Emitter<SetDateState> emit) async {
+    try {
+      emit(state.copyWith(status: SetDateStatus.loading));
+      await setDateRepository.addExpenseRepo(event.expenseModel);
+      emit(
+        state.copyWith(
+          status: SetDateStatus.success,
+        ),
+      );
+    } catch (error) {
+      emit(state.copyWith(status: SetDateStatus.error));
+    }
+  }
+
+  void _mapAddTodayExpensesEventToState(
+      AddTodayExpensesEvent event, Emitter<SetDateState> emit) async {
+    try {
+      emit(state.copyWith(status: SetDateStatus.loading));
+      await setDateRepository.addTodayExpensesRepo(event.todayExpensesDetails);
+      emit(
+        state.copyWith(
+          status: SetDateStatus.success,
+        ),
+      );
+    } catch (error) {
+      emit(state.copyWith(status: SetDateStatus.error));
+    }
+  }
+
+  void _mapReadTodayExpensesEventToState(
+      ReadTodayExpensesEvent event, Emitter<SetDateState> emit) async {
+    try {
+      emit(state.copyWith(status: SetDateStatus.loading));
+      final String? todayExpensesDetails = await setDateRepository.readTodayExpensesRepo();
+      emit(
+        state.copyWith(
+            status: SetDateStatus.success,
+            todayExpenses: todayExpensesDetails
         ),
       );
     } catch (error) {
