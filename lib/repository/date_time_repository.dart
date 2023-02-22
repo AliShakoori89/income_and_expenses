@@ -1,9 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:income_and_expenses/data_base/data_base.dart';
 import 'package:shamsi_date/shamsi_date.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../const/app_colors.dart';
 import '../model/expense_model.dart';
 
 class SetDateRepository {
@@ -53,76 +50,13 @@ class SetDateRepository {
 
   addToDate(String date) async{
     final prefs = await SharedPreferences.getInstance();
-    if(DateTime.parse(date).month <= 6){
-      if(DateTime.parse(date).day == 31){
-        Get.rawSnackbar(
-            boxShadows: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.3),
-                offset: const Offset(0, 1),
-                blurRadius: 5,
-                spreadRadius: 0,
-              )
-            ],
-            snackPosition: SnackPosition.TOP,
-            backgroundColor: AppColors.snackBarColor,
-            messageText: const Text('برای تغییر ماه از طریق ضربه زدن بر روی تقویم اقدام نمایید.',
-                textDirection: TextDirection.rtl),
-            titleText: const Text('توجه',
-                style: TextStyle(
-                    fontWeight: FontWeight.w700
-                ),
-                textDirection: TextDirection.rtl));
-      }else{
-        String newDate = "${DateTime.parse(date).year}-${DateTime.parse(date).month}-${DateTime.parse(date).day+1}";
-        await prefs.setString('date', newDate);
-        return newDate;
-      }
-    }else{
-      if(DateTime.parse(date).day == 30){
-        Get.rawSnackbar(
-            boxShadows: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.3),
-                offset: const Offset(0, 1),
-                blurRadius: 5,
-                spreadRadius: 0,
-              )
-            ],
-            snackPosition: SnackPosition.TOP,
-            backgroundColor: AppColors.snackBarColor,
-            messageText: const Text('برای تغییر ماه از طریق ضربه زدن بر روی تقویم اقدام نمایید.',
-                textDirection: TextDirection.rtl),
-            titleText: const Text('توجه',
-                style: TextStyle(
-                    fontWeight: FontWeight.w700
-                ),
-                textDirection: TextDirection.rtl));
-      }else{
-        String newDate = "${DateTime.parse(date).year}-${DateTime.parse(date).month}-${DateTime.parse(date).day+1}";
-        await prefs.setString('date', newDate);
-        return newDate;
-      }
-    }
+      await prefs.setString('date', date);
   }
 
   Future<String> reduceDate(String date) async{
     final prefs = await SharedPreferences.getInstance();
-    if(DateTime.parse(date).day == 1){
-      Get.rawSnackbar(
-          backgroundColor: AppColors.appBarColor,
-          snackPosition: SnackPosition.TOP,
-          titleText: const Text('توجه',
-              style: TextStyle(
-                  fontWeight: FontWeight.w700
-              ),
-              textDirection: TextDirection.rtl),
-          messageText: const Text('برای تغییر ماه از طریق ضربه زدن بر روی تقویم اقدام نمایید.',
-              textDirection: TextDirection.rtl));
-    }
-    String newDate = "${DateTime.parse(date).year}-${DateTime.parse(date).month}-${DateTime.parse(date).day-1}";
-    await prefs.setString('date', newDate);
-    return newDate;
+    await prefs.setString('date', date);
+    return date;
   }
 
   Future<List<ExpenseModel>> getAllExpensesRepo(String date) async {

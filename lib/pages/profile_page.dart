@@ -5,7 +5,6 @@ import 'package:income_and_expenses/const/app_colors.dart';
 import 'package:income_and_expenses/const/dimensions.dart';
 import 'package:income_and_expenses/utils/setting_item_list.dart';
 import '../bloc/them_bloc/bloc.dart';
-import '../bloc/them_bloc/event.dart';
 import '../bloc/them_bloc/state.dart';
 import '../const/language.dart';
 

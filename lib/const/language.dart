@@ -38,7 +38,9 @@ mixin AppLocale {
   static const String toman = "تومان";
   static const String rial = "ریال";
   static const String theme = "پس زمینه";
-  static const String expensePerYear = "هزینه در سال";
+  static const String expensePerYear = "هزینه به تفکیک ماه های سال";
+  static const String expenseTypePerYear = "نوع هزینه به تفکیک ماه های سال";
+  static const String selectMonth = "انتخاب ماه";
 
 
 
@@ -83,7 +85,9 @@ mixin AppLocale {
     toman: 'T',
     rial: 'R',
     theme: "theme",
-    expensePerYear: "expense per year"
+    expensePerYear: "expense per year",
+    expenseTypePerYear: "expense type per year",
+    selectMonth: "select month"
     };
 
   static const Map<String, dynamic> FA = {
@@ -125,6 +129,8 @@ mixin AppLocale {
     toman: 'تومان',
     rial: 'ریال',
     theme: 'پی زمینه',
-    expensePerYear: "هزینه در سال"
+    expensePerYear: "هزینه به تفکیک ماه های سال",
+    expenseTypePerYear : "نوع هزینه به تفکیک ماه های سال",
+    selectMonth: "انتخاب ماه"
   };
 }

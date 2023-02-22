@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:income_and_expenses/pages/main_expenses_page.dart';
 import 'package:income_and_expenses/pages/profile_page.dart';
+import 'package:income_and_expenses/pages/year_chart_page.dart';
 import 'package:income_and_expenses/routes/route_helper.dart';
 import 'package:income_and_expenses/const/app_colors.dart';
 import 'package:income_and_expenses/const/dimensions.dart';
@@ -24,7 +25,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   List pages = [
     const MainExpensesPage(),
     const MonthChart(),
-    Container(child: const Center(child: Text('Next page'))),
+    const YearChartPage(),
     const ProfilePage(),
   ];
 
@@ -40,7 +41,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     Icons.home,
     Icons.pie_chart,
     Icons.bar_chart,
-    Icons.person,
+    Icons.settings,
   ];
 
   @override

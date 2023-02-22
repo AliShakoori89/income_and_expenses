@@ -26,7 +26,9 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
   String selectedDate = "";
 
   String month = "${Jalali.now().year}-${Jalali.now().month}";
-  String date = "${Jalali.now().year}-${Jalali.now().month}-${Jalali.now().day}";
+  String date = Jalali.now().day < 10
+      ? "${Jalali.now().year}-${Jalali.now().month}-0${Jalali.now().day}"
+      : "${Jalali.now().year}-${Jalali.now().month}-${Jalali.now().day}";
 
   @override
   void initState() {
@@ -75,13 +77,20 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    date = "${DateTime.parse(date).year}-${DateTime.parse(date).month}-${DateTime.parse(date).day-1}";
+                      date = "${DateTime.parse(date).add(const Duration(days: -1))}";
                       BlocProvider.of<SetDateBloc>(context)
-                          .add(ReduceDateEvent(date: state.date));
+                          .add(ReduceDateEvent(date: DateFormat('yyyy-MM-dd').format(DateTime.parse(date)).toString()));
                       BlocProvider.of<SetDateBloc>(context)
                           .add(ReadDateEvent());
                       BlocProvider.of<SetDateBloc>(context)
-                          .add(FetchExpensesEvent(date: date));
+                          .add(FetchIncomeEvent(month : DateFormat('yyyy-MM').format(DateTime.parse(date)).toString()));
+                      BlocProvider.of<SetDateBloc>(context)
+                          .add(SumExpensePerMonthEvent(dateMonth : DateFormat('yyyy-MM').format(DateTime.parse(date)).toString()));
+                      BlocProvider.of<SetDateBloc>(context)
+                          .add(CalculateCashPerMonthEvent(dateMonth : DateFormat('yyyy-MM').format(DateTime.parse(date)).toString()));
+                      BlocProvider.of<SetDateBloc>(context)
+                          .add(FetchExpensesEvent(date: DateFormat('yyyy-MM-dd').format(DateTime.parse(date)).toString()));
+
                   },
                   child: const Icon(
                     Icons.arrow_back_ios,
@@ -147,7 +156,7 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                             SizedBox(
                               width: Dimensions.height10,
                             ),
-                            Text(date,
+                            Text(DateFormat('yyyy-MM-dd').format(DateTime.parse(date)).toString(),
                                 style: const TextStyle(
                                     color: AppColors.appBarTitleColor)),
                           ],
@@ -156,14 +165,19 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    date = "${DateTime.parse(date).year}-${DateTime.parse(date).month}-${DateTime.parse(date).day+1}";
+                    date = "${DateTime.parse(date).add(const Duration(days: 1))}";
                     BlocProvider.of<SetDateBloc>(context)
-                        .add(AddToDateEvent(date: date));
+                        .add(AddToDateEvent(date: DateFormat('yyyy-MM-dd').format(DateTime.parse(date)).toString()));
                     BlocProvider.of<SetDateBloc>(context)
                         .add(ReadDateEvent());
-
                     BlocProvider.of<SetDateBloc>(context)
-                        .add(FetchExpensesEvent(date: date));
+                        .add(FetchIncomeEvent(month : DateFormat('yyyy-MM').format(DateTime.parse(date)).toString()));
+                    BlocProvider.of<SetDateBloc>(context)
+                        .add(SumExpensePerMonthEvent(dateMonth : DateFormat('yyyy-MM').format(DateTime.parse(date)).toString()));
+                    BlocProvider.of<SetDateBloc>(context)
+                        .add(CalculateCashPerMonthEvent(dateMonth : DateFormat('yyyy-MM').format(DateTime.parse(date)).toString()));
+                    BlocProvider.of<SetDateBloc>(context)
+                        .add(FetchExpensesEvent(date: DateFormat('yyyy-MM-dd').format(DateTime.parse(date)).toString()));
                   },
                   child: const Icon(
                     Icons.arrow_forward_ios,

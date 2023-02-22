@@ -54,6 +54,7 @@ dependencies:
   expandable: ^5.0.1
   syncfusion_flutter_charts: ^20.4.44
   persian_datetime_picker: ^2.5.0
+  dropdown_button2: ^1.9.3
 #  datepicker_dropdown: ^0.0.7+3
 #  flutter_linear_datepicker: ^2.0.4
 #  persian_datepicker:

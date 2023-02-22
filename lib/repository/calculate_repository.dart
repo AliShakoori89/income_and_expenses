@@ -10,7 +10,12 @@ class CalculateRepository {
   }
 
   Future<String> calculateExpenseRepo(String dateMonth) async {
+    print("EEEEEEEEEEE     "+dateMonth);
     return await helper.calculateTotalExpenses(dateMonth.toString());
+  }
+
+  calculateCategoryTypeExpensesPerMonthRepo(String dateMonth) async {
+    return await helper.calculateCategoryTypeExpensesPerMonth(dateMonth.toString());
   }
 
   Future<String> calculateCashRepo(String dateMonth) async {

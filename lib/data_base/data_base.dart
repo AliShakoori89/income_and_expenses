@@ -74,8 +74,20 @@ class DatabaseHelper {
     var result = await dbExpense.rawQuery("SELECT SUM($columnExpense) FROM my_table WHERE $columnExpenseDateMonth ='$dateMonth'");
     Object? value = result[0]["SUM($columnExpense)"];
     if (value == null){
-      return '';
+      return '0';
     }else{
+      return "$value";
+    }
+  }
+
+  calculateCategoryTypeExpensesPerMonth(String? dateMonth) async {
+    var dbExpense = await database;
+    var result = await dbExpense.rawQuery("SELECT SUM($columnExpense) FROM my_table WHERE $columnExpenseDateMonth ='$dateMonth' AND $columnExpenseCategory 'خوراکی' = ");
+    Object? value = result[0]["SUM($columnExpense)"];
+    if (value == null){
+      return '0';
+    }else{
+      print("TTTTTTTTTT     "+value.toString());
       return "$value";
     }
   }

@@ -40,7 +40,7 @@ class _AppTextFieldState extends State<AppTextField> {
         child: TextFormField(
           style: TextStyle(
               color: widget.themeBoolean == "false"
-                  ? AppColors.labelColor
+                  ? Colors.black
                   : Colors.white70
           ),
           readOnly: widget.clickable == true ? true : false,
@@ -51,13 +51,13 @@ class _AppTextFieldState extends State<AppTextField> {
               suffixText: widget.labelText == "هزینه" || widget.labelText == "expense" ? "تومان" : "",
               suffixStyle: TextStyle(
                   color: widget.themeBoolean == "false"
-                      ? AppColors.labelColor
+                      ? Colors.black
                       : Colors.white70
               ),
               labelText: widget.labelText,
               labelStyle: TextStyle(
                   color: widget.themeBoolean == "false"
-                      ? AppColors.labelColor
+                      ? Colors.black
                       : Colors.white70
               )
           ),

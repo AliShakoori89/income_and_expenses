@@ -38,6 +38,8 @@ class AppColors{
   // #BDBDBD
   static const Color darkArrowButtonColor = Color.fromRGBO(189, 189, 189, 1.00);
 
+  static const Color chartColor = Color.fromRGBO(8, 142, 255, 1);
+
   static const Color calenderBoxColor = Color.fromRGBO(245, 245, 245, 1.00);
 
   static const Color snackBarColor = Color.fromRGBO(255, 248, 225, 1.0);

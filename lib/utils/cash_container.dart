@@ -61,6 +61,7 @@ class _CashContainerState extends State<CashContainer> {
 
                         return BlocBuilder<SetDateBloc, SetDateState>(
                             builder: (context, state) {
+
                               return Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
@@ -78,7 +79,7 @@ class _CashContainerState extends State<CashContainer> {
                                           ? Row(
                                         children: [
                                           Text(
-                                              state.expenses != ""
+                                              (state.expenses != "" && state.expenses != 0.toString())
                                                   ? rialCurrencyType == true
                                                   ? AppLocale.rial.getString(context)
                                                   : AppLocale.toman.getString(context)
@@ -106,8 +107,7 @@ class _CashContainerState extends State<CashContainer> {
                                           Text(
                                               state.expenses != ""
                                                   ? rialCurrencyType == true
-                                                  ? ("${state.expenses}0")
-                                                  .seRagham()
+                                                  ? ("${state.expenses}0").seRagham()
                                                   : state.expenses.seRagham()
                                                   : "0",
                                               style: TextStyle(
@@ -119,10 +119,8 @@ class _CashContainerState extends State<CashContainer> {
                                           Text(
                                               state.expenses != ""
                                                   ? rialCurrencyType == true
-                                                  ? AppLocale.rial
-                                                  .getString(context)
-                                                  : AppLocale.toman
-                                                  .getString(context)
+                                                  ? AppLocale.rial.getString(context)
+                                                  : AppLocale.toman.getString(context)
                                                   : '',
                                               style: TextStyle(
                                                 color: darkThemeBoolean == "false"

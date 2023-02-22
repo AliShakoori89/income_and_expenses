@@ -27,6 +27,8 @@ class SettingItems extends StatelessWidget {
 
       var darkThemeBoolean = state.darkThemeBoolean;
 
+      print("englishLanguageBoolean    "+englishLanguageBoolean.toString());
+
       return englishLanguageBoolean == true
           ? Row(
         mainAxisAlignment: MainAxisAlignment.start,

@@ -7,6 +7,7 @@ import 'package:income_and_expenses/bloc/change_language_bloc/bloc.dart';
 import 'package:income_and_expenses/bloc/set_date_bloc/bloc.dart';
 import 'package:income_and_expenses/bloc/them_bloc/bloc.dart';
 import 'package:income_and_expenses/repository/calculate_repository.dart';
+import 'package:income_and_expenses/repository/calculate_sf_cartesian_chart_repository.dart';
 import 'package:income_and_expenses/repository/calculate_sf_circular_chart_repository.dart';
 import 'package:income_and_expenses/repository/income_repository.dart';
 import 'package:income_and_expenses/repository/change_currecy_repository.dart';
@@ -14,6 +15,7 @@ import 'package:income_and_expenses/repository/change_language_repository.dart';
 import 'package:income_and_expenses/repository/date_time_repository.dart';
 import 'package:income_and_expenses/repository/theme_repository.dart';
 import 'package:income_and_expenses/routes/route_helper.dart';
+import 'bloc/calculate_sf_cartesian_chart/bloc.dart';
 import 'bloc/change_currency_bloc/bloc.dart';
 import 'const/language.dart';
 
@@ -74,6 +76,9 @@ class _MyAppState extends State<MyApp> {
         BlocProvider(
             create: (BuildContext context) =>
                 CalculateSFCircularChartBloc(CalculateSFCircularChartRepository())),
+        BlocProvider(
+            create: (BuildContext context) =>
+                CalculateSFCartesianChartBloc(CalculateSFCartesianChartRepository())),
       ],
       child: GetMaterialApp(
         supportedLocales: _localization.supportedLocales,

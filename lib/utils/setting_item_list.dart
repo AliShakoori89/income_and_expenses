@@ -27,6 +27,7 @@ class SettingItemList extends StatefulWidget {
 class _SettingItemListState extends State<SettingItemList> {
 
   final FlutterLocalization _localization = FlutterLocalization.instance;
+  bool isSwitched = false;
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +74,8 @@ class _SettingItemListState extends State<SettingItemList> {
                     textDirection: TextDirection.rtl,
                     style: TextStyle(fontSize: Dimensions.font16),
                   ),
-                  content: Text(AppLocale.chooseCurrencyQuestion.getString(context),
+                  content: Text(
+                      AppLocale.chooseCurrencyQuestion.getString(context),
                       textDirection: TextDirection.rtl,
                       style: TextStyle(fontSize: Dimensions.font14)),
                   actions: <Widget>[
@@ -152,6 +154,7 @@ class _SettingItemListState extends State<SettingItemList> {
                             BlocProvider.of<ChangeLanguageBloc>(context)
                                 .add(WriteLanguageBooleanEvent(englishLanguageBoolean: true));
                             _localization.translate('en');
+                            isSwitched = false;
                             Navigator.of(ctx).pop();
                           },
                           child: Text(AppLocale.english.getString(context)),),
@@ -160,6 +163,7 @@ class _SettingItemListState extends State<SettingItemList> {
                               BlocProvider.of<ChangeLanguageBloc>(context)
                                   .add(WriteLanguageBooleanEvent(englishLanguageBoolean: false));
                               _localization.translate('fa');
+                              isSwitched = true;
                               Navigator.of(ctx).pop();
                             },
                             child: Text(AppLocale.persian.getString(context)),),
