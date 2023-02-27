@@ -14,10 +14,6 @@ class CalculateRepository {
     return await helper.calculateTotalExpenses(dateMonth.toString());
   }
 
-  calculateCategoryTypeExpensesPerMonthRepo(String dateMonth) async {
-    return await helper.calculateCategoryTypeExpensesPerMonth(dateMonth.toString());
-  }
-
   Future<String> calculateCashRepo(String dateMonth) async {
     final prefs = await SharedPreferences.getInstance();
     final String income = prefs.getString('income$dateMonth') ?? "";

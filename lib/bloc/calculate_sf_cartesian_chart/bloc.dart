@@ -15,15 +15,15 @@ class CalculateSFCartesianChartBloc extends Bloc<CalculateSFCartesianChartEvent,
       SumExpensesByGroupingTypePerMonthForSFCartesianChartEvent event, Emitter<CalculateSFCartesianChartState> emit) async {
     try {
       emit(state.copyWith(status: CalculateSFCartesianChartStatus.loading));
-      String buyItemsExpenses = await calculateSFCartesianChartRepository.calculateExpenseByGroupingTypePerMonthRepo(event.month ,'buy items' );
-      String comestibleExpenses = await calculateSFCartesianChartRepository.calculateExpenseByGroupingTypePerMonthRepo(event.month ,'comestible');
-      String transportationExpenses = await calculateSFCartesianChartRepository.calculateExpenseByGroupingTypePerMonthRepo(event.month ,'transportation');
-      String giftsExpenses = await calculateSFCartesianChartRepository.calculateExpenseByGroupingTypePerMonthRepo(event.month, 'gifts');
-      String treatmentExpenses = await calculateSFCartesianChartRepository.calculateExpenseByGroupingTypePerMonthRepo(event.month, 'treatment');
-      String installmentsAndDebtExpenses = await calculateSFCartesianChartRepository.calculateExpenseByGroupingTypePerMonthRepo(event.month, 'installments and debt');
-      String renovationExpenses = await calculateSFCartesianChartRepository.calculateExpenseByGroupingTypePerMonthRepo(event.month, 'renovation');
-      String pastimeExpenses = await calculateSFCartesianChartRepository.calculateExpenseByGroupingTypePerMonthRepo(event.month, 'pastime');
-      String etceteraExpenses = await calculateSFCartesianChartRepository.calculateExpenseByGroupingTypePerMonthRepo(event.month, 'etcetera');
+      String buyItemsExpenses = await calculateSFCartesianChartRepository.calculateExpenseByGroupingTypePerMonthRepo(event.month ,'خرید اقلام');
+      String comestibleExpenses = await calculateSFCartesianChartRepository.calculateExpenseByGroupingTypePerMonthRepo(event.month ,'خوراکی');
+      String transportationExpenses = await calculateSFCartesianChartRepository.calculateExpenseByGroupingTypePerMonthRepo(event.month ,'حمل و نقل');
+      String giftsExpenses = await calculateSFCartesianChartRepository.calculateExpenseByGroupingTypePerMonthRepo(event.month, 'هدایا');
+      String treatmentExpenses = await calculateSFCartesianChartRepository.calculateExpenseByGroupingTypePerMonthRepo(event.month, 'درمانی');
+      String installmentsAndDebtExpenses = await calculateSFCartesianChartRepository.calculateExpenseByGroupingTypePerMonthRepo(event.month, 'اقساط و بدهی');
+      String renovationExpenses = await calculateSFCartesianChartRepository.calculateExpenseByGroupingTypePerMonthRepo(event.month, 'تعمیرات');
+      String pastimeExpenses = await calculateSFCartesianChartRepository.calculateExpenseByGroupingTypePerMonthRepo(event.month, 'تفریح' );
+      String etceteraExpenses = await calculateSFCartesianChartRepository.calculateExpenseByGroupingTypePerMonthRepo(event.month, 'سایر');
 
       emit(
         state.copyWith(

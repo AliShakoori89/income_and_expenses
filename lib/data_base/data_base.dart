@@ -80,14 +80,13 @@ class DatabaseHelper {
     }
   }
 
-  calculateCategoryTypeExpensesPerMonth(String? dateMonth) async {
+  calculateCategoryTypeExpensesPerMonth(String? dateMonth, String categoryPersianName) async {
     var dbExpense = await database;
-    var result = await dbExpense.rawQuery("SELECT SUM($columnExpense) FROM my_table WHERE $columnExpenseDateMonth ='$dateMonth' AND $columnExpenseCategory 'خوراکی' = ");
+    var result = await dbExpense.rawQuery("SELECT SUM($columnExpense) FROM my_table WHERE $columnExpenseDateMonth ='$dateMonth' AND $columnExpenseCategory ='$categoryPersianName' ");
     Object? value = result[0]["SUM($columnExpense)"];
     if (value == null){
       return '0';
     }else{
-      print("TTTTTTTTTT     "+value.toString());
       return "$value";
     }
   }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localization/flutter_localization.dart';
-import 'package:income_and_expenses/const/dimensions.dart';
 import 'package:persian_number_utility/persian_number_utility.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import '../bloc/calculate_sf_circular_chart/bloc.dart';
@@ -122,12 +121,8 @@ class _MonthChartState extends State<MonthChart> {
                           yValueMapper: (_PieData data, _) => data.yData,
                           dataLabelMapper: (_PieData data, _) => data.text,
                           dataLabelSettings: DataLabelSettings(
-                            textStyle: darkThemeBoolean == "false"
-                                ? const TextStyle(
-                                color: Colors.black)
-                                : const TextStyle(
-                                color: Colors.white
-                            ),
+                            textStyle: const TextStyle(
+                                color: Colors.black),
                             isVisible: true,
                           )),
                     ])));

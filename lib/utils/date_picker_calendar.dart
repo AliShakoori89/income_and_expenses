@@ -117,9 +117,9 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
 
                     setState(() {
                       month = "${picked.year}-${picked.month}";
-                      date =
-                      "${picked.year}-${picked.month}-${picked.day}"
-                      ;
+                      date = picked.day.toString().length != 1
+                      ? "${picked.year}-${picked.month}-${picked.day}"
+                      : "${picked.year}-${picked.month}-0${picked.day}";
                     });
 
                     BlocProvider.of<SetDateBloc>(context)
