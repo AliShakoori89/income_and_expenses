@@ -77,19 +77,25 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
               children: [
                 GestureDetector(
                   onTap: () {
-                      date = "${DateTime.parse(date).add(const Duration(days: -1))}";
-                      BlocProvider.of<SetDateBloc>(context)
-                          .add(ReduceDateEvent(date: DateFormat('yyyy-MM-dd').format(DateTime.parse(date)).toString()));
-                      BlocProvider.of<SetDateBloc>(context)
-                          .add(ReadDateEvent());
-                      BlocProvider.of<SetDateBloc>(context)
-                          .add(FetchIncomeEvent(month : DateFormat('yyyy-MM').format(DateTime.parse(date)).toString()));
-                      BlocProvider.of<SetDateBloc>(context)
-                          .add(SumExpensePerMonthEvent(dateMonth : DateFormat('yyyy-MM').format(DateTime.parse(date)).toString()));
-                      BlocProvider.of<SetDateBloc>(context)
-                          .add(CalculateCashPerMonthEvent(dateMonth : DateFormat('yyyy-MM').format(DateTime.parse(date)).toString()));
-                      BlocProvider.of<SetDateBloc>(context)
-                          .add(FetchExpensesEvent(date: DateFormat('yyyy-MM-dd').format(DateTime.parse(date)).toString()));
+                    date = "${DateTime.parse(DateFormat('yyyy-MM-dd').format(DateTime.parse(date)))
+                        .add(const Duration(days: -1))}";
+                    BlocProvider.of<SetDateBloc>(context)
+                        .add(ReduceDateEvent(date: DateFormat('yyyy-MM-dd')
+                        .format(DateTime.parse(date)).toString()));
+                    BlocProvider.of<SetDateBloc>(context)
+                        .add(ReadDateEvent());
+                    BlocProvider.of<SetDateBloc>(context)
+                        .add(FetchIncomeEvent(month : DateFormat('yyyy-MM')
+                        .format(DateTime.parse(date)).toString()));
+                    BlocProvider.of<SetDateBloc>(context)
+                        .add(SumExpensePerMonthEvent(dateMonth : DateFormat('yyyy-MM')
+                        .format(DateTime.parse(date)).toString()));
+                    BlocProvider.of<SetDateBloc>(context)
+                        .add(CalculateCashPerMonthEvent(dateMonth : DateFormat('yyyy-MM')
+                        .format(DateTime.parse(date)).toString()));
+                    BlocProvider.of<SetDateBloc>(context)
+                        .add(FetchExpensesEvent(date: DateFormat('yyyy-MM-dd')
+                        .format(DateTime.parse(date)).toString()));
 
                   },
                   child: const Icon(
@@ -117,9 +123,12 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
 
                     setState(() {
                       month = "${picked.year}-${picked.month}";
-                      date = picked.day.toString().length != 1
-                      ? "${picked.year}-${picked.month}-${picked.day}"
-                      : "${picked.year}-${picked.month}-0${picked.day}";
+                      date =
+                      picked.day.toString().length != 1
+                          ?
+                      "${picked.year}-${picked.month}-${picked.day}"
+                          : "${picked.year}-${picked.month}-0${picked.day}"
+                      ;
                     });
 
                     BlocProvider.of<SetDateBloc>(context)
@@ -156,7 +165,7 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                             SizedBox(
                               width: Dimensions.height10,
                             ),
-                            Text(DateFormat('yyyy-MM-dd').format(DateTime.parse(date)).toString(),
+                            Text(DateFormat('yyyy-MM-dd').format(DateTime.parse(date)),
                                 style: const TextStyle(
                                     color: AppColors.appBarTitleColor)),
                           ],
@@ -165,7 +174,7 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    date = "${DateTime.parse(date).add(const Duration(days: 1))}";
+                    date = "${DateTime.parse(DateFormat('yyyy-MM-dd').format(DateTime.parse(date))).add(const Duration(days: 1))}";
                     BlocProvider.of<SetDateBloc>(context)
                         .add(AddToDateEvent(date: DateFormat('yyyy-MM-dd').format(DateTime.parse(date)).toString()));
                     BlocProvider.of<SetDateBloc>(context)
