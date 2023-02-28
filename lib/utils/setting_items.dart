@@ -38,32 +38,34 @@ class SettingItems extends StatelessWidget {
           SizedBox(
             width: Dimensions.width10,
           ),
-          Container(
-            width: Dimensions.screenWidth / 1.35,
-            margin: EdgeInsets.only(
-              right: Dimensions.width20,
-              left: Dimensions.width10,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  itemName.getString(context),
-                  textDirection: TextDirection.ltr,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w400,
-                    fontSize: Dimensions.font16,
-                    color: darkThemeBoolean == "false"
-                        ? AppColors.appBarProfileName
-                        : Colors.white,
+          Expanded(
+            child: Container(
+              width: Dimensions.screenWidth / 1.35,
+              margin: EdgeInsets.only(
+                right: Dimensions.width20,
+                left: Dimensions.width10,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    itemName.getString(context),
+                    textDirection: TextDirection.ltr,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: Dimensions.font16,
+                      color: darkThemeBoolean == "false"
+                          ? AppColors.appBarProfileName
+                          : Colors.white,
+                    ),
                   ),
-                ),
-                Icon(Icons.arrow_forward_ios,
-                    color: darkThemeBoolean == "false"
-                        ? AppColors.darkArrowButtonColor
-                        : Colors.white,
-                    size: Dimensions.iconSize16),
-              ],
+                  Icon(Icons.arrow_forward_ios,
+                      color: darkThemeBoolean == "false"
+                          ? AppColors.darkArrowButtonColor
+                          : Colors.white,
+                      size: Dimensions.iconSize16),
+                ],
+              ),
             ),
           ),
         ],
@@ -71,32 +73,34 @@ class SettingItems extends StatelessWidget {
           : Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          Container(
-            width: Dimensions.screenWidth / 1.35,
-            margin: EdgeInsets.only(
-              right: Dimensions.width20,
-              left: Dimensions.width10,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Icon(Icons.arrow_back_ios,
-                    color: darkThemeBoolean == "false"
-                        ? AppColors.darkArrowButtonColor
-                        : Colors.white,
-                    size: Dimensions.iconSize16),
-                Text(
-                  itemName.getString(context),
-                  textDirection: TextDirection.rtl,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w400,
-                    fontSize: Dimensions.font16,
-                    color: darkThemeBoolean == "false"
-                        ? AppColors.appBarProfileName
-                        : Colors.white,
+          Expanded(
+            child: Container(
+              width: Dimensions.screenWidth / 1.35,
+              margin: EdgeInsets.only(
+                right: Dimensions.width20,
+                left: Dimensions.width10,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Icon(Icons.arrow_back_ios,
+                      color: darkThemeBoolean == "false"
+                          ? AppColors.darkArrowButtonColor
+                          : Colors.white,
+                      size: Dimensions.iconSize16),
+                  Text(
+                    itemName.getString(context),
+                    textDirection: TextDirection.rtl,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: Dimensions.font16,
+                      color: darkThemeBoolean == "false"
+                          ? AppColors.appBarProfileName
+                          : Colors.white,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
           SizedBox(
