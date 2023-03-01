@@ -121,15 +121,34 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
 
                     if (!mounted) return;
 
-                    setState(() {
-                      month = "${picked.year}-${picked.month}";
-                      date =
-                      picked.day.toString().length != 1
-                          ?
-                      "${picked.year}-${picked.month}-${picked.day}"
-                          : "${picked.year}-${picked.month}-0${picked.day}"
-                      ;
-                    });
+                    // setState(() {
+                    //   month = "${picked.year}-${picked.month}";
+                    //   date = picked.day.toString().length != 1
+                    //       ? "${picked.year}-${picked.month}-${picked.day}"
+                    //       : "${picked.year}-${picked.month}-0${picked.day}"
+                    //   ;
+                    // });
+
+                    if(picked.month.toString().length != 1){
+                      if(picked.day.toString().length != 1){
+                        month = "${picked.year}-${picked.month}";
+                        date = "${picked.year}-${picked.month}-${picked.day}";
+                      }else{
+                        month = "${picked.year}-${picked.month}";
+                        date = "${picked.year}-${picked.month}-0${picked.day}";
+                      }
+                    }else{
+                      if(picked.day.toString().length != 1){
+                        month = "${picked.year}-0${picked.month}";
+                        date = "${picked.year}-0${picked.month}-${picked.day}";
+                      }else{
+                        month = "${picked.year}-0${picked.month}";
+                        date = "${picked.year}-0${picked.month}-0${picked.day}";
+                      }
+                    }
+
+                    print("date                  "+date);
+                    print("month                  "+month);
 
                     BlocProvider.of<SetDateBloc>(context)
                         .add(WriteDateEvent(date: date));
@@ -143,7 +162,6 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                         .add(CalculateCashPerMonthEvent(dateMonth : month));
                     BlocProvider.of<SetDateBloc>(context)
                         .add(FetchExpensesEvent(date : date));
-
                   },
                   child: Container(
                     decoration: BoxDecoration(

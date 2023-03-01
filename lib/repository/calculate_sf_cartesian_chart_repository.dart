@@ -35,7 +35,6 @@ class CalculateSFCartesianChartRepository {
     }else if(monthName == "دی"){
       return await helper.calculateCategoryTypeExpensesPerMonth("${g2j1.formatter.y}-10", categoryPersianName);
     }else if(monthName == "بهمن"){
-      print("***************************");
       return await helper.calculateCategoryTypeExpensesPerMonth("${g2j1.formatter.y}-11", categoryPersianName);
     }else{
       return await helper.calculateCategoryTypeExpensesPerMonth("${g2j1.formatter.y}-12", categoryPersianName);

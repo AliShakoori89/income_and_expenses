@@ -62,6 +62,8 @@ class _CashContainerState extends State<CashContainer> {
                         return BlocBuilder<SetDateBloc, SetDateState>(
                             builder: (context, state) {
 
+                              String dateMonth = state.dateMonth;
+
                               return Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
@@ -376,8 +378,6 @@ class _CashContainerState extends State<CashContainer> {
                                   ),
                                   GestureDetector(
                                       onTap: () {
-                                        // BlocProvider.of<SetDateBloc>(context)
-                                        //     .add(InitialDateEvent());
 
                                         showDialog(
                                           context: context,
@@ -412,17 +412,18 @@ class _CashContainerState extends State<CashContainer> {
                                               ),
                                               TextButton(
                                                 onPressed: () {
-                                                  BlocProvider.of<SetDateBloc>(context)
-                                                      .add(AddIncomeEvent(
+                                                  print("***************      ");
+                                                  print("***************      "+dateMonth);
+                                                  BlocProvider.of<SetDateBloc>(context).add(AddIncomeEvent(
                                                     cash: cashController.text,
-                                                    month: DatePickerCalendarState().month
+                                                    month: dateMonth
                                                   ));
                                                   BlocProvider.of<SetDateBloc>(context)
-                                                      .add(FetchIncomeEvent(month: DatePickerCalendarState().month)
+                                                      .add(FetchIncomeEvent(month: dateMonth)
                                                   );
                                                   BlocProvider.of<SetDateBloc>(context)
                                                       .add(CalculateCashPerMonthEvent(
-                                                      dateMonth: DatePickerCalendarState().month
+                                                      dateMonth: dateMonth
                                                   ));
                                                   Navigator.of(ctx).pop();
                                                 },

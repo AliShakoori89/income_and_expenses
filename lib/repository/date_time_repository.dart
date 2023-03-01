@@ -22,28 +22,37 @@ class SetDateRepository {
 
   writeDate(String date , [String? dateMonth]) async{
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('dateMonth', "${DateTime.parse(date).year}-${DateTime.parse(date).month}");
-    await prefs.setString('date', "${DateTime.parse(date).year}-${DateTime.parse(date).month}-${DateTime.parse(date).day}");
+    print("write date                      "+date);
+    await prefs.setString('date', date);
+    await prefs.setString('dateMonth', dateMonth!);
+  }
+
+  Future<String> reduceDate(String date) async{
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('date', date);
+    return date;
   }
 
   Future<String> readDateMonth() async{
     final prefs = await SharedPreferences.getInstance();
-    final String? date = prefs.getString('dateMonth');
-    if(date == null){
+    final String? dateMonth = prefs.getString('dateMonth');
+    if(dateMonth == null){
       String dateMonthString = '${Jalali.now().year}-${Jalali.now().month}';
       return dateMonthString;
     }else{
-      return date;
+      return dateMonth;
     }
   }
 
   Future<String> readDate() async{
     final prefs = await SharedPreferences.getInstance();
     final String? date = prefs.getString('date');
+    print("dateeeeeeeeeeeeeeeee                   "+date.toString());
     if(date == ""){
       String dateString = '${Jalali.now().year}-${Jalali.now().month}-${Jalali.now().day}';
       return dateString;
     }else{
+      print("read date          "+date.toString());
       return date!;
     }
   }
@@ -51,12 +60,6 @@ class SetDateRepository {
   addToDate(String date) async{
     final prefs = await SharedPreferences.getInstance();
       await prefs.setString('date', date);
-  }
-
-  Future<String> reduceDate(String date) async{
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('date', date);
-    return date;
   }
 
   Future<List<ExpenseModel>> getAllExpensesRepo(String date) async {

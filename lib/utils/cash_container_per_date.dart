@@ -26,11 +26,11 @@ class CashContainerPerDate extends StatefulWidget {
 
 class _CashContainerPerDateState extends State<CashContainerPerDate> {
 
-  @override
-  void initState() {
-    BlocProvider.of<SetDateBloc>(context).add(FetchExpensesEvent(date: DatePickerCalendarState().date));
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //   BlocProvider.of<SetDateBloc>(context).add(FetchExpensesEvent(date: DatePickerCalendarState().date));
+  //   super.initState();
+  // }
   @override
   Widget build(BuildContext context) {
 
