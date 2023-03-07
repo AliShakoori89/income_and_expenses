@@ -15,6 +15,7 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
   SetDateBloc(this.setDateRepository, this.calculateExpensesRepository, this.incomeRepository) : super(
       const SetDateState()){
     on<ReadDateEvent>(_mapReadDateEventToState);
+    on<ReadDateMonthEvent>(_mapReadDateMonthEventToState);
     on<WriteDateEvent>(_mapWriteDateEventToState);
     on<InitialDateEvent>(_mapInitialDateEventToState);
     on<AddToDateEvent>(_mapAddNextDateEventToState);
@@ -34,11 +35,25 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
     try {
       emit(state.copyWith(status: SetDateStatus.loading));
       final String date = await setDateRepository.readDate();
-      final String dateMonth = await setDateRepository.readDateMonth();
       emit(
         state.copyWith(
             status: SetDateStatus.success,
             date: date,
+        ),
+      );
+    } catch (error) {
+      emit(state.copyWith(status: SetDateStatus.error));
+    }
+  }
+
+  void _mapReadDateMonthEventToState(
+      ReadDateMonthEvent event, Emitter<SetDateState> emit) async {
+    try {
+      emit(state.copyWith(status: SetDateStatus.loading));
+      final String dateMonth = await setDateRepository.readDateMonth();
+      emit(
+        state.copyWith(
+            status: SetDateStatus.success,
             dateMonth: dateMonth
         ),
       );
@@ -51,7 +66,7 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
       WriteDateEvent event, Emitter<SetDateState> emit) async {
     try {
       emit(state.copyWith(status: SetDateStatus.loading));
-      await setDateRepository.writeDate(event.date);
+      await setDateRepository.writeDate(event.date , event.dateMonth);
       // final String date = await setDateRepository.readDate();
       // final String dateMonth = await setDateRepository.readDateMonth();
       emit(

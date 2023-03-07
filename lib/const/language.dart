@@ -3,7 +3,7 @@ mixin AppLocale {
   static const String expenses = 'هزینه شده';
   static const String income = 'ورودی';
   static const String cash = 'موجودی';
-  static const String today = 'امروز';
+  static const String allExpenses = 'هزینه کل';
   static const String notExpenses = 'اطلاعاتی برای نمایش وجود ندارد!';
   static const String persianDigit = 'toPersianDigit()';
   static const String setting = 'تنظیمات';
@@ -50,7 +50,7 @@ mixin AppLocale {
     expenses: 'expenses',
     cash: 'cash',
     income: 'income',
-    today: 'today',
+    allExpenses: 'all expenses',
     notExpenses: 'no information!',
     persianDigit: 'toPersianDigit()',
     setting: 'Setting',
@@ -94,7 +94,7 @@ mixin AppLocale {
     expenses: 'هزینه شده',
     cash: 'موجودی',
     income: 'ورودی',
-    today: 'امروز',
+    allExpenses: 'هزینه کل روز',
     notExpenses: 'اطلاعاتی برای نمایش وجود ندارد!',
     persianDigit: 'toPersianDigit()',
     setting: 'تنظیمات',

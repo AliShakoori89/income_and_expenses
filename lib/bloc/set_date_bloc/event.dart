@@ -9,14 +9,17 @@ class InitialDateEvent extends SetDateEvent {}
 
 class ReadDateEvent extends SetDateEvent {}
 
+class ReadDateMonthEvent extends SetDateEvent {}
+
 class WriteDateEvent extends SetDateEvent {
   final String date;
+  final String dateMonth;
 
   WriteDateEvent(
-      {required this.date});
+      {required this.date, required this.dateMonth});
 
   @override
-  List<Object> get props => [date];
+  List<Object> get props => [date, dateMonth];
 }
 
 class AddToDateEvent extends SetDateEvent{

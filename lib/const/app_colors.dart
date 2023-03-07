@@ -50,6 +50,10 @@ class AppColors{
 
   static const Color lightColor = Color.fromRGBO(255, 148, 75, 1.0);
 
+  static const Color cashContainerColor = Color.fromRGBO(209, 184, 255, 1);
+
+  static const Color cashContainerShapeBorderColor = Color.fromRGBO(209, 184, 255, 1);
+
   static const List colorList = [
     Color.fromRGBO(200, 230, 201, 1),
     Color.fromRGBO(225, 190, 231, 1),

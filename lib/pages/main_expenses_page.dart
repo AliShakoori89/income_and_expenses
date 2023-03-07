@@ -39,39 +39,51 @@ class _MainExpensesPageState extends State<MainExpensesPage> {
         backgroundColor: state.darkThemeBoolean == "false"
             ? Colors.white
             : AppColors.darkThemeColor,
-        body: SafeArea(
-          child: Container(
-            margin: EdgeInsets.only(
-              left: Dimensions.width25,
-              right: Dimensions.width25,
-            ),
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  // SizedBox(
-                  //   height: Dimensions.height10,
-                  // ),
-                  // const MainExpensesPageHeader(),
-                  SizedBox(
-                    height: Dimensions.height20,
-                  ),
-                  const DatePickerCalendar(),
-                  SizedBox(
-                    height: Dimensions.height20,
-                  ),
-                  Column(
-                    children: [
-                      const CashContainer(),
-                      SizedBox(
-                        height: Dimensions.width20,
-                      ),
-                      const CashContainerPerDate(),
-                    ],
-                  )
-                ],
+        body: Stack(
+          children: [
+            Container(
+              height: Dimensions.height45*5,
+              decoration: BoxDecoration(
+                gradient: const LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment(0.8, 1),
+                  colors: <Color>[
+                    Color.fromRGBO(248, 187, 208, 1),
+                    Color.fromRGBO(212, 200, 235, 1),
+                    Color.fromRGBO(179, 229, 252, 1),
+                  ], // Gradient from https://learnui.design/tools/gradient-generator.html
+                  tileMode: TileMode.mirror,
+                ),
+                borderRadius: BorderRadius.vertical(
+                    bottom: Radius.elliptical(
+                        MediaQuery.of(context).size.width, 200)),
               ),
+              // margin: EdgeInsets.only(
+              //   left: Dimensions.width25,
+              //   right: Dimensions.width25,
+              // ),
             ),
-          ),
+            Column(
+              children: [
+                SizedBox(
+                  height: Dimensions.height45,
+                ),
+                const DatePickerCalendar(),
+                SizedBox(
+                  height: Dimensions.height45,
+                ),
+                Column(
+                  children: const [
+                    CashContainer(),
+                    CashContainerPerDate(),
+                  ],
+                ),
+                SizedBox(
+                  height: Dimensions.width20,
+                ),
+              ],
+            )
+          ],
         ),
       );});
   }

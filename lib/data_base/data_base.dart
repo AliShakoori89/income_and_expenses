@@ -92,22 +92,19 @@ class DatabaseHelper {
   }
 
   Future<String> calculateCash(String? dateMonth, String? income) async {
+    print("+++++++++++++++++++++++            "+dateMonth.toString());
+    print("incomeeeeeee                           "+income.toString());
     late String cash;
     var dbExpense = await database;
     var result = await dbExpense.rawQuery("SELECT SUM($columnExpense) FROM my_table WHERE $columnExpenseDateMonth ='$dateMonth'");
     Object? value = result[0]["SUM($columnExpense)"];
     if(income == null){
-      Get.rawSnackbar(
-        backgroundColor: AppColors.snackBarColor,
-      snackPosition: SnackPosition.TOP,
-      titleText: const Text("توجه",
-      textDirection: TextDirection.rtl),
-        messageText: const Text('برای نمایش موجودی، مقدار ورودی را وارد نمایید! ',
-            textDirection: TextDirection.rtl)
-      );
       cash = "";
     }else{
+      print("income                           "+income.toString());
+      print("value                           "+value.toString());
       cash = value == null ? income :(int.parse(income) - int.parse(value.toString())).toString();
+      print("cash                           "+cash);
     }
     return cash.toString();
   }

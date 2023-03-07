@@ -15,16 +15,17 @@ class SetDateRepository {
     final prefs = await SharedPreferences.getInstance();
     String dateMonthString = '${Jalali.now().year}-${Jalali.now().month}';
     String dateString = '${Jalali.now().year}-${Jalali.now().month}-${Jalali.now().day}';
-      await prefs.setString('dateMonth', dateMonthString);
-      await prefs.setString('date', dateString);
+    await prefs.setString('dateMonth', dateMonthString);
+    await prefs.setString('date', dateString);
   }
 
 
-  writeDate(String date , [String? dateMonth]) async{
+  writeDate(String date , String dateMonth) async{
     final prefs = await SharedPreferences.getInstance();
     print("write date                      "+date);
+    print("write dateMonth                      "+dateMonth);
     await prefs.setString('date', date);
-    await prefs.setString('dateMonth', dateMonth!);
+    await prefs.setString('dateMonth', dateMonth);
   }
 
   Future<String> reduceDate(String date) async{
@@ -36,11 +37,12 @@ class SetDateRepository {
   Future<String> readDateMonth() async{
     final prefs = await SharedPreferences.getInstance();
     final String? dateMonth = prefs.getString('dateMonth');
-    if(dateMonth == null){
+    print("dateMonththththththth                   "+dateMonth.toString());
+    if(dateMonth == ""){
       String dateMonthString = '${Jalali.now().year}-${Jalali.now().month}';
       return dateMonthString;
     }else{
-      return dateMonth;
+      return dateMonth!;
     }
   }
 
@@ -59,7 +61,7 @@ class SetDateRepository {
 
   addToDate(String date) async{
     final prefs = await SharedPreferences.getInstance();
-      await prefs.setString('date', date);
+    await prefs.setString('date', date);
   }
 
   Future<List<ExpenseModel>> getAllExpensesRepo(String date) async {

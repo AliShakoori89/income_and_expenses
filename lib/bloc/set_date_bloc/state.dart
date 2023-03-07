@@ -59,15 +59,15 @@ class SetDateState extends Equatable {
     String? todayExpenses
   }) {
     return SetDateState(
-      status: status ?? this.status,
-      date: date ?? this.date,
-      dateMonth: dateMonth ?? this.dateMonth,
-      selectDate: selectDate ?? this.selectDate,
-      expenses: expenses ?? this.expenses,
-      calculateCash: calculateCash ?? this.calculateCash,
-      income: income ?? this.income,
-      expensesDetails: expensesDetails ?? this.expensesDetails,
-      todayExpenses: todayExpenses ?? this.todayExpenses
+        status: status ?? this.status,
+        date: date ?? this.date,
+        dateMonth: dateMonth ?? this.dateMonth,
+        selectDate: selectDate ?? this.selectDate,
+        expenses: expenses ?? this.expenses,
+        calculateCash: calculateCash ?? this.calculateCash,
+        income: income ?? this.income,
+        expensesDetails: expensesDetails ?? this.expensesDetails,
+        todayExpenses: todayExpenses ?? this.todayExpenses
     );
   }
 }
