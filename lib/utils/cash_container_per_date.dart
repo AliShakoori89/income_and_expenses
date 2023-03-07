@@ -15,7 +15,6 @@ import '../bloc/set_date_bloc/event.dart';
 import '../bloc/them_bloc/bloc.dart';
 import '../bloc/them_bloc/state.dart';
 import '../const/language.dart';
-import 'date_picker_calendar.dart';
 
 class CashContainerPerDate extends StatefulWidget {
   const CashContainerPerDate({Key? key}) : super(key: key);
@@ -26,11 +25,6 @@ class CashContainerPerDate extends StatefulWidget {
 
 class _CashContainerPerDateState extends State<CashContainerPerDate> {
 
-  // @override
-  // void initState() {
-  //   BlocProvider.of<SetDateBloc>(context).add(FetchExpensesEvent(date: DatePickerCalendarState().date));
-  //   super.initState();
-  // }
   @override
   Widget build(BuildContext context) {
 
