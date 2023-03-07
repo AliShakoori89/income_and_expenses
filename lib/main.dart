@@ -23,11 +23,11 @@ import 'package:device_preview/device_preview.dart';
 
 void main() {
   runApp(
-    DevicePreview(
-      enabled: !kReleaseMode,
-      builder: (context) =>
+    // DevicePreview(
+    //   enabled: !kReleaseMode,
+    //   builder: (context) =>
     MyApp(), // Wrap your app
-    ),
+    // ),
   );
 }
 

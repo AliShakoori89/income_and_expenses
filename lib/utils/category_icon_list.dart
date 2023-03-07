@@ -88,7 +88,8 @@ class CategoryIconList extends StatelessWidget {
                                                             .getString(context)
                                                         : AppLocale.etcetera
                                                             .getString(
-                                                                context)),
+                                                                context),
+                          overflow: TextOverflow.ellipsis,),
                       ],
                     ),
                   );

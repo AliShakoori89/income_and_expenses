@@ -1,11 +1,8 @@
 import 'dart:io';
-import 'package:flutter/cupertino.dart';
-import 'package:get/get.dart';
 import 'package:income_and_expenses/model/expense_model.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
-import '../const/app_colors.dart';
 
 class DatabaseHelper {
   DatabaseHelper();
@@ -92,8 +89,6 @@ class DatabaseHelper {
   }
 
   Future<String> calculateCash(String? dateMonth, String? income) async {
-    print("+++++++++++++++++++++++            "+dateMonth.toString());
-    print("incomeeeeeee                           "+income.toString());
     late String cash;
     var dbExpense = await database;
     var result = await dbExpense.rawQuery("SELECT SUM($columnExpense) FROM my_table WHERE $columnExpenseDateMonth ='$dateMonth'");
@@ -101,10 +96,7 @@ class DatabaseHelper {
     if(income == null){
       cash = "";
     }else{
-      print("income                           "+income.toString());
-      print("value                           "+value.toString());
       cash = value == null ? income :(int.parse(income) - int.parse(value.toString())).toString();
-      print("cash                           "+cash);
     }
     return cash.toString();
   }

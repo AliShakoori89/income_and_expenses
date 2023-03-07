@@ -4,7 +4,7 @@ class ChangeThemeRepository {
 
   writeThemeBoolean(bool themeBoolean) async {
     final prefs = await SharedPreferences.getInstance();
-    prefs.setString('ThemeBoolean', themeBoolean.toString());
+    await prefs.setString('ThemeBoolean', themeBoolean.toString());
   }
 
   Future<String?> readThemeBoolean() async {

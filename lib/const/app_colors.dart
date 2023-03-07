@@ -54,6 +54,8 @@ class AppColors{
 
   static const Color cashContainerShapeBorderColor = Color.fromRGBO(236, 236, 236, 0.61);
 
+  static const Color noDataTextColor = Color.fromRGBO(165, 174, 177, 1);
+
   static const List colorList = [
     Color.fromRGBO(200, 230, 201, 1),
     Color.fromRGBO(225, 190, 231, 1),

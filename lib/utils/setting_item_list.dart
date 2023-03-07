@@ -155,6 +155,7 @@ class _SettingItemListState extends State<SettingItemList> {
                                 .add(WriteLanguageBooleanEvent(englishLanguageBoolean: true));
                             _localization.translate('en');
                             isSwitched = false;
+                            BlocProvider.of<ChangeLanguageBloc>(context).add(ReadLanguageBooleanEvent());
                             Navigator.of(ctx).pop();
                           },
                           child: Text(AppLocale.english.getString(context)),),
@@ -164,6 +165,7 @@ class _SettingItemListState extends State<SettingItemList> {
                                   .add(WriteLanguageBooleanEvent(englishLanguageBoolean: false));
                               _localization.translate('fa');
                               isSwitched = true;
+                              BlocProvider.of<ChangeLanguageBloc>(context).add(ReadLanguageBooleanEvent());
                               Navigator.of(ctx).pop();
                             },
                             child: Text(AppLocale.persian.getString(context)),),

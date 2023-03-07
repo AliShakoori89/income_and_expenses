@@ -29,7 +29,7 @@ class ThemeState extends Equatable {
   }) {
     return ThemeState(
       status: status ?? this.status,
-      themeBoolean: themeBoolean ?? this.darkThemeBoolean,
+      themeBoolean: themeBoolean ?? darkThemeBoolean,
     );
   }
 }

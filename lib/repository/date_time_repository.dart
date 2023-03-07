@@ -22,8 +22,6 @@ class SetDateRepository {
 
   writeDate(String date , String dateMonth) async{
     final prefs = await SharedPreferences.getInstance();
-    print("write date                      "+date);
-    print("write dateMonth                      "+dateMonth);
     await prefs.setString('date', date);
     await prefs.setString('dateMonth', dateMonth);
   }
@@ -37,7 +35,6 @@ class SetDateRepository {
   Future<String> readDateMonth() async{
     final prefs = await SharedPreferences.getInstance();
     final String? dateMonth = prefs.getString('dateMonth');
-    print("dateMonththththththth                   "+dateMonth.toString());
     if(dateMonth == ""){
       String dateMonthString = '${Jalali.now().year}-${Jalali.now().month}';
       return dateMonthString;
@@ -49,12 +46,10 @@ class SetDateRepository {
   Future<String> readDate() async{
     final prefs = await SharedPreferences.getInstance();
     final String? date = prefs.getString('date');
-    print("dateeeeeeeeeeeeeeeee                   "+date.toString());
     if(date == ""){
       String dateString = '${Jalali.now().year}-${Jalali.now().month}-${Jalali.now().day}';
       return dateString;
     }else{
-      print("read date          "+date.toString());
       return date!;
     }
   }

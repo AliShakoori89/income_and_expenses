@@ -11,7 +11,6 @@ import '../bloc/them_bloc/bloc.dart';
 import '../bloc/them_bloc/state.dart';
 import '../const/app_colors.dart';
 import '../const/language.dart';
-import '../utils/customColumnSeriesRenderer.dart';
 
 class YearChartPage extends StatefulWidget {
   // ignore: prefer_const_constructors_in_immutables

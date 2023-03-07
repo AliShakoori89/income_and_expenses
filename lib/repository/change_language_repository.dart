@@ -12,7 +12,8 @@ class ChangeLanguageRepository {
 
   writeLanguageBoolean(bool languageBoolean) async {
     final prefs = await SharedPreferences.getInstance();
-    prefs.setString('languageBoolean', languageBoolean.toString());
+    print("languageBoolean              "+languageBoolean.toString());
+    await prefs.setString('languageBoolean', languageBoolean.toString());
   }
 
   Future<String?> readLanguageBoolean() async {

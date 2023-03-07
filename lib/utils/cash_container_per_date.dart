@@ -10,6 +10,7 @@ import 'package:persian_number_utility/persian_number_utility.dart';
 import '../bloc/change_currency_bloc/bloc.dart';
 import '../bloc/change_currency_bloc/state.dart';
 import '../bloc/change_language_bloc/bloc.dart';
+import '../bloc/change_language_bloc/event.dart';
 import '../bloc/change_language_bloc/state.dart';
 import '../bloc/set_date_bloc/event.dart';
 import '../bloc/them_bloc/bloc.dart';
@@ -26,6 +27,12 @@ class CashContainerPerDate extends StatefulWidget {
 class _CashContainerPerDateState extends State<CashContainerPerDate> {
 
   @override
+  void initState() {
+    BlocProvider.of<ChangeLanguageBloc>(context).add(ReadLanguageBooleanEvent());
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
 
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
@@ -35,6 +42,8 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
       return BlocBuilder<ChangeLanguageBloc, ChangeLanguageState>(
           builder: (context, state) {
         bool englishLanguageBoolean = state.englishLanguageBoolean;
+
+        print("bbbbbbbbbb             "+englishLanguageBoolean.toString());
 
         return BlocBuilder<ChangeCurrencyBloc, ChangeCurrencyState>(
             builder: (context, state) {
@@ -249,13 +258,13 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                           : Column(
                             children: [
                               Image.asset("assets/images/No data.png",
-                              width: Dimensions.width45*4),
+                              width: Dimensions.width45*6),
                               Text(
                                 AppLocale.notExpenses.getString(context),
                                 style: TextStyle(
-                                  fontSize: Dimensions.font20,
+                                  fontSize: Dimensions.font14,
                                   color: darkThemeBoolean == "false"
-                                      ? AppColors.calenderBoxIconColor
+                                      ? AppColors.noDataTextColor
                                       : Colors.white,
                                 ),
                               ),
@@ -265,7 +274,7 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                           ? Center(
                               child: Text(
                                   style: TextStyle(
-                                    fontSize: Dimensions.font20,
+                                    fontSize: Dimensions.font14,
                                     color: darkThemeBoolean == "false"
                                         ? AppColors.calenderBoxIconColor
                                         : Colors.white,

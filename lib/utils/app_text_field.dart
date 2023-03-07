@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:income_and_expenses/const/app_colors.dart';
 import 'package:income_and_expenses/utils/category_icon_list.dart';
 import 'package:income_and_expenses/utils/widget.dart';
 import '../bloc/change_language_bloc/bloc.dart';

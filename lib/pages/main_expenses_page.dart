@@ -58,10 +58,6 @@ class _MainExpensesPageState extends State<MainExpensesPage> {
                     bottom: Radius.elliptical(
                         MediaQuery.of(context).size.width, 200)),
               ),
-              // margin: EdgeInsets.only(
-              //   left: Dimensions.width25,
-              //   right: Dimensions.width25,
-              // ),
             ),
             Column(
               children: [
@@ -70,16 +66,13 @@ class _MainExpensesPageState extends State<MainExpensesPage> {
                 ),
                 const DatePickerCalendar(),
                 SizedBox(
-                  height: Dimensions.height45,
+                  height: Dimensions.height30,
                 ),
                 Column(
                   children: const [
                     CashContainer(),
                     CashContainerPerDate(),
                   ],
-                ),
-                SizedBox(
-                  height: Dimensions.width20,
                 ),
               ],
             )

@@ -7,10 +7,9 @@ import 'package:income_and_expenses/const/app_colors.dart';
 import 'package:income_and_expenses/const/dimensions.dart';
 import 'package:intl/intl.dart';
 import 'package:persian_datetime_picker/persian_datetime_picker.dart';
-import '../bloc/them_bloc/bloc.dart';
-import '../bloc/them_bloc/state.dart';
 
-
+import '../bloc/change_language_bloc/bloc.dart';
+import '../bloc/change_language_bloc/event.dart';
 
 class DatePickerCalendar extends StatefulWidget {
   const DatePickerCalendar({Key? key}) : super(key: key);
@@ -34,6 +33,8 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
   void initState() {
 
     selectedDate = DateFormat('yyyy-MM').format(DateTime.parse(Jalali.now().toJalaliDateTime()));
+
+    BlocProvider.of<ChangeLanguageBloc>(context).add(ReadLanguageBooleanEvent());
 
     BlocProvider.of<SetDateBloc>(context).add(FetchIncomeEvent(month: selectedDate));
 
@@ -105,14 +106,6 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
 
                 if (!mounted) return;
 
-                // setState(() {
-                //   month = "${picked.year}-${picked.month}";
-                //   date = picked.day.toString().length != 1
-                //       ? "${picked.year}-${picked.month}-${picked.day}"
-                //       : "${picked.year}-${picked.month}-0${picked.day}"
-                //   ;
-                // });
-
                 if(picked.month.toString().length != 1){
                   if(picked.day.toString().length != 1){
                     month = "${picked.year}-${picked.month}";
@@ -130,9 +123,6 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                     date = "${picked.year}-0${picked.month}-0${picked.day}";
                   }
                 }
-
-                print("date                  "+date);
-                print("month                  "+month);
 
                 BlocProvider.of<SetDateBloc>(context)
                     .add(WriteDateEvent(date: date, dateMonth: month));
