@@ -7,9 +7,11 @@ import 'package:income_and_expenses/const/app_colors.dart';
 import 'package:income_and_expenses/const/dimensions.dart';
 import 'package:intl/intl.dart';
 import 'package:persian_datetime_picker/persian_datetime_picker.dart';
+import 'package:persian_number_utility/persian_number_utility.dart';
 
 import '../bloc/change_language_bloc/bloc.dart';
 import '../bloc/change_language_bloc/event.dart';
+import '../bloc/change_language_bloc/state.dart';
 
 class DatePickerCalendar extends StatefulWidget {
   const DatePickerCalendar({Key? key}) : super(key: key);
@@ -50,7 +52,11 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
 
     return BlocBuilder<SetDateBloc, SetDateState>(builder: (context, state) {
 
-      return Container(
+      return BlocBuilder<ChangeLanguageBloc, ChangeLanguageState>(
+          builder: (context, state) {
+            bool englishLanguageBoolean = state.englishLanguageBoolean;
+
+            return Container(
         margin: EdgeInsets.only(
             left: Dimensions.width10,
             right: Dimensions.width10
@@ -83,9 +89,11 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                     .format(DateTime.parse(date)).toString()));
 
               },
-              child: const Icon(
-                Icons.arrow_back_ios,
-                color: AppColors.arrowIconColor,
+              child: SizedBox(
+                width: Dimensions.width20,
+                height: Dimensions.height20,
+                child: Image.asset("assets/main_page_first_container_logo/left_arrow.png",
+                width: Dimensions.iconSize16,),
               ),
             ),
             GestureDetector(
@@ -159,8 +167,13 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                         SizedBox(
                           width: Dimensions.height10,
                         ),
-                        Text(DateFormat('yyyy-MM-dd').format(DateTime.parse(date)),
-                            style: const TextStyle(
+                        //DateFormat('yyyy-MM-dd').format(DateTime.parse(date))
+                        Text(englishLanguageBoolean == false ? "${DateTime.parse(date).year.toString().toPersianDigit()}"
+                            "-${DateTime.parse(date).month.toString().toPersianDigit()}"
+                            "-${DateTime.parse(date).day.toString().toPersianDigit()}"
+                            : DateFormat('yyyy-MM-dd').format(DateTime.parse(date)),
+                            style: TextStyle(
+                              fontSize: Dimensions.font18,
                                 color: AppColors.appBarTitleColor)),
                       ],
                     )),
@@ -184,13 +197,15 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                 BlocProvider.of<SetDateBloc>(context)
                     .add(FetchExpensesEvent(date: DateFormat('yyyy-MM-dd').format(DateTime.parse(date)).toString()));
               },
-              child: const Icon(
-                Icons.arrow_forward_ios,
-                color: AppColors.arrowIconColor,
+              child: SizedBox(
+                width: Dimensions.width20,
+                height: Dimensions.height20,
+                child: Image.asset("assets/main_page_first_container_logo/right_arrow.png",
+                  width: Dimensions.iconSize16,),
               ),
             ),
           ],
         ),
-      );});
+      );});});
   }
 }

@@ -4,7 +4,7 @@ class ChangeCurrencyRepository {
 
   writeRialCurrencyBoolean(bool rialCurrencyBoolean) async {
     final prefs = await SharedPreferences.getInstance();
-    prefs.setString('rialCurrencyBoolean', rialCurrencyBoolean.toString());
+    await prefs.setString('rialCurrencyBoolean', rialCurrencyBoolean.toString());
   }
 
   Future<String?> readRialCurrencyBoolean() async {

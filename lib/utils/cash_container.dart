@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localization/flutter_localization.dart';
+import 'package:income_and_expenses/bloc/change_currency_bloc/event.dart';
 import 'package:income_and_expenses/bloc/change_language_bloc/bloc.dart';
 import 'package:income_and_expenses/bloc/change_language_bloc/state.dart';
 import 'package:income_and_expenses/bloc/set_date_bloc/state.dart';
@@ -29,6 +30,7 @@ class _CashContainerState extends State<CashContainer> {
   @override
   void initState() {
     BlocProvider.of<ChangeLanguageBloc>(context).add(ReadLanguageBooleanEvent());
+    BlocProvider.of<ChangeCurrencyBloc>(context).add(ReadCurrencyBooleanEvent());
     super.initState();
   }
 
@@ -36,8 +38,6 @@ class _CashContainerState extends State<CashContainer> {
   Widget build(BuildContext context) {
 
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
-
-      var darkThemeBoolean = state.darkThemeBoolean;
 
       return Container(
         height: Dimensions.height45*4.5,
@@ -51,8 +51,6 @@ class _CashContainerState extends State<CashContainer> {
         child: BlocBuilder<ChangeLanguageBloc, ChangeLanguageState>(
             builder: (context, state) {
               bool englishLanguageBoolean = state.englishLanguageBoolean;
-
-              print("cash container               "+englishLanguageBoolean.toString());
 
               return BlocBuilder<ChangeCurrencyBloc, ChangeCurrencyState>(
                   builder: (context, state) {
@@ -74,7 +72,7 @@ class _CashContainerState extends State<CashContainer> {
                                       alignment: Alignment.topLeft,
                                       child: Container(
                                         height: Dimensions.height45*2.2,
-                                        width: Dimensions.width45*3,
+                                        width: Dimensions.width45*3.5,
                                         decoration: BoxDecoration(
                                             border: Border.all(color: AppColors.cashContainerShapeBorderColor),
                                             borderRadius: BorderRadius.only(
@@ -236,7 +234,7 @@ class _CashContainerState extends State<CashContainer> {
                                                     ? AppLocale.rial.getString(context)
                                                     : AppLocale.toman.getString(context)
                                                     : '',
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                   fontWeight: FontWeight.w800,
                                                   color: Colors.white,
                                                 )),
@@ -248,7 +246,7 @@ class _CashContainerState extends State<CashContainer> {
                                       alignment: Alignment.bottomRight,
                                       child: Container(
                                         height: Dimensions.height45*2.2,
-                                        width: Dimensions.width45*3,
+                                        width: Dimensions.width45*3.5,
                                         decoration: BoxDecoration(
                                             border: Border.all(color: AppColors.cashContainerShapeBorderColor),
                                             borderRadius: BorderRadius.only(

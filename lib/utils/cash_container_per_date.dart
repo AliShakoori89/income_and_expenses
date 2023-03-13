@@ -6,6 +6,7 @@ import 'package:income_and_expenses/bloc/set_date_bloc/bloc.dart';
 import 'package:income_and_expenses/bloc/set_date_bloc/state.dart';
 import 'package:income_and_expenses/const/app_colors.dart';
 import 'package:income_and_expenses/const/dimensions.dart';
+import 'package:persian_datetime_picker/persian_datetime_picker.dart';
 import 'package:persian_number_utility/persian_number_utility.dart';
 import '../bloc/change_currency_bloc/bloc.dart';
 import '../bloc/change_currency_bloc/state.dart';
@@ -16,6 +17,7 @@ import '../bloc/set_date_bloc/event.dart';
 import '../bloc/them_bloc/bloc.dart';
 import '../bloc/them_bloc/state.dart';
 import '../const/language.dart';
+import 'no_data.dart';
 
 class CashContainerPerDate extends StatefulWidget {
   const CashContainerPerDate({Key? key}) : super(key: key);
@@ -29,6 +31,7 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
   @override
   void initState() {
     BlocProvider.of<ChangeLanguageBloc>(context).add(ReadLanguageBooleanEvent());
+    BlocProvider.of<SetDateBloc>(context).add(FetchExpensesEvent(date: "${Jalali.now().year}-${Jalali.now().month}-0${Jalali.now().day}"));
     super.initState();
   }
 
@@ -42,8 +45,6 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
       return BlocBuilder<ChangeLanguageBloc, ChangeLanguageState>(
           builder: (context, state) {
         bool englishLanguageBoolean = state.englishLanguageBoolean;
-
-        print("bbbbbbbbbb             "+englishLanguageBoolean.toString());
 
         return BlocBuilder<ChangeCurrencyBloc, ChangeCurrencyState>(
             builder: (context, state) {
@@ -255,20 +256,9 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                                 ),
                               ],
                             )
-                          : Column(
-                            children: [
-                              Image.asset("assets/images/No data.png",
-                              width: Dimensions.width45*6),
-                              Text(
-                                AppLocale.notExpenses.getString(context),
-                                style: TextStyle(
-                                  fontSize: Dimensions.font14,
-                                  color: darkThemeBoolean == "false"
-                                      ? AppColors.noDataTextColor
-                                      : Colors.white,
-                                ),
-                              ),
-                            ],
+                          : Padding(
+                            padding: EdgeInsets.only(top: Dimensions.height45*2),
+                            child: const NoDataPage(),
                           )
                       : state.status.isError
                           ? Center(

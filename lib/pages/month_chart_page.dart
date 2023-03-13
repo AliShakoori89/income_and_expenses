@@ -12,6 +12,7 @@ import '../bloc/them_bloc/bloc.dart';
 import '../bloc/them_bloc/state.dart';
 import '../const/app_colors.dart';
 import '../const/language.dart';
+import '../utils/no_data.dart';
 
 class MonthChart extends StatefulWidget {
   const MonthChart({Key? key}) : super(key: key);
@@ -73,12 +74,22 @@ class _MonthChartState extends State<MonthChart> {
               ];
             }
 
-
             return Scaffold(
             backgroundColor: darkThemeBoolean == "false"
-                ? AppColors.mainPageCardBorderColor
+                ? Colors.white
                 : AppColors.darkThemeColor,
-            body: SafeArea(
+            body: state.farvardinExpenses != '0' &&
+                state.ordibeheshtExpenses != '0' &&
+                state.khordadExpenses != '0' &&
+                state.tirExpenses != '0' &&
+                state.mordadExpenses != '0' &&
+                state.mehrExpenses != '0' &&
+                state.abanExpenses != '0' &&
+                state.azarExpenses != '0' &&
+                state.deyExpenses != '0' &&
+                state.bahmanExpenses != '0' &&
+                state.esfandExpenses != '0'
+                ? SafeArea(
                 child: SfCircularChart(
                     palette: const [
                       Color.fromRGBO(200, 230, 201, 1),
@@ -120,12 +131,13 @@ class _MonthChartState extends State<MonthChart> {
                           xValueMapper: (_PieData data, _) => data.xData,
                           yValueMapper: (_PieData data, _) => data.yData,
                           dataLabelMapper: (_PieData data, _) => data.text,
-                          dataLabelSettings: DataLabelSettings(
-                            textStyle: const TextStyle(
+                          dataLabelSettings: const DataLabelSettings(
+                            textStyle: TextStyle(
                                 color: Colors.black),
                             isVisible: true,
                           )),
-                    ])));
+                    ]))
+            : const NoDataPage());
       });});});
   }
 }

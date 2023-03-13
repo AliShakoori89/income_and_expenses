@@ -92,12 +92,7 @@ class _SettingItemListState extends State<SettingItemList> {
                               Navigator.of(ctx).pop();
                             },
                                 child: Text(AppLocale.rial.getString(context)));
-                          })
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
+                          }),
                         BlocBuilder<ChangeCurrencyBloc, ChangeCurrencyState>(
                             builder: (context, state) {
                               return TextButton(
