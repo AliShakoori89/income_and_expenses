@@ -105,6 +105,15 @@ class AddOneByOneExpenseEvent extends SetDateEvent {
   List<Object> get props => [expenseModel];
 }
 
+class EditItemEvent extends SetDateEvent{
+  final ExpenseModel expenseModel;
+
+  EditItemEvent(this.expenseModel);
+
+  @override
+  List<Object> get props => [expenseModel];
+}
+
 class AddTodayExpensesEvent extends SetDateEvent {
 
   final int todayExpensesDetails;

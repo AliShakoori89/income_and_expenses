@@ -24,6 +24,8 @@ mixin AppLocale {
   static const String grouping = "دسته بندی";
   static const String expense = "هزینه";
   static const String newExpense = "هزینه جدید";
+  static const String editExpense = "تغییرات";
+  static const String applyChange = "اعمال تغییرات";
   static const String description = "توضیحات";
   static const String addExpense = "اضافه کردن هزینه";
   static const String transportation = "حمل و نقل";
@@ -71,6 +73,8 @@ mixin AppLocale {
     grouping: 'grouping',
     expense: 'expense',
     newExpense: "New Expense",
+    editExpense: "Edit Expense",
+    applyChange: "Apply Change",
     description: 'description',
     addExpense: 'Add Expense',
     transportation: 'transportation',
@@ -117,6 +121,8 @@ mixin AppLocale {
     newExpense: "هزینه جدید",
     description: 'توضیحات',
     addExpense: 'اضافه کردن هزینه',
+    editExpense: 'تغییرات',
+    applyChange: 'اعمال تغییرات',
     transportation: 'حمل و نقل',
     comestible: "خوراکی",
     buyItems: "خرید اقلام",

@@ -53,6 +53,12 @@ class DatabaseHelper {
     return true;
   }
 
+  Future<int> updateItem(ExpenseModel expense) async {
+    var dbExpense = await database;
+    return await dbExpense.update(table, expense.toJson(),
+        where: '$columnId = ?', whereArgs: [expense.id]);
+  }
+
   Future<List<ExpenseModel>> getAllExpenses(String date) async {
     var dbExpense = await database;
     var listMap = await dbExpense

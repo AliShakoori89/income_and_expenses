@@ -17,6 +17,7 @@ import '../bloc/set_date_bloc/event.dart';
 import '../bloc/them_bloc/bloc.dart';
 import '../bloc/them_bloc/state.dart';
 import '../const/language.dart';
+import '../pages/edit_page.dart';
 import 'no_data.dart';
 
 class CashContainerPerDate extends StatefulWidget {
@@ -141,113 +142,121 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                                                 ? AppColors.iconUnSelectedBackGroundMainColor
                                                 : Colors.white,
                                           ),
-                                          englishLanguageBoolean == false
-                                              ? Row(
-                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                  children: [
-                                                    Text( rialCurrencyType == true
-                                                        ? "-${("${state.expensesDetails[index].expense!}0").toPersianDigit().seRagham()}"
-                                                        : "-${state.expensesDetails[index].expense!.toString().toPersianDigit().seRagham()}",
-                                                        style: TextStyle(
-                                                            fontSize: Dimensions.font17,
-                                                            color: darkThemeBoolean == "false"
-                                                                ? AppColors.expensesDigitColor
-                                                                : Colors.white)),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment.end,
-                                                      children: [
-                                                        Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment.end,
-                                                          children: [
-                                                            Text(state.expensesDetails[index].expenseCategory!.getString(context),
-                                                                style: TextStyle(
-                                                                    fontSize: Dimensions.font17,
-                                                                    fontWeight: FontWeight.w400,
-                                                                    color: darkThemeBoolean == "false"
-                                                                        ? AppColors.mainPageFirstContainerFontColor
-                                                                        : Colors.white)),
-                                                            Text(state.expensesDetails[index].description!,
-                                                                style: TextStyle(
-                                                                    fontSize: Dimensions.font16,
-                                                                    fontWeight: FontWeight.w400,
-                                                                    color: darkThemeBoolean == "false"
-                                                                        ? AppColors.appBarProfileName
-                                                                        : Colors.white)),
-                                                          ],
-                                                        ),
-                                                        SizedBox(
-                                                          width: Dimensions.width10,
-                                                        ),
-                                                        Container(
-                                                          width: Dimensions.width45,
-                                                          height: Dimensions.width45,
-                                                          decoration: BoxDecoration(
-                                                              shape: BoxShape.circle,
-                                                              color: AppColors.colorList[index]),
-                                                          child: Container(
-                                                            margin: EdgeInsets.all(Dimensions.width10 / 1.4),
-                                                            child: SvgPicture
-                                                                .asset(state.expensesDetails[index].iconType!),
+                                          GestureDetector(
+                                            onTap: (){
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) => EditedPage(expenseModel: state.expensesDetails[index])));
+                                            },
+                                            child: englishLanguageBoolean == false
+                                                ? Row(
+                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                    children: [
+                                                      Text( rialCurrencyType == true
+                                                          ? "-${("${state.expensesDetails[index].expense!}0").toPersianDigit().seRagham()}"
+                                                          : "-${state.expensesDetails[index].expense!.toString().toPersianDigit().seRagham()}",
+                                                          style: TextStyle(
+                                                              fontSize: Dimensions.font17,
+                                                              color: darkThemeBoolean == "false"
+                                                                  ? AppColors.expensesDigitColor
+                                                                  : Colors.white)),
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment.end,
+                                                        children: [
+                                                          Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment.end,
+                                                            children: [
+                                                              Text(state.expensesDetails[index].expenseCategory!.getString(context),
+                                                                  style: TextStyle(
+                                                                      fontSize: Dimensions.font17,
+                                                                      fontWeight: FontWeight.w400,
+                                                                      color: darkThemeBoolean == "false"
+                                                                          ? AppColors.mainPageFirstContainerFontColor
+                                                                          : Colors.white)),
+                                                              Text(state.expensesDetails[index].description!,
+                                                                  style: TextStyle(
+                                                                      fontSize: Dimensions.font16,
+                                                                      fontWeight: FontWeight.w400,
+                                                                      color: darkThemeBoolean == "false"
+                                                                          ? AppColors.appBarProfileName
+                                                                          : Colors.white)),
+                                                            ],
                                                           ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ],
-                                                )
-                                              : Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.spaceBetween,
-                                                  children: [
-                                                    Row(mainAxisAlignment: MainAxisAlignment.end,
-                                                      children: [
-                                                        Container(
-                                                          width: Dimensions.width45,
-                                                          height: Dimensions.width45,
-                                                          decoration: BoxDecoration(
-                                                              shape: BoxShape.circle,
-                                                              color: AppColors.colorList[index]),
-                                                          child: Container(
-                                                            margin: EdgeInsets.all(Dimensions.width10 / 1.4),
-                                                            child: SvgPicture.asset(state.expensesDetails[index].iconType!),
+                                                          SizedBox(
+                                                            width: Dimensions.width10,
                                                           ),
-                                                        ),
-                                                        SizedBox(
-                                                          width: Dimensions.width10,
-                                                        ),
-                                                        Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment.start,
-                                                          children: [
-                                                            Text((state.expensesDetails[index].expenseCategory!).getString(context),
-                                                                style: TextStyle(
-                                                                    fontSize: Dimensions.font14,
-                                                                    fontWeight: FontWeight.w700,
-                                                                    color: darkThemeBoolean == "false"
-                                                                        ? AppColors.mainPageFirstContainerFontColor
-                                                                        : Colors.white)),
-                                                            Text(
-                                                                state.expensesDetails[index].description!,
-                                                                style: TextStyle(
-                                                                    fontSize: Dimensions.font12,
-                                                                    fontWeight: FontWeight.w400,
-                                                                    color: darkThemeBoolean ==
-                                                                            "false"
-                                                                        ? AppColors.appBarProfileName
-                                                                        : Colors.white)),
-                                                          ],
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    Text(rialCurrencyType == true
-                                                        ? "-${("${state.expensesDetails[index].expense!}0").seRagham()}"
-                                                        : "-${state.expensesDetails[index].expense!.toString().seRagham()}",
-                                                        style: TextStyle(
-                                                            fontSize: Dimensions.font14,
-                                                            color: AppColors.expensesDigitColor)),
-                                                  ],
-                                                ),
+                                                          Container(
+                                                            width: Dimensions.width45,
+                                                            height: Dimensions.width45,
+                                                            decoration: BoxDecoration(
+                                                                shape: BoxShape.circle,
+                                                                color: AppColors.colorList[index]),
+                                                            child: Container(
+                                                              margin: EdgeInsets.all(Dimensions.width10 / 1.4),
+                                                              child: SvgPicture
+                                                                  .asset(state.expensesDetails[index].iconType!),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  )
+                                                : Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.spaceBetween,
+                                                    children: [
+                                                      Row(mainAxisAlignment: MainAxisAlignment.end,
+                                                        children: [
+                                                          Container(
+                                                            width: Dimensions.width45,
+                                                            height: Dimensions.width45,
+                                                            decoration: BoxDecoration(
+                                                                shape: BoxShape.circle,
+                                                                color: AppColors.colorList[index]),
+                                                            child: Container(
+                                                              margin: EdgeInsets.all(Dimensions.width10 / 1.4),
+                                                              child: SvgPicture.asset(state.expensesDetails[index].iconType!),
+                                                            ),
+                                                          ),
+                                                          SizedBox(
+                                                            width: Dimensions.width10,
+                                                          ),
+                                                          Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment.start,
+                                                            children: [
+                                                              Text((state.expensesDetails[index].expenseCategory!).getString(context),
+                                                                  style: TextStyle(
+                                                                      fontSize: Dimensions.font14,
+                                                                      fontWeight: FontWeight.w700,
+                                                                      color: darkThemeBoolean == "false"
+                                                                          ? AppColors.mainPageFirstContainerFontColor
+                                                                          : Colors.white)),
+                                                              Text(
+                                                                  state.expensesDetails[index].description!,
+                                                                  style: TextStyle(
+                                                                      fontSize: Dimensions.font12,
+                                                                      fontWeight: FontWeight.w400,
+                                                                      color: darkThemeBoolean ==
+                                                                              "false"
+                                                                          ? AppColors.appBarProfileName
+                                                                          : Colors.white)),
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      Text(rialCurrencyType == true
+                                                          ? "-${("${state.expensesDetails[index].expense!}0").seRagham()}"
+                                                          : "-${state.expensesDetails[index].expense!.toString().seRagham()}",
+                                                          style: TextStyle(
+                                                              fontSize: Dimensions.font14,
+                                                              color: AppColors.expensesDigitColor)),
+                                                    ],
+                                                  ),
+                                          ),
                                         ],
                                       ),
                                     );

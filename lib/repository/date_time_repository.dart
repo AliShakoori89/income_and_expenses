@@ -67,6 +67,11 @@ class SetDateRepository {
     return await helper.saveExpense(expenseModel);
   }
 
+  Future<int> updateItem(ExpenseModel expenseModel) async {
+    var helper = DatabaseHelper();
+    return await helper.updateItem(expenseModel);
+  }
+
   addTodayExpensesRepo(int todayExpenses) async {
     final prefs = await SharedPreferences.getInstance();
     prefs.setString('todayExpenses', todayExpenses.toString());
