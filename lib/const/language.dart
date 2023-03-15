@@ -1,5 +1,7 @@
 mixin AppLocale {
 
+  static const String yes = 'بله';
+  static const String no = 'خیر';
   static const String expenses = 'هزینه شده';
   static const String income = 'ورودی';
   static const String cash = 'موجودی';
@@ -9,6 +11,8 @@ mixin AppLocale {
   static const String setting = 'تنظیمات';
   static const String export = 'PDF خروجی';
   static const String chooseCurrency = 'انتخاب واحد پول';
+  static const String delete = 'توجه';
+  static const String doYouWantTheDesiredItemToBeDeleted = 'آیا می خواهید که آیتم مورد نظر پاک شود؟';
   static const String chooseLanguage = 'نتخاب زبان';
   static const String chooseTheme = 'نتخاب زمینه';
   static const String frequentlyAskedQuestions = 'سوالات متداول';
@@ -49,6 +53,8 @@ mixin AppLocale {
 
 
   static const Map<String, dynamic> EN = {
+    yes: 'yes',
+    no: 'no',
     expenses: 'expenses',
     cash: 'cash',
     income: 'income',
@@ -58,6 +64,8 @@ mixin AppLocale {
     setting: 'Setting',
     export: 'export PDF',
     chooseCurrency: 'Choose currency',
+    doYouWantTheDesiredItemToBeDeleted: 'Do you want the desired item to be deleted?',
+    delete: 'Delete',
     chooseCurrencyQuestion: 'Please choose currency',
     chooseLanguage: 'Choose language',
     frequentlyAskedQuestions: 'Frequently asked questions',
@@ -95,6 +103,8 @@ mixin AppLocale {
     };
 
   static const Map<String, dynamic> FA = {
+    yes: 'بله',
+    no: 'خیر',
     expenses: 'هزینه شده',
     cash: 'موجودی',
     income: 'ورودی',
@@ -104,6 +114,8 @@ mixin AppLocale {
     setting: 'تنظیمات',
     export: 'خروجی',
     chooseCurrency: 'انتخاب واحد پول',
+    doYouWantTheDesiredItemToBeDeleted: 'آیا می خواهید که آیتم مورد نظر پاک شود؟',
+    delete: 'نوجه',
     chooseLanguage: 'انتخاب زبان',
     frequentlyAskedQuestions: 'سوالات متداول',
     exit: 'خروج',

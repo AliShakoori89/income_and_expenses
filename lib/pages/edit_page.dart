@@ -19,6 +19,7 @@ import '../routes/route_helper.dart';
 import '../utils/app_text_field.dart';
 import '../utils/arrow_back_icon.dart';
 import '../utils/date_picker_calendar.dart';
+import '../utils/widget.dart';
 
 class EditedPage extends StatefulWidget {
   final ExpenseModel expenseModel;
@@ -60,10 +61,6 @@ class _EditedPageState extends State<EditedPage> {
 
           return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
 
-      var darkThemeBoolean = state.darkThemeBoolean;
-
-      return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
-
         var darkThemeBoolean = state.darkThemeBoolean;
 
         return Scaffold(
@@ -80,9 +77,55 @@ class _EditedPageState extends State<EditedPage> {
             fontSize: Dimensions.font24,
             fontWeight: FontWeight.w400),
         title: Align(
-            alignment: Alignment.centerRight,
+            alignment: Alignment.center,
             child: Text(AppLocale.editExpense.getString(context))),
         leading: ArrowBackIcon(themeBoolean: darkThemeBoolean),
+        actions: [
+          GestureDetector(
+            onTap: (){
+              showDialog(
+                context: context,
+                builder: (ctx) => AlertDialog(
+                  title: Text(
+                    AppLocale.delete.getString(context),
+                    textDirection: TextDirection.rtl,
+                    style: TextStyle(fontSize: Dimensions.font16),
+                  ),
+                  content: Text(
+                      AppLocale.doYouWantTheDesiredItemToBeDeleted.getString(context),
+                      textDirection: TextDirection.rtl,
+                      style: TextStyle(fontSize: Dimensions.font14)),
+                  actions: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        TextButton(
+                            onPressed: (){
+
+                            },
+                            child: Text(AppLocale.no.getString(context),
+                            style: TextStyle(
+                              color: Colors.red
+                            ),)),
+                        TextButton(
+                            onPressed: (){
+
+                            },
+                            child: Text(AppLocale.yes.getString(context),
+                              style: TextStyle(
+                                  color: Colors.green
+                              ),))
+                      ],
+                    ),
+                  ],
+                ),
+              );
+            },
+            child: Icon(Icons.delete,
+            color: AppColors.appBarProfileName,),
+          ),
+          SizedBox(width: Dimensions.width20,),
+        ],
       ),
       backgroundColor: darkThemeBoolean == "false"
           ? Colors.white
@@ -116,14 +159,20 @@ class _EditedPageState extends State<EditedPage> {
                   SizedBox(
                     height: Dimensions.height10,
                   ),
-                  TextFormField(
-                    controller: TextEditingController(text: _editedExpenses.expenseCategory),
-                    style: TextStyle(
-                        color: darkThemeBoolean == "false"
-                            ? Colors.black
-                            : Colors.white70
+                  Directionality(
+                    textDirection: englishLanguageBoolean == false ? TextDirection.rtl : TextDirection.ltr,
+                    child: TextFormField(
+                      controller: TextEditingController(text: _editedExpenses.expenseCategory),
+                      style: TextStyle(
+                          color: darkThemeBoolean == "false"
+                              ? Colors.black
+                              : Colors.white70
+                      ),
+                      readOnly: true,
+                      decoration: textInputDecoration.copyWith(
+                        labelText: AppLocale.grouping.getString(context),
+                      )
                     ),
-                    readOnly: true,
                   ),
                   SizedBox(
                     height: Dimensions.height30,
@@ -149,7 +198,7 @@ class _EditedPageState extends State<EditedPage> {
           ),
         ),
       ),
-    );});});});
+    );});});
   }
 
   BlocBuilder<SetDateBloc, SetDateState> appButton(String themeBoolean) {
