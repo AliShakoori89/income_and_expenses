@@ -35,6 +35,12 @@ class _AddExpensePageState extends State<AddExpensePage> {
   final formKey = GlobalKey<FormState>();
 
   @override
+  void initState() {
+    BlocProvider.of<SetDateBloc>(context).add(InitialDateEvent());
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
 
     BlocProvider.of<SetDateBloc>(context).add(InitialDateEvent());
@@ -138,12 +144,10 @@ class _AddExpensePageState extends State<AddExpensePage> {
                     final setDateBloc = BlocProvider.of<SetDateBloc>(context);
 
                     expense.expenseDate = date;
-                    expense.expenseDateMonth = "${DateTime
-                        .parse(date)
-                        .year}-${DateTime
-                        .parse(date)
-                        .month}";
+                    expense.expenseDateMonth = "${DateTime.parse(date).year}-${DateTime.parse(date).month}";
+
                     expense.expenseCategory = categoryController.text;
+
                     expense.expense =
                         int.parse(expensesController.text.toEnglishDigit());
                     expense.description = descriptionController.text;

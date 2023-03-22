@@ -107,10 +107,16 @@ class _YearChartPageState extends State<YearChartPage> {
                     onChanged: (value) {
                       setState(() {
                         selectedValue = value as String;
-                        print("selectedValue        $selectedValue");
                         BlocProvider.of<CalculateSFCartesianChartBloc>(context).add(SumExpensesByGroupingTypePerMonthForSFCartesianChartEvent(month: selectedValue!));
                       });
                     },
+                    // buttonStyleData: const ButtonStyleData(
+                    //   height: 40,
+                    //   width: 140,
+                    // ),
+                    // menuItemStyleData: const MenuItemStyleData(
+                    //   height: 40,
+                    // ),
                     buttonHeight: Dimensions.bottomHeightBar/3,
                     buttonWidth: Dimensions.width45*3,
                     buttonPadding: EdgeInsets.only(left: Dimensions.width30, right: Dimensions.width10),

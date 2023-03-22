@@ -27,16 +27,18 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
   String selectedDate = "";
 
   String month = "${Jalali.now().year}-${Jalali.now().month}";
-  String date = Jalali.now().day < 10
-      ? "${Jalali.now().year}-${Jalali.now().month}-0${Jalali.now().day}"
-      : "${Jalali.now().year}-${Jalali.now().month}-${Jalali.now().day}";
+  String date = Jalali.now().day < 10 && Jalali.now().month < 10
+      ? "${Jalali.now().year}-0${Jalali.now().month}-0${Jalali.now().day}"
+      : Jalali.now().month < 10
+      ? "${Jalali.now().year}-0${Jalali.now().month}-${Jalali.now().day}"
+      : "${Jalali.now().year}-${Jalali.now().month}-0${Jalali.now().day}";
 
   @override
   void initState() {
 
-    selectedDate = DateFormat('yyyy-MM').format(DateTime.parse(Jalali.now().toJalaliDateTime()));
+    print("dateeeeeeeee       "+date);
 
-    BlocProvider.of<ChangeLanguageBloc>(context).add(ReadLanguageBooleanEvent());
+    selectedDate = DateFormat('yyyy-MM').format(DateTime.parse(Jalali.now().toJalaliDateTime()));
 
     BlocProvider.of<SetDateBloc>(context).add(FetchIncomeEvent(month: selectedDate));
 
@@ -49,6 +51,8 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
 
   @override
   Widget build(BuildContext context) {
+
+    print("QQQQQQQQQQQQQQQQQ        "+ date);
 
     return BlocBuilder<SetDateBloc, SetDateState>(builder: (context, state) {
 
@@ -158,6 +162,7 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                         left: Dimensions.width20,
                         right: Dimensions.width20),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
                           Icons.calendar_today,
@@ -167,13 +172,14 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                         SizedBox(
                           width: Dimensions.height10,
                         ),
-                        //DateFormat('yyyy-MM-dd').format(DateTime.parse(date))
-                        Text(englishLanguageBoolean == false ? "${DateTime.parse(date).year.toString().toPersianDigit()}"
-                            "-${DateTime.parse(date).month.toString().toPersianDigit()}"
-                            "-${DateTime.parse(date).day.toString().toPersianDigit()}"
+                        Text(
+                            englishLanguageBoolean == false
+                            ? DateFormat('yyyy-MM-dd').format(DateTime.parse(date)).toPersianDigit()
                             : DateFormat('yyyy-MM-dd').format(DateTime.parse(date)),
                             style: TextStyle(
-                              fontSize: Dimensions.font18,
+                              fontSize: englishLanguageBoolean == false
+                                  ? Dimensions.font18
+                                  : Dimensions.font14,
                                 color: AppColors.appBarTitleColor)),
                       ],
                     )),

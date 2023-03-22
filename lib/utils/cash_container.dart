@@ -29,7 +29,6 @@ class _CashContainerState extends State<CashContainer> {
 
   @override
   void initState() {
-    BlocProvider.of<ChangeLanguageBloc>(context).add(ReadLanguageBooleanEvent());
     BlocProvider.of<ChangeCurrencyBloc>(context).add(ReadCurrencyBooleanEvent());
     super.initState();
   }
@@ -48,9 +47,12 @@ class _CashContainerState extends State<CashContainer> {
         decoration: BoxDecoration(
           color: AppColors.cashContainerColor,
             borderRadius: BorderRadius.circular(Dimensions.radius20*2)),
+
         child: BlocBuilder<ChangeLanguageBloc, ChangeLanguageState>(
             builder: (context, state) {
               bool englishLanguageBoolean = state.englishLanguageBoolean;
+
+              print("DDDDDDDDdd    "+englishLanguageBoolean.toString());
 
               return BlocBuilder<ChangeCurrencyBloc, ChangeCurrencyState>(
                   builder: (context, state) {

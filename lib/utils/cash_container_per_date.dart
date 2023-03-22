@@ -31,7 +31,6 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
 
   @override
   void initState() {
-    BlocProvider.of<ChangeLanguageBloc>(context).add(ReadLanguageBooleanEvent());
     BlocProvider.of<SetDateBloc>(context).add(FetchExpensesEvent(date: "${Jalali.now().year}-${Jalali.now().month}-0${Jalali.now().day}"));
     super.initState();
   }

@@ -13,8 +13,16 @@ class SetDateRepository {
 
   initialDate() async{
     final prefs = await SharedPreferences.getInstance();
-    String dateMonthString = '${Jalali.now().year}-${Jalali.now().month}';
-    String dateString = '${Jalali.now().year}-${Jalali.now().month}-${Jalali.now().day}';
+    String dateMonthString = Jalali.now().month.toString().length != 1
+        ? '${Jalali.now().year}-${Jalali.now().month}'
+        : '${Jalali.now().year}-0${Jalali.now().month}';
+    String dateString = Jalali.now().month.toString().length != 1 && Jalali.now().day.toString().length != 1
+        ? '${Jalali.now().year}-${Jalali.now().month}-${Jalali.now().day}'
+        : Jalali.now().month.toString().length != 1 && Jalali.now().day.toString().length == 1
+        ? '${Jalali.now().year}-${Jalali.now().month}-0${Jalali.now().day}'
+        : Jalali.now().month.toString().length == 1 && Jalali.now().day.toString().length != 1
+        ? '${Jalali.now().year}-0${Jalali.now().month}-${Jalali.now().day}'
+        : '${Jalali.now().year}-0${Jalali.now().month}-0${Jalali.now().day}';
     await prefs.setString('dateMonth', dateMonthString);
     await prefs.setString('date', dateString);
   }
