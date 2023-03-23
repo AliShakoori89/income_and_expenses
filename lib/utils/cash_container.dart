@@ -152,7 +152,7 @@ class _CashContainerState extends State<CashContainer> {
                                                     ? AppLocale.rial.getString(context)
                                                     : AppLocale.toman.getString(context)
                                                     : '',
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                   fontWeight: FontWeight.w800,
                                                   color: Colors.white,
                                                 )),

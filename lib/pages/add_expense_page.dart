@@ -144,7 +144,9 @@ class _AddExpensePageState extends State<AddExpensePage> {
                     final setDateBloc = BlocProvider.of<SetDateBloc>(context);
 
                     expense.expenseDate = date;
-                    expense.expenseDateMonth = "${DateTime.parse(date).year}-${DateTime.parse(date).month}";
+                    expense.expenseDateMonth = DateTime.parse(date).month.toString().length != 1
+                        ? "${DateTime.parse(date).year}-${DateTime.parse(date).month}"
+                        : "${DateTime.parse(date).year}-0${DateTime.parse(date).month}";
 
                     expense.expenseCategory = categoryController.text;
 
@@ -195,6 +197,9 @@ class _AddExpensePageState extends State<AddExpensePage> {
                         expense.iconType = "assets/logos/group_30.svg";
                       }
                     }
+
+                    print("add                    "+expense.expenseDate.toString());
+                    print("add                    "+expense.expenseDateMonth.toString());
 
                     setDateBloc.add(
                         AddOneByOneExpenseEvent(expenseModel: expense));
