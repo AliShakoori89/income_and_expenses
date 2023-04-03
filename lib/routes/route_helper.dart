@@ -8,25 +8,25 @@ import 'package:income_and_expenses/pages/search_page.dart';
 class RouteHelper{
 
   static const String initial = "/";
-  static const String addPage = "/addPage";
+  // static const String addPage = "/addPage";
   static const String searchPage = "/searchPage";
   static const String frequentlyAskedQuestions = "/frequentlyAskedQuestions";
   static const String profilePage = "/profilePage";
 
 
   static String getInitial()=> initial;
-  static String getAddPage()=> addPage;
+  // static String getAddPage()=> addPage;
   static String getSearchPage()=> searchPage;
   static String getFrequentlyAskedQuestions()=> frequentlyAskedQuestions;
   static String getProfilePage()=> profilePage;
 
   static List<GetPage> routes = [
 
-    GetPage(name: initial , page: ()=> MyHomePage(),
-        transition:  Transition.fadeIn),
+    // GetPage(name: initial , page: ()=> MyHomePage(),
+    //     transition:  Transition.fadeIn),
 
-    GetPage(name: addPage , page: ()=> const AddExpensePage(),
-        transition:  Transition.fadeIn),
+    // GetPage(name: addPage , page: ()=> AddExpensePage(),
+    //     transition:  Transition.fadeIn),
 
     GetPage(name: searchPage , page: ()=> const SearchPage(),
         transition:  Transition.fadeIn),

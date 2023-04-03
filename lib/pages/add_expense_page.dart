@@ -20,19 +20,32 @@ import '../bloc/them_bloc/state.dart';
 import '../const/language.dart';
 
 class AddExpensePage extends StatefulWidget {
-  const AddExpensePage({Key? key}) : super(key: key);
+
+  GlobalKey keyButton1;
+  GlobalKey keyButton2;
+  GlobalKey keyButton3;
+
+  AddExpensePage({Key? key, required this.keyButton1,
+    required this.keyButton2,
+    required this.keyButton3}) : super(key: key);
 
   @override
-  State<AddExpensePage> createState() => _AddExpensePageState();
+  State<AddExpensePage> createState() => _AddExpensePageState(keyButton1, keyButton2, keyButton3);
 }
 
 class _AddExpensePageState extends State<AddExpensePage> {
+
+  GlobalKey keyButton1;
+  GlobalKey keyButton2;
+  GlobalKey keyButton3;
 
   late TextEditingController categoryController = TextEditingController();
   late TextEditingController expensesController = TextEditingController();
   late TextEditingController descriptionController = TextEditingController();
 
   final formKey = GlobalKey<FormState>();
+
+  _AddExpensePageState(this.keyButton1, this.keyButton2, this.keyButton3);
 
   @override
   void initState() {
@@ -82,7 +95,10 @@ class _AddExpensePageState extends State<AddExpensePage> {
                 SizedBox(
                   height: Dimensions.height30,
                 ),
-                const DatePickerCalendar(),
+                DatePickerCalendar(
+                    keyButton1: keyButton1,
+                    keyButton2: keyButton2,
+                    keyButton3: keyButton3),
                 SizedBox(
                   height: Dimensions.height20,
                 ),
@@ -198,13 +214,10 @@ class _AddExpensePageState extends State<AddExpensePage> {
                       }
                     }
 
-                    print("add                    "+expense.expenseDate.toString());
-                    print("add                    "+expense.expenseDateMonth.toString());
-
                     setDateBloc.add(
                         AddOneByOneExpenseEvent(expenseModel: expense));
 
-                    Get.toNamed(RouteHelper.getInitial());
+                    // Get.toNamed(RouteHelper.getInitial());
                   }
                 },
                 child: Container(

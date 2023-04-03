@@ -11,7 +11,7 @@ class ArrowBackIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
         onPressed: (){
-          Get.toNamed(RouteHelper.getInitial());
+          // Get.toNamed(RouteHelper.getInitial());
         },
         icon: Icon(Icons.arrow_back,
           color: themeBoolean == "false"

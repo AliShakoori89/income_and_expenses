@@ -27,7 +27,7 @@ class MainExpensesPageHeader extends StatelessWidget {
           children: [
             GestureDetector(
               onTap: (){
-                Get.toNamed(RouteHelper.getSearchPage());
+                // Get.toNamed(RouteHelper.getSearchPage());
               },
               child: Icon(Icons.search,
                 size: Dimensions.iconSize24,

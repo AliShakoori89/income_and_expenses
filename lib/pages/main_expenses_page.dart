@@ -13,15 +13,28 @@ import '../bloc/change_language_bloc/event.dart';
 import '../utils/cash_container_per_date.dart';
 
 class MainExpensesPage extends StatefulWidget {
-  const MainExpensesPage({Key? key}) : super(key: key);
+
+  GlobalKey keyButton;
+  GlobalKey keyButton1;
+  GlobalKey keyButton2;
+  GlobalKey keyButton3;
+
+  MainExpensesPage({Key? key, required this.keyButton, required this.keyButton1,
+  required this.keyButton2, required this.keyButton3}) : super(key: key);
 
   @override
-  State<MainExpensesPage> createState() => _MainExpensesPageState();
+  State<MainExpensesPage> createState() => _MainExpensesPageState(keyButton, keyButton1, keyButton2, keyButton3);
 }
 
 class _MainExpensesPageState extends State<MainExpensesPage> {
 
   String date = "";
+  GlobalKey keyButton;
+  GlobalKey keyButton1;
+  GlobalKey keyButton2;
+  GlobalKey keyButton3;
+
+  _MainExpensesPageState(this.keyButton, this.keyButton1, this.keyButton2, this.keyButton3);
 
   @override
   void initState() {
@@ -66,14 +79,17 @@ class _MainExpensesPageState extends State<MainExpensesPage> {
                 SizedBox(
                   height: Dimensions.height45,
                 ),
-                const DatePickerCalendar(),
+                DatePickerCalendar(
+                    keyButton1: keyButton1,
+                    keyButton2: keyButton2,
+                    keyButton3: keyButton3),
                 SizedBox(
                   height: Dimensions.height30,
                 ),
                 Column(
-                  children: const [
-                    CashContainer(),
-                    CashContainerPerDate(),
+                  children: [
+                    CashContainer(keyButton: keyButton),
+                    const CashContainerPerDate(),
                   ],
                 ),
               ],

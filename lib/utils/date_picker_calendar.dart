@@ -14,10 +14,20 @@ import '../bloc/change_language_bloc/event.dart';
 import '../bloc/change_language_bloc/state.dart';
 
 class DatePickerCalendar extends StatefulWidget {
-  const DatePickerCalendar({Key? key}) : super(key: key);
+
+  GlobalKey keyButton1;
+  GlobalKey keyButton2;
+  GlobalKey keyButton3;
+
+  DatePickerCalendar( {Key? key,
+    required this.keyButton1,
+    required this.keyButton2,
+    required this.keyButton3}): super(key: key);
 
   @override
-  State<DatePickerCalendar> createState() => DatePickerCalendarState();
+  State<DatePickerCalendar> createState() => DatePickerCalendarState(
+    keyButton1, keyButton2, keyButton3
+  );
 }
 
 class DatePickerCalendarState extends State<DatePickerCalendar> {
@@ -33,10 +43,14 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
       ? "${Jalali.now().year}-0${Jalali.now().month}-${Jalali.now().day}"
       : "${Jalali.now().year}-${Jalali.now().month}-0${Jalali.now().day}";
 
+  GlobalKey keyButton1;
+  GlobalKey keyButton2;
+  GlobalKey keyButton3;
+
+  DatePickerCalendarState(this.keyButton1, this.keyButton2, this.keyButton3);
+
   @override
   void initState() {
-
-    print("dateeeeeeeee       "+date);
 
     selectedDate = DateFormat('yyyy-MM').format(DateTime.parse(Jalali.now().toJalaliDateTime()));
 
@@ -51,8 +65,6 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
 
   @override
   Widget build(BuildContext context) {
-
-    print("QQQQQQQQQQQQQQQQQ        "+ date);
 
     return BlocBuilder<SetDateBloc, SetDateState>(builder: (context, state) {
 
@@ -96,7 +108,9 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
               child: SizedBox(
                 width: Dimensions.width20,
                 height: Dimensions.height20,
-                child: Image.asset("assets/main_page_first_container_logo/left_arrow.png",
+                child: Image.asset(
+                  key: keyButton1,
+                  "assets/main_page_first_container_logo/left_arrow.png",
                 width: Dimensions.iconSize16,),
               ),
             ),
@@ -152,6 +166,7 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                     .add(FetchExpensesEvent(date : date));
               },
               child: Container(
+                key: keyButton2,
                 decoration: BoxDecoration(
                     color: AppColors.calenderBoxColor,
                     borderRadius: BorderRadius.circular(Dimensions.radius20)),
@@ -206,7 +221,9 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
               child: SizedBox(
                 width: Dimensions.width20,
                 height: Dimensions.height20,
-                child: Image.asset("assets/main_page_first_container_logo/right_arrow.png",
+                child: Image.asset(
+                  key: keyButton3,
+                  "assets/main_page_first_container_logo/right_arrow.png",
                   width: Dimensions.iconSize16,),
               ),
             ),

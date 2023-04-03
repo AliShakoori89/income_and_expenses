@@ -17,15 +17,23 @@ import '../bloc/set_date_bloc/bloc.dart';
 import '../bloc/set_date_bloc/event.dart';
 import '../bloc/them_bloc/bloc.dart';
 import '../bloc/them_bloc/state.dart';
+import '../const/income_animation.dart';
 
 class CashContainer extends StatefulWidget {
-  const CashContainer({Key? key}) : super(key: key);
+
+  GlobalKey keyButton;
+
+  CashContainer({Key? key, required this.keyButton}) : super(key: key);
 
   @override
-  State<CashContainer> createState() => _CashContainerState();
+  State<CashContainer> createState() => _CashContainerState(keyButton);
 }
 
 class _CashContainerState extends State<CashContainer> {
+
+  GlobalKey keyButton;
+
+  _CashContainerState(this.keyButton);
 
   @override
   void initState() {
@@ -51,8 +59,6 @@ class _CashContainerState extends State<CashContainer> {
         child: BlocBuilder<ChangeLanguageBloc, ChangeLanguageState>(
             builder: (context, state) {
               bool englishLanguageBoolean = state.englishLanguageBoolean;
-
-              print("DDDDDDDDdd    "+englishLanguageBoolean.toString());
 
               return BlocBuilder<ChangeCurrencyBloc, ChangeCurrencyState>(
                   builder: (context, state) {
@@ -99,6 +105,7 @@ class _CashContainerState extends State<CashContainer> {
                                                     fontSize: Dimensions.font16,
                                                   fontWeight: FontWeight.w800,)),
                                             SizedBox(width: Dimensions.width10,),
+                                            // const AnimatedModalBarrierApp(),
                                             Image.asset(
                                                 "assets/main_page_first_container_logo/darkExpenses.png",
                                             scale: Dimensions.width10/12),
@@ -330,14 +337,16 @@ class _CashContainerState extends State<CashContainer> {
                                                   children: [
                                                     Text(AppLocale.income.getString(context),
                                                         style: TextStyle(
-                                                            color: Colors.white,
-                                                            fontWeight: FontWeight.w800,
-                                                            fontSize: Dimensions.font16,
-                                                            )),
+                                                          color: Colors.white,
+                                                          fontWeight: FontWeight.w800,
+                                                          fontSize: Dimensions.font16,
+                                                        )),
                                                     SizedBox(
                                                         width: Dimensions.width10),
                                                     Image.asset(
+                                                        key: keyButton,
                                                         "assets/main_page_first_container_logo/darkIncome.png",
+                                                        color: Colors.green,
                                                         scale: Dimensions.width10/12),
                                                   ],
                                                 ),
