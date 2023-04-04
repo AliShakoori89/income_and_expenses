@@ -19,19 +19,18 @@ import 'month_chart_page.dart';
 
 class MyHomePage extends StatefulWidget {
 
-  bool isViewed;
+  // bool isViewed;
 
-  MyHomePage({Key? key, required this.isViewed}) : super(key: key);
+  MyHomePage({Key? key}) : super(key: key);
 
   @override
-  MyHomePageState createState() => MyHomePageState(isViewed);
+  MyHomePageState createState() => MyHomePageState();
 }
 
 class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
   var _bottomNavIndex = 0; //default index of a first screen
   late TutorialCoachMark tutorialCoachMark;
-  late bool isViewed;
 
   GlobalKey keyButton = GlobalKey();
   GlobalKey keyButton1 = GlobalKey();
@@ -43,8 +42,6 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   GlobalKey keyBottomNavigation3 = GlobalKey();
   GlobalKey keyBottomNavigation4 = GlobalKey();
   GlobalKey keyBottomNavigation5 = GlobalKey();
-
-  MyHomePageState(bool isViewed);
 
   List<Widget> _pages() =>
       [
@@ -115,10 +112,10 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
           () => _borderRadiusAnimationController.forward(),
     );
 
-    if(!isViewed){
+
       createTutorial();
       Future.delayed(Duration.zero, showTutorial);
-    }
+
   }
 
   bool onScrollNotification(ScrollNotification notification) {
@@ -458,12 +455,12 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
             _borderRadiusAnimationController.forward();
             _fabAnimationController.forward();
             // Get.toNamed(RouteHelper.getAddPage());
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => AddExpensePage(keyButton1: keyButton1,
-                  keyButton2: keyButton2,
-                  keyButton3: keyButton3)),
-            );
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(builder: (context) => AddExpensePage(keyButton1: keyButton1,
+            //       keyButton2: keyButton2,
+            //       keyButton3: keyButton3)),
+            // );
           },
         ),
       ),

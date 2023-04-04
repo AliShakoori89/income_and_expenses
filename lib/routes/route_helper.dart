@@ -22,8 +22,8 @@ class RouteHelper{
 
   static List<GetPage> routes = [
 
-    // GetPage(name: initial , page: ()=> MyHomePage(),
-    //     transition:  Transition.fadeIn),
+    GetPage(name: initial , page: ()=> MyHomePage(),
+        transition:  Transition.fadeIn),
 
     // GetPage(name: addPage , page: ()=> AddExpensePage(),
     //     transition:  Transition.fadeIn),
