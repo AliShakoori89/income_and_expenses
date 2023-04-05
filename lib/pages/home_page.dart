@@ -112,10 +112,11 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
           () => _borderRadiusAnimationController.forward(),
     );
 
-
-      createTutorial();
-      Future.delayed(Duration.zero, showTutorial);
-
+    checkFirstSeen();
+    // if(!isViewed){
+    //   createTutorial();
+    //   Future.delayed(Duration.zero, showTutorial);
+    // }
   }
 
   bool onScrollNotification(ScrollNotification notification) {
@@ -427,6 +428,20 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     );
     return targets;
   }
+
+  Future checkFirstSeen() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool seen = (prefs.getBool('seen') ?? false);
+
+    if (seen) {
+    } else {
+      await prefs.setBool('seen', true);
+        createTutorial();
+        Future.delayed(Duration.zero, showTutorial);
+    }
+  }
+
+  void afterFirstLayout(BuildContext context) => checkFirstSeen();
 
   @override
   Widget build(BuildContext context) {
