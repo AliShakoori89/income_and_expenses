@@ -349,7 +349,7 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       TargetFocus(
         identify: "Target 0",
         keyTarget: keyButton1,
-        alignSkip: Alignment.topRight,
+        alignSkip: Alignment.bottomRight,
         contents: [
           TargetContent(
             align: ContentAlign.bottom,
@@ -376,7 +376,7 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       TargetFocus(
         identify: "Target 0",
         keyTarget: keyButton2,
-        alignSkip: Alignment.topRight,
+        alignSkip: Alignment.bottomRight,
         contents: [
           TargetContent(
             align: ContentAlign.bottom,
@@ -404,7 +404,7 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       TargetFocus(
         identify: "Target 0",
         keyTarget: keyButton3,
-        alignSkip: Alignment.topRight,
+        alignSkip: Alignment.bottomRight,
         contents: [
           TargetContent(
             align: ContentAlign.bottom,

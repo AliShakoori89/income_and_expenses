@@ -29,16 +29,30 @@ class CashContainer extends StatefulWidget {
   State<CashContainer> createState() => _CashContainerState(keyButton);
 }
 
-class _CashContainerState extends State<CashContainer> {
+class _CashContainerState extends State<CashContainer> with TickerProviderStateMixin  {
 
   GlobalKey keyButton;
+  late AnimationController animationController;
 
   _CashContainerState(this.keyButton);
 
   @override
   void initState() {
     BlocProvider.of<ChangeCurrencyBloc>(context).add(ReadCurrencyBooleanEvent());
+    animationController = AnimationController(
+      vsync: this,
+      lowerBound: 0.8,
+      duration: const Duration(seconds: 1),
+    )
+      ..forward()
+      ..repeat(reverse: true);
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    animationController.dispose();
+    super.dispose();
   }
 
   @override
@@ -343,11 +357,29 @@ class _CashContainerState extends State<CashContainer> {
                                                         )),
                                                     SizedBox(
                                                         width: Dimensions.width10),
-                                                    Image.asset(
-                                                        key: keyButton,
-                                                        "assets/main_page_first_container_logo/darkIncome.png",
-                                                        color: Colors.green,
-                                                        scale: Dimensions.width10/12),
+                                                    AnimatedBuilder(
+                                                      animation: animationController,
+                                                      builder: (context, child) {
+                                                        return SizedBox(
+                                                          width: Dimensions.width20* animationController.value,
+                                                          height: Dimensions.height20* animationController.value,
+                                                          child: Image.asset(
+                                                              key: keyButton,
+                                                              "assets/main_page_first_container_logo/darkIncome.png",
+                                                              color: Colors.green,
+                                                              ),
+                                                        );
+                                                          // Container(
+                                                          // decoration: ShapeDecoration(
+                                                          //   color: Colors.white.withOpacity(0.5),
+                                                          //   shape: CircleBorder(),
+                                                          // ),
+                                                          // child: Padding(
+                                                          //   padding: EdgeInsets.all(8.0 * animationController.value), child:
+                                                          // ),
+                                                        // );
+                                                      }
+                                                    ),
                                                   ],
                                                 ),
                                                 SizedBox(
