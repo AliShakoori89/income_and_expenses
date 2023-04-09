@@ -3,18 +3,14 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
-import 'package:income_and_expenses/pages/add_expense_page.dart';
 import 'package:income_and_expenses/pages/main_expenses_page.dart';
 import 'package:income_and_expenses/pages/profile_page.dart';
 import 'package:income_and_expenses/pages/year_chart_page.dart';
-import 'package:income_and_expenses/routes/route_helper.dart';
 import 'package:income_and_expenses/const/app_colors.dart';
 import 'package:income_and_expenses/const/dimensions.dart';
-import 'package:is_first_run/is_first_run.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
-import '../utils/cash_container.dart';
+import 'add_expense_page.dart';
 import 'month_chart_page.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -311,6 +307,7 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         ],
       ),
     );
+
     targets.add(
       TargetFocus(
         identify: "Target 0",
@@ -470,12 +467,10 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
             _borderRadiusAnimationController.forward();
             _fabAnimationController.forward();
             // Get.toNamed(RouteHelper.getAddPage());
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(builder: (context) => AddExpensePage(keyButton1: keyButton1,
-            //       keyButton2: keyButton2,
-            //       keyButton3: keyButton3)),
-            // );
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => AddExpensePage()),
+            );
           },
         ),
       ),
@@ -522,7 +517,7 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                   ),
                 ),
               ],
-            ),
+            )
           ),
           AnimatedBottomNavigationBar.builder(
             itemCount: iconList.length,
