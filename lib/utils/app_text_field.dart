@@ -12,7 +12,8 @@ class AppTextField extends StatefulWidget {
   final TextEditingController controller;
   final String themeBoolean;
 
-  const AppTextField({Key? key,
+  const
+  AppTextField({Key? key,
     required this.labelText,
     required this.clickable,
     required this.controller,

@@ -486,7 +486,7 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                     child: Center(
                       child: SizedBox(
                         key: keyBottomNavigation1,
-                        height: Dimensions.height20*9,
+                        height: Dimensions.height20*2,
                         width: Dimensions.width20*2,
                       ),
                     )),

@@ -76,39 +76,47 @@ class _MainExpensesPageState extends State<MainExpensesPage> {
             ),
             Column(
               children: [
-                SizedBox(
-                  height: Dimensions.height45,
-                ),
+                SizedBox(height: Dimensions.height45,),
                 Stack(
                   children: [
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Expanded(
-                            child: Positioned(
-                              left: 0,
-                              child: SizedBox(
-                                key: keyButton1,
-                                height: Dimensions.height20*2,
-                                width: Dimensions.width20*2,
-                              ),
-                            )),
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                              top: Dimensions.height10,
+                            ),
+                            child: SizedBox(
+                              key: keyButton1,
+                              height: Dimensions.height10,
+                              width: Dimensions.width10,
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 130,),
                         Expanded(
-                            child: Positioned(
-                              width: Dimensions.screenWidth / 2,
-                              child: SizedBox(
-                                key: keyButton2,
-                                height: Dimensions.height20*4,
-                                width: Dimensions.width20*4,
-                              ),
-                            )),
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                              top: Dimensions.height10,
+                            ),
+                            child: SizedBox(
+                              key: keyButton2,
+                              height: Dimensions.height10*2,
+                              width: Dimensions.width10*2,
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 130),
                         Expanded(
-                          child: Positioned(
-                            right: 0,
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                              top: Dimensions.height10,
+                            ),
                             child: SizedBox(
                               key: keyButton3,
-                              height: Dimensions.height20*2,
-                              width: Dimensions.width20*2,
+                              height: Dimensions.height10,
+                              width: Dimensions.width10,
                             ),
                           ),
                         ),
