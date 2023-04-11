@@ -81,41 +81,38 @@ class _MainExpensesPageState extends State<MainExpensesPage> {
                 ),
                 Stack(
                   children: [
-                    SizedBox(
-                        height: Dimensions.height45,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Expanded(
-                                child: Positioned(
-                                  left: 0,
-                                  child: SizedBox(
-                                    key: keyButton1,
-                                    height: Dimensions.height20*9,
-                                    width: Dimensions.width20*2,
-                                  ),
-                                )),
-                            Expanded(
-                                child: Center(
-                                  child: SizedBox(
-                                    key: keyButton2,
-                                    height: Dimensions.height20*2,
-                                    width: Dimensions.width20*2,
-                                  ),
-                                )),
-                            SizedBox(width: Dimensions.width25*3,),
-                            Expanded(
-                              child: Positioned(
-                                right: 0,
-                                child: SizedBox(
-                                  key: keyButton3,
-                                  height: Dimensions.height20*2,
-                                  width: Dimensions.width20*2,
-                                ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                            child: Positioned(
+                              left: 0,
+                              child: SizedBox(
+                                key: keyButton1,
+                                height: Dimensions.height20*2,
+                                width: Dimensions.width20*2,
                               ),
+                            )),
+                        Expanded(
+                            child: Positioned(
+                              width: Dimensions.screenWidth / 2,
+                              child: SizedBox(
+                                key: keyButton2,
+                                height: Dimensions.height20*4,
+                                width: Dimensions.width20*4,
+                              ),
+                            )),
+                        Expanded(
+                          child: Positioned(
+                            right: 0,
+                            child: SizedBox(
+                              key: keyButton3,
+                              height: Dimensions.height20*2,
+                              width: Dimensions.width20*2,
                             ),
-                          ],
-                        )
+                          ),
+                        ),
+                      ],
                     ),
                     DatePickerCalendar(),
                   ],

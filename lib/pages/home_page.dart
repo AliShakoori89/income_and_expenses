@@ -372,6 +372,7 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     targets.add(
       TargetFocus(
         identify: "Target 0",
+
         keyTarget: keyButton2,
         alignSkip: Alignment.bottomRight,
         contents: [
@@ -382,7 +383,7 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  SizedBox(height: Dimensions.height30,),
+                  SizedBox(height: Dimensions.height30),
                   const Text(
                     "انتخاب روز مورد نظر",
                     style: TextStyle(
