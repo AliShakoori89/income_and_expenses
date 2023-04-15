@@ -66,6 +66,15 @@ class AppColors{
     Color.fromRGBO(197, 202, 233, 1),
     Color.fromRGBO(255, 236, 179, 1),
     Color.fromRGBO(248, 187, 208, 1),
+    Color.fromRGBO(200, 230, 201, 1),
+    Color.fromRGBO(225, 190, 231, 1),
+    Color.fromRGBO(255, 236, 179, 1),
+    Color.fromRGBO(248, 187, 208, 1),
+    Color.fromRGBO(178, 235, 242, 1),
+    Color.fromRGBO(255, 205, 210, 1),
+    Color.fromRGBO(197, 202, 233, 1),
+    Color.fromRGBO(255, 236, 179, 1),
+    Color.fromRGBO(248, 187, 208, 1),
   ];
 
 }

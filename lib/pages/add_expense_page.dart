@@ -201,7 +201,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
                     setDateBloc.add(
                         AddOneByOneExpenseEvent(expenseModel: expense));
 
-                    // Get.toNamed(RouteHelper.getInitial());
+                    Get.toNamed(RouteHelper.getInitial());
                   }
                 },
                 child: Container(
