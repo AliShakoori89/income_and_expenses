@@ -4,7 +4,6 @@ import 'package:income_and_expenses/utils/category_icon_list.dart';
 import 'package:income_and_expenses/utils/widget.dart';
 import '../bloc/change_language_bloc/bloc.dart';
 import '../bloc/change_language_bloc/state.dart';
-import 'package:pattern_formatter/pattern_formatter.dart';
 
 class AppTextField extends StatefulWidget {
 

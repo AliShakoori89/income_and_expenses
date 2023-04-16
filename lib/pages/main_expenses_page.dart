@@ -168,6 +168,7 @@ class _MainExpensesPageState extends State<MainExpensesPage> {
                             right: Dimensions.width15,
                             left: Dimensions.width15),
                         child: englishLanguageBoolean == false
+                            ? state.todayExpenses != ''
                             ? Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -196,7 +197,9 @@ class _MainExpensesPageState extends State<MainExpensesPage> {
                                   ),
                                 ],
                               )
-                            : Row(
+                            : Container()
+                            : state.todayExpenses != ''
+                            ? Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
@@ -219,9 +222,14 @@ class _MainExpensesPageState extends State<MainExpensesPage> {
                                         fontSize: Dimensions.font14),
                                   ),
                                 ],
-                              ),
+                              )
+                            : Container(),
                       ),
-                      CashContainerPerDate(),
+                      CashContainerPerDate(
+                        darkThemeBoolean: darkThemeBoolean,
+                        englishLanguageBoolean: englishLanguageBoolean,
+                        rialCurrencyType: rialCurrencyType,
+                      ),
                     ],
                   )
                 ],

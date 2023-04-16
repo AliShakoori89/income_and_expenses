@@ -225,7 +225,7 @@ class _EditedPageState extends State<EditedPage> {
 
                     setDateBloc.add(EditItemEvent(_editedExpenses));
 
-                    // Get.toNamed(RouteHelper.getInitial());
+                    Get.toNamed(RouteHelper.getInitial());
                   }
                 },
                 child: Container(
