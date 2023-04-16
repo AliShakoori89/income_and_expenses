@@ -47,22 +47,26 @@ class DatabaseHelper {
     );
   }
 
-  Future<bool> saveExpense(ExpenseModel expense) async {
-    var dbExpense = await database;
-    await dbExpense.insert(table, expense.toJson());
-    return true;
+  Future<int> saveExpense(ExpenseModel expense) async {
+    Database dbExpense = await instance.database;
+    return await dbExpense.transaction((txn) async {
+      return await txn.insert(table, expense.toJson());
+    });
   }
 
   Future<int> updateItem(ExpenseModel expense) async {
-    var dbExpense = await database;
-    return await dbExpense.update(table, expense.toJson(),
-        where: '$columnId = ?', whereArgs: [expense.id]);
+    Database dbExpense = await instance.database;
+    return await dbExpense.transaction((txn) async {
+      return await txn.update(table, expense.toJson(),
+          where: '$columnId = ?', whereArgs: [expense.id]);
+    });
   }
 
   Future<List<ExpenseModel>> getAllExpenses(String date) async {
-    var dbExpense = await database;
-    var listMap = await dbExpense
-        .rawQuery('SELECT * FROM my_table WHERE $columnExpenseDate = "$date"');
+    Database dbExpense = await instance.database;
+    var listMap = await dbExpense.transaction((txn) async {
+      return await txn.rawQuery('SELECT * FROM my_table WHERE $columnExpenseDate = "$date"');
+    });
     var listMedicines = <ExpenseModel>[];
     for (Map<String, dynamic> m in listMap) {
       listMedicines.add(ExpenseModel.fromJson(m));
@@ -74,8 +78,10 @@ class DatabaseHelper {
 
   Future<String> calculateTotalExpenses(String? dateMonth) async {
     print("datemonth                  "+dateMonth.toString());
-    var dbExpense = await database;
-    var result = await dbExpense.rawQuery("SELECT SUM($columnExpense) FROM my_table WHERE $columnExpenseDateMonth ='$dateMonth'");
+    Database dbExpense = await instance.database;
+    var result = await dbExpense.transaction((txn) async {
+      return await txn.rawQuery("SELECT SUM($columnExpense) FROM my_table WHERE $columnExpenseDateMonth ='$dateMonth'");
+    });
     Object? value = result[0]["SUM($columnExpense)"];
     if (value == null){
       return '0';
@@ -85,8 +91,10 @@ class DatabaseHelper {
   }
 
   calculateCategoryTypeExpensesPerMonth(String? dateMonth, String categoryPersianName) async {
-    var dbExpense = await database;
-    var result = await dbExpense.rawQuery("SELECT SUM($columnExpense) FROM my_table WHERE $columnExpenseDateMonth ='$dateMonth' AND $columnExpenseCategory ='$categoryPersianName' ");
+    Database dbExpense = await instance.database;
+    var result = await dbExpense.transaction((txn) async {
+      return await txn.rawQuery("SELECT SUM($columnExpense) FROM my_table WHERE $columnExpenseDateMonth ='$dateMonth' AND $columnExpenseCategory ='$categoryPersianName' ");
+    });
     Object? value = result[0]["SUM($columnExpense)"];
     if (value == null){
       return '0';
@@ -97,8 +105,10 @@ class DatabaseHelper {
 
   Future<String> calculateCash(String? dateMonth, String? income) async {
     late String cash;
-    var dbExpense = await database;
-    var result = await dbExpense.rawQuery("SELECT SUM($columnExpense) FROM my_table WHERE $columnExpenseDateMonth ='$dateMonth'");
+    Database dbExpense = await instance.database;
+    var result = await dbExpense.transaction((txn) async {
+      return await txn.rawQuery("SELECT SUM($columnExpense) FROM my_table WHERE $columnExpenseDateMonth ='$dateMonth'");
+    });
     Object? value = result[0]["SUM($columnExpense)"];
     if(income == null){
       cash = "";
@@ -106,5 +116,10 @@ class DatabaseHelper {
       cash = value == null ? income :(int.parse(income) - int.parse(value.toString())).toString();
     }
     return cash.toString();
+  }
+
+  Future close() async {
+    Database dbExpense = await instance.database;
+    dbExpense.close();
   }
 }

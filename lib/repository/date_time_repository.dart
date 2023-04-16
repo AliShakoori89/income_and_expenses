@@ -71,7 +71,7 @@ class SetDateRepository {
     return await helper.getAllExpenses(date);
   }
 
-  Future<bool> addExpenseRepo(ExpenseModel expenseModel) async {
+  Future<int> addExpenseRepo(ExpenseModel expenseModel) async {
     return await helper.saveExpense(expenseModel);
   }
 

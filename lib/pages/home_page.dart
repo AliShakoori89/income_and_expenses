@@ -109,10 +109,6 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     );
 
     checkFirstSeen();
-    // if(!isViewed){
-    //   createTutorial();
-    //   Future.delayed(Duration.zero, showTutorial);
-    // }
   }
 
   bool onScrollNotification(ScrollNotification notification) {

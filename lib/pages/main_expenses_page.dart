@@ -221,7 +221,7 @@ class _MainExpensesPageState extends State<MainExpensesPage> {
                                 ],
                               ),
                       ),
-                      Flexible(child: CashContainerPerDate()),
+                      CashContainerPerDate(),
                     ],
                   )
                 ],

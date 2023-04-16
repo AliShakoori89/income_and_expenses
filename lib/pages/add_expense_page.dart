@@ -144,6 +144,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
                     final setDateBloc = BlocProvider.of<SetDateBloc>(context);
 
                     expense.expenseDate = date;
+                    print("expenseDate                "+expense.expenseDate.toString());
                     expense.expenseDateMonth = DateTime.parse(date).month.toString().length != 1
                         ? "${DateTime.parse(date).year}-${DateTime.parse(date).month}"
                         : "${DateTime.parse(date).year}-0${DateTime.parse(date).month}";
