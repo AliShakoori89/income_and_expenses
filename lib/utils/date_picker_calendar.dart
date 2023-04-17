@@ -70,6 +70,8 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                     onTap: () {
                       date = "${DateTime.parse(DateFormat('yyyy-MM-dd').format(DateTime.parse(date)))
                           .add(const Duration(days: -1))}";
+
+                      print("222222222222222222222         "+date);
                       BlocProvider.of<SetDateBloc>(context)
                           .add(ReduceDateEvent(date: DateFormat('yyyy-MM-dd')
                           .format(DateTime.parse(date)).toString()));
@@ -136,6 +138,8 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                         }
                       }
 
+                      print("111111111111111         "+date);
+
                       BlocProvider.of<SetDateBloc>(context)
                           .add(WriteDateEvent(date: date, dateMonth: month));
                       BlocProvider.of<SetDateBloc>(context)
@@ -189,6 +193,8 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                   GestureDetector(
                     onTap: () {
                       date = "${DateTime.parse(DateFormat('yyyy-MM-dd').format(DateTime.parse(date))).add(const Duration(days: 1))}";
+
+                      print("333333333333333333         "+date);
                       BlocProvider.of<SetDateBloc>(context)
                           .add(AddToDateEvent(date: DateFormat('yyyy-MM-dd').format(DateTime.parse(date)).toString()));
                       BlocProvider.of<SetDateBloc>(context)

@@ -46,9 +46,6 @@ class _AppTextFieldState extends State<AppTextField> {
           readOnly: widget.clickable == true ? true : false,
           controller: widget.controller,
           keyboardType: widget.labelText == "هزینه" || widget.labelText == "expense" ? TextInputType.number : null,
-          // inputFormatters: [
-          //   ThousandsFormatter()
-          // ],
           maxLines: widget.labelText == "توضیحات" ? 6 : null,
           decoration: textInputDecoration.copyWith(
               suffixText: widget.labelText == "هزینه" || widget.labelText == "expense" ? "تومان" : "",

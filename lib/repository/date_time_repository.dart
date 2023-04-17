@@ -36,6 +36,7 @@ class SetDateRepository {
 
   Future<String> reduceDate(String date) async{
     final prefs = await SharedPreferences.getInstance();
+    print("44444444444444444           "+date);
     await prefs.setString('date', date);
     return date;
   }
@@ -71,7 +72,7 @@ class SetDateRepository {
     return await helper.getAllExpenses(date);
   }
 
-  Future<int> addExpenseRepo(ExpenseModel expenseModel) async {
+  Future<bool> addExpenseRepo(ExpenseModel expenseModel) async {
     return await helper.saveExpense(expenseModel);
   }
 
