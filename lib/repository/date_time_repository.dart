@@ -76,6 +76,10 @@ class SetDateRepository {
     return await helper.saveExpense(expenseModel);
   }
 
+  deleteExpensesRepo(int id) async {
+    return await helper.deleteItem(id);
+  }
+
   Future<int> updateItem(ExpenseModel expenseModel) async {
     var helper = DatabaseHelper();
     return await helper.updateItem(expenseModel);

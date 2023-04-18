@@ -26,19 +26,16 @@ class EditedPage extends StatefulWidget {
   const EditedPage({Key? key, required this.expenseModel}) : super(key: key);
 
   @override
-  _EditedPageState createState() => _EditedPageState(this.expenseModel);
+  _EditedPageState createState() => _EditedPageState();
 }
 
 class _EditedPageState extends State<EditedPage> {
-  late ExpenseModel expenseModel;
   final _expensesController = TextEditingController();
   final _descriptionController = TextEditingController();
 
   final formKey = GlobalKey<FormState>();
 
   late ExpenseModel _editedExpenses;
-
-  _EditedPageState(ExpenseModel expenseModel);
 
   @override
   void initState() {
@@ -101,7 +98,10 @@ class _EditedPageState extends State<EditedPage> {
                       children: [
                         TextButton(
                             onPressed: (){
-
+                              Navigator.pushNamed(
+                                context,
+                                '/edit_page.dart',
+                              );
                             },
                             child: Text(AppLocale.no.getString(context),
                             style: TextStyle(
@@ -109,7 +109,12 @@ class _EditedPageState extends State<EditedPage> {
                             ),)),
                         TextButton(
                             onPressed: (){
-
+                              final medicineBloc = BlocProvider.of<SetDateBloc>(context);
+                              medicineBloc.add(DeleteItemEvent(widget.expenseModel.id! , widget.expenseModel.expenseDate!));
+                              Navigator.pushNamed(
+                                context,
+                                '/main_expenses_page',
+                              );
                             },
                             child: Text(AppLocale.yes.getString(context),
                               style: TextStyle(

@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:income_and_expenses/bloc/set_date_bloc/bloc.dart';
 import 'package:income_and_expenses/bloc/set_date_bloc/state.dart';
 import 'package:income_and_expenses/model/expense_model.dart';
+import 'package:income_and_expenses/pages/home_page.dart';
 import 'package:income_and_expenses/routes/route_helper.dart';
 import 'package:income_and_expenses/const/app_colors.dart';
 import 'package:income_and_expenses/utils/app_text_field.dart';
@@ -43,7 +44,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
   @override
   Widget build(BuildContext context) {
 
-    BlocProvider.of<SetDateBloc>(context).add(InitialDateEvent());
+    // BlocProvider.of<SetDateBloc>(context).add(InitialDateEvent());
 
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
 
@@ -202,7 +203,11 @@ class _AddExpensePageState extends State<AddExpensePage> {
                     setDateBloc.add(
                         AddOneByOneExpenseEvent(expenseModel: expense));
 
-                    Navigator.pop(context);
+                    Navigator.pushNamed(
+                      context,
+                      '/main_expenses_page',
+                    );
+
                   }
                 },
                 child: Container(

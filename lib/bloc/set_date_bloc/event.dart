@@ -114,6 +114,16 @@ class EditItemEvent extends SetDateEvent{
   List<Object> get props => [expenseModel];
 }
 
+class DeleteItemEvent extends SetDateEvent{
+  final int id;
+  final String date;
+
+  DeleteItemEvent(this.id, this.date);
+
+  @override
+  List<Object> get props => [id, date];
+}
+
 class AddTodayExpensesEvent extends SetDateEvent {
 
   final int todayExpensesDetails;

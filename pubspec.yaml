@@ -45,7 +45,7 @@ dependencies:
   shamsi_date: ^1.0.1
   intl: 0.17.0
   flutter_svg: 2.0.4
-  sqflite: 2.2.6
+  sqflite: ^2.2.6
   path_provider: 2.0.14
   equatable: ^2.0.5
   flutter_bloc: ^8.1.1

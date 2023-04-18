@@ -29,6 +29,7 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
     on<EditItemEvent>(_mapEditExpenseEventToState);
     on<AddTodayExpensesEvent>(_mapAddTodayExpensesEventToState);
     on<ReadTodayExpensesEvent>(_mapReadTodayExpensesEventToState);
+    on<DeleteItemEvent>(_mapDeleteTodayExpensesEventToState);
   }
 
   void _mapReadDateEventToState(
@@ -237,6 +238,23 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
       emit(
         state.copyWith(
           status: SetDateStatus.success,
+        ),
+      );
+    } catch (error) {
+      emit(state.copyWith(status: SetDateStatus.error));
+    }
+  }
+
+  void _mapDeleteTodayExpensesEventToState(
+      DeleteItemEvent event, Emitter<SetDateState> emit) async {
+    try {
+      emit(state.copyWith(status: SetDateStatus.loading));
+      await setDateRepository.deleteExpensesRepo(event.id);
+      final List<ExpenseModel> expenses = await setDateRepository.getAllExpensesRepo(event.date);
+      emit(
+        state.copyWith(
+          status: SetDateStatus.success,
+          expensesDetails : expenses,
         ),
       );
     } catch (error) {

@@ -59,6 +59,12 @@ class DatabaseHelper {
         where: '$columnId = ?', whereArgs: [expense.id]);
   }
 
+  Future<int> deleteItem(int id) async {
+    var dbExpense = await database;
+    return await dbExpense.delete(table,
+        where: '$columnId = ?', whereArgs: [id]);
+  }
+
   Future<List<ExpenseModel>> getAllExpenses(String date) async {
     var dbExpense = await database;
     var listMap = await dbExpense
