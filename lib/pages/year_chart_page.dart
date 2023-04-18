@@ -107,6 +107,77 @@ class _YearChartPageState extends State<YearChartPage> {
                     onChanged: (value) {
                       setState(() {
                         selectedValue = value as String;
+                        BlocProvider.of<CalculateSFCartesianChartBloc>(context).add(
+                            SumExpensesByGroupingTypePerMonthForSFCartesianChartEvent(month: selectedValue!));
+                      });
+                    },
+                    buttonHeight: Dimensions.bottomHeightBar/3,
+                    buttonWidth: Dimensions.width45*3,
+                    buttonPadding: EdgeInsets.only(left: Dimensions.width30, right: Dimensions.width10),
+                    buttonDecoration: BoxDecoration(
+                        color: darkThemeBoolean == "false"
+                            ? AppColors.backGroundColor
+                            : AppColors.darkArrowButtonColor,
+                        borderRadius: BorderRadius.circular(Dimensions.radius5),
+                        border: Border.all(
+                          color: Colors.black26,
+                        ),
+                    ),
+                    buttonElevation: 0,
+                    itemHeight: Dimensions.height45,
+                    itemPadding: EdgeInsets.only(left: Dimensions.width30, right: Dimensions.width30),
+                    dropdownMaxHeight: Dimensions.height45*4,
+                    dropdownWidth: Dimensions.height45*3,
+                    dropdownPadding: null,
+                    dropdownDecoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(Dimensions.radius5),
+                        border: Border.all(
+                          color: Colors.black26,
+                        ),
+                        color: darkThemeBoolean == "false"
+                            ? AppColors.backGroundColor
+                            : AppColors.darkArrowButtonColor
+                    ),
+                    dropdownElevation: 0,
+                    scrollbarRadius:  Radius.circular(Dimensions.radius5),
+                    scrollbarThickness: Dimensions.width10/3,
+                    scrollbarAlwaysShow: true,
+                    offset: const Offset(-20, 0),
+                  ),
+                ),
+                SizedBox(height: Dimensions.height20,),
+                DropdownButtonHideUnderline(
+                  child: DropdownButton2(
+                    isExpanded: true,
+                    hint: Text(
+                      AppLocale.selectMonth.getString(context),
+                      style: TextStyle(
+                          fontSize: Dimensions.font14,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    items: items
+                        .map((item) => DropdownMenuItem<String>(
+                      value: item,
+                      child: Text(
+                        item,
+                        textDirection: TextDirection.rtl,
+                        style: TextStyle(
+                            fontSize: Dimensions.font14,
+                            fontWeight: FontWeight.bold,
+                            color: darkThemeBoolean == "false"
+                                ? Colors.black
+                                : Colors.white
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    )).toList(),
+                    value: selectedValue,
+                    onChanged: (value) {
+                      setState(() {
+                        selectedValue = value as String;
                         BlocProvider.of<CalculateSFCartesianChartBloc>(context).add(SumExpensesByGroupingTypePerMonthForSFCartesianChartEvent(month: selectedValue!));
                       });
                     },
@@ -121,13 +192,13 @@ class _YearChartPageState extends State<YearChartPage> {
                     buttonWidth: Dimensions.width45*3,
                     buttonPadding: EdgeInsets.only(left: Dimensions.width30, right: Dimensions.width10),
                     buttonDecoration: BoxDecoration(
-                        color: darkThemeBoolean == "false"
-                            ? AppColors.backGroundColor
-                            : AppColors.darkArrowButtonColor,
-                        borderRadius: BorderRadius.circular(Dimensions.radius5),
-                        border: Border.all(
-                          color: Colors.black26,
-                        ),
+                      color: darkThemeBoolean == "false"
+                          ? AppColors.backGroundColor
+                          : AppColors.darkArrowButtonColor,
+                      borderRadius: BorderRadius.circular(Dimensions.radius5),
+                      border: Border.all(
+                        color: Colors.black26,
+                      ),
                     ),
                     buttonElevation: 0,
                     itemHeight: Dimensions.height45,

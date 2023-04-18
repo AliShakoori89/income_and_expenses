@@ -47,6 +47,7 @@ mixin AppLocale {
   static const String expensePerYear = "هزینه به تفکیک ماه های سال";
   static const String expenseTypePerYear = "نوع هزینه به تفکیک ماه های سال";
   static const String selectMonth = "انتخاب ماه";
+  static const String selectYear = "انتخاب سال";
 
 
 
@@ -99,7 +100,8 @@ mixin AppLocale {
     theme: "theme",
     expensePerYear: "expense per year",
     expenseTypePerYear: "expense type per year",
-    selectMonth: "select month"
+    selectMonth: "select month",
+    selectYear: "select year"
     };
 
   static const Map<String, dynamic> FA = {
@@ -149,6 +151,7 @@ mixin AppLocale {
     theme: 'پی زمینه',
     expensePerYear: "هزینه به تفکیک ماه های سال",
     expenseTypePerYear : "نوع هزینه به تفکیک ماه های سال",
-    selectMonth: "انتخاب ماه"
+    selectMonth: "انتخاب ماه",
+    selectYear: "انتخاب سال",
   };
 }

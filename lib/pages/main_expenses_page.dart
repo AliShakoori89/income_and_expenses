@@ -74,67 +74,69 @@ class _MainExpensesPageState extends State<MainExpensesPage> {
                         MediaQuery.of(context).size.width, 200)),
               ),
             ),
-            Column(
-              children: [
-                SizedBox(height: Dimensions.height45,),
-                Stack(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Expanded(
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                              top: Dimensions.height10,
-                            ),
-                            child: SizedBox(
-                              key: keyButton1,
-                              height: Dimensions.height10,
-                              width: Dimensions.width10,
-                            ),
-                          ),
-                        ),
-                        SizedBox(width: 130,),
-                        Expanded(
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                              top: Dimensions.height10,
-                            ),
-                            child: SizedBox(
-                              key: keyButton2,
-                              height: Dimensions.height10*2,
-                              width: Dimensions.width10*2,
+            SingleChildScrollView(
+              child: Column(
+                children: [
+                  SizedBox(height: Dimensions.height45,),
+                  Stack(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: EdgeInsets.only(
+                                top: Dimensions.height10,
+                              ),
+                              child: SizedBox(
+                                key: keyButton1,
+                                height: Dimensions.height10,
+                                width: Dimensions.width10,
+                              ),
                             ),
                           ),
-                        ),
-                        SizedBox(width: 130),
-                        Expanded(
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                              top: Dimensions.height10,
-                            ),
-                            child: SizedBox(
-                              key: keyButton3,
-                              height: Dimensions.height10,
-                              width: Dimensions.width10,
+                          const SizedBox(width: 130,),
+                          Expanded(
+                            child: Padding(
+                              padding: EdgeInsets.only(
+                                top: Dimensions.height10,
+                              ),
+                              child: SizedBox(
+                                key: keyButton2,
+                                height: Dimensions.height10*2,
+                                width: Dimensions.width10*2,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                    DatePickerCalendar(),
-                  ],
-                ),
-                SizedBox(
-                  height: Dimensions.height30,
-                ),
-                Column(
-                  children: [
-                    CashContainer(keyButton: keyButton),
-                    const CashContainerPerDate(),
-                  ],
-                ),
-              ],
+                          const SizedBox(width: 130),
+                          Expanded(
+                            child: Padding(
+                              padding: EdgeInsets.only(
+                                top: Dimensions.height10,
+                              ),
+                              child: SizedBox(
+                                key: keyButton3,
+                                height: Dimensions.height10,
+                                width: Dimensions.width10,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const DatePickerCalendar(),
+                    ],
+                  ),
+                  SizedBox(
+                    height: Dimensions.height30,
+                  ),
+                  Column(
+                    children: [
+                      CashContainer(keyButton: keyButton),
+                      const CashContainerPerDate(),
+                    ],
+                  ),
+                ],
+              ),
             )
           ],
         ),
