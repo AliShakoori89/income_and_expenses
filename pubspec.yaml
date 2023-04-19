@@ -58,6 +58,7 @@ dependencies:
   tutorial_coach_mark: ^1.2.8
   is_first_run: ^1.0.0
   timezone: ^0.8.0
+  flutter_linear_datepicker: ^2.0.4
 #  datepicker_dropdown: ^0.0.7+3
 #  flutter_linear_datepicker: ^2.0.4
 #  persian_datepicker:

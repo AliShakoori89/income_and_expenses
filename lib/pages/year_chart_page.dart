@@ -1,8 +1,11 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_linear_datepicker/flutter_datepicker.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:income_and_expenses/const/dimensions.dart';
+import 'package:intl/intl.dart';
+import 'package:persian_datetime_picker/persian_datetime_picker.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import '../bloc/calculate_sf_cartesian_chart/bloc.dart';
 import '../bloc/calculate_sf_cartesian_chart/event.dart';
@@ -74,155 +77,103 @@ class _YearChartPageState extends State<YearChartPage> {
           body: SafeArea(
             child: Column(
               children: [
-                SizedBox(height: Dimensions.height20,),
-                DropdownButtonHideUnderline(
-                  child: DropdownButton2(
-                    isExpanded: true,
-                    hint: Text(
-                      AppLocale.selectMonth.getString(context),
-                      style: TextStyle(
-                          fontSize: Dimensions.font14,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    items: items
-                        .map((item) => DropdownMenuItem<String>(
-                      value: item,
-                      child: Text(
-                        item,
-                        textDirection: TextDirection.rtl,
-                        style: TextStyle(
-                            fontSize: Dimensions.font14,
-                            fontWeight: FontWeight.bold,
-                            color: darkThemeBoolean == "false"
-                                ? Colors.black
-                                : Colors.white
-                        ),
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    )).toList(),
-                    value: selectedValue,
-                    onChanged: (value) {
-                      setState(() {
-                        selectedValue = value as String;
-                        BlocProvider.of<CalculateSFCartesianChartBloc>(context).add(
-                            SumExpensesByGroupingTypePerMonthForSFCartesianChartEvent(month: selectedValue!));
-                      });
-                    },
-                    buttonHeight: Dimensions.bottomHeightBar/3,
-                    buttonWidth: Dimensions.width45*3,
-                    buttonPadding: EdgeInsets.only(left: Dimensions.width30, right: Dimensions.width10),
-                    buttonDecoration: BoxDecoration(
-                        color: darkThemeBoolean == "false"
-                            ? AppColors.backGroundColor
-                            : AppColors.darkArrowButtonColor,
-                        borderRadius: BorderRadius.circular(Dimensions.radius5),
-                        border: Border.all(
-                          color: Colors.black26,
-                        ),
-                    ),
-                    buttonElevation: 0,
-                    itemHeight: Dimensions.height45,
-                    itemPadding: EdgeInsets.only(left: Dimensions.width30, right: Dimensions.width30),
-                    dropdownMaxHeight: Dimensions.height45*4,
-                    dropdownWidth: Dimensions.height45*3,
-                    dropdownPadding: null,
-                    dropdownDecoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(Dimensions.radius5),
-                        border: Border.all(
-                          color: Colors.black26,
-                        ),
-                        color: darkThemeBoolean == "false"
-                            ? AppColors.backGroundColor
-                            : AppColors.darkArrowButtonColor
-                    ),
-                    dropdownElevation: 0,
-                    scrollbarRadius:  Radius.circular(Dimensions.radius5),
-                    scrollbarThickness: Dimensions.width10/3,
-                    scrollbarAlwaysShow: true,
-                    offset: const Offset(-20, 0),
+                SizedBox(height: Dimensions.height45,),
+                // DropdownButtonHideUnderline(
+                //   child: DropdownButton2(
+                //     isExpanded: true,
+                //     hint: Text(
+                //       AppLocale.selectMonth.getString(context),
+                //       style: TextStyle(
+                //           fontSize: Dimensions.font14,
+                //           fontWeight: FontWeight.bold,
+                //           color: Colors.black
+                //       ),
+                //       overflow: TextOverflow.ellipsis,
+                //     ),
+                //     items: items
+                //         .map((item) => DropdownMenuItem<String>(
+                //       value: item,
+                //       child: Text(
+                //         item,
+                //         textDirection: TextDirection.rtl,
+                //         style: TextStyle(
+                //             fontSize: Dimensions.font14,
+                //             fontWeight: FontWeight.bold,
+                //             color: darkThemeBoolean == "false"
+                //                 ? Colors.black
+                //                 : Colors.white
+                //         ),
+                //         overflow: TextOverflow.ellipsis,
+                //       ),
+                //     )).toList(),
+                //     value: selectedValue,
+                //     onChanged: (value) {
+                //       setState(() {
+                //         selectedValue = value as String;
+                //         BlocProvider.of<CalculateSFCartesianChartBloc>(context).add(SumExpensesByGroupingTypePerMonthForSFCartesianChartEvent(month: selectedValue!));
+                //       });
+                //     },
+                //     buttonHeight: Dimensions.bottomHeightBar/3,
+                //     buttonWidth: Dimensions.width45*3,
+                //     buttonPadding: EdgeInsets.only(left: Dimensions.width30, right: Dimensions.width10),
+                //     buttonDecoration: BoxDecoration(
+                //       color: darkThemeBoolean == "false"
+                //           ? AppColors.backGroundColor
+                //           : AppColors.darkArrowButtonColor,
+                //       borderRadius: BorderRadius.circular(Dimensions.radius5),
+                //       border: Border.all(
+                //         color: Colors.black26,
+                //       ),
+                //     ),
+                //     buttonElevation: 0,
+                //     itemHeight: Dimensions.height45,
+                //     itemPadding: EdgeInsets.only(left: Dimensions.width30, right: Dimensions.width30),
+                //     dropdownMaxHeight: Dimensions.height45*4,
+                //     dropdownWidth: Dimensions.height45*3,
+                //     dropdownPadding: null,
+                //     dropdownDecoration: BoxDecoration(
+                //         borderRadius: BorderRadius.circular(Dimensions.radius5),
+                //         border: Border.all(
+                //           color: Colors.black26,
+                //         ),
+                //         color: darkThemeBoolean == "false"
+                //             ? AppColors.backGroundColor
+                //             : AppColors.darkArrowButtonColor
+                //     ),
+                //     dropdownElevation: 0,
+                //     scrollbarRadius:  Radius.circular(Dimensions.radius5),
+                //     scrollbarThickness: Dimensions.width10/3,
+                //     scrollbarAlwaysShow: true,
+                //     offset: const Offset(-20, 0),
+                //   ),
+                // ),
+                LinearDatePicker(
+                  startDate: "1396/01",
+                  endDate: "1499/12",
+                  dateChangeListener: (String selectedDate) {
+                    print(selectedDate);
+                  },
+                  showDay: false,
+                  selectedRowStyle: TextStyle(
+                    fontFamily: 'iran',
+                    fontSize: Dimensions.font20,
+                    color: darkThemeBoolean == "false" ? AppColors.mainColor : Colors.white,
+                    fontWeight: FontWeight.bold,
                   ),
-                ),
-                SizedBox(height: Dimensions.height20,),
-                DropdownButtonHideUnderline(
-                  child: DropdownButton2(
-                    isExpanded: true,
-                    hint: Text(
-                      AppLocale.selectMonth.getString(context),
-                      style: TextStyle(
-                          fontSize: Dimensions.font14,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    items: items
-                        .map((item) => DropdownMenuItem<String>(
-                      value: item,
-                      child: Text(
-                        item,
-                        textDirection: TextDirection.rtl,
-                        style: TextStyle(
-                            fontSize: Dimensions.font14,
-                            fontWeight: FontWeight.bold,
-                            color: darkThemeBoolean == "false"
-                                ? Colors.black
-                                : Colors.white
-                        ),
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    )).toList(),
-                    value: selectedValue,
-                    onChanged: (value) {
-                      setState(() {
-                        selectedValue = value as String;
-                        BlocProvider.of<CalculateSFCartesianChartBloc>(context).add(SumExpensesByGroupingTypePerMonthForSFCartesianChartEvent(month: selectedValue!));
-                      });
-                    },
-                    // buttonStyleData: const ButtonStyleData(
-                    //   height: 40,
-                    //   width: 140,
-                    // ),
-                    // menuItemStyleData: const MenuItemStyleData(
-                    //   height: 40,
-                    // ),
-                    buttonHeight: Dimensions.bottomHeightBar/3,
-                    buttonWidth: Dimensions.width45*3,
-                    buttonPadding: EdgeInsets.only(left: Dimensions.width30, right: Dimensions.width10),
-                    buttonDecoration: BoxDecoration(
-                      color: darkThemeBoolean == "false"
-                          ? AppColors.backGroundColor
-                          : AppColors.darkArrowButtonColor,
-                      borderRadius: BorderRadius.circular(Dimensions.radius5),
-                      border: Border.all(
-                        color: Colors.black26,
-                      ),
-                    ),
-                    buttonElevation: 0,
-                    itemHeight: Dimensions.height45,
-                    itemPadding: EdgeInsets.only(left: Dimensions.width30, right: Dimensions.width30),
-                    dropdownMaxHeight: Dimensions.height45*4,
-                    dropdownWidth: Dimensions.height45*3,
-                    dropdownPadding: null,
-                    dropdownDecoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(Dimensions.radius5),
-                        border: Border.all(
-                          color: Colors.black26,
-                        ),
-                        color: darkThemeBoolean == "false"
-                            ? AppColors.backGroundColor
-                            : AppColors.darkArrowButtonColor
-                    ),
-                    dropdownElevation: 0,
-                    scrollbarRadius:  Radius.circular(Dimensions.radius5),
-                    scrollbarThickness: Dimensions.width10/3,
-                    scrollbarAlwaysShow: true,
-                    offset: const Offset(-20, 0),
+                  yearText: "سال | year",
+                  monthText: "ماه | month",
+                  labelStyle: TextStyle(
+                    color: darkThemeBoolean == "false" ? Colors.black : Colors.white,
                   ),
+                  unselectedRowStyle: TextStyle(
+                    color: darkThemeBoolean == "false" ? Colors.black : Colors.white,
+                  ),
+                  showLabels: true,
+                  columnWidth: Dimensions.width45*2,
+                  showMonthName: true,
+                  isJalaali: true,
                 ),
-                SizedBox(height: Dimensions.height45*5,),
+                SizedBox(height: Dimensions.height45*3,),
                 SfCartesianChart(
                     margin: EdgeInsets.only(
                       top: Dimensions.height20,
@@ -238,7 +189,8 @@ class _YearChartPageState extends State<YearChartPage> {
                             : const TextStyle(
                             color: Colors.white
                         )),
-                    primaryXAxis: CategoryAxis(),
+                    primaryXAxis: CategoryAxis(
+                    ),
                     primaryYAxis: NumericAxis(minimum: 0, maximum: 100, interval: 10),
                     tooltipBehavior: _tooltip,
                     series: <ChartSeries<_ChartData, String>>[
@@ -257,7 +209,7 @@ class _YearChartPageState extends State<YearChartPage> {
                               )),
                           onCreateRenderer: (ChartSeries<_ChartData, String> series) =>
                               _CustomColumnSeriesRenderer(),
-                          color: AppColors.chartColor),
+                          color: AppColors.chartColor,),
                     ]
                 ),
                 SizedBox(height: Dimensions.height20,),
