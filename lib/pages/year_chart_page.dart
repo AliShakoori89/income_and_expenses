@@ -152,6 +152,11 @@ class _YearChartPageState extends State<YearChartPage> {
                   endDate: "1499/12",
                   dateChangeListener: (String selectedDate) {
                     print(selectedDate);
+                      selectedValue = selectedDate;
+                      print("################        "+selectedValue!.split("/").first);
+                      BlocProvider.of<CalculateSFCartesianChartBloc>(context).add(
+                          SumExpensesByGroupingTypePerMonthForSFCartesianChartEvent(year: selectedValue!.split("/").first, month: selectedValue!.split("/").last));
+
                   },
                   showDay: false,
                   selectedRowStyle: TextStyle(

@@ -4,11 +4,12 @@ abstract class CalculateSFCartesianChartEvent{
 }
 
 class SumExpensesByGroupingTypePerMonthForSFCartesianChartEvent extends CalculateSFCartesianChartEvent{
+  final String year;
   final String month;
 
   SumExpensesByGroupingTypePerMonthForSFCartesianChartEvent(
-      {required this.month});
+      {required this.year, required this.month});
 
   @override
-  List<Object> get props => [month];
+  List<Object> get props => [year, month];
 }
