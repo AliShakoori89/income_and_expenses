@@ -1,4 +1,3 @@
-import 'package:shamsi_date/shamsi_date.dart';
 import '../data_base/data_base.dart';
 
 class CalculateSFCartesianChartRepository {
@@ -8,7 +7,7 @@ class CalculateSFCartesianChartRepository {
     helper = DatabaseHelper();
   }
 
-  Future<String> calculateExpenseByGroupingTypePerMonthRepo(String year, String monthName ,String categoryPersianName) async {
+  Future<String?> calculateExpenseByGroupingTypePerMonthRepo(String year, String monthName ,String categoryPersianName) async {
 
     if(monthName == "1"){
       return await helper.calculateCategoryTypeExpensesPerMonth("$year-01", categoryPersianName);
@@ -17,7 +16,7 @@ class CalculateSFCartesianChartRepository {
     }else if(monthName == "3"){
       return await helper.calculateCategoryTypeExpensesPerMonth("$year-03", categoryPersianName);
     }else if(monthName == "4"){
-      return await helper.calculateCategoryTypeExpensesPerMonth("$year}-04", categoryPersianName);
+      return await helper.calculateCategoryTypeExpensesPerMonth("$year-04", categoryPersianName);
     }else if(monthName == "5"){
       return await helper.calculateCategoryTypeExpensesPerMonth("$year-05", categoryPersianName);
     }else if(monthName == "6"){
@@ -32,8 +31,9 @@ class CalculateSFCartesianChartRepository {
       return await helper.calculateCategoryTypeExpensesPerMonth("$year-10", categoryPersianName);
     }else if(monthName == "11"){
       return await helper.calculateCategoryTypeExpensesPerMonth("$year-11", categoryPersianName);
-    }else{
+    }else if(monthName == "12"){
       return await helper.calculateCategoryTypeExpensesPerMonth("$year-12", categoryPersianName);
     }
+    return null;
   }
 }
