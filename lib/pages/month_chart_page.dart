@@ -4,8 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:persian_number_utility/persian_number_utility.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-import '../bloc/calculate_sf_cartesian_chart/bloc.dart';
-import '../bloc/calculate_sf_cartesian_chart/event.dart';
 import '../bloc/calculate_sf_circular_chart/bloc.dart';
 import '../bloc/calculate_sf_circular_chart/event.dart';
 import '../bloc/calculate_sf_circular_chart/state.dart';
@@ -16,7 +14,6 @@ import '../bloc/them_bloc/state.dart';
 import '../const/app_colors.dart';
 import '../const/dimensions.dart';
 import '../const/language.dart';
-import '../repository/calculate_sf_circular_chart_repository.dart';
 import '../utils/no_data.dart';
 
 class MonthChart extends StatefulWidget {
@@ -117,7 +114,6 @@ class _MonthChartState extends State<MonthChart> {
                     onChanged: (value) {
                       setState(() {
                         selectedValue = value as String;
-                        print("11111111111            "+selectedValue.toString());
                         BlocProvider.of<CalculateSFCircularChartBloc>(context).add(SumExpensesPerMonthForCircularChartEvent(selectedValue!));
                       });
                     },

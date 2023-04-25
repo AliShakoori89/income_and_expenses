@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localization/flutter_localization.dart';
-import 'package:get/get.dart';
 import 'package:income_and_expenses/bloc/set_date_bloc/bloc.dart';
 import 'package:income_and_expenses/bloc/set_date_bloc/state.dart';
 import 'package:income_and_expenses/model/expense_model.dart';
-import 'package:income_and_expenses/routes/route_helper.dart';
 import 'package:income_and_expenses/const/app_colors.dart';
 import 'package:income_and_expenses/utils/app_text_field.dart';
 import 'package:income_and_expenses/utils/arrow_back_icon.dart';
@@ -42,8 +40,6 @@ class _AddExpensePageState extends State<AddExpensePage> {
 
   @override
   Widget build(BuildContext context) {
-
-    // BlocProvider.of<SetDateBloc>(context).add(InitialDateEvent());
 
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
 
@@ -143,7 +139,6 @@ class _AddExpensePageState extends State<AddExpensePage> {
                     late ExpenseModel expense = ExpenseModel();
                     final setDateBloc = BlocProvider.of<SetDateBloc>(context);
 
-                    print("----------------------------"+date);
                     expense.expenseDate = date;
                     expense.expenseDateMonth = DateTime.parse(date).month.toString().length != 1
                         ? "${DateTime.parse(date).year}-${DateTime.parse(date).month}"
@@ -202,7 +197,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
                     setDateBloc.add(
                         AddOneByOneExpenseEvent(expenseModel: expense, date: date));
 
-                    Navigator.pop(context);
+                    Navigator.pushNamed(context, '/main_expenses_page');
                   }
                 },
                 child: Container(

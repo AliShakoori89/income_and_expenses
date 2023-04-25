@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localization/flutter_localization.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:persian_number_utility/persian_number_utility.dart';
 import '../bloc/change_language_bloc/bloc.dart';
 import '../bloc/change_language_bloc/state.dart';
@@ -15,10 +13,8 @@ import '../const/app_colors.dart';
 import '../const/dimensions.dart';
 import '../const/language.dart';
 import '../model/expense_model.dart';
-import '../routes/route_helper.dart';
 import '../utils/app_text_field.dart';
 import '../utils/arrow_back_icon.dart';
-import '../utils/date_picker_calendar.dart';
 import '../utils/widget.dart';
 
 class EditedPage extends StatefulWidget {

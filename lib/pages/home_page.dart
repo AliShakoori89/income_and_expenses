@@ -140,8 +140,10 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     });
   }
 
-  void showTutorial() {
+  void showTutorial() async{
     tutorialCoachMark.show(context: context);
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('seen', true);
   }
 
   void createTutorial() {
@@ -429,11 +431,12 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
   Future checkFirstSeen() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool seen = (prefs.getBool('seen') ?? false);
+    bool? seen = (prefs.getBool('seen') == null ? false : true );
 
-    if (seen) {
+    if (seen == true) {
     } else {
       await prefs.setBool('seen', true);
+      seen = prefs.getBool('seen');
         createTutorial();
         Future.delayed(Duration.zero, showTutorial);
     }

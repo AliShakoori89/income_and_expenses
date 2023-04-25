@@ -15,7 +15,6 @@ class CalculateSFCircularChartBloc extends Bloc<CalculateSFCircularChartEvent, C
       SumExpensesPerMonthForCircularChartEvent event, Emitter<CalculateSFCircularChartState> emit) async {
     try {
       emit(state.copyWith(status: CalculateSFCircularChartStatus.loading));
-      print('22222222222           '+event.year);
       String farvardinExpenses = await calculateSFCircularChartRepository.calculateExpensePerMonthRepo(event.year, 'farvardin');
       String ordibeheshtExpenses = await calculateSFCircularChartRepository.calculateExpensePerMonthRepo(event.year, 'ordibehesht');
       String khordadExpenses = await calculateSFCircularChartRepository.calculateExpensePerMonthRepo(event.year, 'khordad');
