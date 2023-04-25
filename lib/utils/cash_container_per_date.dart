@@ -63,7 +63,7 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
             child: BlocBuilder<SetDateBloc, SetDateState>(
                 builder: (context, state) {
               int allTodayExpenses = 0;
-              BlocProvider.of<SetDateBloc>(context).add(ReadTodayExpensesEvent());
+              // BlocProvider.of<SetDateBloc>(context).add(ReadTodayExpensesEvent());
               // BlocProvider.of<SetDateBloc>(context).add(FetchExpensesEvent(date: state.date));
 
               return state.status.isLoading

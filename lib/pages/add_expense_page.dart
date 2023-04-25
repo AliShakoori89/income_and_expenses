@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:income_and_expenses/bloc/set_date_bloc/bloc.dart';
 import 'package:income_and_expenses/bloc/set_date_bloc/state.dart';
 import 'package:income_and_expenses/model/expense_model.dart';
-import 'package:income_and_expenses/pages/home_page.dart';
 import 'package:income_and_expenses/routes/route_helper.dart';
 import 'package:income_and_expenses/const/app_colors.dart';
 import 'package:income_and_expenses/utils/app_text_field.dart';
@@ -201,12 +200,9 @@ class _AddExpensePageState extends State<AddExpensePage> {
                     }
 
                     setDateBloc.add(
-                        AddOneByOneExpenseEvent(expenseModel: expense));
+                        AddOneByOneExpenseEvent(expenseModel: expense, date: date));
 
-                    Navigator.pop(
-                      context
-                    );
-
+                    Navigator.pop(context);
                   }
                 },
                 child: Container(

@@ -95,14 +95,14 @@ class FetchExpensesEvent extends SetDateEvent {
 }
 
 class AddOneByOneExpenseEvent extends SetDateEvent {
-
   final ExpenseModel expenseModel;
+  final String date;
 
   AddOneByOneExpenseEvent(
-      {required this.expenseModel});
+      {required this.expenseModel, required this.date});
 
   @override
-  List<Object> get props => [expenseModel];
+  List<Object> get props => [expenseModel, date];
 }
 
 class EditItemEvent extends SetDateEvent{

@@ -220,9 +220,12 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
     try {
       emit(state.copyWith(status: SetDateStatus.loading));
       await setDateRepository.addExpenseRepo(event.expenseModel);
+      final List<ExpenseModel> expensesDetails =
+      await setDateRepository.getAllExpensesRepo(event.date);
       emit(
         state.copyWith(
           status: SetDateStatus.success,
+          expensesDetails: expensesDetails
         ),
       );
     } catch (error) {
