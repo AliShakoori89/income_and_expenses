@@ -203,9 +203,8 @@ class _AddExpensePageState extends State<AddExpensePage> {
                     setDateBloc.add(
                         AddOneByOneExpenseEvent(expenseModel: expense));
 
-                    Navigator.pushNamed(
-                      context,
-                      '/main_expenses_page',
+                    Navigator.pop(
+                      context
                     );
 
                   }

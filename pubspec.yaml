@@ -37,7 +37,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   persian_number_utility: ^1.1.2
-  device_preview: ^1.1.0
+#  device_preview: ^1.1.0
   get: ^4.6.5
   persian_datetimepickers: ^1.0.3
   animated_bottom_navigation_bar: 1.2.0
@@ -54,6 +54,7 @@ dependencies:
   expandable: ^5.0.1
   syncfusion_flutter_charts: 20.4.54
   persian_datetime_picker: ^2.5.0
+  dropdown_button2: ^1.0.0
   tutorial_coach_mark: ^1.2.8
   is_first_run: ^1.0.0
   timezone: ^0.8.0

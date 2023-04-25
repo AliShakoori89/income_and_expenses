@@ -79,6 +79,8 @@ class DatabaseHelper {
 
 
   Future<String> calculateTotalExpenses(String? dateMonth) async {
+
+    print("333333333333333            "+dateMonth.toString());
     var dbExpense = await database;
     var result = await dbExpense.rawQuery("SELECT SUM($columnExpense) FROM my_table WHERE $columnExpenseDateMonth ='$dateMonth'");
     Object? value = result[0]["SUM($columnExpense)"];
@@ -92,6 +94,17 @@ class DatabaseHelper {
   calculateCategoryTypeExpensesPerMonth(String? dateMonth, String categoryPersianName) async {
     var dbExpense = await database;
     var result = await dbExpense.rawQuery("SELECT SUM($columnExpense) FROM my_table WHERE $columnExpenseDateMonth ='$dateMonth' AND $columnExpenseCategory ='$categoryPersianName' ");
+    Object? value = result[0]["SUM($columnExpense)"];
+    if (value == null){
+      return '0';
+    }else{
+      return "$value";
+    }
+  }
+
+  calculateExpensesInYearPerMonth(String? dateMonth) async {
+    var dbExpense = await database;
+    var result = await dbExpense.rawQuery("SELECT SUM($columnExpense) FROM my_table WHERE $columnExpenseDateMonth ='$dateMonth'");
     Object? value = result[0]["SUM($columnExpense)"];
     if (value == null){
       return '0';

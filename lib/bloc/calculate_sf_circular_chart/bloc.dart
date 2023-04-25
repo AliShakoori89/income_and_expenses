@@ -15,18 +15,19 @@ class CalculateSFCircularChartBloc extends Bloc<CalculateSFCircularChartEvent, C
       SumExpensesPerMonthForCircularChartEvent event, Emitter<CalculateSFCircularChartState> emit) async {
     try {
       emit(state.copyWith(status: CalculateSFCircularChartStatus.loading));
-      String farvardinExpenses = await calculateSFCircularChartRepository.calculateExpensePerMonthRepo('farvardin');
-      String ordibeheshtExpenses = await calculateSFCircularChartRepository.calculateExpensePerMonthRepo('ordibehesht');
-      String khordadExpenses = await calculateSFCircularChartRepository.calculateExpensePerMonthRepo('khordad');
-      String tirExpenses = await calculateSFCircularChartRepository.calculateExpensePerMonthRepo('tir');
-      String mordadExpenses = await calculateSFCircularChartRepository.calculateExpensePerMonthRepo('mordad');
-      String shahrivarExpenses = await calculateSFCircularChartRepository.calculateExpensePerMonthRepo('shahrivar');
-      String mehrExpenses = await calculateSFCircularChartRepository.calculateExpensePerMonthRepo('mehr');
-      String abanExpenses = await calculateSFCircularChartRepository.calculateExpensePerMonthRepo('aban');
-      String azarExpenses = await calculateSFCircularChartRepository.calculateExpensePerMonthRepo('azar');
-      String deyExpenses = await calculateSFCircularChartRepository.calculateExpensePerMonthRepo('dey');
-      String bahmanExpenses = await calculateSFCircularChartRepository.calculateExpensePerMonthRepo('bahman');
-      String esfandExpenses = await calculateSFCircularChartRepository.calculateExpensePerMonthRepo('esfand');
+      print('22222222222           '+event.year);
+      String farvardinExpenses = await calculateSFCircularChartRepository.calculateExpensePerMonthRepo(event.year, 'farvardin');
+      String ordibeheshtExpenses = await calculateSFCircularChartRepository.calculateExpensePerMonthRepo(event.year, 'ordibehesht');
+      String khordadExpenses = await calculateSFCircularChartRepository.calculateExpensePerMonthRepo(event.year, 'khordad');
+      String tirExpenses = await calculateSFCircularChartRepository.calculateExpensePerMonthRepo(event.year, 'tir');
+      String mordadExpenses = await calculateSFCircularChartRepository.calculateExpensePerMonthRepo(event.year, 'mordad');
+      String shahrivarExpenses = await calculateSFCircularChartRepository.calculateExpensePerMonthRepo(event.year, 'shahrivar');
+      String mehrExpenses = await calculateSFCircularChartRepository.calculateExpensePerMonthRepo(event.year, 'mehr');
+      String abanExpenses = await calculateSFCircularChartRepository.calculateExpensePerMonthRepo(event.year, 'aban');
+      String azarExpenses = await calculateSFCircularChartRepository.calculateExpensePerMonthRepo(event.year, 'azar');
+      String deyExpenses = await calculateSFCircularChartRepository.calculateExpensePerMonthRepo(event.year, 'dey');
+      String bahmanExpenses = await calculateSFCircularChartRepository.calculateExpensePerMonthRepo(event.year, 'bahman');
+      String esfandExpenses = await calculateSFCircularChartRepository.calculateExpensePerMonthRepo(event.year, 'esfand');
 
       emit(
         state.copyWith(

@@ -6,6 +6,7 @@ import 'package:income_and_expenses/bloc/set_date_bloc/bloc.dart';
 import 'package:income_and_expenses/bloc/set_date_bloc/state.dart';
 import 'package:income_and_expenses/const/app_colors.dart';
 import 'package:income_and_expenses/const/dimensions.dart';
+import 'package:intl/intl.dart';
 import 'package:persian_datetime_picker/persian_datetime_picker.dart';
 import 'package:persian_number_utility/persian_number_utility.dart';
 import '../bloc/change_currency_bloc/bloc.dart';
@@ -31,8 +32,9 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
 
   @override
   void initState() {
+    String selectedDate = DateFormat('yyyy-MM-dd').format(DateTime.parse(Jalali.now().toJalaliDateTime()));
     BlocProvider.of<SetDateBloc>(context).add(
-        FetchExpensesEvent(date: "${Jalali.now().year}-${Jalali.now().month}-0${Jalali.now().day}"));
+        FetchExpensesEvent(date: selectedDate));
     super.initState();
   }
 
@@ -62,7 +64,7 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                 builder: (context, state) {
               int allTodayExpenses = 0;
               BlocProvider.of<SetDateBloc>(context).add(ReadTodayExpensesEvent());
-              BlocProvider.of<SetDateBloc>(context).add(FetchExpensesEvent(date: state.date));
+              // BlocProvider.of<SetDateBloc>(context).add(FetchExpensesEvent(date: state.date));
 
               return state.status.isLoading
                   ? const Center(child: CircularProgressIndicator())

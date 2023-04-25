@@ -45,7 +45,7 @@ mixin AppLocale {
   static const String rial = "ریال";
   static const String theme = "پس زمینه";
   static const String expensePerYear = "هزینه به تفکیک ماه های سال";
-  static const String expenseTypePerYear = "نوع هزینه به تفکیک ماه های سال";
+  static const String expenseTypePerYear = "میزان هزینه به تفکیک ماه های سال";
   static const String selectMonth = "انتخاب ماه";
   static const String selectYear = "انتخاب سال";
 
@@ -150,7 +150,7 @@ mixin AppLocale {
     rial: 'ریال',
     theme: 'پی زمینه',
     expensePerYear: "هزینه به تفکیک ماه های سال",
-    expenseTypePerYear : "نوع هزینه به تفکیک ماه های سال",
+    expenseTypePerYear : "میزان هزینه به تفکیک ماه های سال",
     selectMonth: "انتخاب ماه",
     selectYear: "انتخاب سال",
   };
