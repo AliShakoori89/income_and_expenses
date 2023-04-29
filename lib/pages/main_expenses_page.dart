@@ -93,7 +93,7 @@ class _MainExpensesPageState extends State<MainExpensesPage> {
                               ),
                             ),
                           ),
-                          const SizedBox(width: 130,),
+                          SizedBox(width: Dimensions.width45*3),
                           Expanded(
                             child: Padding(
                               padding: EdgeInsets.only(
@@ -106,7 +106,7 @@ class _MainExpensesPageState extends State<MainExpensesPage> {
                               ),
                             ),
                           ),
-                          const SizedBox(width: 130),
+                          SizedBox(width: Dimensions.width45*3),
                           Expanded(
                             child: Padding(
                               padding: EdgeInsets.only(

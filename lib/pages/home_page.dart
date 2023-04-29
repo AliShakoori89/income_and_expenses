@@ -529,7 +529,7 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
               final color = isActive ? AppColors.mainColor : AppColors.iconUnSelectedBackGroundMainColor;
               return Icon(
                 iconList[index],
-                size: 24,
+                size: Dimensions.font24,
                 color: color,
               );
             },
