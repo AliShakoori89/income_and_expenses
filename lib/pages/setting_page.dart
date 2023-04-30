@@ -24,6 +24,7 @@ class ProfilePage extends StatelessWidget {
             ? Colors.white
             : AppColors.darkThemeColor,
       appBar: AppBar(
+        toolbarHeight: 20,
         backgroundColor: darkThemeBoolean == "false"
             ? AppColors.profileAppBarColor
             : AppColors.darkThemeColor,

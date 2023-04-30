@@ -188,7 +188,7 @@ class _SettingItemListState extends State<SettingItemList> {
           // frequently asked question
           GestureDetector(
             onTap: (){
-              // Get.toNamed(RouteHelper.getFrequentlyAskedQuestions());
+              Get.toNamed(RouteHelper.getFrequentlyAskedQuestions());
             },
             child: Center(
               child: SettingItems(

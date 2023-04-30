@@ -270,10 +270,9 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                                 ),
                               ],
                             )
-                          : Padding(
-                            padding: EdgeInsets.only(top: Dimensions.height45*2),
-                            child: const NoDataPage(),
-                          )
+                          : const Center(
+                              child: NoDataPage(),
+                            )
                       : state.status.isError
                           ? Center(
                               child: Text(
