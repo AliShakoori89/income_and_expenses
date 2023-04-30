@@ -61,10 +61,10 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
 
       return Container(
-        height: Dimensions.height45*4.5,
+        height: Dimensions.height45*5,
         margin: EdgeInsets.only(
-          left: Dimensions.width20,
-          right: Dimensions.width20,
+          left: Dimensions.width30,
+          right: Dimensions.width30,
         ),
         decoration: BoxDecoration(
           color: AppColors.cashContainerColor,
@@ -94,9 +94,10 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                                       alignment: Alignment.topLeft,
                                       child: Container(
                                         height: Dimensions.height45*2.2,
-                                        width: Dimensions.width45*3.5,
+                                        width: Dimensions.width45*4,
                                         decoration: BoxDecoration(
-                                            border: Border.all(color: AppColors.cashContainerShapeBorderColor),
+                                            border: Border.all(color: AppColors.cashContainerShapeBorderColor,
+                                                width: 2),
                                             borderRadius: BorderRadius.only(
                                                 bottomLeft: Radius.circular(Dimensions.radius20*2),
                                               topLeft: Radius.circular(Dimensions.radius20*2),
@@ -116,13 +117,13 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                                             Text(AppLocale.expenses.getString(context),
                                                 style: TextStyle(
                                                     color: Colors.white,
-                                                    fontSize: Dimensions.font16,
+                                                    fontSize: Dimensions.font20,
                                                   fontWeight: FontWeight.w800,)),
                                             SizedBox(width: Dimensions.width10,),
                                             // const AnimatedModalBarrierApp(),
                                             Image.asset(
                                                 "assets/main_page_first_container_logo/darkExpenses.png",
-                                            scale: Dimensions.width10/12),
+                                            scale: Dimensions.width10/8),
                                           ],
                                         ),
                                         SizedBox(
@@ -150,7 +151,7 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.w800,
                                                     color: Colors.white,
-                                                    fontSize: Dimensions.font16)),
+                                                    fontSize: Dimensions.font26)),
                                           ],
                                         )
                                             : Row(
@@ -165,7 +166,7 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.w800,
                                                     color: Colors.white,
-                                                    fontSize: Dimensions.font14)),
+                                                    fontSize: Dimensions.font26)),
                                             SizedBox(width: Dimensions.width10 / 3),
                                             Text(
                                                 state.expenses != ""
@@ -199,13 +200,13 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                                             Text(AppLocale.cash.getString(context),
                                                 style: TextStyle(
                                                     color: Colors.white,
-                                                    fontSize: Dimensions.font16,
+                                                    fontSize: Dimensions.font20,
                                                   fontWeight: FontWeight.w800,)),
                                             SizedBox(
                                                 width: Dimensions.width10),
                                             Image.asset(
                                                 "assets/main_page_first_container_logo/darkBalance.png",
-                                                scale: Dimensions.width10/12),
+                                                scale: Dimensions.width10/8),
                                           ],
                                         ),
                                         SizedBox(
@@ -234,7 +235,7 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.w800,
                                                     color: Colors.white,
-                                                    fontSize: Dimensions.font16)),
+                                                    fontSize: Dimensions.font26)),
                                           ],
                                         )
                                             : Row(
@@ -249,7 +250,7 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.w800,
                                                     color: Colors.white,
-                                                    fontSize: Dimensions.font14)),
+                                                    fontSize: Dimensions.font26)),
                                             SizedBox(width: Dimensions.width10 / 3),
                                             Text(
                                                 state.calculateCash != ""
@@ -269,9 +270,11 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                                       alignment: Alignment.bottomRight,
                                       child: Container(
                                         height: Dimensions.height45*2.2,
-                                        width: Dimensions.width45*3.5,
+                                        width: Dimensions.width45*4,
                                         decoration: BoxDecoration(
-                                            border: Border.all(color: AppColors.cashContainerShapeBorderColor),
+                                            border: Border.all(
+                                                color: AppColors.cashContainerShapeBorderColor,
+                                            width: 2),
                                             borderRadius: BorderRadius.only(
                                               bottomRight: Radius.circular(Dimensions.radius20*2),
                                               bottomLeft: Radius.circular(Dimensions.radius20*2),
@@ -289,7 +292,7 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                                                     textDirection: TextDirection.rtl,
                                                     style:
                                                     TextStyle(
-                                                        fontSize: Dimensions.font16,
+                                                        fontSize: Dimensions.font20,
                                                       fontWeight: FontWeight.w800,),
                                                   ),
                                                   content: Text(
@@ -298,7 +301,7 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                                                       textDirection: TextDirection.rtl,
                                                       style: TextStyle(
                                                           fontWeight: FontWeight.w800,
-                                                          fontSize: Dimensions.font14)),
+                                                          fontSize: Dimensions.font20)),
                                                   actions: <Widget>[
                                                     Directionality(
                                                       textDirection: TextDirection.rtl,
@@ -353,7 +356,7 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                                                         style: TextStyle(
                                                           color: Colors.white,
                                                           fontWeight: FontWeight.w800,
-                                                          fontSize: Dimensions.font16,
+                                                          fontSize: Dimensions.font20,
                                                         )),
                                                     SizedBox(
                                                         width: Dimensions.width10),
@@ -361,23 +364,15 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                                                       animation: animationController,
                                                       builder: (context, child) {
                                                         return SizedBox(
-                                                          width: Dimensions.width20* animationController.value,
-                                                          height: Dimensions.height20* animationController.value,
+                                                          width: Dimensions.width30* animationController.value,
+                                                          height: Dimensions.height30* animationController.value,
                                                           child: Image.asset(
                                                               key: keyButton,
                                                               "assets/main_page_first_container_logo/darkIncome.png",
                                                               color: Colors.green,
+                                                            scale: Dimensions.width10/8,
                                                               ),
                                                         );
-                                                          // Container(
-                                                          // decoration: ShapeDecoration(
-                                                          //   color: Colors.white.withOpacity(0.5),
-                                                          //   shape: CircleBorder(),
-                                                          // ),
-                                                          // child: Padding(
-                                                          //   padding: EdgeInsets.all(8.0 * animationController.value), child:
-                                                          // ),
-                                                        // );
                                                       }
                                                     ),
                                                   ],
@@ -415,7 +410,7 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                                                         style: TextStyle(
                                                             color: Colors.white,
                                                             fontWeight: FontWeight.w800,
-                                                            fontSize: Dimensions.font16)),
+                                                            fontSize: Dimensions.font26)),
                                                   ],
                                                 )
                                                     : Row(
@@ -431,7 +426,7 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                                                         style: TextStyle(
                                                             color: Colors.white,
                                                             fontWeight: FontWeight.w800,
-                                                            fontSize: Dimensions.font14)),
+                                                            fontSize: Dimensions.font26)),
                                                     SizedBox(
                                                         width: Dimensions.width10 / 3),
                                                     Text(
@@ -442,9 +437,10 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                                                             : AppLocale.toman
                                                             .getString(context)
                                                             : "0",
-                                                        style: const TextStyle(
+                                                        style: TextStyle(
                                                           fontWeight: FontWeight.w800,
                                                           color: Colors.white,
+                                                          fontSize: Dimensions.font20
                                                         )),
                                                   ],
                                                 ),

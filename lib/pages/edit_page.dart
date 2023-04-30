@@ -131,71 +131,73 @@ class _EditedPageState extends State<EditedPage> {
       backgroundColor: darkThemeBoolean == "false"
           ? Colors.white
           : AppColors.darkThemeColor,
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       bottomSheet: appButton(darkThemeBoolean),
       body: Container(
         margin: EdgeInsets.only(
             left: Dimensions.width30, right: Dimensions.width30),
         child: Form(
-          child: Column(
-            children: [
-              SizedBox(
-                height: Dimensions.height30,
-              ),
-              Text(
-                  // DateTime.parse(_editedExpenses.expenseDate.toString()).day.toString()
-                  englishLanguageBoolean == false
-                      ? "${DateTime.parse(_editedExpenses.expenseDate.toString()).year.toString().toPersianDigit()}"
-                      "-${DateTime.parse(_editedExpenses.expenseDate.toString()).month.toString().toPersianDigit()}"
-                      "-${DateTime.parse(_editedExpenses.expenseDate.toString()).day.toString().toPersianDigit()}"
-                      : _editedExpenses.expenseDate.toString(),
-                  style: TextStyle(
-                      fontSize: Dimensions.font18,
-                      color: AppColors.appBarTitleColor)),
-              SizedBox(
-                height: Dimensions.height20,
-              ),
-              Column(
-                children: [
-                  SizedBox(
-                    height: Dimensions.height10,
-                  ),
-                  Directionality(
-                    textDirection: englishLanguageBoolean == false ? TextDirection.rtl : TextDirection.ltr,
-                    child: TextFormField(
-                      controller: TextEditingController(text: _editedExpenses.expenseCategory),
-                      style: TextStyle(
-                          color: darkThemeBoolean == "false"
-                              ? Colors.black
-                              : Colors.white70
-                      ),
-                      readOnly: true,
-                      decoration: textInputDecoration.copyWith(
-                        labelText: AppLocale.grouping.getString(context),
-                      )
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: Dimensions.height30,
+                ),
+                Text(
+                    // DateTime.parse(_editedExpenses.expenseDate.toString()).day.toString()
+                    englishLanguageBoolean == false
+                        ? "${DateTime.parse(_editedExpenses.expenseDate.toString()).year.toString().toPersianDigit()}"
+                        "-${DateTime.parse(_editedExpenses.expenseDate.toString()).month.toString().toPersianDigit()}"
+                        "-${DateTime.parse(_editedExpenses.expenseDate.toString()).day.toString().toPersianDigit()}"
+                        : _editedExpenses.expenseDate.toString(),
+                    style: TextStyle(
+                        fontSize: Dimensions.font18,
+                        color: AppColors.appBarTitleColor)),
+                SizedBox(
+                  height: Dimensions.height20,
+                ),
+                Column(
+                  children: [
+                    SizedBox(
+                      height: Dimensions.height10,
                     ),
-                  ),
-                  SizedBox(
-                    height: Dimensions.height30,
-                  ),
-                  AppTextField(
-                    labelText: AppLocale.expense.getString(context),
-                    controller: _expensesController,
-                    clickable: false,
-                    themeBoolean: darkThemeBoolean,
-                  ),
-                  SizedBox(
-                    height: Dimensions.height30,
-                  ),
-                  AppTextField(
-                    labelText: AppLocale.description.getString(context),
-                    controller: _descriptionController,
-                    clickable: false,
-                    themeBoolean: darkThemeBoolean,
-                  ),
-                ],
-              )
-            ],
+                    Directionality(
+                      textDirection: englishLanguageBoolean == false ? TextDirection.rtl : TextDirection.ltr,
+                      child: TextFormField(
+                        controller: TextEditingController(text: _editedExpenses.expenseCategory),
+                        style: TextStyle(
+                            color: darkThemeBoolean == "false"
+                                ? Colors.black
+                                : Colors.white70
+                        ),
+                        readOnly: true,
+                        decoration: textInputDecoration.copyWith(
+                          labelText: AppLocale.grouping.getString(context),
+                        )
+                      ),
+                    ),
+                    SizedBox(
+                      height: Dimensions.height30,
+                    ),
+                    AppTextField(
+                      labelText: AppLocale.expense.getString(context),
+                      controller: _expensesController,
+                      clickable: false,
+                      themeBoolean: darkThemeBoolean,
+                    ),
+                    SizedBox(
+                      height: Dimensions.height30,
+                    ),
+                    AppTextField(
+                      labelText: AppLocale.description.getString(context),
+                      controller: _descriptionController,
+                      clickable: false,
+                      themeBoolean: darkThemeBoolean,
+                    ),
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),

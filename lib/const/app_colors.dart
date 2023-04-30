@@ -6,6 +6,7 @@ class AppColors{
   static const Color iconBackGroundMainColor = Color.fromRGBO(166, 165, 165, 1.0);
   static const Color iconUnSelectedBackGroundMainColor = Color.fromRGBO(185, 185, 185, 1.0);
   static const Color labelColor = Color.fromRGBO(119, 119, 119, 1.0);
+  static const Color black = Color.fromRGBO(	0, 0, 0, 1.0);
 
   //#F5F5F5
   static const Color appBarColor = Color.fromRGBO(245,245,245,1.00);

@@ -4,7 +4,7 @@ import 'dart:async';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:income_and_expenses/pages/main_expenses_page.dart';
-import 'package:income_and_expenses/pages/profile_page.dart';
+import 'package:income_and_expenses/pages/setting_page.dart';
 import 'package:income_and_expenses/pages/year_chart_page.dart';
 import 'package:income_and_expenses/const/app_colors.dart';
 import 'package:income_and_expenses/const/dimensions.dart';
@@ -43,9 +43,9 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       [
         MainExpensesPage(keyButton: keyButton, keyButton1: keyButton1, keyButton2: keyButton2, keyButton3: keyButton3),
         // MainExpensesPage(),
-        const MonthChart(),
-        const YearChartPage(),
-        const ProfilePage(),
+        MonthChart(),
+        YearChartPage(),
+        ProfilePage(),
       ];
 
   late AnimationController _fabAnimationController;
@@ -447,6 +447,9 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
 
+    List keyBottomNavigation = [keyBottomNavigation1 ,keyBottomNavigation2
+      , keyBottomNavigation4, keyBottomNavigation5];
+
     bool keyboardIsOpen = MediaQuery.of(context).viewInsets.bottom != 0;
     final List<Widget> pages = _pages();
 
@@ -481,55 +484,56 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: Stack(
         children: [
-          SizedBox(
-            height: Dimensions.height45,
-            child: Row(
-              children: [
-                Expanded(
-                    child: Center(
-                      child: SizedBox(
-                        key: keyBottomNavigation1,
-                        height: Dimensions.height20*2,
-                        width: Dimensions.width20*2,
-                      ),
-                    )),
-                Expanded(
-                    child: Center(
-                      child: SizedBox(
-                        key: keyBottomNavigation2,
-                        height: Dimensions.height20*2,
-                        width: Dimensions.width20*2,
-                      ),
-                    )),
-                SizedBox(width: Dimensions.width25*3,),
-                Expanded(
-                  child: Center(
-                    child: SizedBox(
-                      key: keyBottomNavigation4,
-                      height: Dimensions.height20*2,
-                      width: Dimensions.width20*2,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Center(
-                    child: SizedBox(
-                      key: keyBottomNavigation5,
-                      height: Dimensions.height20*2,
-                      width: Dimensions.width20*2,
-                    ),
-                  ),
-                ),
-              ],
-            )
-          ),
+          // SizedBox(
+          //   height: Dimensions.height45,
+          //   child: Row(
+          //     children: [
+          //       Expanded(
+          //           child: Center(
+          //             child: SizedBox(
+          //               // key: keyBottomNavigation1,
+          //               height: Dimensions.height20*2,
+          //               width: Dimensions.width20*2,
+          //             ),
+          //           )),
+          //       Expanded(
+          //           child: Center(
+          //             child: SizedBox(
+          //               // key: keyBottomNavigation2,
+          //               height: Dimensions.height20*2,
+          //               width: Dimensions.width20*2,
+          //             ),
+          //           )),
+          //       SizedBox(width: Dimensions.width25*3,),
+          //       Expanded(
+          //         child: Center(
+          //           child: SizedBox(
+          //             // key: keyBottomNavigation4,
+          //             height: Dimensions.height20*2,
+          //             width: Dimensions.width20*2,
+          //           ),
+          //         ),
+          //       ),
+          //       Expanded(
+          //         child: Center(
+          //           child: SizedBox(
+          //             // key: keyBottomNavigation5,
+          //             height: Dimensions.height20*2,
+          //             width: Dimensions.width20*2,
+          //           ),
+          //         ),
+          //       ),
+          //     ],
+          //   )
+          // ),
           AnimatedBottomNavigationBar.builder(
             itemCount: iconList.length,
             tabBuilder: (int index, bool isActive) {
               final color = isActive ? AppColors.mainColor : AppColors.iconUnSelectedBackGroundMainColor;
               return Icon(
                 iconList[index],
-                size: Dimensions.font24,
+                key: keyBottomNavigation[index],
+                size: Dimensions.iconSize30,
                 color: color,
               );
             },

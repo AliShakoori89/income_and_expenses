@@ -23,11 +23,11 @@ import 'const/language.dart';
 
 void main() {
   runApp(
-    DevicePreview(
-      enabled: !kReleaseMode,
-      builder: (context) =>
+    // DevicePreview(
+    //   enabled: !kReleaseMode,
+    //   builder: (context) =>
     MyApp(), // Wrap your app
-    ),
+    // ),
   );
 }
 

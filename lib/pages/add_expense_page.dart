@@ -66,54 +66,56 @@ class _AddExpensePageState extends State<AddExpensePage> {
         backgroundColor: darkThemeBoolean == "false"
             ? Colors.white
             : AppColors.darkThemeColor,
-        resizeToAvoidBottomInset: false,
+        resizeToAvoidBottomInset: true,
         bottomSheet: appButton(darkThemeBoolean),
         body: Container(
           margin: EdgeInsets.only(
               left: Dimensions.width30, right: Dimensions.width30),
           child: Form(
             key: formKey,
-            child: Column(
-              children: [
-                SizedBox(
-                  height: Dimensions.height30,
-                ),
-                DatePickerCalendar(),
-                SizedBox(
-                  height: Dimensions.height20,
-                ),
-                Column(
-                  children: [
-                    SizedBox(
-                      height: Dimensions.height10,
-                    ),
-                    AppTextField(
-                      labelText: AppLocale.grouping.getString(context),
-                      controller: categoryController,
-                      clickable: true,
-                      themeBoolean: darkThemeBoolean,
-                    ),
-                    SizedBox(
-                      height: Dimensions.height30,
-                    ),
-                    AppTextField(
-                      labelText: AppLocale.expense.getString(context),
-                      controller: expensesController,
-                      clickable: false,
-                      themeBoolean: darkThemeBoolean,
-                    ),
-                    SizedBox(
-                      height: Dimensions.height30,
-                    ),
-                    AppTextField(
-                      labelText: AppLocale.description.getString(context),
-                      controller: descriptionController,
-                      clickable: false,
-                      themeBoolean: darkThemeBoolean,
-                    ),
-                  ],
-                )
-              ],
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: Dimensions.height30,
+                  ),
+                  DatePickerCalendar(),
+                  SizedBox(
+                    height: Dimensions.height20,
+                  ),
+                  Column(
+                    children: [
+                      SizedBox(
+                        height: Dimensions.height10,
+                      ),
+                      AppTextField(
+                        labelText: AppLocale.grouping.getString(context),
+                        controller: categoryController,
+                        clickable: true,
+                        themeBoolean: darkThemeBoolean,
+                      ),
+                      SizedBox(
+                        height: Dimensions.height30,
+                      ),
+                      AppTextField(
+                        labelText: AppLocale.expense.getString(context),
+                        controller: expensesController,
+                        clickable: false,
+                        themeBoolean: darkThemeBoolean,
+                      ),
+                      SizedBox(
+                        height: Dimensions.height30,
+                      ),
+                      AppTextField(
+                        labelText: AppLocale.description.getString(context),
+                        controller: descriptionController,
+                        clickable: false,
+                        themeBoolean: darkThemeBoolean,
+                      ),
+                    ],
+                  )
+                ],
+              ),
             ),
           ),
         ),

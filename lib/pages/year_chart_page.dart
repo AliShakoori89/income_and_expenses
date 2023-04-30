@@ -66,88 +66,96 @@ class _YearChartPageState extends State<YearChartPage> {
               ? AppColors.mainPageCardBorderColor
               : AppColors.darkThemeColor,
           body: SafeArea(
-            child: Column(
-              children: [
-                SizedBox(height: Dimensions.height45,),
-                LinearDatePicker(
-                  startDate: "1396/01",
-                  endDate: "1499/12",
-                  dateChangeListener: (String selectedDate) {
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  SizedBox(height: Dimensions.height45,),
+                  LinearDatePicker(
+                    startDate: "1396/01",
+                    endDate: "1499/12",
+                    dateChangeListener: (String selectedDate) {
 
-                    selectedValue = selectedDate;
+                      selectedValue = selectedDate;
 
-                    BlocProvider.of<CalculateSFCartesianChartBloc>(context).add(
-                          SumExpensesByGroupingTypePerMonthForSFCartesianChartEvent(
-                              year: selectedValue!.split("/").first,
-                              month: selectedValue!.split("/").last));
+                      BlocProvider.of<CalculateSFCartesianChartBloc>(context).add(
+                            SumExpensesByGroupingTypePerMonthForSFCartesianChartEvent(
+                                year: selectedValue!.split("/").first,
+                                month: selectedValue!.split("/").last));
 
-                  },
-                  showDay: false,
-                  selectedRowStyle: TextStyle(
-                    fontFamily: 'iran',
+                    },
+                    showDay: false,
+                    selectedRowStyle: TextStyle(
+                      decoration: TextDecoration.underline,
+                      decorationStyle: TextDecorationStyle.double,
+                      decorationColor: darkThemeBoolean == "false" ? AppColors.mainColor : Colors.white,
+                      fontStyle: FontStyle.italic,
+
+                      fontFamily: 'iran',
+                      fontSize: Dimensions.font24,
+                      color: darkThemeBoolean == "false" ? AppColors.mainColor : Colors.white,
+                      fontWeight: FontWeight.w900,
+                    ),
+                    yearText: "سال | year",
+                    monthText: "ماه | month",
+                    labelStyle: TextStyle(
+                      color: darkThemeBoolean == "false" ? Colors.black : Colors.white,
+                    ),
+                    unselectedRowStyle: TextStyle(
+                      color: darkThemeBoolean == "false" ? Colors.black : Colors.white,
+                    ),
+                    showLabels: true,
+                    columnWidth: Dimensions.width45*2,
+                    showMonthName: true,
+                    isJalaali: true,
+                  ),
+                  SizedBox(height: Dimensions.height45,),
+                  SfCartesianChart(
+                      margin: EdgeInsets.only(
+                        top: Dimensions.height20,
+                        bottom: Dimensions.height30,
+                      ),
+                      title: ChartTitle(
+                          text: AppLocale.expensePerYear.getString(context),
+                          textStyle: darkThemeBoolean == "false"
+                              ? const TextStyle(
+                              color: AppColors.appBarTitleColor)
+                              : const TextStyle(
+                              color: Colors.white
+                          )),
+                      primaryXAxis: CategoryAxis(
+                      ),
+                      primaryYAxis: NumericAxis(minimum: 0, maximum: 100, interval: 10),
+                      tooltipBehavior: _tooltip,
+                      series: <ChartSeries<_ChartData, String>>[
+                        ColumnSeries<_ChartData, String>(
+                            dataSource: data,
+                            xValueMapper: (_ChartData data, _) => data.x,
+                            yValueMapper: (_ChartData data, _) => data.y,
+                            name: 'Gold',
+                            dataLabelSettings: DataLabelSettings(
+                                isVisible: true,
+                                labelAlignment: ChartDataLabelAlignment.middle,
+                                textStyle: TextStyle(
+                                  color: darkThemeBoolean == "false"
+                                      ? AppColors.appBarTitleColor
+                                      : Colors.white,
+                                )),
+                            onCreateRenderer: (ChartSeries<_ChartData, String> series) =>
+                                _CustomColumnSeriesRenderer(),
+                            color: AppColors.chartColor,),
+                      ]
+                  ),
+                  SizedBox(height: Dimensions.height20,),
+                  Text("مقیاس : 1/100000",
+                  style: TextStyle(
                     fontSize: Dimensions.font20,
-                    color: darkThemeBoolean == "false" ? AppColors.mainColor : Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  yearText: "سال | year",
-                  monthText: "ماه | month",
-                  labelStyle: TextStyle(
-                    color: darkThemeBoolean == "false" ? Colors.black : Colors.white,
-                  ),
-                  unselectedRowStyle: TextStyle(
-                    color: darkThemeBoolean == "false" ? Colors.black : Colors.white,
-                  ),
-                  showLabels: true,
-                  columnWidth: Dimensions.width45*2,
-                  showMonthName: true,
-                  isJalaali: true,
-                ),
-                SizedBox(height: Dimensions.height45*3,),
-                SfCartesianChart(
-                    margin: EdgeInsets.only(
-                      top: Dimensions.height20,
-                      bottom: Dimensions.height30,
-                    ),
-                    title: ChartTitle(
-                        text: AppLocale.expensePerYear.getString(context),
-                        textStyle: darkThemeBoolean == "false"
-                            ? const TextStyle(
-                            color: AppColors.appBarTitleColor)
-                            : const TextStyle(
-                            color: Colors.white
-                        )),
-                    primaryXAxis: CategoryAxis(
-                    ),
-                    primaryYAxis: NumericAxis(minimum: 0, maximum: 100, interval: 10),
-                    tooltipBehavior: _tooltip,
-                    series: <ChartSeries<_ChartData, String>>[
-                      ColumnSeries<_ChartData, String>(
-                          dataSource: data,
-                          xValueMapper: (_ChartData data, _) => data.x,
-                          yValueMapper: (_ChartData data, _) => data.y,
-                          name: 'Gold',
-                          dataLabelSettings: DataLabelSettings(
-                              isVisible: true,
-                              labelAlignment: ChartDataLabelAlignment.middle,
-                              textStyle: TextStyle(
-                                color: darkThemeBoolean == "false"
-                                    ? AppColors.appBarTitleColor
-                                    : Colors.white,
-                              )),
-                          onCreateRenderer: (ChartSeries<_ChartData, String> series) =>
-                              _CustomColumnSeriesRenderer(),
-                          color: AppColors.chartColor,),
-                    ]
-                ),
-                SizedBox(height: Dimensions.height20,),
-                Text("مقیاس : 1/100000",
-                style: TextStyle(
-                  fontSize: Dimensions.font12,
-                  color: darkThemeBoolean == "false"
-                      ? AppColors.appBarTitleColor
-                      : Colors.white,
-                ),)
-              ],
+                    color: darkThemeBoolean == "false"
+                        ? AppColors.appBarTitleColor
+                        : Colors.white,
+                  ),),
+                  SizedBox(height: Dimensions.height30*2,),
+                ],
+              ),
             ),
           ));
     });});
