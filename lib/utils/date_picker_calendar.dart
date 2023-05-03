@@ -87,7 +87,7 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                           .add(CalculateCashPerMonthEvent(dateMonth : DateFormat('yyyy-MM')
                           .format(DateTime.parse(date)).toString()));
                       BlocProvider.of<SetDateBloc>(context)
-                          .add(FetchExpensesEvent(date: DateFormat('yyyy-MM-dd')
+                          .add(FetchExpensesItemsEvent(date: DateFormat('yyyy-MM-dd')
                           .format(DateTime.parse(date)).toString()));
 
                     },
@@ -149,7 +149,7 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                       BlocProvider.of<SetDateBloc>(context)
                           .add(CalculateCashPerMonthEvent(dateMonth : month));
                       BlocProvider.of<SetDateBloc>(context)
-                          .add(FetchExpensesEvent(date : date));
+                          .add(FetchExpensesItemsEvent(date : date));
                     },
                     child: Container(
                       // key: keyButton2,
@@ -203,7 +203,7 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                       BlocProvider.of<SetDateBloc>(context)
                           .add(CalculateCashPerMonthEvent(dateMonth : DateFormat('yyyy-MM').format(DateTime.parse(date)).toString()));
                       BlocProvider.of<SetDateBloc>(context)
-                          .add(FetchExpensesEvent(date: DateFormat('yyyy-MM-dd').format(DateTime.parse(date)).toString()));
+                          .add(FetchExpensesItemsEvent(date: DateFormat('yyyy-MM-dd').format(DateTime.parse(date)).toString()));
                     },
                     child: SizedBox(
                       width: Dimensions.width20,

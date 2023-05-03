@@ -42,250 +42,252 @@ class _SettingItemListState extends State<SettingItemList> {
           right: Dimensions.width20,
           left: Dimensions.width20
       ),
-      child: Column(
-        children: [
-          // export pdf
-          GestureDetector(
-            onTap: () async {
-            },
-            child: SettingItems(
-              imagePath: darkThemeBoolean == "false"
-                  ? "assets/profile_icons/export_to_pdf.png"
-                  : "assets/profile_icons/dark_export_to_pdf.png",
-              itemName: AppLocale.export,
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            // export pdf
+            GestureDetector(
+              onTap: () async {
+              },
+              child: SettingItems(
+                imagePath: darkThemeBoolean == "false"
+                    ? "assets/profile_icons/export_to_pdf.png"
+                    : "assets/profile_icons/dark_export_to_pdf.png",
+                itemName: AppLocale.export,
+              ),
             ),
-          ),
-          Divider(
-            color: darkThemeBoolean == "false"
-                ? Colors.grey
-                : Colors.white,
-          ),
-          SizedBox(
-            height: Dimensions.height30,
-          ),
-          // choose currency
-          GestureDetector(
-            onTap: (){
-              showDialog(
-                context: context,
-                builder: (ctx) => AlertDialog(
-                  title: Text(
-                    AppLocale.chooseCurrency.getString(context),
-                    textDirection: TextDirection.rtl,
-                    style: TextStyle(fontSize: Dimensions.font16),
-                  ),
-                  content: Text(
-                      AppLocale.chooseCurrencyQuestion.getString(context),
+            Divider(
+              color: darkThemeBoolean == "false"
+                  ? Colors.grey
+                  : Colors.white,
+            ),
+            SizedBox(
+              height: Dimensions.height30,
+            ),
+            // choose currency
+            GestureDetector(
+              onTap: (){
+                showDialog(
+                  context: context,
+                  builder: (ctx) => AlertDialog(
+                    title: Text(
+                      AppLocale.chooseCurrency.getString(context),
                       textDirection: TextDirection.rtl,
-                      style: TextStyle(fontSize: Dimensions.font14)),
-                  actions: <Widget>[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        BlocBuilder<ChangeCurrencyBloc, ChangeCurrencyState>(
-                          builder: (context, state) {
-                            return TextButton(onPressed: (){
-                              BlocProvider.of<ChangeCurrencyBloc>(context)
-                                  .add(WriteCurrencyBooleanEvent(
-                                rialCurrencyBoolean: true,
-                              ));
-                              Navigator.of(ctx).pop();
-                            },
-                                child: Text(AppLocale.rial.getString(context)));
-                          }),
-                        BlocBuilder<ChangeCurrencyBloc, ChangeCurrencyState>(
-                            builder: (context, state) {
-                              return TextButton(
-                                  onPressed: (){
-                                    BlocProvider.of<ChangeCurrencyBloc>(context)
-                                        .add(WriteCurrencyBooleanEvent(
-                                      rialCurrencyBoolean: false,
-                                    ));
-                                    Navigator.of(ctx).pop();
-                                  },
-                                  child: Text(AppLocale.toman.getString(context)));
-                            }),
-                      ],
+                      style: TextStyle(fontSize: Dimensions.font16),
                     ),
-                  ],
-                ),
-              );
-            },
-            child: SettingItems(
-              imagePath: darkThemeBoolean == "false"
-                  ? "assets/profile_icons/choose_currency.png"
-                  : "assets/profile_icons/dark_choose_currency.png",
-              itemName: AppLocale.chooseCurrency,
-            ),
-          ),
-          Divider(
-            color: darkThemeBoolean == "false"
-                ? Colors.grey
-                : Colors.white,
-          ),
-          SizedBox(
-            height: Dimensions.height30,
-          ),
-          // choose language
-          GestureDetector(
-            onTap: () {
-              showDialog(
-                context: context,
-                builder: (ctx) => AlertDialog(
-                  title: Text(
-                    AppLocale.chooseLanguage.getString(context),
-                    textDirection: TextDirection.rtl,
-                    style: TextStyle(fontSize: Dimensions.font16),
+                    content: Text(
+                        AppLocale.chooseCurrencyQuestion.getString(context),
+                        textDirection: TextDirection.rtl,
+                        style: TextStyle(fontSize: Dimensions.font14)),
+                    actions: <Widget>[
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          BlocBuilder<ChangeCurrencyBloc, ChangeCurrencyState>(
+                            builder: (context, state) {
+                              return TextButton(onPressed: (){
+                                BlocProvider.of<ChangeCurrencyBloc>(context)
+                                    .add(WriteCurrencyBooleanEvent(
+                                  rialCurrencyBoolean: true,
+                                ));
+                                Navigator.of(ctx).pop();
+                              },
+                                  child: Text(AppLocale.rial.getString(context)));
+                            }),
+                          BlocBuilder<ChangeCurrencyBloc, ChangeCurrencyState>(
+                              builder: (context, state) {
+                                return TextButton(
+                                    onPressed: (){
+                                      BlocProvider.of<ChangeCurrencyBloc>(context)
+                                          .add(WriteCurrencyBooleanEvent(
+                                        rialCurrencyBoolean: false,
+                                      ));
+                                      Navigator.of(ctx).pop();
+                                    },
+                                    child: Text(AppLocale.toman.getString(context)));
+                              }),
+                        ],
+                      ),
+                    ],
                   ),
-                  content: Text(AppLocale.pleaseChooseYourLanguage.getString(context),
+                );
+              },
+              child: SettingItems(
+                imagePath: darkThemeBoolean == "false"
+                    ? "assets/profile_icons/choose_currency.png"
+                    : "assets/profile_icons/dark_choose_currency.png",
+                itemName: AppLocale.chooseCurrency,
+              ),
+            ),
+            Divider(
+              color: darkThemeBoolean == "false"
+                  ? Colors.grey
+                  : Colors.white,
+            ),
+            SizedBox(
+              height: Dimensions.height30,
+            ),
+            // choose language
+            GestureDetector(
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (ctx) => AlertDialog(
+                    title: Text(
+                      AppLocale.chooseLanguage.getString(context),
                       textDirection: TextDirection.rtl,
-                      style: TextStyle(fontSize: Dimensions.font14)),
-                  actions: <Widget>[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        TextButton(
-                          onPressed: (){
-                            BlocProvider.of<ChangeLanguageBloc>(context)
-                                .add(WriteLanguageBooleanEvent(englishLanguageBoolean: true));
-                            _localization.translate('en');
-                            isSwitched = false;
-                            BlocProvider.of<ChangeLanguageBloc>(context).add(ReadLanguageBooleanEvent());
-                            Navigator.of(ctx).pop();
-                          },
-                          child: Text(AppLocale.english.getString(context)),),
-                        TextButton(
+                      style: TextStyle(fontSize: Dimensions.font16),
+                    ),
+                    content: Text(AppLocale.pleaseChooseYourLanguage.getString(context),
+                        textDirection: TextDirection.rtl,
+                        style: TextStyle(fontSize: Dimensions.font14)),
+                    actions: <Widget>[
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          TextButton(
                             onPressed: (){
                               BlocProvider.of<ChangeLanguageBloc>(context)
-                                  .add(WriteLanguageBooleanEvent(englishLanguageBoolean: false));
-                              _localization.translate('fa');
-                              isSwitched = true;
+                                  .add(WriteLanguageBooleanEvent(englishLanguageBoolean: true));
+                              _localization.translate('en');
+                              isSwitched = false;
                               BlocProvider.of<ChangeLanguageBloc>(context).add(ReadLanguageBooleanEvent());
                               Navigator.of(ctx).pop();
                             },
-                            child: Text(AppLocale.persian.getString(context)),),
-                      ],
-                    ),
-                  ],
-                ),
-              );
-            },
-            child: SettingItems(
-              imagePath: darkThemeBoolean == "false"
-                  ? "assets/profile_icons/choose_language.png"
-                  : "assets/profile_icons/dark_choose_language.png",
-              itemName: AppLocale.chooseLanguage,
-            ),
-          ),
-          Divider(
-            color: darkThemeBoolean == "false"
-                ? Colors.grey
-                : Colors.white,
-          ),
-          SizedBox(
-            height: Dimensions.height30,
-          ),
-          // frequently asked question
-          GestureDetector(
-            onTap: (){
-              Get.toNamed(RouteHelper.getFrequentlyAskedQuestions());
-            },
-            child: Center(
-              child: SettingItems(
-                imagePath: darkThemeBoolean == "false"
-                    ? "assets/profile_icons/frequently_asked_questions.png"
-                    : "assets/profile_icons/dark_frequently_asked_questions.png",
-                itemName: AppLocale.frequentlyAskedQuestions,
-              ),
-            ),
-          ),
-          Divider(
-            color: darkThemeBoolean == "false"
-                ? Colors.grey
-                : Colors.white,
-          ),
-          SizedBox(
-            height: Dimensions.height30,
-          ),
-          // choose Theme
-          GestureDetector(
-            onTap: (){
-              showDialog(
-                context: context,
-                builder: (ctx) => AlertDialog(
-                  title: Text(
-                    AppLocale.chooseTheme.getString(context),
-                    textDirection: TextDirection.rtl,
-                    style: TextStyle(fontSize: Dimensions.font16),
-                  ),
-                  content: Text(AppLocale.pleaseChooseYourTheme.getString(context),
-                      textDirection: TextDirection.rtl,
-                      style: TextStyle(fontSize: Dimensions.font14)),
-                  actions: <Widget>[
-                    Container(
-                      margin: EdgeInsets.only(
-                        left: Dimensions.width45,
-                        right: Dimensions.width45,
-                        bottom: Dimensions.height15
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          GestureDetector(
-                            child: const Icon(Icons.dark_mode),
-                            onTap: (){
-                            BlocProvider.of<ThemeBloc>(context)
-                                .add(WriteThemeBooleanEvent(darkThemeBoolean: true));
-                            BlocProvider.of<ThemeBloc>(context)
-                                .add(ReadThemeBooleanEvent());
-                            Navigator.of(ctx).pop();
-                            }
-                          ),
-                          GestureDetector(
-                              child: const Icon(Icons.light_mode ,
-                              color: AppColors.lightColor,),
-                          onTap: (){
-                            BlocProvider.of<ThemeBloc>(context)
-                                .add(WriteThemeBooleanEvent(darkThemeBoolean: false));
-                            BlocProvider.of<ThemeBloc>(context)
-                                .add(ReadThemeBooleanEvent());
-                            Navigator.of(ctx).pop();
-                          }),
+                            child: Text(AppLocale.english.getString(context)),),
+                          TextButton(
+                              onPressed: (){
+                                BlocProvider.of<ChangeLanguageBloc>(context)
+                                    .add(WriteLanguageBooleanEvent(englishLanguageBoolean: false));
+                                _localization.translate('fa');
+                                isSwitched = true;
+                                BlocProvider.of<ChangeLanguageBloc>(context).add(ReadLanguageBooleanEvent());
+                                Navigator.of(ctx).pop();
+                              },
+                              child: Text(AppLocale.persian.getString(context)),),
                         ],
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
+                );
+              },
+              child: SettingItems(
+                imagePath: darkThemeBoolean == "false"
+                    ? "assets/profile_icons/choose_language.png"
+                    : "assets/profile_icons/dark_choose_language.png",
+                itemName: AppLocale.chooseLanguage,
+              ),
+            ),
+            Divider(
+              color: darkThemeBoolean == "false"
+                  ? Colors.grey
+                  : Colors.white,
+            ),
+            SizedBox(
+              height: Dimensions.height30,
+            ),
+            // frequently asked question
+            GestureDetector(
+              onTap: (){
+                Get.toNamed(RouteHelper.getFrequentlyAskedQuestions());
+              },
+              child: Center(
+                child: SettingItems(
+                  imagePath: darkThemeBoolean == "false"
+                      ? "assets/profile_icons/frequently_asked_questions.png"
+                      : "assets/profile_icons/dark_frequently_asked_questions.png",
+                  itemName: AppLocale.frequentlyAskedQuestions,
                 ),
-              );
-            },
-            child: SettingItems(
-              imagePath: darkThemeBoolean == "false"
-                  ? "assets/profile_icons/theme.png"
-                  : "assets/profile_icons/dark_theme.png",
-              itemName: AppLocale.theme,
+              ),
             ),
-          ),
-          Divider(
-            color: darkThemeBoolean == "false"
-                ? Colors.grey
-                : Colors.white,
-          ),
-          SizedBox(
-            height: Dimensions.height30,
-          ),
-          // logout
-          GestureDetector(
-            onTap: (){
-              exit(0);
-            },
-            child: SettingItems(
-              imagePath: darkThemeBoolean == "false"
-                  ? "assets/profile_icons/logout.png"
-                  : "assets/profile_icons/dark_logout.png",
-              itemName: AppLocale.exit,
+            Divider(
+              color: darkThemeBoolean == "false"
+                  ? Colors.grey
+                  : Colors.white,
             ),
-          ),
-        ],
+            SizedBox(
+              height: Dimensions.height30,
+            ),
+            // choose Theme
+            GestureDetector(
+              onTap: (){
+                showDialog(
+                  context: context,
+                  builder: (ctx) => AlertDialog(
+                    title: Text(
+                      AppLocale.chooseTheme.getString(context),
+                      textDirection: TextDirection.rtl,
+                      style: TextStyle(fontSize: Dimensions.font16),
+                    ),
+                    content: Text(AppLocale.pleaseChooseYourTheme.getString(context),
+                        textDirection: TextDirection.rtl,
+                        style: TextStyle(fontSize: Dimensions.font14)),
+                    actions: <Widget>[
+                      Container(
+                        margin: EdgeInsets.only(
+                          left: Dimensions.width45,
+                          right: Dimensions.width45,
+                          bottom: Dimensions.height15
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            GestureDetector(
+                              child: const Icon(Icons.dark_mode),
+                              onTap: (){
+                              BlocProvider.of<ThemeBloc>(context)
+                                  .add(WriteThemeBooleanEvent(darkThemeBoolean: true));
+                              BlocProvider.of<ThemeBloc>(context)
+                                  .add(ReadThemeBooleanEvent());
+                              Navigator.of(ctx).pop();
+                              }
+                            ),
+                            GestureDetector(
+                                child: const Icon(Icons.light_mode ,
+                                color: AppColors.lightColor,),
+                            onTap: (){
+                              BlocProvider.of<ThemeBloc>(context)
+                                  .add(WriteThemeBooleanEvent(darkThemeBoolean: false));
+                              BlocProvider.of<ThemeBloc>(context)
+                                  .add(ReadThemeBooleanEvent());
+                              Navigator.of(ctx).pop();
+                            }),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+              child: SettingItems(
+                imagePath: darkThemeBoolean == "false"
+                    ? "assets/profile_icons/theme.png"
+                    : "assets/profile_icons/dark_theme.png",
+                itemName: AppLocale.theme,
+              ),
+            ),
+            Divider(
+              color: darkThemeBoolean == "false"
+                  ? Colors.grey
+                  : Colors.white,
+            ),
+            SizedBox(
+              height: Dimensions.height30,
+            ),
+            // logout
+            GestureDetector(
+              onTap: (){
+                exit(0);
+              },
+              child: SettingItems(
+                imagePath: darkThemeBoolean == "false"
+                    ? "assets/profile_icons/logout.png"
+                    : "assets/profile_icons/dark_logout.png",
+                itemName: AppLocale.exit,
+              ),
+            ),
+          ],
+        ),
       ),
     );});
   }

@@ -68,8 +68,8 @@ class SetDateRepository {
     await prefs.setString('date', date);
   }
 
-  Future<List<ExpenseModel>> getAllExpensesRepo(String date) async {
-    return await helper.getAllExpenses(date);
+  Future<List<ExpenseModel>> getAllExpensesItemsRepo(String date) async {
+    return await helper.getAllExpensesItems(date);
   }
 
   Future<bool> addExpenseRepo(ExpenseModel expenseModel) async {
@@ -91,6 +91,7 @@ class SetDateRepository {
   }
 
   Future<String?> readTodayExpensesRepo() async {
+    print("**********************************");
     final prefs = await SharedPreferences.getInstance();
     final String? todayExpenses = prefs.getString('todayExpenses');
     return todayExpenses;

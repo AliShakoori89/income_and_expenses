@@ -34,7 +34,8 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
   void initState() {
     String selectedDate = DateFormat('yyyy-MM-dd').format(DateTime.parse(Jalali.now().toJalaliDateTime()));
     BlocProvider.of<SetDateBloc>(context).add(
-        FetchExpensesEvent(date: selectedDate));
+        FetchExpensesItemsEvent(date: selectedDate));
+    BlocProvider.of<SetDateBloc>(context).add(SumExpensePerDateEvent(date: selectedDate));
     super.initState();
   }
 
@@ -63,8 +64,6 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
             child: BlocBuilder<SetDateBloc, SetDateState>(
                 builder: (context, state) {
               int allTodayExpenses = 0;
-              // BlocProvider.of<SetDateBloc>(context).add(ReadTodayExpensesEvent());
-              // BlocProvider.of<SetDateBloc>(context).add(FetchExpensesEvent(date: state.date));
 
               return state.status.isLoading
                   ? const Center(child: CircularProgressIndicator())
@@ -77,8 +76,8 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(rialCurrencyType == true
-                                              ? ("${state.todayExpenses}0").toPersianDigit().seRagham()
-                                              : state.todayExpenses.toPersianDigit().seRagham(),
+                                              ? ("${state.expensesPerDate}0").toPersianDigit().seRagham()
+                                              : state.expensesPerDate.toPersianDigit().seRagham(),
                                             style: TextStyle(
                                                 color: darkThemeBoolean == "false"
                                                     ? AppColors.appBarTitleColor
@@ -91,7 +90,7 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                                                 color: darkThemeBoolean == "false"
                                                     ? AppColors.appBarTitleColor
                                                     : Colors.white,
-                                                fontSize: Dimensions.font20),
+                                                fontSize: Dimensions.font16),
                                           ),
                                         ],
                                       )
@@ -105,11 +104,11 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                                                 color: darkThemeBoolean == "false"
                                                     ? AppColors.appBarTitleColor
                                                     : Colors.white,
-                                                fontSize: Dimensions.font20),
+                                                fontSize: Dimensions.font16),
                                           ),
                                           Text(rialCurrencyType == true
-                                              ? ("${state.todayExpenses}0").seRagham()
-                                              : state.todayExpenses.seRagham(),
+                                              ? ("${state.expensesPerDate}0").seRagham()
+                                              : state.expensesPerDate.seRagham(),
                                             style: TextStyle(
                                                 color: darkThemeBoolean == "false"
                                                     ? AppColors.appBarTitleColor
@@ -126,6 +125,9 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                                   height: Dimensions.height45*9,
                                   child: ListView.builder(
                                     scrollDirection: Axis.vertical,
+                                    padding: EdgeInsets.only(
+                                      bottom: Dimensions.height30*3
+                                    ),
                                     shrinkWrap: true,
                                     itemBuilder: (context, index) {
                                       allTodayExpenses +=

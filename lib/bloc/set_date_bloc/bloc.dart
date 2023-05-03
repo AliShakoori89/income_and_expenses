@@ -22,13 +22,14 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
     on<ReduceDateEvent>(_mapReduceDateEventToState);
     on<AddIncomeEvent>(_mapAddIncomeEventToState);
     on<FetchIncomeEvent>(_mapFetchIncomeEventToState);
-    on<SumExpensePerMonthEvent>(_mapSumExpenseByMonthEventToState);
+    on<SumExpensePerMonthEvent>(_mapSumExpensePerMonthEventToState);
+    on<SumExpensePerDateEvent>(_mapSumExpensePerDateEventToState);
     on<CalculateCashPerMonthEvent>(_mapCalculateCashPerMonthEventToState);
-    on<FetchExpensesEvent>(_mapFetchExpensesEventToState);
+    on<FetchExpensesItemsEvent>(_mapFetchExpensesEventToState);
     on<AddOneByOneExpenseEvent>(_mapAddExpenseEventToState);
     on<EditItemEvent>(_mapEditExpenseEventToState);
     on<AddTodayExpensesEvent>(_mapAddTodayExpensesEventToState);
-    on<ReadTodayExpensesEvent>(_mapReadTodayExpensesEventToState);
+    // on<ReadTodayExpensesEvent>(_mapReadTodayExpensesEventToState);
     on<DeleteItemEvent>(_mapDeleteTodayExpensesEventToState);
   }
 
@@ -39,8 +40,8 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
       final String date = await setDateRepository.readDate();
       emit(
         state.copyWith(
-            status: SetDateStatus.success,
-            date: date,
+          status: SetDateStatus.success,
+          date: date,
         ),
       );
     } catch (error) {
@@ -130,15 +131,53 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
     }
   }
 
-  void _mapSumExpenseByMonthEventToState(
-      SumExpensePerMonthEvent event, Emitter<SetDateState> emit) async {
+  void _mapFetchExpensesEventToState(
+      FetchExpensesItemsEvent event, Emitter<SetDateState> emit) async {
     try {
       emit(state.copyWith(status: SetDateStatus.loading));
-      String expenses = await calculateExpensesRepository.calculateExpenseRepo(event.dateMonth);
+
+      final List<ExpenseModel> expensesDetails =
+      await setDateRepository.getAllExpensesItemsRepo(event.date);
+      final String expensesPerDate =
+      await calculateExpensesRepository.calculateDayExpenseRepo(event.date);
       emit(
         state.copyWith(
           status: SetDateStatus.success,
-          expenses: expenses,
+          expensesDetails: expensesDetails,
+          expensesPerDate: expensesPerDate
+        ),
+      );
+    } catch (error) {
+      emit(state.copyWith(status: SetDateStatus.error));
+    }
+  }
+
+  void _mapSumExpensePerMonthEventToState(
+      SumExpensePerMonthEvent event, Emitter<SetDateState> emit) async {
+    try {
+      emit(state.copyWith(status: SetDateStatus.loading));
+      String expensesPerMonth = await calculateExpensesRepository.calculateExpenseRepo(event.dateMonth);
+      emit(
+        state.copyWith(
+          status: SetDateStatus.success,
+          expensesPerMonth: expensesPerMonth,
+        ),
+      );
+    } catch (error) {
+      emit(state.copyWith(status: SetDateStatus.error));
+    }
+  }
+
+  void _mapSumExpensePerDateEventToState(
+      SumExpensePerDateEvent event, Emitter<SetDateState> emit) async {
+    try {
+      emit(state.copyWith(status: SetDateStatus.loading));
+      final String expensesPerDate =
+      await calculateExpensesRepository.calculateDayExpenseRepo(event.date);
+      emit(
+        state.copyWith(
+          status: SetDateStatus.success,
+          expensesPerDate: expensesPerDate,
         ),
       );
     } catch (error) {
@@ -193,31 +232,13 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
     }
   }
 
-  void _mapFetchExpensesEventToState(
-      FetchExpensesEvent event, Emitter<SetDateState> emit) async {
-    try {
-      emit(state.copyWith(status: SetDateStatus.loading));
-
-      final List<ExpenseModel> expensesDetails =
-      await setDateRepository.getAllExpensesRepo(event.date);
-      emit(
-        state.copyWith(
-          status: SetDateStatus.success,
-          expensesDetails: expensesDetails,
-        ),
-      );
-    } catch (error) {
-      emit(state.copyWith(status: SetDateStatus.error));
-    }
-  }
-
   void _mapAddExpenseEventToState(
       AddOneByOneExpenseEvent event, Emitter<SetDateState> emit) async {
     try {
       emit(state.copyWith(status: SetDateStatus.loading));
       await setDateRepository.addExpenseRepo(event.expenseModel);
       final List<ExpenseModel> expensesDetails =
-      await setDateRepository.getAllExpensesRepo(event.date);
+      await setDateRepository.getAllExpensesItemsRepo(event.date);
       emit(
         state.copyWith(
           status: SetDateStatus.success,
@@ -249,7 +270,7 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
     try {
       emit(state.copyWith(status: SetDateStatus.loading));
       await setDateRepository.deleteExpensesRepo(event.id);
-      final List<ExpenseModel> expenses = await setDateRepository.getAllExpensesRepo(event.date);
+      final List<ExpenseModel> expenses = await setDateRepository.getAllExpensesItemsRepo(event.date);
       emit(
         state.copyWith(
           status: SetDateStatus.success,
@@ -276,19 +297,19 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
     }
   }
 
-  void _mapReadTodayExpensesEventToState(
-      ReadTodayExpensesEvent event, Emitter<SetDateState> emit) async {
-    try {
-      emit(state.copyWith(status: SetDateStatus.loading));
-      final String? todayExpensesDetails = await setDateRepository.readTodayExpensesRepo();
-      emit(
-        state.copyWith(
-            status: SetDateStatus.success,
-            todayExpenses: todayExpensesDetails
-        ),
-      );
-    } catch (error) {
-      emit(state.copyWith(status: SetDateStatus.error));
-    }
-  }
+  // void _mapReadTodayExpensesEventToState(
+  //     ReadTodayExpensesEvent event, Emitter<SetDateState> emit) async {
+  //   try {
+  //     emit(state.copyWith(status: SetDateStatus.loading));
+  //     final String? todayExpensesDetails = await setDateRepository.readTodayExpensesRepo();
+  //     emit(
+  //       state.copyWith(
+  //           status: SetDateStatus.success,
+  //           todayExpenses: todayExpensesDetails
+  //       ),
+  //     );
+  //   } catch (error) {
+  //     emit(state.copyWith(status: SetDateStatus.error));
+  //   }
+  // }
 }

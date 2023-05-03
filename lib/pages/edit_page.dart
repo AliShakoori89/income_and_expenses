@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localization/flutter_localization.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:persian_number_utility/persian_number_utility.dart';
 import '../bloc/change_language_bloc/bloc.dart';
 import '../bloc/change_language_bloc/state.dart';
@@ -13,6 +15,7 @@ import '../const/app_colors.dart';
 import '../const/dimensions.dart';
 import '../const/language.dart';
 import '../model/expense_model.dart';
+import '../routes/route_helper.dart';
 import '../utils/app_text_field.dart';
 import '../utils/arrow_back_icon.dart';
 import '../utils/widget.dart';
@@ -137,6 +140,7 @@ class _EditedPageState extends State<EditedPage> {
         margin: EdgeInsets.only(
             left: Dimensions.width30, right: Dimensions.width30),
         child: Form(
+          key: formKey,
           child: SingleChildScrollView(
             child: Column(
               children: [
@@ -221,6 +225,7 @@ class _EditedPageState extends State<EditedPage> {
                 onTap: () {
                   if (formKey.currentState!.validate()) {
 
+                    _editedExpenses.expenseCategory = _editedExpenses.expenseCategory;
                     _editedExpenses.expense = int.parse(_expensesController.text);
                     _editedExpenses.description = _descriptionController.text;
 
@@ -228,7 +233,7 @@ class _EditedPageState extends State<EditedPage> {
 
                     setDateBloc.add(EditItemEvent(_editedExpenses));
 
-                    // Get.toNamed(RouteHelper.getInitial());
+                    Get.toNamed(RouteHelper.getInitial());
                   }
                 },
                 child: Container(

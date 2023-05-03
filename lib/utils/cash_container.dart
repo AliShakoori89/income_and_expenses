@@ -134,7 +134,7 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                                           mainAxisAlignment: MainAxisAlignment.center,
                                           children: [
                                             Text(
-                                                (state.expenses != "" && state.expenses != 0.toString())
+                                                (state.expensesPerMonth != "" && state.expensesPerMonth != 0.toString())
                                                     ? rialCurrencyType == true
                                                     ? AppLocale.rial.getString(context)
                                                     : AppLocale.toman.getString(context)
@@ -143,10 +143,10 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                                                     color: Colors.white)),
                                             SizedBox(width: Dimensions.width10 / 3),
                                             Text(
-                                                state.expenses != ""
+                                                state.expensesPerMonth != ""
                                                     ? rialCurrencyType == true
-                                                    ? ('${state.expenses}0').toPersianDigit().seRagham()
-                                                    : state.expenses.toPersianDigit().seRagham()
+                                                    ? ('${state.expensesPerMonth}0').toPersianDigit().seRagham()
+                                                    : state.expensesPerMonth.toPersianDigit().seRagham()
                                                     : "0".toPersianDigit(),
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.w800,
@@ -158,10 +158,10 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                                           mainAxisAlignment: MainAxisAlignment.center,
                                           children: [
                                             Text(
-                                                state.expenses != ""
+                                                state.expensesPerMonth != ""
                                                     ? rialCurrencyType == true
-                                                    ? ("${state.expenses}0").seRagham()
-                                                    : state.expenses.seRagham()
+                                                    ? ("${state.expensesPerMonth}0").seRagham()
+                                                    : state.expensesPerMonth.seRagham()
                                                     : "0",
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.w800,
@@ -169,7 +169,7 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                                                     fontSize: Dimensions.font26)),
                                             SizedBox(width: Dimensions.width10 / 3),
                                             Text(
-                                                state.expenses != ""
+                                                state.expensesPerMonth != ""
                                                     ? rialCurrencyType == true
                                                     ? AppLocale.rial.getString(context)
                                                     : AppLocale.toman.getString(context)
