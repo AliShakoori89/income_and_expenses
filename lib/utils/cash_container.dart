@@ -453,7 +453,8 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                               )
                             ],
                           );
-                        });});
+                        });
+                  });
             }),
       );});
   }
