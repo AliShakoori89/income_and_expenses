@@ -1,14 +1,12 @@
-import 'package:device_preview/device_preview.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localization/flutter_localization.dart';
-import 'package:get/get.dart';
 import 'package:income_and_expenses/bloc/calculate_sf_circular_chart/bloc.dart';
 import 'package:income_and_expenses/bloc/change_language_bloc/bloc.dart';
 import 'package:income_and_expenses/bloc/set_date_bloc/bloc.dart';
 import 'package:income_and_expenses/bloc/them_bloc/bloc.dart';
+import 'package:income_and_expenses/pages/home_page.dart';
 import 'package:income_and_expenses/repository/calculate_repository.dart';
 import 'package:income_and_expenses/repository/calculate_sf_cartesian_chart_repository.dart';
 import 'package:income_and_expenses/repository/calculate_sf_circular_chart_repository.dart';
@@ -17,18 +15,17 @@ import 'package:income_and_expenses/repository/change_currecy_repository.dart';
 import 'package:income_and_expenses/repository/change_language_repository.dart';
 import 'package:income_and_expenses/repository/date_time_repository.dart';
 import 'package:income_and_expenses/repository/theme_repository.dart';
-import 'package:income_and_expenses/routes/route_helper.dart';
 import 'bloc/calculate_sf_cartesian_chart/bloc.dart';
 import 'bloc/change_currency_bloc/bloc.dart';
 import 'const/language.dart';
 
 void main() {
   runApp(
-    DevicePreview(
-      enabled: !kReleaseMode,
-      builder: (context) =>
-    MyApp(), // Wrap your app
-    ),
+    // DevicePreview(
+    //   enabled: !kReleaseMode,
+    //   builder: (context) =>
+    const MyApp(), // Wrap your app
+    // ),
   );
 }
 
@@ -87,13 +84,12 @@ class _MyAppState extends State<MyApp> {
             create: (BuildContext context) =>
                 CalculateSFCartesianChartBloc(CalculateSFCartesianChartRepository())),
       ],
-      child: GetMaterialApp(
+      child: MaterialApp(
         supportedLocales: _localization.supportedLocales,
         localizationsDelegates: _localization.localizationsDelegates,
         debugShowCheckedModeBanner: false,
         title: 'Income and Expenses',
-        initialRoute: RouteHelper.getInitial(),
-        getPages: RouteHelper.routes,
+        home: const MyHomePage(),
       ),
     );
   }

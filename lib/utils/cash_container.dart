@@ -12,12 +12,10 @@ import 'package:income_and_expenses/utils/widget.dart';
 import 'package:persian_number_utility/persian_number_utility.dart';
 import '../bloc/change_currency_bloc/bloc.dart';
 import '../bloc/change_currency_bloc/state.dart';
-import '../bloc/change_language_bloc/event.dart';
 import '../bloc/set_date_bloc/bloc.dart';
 import '../bloc/set_date_bloc/event.dart';
 import '../bloc/them_bloc/bloc.dart';
 import '../bloc/them_bloc/state.dart';
-import '../const/income_animation.dart';
 
 class CashContainer extends StatefulWidget {
 

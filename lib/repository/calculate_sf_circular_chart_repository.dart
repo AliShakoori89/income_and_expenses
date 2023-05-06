@@ -1,4 +1,3 @@
-import 'package:shamsi_date/shamsi_date.dart';
 import '../data_base/data_base.dart';
 
 class CalculateSFCircularChartRepository {

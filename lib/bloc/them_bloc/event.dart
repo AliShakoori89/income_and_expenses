@@ -1,6 +1,5 @@
 
 abstract class ThemEvent{
-  @override
   List<Object> get props => [];
 }
 

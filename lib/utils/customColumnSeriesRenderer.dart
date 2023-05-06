@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class CustomColumnSeriesRenderer extends BarSeriesRenderer {

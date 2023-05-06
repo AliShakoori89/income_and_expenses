@@ -18,6 +18,8 @@ import '../bloc/them_bloc/state.dart';
 import '../const/language.dart';
 
 class AddExpensePage extends StatefulWidget {
+  const AddExpensePage({super.key});
+
 
 
   @override
@@ -79,7 +81,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
                   SizedBox(
                     height: Dimensions.height30,
                   ),
-                  DatePickerCalendar(),
+                  const DatePickerCalendar(),
                   SizedBox(
                     height: Dimensions.height20,
                   ),

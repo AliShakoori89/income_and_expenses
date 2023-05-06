@@ -1,5 +1,4 @@
 abstract class CalculateSFCartesianChartEvent{
-  @override
   List<Object> get props => [];
 }
 

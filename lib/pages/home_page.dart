@@ -17,7 +17,7 @@ class MyHomePage extends StatefulWidget {
 
   // bool isViewed;
 
-  MyHomePage({Key? key}) : super(key: key);
+  const MyHomePage({Key? key}) : super(key: key);
 
   @override
   MyHomePageState createState() => MyHomePageState();
@@ -43,9 +43,9 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       [
         MainExpensesPage(keyButton: keyButton, keyButton1: keyButton1, keyButton2: keyButton2, keyButton3: keyButton3),
         // MainExpensesPage(),
-        MonthChart(),
-        YearChartPage(),
-        ProfilePage(),
+        const MonthChart(),
+        const YearChartPage(),
+        const ProfilePage(),
       ];
 
   late AnimationController _fabAnimationController;
@@ -154,21 +154,14 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       paddingFocus: 10,
       opacityShadow: 0.8,
       onFinish: () {
-        print("finish");
       },
       onClickTarget: (target) {
-        print('onClickTarget: $target');
       },
       onClickTargetWithTapPosition: (target, tapDetails) {
-        print("target: $target");
-        print(
-            "clicked at position local: ${tapDetails.localPosition} - global: ${tapDetails.globalPosition}");
       },
       onClickOverlay: (target) {
-        print('onClickOverlay: $target');
       },
       onSkip: () {
-        print("skip");
       },
     );
   }
@@ -476,7 +469,7 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
             // Get.toNamed(RouteHelper.getAddPage());
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => AddExpensePage()),
+              MaterialPageRoute(builder: (context) => const AddExpensePage()),
             );
           },
         ),

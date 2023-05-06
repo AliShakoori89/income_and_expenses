@@ -78,8 +78,6 @@ class DatabaseHelper {
 
   Future<String> calculateDayExpenses(String? day) async {
 
-    print("calculateDayExpenses  day            "+day.toString());
-
     var dbExpense = await database;
     var result = await dbExpense.rawQuery("SELECT SUM($columnExpense) FROM my_table WHERE $columnExpenseDate ='$day'");
     Object? value = result[0]["SUM($columnExpense)"];
@@ -91,8 +89,6 @@ class DatabaseHelper {
   }
 
   Future<String> calculateTotalExpenses(String? dateMonth) async {
-
-    print("calculateTotalExpenses  day            "+dateMonth.toString());
 
     var dbExpense = await database;
     var result = await dbExpense.rawQuery("SELECT SUM($columnExpense) FROM my_table WHERE $columnExpenseDateMonth ='$dateMonth'");

@@ -1,5 +1,4 @@
 abstract class ChangeLanguageEvent{
-  @override
   List<Object> get props => [];
 }
 

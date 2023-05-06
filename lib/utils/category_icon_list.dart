@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
 import 'package:income_and_expenses/const/app_colors.dart';
 import 'package:income_and_expenses/const/app_const.dart';
 import 'package:income_and_expenses/const/dimensions.dart';
@@ -48,7 +47,7 @@ class CategoryIconList extends StatelessWidget {
                       controller.text = englishLanguageBoolean == false
                           ? AppConst.iconsPersianName[index]
                           : AppConst.iconsEnglishName[index];
-                      Get.back();
+                      Navigator.pop(context);
                     },
                     child: Column(
                       children: [

@@ -88,6 +88,7 @@ class _AppTextFieldState extends State<AppTextField> {
                 return "لطفا هزینه مربوطه را وارد نمایید.";
               }
             }
+ return null;
           },
         ),
       );});

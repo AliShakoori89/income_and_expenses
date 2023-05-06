@@ -36,7 +36,6 @@ class SetDateRepository {
 
   Future<String> reduceDate(String date) async{
     final prefs = await SharedPreferences.getInstance();
-    print("44444444444444444           "+date);
     await prefs.setString('date', date);
     return date;
   }
@@ -91,7 +90,6 @@ class SetDateRepository {
   }
 
   Future<String?> readTodayExpensesRepo() async {
-    print("**********************************");
     final prefs = await SharedPreferences.getInstance();
     final String? todayExpenses = prefs.getString('todayExpenses');
     return todayExpenses;

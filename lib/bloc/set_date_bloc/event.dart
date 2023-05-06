@@ -1,7 +1,6 @@
 import '../../model/expense_model.dart';
 
 abstract class SetDateEvent{
-  @override
   List<Object> get props => [];
 }
 

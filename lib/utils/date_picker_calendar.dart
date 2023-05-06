@@ -110,7 +110,7 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                         lastDate: Jalali(1450, 9),
 
                       ))!;
-                      if (picked != null && picked != selectedDate) {
+                      if (picked != selectedDate) {
                         setState(() {
                           label = picked.toJalaliDateTime();
                         });

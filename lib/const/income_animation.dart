@@ -19,16 +19,16 @@ class _AnimatedModalBarrierAppState extends State<AnimatedModalBarrierApp> with 
 
   @override
   void initState() {
-    ColorTween  _colorTween = ColorTween(
-      begin: Color.fromARGB(100, 255, 255, 255),
-      end: Color.fromARGB(100, 127, 127, 127),
+    ColorTween  colorTween = ColorTween(
+      begin: const Color.fromARGB(100, 255, 255, 255),
+      end: const Color.fromARGB(100, 127, 127, 127),
     );
 
     _animationController = AnimationController(
         vsync: this,
         duration: const Duration(seconds: 3)
     );
-    _colorTweenAnimation = _colorTween.animate(_animationController);
+    _colorTweenAnimation = colorTween.animate(_animationController);
 
     _animatedModalBarrier = AnimatedModalBarrier(
       color: _colorTweenAnimation,
@@ -41,7 +41,7 @@ class _AnimatedModalBarrierAppState extends State<AnimatedModalBarrierApp> with 
   List<Widget> buildWidgetList(BuildContext context) {
     List<Widget> widgets = <Widget>[
       TextButton(
-        child: Text('Button'),
+        child: const Text('Button'),
         onPressed: () {
           setState(() {
             _isLoading = true;
@@ -70,20 +70,20 @@ class _AnimatedModalBarrierAppState extends State<AnimatedModalBarrierApp> with 
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Woolha.com Flutter Tutorial'),
+        title: const Text('Woolha.com Flutter Tutorial'),
       ),
       body: Builder(
         builder: (context) => Center(
           child: Padding(
-            padding: EdgeInsets.all(15.0),
+            padding: const EdgeInsets.all(15.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Container(
+                SizedBox(
                   height: 100.0,
                   width: 250.0,
                   // alignment: FractionalOffset.center,
-                  child: new Stack(
+                  child: Stack(
                     alignment: AlignmentDirectional.center,
                     children: buildWidgetList(context),
                   ),

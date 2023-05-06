@@ -12,7 +12,7 @@ class SettingItems extends StatelessWidget {
 
   final String imagePath;
   final String itemName;
-  SettingItems({Key? key,
+  const SettingItems({Key? key,
     required this.imagePath,
   required this.itemName}) : super(key: key);
 

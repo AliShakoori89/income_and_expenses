@@ -1,5 +1,4 @@
 abstract class ChangeCurrencyEvent{
-  @override
   List<Object> get props => [];
 }
 

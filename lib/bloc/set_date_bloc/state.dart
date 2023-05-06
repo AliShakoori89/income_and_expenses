@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:persian_datetime_picker/persian_datetime_picker.dart';
 
 import '../../model/expense_model.dart';
 
