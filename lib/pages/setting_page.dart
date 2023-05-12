@@ -9,8 +9,8 @@ import '../bloc/them_bloc/state.dart';
 import '../const/language.dart';
 
 
-class ProfilePage extends StatelessWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+class SettingPage extends StatelessWidget {
+  const SettingPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class ProfilePage extends StatelessWidget {
             ? Colors.white
             : AppColors.darkThemeColor,
       appBar: AppBar(
-        toolbarHeight: 20,
+        toolbarHeight: Dimensions.height45,
         backgroundColor: darkThemeBoolean == "false"
             ? AppColors.profileAppBarColor
             : AppColors.darkThemeColor,

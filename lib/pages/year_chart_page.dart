@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_linear_datepicker/flutter_datepicker.dart';
 import 'package:flutter_localization/flutter_localization.dart';
-import 'package:income_and_expenses/const/dimensions.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import '../bloc/calculate_sf_cartesian_chart/bloc.dart';
 import '../bloc/calculate_sf_cartesian_chart/event.dart';
 import '../bloc/calculate_sf_cartesian_chart/state.dart';
+import '../bloc/change_language_bloc/bloc.dart';
+import '../bloc/change_language_bloc/state.dart';
 import '../bloc/them_bloc/bloc.dart';
 import '../bloc/them_bloc/state.dart';
 import '../const/app_colors.dart';
 import '../const/language.dart';
+import  'package:persian_number_utility/persian_number_utility.dart';
+
 
 class YearChartPage extends StatefulWidget {
   // ignore: prefer_const_constructors_in_immutables
@@ -42,22 +45,27 @@ class _YearChartPageState extends State<YearChartPage> {
   @override
   Widget build(BuildContext context) {
     
-    return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
+    return BlocBuilder<ChangeLanguageBloc, ChangeLanguageState>(
+        builder: (context, state) {
+
+      bool englishLanguageBoolean = state.englishLanguageBoolean;
+
+      return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
 
       var darkThemeBoolean = state.darkThemeBoolean;
 
       return BlocBuilder<CalculateSFCartesianChartBloc, CalculateSFCartesianChartState>(builder: (context, state) {
 
         data = [
-          _ChartData('خرید اقلام', double.parse(state.buyItemsExpenses)/100000),
-          _ChartData('خوراکی', double.parse(state.comestibleExpenses)/100000),
-          _ChartData('حمل و نقل', double.parse(state.transportationExpenses)/100000),
-          _ChartData('اقساط', double.parse(state.installmentsAndDebtExpenses)/100000),
-          _ChartData('درمانی', double.parse(state.treatmentExpenses)/100000),
-          _ChartData('هدایا', double.parse(state.giftsExpenses)/100000),
-          _ChartData('تعمیرات', double.parse(state.renovationExpenses)/100000),
-          _ChartData('تفریح', double.parse(state.pastimeExpenses)/100000),
-          _ChartData('سایر', double.parse(state.etceteraExpenses)/100000),
+          _ChartData(AppLocale.buyItems.getString(context), double.parse(state.buyItemsExpenses)/100000),
+          _ChartData(AppLocale.comestible.getString(context), double.parse(state.comestibleExpenses)/100000),
+          _ChartData(AppLocale.transportation.getString(context), double.parse(state.transportationExpenses)/100000),
+          _ChartData(AppLocale.installmentsAndDebt.getString(context), double.parse(state.installmentsAndDebtExpenses)/100000),
+          _ChartData(AppLocale.treatment.getString(context), double.parse(state.treatmentExpenses)/100000),
+          _ChartData(AppLocale.gifts.getString(context), double.parse(state.giftsExpenses)/100000),
+          _ChartData(AppLocale.comestible.getString(context), double.parse(state.renovationExpenses)/100000),
+          _ChartData(AppLocale.comestible.getString(context), double.parse(state.pastimeExpenses)/100000),
+          _ChartData(AppLocale.comestible.getString(context), double.parse(state.etceteraExpenses)/100000),
         ];
         _tooltip = TooltipBehavior(enable: true);
 
@@ -66,11 +74,12 @@ class _YearChartPageState extends State<YearChartPage> {
               ? AppColors.mainPageCardBorderColor
               : AppColors.darkThemeColor,
           body: SafeArea(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  SizedBox(height: Dimensions.height45,),
-                  LinearDatePicker(
+            child: Column(
+              children: [
+                SizedBox(height: MediaQuery.of(context).size.height / 15),
+                Expanded(
+                  flex: 3,
+                  child: LinearDatePicker(
                     startDate: "1396/01",
                     endDate: "1499/12",
                     dateChangeListener: (String selectedDate) {
@@ -78,10 +87,9 @@ class _YearChartPageState extends State<YearChartPage> {
                       selectedValue = selectedDate;
 
                       BlocProvider.of<CalculateSFCartesianChartBloc>(context).add(
-                            SumExpensesByGroupingTypePerMonthForSFCartesianChartEvent(
-                                year: selectedValue!.split("/").first,
-                                month: selectedValue!.split("/").last));
-
+                          SumExpensesByGroupingTypePerMonthForSFCartesianChartEvent(
+                              year: selectedValue!.split("/").first,
+                              month: selectedValue!.split("/").last));
                     },
                     showDay: false,
                     selectedRowStyle: TextStyle(
@@ -91,7 +99,7 @@ class _YearChartPageState extends State<YearChartPage> {
                       fontStyle: FontStyle.italic,
 
                       fontFamily: 'iran',
-                      fontSize: Dimensions.font24,
+                      fontSize: MediaQuery.of(context).size.width / 20,
                       color: darkThemeBoolean == "false" ? AppColors.mainColor : Colors.white,
                       fontWeight: FontWeight.w900,
                     ),
@@ -104,15 +112,18 @@ class _YearChartPageState extends State<YearChartPage> {
                       color: darkThemeBoolean == "false" ? Colors.black : Colors.white,
                     ),
                     showLabels: true,
-                    columnWidth: Dimensions.width45*2,
+                    columnWidth: MediaQuery.of(context).size.width / 4,
                     showMonthName: true,
                     isJalaali: true,
                   ),
-                  SizedBox(height: Dimensions.height45,),
-                  SfCartesianChart(
+                ),
+                SizedBox(height: MediaQuery.of(context).size.height / 20),
+                Expanded(
+                  flex: 3,
+                  child: SfCartesianChart(
                       margin: EdgeInsets.only(
-                        top: Dimensions.height20,
-                        bottom: Dimensions.height30,
+                        top: MediaQuery.of(context).size.height / 30,
+                        bottom: MediaQuery.of(context).size.height / 30
                       ),
                       title: ChartTitle(
                           text: AppLocale.expensePerYear.getString(context),
@@ -128,37 +139,88 @@ class _YearChartPageState extends State<YearChartPage> {
                       tooltipBehavior: _tooltip,
                       series: <ChartSeries<_ChartData, String>>[
                         ColumnSeries<_ChartData, String>(
-                            dataSource: data,
-                            xValueMapper: (_ChartData data, _) => data.x,
-                            yValueMapper: (_ChartData data, _) => data.y,
-                            name: 'Gold',
-                            dataLabelSettings: DataLabelSettings(
-                                isVisible: true,
-                                labelAlignment: ChartDataLabelAlignment.middle,
-                                textStyle: TextStyle(
-                                  color: darkThemeBoolean == "false"
-                                      ? AppColors.appBarTitleColor
-                                      : Colors.white,
-                                )),
-                            onCreateRenderer: (ChartSeries<_ChartData, String> series) =>
-                                _CustomColumnSeriesRenderer(),
-                            color: AppColors.chartColor,),
+                          dataSource: data,
+                          xValueMapper: (_ChartData data, _) => data.x,
+                          yValueMapper: (_ChartData data, _) => data.y,
+                          name: 'Gold',
+                          dataLabelSettings: DataLabelSettings(
+                              isVisible: true,
+                              labelAlignment: ChartDataLabelAlignment.middle,
+                              textStyle: TextStyle(
+                                color: darkThemeBoolean == "false"
+                                    ? AppColors.appBarTitleColor
+                                    : Colors.white,
+                              )),
+                          onCreateRenderer: (ChartSeries<_ChartData, String> series) =>
+                              _CustomColumnSeriesRenderer(),
+                          color: AppColors.chartColor,),
                       ]
                   ),
-                  SizedBox(height: Dimensions.height20,),
-                  Text("مقیاس : 1/100000",
-                  style: TextStyle(
-                    fontSize: Dimensions.font20,
-                    color: darkThemeBoolean == "false"
-                        ? AppColors.appBarTitleColor
-                        : Colors.white,
-                  ),),
-                  SizedBox(height: Dimensions.height30*2,),
-                ],
-              ),
+                ),
+                SizedBox(height: MediaQuery.of(context).size.height / 20),
+                    Expanded(
+                      flex: 1,
+                      child: englishLanguageBoolean == false
+                          ? Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  englishLanguageBoolean == false
+                                      ? "1/100000".toPersianDigit()
+                                      : "1/100000",
+                                  style: TextStyle(
+                                    fontSize:
+                                        MediaQuery.of(context).size.width / 25,
+                                    color: darkThemeBoolean == "false"
+                                        ? AppColors.appBarTitleColor
+                                        : Colors.white,
+                                  ),
+                                ),
+                                Text(
+                                  " : ${AppLocale.mapScale.getString(context)}",
+                                  style: TextStyle(
+                                    fontSize:
+                                        MediaQuery.of(context).size.width / 25,
+                                    color: darkThemeBoolean == "false"
+                                        ? AppColors.appBarTitleColor
+                                        : Colors.white,
+                                  ),
+                                ),
+                              ],
+                            )
+                          : Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "${AppLocale.mapScale.getString(context)} : ",
+                                  style: TextStyle(
+                                    fontSize:
+                                    MediaQuery.of(context).size.width / 25,
+                                    color: darkThemeBoolean == "false"
+                                        ? AppColors.appBarTitleColor
+                                        : Colors.white,
+                                  ),
+                                ),
+                                Text(
+                                  englishLanguageBoolean == false
+                                      ? "1/100000".toPersianDigit()
+                                      : "1/100000",
+                                  style: TextStyle(
+                                    fontSize:
+                                        MediaQuery.of(context).size.width / 25,
+                                    color: darkThemeBoolean == "false"
+                                        ? AppColors.appBarTitleColor
+                                        : Colors.white,
+                                  ),
+                                ),
+                              ],
+                            ),
+                    ),
+                SizedBox(height: MediaQuery.of(context).size.height / 15),
+              ],
             ),
           ));
-    });});
+    });});});
   }
 }
 

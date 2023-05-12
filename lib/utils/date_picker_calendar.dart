@@ -57,15 +57,12 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
           builder: (context, state) {
             bool englishLanguageBoolean = state.englishLanguageBoolean;
 
-            return Container(
-              margin: EdgeInsets.only(
-                  left: Dimensions.width10,
-                  right: Dimensions.width10
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  GestureDetector(
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: GestureDetector(
                     onTap: () {
                       date = "${DateTime.parse(DateFormat('yyyy-MM-dd').format(DateTime.parse(date)))
                           .add(const Duration(days: -1))}";
@@ -92,15 +89,17 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
 
                     },
                     child: SizedBox(
-                      width: Dimensions.width20,
-                      height: Dimensions.height20,
+                      width: MediaQuery.of(context).size.width / 15,
+                      height: MediaQuery.of(context).size.width / 15,
                       child: Image.asset(
                         // key: keyButton1,
-                        "assets/main_page_first_container_logo/left_arrow.png",
-                        width: Dimensions.iconSize16,),
+                        "assets/main_page_first_container_logo/left_arrow.png"),
                     ),
                   ),
-                  GestureDetector(
+                ),
+                Expanded(
+                  flex: 4,
+                  child: GestureDetector(
 
                     onTap:() async{
                       picked = (await showPersianDatePicker(
@@ -152,41 +151,43 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                           .add(FetchExpensesItemsEvent(date : date));
                     },
                     child: Container(
+                      height: MediaQuery.of(context).size.width / 8,
+                      margin: EdgeInsets.only(
+                        right: MediaQuery.of(context).size.width / 30,
+                        left: MediaQuery.of(context).size.width / 30,
+                      ),
                       // key: keyButton2,
                       decoration: BoxDecoration(
                           color: AppColors.calenderBoxColor,
-                          borderRadius: BorderRadius.circular(Dimensions.radius20)),
-                      child: Padding(
-                          padding: EdgeInsets.only(
-                              top: Dimensions.height10,
-                              bottom: Dimensions.height10,
-                              left: Dimensions.width20,
-                              right: Dimensions.width20),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.calendar_today,
-                                size: Dimensions.iconSize16,
-                                color: AppColors.calenderBoxIconColor,
-                              ),
-                              SizedBox(
-                                width: Dimensions.height10,
-                              ),
-                              Text(
-                                  englishLanguageBoolean == false
-                                      ? DateFormat('yyyy-MM-dd').format(DateTime.parse(date)).toPersianDigit()
-                                      : DateFormat('yyyy-MM-dd').format(DateTime.parse(date)),
-                                  style: TextStyle(
-                                      fontSize: englishLanguageBoolean == false
-                                          ? Dimensions.font18
-                                          : Dimensions.font14,
-                                      color: AppColors.appBarTitleColor)),
-                            ],
-                          )),
+                          borderRadius: BorderRadius.circular(20)),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.calendar_today,
+                            size: MediaQuery.of(context).size.width / 20,
+                            color: AppColors.calenderBoxIconColor,
+                          ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width / 20,
+                          ),
+                          Text(
+                              englishLanguageBoolean == false
+                                  ? DateFormat('yyyy-MM-dd').format(DateTime.parse(date)).toPersianDigit()
+                                  : DateFormat('yyyy-MM-dd').format(DateTime.parse(date)),
+                              style: TextStyle(
+                                  fontSize: englishLanguageBoolean == false
+                                      ? Dimensions.font18
+                                      : Dimensions.font14,
+                                  color: AppColors.appBarTitleColor)),
+                        ],
+                      ),
                     ),
                   ),
-                  GestureDetector(
+                ),
+                Expanded(
+                  flex: 1,
+                  child: GestureDetector(
                     onTap: () {
                       date = "${DateTime.parse(DateFormat('yyyy-MM-dd').format(DateTime.parse(date))).add(const Duration(days: 1))}";
 
@@ -206,16 +207,16 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                           .add(FetchExpensesItemsEvent(date: DateFormat('yyyy-MM-dd').format(DateTime.parse(date)).toString()));
                     },
                     child: SizedBox(
-                      width: Dimensions.width20,
-                      height: Dimensions.height20,
+                      width: MediaQuery.of(context).size.width / 15,
+                      height: MediaQuery.of(context).size.width / 15,
                       child: Image.asset(
                         // key: keyButton3,
                         "assets/main_page_first_container_logo/right_arrow.png",
-                        width: Dimensions.iconSize16,),
+                       ),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             );});});
   }
 }

@@ -17,10 +17,9 @@ class NoDataPage extends StatelessWidget {
 
       var darkThemeBoolean = state.darkThemeBoolean;
 
-      return Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
           Image.asset("assets/images/No data.png",
               width: Dimensions.width45*6),
           Text(
@@ -31,9 +30,8 @@ class NoDataPage extends StatelessWidget {
                   ? AppColors.noDataTextColor
                   : Colors.white,
             ),
-          ),
+          )
         ],
-    ),
       );
   });}
 }

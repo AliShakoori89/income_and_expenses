@@ -28,86 +28,82 @@ class SettingItems extends StatelessWidget {
       var darkThemeBoolean = state.darkThemeBoolean;
 
       return englishLanguageBoolean == true
-          ? Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          SizedBox(
-              width: Dimensions.width20, child: Image.asset(imagePath)),
-          SizedBox(
-            width: Dimensions.width10,
-          ),
-          Expanded(
-            child: Container(
+          ? Container(
               width: Dimensions.screenWidth / 1.35,
+              height: Dimensions.height45,
               margin: EdgeInsets.only(
-                right: Dimensions.width20,
+                right: Dimensions.width10,
                 left: Dimensions.width10,
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    itemName.getString(context),
-                    textDirection: TextDirection.ltr,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontSize: Dimensions.font16,
-                      color: darkThemeBoolean == "false"
-                          ? AppColors.appBarProfileName
-                          : Colors.white,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                            width: Dimensions.width20,
+                            child: Image.asset(imagePath)),
+                        SizedBox(width: Dimensions.width15,),
+                        Text(
+                          itemName.getString(context),
+                          textDirection: TextDirection.ltr,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: Dimensions.font16,
+                            color: darkThemeBoolean == "false"
+                                ? AppColors.appBarProfileName
+                                : Colors.white,
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                  Icon(Icons.arrow_forward_ios,
-                      color: darkThemeBoolean == "false"
-                          ? AppColors.darkArrowButtonColor
-                          : Colors.white,
-                      size: Dimensions.iconSize16),
-                ],
-              ),
-            ),
-          ),
-        ],
-      )
-          : Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          Expanded(
-            child: Container(
-              width: Dimensions.screenWidth / 1.35,
-              margin: EdgeInsets.only(
-                right: Dimensions.width20,
-                left: Dimensions.width10,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Icon(Icons.arrow_back_ios,
-                      color: darkThemeBoolean == "false"
-                          ? AppColors.darkArrowButtonColor
-                          : Colors.white,
-                      size: Dimensions.iconSize16),
-                  Text(
-                    itemName.getString(context),
-                    textDirection: TextDirection.rtl,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontSize: Dimensions.font16,
-                      color: darkThemeBoolean == "false"
-                          ? AppColors.appBarProfileName
-                          : Colors.white,
+                    Icon(Icons.arrow_forward_ios,
+                        color: darkThemeBoolean == "false"
+                            ? AppColors.darkArrowButtonColor
+                            : Colors.white,
+                        size: Dimensions.iconSize16)
+                  ],
+                ),
+          )
+            : Container(
+                width: Dimensions.screenWidth / 1.35,
+                height: Dimensions.height45,
+                margin: EdgeInsets.only(
+                  right: Dimensions.width10,
+                  left: Dimensions.width10,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Icon(Icons.arrow_back_ios,
+                        color: darkThemeBoolean == "false"
+                            ? AppColors.darkArrowButtonColor
+                            : Colors.white,
+                        size: Dimensions.iconSize16),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text(
+                          itemName.getString(context),
+                          textDirection: TextDirection.rtl,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: Dimensions.font16,
+                            color: darkThemeBoolean == "false"
+                                ? AppColors.appBarProfileName
+                                : Colors.white,
+                          ),
+                        ),
+                        SizedBox(width: Dimensions.width15,),
+                        SizedBox(
+                            width: Dimensions.width20,
+                            child: Image.asset(imagePath)),
+                      ],
                     ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          SizedBox(
-            width: Dimensions.width10,
-          ),
-          SizedBox(
-              width: Dimensions.width20, child: Image.asset(imagePath)),
-        ],
-      );
+                  ],
+                ),
+              );
 
     });});
   }

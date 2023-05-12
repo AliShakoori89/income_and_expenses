@@ -1,11 +1,11 @@
-import 'dart:ui';
+import 'package:get/get.dart';
 
 class Dimensions{
 
   //834.9090909090909
-  static double screenHeight = window.physicalSize.longestSide / window.devicePixelRatio;
+  static double screenHeight = Get.context!.height;
   //392.72727272727275
-  static double screenWidth = window.physicalSize.shortestSide / window.devicePixelRatio;
+  static double screenWidth = Get.context!.width;
 
   static double pageViewContainer = screenHeight/3.84;
   static double pageViewTextContainer = screenHeight/1.1;
@@ -20,6 +20,7 @@ class Dimensions{
   static double height25 = screenHeight/35;
   static double height30 = screenHeight/28.13;
   static double height45 = screenHeight/18.76;
+  static double height400 = screenHeight/4;
   //dynamic width padding and margin
   static double width10 = screenHeight/84.4;
   static double width15 = screenHeight/56.27;

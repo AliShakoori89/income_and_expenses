@@ -12,27 +12,15 @@ import '../utils/cash_container_per_date.dart';
 
 class MainExpensesPage extends StatefulWidget {
 
-  GlobalKey keyButton;
-  GlobalKey keyButton1;
-  GlobalKey keyButton2;
-  GlobalKey keyButton3;
-
-  MainExpensesPage({Key? key, required this.keyButton, required this.keyButton1,
-  required this.keyButton2, required this.keyButton3}) : super(key: key);
+  MainExpensesPage({Key? key}) : super(key: key);
 
   @override
-  State<MainExpensesPage> createState() => _MainExpensesPageState(keyButton, keyButton1, keyButton2, keyButton3);
+  State<MainExpensesPage> createState() => _MainExpensesPageState();
 }
 
 class _MainExpensesPageState extends State<MainExpensesPage> {
 
   String date = "";
-  GlobalKey keyButton;
-  GlobalKey keyButton1;
-  GlobalKey keyButton2;
-  GlobalKey keyButton3;
-
-  _MainExpensesPageState(this.keyButton, this.keyButton1, this.keyButton2, this.keyButton3);
 
   @override
   void initState() {
@@ -48,96 +36,83 @@ class _MainExpensesPageState extends State<MainExpensesPage> {
 
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
       return Scaffold(
+        extendBody: true,
         resizeToAvoidBottomInset: false,
         backgroundColor: state.darkThemeBoolean == "false"
             ? Colors.white
             : AppColors.darkThemeColor,
-        body: Stack(
-          children: [
-            Container(
-              height: Dimensions.height45*5,
-              decoration: BoxDecoration(
-                gradient: const LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment(0.8, 1),
-                  colors: <Color>[
-                    Color.fromRGBO(248, 187, 208, 1),
-                    Color.fromRGBO(212, 200, 235, 1),
-                    Color.fromRGBO(179, 229, 252, 1),
-                  ], // Gradient from https://learnui.design/tools/gradient-generator.html
-                  tileMode: TileMode.mirror,
-                ),
-                borderRadius: BorderRadius.vertical(
-                    bottom: Radius.elliptical(
-                        MediaQuery.of(context).size.width, 200)),
-              ),
-            ),
-            SingleChildScrollView(
-              child: Column(
-                children: [
-                  SizedBox(height: Dimensions.height45,),
-                  Stack(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Expanded(
-                            child: Padding(
-                              padding: EdgeInsets.only(
-                                top: Dimensions.height10,
-                              ),
-                              child: SizedBox(
-                                key: keyButton1,
-                                height: Dimensions.height10,
-                                width: Dimensions.width10,
-                              ),
-                            ),
-                          ),
-                          SizedBox(width: Dimensions.width45*3),
-                          Expanded(
-                            child: Padding(
-                              padding: EdgeInsets.only(
-                                top: Dimensions.height10,
-                              ),
-                              child: SizedBox(
-                                key: keyButton2,
-                                height: Dimensions.height10*2,
-                                width: Dimensions.width10*2,
-                              ),
-                            ),
-                          ),
-                          SizedBox(width: Dimensions.width45*3),
-                          Expanded(
-                            child: Padding(
-                              padding: EdgeInsets.only(
-                                top: Dimensions.height10,
-                              ),
-                              child: SizedBox(
-                                key: keyButton3,
-                                height: Dimensions.height10,
-                                width: Dimensions.width10,
-                              ),
-                            ),
-                          ),
-                        ],
+        body:
+        // Stack(
+        //   fit: StackFit.expand,
+        //   children: [
+            Column(
+              children: [
+                Stack(
+                  children: [
+                    Container(
+                      height: MediaQuery.of(context).size.height / 4,
+                      decoration: BoxDecoration(
+                        gradient: const LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment(0.8, 1),
+                          colors: <Color>[
+                            Color.fromRGBO(248, 187, 208, 1),
+                            Color.fromRGBO(212, 200, 235, 1),
+                            Color.fromRGBO(179, 229, 252, 1),
+                          ],
+                          // Gradient from https://learnui.design/tools/gradient-generator.html
+                          tileMode: TileMode.mirror,
+                        ),
+                        borderRadius: BorderRadius.vertical(
+                            bottom: Radius.elliptical(
+                                MediaQuery.of(context).size.width, 200)),
                       ),
-                      const DatePickerCalendar(),
-                    ],
-                  ),
-                  SizedBox(
-                    height: Dimensions.height30,
-                  ),
-                  Column(
-                    children: [
-                      CashContainer(keyButton: keyButton),
-                      const CashContainerPerDate(),
-                    ],
-                  ),
-                ],
-              ),
-            )
-          ],
-        ),
-      );});
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: MediaQuery.of(context).size.height/15),
+                      child: DatePickerCalendar(),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: MediaQuery.of(context).size.height/6),
+                      child: CashContainer(),
+                    ),
+
+                  ],
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: MediaQuery.of(context).size.height/15),
+                  child: SingleChildScrollView(
+                      child: CashContainerPerDate()),
+                )
+              ],
+            ),
+
+            // Column(
+            //   children: [
+            //     Expanded(
+            //       child: SizedBox(
+            //         height: MediaQuery.of(context).size.height / 30,
+            //       ),
+            //     ),
+            //     Expanded(
+            //         flex: 1,
+            //         child: const DatePickerCalendar()),
+            //     SizedBox(
+            //       height: MediaQuery.of(context).size.height / 30,
+            //     ),
+            //     Expanded(
+            //         flex: 5,
+            //         child: CashContainer()),
+            //     Expanded(
+            //       child: const SingleChildScrollView(
+            //         child: CashContainerPerDate(),
+            //       ),
+            //     )
+            //   ],
+            // )
+        //   ],
+        // )
+      );
+    });
   }
 }

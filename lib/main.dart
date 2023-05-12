@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localization/flutter_localization.dart';
+import 'package:get/get.dart';
 import 'package:income_and_expenses/bloc/calculate_sf_circular_chart/bloc.dart';
 import 'package:income_and_expenses/bloc/change_language_bloc/bloc.dart';
 import 'package:income_and_expenses/bloc/set_date_bloc/bloc.dart';
@@ -38,7 +39,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
 
-  final FlutterLocalization _localization = FlutterLocalization.instance;
+  FlutterLocalization _localization = FlutterLocalization.instance;
 
   @override
   void initState() {
@@ -84,7 +85,7 @@ class _MyAppState extends State<MyApp> {
             create: (BuildContext context) =>
                 CalculateSFCartesianChartBloc(CalculateSFCartesianChartRepository())),
       ],
-      child: MaterialApp(
+      child: GetMaterialApp(
         supportedLocales: _localization.supportedLocales,
         localizationsDelegates: _localization.localizationsDelegates,
         debugShowCheckedModeBanner: false,
