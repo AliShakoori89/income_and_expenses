@@ -4,7 +4,6 @@ import 'package:flutter_localization/flutter_localization.dart';
 import 'package:income_and_expenses/bloc/change_language_bloc/bloc.dart';
 import 'package:income_and_expenses/bloc/change_language_bloc/state.dart';
 import 'package:income_and_expenses/const/app_colors.dart';
-import 'package:income_and_expenses/const/dimensions.dart';
 import '../bloc/them_bloc/bloc.dart';
 import '../bloc/them_bloc/state.dart';
 
@@ -29,11 +28,11 @@ class SettingItems extends StatelessWidget {
 
       return englishLanguageBoolean == true
           ? Container(
-              width: Dimensions.screenWidth / 1.35,
-              height: Dimensions.height45,
+              width: double.infinity / 1.35,
+              height: MediaQuery.of(context).size.height / 10,
               margin: EdgeInsets.only(
-                right: Dimensions.width10,
-                left: Dimensions.width10,
+                right: MediaQuery.of(context).size.width / 20,
+                left: MediaQuery.of(context).size.width / 20,
               ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -42,15 +41,15 @@ class SettingItems extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         SizedBox(
-                            width: Dimensions.width20,
+                            width: MediaQuery.of(context).size.width / 10,
                             child: Image.asset(imagePath)),
-                        SizedBox(width: Dimensions.width15,),
+                        SizedBox(width: MediaQuery.of(context).size.width / 20,),
                         Text(
                           itemName.getString(context),
                           textDirection: TextDirection.ltr,
                           style: TextStyle(
                             fontWeight: FontWeight.w400,
-                            fontSize: Dimensions.font16,
+                            fontSize: MediaQuery.of(context).size.height / 50,
                             color: darkThemeBoolean == "false"
                                 ? AppColors.appBarProfileName
                                 : Colors.white,
@@ -62,16 +61,16 @@ class SettingItems extends StatelessWidget {
                         color: darkThemeBoolean == "false"
                             ? AppColors.darkArrowButtonColor
                             : Colors.white,
-                        size: Dimensions.iconSize16)
+                        size:  MediaQuery.of(context).size.width / 25)
                   ],
                 ),
           )
             : Container(
-                width: Dimensions.screenWidth / 1.35,
-                height: Dimensions.height45,
+                width: double.infinity / 1.35,
+                height: MediaQuery.of(context).size.height / 10,
                 margin: EdgeInsets.only(
-                  right: Dimensions.width10,
-                  left: Dimensions.width10,
+                  right: MediaQuery.of(context).size.width / 20,
+                  left: MediaQuery.of(context).size.width / 20,
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -80,7 +79,7 @@ class SettingItems extends StatelessWidget {
                         color: darkThemeBoolean == "false"
                             ? AppColors.darkArrowButtonColor
                             : Colors.white,
-                        size: Dimensions.iconSize16),
+                        size: MediaQuery.of(context).size.width / 25),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
@@ -89,15 +88,15 @@ class SettingItems extends StatelessWidget {
                           textDirection: TextDirection.rtl,
                           style: TextStyle(
                             fontWeight: FontWeight.w400,
-                            fontSize: Dimensions.font16,
+                            fontSize: MediaQuery.of(context).size.height / 50,
                             color: darkThemeBoolean == "false"
                                 ? AppColors.appBarProfileName
                                 : Colors.white,
                           ),
                         ),
-                        SizedBox(width: Dimensions.width15,),
+                        SizedBox(width: MediaQuery.of(context).size.width / 20),
                         SizedBox(
-                            width: Dimensions.width20,
+                            width: MediaQuery.of(context).size.width / 20,
                             child: Image.asset(imagePath)),
                       ],
                     ),

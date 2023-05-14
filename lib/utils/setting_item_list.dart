@@ -5,7 +5,6 @@ import 'package:flutter_localization/flutter_localization.dart';
 import 'package:income_and_expenses/bloc/change_language_bloc/bloc.dart';
 import 'package:income_and_expenses/bloc/change_language_bloc/event.dart';
 import 'package:income_and_expenses/const/app_colors.dart';
-import 'package:income_and_expenses/const/dimensions.dart';
 import '../bloc/change_currency_bloc/bloc.dart';
 import '../bloc/change_currency_bloc/event.dart';
 import '../bloc/change_currency_bloc/state.dart';
@@ -37,9 +36,9 @@ class _SettingItemListState extends State<SettingItemList> {
 
       return Container(
       margin: EdgeInsets.only(
-          top: Dimensions.height30,
-          right: Dimensions.width20,
-          left: Dimensions.width20
+          top: MediaQuery.of(context).size.height / 50,
+          right: MediaQuery.of(context).size.width / 50,
+          left: MediaQuery.of(context).size.width / 50,
       ),
       child: Column(
         children: [
@@ -48,7 +47,7 @@ class _SettingItemListState extends State<SettingItemList> {
             onTap: () async {
             },
             child: SizedBox(
-              height: Dimensions.height45,
+              height: MediaQuery.of(context).size.height / 20,
               child: SettingItems(
                 imagePath: darkThemeBoolean == "false"
                     ? "assets/profile_icons/export_to_pdf.png"
@@ -67,51 +66,67 @@ class _SettingItemListState extends State<SettingItemList> {
             onTap: (){
               showDialog(
                 context: context,
-                builder: (ctx) => AlertDialog(
-                  title: Text(
-                    AppLocale.chooseCurrency.getString(context),
-                    textDirection: TextDirection.rtl,
-                    style: TextStyle(fontSize: Dimensions.font16),
-                  ),
-                  content: Text(
-                      AppLocale.chooseCurrencyQuestion.getString(context),
+                builder: (ctx) =>
+                  AlertDialog(
+                    backgroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                    title: Text(
+                      AppLocale.chooseCurrency.getString(context),
                       textDirection: TextDirection.rtl,
-                      style: TextStyle(fontSize: Dimensions.font14)),
-                  actions: <Widget>[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        BlocBuilder<ChangeCurrencyBloc, ChangeCurrencyState>(
-                            builder: (context, state) {
-                              return TextButton(onPressed: (){
-                                BlocProvider.of<ChangeCurrencyBloc>(context)
-                                    .add(WriteCurrencyBooleanEvent(
-                                  rialCurrencyBoolean: true,
-                                ));
-                                Navigator.of(ctx).pop();
-                              },
-                                  child: Text(AppLocale.rial.getString(context)));
-                            }),
-                        BlocBuilder<ChangeCurrencyBloc, ChangeCurrencyState>(
-                            builder: (context, state) {
-                              return TextButton(
-                                  onPressed: (){
+                      style: TextStyle(fontSize: MediaQuery
+                          .of(context)
+                          .size
+                          .width / 30,
+                        fontWeight: FontWeight.w700
+                      )),
+                      content: Text(
+                          AppLocale.chooseCurrencyQuestion.getString(context),
+                          textDirection: TextDirection.rtl,
+                          style: TextStyle(fontSize: MediaQuery
+                              .of(context)
+                              .size
+                              .width / 30)),
+                      actions: <Widget>[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            BlocBuilder<ChangeCurrencyBloc,
+                                ChangeCurrencyState>(
+                                builder: (context, state) {
+                                  return TextButton(onPressed: () {
                                     BlocProvider.of<ChangeCurrencyBloc>(context)
                                         .add(WriteCurrencyBooleanEvent(
-                                      rialCurrencyBoolean: false,
+                                      rialCurrencyBoolean: true,
                                     ));
                                     Navigator.of(ctx).pop();
                                   },
-                                  child: Text(AppLocale.toman.getString(context)));
-                            }),
+                                      child: Text(
+                                          AppLocale.rial.getString(context)));
+                                }),
+                            BlocBuilder<ChangeCurrencyBloc,
+                                ChangeCurrencyState>(
+                                builder: (context, state) {
+                                  return TextButton(
+                                      onPressed: () {
+                                        BlocProvider.of<ChangeCurrencyBloc>(
+                                            context)
+                                            .add(WriteCurrencyBooleanEvent(
+                                          rialCurrencyBoolean: false,
+                                        ));
+                                        Navigator.of(ctx).pop();
+                                      },
+                                      child: Text(
+                                          AppLocale.toman.getString(context)));
+                                }),
+                          ],
+                        ),
                       ],
                     ),
-                  ],
-                ),
-              );
+                  );
             },
             child: SizedBox(
-              height: Dimensions.height45,
+              height: MediaQuery.of(context).size.height / 20,
               child: SettingItems(
                 imagePath: darkThemeBoolean == "false"
                     ? "assets/profile_icons/choose_currency.png"
@@ -131,14 +146,23 @@ class _SettingItemListState extends State<SettingItemList> {
               showDialog(
                 context: context,
                 builder: (ctx) => AlertDialog(
+                  backgroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(20.0))),
                   title: Text(
                     AppLocale.chooseLanguage.getString(context),
                     textDirection: TextDirection.rtl,
-                    style: TextStyle(fontSize: Dimensions.font16),
+                    style: TextStyle(fontSize: MediaQuery
+                        .of(context)
+                        .size
+                        .width / 30),
                   ),
                   content: Text(AppLocale.pleaseChooseYourLanguage.getString(context),
                       textDirection: TextDirection.rtl,
-                      style: TextStyle(fontSize: Dimensions.font14)),
+                      style: TextStyle(fontSize: MediaQuery
+                          .of(context)
+                          .size
+                          .width / 30)),
                   actions: <Widget>[
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -170,7 +194,7 @@ class _SettingItemListState extends State<SettingItemList> {
               );
             },
             child: SizedBox(
-              height: Dimensions.height45,
+              height: MediaQuery.of(context).size.height / 20,
               child: SettingItems(
                 imagePath: darkThemeBoolean == "false"
                     ? "assets/profile_icons/choose_language.png"
@@ -193,7 +217,7 @@ class _SettingItemListState extends State<SettingItemList> {
               );
             },
             child: SizedBox(
-              height: Dimensions.height45,
+              height: MediaQuery.of(context).size.height / 20,
               child: SettingItems(
                 imagePath: darkThemeBoolean == "false"
                     ? "assets/profile_icons/frequently_asked_questions.png"
@@ -213,20 +237,23 @@ class _SettingItemListState extends State<SettingItemList> {
               showDialog(
                 context: context,
                 builder: (ctx) => AlertDialog(
+                  backgroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(20.0))),
                   title: Text(
                     AppLocale.chooseTheme.getString(context),
                     textDirection: TextDirection.rtl,
-                    style: TextStyle(fontSize: Dimensions.font16),
+                    style: TextStyle(fontSize: MediaQuery.of(context).size.width / 30,),
                   ),
                   content: Text(AppLocale.pleaseChooseYourTheme.getString(context),
                       textDirection: TextDirection.rtl,
-                      style: TextStyle(fontSize: Dimensions.font14)),
+                      style: TextStyle(fontSize: MediaQuery.of(context).size.width / 30)),
                   actions: <Widget>[
                     Container(
                       margin: EdgeInsets.only(
-                          left: Dimensions.width45,
-                          right: Dimensions.width45,
-                          bottom: Dimensions.height15
+                          left: MediaQuery.of(context).size.width / 200,
+                          right: MediaQuery.of(context).size.width / 200,
+                          bottom: MediaQuery.of(context).size.height / 100
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -259,7 +286,7 @@ class _SettingItemListState extends State<SettingItemList> {
               );
             },
             child: SizedBox(
-              height: Dimensions.height45,
+              height: MediaQuery.of(context).size.height / 20,
               child: SettingItems(
                 imagePath: darkThemeBoolean == "false"
                     ? "assets/profile_icons/theme.png"
@@ -279,7 +306,7 @@ class _SettingItemListState extends State<SettingItemList> {
               exit(0);
             },
             child: SizedBox(
-              height: Dimensions.height45,
+              height: MediaQuery.of(context).size.height / 20,
               child: SettingItems(
                 imagePath: darkThemeBoolean == "false"
                     ? "assets/profile_icons/logout.png"

@@ -42,8 +42,19 @@ class SettingPage extends StatelessWidget {
             alignment: Alignment.centerRight,
             child: Text(AppLocale.setting.getString(context))),
       ),
-      body: const SafeArea(
-        child: SettingItemList(),
+      body: SafeArea(
+        child: Container(
+            decoration: BoxDecoration(
+                color: AppColors.themContainer,
+                borderRadius: BorderRadius.circular(25)
+            ),
+            margin: EdgeInsets.only(
+              left: MediaQuery.of(context).size.width / 30,
+              right: MediaQuery.of(context).size.width / 30,
+              top: MediaQuery.of(context).size.height / 60,
+              bottom: MediaQuery.of(context).size.height / 30,
+            ),
+            child: const SettingItemList()),
       ),
     );});
   }

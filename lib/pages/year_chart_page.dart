@@ -74,150 +74,162 @@ class _YearChartPageState extends State<YearChartPage> {
               ? AppColors.mainPageCardBorderColor
               : AppColors.darkThemeColor,
           body: SafeArea(
-            child: Column(
-              children: [
-                SizedBox(height: MediaQuery.of(context).size.height / 15),
-                Expanded(
-                  flex: 3,
-                  child: LinearDatePicker(
-                    startDate: "1396/01",
-                    endDate: "1499/12",
-                    dateChangeListener: (String selectedDate) {
+            child: Container(
+              decoration: BoxDecoration(
+                  color: AppColors.themContainer,
+                  borderRadius: BorderRadius.circular(25)
+              ),
+              margin: EdgeInsets.only(
+                left: MediaQuery.of(context).size.width / 30,
+                right: MediaQuery.of(context).size.width / 30,
+                top: MediaQuery.of(context).size.height / 60,
+                bottom: MediaQuery.of(context).size.height / 30,
+              ),
+              child: Column(
+                children: [
+                  SizedBox(height: MediaQuery.of(context).size.height / 15),
+                  Expanded(
+                    flex: 3,
+                    child: LinearDatePicker(
+                      startDate: "1396/01",
+                      endDate: "1499/12",
+                      dateChangeListener: (String selectedDate) {
 
-                      selectedValue = selectedDate;
+                        selectedValue = selectedDate;
 
-                      BlocProvider.of<CalculateSFCartesianChartBloc>(context).add(
-                          SumExpensesByGroupingTypePerMonthForSFCartesianChartEvent(
-                              year: selectedValue!.split("/").first,
-                              month: selectedValue!.split("/").last));
-                    },
-                    showDay: false,
-                    selectedRowStyle: TextStyle(
-                      decoration: TextDecoration.underline,
-                      decorationStyle: TextDecorationStyle.double,
-                      decorationColor: darkThemeBoolean == "false" ? AppColors.mainColor : Colors.white,
-                      fontStyle: FontStyle.italic,
+                        BlocProvider.of<CalculateSFCartesianChartBloc>(context).add(
+                            SumExpensesByGroupingTypePerMonthForSFCartesianChartEvent(
+                                year: selectedValue!.split("/").first,
+                                month: selectedValue!.split("/").last));
+                      },
+                      showDay: false,
+                      selectedRowStyle: TextStyle(
+                        decoration: TextDecoration.underline,
+                        decorationStyle: TextDecorationStyle.double,
+                        decorationColor: darkThemeBoolean == "false" ? AppColors.mainColor : Colors.white,
+                        fontStyle: FontStyle.italic,
 
-                      fontFamily: 'iran',
-                      fontSize: MediaQuery.of(context).size.width / 20,
-                      color: darkThemeBoolean == "false" ? AppColors.mainColor : Colors.white,
-                      fontWeight: FontWeight.w900,
-                    ),
-                    yearText: "سال | year",
-                    monthText: "ماه | month",
-                    labelStyle: TextStyle(
-                      color: darkThemeBoolean == "false" ? Colors.black : Colors.white,
-                    ),
-                    unselectedRowStyle: TextStyle(
-                      color: darkThemeBoolean == "false" ? Colors.black : Colors.white,
-                    ),
-                    showLabels: true,
-                    columnWidth: MediaQuery.of(context).size.width / 4,
-                    showMonthName: true,
-                    isJalaali: true,
-                  ),
-                ),
-                SizedBox(height: MediaQuery.of(context).size.height / 20),
-                Expanded(
-                  flex: 3,
-                  child: SfCartesianChart(
-                      margin: EdgeInsets.only(
-                        top: MediaQuery.of(context).size.height / 30,
-                        bottom: MediaQuery.of(context).size.height / 30
+                        fontFamily: 'iran',
+                        fontSize: MediaQuery.of(context).size.width / 20,
+                        color: darkThemeBoolean == "false" ? AppColors.mainColor : Colors.white,
+                        fontWeight: FontWeight.w900,
                       ),
-                      title: ChartTitle(
-                          text: AppLocale.expensePerYear.getString(context),
-                          textStyle: darkThemeBoolean == "false"
-                              ? const TextStyle(
-                              color: AppColors.appBarTitleColor)
-                              : const TextStyle(
-                              color: Colors.white
-                          )),
-                      primaryXAxis: CategoryAxis(
+                      yearText: "سال | year",
+                      monthText: "ماه | month",
+                      labelStyle: TextStyle(
+                        color: darkThemeBoolean == "false" ? Colors.black : Colors.white,
                       ),
-                      primaryYAxis: NumericAxis(minimum: 0, maximum: 100, interval: 10),
-                      tooltipBehavior: _tooltip,
-                      series: <ChartSeries<_ChartData, String>>[
-                        ColumnSeries<_ChartData, String>(
-                          dataSource: data,
-                          xValueMapper: (_ChartData data, _) => data.x,
-                          yValueMapper: (_ChartData data, _) => data.y,
-                          name: 'Gold',
-                          dataLabelSettings: DataLabelSettings(
-                              isVisible: true,
-                              labelAlignment: ChartDataLabelAlignment.middle,
-                              textStyle: TextStyle(
-                                color: darkThemeBoolean == "false"
-                                    ? AppColors.appBarTitleColor
-                                    : Colors.white,
-                              )),
-                          onCreateRenderer: (ChartSeries<_ChartData, String> series) =>
-                              _CustomColumnSeriesRenderer(),
-                          color: AppColors.chartColor,),
-                      ]
-                  ),
-                ),
-                SizedBox(height: MediaQuery.of(context).size.height / 20),
-                    Expanded(
-                      flex: 1,
-                      child: englishLanguageBoolean == false
-                          ? Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  englishLanguageBoolean == false
-                                      ? "1/100000".toPersianDigit()
-                                      : "1/100000",
-                                  style: TextStyle(
-                                    fontSize:
-                                        MediaQuery.of(context).size.width / 25,
-                                    color: darkThemeBoolean == "false"
-                                        ? AppColors.appBarTitleColor
-                                        : Colors.white,
-                                  ),
-                                ),
-                                Text(
-                                  " : ${AppLocale.mapScale.getString(context)}",
-                                  style: TextStyle(
-                                    fontSize:
-                                        MediaQuery.of(context).size.width / 25,
-                                    color: darkThemeBoolean == "false"
-                                        ? AppColors.appBarTitleColor
-                                        : Colors.white,
-                                  ),
-                                ),
-                              ],
-                            )
-                          : Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  "${AppLocale.mapScale.getString(context)} : ",
-                                  style: TextStyle(
-                                    fontSize:
-                                    MediaQuery.of(context).size.width / 25,
-                                    color: darkThemeBoolean == "false"
-                                        ? AppColors.appBarTitleColor
-                                        : Colors.white,
-                                  ),
-                                ),
-                                Text(
-                                  englishLanguageBoolean == false
-                                      ? "1/100000".toPersianDigit()
-                                      : "1/100000",
-                                  style: TextStyle(
-                                    fontSize:
-                                        MediaQuery.of(context).size.width / 25,
-                                    color: darkThemeBoolean == "false"
-                                        ? AppColors.appBarTitleColor
-                                        : Colors.white,
-                                  ),
-                                ),
-                              ],
-                            ),
+                      unselectedRowStyle: TextStyle(
+                        color: darkThemeBoolean == "false" ? Colors.black : Colors.white,
+                      ),
+                      showLabels: true,
+                      columnWidth: MediaQuery.of(context).size.width / 4,
+                      showMonthName: true,
+                      isJalaali: true,
                     ),
-                SizedBox(height: MediaQuery.of(context).size.height / 15),
-              ],
+                  ),
+                  SizedBox(height: MediaQuery.of(context).size.height / 20),
+                  Expanded(
+                    flex: 3,
+                    child: SfCartesianChart(
+                        margin: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height / 30,
+                          bottom: MediaQuery.of(context).size.height / 30
+                        ),
+                        title: ChartTitle(
+                            text: AppLocale.expensePerYear.getString(context),
+                            textStyle: darkThemeBoolean == "false"
+                                ? const TextStyle(
+                                color: AppColors.appBarTitleColor)
+                                : const TextStyle(
+                                color: Colors.white
+                            )),
+                        primaryXAxis: CategoryAxis(
+                        ),
+                        primaryYAxis: NumericAxis(minimum: 0, maximum: 100, interval: 10),
+                        tooltipBehavior: _tooltip,
+                        series: <ChartSeries<_ChartData, String>>[
+                          ColumnSeries<_ChartData, String>(
+                            dataSource: data,
+                            xValueMapper: (_ChartData data, _) => data.x,
+                            yValueMapper: (_ChartData data, _) => data.y,
+                            name: 'Gold',
+                            dataLabelSettings: DataLabelSettings(
+                                isVisible: true,
+                                labelAlignment: ChartDataLabelAlignment.middle,
+                                textStyle: TextStyle(
+                                  color: darkThemeBoolean == "false"
+                                      ? AppColors.appBarTitleColor
+                                      : Colors.white,
+                                )),
+                            onCreateRenderer: (ChartSeries<_ChartData, String> series) =>
+                                _CustomColumnSeriesRenderer(),
+                            color: AppColors.chartColor,),
+                        ]
+                    ),
+                  ),
+                  SizedBox(height: MediaQuery.of(context).size.height / 20),
+                      Expanded(
+                        flex: 1,
+                        child: englishLanguageBoolean == false
+                            ? Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    englishLanguageBoolean == false
+                                        ? "1/100000".toPersianDigit()
+                                        : "1/100000",
+                                    style: TextStyle(
+                                      fontSize:
+                                          MediaQuery.of(context).size.width / 25,
+                                      color: darkThemeBoolean == "false"
+                                          ? AppColors.appBarTitleColor
+                                          : Colors.white,
+                                    ),
+                                  ),
+                                  Text(
+                                    " : ${AppLocale.mapScale.getString(context)}",
+                                    style: TextStyle(
+                                      fontSize:
+                                          MediaQuery.of(context).size.width / 25,
+                                      color: darkThemeBoolean == "false"
+                                          ? AppColors.appBarTitleColor
+                                          : Colors.white,
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "${AppLocale.mapScale.getString(context)} : ",
+                                    style: TextStyle(
+                                      fontSize:
+                                      MediaQuery.of(context).size.width / 25,
+                                      color: darkThemeBoolean == "false"
+                                          ? AppColors.appBarTitleColor
+                                          : Colors.white,
+                                    ),
+                                  ),
+                                  Text(
+                                    englishLanguageBoolean == false
+                                        ? "1/100000".toPersianDigit()
+                                        : "1/100000",
+                                    style: TextStyle(
+                                      fontSize:
+                                          MediaQuery.of(context).size.width / 25,
+                                      color: darkThemeBoolean == "false"
+                                          ? AppColors.appBarTitleColor
+                                          : Colors.white,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                      ),
+                  SizedBox(height: MediaQuery.of(context).size.height / 15),
+                ],
+              ),
             ),
           ));
     });});});

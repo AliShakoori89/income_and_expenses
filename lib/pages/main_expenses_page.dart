@@ -45,46 +45,48 @@ class _MainExpensesPageState extends State<MainExpensesPage> {
         // Stack(
         //   fit: StackFit.expand,
         //   children: [
-            Column(
-              children: [
-                Stack(
-                  children: [
-                    Container(
-                      height: MediaQuery.of(context).size.height / 4,
-                      decoration: BoxDecoration(
-                        gradient: const LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment(0.8, 1),
-                          colors: <Color>[
-                            Color.fromRGBO(248, 187, 208, 1),
-                            Color.fromRGBO(212, 200, 235, 1),
-                            Color.fromRGBO(179, 229, 252, 1),
-                          ],
-                          // Gradient from https://learnui.design/tools/gradient-generator.html
-                          tileMode: TileMode.mirror,
+            SingleChildScrollView(
+              child: Column(
+                children: [
+                  Stack(
+                    children: [
+                      Container(
+                        height: MediaQuery.of(context).size.height / 4,
+                        decoration: BoxDecoration(
+                          gradient: const LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment(0.8, 1),
+                            colors: <Color>[
+                              Color.fromRGBO(248, 187, 208, 1),
+                              Color.fromRGBO(212, 200, 235, 1),
+                              Color.fromRGBO(179, 229, 252, 1),
+                            ],
+                            // Gradient from https://learnui.design/tools/gradient-generator.html
+                            tileMode: TileMode.mirror,
+                          ),
+                          borderRadius: BorderRadius.vertical(
+                              bottom: Radius.elliptical(
+                                  MediaQuery.of(context).size.width, 200)),
                         ),
-                        borderRadius: BorderRadius.vertical(
-                            bottom: Radius.elliptical(
-                                MediaQuery.of(context).size.width, 200)),
                       ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(top: MediaQuery.of(context).size.height/15),
-                      child: DatePickerCalendar(),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(top: MediaQuery.of(context).size.height/6),
-                      child: CashContainer(),
-                    ),
+                      Padding(
+                        padding: EdgeInsets.only(top: MediaQuery.of(context).size.height/15),
+                        child: DatePickerCalendar(),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: MediaQuery.of(context).size.height/6),
+                        child: CashContainer(),
+                      ),
 
-                  ],
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: MediaQuery.of(context).size.height/15),
-                  child: SingleChildScrollView(
-                      child: CashContainerPerDate()),
-                )
-              ],
+                    ],
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: MediaQuery.of(context).size.height/100),
+                    child: SingleChildScrollView(
+                        child: CashContainerPerDate()),
+                  )
+                ],
+              ),
             ),
 
             // Column(

@@ -68,7 +68,7 @@ class _EditedPageState extends State<EditedPage> {
             color: darkThemeBoolean == "false"
                 ? AppColors.appBarTitleColor
                 : Colors.white,
-            fontSize: Dimensions.font24,
+            fontSize: MediaQuery.of(context).size.width / 20,
             fontWeight: FontWeight.w400),
         title: Align(
             alignment: Alignment.center,
@@ -83,12 +83,12 @@ class _EditedPageState extends State<EditedPage> {
                   title: Text(
                     AppLocale.delete.getString(context),
                     textDirection: TextDirection.rtl,
-                    style: TextStyle(fontSize: Dimensions.font16),
+                    style: TextStyle(fontSize: MediaQuery.of(context).size.width / 20,),
                   ),
                   content: Text(
                       AppLocale.doYouWantTheDesiredItemToBeDeleted.getString(context),
                       textDirection: TextDirection.rtl,
-                      style: TextStyle(fontSize: Dimensions.font14)),
+                      style: TextStyle(fontSize: MediaQuery.of(context).size.width / 20,)),
                   actions: <Widget>[
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -126,7 +126,7 @@ class _EditedPageState extends State<EditedPage> {
             child: const Icon(Icons.delete,
             color: AppColors.appBarProfileName,),
           ),
-          SizedBox(width: Dimensions.width20,),
+          SizedBox(width: MediaQuery.of(context).size.width / 20,),
         ],
       ),
       backgroundColor: darkThemeBoolean == "false"
@@ -136,14 +136,15 @@ class _EditedPageState extends State<EditedPage> {
       bottomSheet: appButton(darkThemeBoolean),
       body: Container(
         margin: EdgeInsets.only(
-            left: Dimensions.width30, right: Dimensions.width30),
+            left: MediaQuery.of(context).size.width / 15,
+            right: MediaQuery.of(context).size.width / 15),
         child: Form(
           key: formKey,
           child: SingleChildScrollView(
             child: Column(
               children: [
                 SizedBox(
-                  height: Dimensions.height30,
+                  height: MediaQuery.of(context).size.height / 20,
                 ),
                 Text(
                     // DateTime.parse(_editedExpenses.expenseDate.toString()).day.toString()
@@ -153,15 +154,15 @@ class _EditedPageState extends State<EditedPage> {
                         "-${DateTime.parse(_editedExpenses.expenseDate.toString()).day.toString().toPersianDigit()}"
                         : _editedExpenses.expenseDate.toString(),
                     style: TextStyle(
-                        fontSize: Dimensions.font18,
+                        fontSize: MediaQuery.of(context).size.width / 20,
                         color: AppColors.appBarTitleColor)),
                 SizedBox(
-                  height: Dimensions.height20,
+                  height: MediaQuery.of(context).size.height / 20,
                 ),
                 Column(
                   children: [
                     SizedBox(
-                      height: Dimensions.height10,
+                      height: MediaQuery.of(context).size.height / 30,
                     ),
                     Directionality(
                       textDirection: englishLanguageBoolean == false ? TextDirection.rtl : TextDirection.ltr,
@@ -179,7 +180,7 @@ class _EditedPageState extends State<EditedPage> {
                       ),
                     ),
                     SizedBox(
-                      height: Dimensions.height30,
+                      height: MediaQuery.of(context).size.height / 30,
                     ),
                     AppTextField(
                       labelText: AppLocale.expense.getString(context),
@@ -188,7 +189,7 @@ class _EditedPageState extends State<EditedPage> {
                       themeBoolean: darkThemeBoolean,
                     ),
                     SizedBox(
-                      height: Dimensions.height30,
+                      height: MediaQuery.of(context).size.width / 10,
                     ),
                     AppTextField(
                       labelText: AppLocale.description.getString(context),
@@ -237,13 +238,13 @@ class _EditedPageState extends State<EditedPage> {
                 },
                 child: Container(
                   margin: EdgeInsets.only(
-                      left: Dimensions.width30,
-                      right: Dimensions.width30,
-                      bottom: Dimensions.height10),
-                  height: Dimensions.buttonHeight,
+                      left: MediaQuery.of(context).size.width / 10,
+                      right: MediaQuery.of(context).size.width / 10,
+                      bottom: MediaQuery.of(context).size.width / 10),
+                  height: MediaQuery.of(context).size.height / 15,
                   decoration: BoxDecoration(
                     color: AppColors.buttonColor,
-                    borderRadius: BorderRadius.circular(Dimensions.radius20),
+                    borderRadius: BorderRadius.circular(15),
                   ),
                   child: Center(
                     child: Text(AppLocale.applyChange.getString(context),
