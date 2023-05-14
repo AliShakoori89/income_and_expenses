@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:income_and_expenses/const/dimensions.dart';
 import 'package:income_and_expenses/utils/widget.dart';
 
 class SearchTextField extends StatelessWidget {
@@ -11,7 +10,7 @@ class SearchTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: Dimensions.width45*7,
+      width: MediaQuery.of(context).size.width / 4,
       child: TextField(
         controller: searchController,
         textAlign: TextAlign.right,

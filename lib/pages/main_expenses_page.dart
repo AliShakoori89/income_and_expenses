@@ -7,7 +7,6 @@ import 'package:income_and_expenses/bloc/them_bloc/state.dart';
 import 'package:income_and_expenses/const/app_colors.dart';
 import 'package:income_and_expenses/utils/cash_container.dart';
 import 'package:income_and_expenses/utils/date_picker_calendar.dart';
-import 'package:income_and_expenses/const/dimensions.dart';
 import '../utils/cash_container_per_date.dart';
 
 class MainExpensesPage extends StatefulWidget {

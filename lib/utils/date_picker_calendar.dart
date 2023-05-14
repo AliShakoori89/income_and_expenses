@@ -4,7 +4,6 @@ import 'package:income_and_expenses/bloc/set_date_bloc/bloc.dart';
 import 'package:income_and_expenses/bloc/set_date_bloc/event.dart';
 import 'package:income_and_expenses/bloc/set_date_bloc/state.dart';
 import 'package:income_and_expenses/const/app_colors.dart';
-import 'package:income_and_expenses/const/dimensions.dart';
 import 'package:intl/intl.dart';
 import 'package:persian_datetime_picker/persian_datetime_picker.dart';
 import 'package:persian_number_utility/persian_number_utility.dart';
@@ -193,8 +192,8 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                                   : DateFormat('yyyy-MM-dd').format(DateTime.parse(date)),
                               style: TextStyle(
                                   fontSize: englishLanguageBoolean == false
-                                      ? Dimensions.font18
-                                      : Dimensions.font14,
+                                      ? MediaQuery.of(context).size.width / 20
+                                      : MediaQuery.of(context).size.width / 30,
                                   color: AppColors.appBarTitleColor)),
                         ],
                       ),

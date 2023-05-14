@@ -4,7 +4,6 @@ import 'package:flutter_localization/flutter_localization.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:income_and_expenses/const/app_colors.dart';
 import 'package:income_and_expenses/const/app_const.dart';
-import 'package:income_and_expenses/const/dimensions.dart';
 import 'package:income_and_expenses/const/language.dart';
 import '../bloc/change_language_bloc/bloc.dart';
 import '../bloc/change_language_bloc/state.dart';
@@ -30,7 +29,7 @@ class CategoryIconList extends StatelessWidget {
         Expanded(
           child: SizedBox(
             child: GridView.count(
-              padding: EdgeInsets.all(Dimensions.width30),
+              padding: EdgeInsets.all(MediaQuery.of(context).size.width / 30),
               scrollDirection: Axis.vertical,
               crossAxisCount: 3,
               shrinkWrap: true,
@@ -52,14 +51,14 @@ class CategoryIconList extends StatelessWidget {
                     child: Column(
                       children: [
                         Container(
-                          width: Dimensions.width45,
-                          height: Dimensions.width45,
-                          margin: EdgeInsets.all(Dimensions.width10),
+                          width: MediaQuery.of(context).size.width / 8,
+                          height: MediaQuery.of(context).size.width / 8,
+                          margin: EdgeInsets.all(MediaQuery.of(context).size.width / 30),
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               color: AppColors.colorList[index]),
                           child: Container(
-                            margin: EdgeInsets.all(Dimensions.width10 / 1.4),
+                            margin: EdgeInsets.all(MediaQuery.of(context).size.width / 60),
                             child: SvgPicture.asset(
                                 "assets/logos/${AppConst.iconsImage[index]}"),
                           ),

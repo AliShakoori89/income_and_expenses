@@ -187,17 +187,17 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width / 50,
+                      Flexible(
+                        child: Text(AppLocale.income.getString(context),
+                            style: TextStyle(
+                              overflow: TextOverflow.ellipsis,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w800,
+                              fontSize: MediaQuery.of(context).size.width / 22,
+                            )),
                       ),
-                      Text(AppLocale.income.getString(context),
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w800,
-                            fontSize: MediaQuery.of(context).size.width / 22,
-                          )),
                       SizedBox(
-                        width: MediaQuery.of(context).size.width / 18,
+                        width: MediaQuery.of(context).size.width / 25,
                       ),
                       SizedBox(
                         child: Image.asset(

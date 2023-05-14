@@ -37,25 +37,30 @@ class SettingItems extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                            width: MediaQuery.of(context).size.width / 10,
-                            child: Image.asset(imagePath)),
-                        SizedBox(width: MediaQuery.of(context).size.width / 20,),
-                        Text(
-                          itemName.getString(context),
-                          textDirection: TextDirection.ltr,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w400,
-                            fontSize: MediaQuery.of(context).size.height / 50,
-                            color: darkThemeBoolean == "false"
-                                ? AppColors.appBarProfileName
-                                : Colors.white,
+                    Expanded(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                              width: MediaQuery.of(context).size.width / 10,
+                              child: Image.asset(imagePath)),
+                          SizedBox(width: MediaQuery.of(context).size.width / 20,),
+                          Flexible(
+                            child: Text(
+                              itemName.getString(context),
+                              textDirection: TextDirection.ltr,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontSize: MediaQuery.of(context).size.height / 50,
+                                color: darkThemeBoolean == "false"
+                                    ? AppColors.appBarProfileName
+                                    : Colors.white,
+                              ),
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                     Icon(Icons.arrow_forward_ios,
                         color: darkThemeBoolean == "false"

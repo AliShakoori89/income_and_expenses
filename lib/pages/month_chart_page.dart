@@ -92,7 +92,7 @@ class _MonthChartState extends State<MonthChart> {
                 ),
                 child: Column(
                   children: [
-                    SizedBox(height: MediaQuery.of(context).size.height / 10),
+                    SizedBox(height: MediaQuery.of(context).size.height / 20),
                     Center(
                       child: DropdownButtonHideUnderline(
                         child: DropdownButton2(

@@ -1,18 +1,10 @@
-import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'dart:async';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/services.dart';
 import 'package:income_and_expenses/pages/main_expenses_page.dart';
 import 'package:income_and_expenses/pages/setting_page.dart';
 import 'package:income_and_expenses/pages/year_chart_page.dart';
 import 'package:income_and_expenses/const/app_colors.dart';
-import 'package:income_and_expenses/const/dimensions.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 import 'add_expense_page.dart';
 import 'month_chart_page.dart';
-import 'dart:math' as math;
 
 class MyHomePage extends StatefulWidget {
 

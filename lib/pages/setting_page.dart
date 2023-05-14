@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:income_and_expenses/const/app_colors.dart';
-import 'package:income_and_expenses/const/dimensions.dart';
 import 'package:income_and_expenses/utils/setting_item_list.dart';
 import '../bloc/them_bloc/bloc.dart';
 import '../bloc/them_bloc/state.dart';
@@ -24,7 +23,7 @@ class SettingPage extends StatelessWidget {
             ? Colors.white
             : AppColors.darkThemeColor,
       appBar: AppBar(
-        toolbarHeight: Dimensions.height45,
+        toolbarHeight: MediaQuery.of(context).size.height / 30,
         backgroundColor: darkThemeBoolean == "false"
             ? AppColors.profileAppBarColor
             : AppColors.darkThemeColor,
@@ -36,7 +35,7 @@ class SettingPage extends StatelessWidget {
           color: darkThemeBoolean == "false"
               ? AppColors.appBarTitleColor
               : Colors.white,
-          fontSize: Dimensions.font20,
+          fontSize: MediaQuery.of(context).size.width / 20,
           fontWeight: FontWeight.w700,),
         title: Align(
             alignment: Alignment.centerRight,

@@ -1,7 +1,6 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:income_and_expenses/const/dimensions.dart';
 
 import '../bloc/them_bloc/bloc.dart';
 import '../bloc/them_bloc/event.dart';
@@ -52,7 +51,7 @@ class FrequentlyAskedQuestions extends StatelessWidget {
         alignment: Alignment.centerRight,
         child: Column(
           children: [
-            buildQuestion( Dimensions.height45, question, darkThemeBoolean),
+            buildQuestion( MediaQuery.of(context).size.height / 30, question, darkThemeBoolean),
             Text(answer,
                 style: TextStyle(
                     fontWeight: FontWeight.w400,
@@ -67,7 +66,7 @@ class FrequentlyAskedQuestions extends StatelessWidget {
     }
 
     buildExpanded1(String question, String darkThemeBoolean) {
-      return buildQuestion(Dimensions.height45, question, darkThemeBoolean);
+      return buildQuestion(MediaQuery.of(context).size.height / 30, question, darkThemeBoolean);
     }
 
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {

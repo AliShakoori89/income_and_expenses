@@ -59,7 +59,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
               color: darkThemeBoolean == "false"
                   ? AppColors.appBarTitleColor
                   : Colors.white,
-              fontSize: MediaQuery.of(context).size.width / 20,
+              fontSize: MediaQuery.of(context).size.width / 25,
               fontWeight: FontWeight.w400),
           title: Align(
               alignment: Alignment.centerRight,
@@ -69,7 +69,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
         backgroundColor: darkThemeBoolean == "false"
             ? Colors.white
             : AppColors.darkThemeColor,
-        resizeToAvoidBottomInset: true,
+        resizeToAvoidBottomInset: false,
         bottomSheet: appButton(darkThemeBoolean),
         body: Container(
           height: double.infinity,
@@ -87,17 +87,17 @@ class _AddExpensePageState extends State<AddExpensePage> {
                 right: MediaQuery.of(context).size.width / 20),
             child: Form(
               key: formKey,
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: MediaQuery.of(context).size.width / 20,
-                    ),
-                    const DatePickerCalendar(),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.width / 20,
-                    ),
-                    Column(
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: MediaQuery.of(context).size.width / 20,
+                  ),
+                  const DatePickerCalendar(),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.width / 20,
+                  ),
+                  SingleChildScrollView(
+                    child: Column(
                       children: [
                         SizedBox(
                           height: MediaQuery.of(context).size.height / 30,
@@ -127,10 +127,10 @@ class _AddExpensePageState extends State<AddExpensePage> {
                           themeBoolean: darkThemeBoolean,
                         ),
                       ],
-                    )
-                  ],
-                ),
-              ),
+                    ),
+                  )
+                ],
+              )
             ),
           ),
         ),
@@ -224,20 +224,22 @@ class _AddExpensePageState extends State<AddExpensePage> {
                       );
                     }
                   },
-                  child: Container(
-                    margin: EdgeInsets.only(
-                        left: MediaQuery.of(context).size.width / 10,
-                        right: MediaQuery.of(context).size.width / 10,
-                        bottom: MediaQuery.of(context).size.width / 10),
-                    height: MediaQuery.of(context).size.height / 15,
-                    decoration: BoxDecoration(
-                      color: AppColors.buttonColor,
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Center(
-                      child: Text(AppLocale.addExpense.getString(context),
-                          style: const TextStyle(color: AppColors
-                              .backGroundColor)),
+                  child: Padding(
+                    padding: EdgeInsets.only(bottom: 30),
+                    child: Container(
+                      margin: EdgeInsets.only(
+                          left: MediaQuery.of(context).size.width / 10,
+                          right: MediaQuery.of(context).size.width / 10,),
+                      height: MediaQuery.of(context).size.height / 15,
+                      decoration: BoxDecoration(
+                        color: AppColors.buttonColor,
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: Center(
+                        child: Text(AppLocale.addExpense.getString(context),
+                            style: const TextStyle(color: AppColors
+                                .backGroundColor)),
+                      ),
                     ),
                   ),
                 ),

@@ -105,7 +105,7 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
       decoration: BoxDecoration(
           color: AppColors.themContainer,
           borderRadius: BorderRadius.circular(15)),
-      height: MediaQuery.of(context).size.height / 2.3,
+      height: MediaQuery.of(context).size.height / 2.1,
       child: ListView.builder(
         scrollDirection: Axis.vertical,
         padding: EdgeInsets.only(
@@ -151,35 +151,38 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    Text(
-                                        state.expensesDetails[index]
-                                            .expenseCategory!
-                                            .getString(context),
-                                        style: TextStyle(
-                                            fontSize: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                25,
-                                            fontWeight: FontWeight.w700,
-                                            color: darkThemeBoolean == "false"
-                                                ? AppColors.black
-                                                : Colors.white)),
-                                    Text(
-                                        state.expensesDetails[index]
-                                            .description!,
-                                        style: TextStyle(
-                                            fontSize: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                30,
-                                            fontWeight: FontWeight.w400,
-                                            color: darkThemeBoolean == "false"
-                                                ? AppColors.appBarProfileName
-                                                : Colors.white)),
-                                  ],
+                                SizedBox(
+                                  width: MediaQuery.of(context).size.width / 2.3,
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      Text(
+                                          state.expensesDetails[index]
+                                              .expenseCategory!
+                                              .getString(context),
+                                          style: TextStyle(
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  25,
+                                              fontWeight: FontWeight.w700,
+                                              color: darkThemeBoolean == "false"
+                                                  ? AppColors.black
+                                                  : Colors.white)),
+                                      Text(
+                                          state.expensesDetails[index]
+                                              .description!,
+                                          style: TextStyle(
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  30,
+                                              fontWeight: FontWeight.w400,
+                                              color: darkThemeBoolean == "false"
+                                                  ? AppColors.appBarProfileName
+                                                  : Colors.white)),
+                                    ],
+                                  ),
                                 ),
                                 SizedBox(
                                   width: MediaQuery.of(context).size.width / 25,
@@ -223,39 +226,43 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                                 SizedBox(
                                   width: MediaQuery.of(context).size.width / 25,
                                 ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                        (state.expensesDetails[index]
-                                                .expenseCategory!)
-                                            .getString(context),
-                                        style: TextStyle(
-                                            fontSize:
-                                                MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    25,
-                                            fontWeight: FontWeight.w700,
-                                            color:
-                                                darkThemeBoolean ==
-                                                        "false"
-                                                    ? AppColors
-                                                        .mainPageFirstContainerFontColor
-                                                    : Colors.white)),
-                                    Text(
-                                        state.expensesDetails[index]
-                                            .description!,
-                                        style: TextStyle(
-                                            fontSize: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                30,
-                                            fontWeight: FontWeight.w400,
-                                            color: darkThemeBoolean == "false"
-                                                ? AppColors.appBarProfileName
-                                                : Colors.white)),
-                                  ],
+                                SizedBox(
+                                  width: MediaQuery.of(context).size.width / 2.3,
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                          (state.expensesDetails[index]
+                                                  .expenseCategory!)
+                                              .getString(context),
+                                          style: TextStyle(
+                                              fontSize:
+                                                  MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      25,
+                                              fontWeight: FontWeight.w700,
+                                              color:
+                                                  darkThemeBoolean ==
+                                                          "false"
+                                                      ? AppColors
+                                                          .mainPageFirstContainerFontColor
+                                                      : Colors.white)),
+                                      Text(
+                                          state.expensesDetails[index]
+                                              .description!,
+                                          maxLines: 1,
+                                          style: TextStyle(
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  30,
+                                              fontWeight: FontWeight.w400,
+                                              color: darkThemeBoolean == "false"
+                                                  ? AppColors.appBarProfileName
+                                                  : Colors.white)),
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),

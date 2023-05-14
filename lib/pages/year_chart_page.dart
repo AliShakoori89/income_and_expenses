@@ -87,9 +87,9 @@ class _YearChartPageState extends State<YearChartPage> {
               ),
               child: Column(
                 children: [
-                  SizedBox(height: MediaQuery.of(context).size.height / 15),
+                  SizedBox(height: MediaQuery.of(context).size.height / 50),
                   Expanded(
-                    flex: 3,
+                    flex: 7,
                     child: LinearDatePicker(
                       startDate: "1396/01",
                       endDate: "1499/12",
@@ -128,9 +128,9 @@ class _YearChartPageState extends State<YearChartPage> {
                       isJalaali: true,
                     ),
                   ),
-                  SizedBox(height: MediaQuery.of(context).size.height / 20),
+                  SizedBox(height: MediaQuery.of(context).size.height / 100),
                   Expanded(
-                    flex: 3,
+                    flex: 8,
                     child: SfCartesianChart(
                         margin: EdgeInsets.only(
                           top: MediaQuery.of(context).size.height / 30,
@@ -168,65 +168,65 @@ class _YearChartPageState extends State<YearChartPage> {
                         ]
                     ),
                   ),
-                  SizedBox(height: MediaQuery.of(context).size.height / 20),
-                      Expanded(
-                        flex: 1,
-                        child: englishLanguageBoolean == false
-                            ? Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    englishLanguageBoolean == false
-                                        ? "1/100000".toPersianDigit()
-                                        : "1/100000",
-                                    style: TextStyle(
-                                      fontSize:
-                                          MediaQuery.of(context).size.width / 25,
-                                      color: darkThemeBoolean == "false"
-                                          ? AppColors.appBarTitleColor
-                                          : Colors.white,
-                                    ),
-                                  ),
-                                  Text(
-                                    " : ${AppLocale.mapScale.getString(context)}",
-                                    style: TextStyle(
-                                      fontSize:
-                                          MediaQuery.of(context).size.width / 25,
-                                      color: darkThemeBoolean == "false"
-                                          ? AppColors.appBarTitleColor
-                                          : Colors.white,
-                                    ),
-                                  ),
-                                ],
-                              )
-                            : Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "${AppLocale.mapScale.getString(context)} : ",
-                                    style: TextStyle(
-                                      fontSize:
+                  SizedBox(height: MediaQuery.of(context).size.height / 100),
+                  Expanded(
+                    flex: 1,
+                    child: englishLanguageBoolean == false
+                        ? Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                englishLanguageBoolean == false
+                                    ? "1/100000".toPersianDigit()
+                                    : "1/100000",
+                                style: TextStyle(
+                                  fontSize:
                                       MediaQuery.of(context).size.width / 25,
-                                      color: darkThemeBoolean == "false"
-                                          ? AppColors.appBarTitleColor
-                                          : Colors.white,
-                                    ),
-                                  ),
-                                  Text(
-                                    englishLanguageBoolean == false
-                                        ? "1/100000".toPersianDigit()
-                                        : "1/100000",
-                                    style: TextStyle(
-                                      fontSize:
-                                          MediaQuery.of(context).size.width / 25,
-                                      color: darkThemeBoolean == "false"
-                                          ? AppColors.appBarTitleColor
-                                          : Colors.white,
-                                    ),
-                                  ),
-                                ],
+                                  color: darkThemeBoolean == "false"
+                                      ? AppColors.appBarTitleColor
+                                      : Colors.white,
+                                ),
                               ),
-                      ),
+                              Text(
+                                " : ${AppLocale.mapScale.getString(context)}",
+                                style: TextStyle(
+                                  fontSize:
+                                      MediaQuery.of(context).size.width / 25,
+                                  color: darkThemeBoolean == "false"
+                                      ? AppColors.appBarTitleColor
+                                      : Colors.white,
+                                ),
+                              ),
+                            ],
+                          )
+                        : Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "${AppLocale.mapScale.getString(context)} : ",
+                                style: TextStyle(
+                                  fontSize:
+                                  MediaQuery.of(context).size.width / 25,
+                                  color: darkThemeBoolean == "false"
+                                      ? AppColors.appBarTitleColor
+                                      : Colors.white,
+                                ),
+                              ),
+                              Text(
+                                englishLanguageBoolean == false
+                                    ? "1/100000".toPersianDigit()
+                                    : "1/100000",
+                                style: TextStyle(
+                                  fontSize:
+                                      MediaQuery.of(context).size.width / 25,
+                                  color: darkThemeBoolean == "false"
+                                      ? AppColors.appBarTitleColor
+                                      : Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
+                  ),
                   SizedBox(height: MediaQuery.of(context).size.height / 15),
                 ],
               ),
