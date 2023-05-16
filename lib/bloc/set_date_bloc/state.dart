@@ -30,7 +30,7 @@ class SetDateState extends Equatable {
         expensesPerMonth = expensesPerMonth ?? "",
         expensesPerDate = expensesPerDate ?? "",
         calculateCash = calculateCash ?? "",
-        income = income ?? '',
+        income = income ?? "",
         expensesDetails = expensesDetails ?? const [];
 
   final SetDateStatus status;

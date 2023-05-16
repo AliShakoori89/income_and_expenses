@@ -34,9 +34,10 @@ class SetDateRepository {
     await prefs.setString('dateMonth', dateMonth);
   }
 
-  Future<String> reduceDate(String date) async{
+  Future<String> reduceDate(String date, String dateMonth) async{
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('date', date);
+    await prefs.setString('dateMonth', dateMonth);
     return date;
   }
 
@@ -62,9 +63,10 @@ class SetDateRepository {
     }
   }
 
-  addToDate(String date) async{
+  addToDate(String date, String dateMonth) async{
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('date', date);
+    await prefs.setString('dateMonth', dateMonth);
   }
 
   Future<List<ExpenseModel>> getAllExpensesItemsRepo(String date) async {

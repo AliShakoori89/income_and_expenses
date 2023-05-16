@@ -67,8 +67,12 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                           .add(const Duration(days: -1))}";
 
                       BlocProvider.of<SetDateBloc>(context)
+                          .add(WriteDateEvent(date: date, dateMonth: month));
+                      BlocProvider.of<SetDateBloc>(context)
                           .add(ReduceDateEvent(date: DateFormat('yyyy-MM-dd')
-                          .format(DateTime.parse(date)).toString()));
+                          .format(DateTime.parse(date)).toString(),
+                          dateMonth : DateFormat('yyyy-MM')
+                              .format(DateTime.parse(date)).toString()));
                       BlocProvider.of<SetDateBloc>(context)
                           .add(ReadDateEvent());
                       BlocProvider.of<SetDateBloc>(context)
@@ -109,7 +113,7 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                         builder: (context, child) {
                           return Theme(
                             data: Theme.of(context).copyWith(
-                              colorScheme: ColorScheme.light(
+                              colorScheme: const ColorScheme.light(
                                 primary: AppColors.cashContainerColor, // header background color
                                 onPrimary: Colors.black, // header text color
                                 onSurface: Colors.black, // body text color
@@ -207,7 +211,10 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                       date = "${DateTime.parse(DateFormat('yyyy-MM-dd').format(DateTime.parse(date))).add(const Duration(days: 1))}";
 
                       BlocProvider.of<SetDateBloc>(context)
-                          .add(AddToDateEvent(date: DateFormat('yyyy-MM-dd').format(DateTime.parse(date)).toString()));
+                          .add(WriteDateEvent(date: date, dateMonth: month));
+                      BlocProvider.of<SetDateBloc>(context)
+                          .add(AddToDateEvent(date: DateFormat('yyyy-MM-dd').format(DateTime.parse(date)).toString(),
+                      dateMonth: DateFormat('yyyy-MM').format(DateTime.parse(date)).toString()));
                       BlocProvider.of<SetDateBloc>(context)
                           .add(ReadDateEvent());
                       BlocProvider.of<SetDateBloc>(context)

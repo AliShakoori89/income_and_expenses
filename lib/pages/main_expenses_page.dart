@@ -50,7 +50,7 @@ class _MainExpensesPageState extends State<MainExpensesPage> {
                   Stack(
                     children: [
                       Container(
-                        height: MediaQuery.of(context).size.height / 4,
+                        height: MediaQuery.of(context).size.height / 5,
                         decoration: BoxDecoration(
                           gradient: const LinearGradient(
                             begin: Alignment.topLeft,
@@ -69,11 +69,11 @@ class _MainExpensesPageState extends State<MainExpensesPage> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(top: MediaQuery.of(context).size.height/15),
-                        child: DatePickerCalendar(),
+                        padding: EdgeInsets.only(top: MediaQuery.of(context).size.height/25),
+                        child: const DatePickerCalendar(),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(top: MediaQuery.of(context).size.height/6),
+                        padding: EdgeInsets.only(top: MediaQuery.of(context).size.height/7),
                         child: CashContainer(),
                       ),
 
@@ -81,7 +81,7 @@ class _MainExpensesPageState extends State<MainExpensesPage> {
                   ),
                   Padding(
                     padding: EdgeInsets.only(top: MediaQuery.of(context).size.height/100),
-                    child: SingleChildScrollView(
+                    child: const SingleChildScrollView(
                         child: CashContainerPerDate()),
                   )
                 ],

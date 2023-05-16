@@ -9,6 +9,7 @@ import 'package:income_and_expenses/bloc/change_language_bloc/bloc.dart';
 import 'package:income_and_expenses/bloc/set_date_bloc/bloc.dart';
 import 'package:income_and_expenses/bloc/them_bloc/bloc.dart';
 import 'package:income_and_expenses/pages/home_page.dart';
+import 'package:income_and_expenses/pages/main_expenses_page.dart';
 import 'package:income_and_expenses/repository/calculate_repository.dart';
 import 'package:income_and_expenses/repository/calculate_sf_cartesian_chart_repository.dart';
 import 'package:income_and_expenses/repository/calculate_sf_circular_chart_repository.dart';
@@ -23,11 +24,11 @@ import 'const/language.dart';
 
 void main() {
   runApp(
-    DevicePreview(
-      enabled: !kReleaseMode,
-      builder: (context) =>
+    // DevicePreview(
+    //   enabled: !kReleaseMode,
+    //   builder: (context) =>
     const MyApp(), // Wrap your app
-    ),
+    // ),
   );
 }
 
@@ -87,6 +88,9 @@ class _MyAppState extends State<MyApp> {
                 CalculateSFCartesianChartBloc(CalculateSFCartesianChartRepository())),
       ],
       child: MaterialApp(
+        routes: <String, WidgetBuilder>{
+          "/home": (BuildContext context) => MainExpensesPage(),
+        },
         supportedLocales: _localization.supportedLocales,
         localizationsDelegates: _localization.localizationsDelegates,
         debugShowCheckedModeBanner: false,

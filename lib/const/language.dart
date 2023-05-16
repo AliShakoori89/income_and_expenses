@@ -119,7 +119,7 @@ mixin AppLocale {
     export: 'خروجی',
     chooseCurrency: 'انتخاب واحد پول',
     doYouWantTheDesiredItemToBeDeleted: 'آیا می خواهید که آیتم مورد نظر پاک شود؟',
-    delete: 'نوجه',
+    delete: 'توجه',
     chooseLanguage: 'انتخاب زبان',
     frequentlyAskedQuestions: 'سوالات متداول',
     exit: 'خروج',

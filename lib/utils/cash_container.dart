@@ -72,7 +72,9 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
 
             return BlocBuilder<SetDateBloc, SetDateState>(
                 builder: (context, state) {
-              String dateMonth = state.dateMonth;
+              String dateMonth = state.date;
+
+              print("month         "+ state.dateMonth);
 
               return Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -101,6 +103,8 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
   }
 
   Align incomeSlice(BuildContext context, String dateMonth, bool englishLanguageBoolean, SetDateState state, bool rialCurrencyType) {
+
+    print("state.income                    "+state.income);
     return Align(
       alignment: Alignment.bottomRight,
       child: Container(
@@ -221,7 +225,7 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                                   ? rialCurrencyType == true
                                       ? AppLocale.rial.getString(context)
                                       : AppLocale.toman.getString(context)
-                                  : '',
+                                  : '0'.toPersianDigit(),
                               style: const TextStyle(
                                   fontWeight: FontWeight.w800,
                                   color: Colors.white)),
@@ -252,7 +256,7 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                                   ? rialCurrencyType == true
                                       ? ("${state.income}0").seRagham()
                                       : state.income.seRagham()
-                                  : "",
+                                  : "0",
                               style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w800,

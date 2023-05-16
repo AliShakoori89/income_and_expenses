@@ -23,22 +23,24 @@ class WriteDateEvent extends SetDateEvent {
 
 class AddToDateEvent extends SetDateEvent{
   final String date;
+  final String dateMonth;
 
   AddToDateEvent(
-      {required this.date});
+      {required this.date, required this.dateMonth});
 
   @override
-  List<Object> get props => [date];
+  List<Object> get props => [date, dateMonth];
 }
 
 class ReduceDateEvent extends SetDateEvent{
   final String date;
+  final String dateMonth;
 
   ReduceDateEvent(
-      {required this.date});
+      {required this.date, required this.dateMonth});
 
   @override
-  List<Object> get props => [date];
+  List<Object> get props => [date, dateMonth];
 }
 
 class SumExpensePerMonthEvent extends SetDateEvent {

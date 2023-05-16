@@ -103,7 +103,7 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
       AddToDateEvent event, Emitter<SetDateState> emit) async {
     try {
       emit(state.copyWith(status: SetDateStatus.loading));
-      await setDateRepository.addToDate(event.date);
+      await setDateRepository.addToDate(event.date, event.dateMonth);
 
       emit(
         state.copyWith(
@@ -119,7 +119,9 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
       ReduceDateEvent event, Emitter<SetDateState> emit) async {
     try {
       emit(state.copyWith(status: SetDateStatus.loading));
-      await setDateRepository.reduceDate(event.date);
+
+      print("event.date          "+event.date);
+      await setDateRepository.reduceDate(event.date, event.dateMonth);
 
       emit(
         state.copyWith(
@@ -134,7 +136,7 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
   void _mapFetchExpensesEventToState(
       FetchExpensesItemsEvent event, Emitter<SetDateState> emit) async {
     try {
-      emit(state.copyWith(status: SetDateStatus.loading));
+      // emit(state.copyWith(status: SetDateStatus.loading));
 
       final List<ExpenseModel> expensesDetails =
       await setDateRepository.getAllExpensesItemsRepo(event.date);
@@ -171,7 +173,7 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
   void _mapSumExpensePerDateEventToState(
       SumExpensePerDateEvent event, Emitter<SetDateState> emit) async {
     try {
-      emit(state.copyWith(status: SetDateStatus.loading));
+      // emit(state.copyWith(status: SetDateStatus.loading));
       final String expensesPerDate =
       await calculateExpensesRepository.calculateDayExpenseRepo(event.date);
       emit(
@@ -235,7 +237,7 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
   void _mapAddExpenseEventToState(
       AddOneByOneExpenseEvent event, Emitter<SetDateState> emit) async {
     try {
-      emit(state.copyWith(status: SetDateStatus.loading));
+      // emit(state.copyWith(status: SetDateStatus.loading));
       await setDateRepository.addExpenseRepo(event.expenseModel);
       final List<ExpenseModel> expensesDetails =
       await setDateRepository.getAllExpensesItemsRepo(event.date);

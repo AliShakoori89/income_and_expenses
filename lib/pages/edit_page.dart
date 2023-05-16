@@ -79,43 +79,65 @@ class _EditedPageState extends State<EditedPage> {
               showDialog(
                 context: context,
                 builder: (ctx) => AlertDialog(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(20.0))),
                   title: Text(
                     AppLocale.delete.getString(context),
                     textDirection: TextDirection.rtl,
-                    style: TextStyle(fontSize: MediaQuery.of(context).size.width / 20,),
+                    style: TextStyle(fontSize: MediaQuery.of(context).size.width / 20,
+                    fontWeight: FontWeight.w700),
                   ),
                   content: Text(
                       AppLocale.doYouWantTheDesiredItemToBeDeleted.getString(context),
                       textDirection: TextDirection.rtl,
-                      style: TextStyle(fontSize: MediaQuery.of(context).size.width / 20,)),
+                      style: TextStyle(fontSize: MediaQuery.of(context).size.width / 25,)),
                   actions: <Widget>[
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         TextButton(
                             onPressed: (){
-                              Navigator.pushNamed(
-                                context,
-                                '/edit_page.dart',
-                              );
+                              Navigator.pop(context);
                             },
-                            child: Text(AppLocale.no.getString(context),
-                            style: const TextStyle(
-                              color: Colors.red
-                            ),)),
+                            child: Container(
+                              height: MediaQuery.of(context).size.height / 25,
+                              width: MediaQuery.of(context).size.width / 6,
+                              decoration: BoxDecoration(
+                                color: Colors.red,
+                                borderRadius: BorderRadius.circular(15)
+                              ),
+                              child: Center(
+                                child: Text(AppLocale.no.getString(context),
+                                style: TextStyle(
+                                  fontSize: MediaQuery.of(context).size.width / 25,
+                                  color: Colors.white
+                                ),),
+                              ),
+                            )),
                         TextButton(
                             onPressed: (){
                               final medicineBloc = BlocProvider.of<SetDateBloc>(context);
                               medicineBloc.add(DeleteItemEvent(widget.expenseModel.id! , widget.expenseModel.expenseDate!));
                               Navigator.pushNamed(
                                 context,
-                                '/main_expenses_page',
+                                '/home',
                               );
                             },
-                            child: Text(AppLocale.yes.getString(context),
-                              style: const TextStyle(
-                                  color: Colors.green
-                              ),))
+                            child: Container(
+                              height: MediaQuery.of(context).size.height / 25,
+                              width: MediaQuery.of(context).size.width / 6,
+                              decoration: BoxDecoration(
+                                  color: Colors.green,
+                                  borderRadius: BorderRadius.circular(15)
+                              ),
+                              child: Center(
+                                child: Text(AppLocale.yes.getString(context),
+                                  style: TextStyle(
+                                      fontSize: MediaQuery.of(context).size.width / 25,
+                                      color: Colors.white
+                                  ),),
+                              ),
+                            ))
                       ],
                     ),
                   ],
@@ -134,71 +156,85 @@ class _EditedPageState extends State<EditedPage> {
       resizeToAvoidBottomInset: true,
       bottomSheet: appButton(darkThemeBoolean),
       body: Container(
+        height: double.infinity,
+        decoration: BoxDecoration(
+            color: AppColors.themContainer,
+            borderRadius: BorderRadius.circular(25)
+        ),
         margin: EdgeInsets.only(
-            left: MediaQuery.of(context).size.width / 15,
-            right: MediaQuery.of(context).size.width / 15),
-        child: Form(
-          key: formKey,
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                SizedBox(
-                  height: MediaQuery.of(context).size.height / 20,
-                ),
-                Text(
-                    // DateTime.parse(_editedExpenses.expenseDate.toString()).day.toString()
-                    englishLanguageBoolean == false
-                        ? "${DateTime.parse(_editedExpenses.expenseDate.toString()).year.toString().toPersianDigit()}"
-                        "-${DateTime.parse(_editedExpenses.expenseDate.toString()).month.toString().toPersianDigit()}"
-                        "-${DateTime.parse(_editedExpenses.expenseDate.toString()).day.toString().toPersianDigit()}"
-                        : _editedExpenses.expenseDate.toString(),
-                    style: TextStyle(
-                        fontSize: MediaQuery.of(context).size.width / 20,
-                        color: AppColors.appBarTitleColor)),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height / 20,
-                ),
-                Column(
-                  children: [
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height / 30,
-                    ),
-                    Directionality(
-                      textDirection: englishLanguageBoolean == false ? TextDirection.rtl : TextDirection.ltr,
-                      child: TextFormField(
-                        controller: TextEditingController(text: _editedExpenses.expenseCategory),
-                        style: TextStyle(
-                            color: darkThemeBoolean == "false"
-                                ? Colors.black
-                                : Colors.white70
-                        ),
-                        readOnly: true,
-                        decoration: textInputDecoration.copyWith(
-                          labelText: AppLocale.grouping.getString(context),
-                        )
+            left: MediaQuery.of(context).size.width / 30,
+            right: MediaQuery.of(context).size.width / 30,
+            bottom: MediaQuery.of(context).size.height / 9,
+            top: MediaQuery.of(context).size.height / 40),
+        child: Container(
+          margin: EdgeInsets.only(
+              left: MediaQuery.of(context).size.width / 15,
+              right: MediaQuery.of(context).size.width / 15),
+          child: Form(
+            key: formKey,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height / 20,
+                  ),
+                  Text(
+                      // DateTime.parse(_editedExpenses.expenseDate.toString()).day.toString()
+                      englishLanguageBoolean == false
+                          ? "${DateTime.parse(_editedExpenses.expenseDate.toString()).year.toString().toPersianDigit()}"
+                          "-${DateTime.parse(_editedExpenses.expenseDate.toString()).month.toString().toPersianDigit()}"
+                          "-${DateTime.parse(_editedExpenses.expenseDate.toString()).day.toString().toPersianDigit()}"
+                          : _editedExpenses.expenseDate.toString(),
+                      style: TextStyle(
+                          fontSize: MediaQuery.of(context).size.width / 15,
+                          color: AppColors.appBarTitleColor)),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height / 30,
+                  ),
+                  Column(
+                    children: [
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height / 50,
                       ),
-                    ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height / 30,
-                    ),
-                    AppTextField(
-                      labelText: AppLocale.expense.getString(context),
-                      controller: _expensesController,
-                      clickable: false,
-                      themeBoolean: darkThemeBoolean,
-                    ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.width / 10,
-                    ),
-                    AppTextField(
-                      labelText: AppLocale.description.getString(context),
-                      controller: _descriptionController,
-                      clickable: false,
-                      themeBoolean: darkThemeBoolean,
-                    ),
-                  ],
-                )
-              ],
+                      Directionality(
+                        textDirection: englishLanguageBoolean == false ? TextDirection.rtl : TextDirection.ltr,
+                        child: TextFormField(
+                            enabled: false,
+                            controller: TextEditingController(text: _editedExpenses.expenseCategory),
+                          style: TextStyle(
+                              color: darkThemeBoolean == "false"
+                                  ? Colors.black
+                                  : Colors.white70,
+                            fontWeight: FontWeight.w700
+                          ),
+                          readOnly: true,
+                          decoration: textInputDecoration.copyWith(
+                            labelText: AppLocale.grouping.getString(context),
+                          )
+                        ),
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height / 30,
+                      ),
+                      AppTextField(
+                        labelText: AppLocale.expense.getString(context),
+                        controller: _expensesController,
+                        clickable: false,
+                        themeBoolean: darkThemeBoolean,
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.width / 10,
+                      ),
+                      AppTextField(
+                        labelText: AppLocale.description.getString(context),
+                        controller: _descriptionController,
+                        clickable: false,
+                        themeBoolean: darkThemeBoolean,
+                      ),
+                    ],
+                  )
+                ],
+              ),
             ),
           ),
         ),
@@ -213,6 +249,9 @@ class _EditedPageState extends State<EditedPage> {
           builder: (context, state) {
 
             return Container(
+              padding: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.height / 30
+              ),
               width: double.infinity,
               color: themeBoolean == "false"
                   ? Colors.white
