@@ -20,6 +20,7 @@ import '../pages/edit_page.dart';
 import 'no_data.dart';
 
 class CashContainerPerDate extends StatefulWidget {
+
   const CashContainerPerDate({Key? key}) : super(key: key);
 
   @override
@@ -82,15 +83,7 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                               child: NoDataPage(),
                             )
                       : state.status.isError
-                          ? Center(
-                              child: Text(
-                                  style: TextStyle(
-                                    fontSize: MediaQuery.of(context).size.height / 30,
-                                    color: darkThemeBoolean == "false"
-                                        ? AppColors.calenderBoxIconColor
-                                        : Colors.white,
-                                  ),
-                                  AppLocale.notExpenses.getString(context)),
+                          ? Container(
                             )
                           : Container();
             }),

@@ -3,6 +3,8 @@ import 'package:income_and_expenses/pages/main_expenses_page.dart';
 import 'package:income_and_expenses/pages/setting_page.dart';
 import 'package:income_and_expenses/pages/year_chart_page.dart';
 import 'package:income_and_expenses/const/app_colors.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 import 'add_expense_page.dart';
 import 'month_chart_page.dart';
 
@@ -18,23 +20,31 @@ class MyHomePage extends StatefulWidget {
 
 class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
-  var _bottomNavIndex = 0; //default index of a first screen
+  var _bottomNavIndex = 0;//default index of a first screen
+
+  GlobalKey keyButton = GlobalKey();
+  GlobalKey keyButton1 = GlobalKey();
+  GlobalKey keyButton2 = GlobalKey();
+  GlobalKey keyButton3 = GlobalKey();
+  GlobalKey keyButton4 = GlobalKey();
+
+  GlobalKey keyBottomNavigation1 = GlobalKey();
+  GlobalKey keyBottomNavigation2 = GlobalKey();
+  GlobalKey keyBottomNavigation3 = GlobalKey();
+  GlobalKey keyBottomNavigation4 = GlobalKey();
+
+  late TutorialCoachMark tutorialCoachMark;
 
   List<Widget> _pages() =>
       [
-        MainExpensesPage(),
+        MainExpensesPage(keyBottomNavigation1: keyBottomNavigation1,
+        keyBottomNavigation2: keyBottomNavigation2,
+        keyBottomNavigation3: keyBottomNavigation3,
+        keyBottomNavigation4: keyBottomNavigation4),
         const MonthChart(),
         const YearChartPage(),
         const SettingPage(),
       ];
-
-  // late AnimationController _fabAnimationController;
-  // late AnimationController _borderRadiusAnimationController;
-  // late Animation<double> fabAnimation;
-  // late Animation<double> borderRadiusAnimation;
-  // late CurvedAnimation fabCurve;
-  // late CurvedAnimation borderRadiusCurve;
-  // late AnimationController _hideBottomBarAnimationController;
 
   final iconList = <IconData>[
     Icons.home,
@@ -43,70 +53,308 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     Icons.settings,
   ];
 
-  // @override
-  // void initState() {
-  //
-  //   super.initState();
-  //   final systemTheme = SystemUiOverlayStyle.light.copyWith(
-  //     systemNavigationBarIconBrightness: Brightness.light,
-  //   );
-  //   SystemChrome.setSystemUIOverlayStyle(systemTheme);
-  //
-  //   _fabAnimationController = AnimationController(
-  //     duration: const Duration(milliseconds: 500),
-  //     vsync: this,
-  //   );
-  //   _borderRadiusAnimationController = AnimationController(
-  //     duration: const Duration(milliseconds: 500),
-  //     vsync: this,
-  //   );
-  //   fabCurve = CurvedAnimation(
-  //     parent: _fabAnimationController,
-  //     curve: const Interval(0.5, 1.0, curve: Curves.fastOutSlowIn),
-  //   );
-  //   borderRadiusCurve = CurvedAnimation(
-  //     parent: _borderRadiusAnimationController,
-  //     curve: const Interval(0.5, 1.0, curve: Curves.fastOutSlowIn),
-  //   );
-  //
-  //   fabAnimation = Tween<double>(begin: 0, end: 1).animate(fabCurve);
-  //   borderRadiusAnimation = Tween<double>(begin: 0, end: 1).animate(
-  //     borderRadiusCurve,
-  //   );
-  //
-  //   _hideBottomBarAnimationController = AnimationController(
-  //     duration: const Duration(milliseconds: 200),
-  //     vsync: this,
-  //   );
-  //
-  //   Future.delayed(
-  //     const Duration(seconds: 1),
-  //         () => _fabAnimationController.forward(),
-  //   );
-  //   Future.delayed(
-  //     const Duration(seconds: 1),
-  //         () => _borderRadiusAnimationController.forward(),
-  //   );
-  // }
+  @override
+  void initState() {
+    checkFirstSeen();
+    // createTutorial();
+    // Future.delayed(Duration.zero, showTutorial);
+    super.initState();
+  }
 
-  // bool onScrollNotification(ScrollNotification notification) {
-  //   if (notification is UserScrollNotification &&
-  //       notification.metrics.axis == Axis.vertical) {
-  //     switch (notification.direction) {
-  //       case ScrollDirection.forward:
-  //         _hideBottomBarAnimationController.reverse();
-  //         _fabAnimationController.forward(from: 0);
-  //         break;
-  //       case ScrollDirection.reverse:
-  //         _hideBottomBarAnimationController.forward();
-  //         _fabAnimationController.reverse(from: 1);
-  //         break;
-  //       case ScrollDirection.idle:
-  //         break;
-  //     }
-  //   }
-  //   return false;
-  // }
+  Future checkFirstSeen() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool? seen = (prefs.getBool('seen') == null ? false : true );
+
+    if (seen == true) {
+    } else {
+      await prefs.setBool('seen', true);
+      seen = prefs.getBool('seen');
+      createTutorial();
+      Future.delayed(Duration.zero, showTutorial);
+    }
+  }
+
+  void afterFirstLayout(BuildContext context) => checkFirstSeen();
+
+  void showTutorial() {
+    tutorialCoachMark.show(context: context);
+  }
+
+  void createTutorial() {
+    tutorialCoachMark = TutorialCoachMark(
+      targets: _createTargets(),
+      colorShadow: AppColors.mainColor,
+      textSkip: "SKIP",
+      paddingFocus: 10,
+      opacityShadow: 0.8,
+      onFinish: () {
+        print("finish");
+      },
+      onClickTarget: (target) {
+        print('onClickTarget: $target');
+      },
+      onClickTargetWithTapPosition: (target, tapDetails) {
+        print("target: $target");
+        print(
+            "clicked at position local: ${tapDetails.localPosition} - global: ${tapDetails.globalPosition}");
+      },
+      onClickOverlay: (target) {
+        print('onClickOverlay: $target');
+      },
+      onSkip: () {
+        print("skip");
+      },
+    );
+  }
+
+  List<TargetFocus> _createTargets() {
+    List<TargetFocus> targets = [];
+    targets.add(TargetFocus(
+      identify: "keyButton",
+      keyTarget: keyButton,
+      alignSkip: Alignment.topRight,
+      contents: [
+        TargetContent(
+          align: ContentAlign.top,
+          builder: (context, controller) {
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const <Widget>[
+                Text(
+                  "صفحه اصلی",
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            );
+          },
+        ),
+      ],
+    ),);
+    targets.add(TargetFocus(
+      identify: "keyButton1",
+      keyTarget: keyButton1,
+      alignSkip: Alignment.topRight,
+      contents: [
+        TargetContent(
+          align: ContentAlign.top,
+          builder: (context, controller) {
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const <Widget>[
+                Text(
+                  "نمودار هزیته های مالانه",
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            );
+          },
+        ),
+      ],
+    ),);
+    targets.add(TargetFocus(
+      identify: "keyButton2",
+      keyTarget: keyButton2,
+      alignSkip: Alignment.topRight,
+      contents: [
+        TargetContent(
+          align: ContentAlign.top,
+          builder: (context, controller) {
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: const <Widget>[
+                Text(
+                  "اضافه کردن هزینه ",
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            );
+          },
+        ),
+      ],
+    ),);
+    targets.add(TargetFocus(
+      identify: "keyButton3",
+      keyTarget: keyButton3,
+      alignSkip: Alignment.topRight,
+      contents: [
+        TargetContent(
+          align: ContentAlign.top,
+          builder: (context, controller) {
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: const <Widget>[
+                Text(
+                  "نمودار هریبه های سالانه",
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            );
+          },
+        ),
+      ],
+    ),);
+    targets.add(TargetFocus(
+      identify: "keyButton4",
+      keyTarget: keyButton4,
+      alignSkip: Alignment.topRight,
+      contents: [
+        TargetContent(
+          align: ContentAlign.top,
+          builder: (context, controller) {
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: const <Widget>[
+                Text(
+                  "تنظیمات",
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            );
+          },
+        ),
+      ],
+    ),);
+
+    targets.add(
+      TargetFocus(
+        identify: "keyBottomNavigation1",
+        keyTarget: keyBottomNavigation1,
+        contents: [
+          TargetContent(
+            align: ContentAlign.bottom,
+            builder: (context, controller) {
+              return Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: const <Widget>[
+                  Text(
+                    "وارد کردن درآمد",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        fontSize: 20.0),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 10.0),
+                    child: Text(
+                      ".با کلیک بر روی این آیکون می نوانید میزان درآمد خود را وارد کتید",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ],
+              );
+            },
+          ),
+        ],
+      ),
+    );
+
+    targets.add(
+      TargetFocus(
+        identify: "keyBottomNavigation2",
+        keyTarget: keyBottomNavigation2,
+        alignSkip: Alignment.topRight,
+        contents: [
+          TargetContent(
+            align: ContentAlign.bottom,
+            builder: (context, controller) {
+              return Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height / 30,
+                  ),
+                  const Text(
+                    "رفتن به روز قبل",
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              );
+            },
+          ),
+        ],
+      ),
+    );
+
+    targets.add(
+      TargetFocus(
+        identify: "keyBottomNavigation3",
+        keyTarget: keyBottomNavigation3,
+        alignSkip: Alignment.bottomRight,
+        contents: [
+          TargetContent(
+            align: ContentAlign.bottom,
+            builder: (context, controller) {
+              return Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height / 30,
+                  ),
+                  const Text(
+                    "انتخاب روز مورد نظر",
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              );
+            },
+          ),
+        ],
+      ),
+    );
+
+    targets.add(
+      TargetFocus(
+        identify: "keyBottomNavigation4",
+        keyTarget: keyBottomNavigation4,
+        alignSkip: Alignment.bottomRight,
+        contents: [
+          TargetContent(
+            align: ContentAlign.bottom,
+            builder: (context, controller) {
+              return Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: <Widget>[
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height / 30,
+                  ),
+                  const Text(
+                    "رفتن به روز بعد",
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              );
+            },
+          ),
+        ],
+      ),
+    );
+    return targets;
+  }
 
   void onTapNav(int index) {
     setState(() {
@@ -125,21 +373,29 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         type: BottomNavigationBarType.fixed,
         backgroundColor: AppColors.calenderBoxColor,
         selectedItemColor: AppColors.mainColor,
-        items: const <BottomNavigationBarItem>[
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(
+                key: keyButton,
+                Icons.home),
             label: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.pie_chart),
+            icon: Icon(
+                key: keyButton1,
+                Icons.pie_chart),
             label: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.bar_chart),
+            icon: Icon(
+                key: keyButton3,
+                Icons.bar_chart),
             label: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
+            icon: Icon(
+                key: keyButton4,
+                Icons.settings),
             label:'',
           ),
         ],
@@ -148,11 +404,14 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColors.mainColor,
-        child: const Icon(Icons.add),
+        child: Icon(
+            key: keyButton2,
+            Icons.add),
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const AddExpensePage()),
+            MaterialPageRoute(builder: (context) =>
+                AddExpensePage()),
           );
         },
       ),

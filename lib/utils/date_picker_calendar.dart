@@ -12,13 +12,26 @@ import '../bloc/change_language_bloc/state.dart';
 
 class DatePickerCalendar extends StatefulWidget {
 
-  const DatePickerCalendar({super.key});
+  GlobalKey? keyBottomNavigation2;
+  GlobalKey? keyBottomNavigation3;
+  GlobalKey? keyBottomNavigation4;
+
+  DatePickerCalendar({super.key, this.keyBottomNavigation2,
+    this.keyBottomNavigation3, this.keyBottomNavigation4});
 
   @override
-  State<DatePickerCalendar> createState() => DatePickerCalendarState();
+  State<DatePickerCalendar> createState() => DatePickerCalendarState(
+    keyBottomNavigation2, keyBottomNavigation3, keyBottomNavigation4
+  );
 }
 
 class DatePickerCalendarState extends State<DatePickerCalendar> {
+
+  GlobalKey? keyBottomNavigation2;
+  GlobalKey? keyBottomNavigation3;
+  GlobalKey? keyBottomNavigation4;
+
+  DatePickerCalendarState(this.keyBottomNavigation2, this.keyBottomNavigation3, this.keyBottomNavigation4);
 
   String label = '';
   Jalali picked = Jalali.now() ;
@@ -30,8 +43,6 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
       : Jalali.now().month < 10
       ? "${Jalali.now().year}-0${Jalali.now().month}-${Jalali.now().day}"
       : "${Jalali.now().year}-${Jalali.now().month}-0${Jalali.now().day}";
-
-  DatePickerCalendarState();
 
   @override
   void initState() {
@@ -95,6 +106,7 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                       width: MediaQuery.of(context).size.width / 15,
                       height: MediaQuery.of(context).size.width / 15,
                       child: Image.asset(
+                        key: keyBottomNavigation2,
                         // key: keyButton1,
                         "assets/main_page_first_container_logo/left_arrow.png"),
                     ),
@@ -191,6 +203,7 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                             width: MediaQuery.of(context).size.width / 20,
                           ),
                           Text(
+                              key: keyBottomNavigation3,
                               englishLanguageBoolean == false
                                   ? DateFormat('yyyy-MM-dd').format(DateTime.parse(date)).toPersianDigit()
                                   : DateFormat('yyyy-MM-dd').format(DateTime.parse(date)),
@@ -232,7 +245,7 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                       width: MediaQuery.of(context).size.width / 15,
                       height: MediaQuery.of(context).size.width / 15,
                       child: Image.asset(
-                        // key: keyButton3,
+                        key: keyBottomNavigation4,
                         "assets/main_page_first_container_logo/right_arrow.png",
                        ),
                     ),

@@ -1,4 +1,3 @@
-import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,7 +8,6 @@ import 'package:income_and_expenses/bloc/change_language_bloc/bloc.dart';
 import 'package:income_and_expenses/bloc/set_date_bloc/bloc.dart';
 import 'package:income_and_expenses/bloc/them_bloc/bloc.dart';
 import 'package:income_and_expenses/pages/home_page.dart';
-import 'package:income_and_expenses/pages/main_expenses_page.dart';
 import 'package:income_and_expenses/repository/calculate_repository.dart';
 import 'package:income_and_expenses/repository/calculate_sf_cartesian_chart_repository.dart';
 import 'package:income_and_expenses/repository/calculate_sf_circular_chart_repository.dart';
@@ -88,9 +86,6 @@ class _MyAppState extends State<MyApp> {
                 CalculateSFCartesianChartBloc(CalculateSFCartesianChartRepository())),
       ],
       child: MaterialApp(
-        routes: <String, WidgetBuilder>{
-          "/home": (BuildContext context) => MainExpensesPage(),
-        },
         supportedLocales: _localization.supportedLocales,
         localizationsDelegates: _localization.localizationsDelegates,
         debugShowCheckedModeBanner: false,

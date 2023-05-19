@@ -18,15 +18,20 @@ import '../bloc/them_bloc/state.dart';
 
 class CashContainer extends StatefulWidget {
 
-  CashContainer({Key? key}) : super(key: key);
+  GlobalKey? keyBottomNavigation1;
+
+  CashContainer({Key? key, this.keyBottomNavigation1}) : super(key: key);
 
   @override
-  State<CashContainer> createState() => _CashContainerState();
+  State<CashContainer> createState() => _CashContainerState(keyBottomNavigation1);
 }
 
 class _CashContainerState extends State<CashContainer> with TickerProviderStateMixin  {
 
   late AnimationController animationController;
+  GlobalKey? keyBottomNavigation1;
+
+  _CashContainerState(this.keyBottomNavigation1);
 
   @override
   void initState() {
@@ -80,7 +85,8 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   leftSideCashContainer(context, englishLanguageBoolean, state, rialCurrencyType),
-                  rightSideCashContainer(context, englishLanguageBoolean, state, rialCurrencyType, dateMonth)
+                  rightSideCashContainer(context, englishLanguageBoolean, state, rialCurrencyType,
+                      dateMonth, keyBottomNavigation1)
                 ],
               );
             });
@@ -90,19 +96,19 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
     });
   }
 
-  Expanded rightSideCashContainer(BuildContext context, bool englishLanguageBoolean, SetDateState state, bool rialCurrencyType, String dateMonth) {
+  Expanded rightSideCashContainer(BuildContext context, bool englishLanguageBoolean, SetDateState state, bool rialCurrencyType, String dateMonth, GlobalKey? keyBottomNavigation1) {
     return Expanded(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       cashSlice(context, englishLanguageBoolean, state, rialCurrencyType),
-                      incomeSlice(context, dateMonth, englishLanguageBoolean, state, rialCurrencyType),
+                      incomeSlice(context, dateMonth, englishLanguageBoolean, state, rialCurrencyType, keyBottomNavigation1),
                     ],
                   ),
                 );
   }
 
-  Align incomeSlice(BuildContext context, String dateMonth, bool englishLanguageBoolean, SetDateState state, bool rialCurrencyType) {
+  Align incomeSlice(BuildContext context, String dateMonth, bool englishLanguageBoolean, SetDateState state, bool rialCurrencyType, GlobalKey? keyBottomNavigation1) {
 
     print("state.income                    "+state.income);
     return Align(
@@ -206,6 +212,7 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                       SizedBox(
                         child: Image.asset(
                           "assets/main_page_first_container_logo/darkIncome.png",
+                          key: keyBottomNavigation1,
                           color: Colors.white,
                           scale: MediaQuery.of(context).size.width / 500,
                         ),
@@ -225,7 +232,7 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                                   ? rialCurrencyType == true
                                       ? AppLocale.rial.getString(context)
                                       : AppLocale.toman.getString(context)
-                                  : '0'.toPersianDigit(),
+                                  : '',
                               style: const TextStyle(
                                   fontWeight: FontWeight.w800,
                                   color: Colors.white)),
@@ -271,7 +278,7 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                                   ? rialCurrencyType == true
                                       ? AppLocale.rial.getString(context)
                                       : AppLocale.toman.getString(context)
-                                  : "0",
+                                  : "",
                               style: TextStyle(
                                 fontWeight: FontWeight.w800,
                                 color: Colors.white,

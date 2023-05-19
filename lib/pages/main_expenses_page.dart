@@ -11,13 +11,35 @@ import '../utils/cash_container_per_date.dart';
 
 class MainExpensesPage extends StatefulWidget {
 
-  MainExpensesPage({Key? key}) : super(key: key);
+  GlobalKey keyBottomNavigation1;
+  GlobalKey keyBottomNavigation2;
+  GlobalKey keyBottomNavigation3;
+  GlobalKey keyBottomNavigation4;
+
+  MainExpensesPage({Key? key, required this.keyBottomNavigation1,
+  required this.keyBottomNavigation2, required this.keyBottomNavigation3,
+  required this.keyBottomNavigation4}) : super(key: key);
 
   @override
-  State<MainExpensesPage> createState() => _MainExpensesPageState();
+  State<MainExpensesPage> createState() => _MainExpensesPageState(
+    keyBottomNavigation1,
+    keyBottomNavigation2,
+    keyBottomNavigation3,
+    keyBottomNavigation4
+  );
 }
 
 class _MainExpensesPageState extends State<MainExpensesPage> {
+
+  GlobalKey keyBottomNavigation1;
+  GlobalKey keyBottomNavigation2;
+  GlobalKey keyBottomNavigation3;
+  GlobalKey keyBottomNavigation4;
+
+  _MainExpensesPageState(this.keyBottomNavigation1,
+      this.keyBottomNavigation2,
+      this.keyBottomNavigation3,
+      this.keyBottomNavigation4);
 
   String date = "";
 
@@ -70,11 +92,15 @@ class _MainExpensesPageState extends State<MainExpensesPage> {
                       ),
                       Padding(
                         padding: EdgeInsets.only(top: MediaQuery.of(context).size.height/25),
-                        child: const DatePickerCalendar(),
+                        child: DatePickerCalendar(
+                            keyBottomNavigation2: keyBottomNavigation2,
+                            keyBottomNavigation3: keyBottomNavigation3,
+                            keyBottomNavigation4: keyBottomNavigation4
+                        ),
                       ),
                       Padding(
                         padding: EdgeInsets.only(top: MediaQuery.of(context).size.height/7),
-                        child: CashContainer(),
+                        child: CashContainer(keyBottomNavigation1: keyBottomNavigation1),
                       ),
 
                     ],
