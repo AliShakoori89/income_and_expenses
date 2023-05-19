@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localization/flutter_localization.dart';
+import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
+import 'package:flutter_multi_formatter/formatters/currency_input_formatter.dart';
 import 'package:income_and_expenses/bloc/change_currency_bloc/event.dart';
 import 'package:income_and_expenses/bloc/change_language_bloc/bloc.dart';
 import 'package:income_and_expenses/bloc/change_language_bloc/state.dart';
@@ -30,6 +32,9 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
 
   late AnimationController animationController;
   GlobalKey? keyBottomNavigation1;
+
+  static final  validCharacters = RegExp(r'^[0-9]+$');
+
 
   _CashContainerState(this.keyBottomNavigation1);
 
@@ -111,6 +116,7 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
   Align incomeSlice(BuildContext context, String dateMonth, bool englishLanguageBoolean, SetDateState state, bool rialCurrencyType, GlobalKey? keyBottomNavigation1) {
 
     print("state.income                    "+state.income);
+
     return Align(
       alignment: Alignment.bottomRight,
       child: Container(
@@ -158,6 +164,14 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                         child: TextFormField(
                           keyboardType: TextInputType.number,
                           controller: cashController,
+                          inputFormatters: [
+                            CurrencyInputFormatter(
+                              useSymbolPadding: true,
+                              thousandSeparator: ThousandSeparator.Comma,
+                              mantissaLength:
+                                  0, // the length of the fractional side
+                            )
+                          ],
                           decoration: textInputDecoration.copyWith(
                               border: InputBorder.none,
                               suffixText: AppLocale.toman.getString(context)),
@@ -166,9 +180,12 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                     ),
                     TextButton(
                       onPressed: () {
+
+                        var income = cashController.text.replaceAll(RegExp(','), '');
+
                         BlocProvider.of<SetDateBloc>(context).add(
                             AddIncomeEvent(
-                                cash: cashController.text, month: dateMonth));
+                                cash: income, month: dateMonth));
                         BlocProvider.of<SetDateBloc>(context)
                             .add(FetchIncomeEvent(month: dateMonth));
                         BlocProvider.of<SetDateBloc>(context).add(
@@ -193,7 +210,7 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                 Padding(
                   padding: EdgeInsets.only(
                       left: MediaQuery.of(context).size.width / 20,
-                      right: MediaQuery.of(context).size.width / 12),
+                      right: MediaQuery.of(context).size.width / 100),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -207,15 +224,34 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                             )),
                       ),
                       SizedBox(
-                        width: MediaQuery.of(context).size.width / 25,
+                        width: MediaQuery.of(context).size.width / 30,
                       ),
-                      SizedBox(
-                        child: Image.asset(
-                          "assets/main_page_first_container_logo/darkIncome.png",
-                          key: keyBottomNavigation1,
-                          color: Colors.white,
-                          scale: MediaQuery.of(context).size.width / 500,
-                        ),
+                      Stack(
+                        alignment: Alignment.topRight,
+                        children: [
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width / 10,
+                            height: MediaQuery.of(context).size.height / 20,
+                            child: Image.asset(
+                              "assets/main_page_first_container_logo/darkIncome.png",
+                              key: keyBottomNavigation1,
+                              scale: MediaQuery.of(context).size.width / 500,
+                            ),
+                          ),
+                          Container(
+                            width: MediaQuery.of(context).size.width / 25,
+                            height: MediaQuery.of(context).size.height / 35,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.green),
+                              shape: BoxShape.circle,
+                              color: Colors.green
+                            ),
+                            child: Align(
+                                alignment: Alignment.center,
+                                child: Icon(Icons.add, color: Colors.white,
+                                  size: MediaQuery.of(context).size.width / 30,)),
+                          )
+                        ],
                       ),
                     ],
                   ),

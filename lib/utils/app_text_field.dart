@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_multi_formatter/formatters/currency_input_formatter.dart';
+import 'package:flutter_multi_formatter/formatters/money_input_enums.dart';
 import 'package:income_and_expenses/utils/category_icon_list.dart';
 import 'package:income_and_expenses/utils/widget.dart';
 import '../bloc/change_language_bloc/bloc.dart';
@@ -61,6 +63,14 @@ class _AppTextFieldState extends State<AppTextField> {
                       : Colors.white70
               )
           ),
+          inputFormatters: widget.labelText == "هزینه" ? [
+            CurrencyInputFormatter(
+              useSymbolPadding: true,
+              thousandSeparator: ThousandSeparator.Comma,
+              mantissaLength:
+              0, // the length of the fractional side
+            )
+          ] : null,
           onChanged: (val) {
             setState(() {
               val = widget.controller.text;

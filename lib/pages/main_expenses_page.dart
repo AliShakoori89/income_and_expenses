@@ -11,14 +11,16 @@ import '../utils/cash_container_per_date.dart';
 
 class MainExpensesPage extends StatefulWidget {
 
-  GlobalKey keyBottomNavigation1;
-  GlobalKey keyBottomNavigation2;
-  GlobalKey keyBottomNavigation3;
-  GlobalKey keyBottomNavigation4;
+  GlobalKey? keyBottomNavigation1;
+  GlobalKey? keyBottomNavigation2;
+  GlobalKey? keyBottomNavigation3;
+  GlobalKey? keyBottomNavigation4;
 
-  MainExpensesPage({Key? key, required this.keyBottomNavigation1,
-  required this.keyBottomNavigation2, required this.keyBottomNavigation3,
-  required this.keyBottomNavigation4}) : super(key: key);
+  MainExpensesPage({Key? key,
+    this.keyBottomNavigation1,
+    this.keyBottomNavigation2,
+    this.keyBottomNavigation3,
+   this.keyBottomNavigation4}) : super(key: key);
 
   @override
   State<MainExpensesPage> createState() => _MainExpensesPageState(
@@ -31,10 +33,10 @@ class MainExpensesPage extends StatefulWidget {
 
 class _MainExpensesPageState extends State<MainExpensesPage> {
 
-  GlobalKey keyBottomNavigation1;
-  GlobalKey keyBottomNavigation2;
-  GlobalKey keyBottomNavigation3;
-  GlobalKey keyBottomNavigation4;
+  GlobalKey? keyBottomNavigation1;
+  GlobalKey? keyBottomNavigation2;
+  GlobalKey? keyBottomNavigation3;
+  GlobalKey? keyBottomNavigation4;
 
   _MainExpensesPageState(this.keyBottomNavigation1,
       this.keyBottomNavigation2,
