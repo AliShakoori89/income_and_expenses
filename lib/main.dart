@@ -13,7 +13,7 @@ import 'package:income_and_expenses/repository/calculate_repository.dart';
 import 'package:income_and_expenses/repository/calculate_sf_cartesian_chart_repository.dart';
 import 'package:income_and_expenses/repository/calculate_sf_circular_chart_repository.dart';
 import 'package:income_and_expenses/repository/income_repository.dart';
-import 'package:income_and_expenses/repository/change_currecy_repository.dart';
+import 'package:income_and_expenses/repository/change_currency_repository.dart';
 import 'package:income_and_expenses/repository/change_language_repository.dart';
 import 'package:income_and_expenses/repository/date_time_repository.dart';
 import 'package:income_and_expenses/repository/theme_repository.dart';
@@ -23,11 +23,11 @@ import 'const/language.dart';
 
 void main() {
   runApp(
-    DevicePreview(
-      enabled: !kReleaseMode,
-      builder: (context) =>
+    // DevicePreview(
+    //   enabled: !kReleaseMode,
+    //   builder: (context) =>
     const MyApp(), // Wrap your app
-    ),
+    // ),
   );
 }
 

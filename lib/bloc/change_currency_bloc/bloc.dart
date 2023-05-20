@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:income_and_expenses/bloc/change_currency_bloc/state.dart';
-import '../../repository/change_currecy_repository.dart';
+import '../../repository/change_currency_repository.dart';
 import 'event.dart';
 
 class ChangeCurrencyBloc extends Bloc<ChangeCurrencyEvent, ChangeCurrencyState> {
