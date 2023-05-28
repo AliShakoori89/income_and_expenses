@@ -6,11 +6,9 @@ import 'package:income_and_expenses/bloc/set_date_bloc/state.dart';
 import 'package:income_and_expenses/model/expense_model.dart';
 import 'package:income_and_expenses/const/app_colors.dart';
 import 'package:income_and_expenses/pages/home_page.dart';
-import 'package:income_and_expenses/pages/main_expenses_page.dart';
 import 'package:income_and_expenses/utils/app_text_field.dart';
 import 'package:income_and_expenses/utils/arrow_back_icon.dart';
 import 'package:income_and_expenses/utils/date_picker_calendar.dart';
-import 'package:persian_number_utility/persian_number_utility.dart';
 import '../bloc/change_language_bloc/bloc.dart';
 import '../bloc/change_language_bloc/state.dart';
 import '../bloc/set_date_bloc/event.dart';
@@ -108,6 +106,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
                             controller: categoryController,
                             clickable: true,
                             themeBoolean: darkThemeBoolean,
+                            addExpenses: true,
                           ),
                           SizedBox(
                             height: MediaQuery.of(context).size.height / 30,
@@ -117,6 +116,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
                             controller: expensesController,
                             clickable: false,
                             themeBoolean: darkThemeBoolean,
+                            addExpenses: true,
                           ),
                           SizedBox(
                             height: MediaQuery.of(context).size.width / 10,
@@ -126,6 +126,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
                             controller: descriptionController,
                             clickable: false,
                             themeBoolean: darkThemeBoolean,
+                            addExpenses: true,
                           ),
                         ],
                       ),
@@ -158,63 +159,57 @@ class _AddExpensePageState extends State<AddExpensePage> {
                     late ExpenseModel expense = ExpenseModel();
                     final setDateBloc = BlocProvider.of<SetDateBloc>(context);
 
-                    print("aaaaaaaaaaaa            "+date);
                     expense.expenseDate = date;
-                    expense.expenseDateMonth = DateTime.parse(date).month.toString().length != 1
+                    expense.expenseMonth = DateTime.parse(date).month.toString().length != 1
                         ? "${DateTime.parse(date).year}-${DateTime.parse(date).month}"
                         : "${DateTime.parse(date).year}-0${DateTime.parse(date).month}";
-
-                    print("bbbbbbbbbbbbbbbbbbbb            "+expense.expenseDateMonth!);
 
                     expense.expenseCategory = categoryController.text;
 
                     expense.expense =
                         int.parse(expensesController.text.replaceAll(RegExp(','), ''));
 
-                    expense.description = descriptionController.text;
+                    expense.expensesDescription = descriptionController.text;
 
                     if (englishLanguageBoolean == true) {
                       if (categoryController.text == "buy items") {
-                        expense.iconType = "assets/logos/card_pos.svg";
+                        expense.expensesIconType = "assets/icons/expense_category_icons/card_pos.svg";
                       } else if (categoryController.text == "comestible") {
-                        expense.iconType = "assets/logos/burger_and_cola.svg";
+                        expense.expensesIconType = "assets/icons/expense_category_icons/burger_and_cola.svg";
                       } else if (categoryController.text == "transportation") {
-                        expense.iconType = "assets/logos/driving.svg";
+                        expense.expensesIconType = "assets/icons/expense_category_icons/driving.svg";
                       } else if (categoryController.text == "gifts") {
-                        expense.iconType = "assets/logos/gift.svg";
+                        expense.expensesIconType = "assets/icons/expense_category_icons/gift.svg";
                       } else if (categoryController.text == "treatment") {
-                        expense.iconType = "assets/logos/health.svg";
-                      } else if (categoryController.text ==
-                          "installments and debt") {
-                        expense.iconType = "assets/logos/receipt_item.svg";
+                        expense.expensesIconType = "assets/icons/expense_category_icons/health.svg";
+                      } else if (categoryController.text == "installments and debt") {
+                        expense.expensesIconType = "assets/icons/expense_category_icons/receipt_item.svg";
                       } else if (categoryController.text == "renovation") {
-                        expense.iconType = "assets/logos/repairs.svg";
+                        expense.expensesIconType = "assets/icons/expense_category_icons/repairs.svg";
                       } else if (categoryController.text == "pastime") {
-                        expense.iconType =
-                        "assets/logos/games_and_multimedia.svg";
+                        expense.expensesIconType = "assets/logos/games_and_multimedia.svg";
                       } else if (categoryController.text == "etcetera") {
-                        expense.iconType = "assets/logos/group_30.svg";
+                        expense.expensesIconType = "assets/logos/group_30.svg";
                       }
                     } else {
                       if (categoryController.text == "خرید اقلام") {
-                        expense.iconType = "assets/logos/card_pos.svg";
+                        expense.expensesIconType = "assets/icons/expense_category_icons/card_pos.svg";
                       } else if (categoryController.text == "خوراکی") {
-                        expense.iconType = "assets/logos/burger_and_cola.svg";
+                        expense.expensesIconType = "assets/icons/expense_category_icons/burger_and_cola.svg";
                       } else if (categoryController.text == "حمل و نقل") {
-                        expense.iconType = "assets/logos/driving.svg";
+                        expense.expensesIconType = "assets/icons/expense_category_icons/driving.svg";
                       } else if (categoryController.text == "هدایا") {
-                        expense.iconType = "assets/logos/gift.svg";
+                        expense.expensesIconType = "assets/icons/expense_category_icons/gift.svg";
                       } else if (categoryController.text == "درمانی") {
-                        expense.iconType = "assets/logos/health.svg";
+                        expense.expensesIconType = "assets/icons/expense_category_icons/health.svg";
                       } else if (categoryController.text == "اقساط و بدهی") {
-                        expense.iconType = "assets/logos/receipt_item.svg";
+                        expense.expensesIconType = "assets/icons/expense_category_icons/receipt_item.svg";
                       } else if (categoryController.text == "تعمیرات") {
-                        expense.iconType = "assets/logos/repairs.svg";
+                        expense.expensesIconType = "assets/icons/expense_category_icons/repairs.svg";
                       } else if (categoryController.text == "تفریح") {
-                        expense.iconType =
-                        "assets/logos/games_and_multimedia.svg";
+                        expense.expensesIconType = "assets/icons/expense_category_icons/games_and_multimedia.svg";
                       } else if (categoryController.text == "سایر") {
-                        expense.iconType = "assets/logos/group_30.svg";
+                        expense.expensesIconType = "assets/icons/expense_category_icons/group_30.svg";
                       }
                     }
 
@@ -223,7 +218,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
 
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => MainExpensesPage()));
+                      MaterialPageRoute(builder: (context) => MyHomePage()));
                   }
                 },
                 child: Padding(

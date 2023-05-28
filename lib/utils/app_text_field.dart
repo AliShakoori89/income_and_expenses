@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_multi_formatter/formatters/currency_input_formatter.dart';
 import 'package:flutter_multi_formatter/formatters/money_input_enums.dart';
-import 'package:income_and_expenses/utils/category_icon_list.dart';
+import 'package:income_and_expenses/utils/expenses_category_icon_list.dart';
 import 'package:income_and_expenses/utils/widget.dart';
 import '../bloc/change_language_bloc/bloc.dart';
 import '../bloc/change_language_bloc/state.dart';
+import 'income_category_icon_list.dart';
 
 class AppTextField extends StatefulWidget {
 
@@ -13,22 +14,24 @@ class AppTextField extends StatefulWidget {
   final bool clickable;
   final TextEditingController controller;
   final String themeBoolean;
+  final bool addExpenses;
 
   const
   AppTextField({Key? key,
     required this.labelText,
     required this.clickable,
     required this.controller,
-    required this.themeBoolean}) : super(key: key);
+    required this.themeBoolean,
+    required this.addExpenses}) : super(key: key);
 
   @override
   State<AppTextField> createState() =>
-      _AppTextFieldState(labelText, clickable, controller, themeBoolean);
+      _AppTextFieldState(labelText, clickable, controller, themeBoolean, addExpenses);
 }
 
 class _AppTextFieldState extends State<AppTextField> {
 
-  _AppTextFieldState(labelText, clickable, controller, themeBoolean);
+  _AppTextFieldState(labelText, clickable, controller, themeBoolean, addExpenses);
 
   @override
   Widget build(BuildContext context) {
@@ -47,10 +50,13 @@ class _AppTextFieldState extends State<AppTextField> {
           ),
           readOnly: widget.clickable == true ? true : false,
           controller: widget.controller,
-          keyboardType: widget.labelText == "هزینه" || widget.labelText == "expense" ? TextInputType.number : null,
+          keyboardType: widget.labelText == "هزینه" || widget.labelText == "expense" || widget.labelText == "مبلغ ورودی" || widget.labelText == "income"
+              ? TextInputType.number : null,
           maxLines: widget.labelText == "توضیحات" ? 6 : null,
           decoration: textInputDecoration.copyWith(
-              suffixText: widget.labelText == "هزینه" || widget.labelText == "expense" ? "تومان" : "",
+              filled: true, //<-- SEE HERE
+              fillColor: Colors.white, //<-- SEE HERE
+              suffixText: widget.labelText == "هزینه" || widget.labelText == "expense" || widget.labelText == "مبلغ ورودی" || widget.labelText == "income" ? "تومان" : "",
               suffixStyle: TextStyle(
                   color: widget.themeBoolean == "false"
                       ? Colors.black
@@ -63,12 +69,11 @@ class _AppTextFieldState extends State<AppTextField> {
                       : Colors.white70
               )
           ),
-          inputFormatters: widget.labelText == "هزینه" ? [
+          inputFormatters: widget.labelText == "هزینه" || widget.labelText == "expense" || widget.labelText == "مبلغ ورودی" || widget.labelText == "income"  ? [
             CurrencyInputFormatter(
               useSymbolPadding: true,
               thousandSeparator: ThousandSeparator.Comma,
-              mantissaLength:
-              0, // the length of the fractional side
+              mantissaLength: 0, // the length of the fractional side
             )
           ] : null,
           onChanged: (val) {
@@ -77,12 +82,18 @@ class _AppTextFieldState extends State<AppTextField> {
             });
           },
           onTap: (){
-            widget.clickable == true ? showModalBottomSheet(
+            widget.clickable == true ?
+            widget.addExpenses == true
+                ? showModalBottomSheet(
                 context: context,
                 builder: (context) {
-                  return CategoryIconList(controller: widget.controller);
-                }):
-            null;
+                  return ExpensesCategoryIconList(controller: widget.controller);
+                })
+                : showModalBottomSheet(
+                context: context,
+                builder: (context) {
+                  return IncomeCategoryIconList(controller: widget.controller);
+                }): null;
           },
           validator: (val) {
             if(widget.labelText == "دسته بندی"){
@@ -91,7 +102,7 @@ class _AppTextFieldState extends State<AppTextField> {
               }else {
                 return "لطفا دسته بندی مورد نظر را انتخاب نمایید.";
               }
-            } if(widget.labelText == "هزینه"){
+            } if(widget.labelText == "هزینه" || widget.labelText == "expense" || widget.labelText == "مبلغ ورودی" || widget.labelText == "income"){
               if (val!.isNotEmpty) {
                 return null;
               } else {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:income_and_expenses/const/app_colors.dart';
-import 'package:income_and_expenses/const/app_const.dart';
+import 'package:income_and_expenses/const/expenses_icons.dart';
 import 'package:income_and_expenses/utils/search_text_field.dart';
 
 class SearchPage extends StatelessWidget {
@@ -35,7 +35,7 @@ class SearchPage extends StatelessWidget {
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
-                  children: List.generate(AppConst.iconsPersianName.length, (index){
+                  children: List.generate(ExpensesIcon.iconsPersianName.length, (index){
                     return Container(
                       margin: EdgeInsets.all(MediaQuery.of(context).size.width / 15,),
                       decoration: BoxDecoration(
@@ -51,11 +51,11 @@ class SearchPage extends StatelessWidget {
                                 width: MediaQuery.of(context).size.width / 15/1.5,
                                 height: MediaQuery.of(context).size.width / 15/1.5,
                                 child: SvgPicture.asset(
-                                    "assets/logos/${AppConst.iconsImage[index]}",
+                                    "assets/logos/${ExpensesIcon.iconsImage[index]}",
                                 color: AppColors.labelColor,),
                               ),
                               SizedBox(width: MediaQuery.of(context).size.width / 15 / 2,),
-                              Text("${AppConst.iconsPersianName[index]}"),
+                              Text("${ExpensesIcon.iconsPersianName[index]}"),
                             ],
                           )),
                     );

@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:income_and_expenses/model/expense_model.dart';
+import 'package:income_and_expenses/model/income_model.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
@@ -9,14 +10,25 @@ class DatabaseHelper {
 
   static const _databaseName = "MyDatabase.db";
   static const _databaseVersion = 1;
-  static const table = 'my_table';
-  static const columnId = 'id';
+
+  static const expenseTable = 'expenseTable';
+  static const columnExpenseId = 'id';
   static const columnExpenseDate = 'expenseDate';
-  static const columnExpenseDateMonth = 'expenseDateMonth';
+  static const columnExpenseMonth = 'expenseMonth';
   static const columnExpenseCategory = 'expenseCategory';
   static const columnExpense = 'expense';
-  static const columnDescription = 'description';
-  static const columnIconType = 'iconType';
+  static const columnExpenseDescription = 'expenseDescription';
+  static const columnExpenseIconType = 'expenseIconType';
+
+  static const incomeTable = 'incomeTable';
+  static const columnIncomeId = 'id';
+  static const columnIncomeDate = 'incomeDate';
+  static const columnIncomeMonth = 'incomeMonth';
+  static const columnIncomeCategory = "incomeCategory";
+  static const columnIncome = "Income";
+  static const columnIncomeDescription = "incomeDescription";
+  static const columnIncomeIconType = "incomeIconType";
+
 
   DatabaseHelper._privateConstructor();
 
@@ -35,39 +47,94 @@ class DatabaseHelper {
   }
 
   Future _onCreate(Database db, int version) async {
-    await db.execute('CREATE TABLE $table ('
-        '$columnId INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,'
+    await db.execute('CREATE TABLE $expenseTable ('
+        '$columnExpenseId INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,'
         '$columnExpenseDate TEXT,'
-        '$columnExpenseDateMonth TEXT,'
+        '$columnExpenseMonth TEXT,'
         '$columnExpenseCategory TEXT,'
         '$columnExpense INTEGER,'
-        '$columnDescription TEXT,'
-        '$columnIconType Text'
+        '$columnExpenseDescription TEXT,'
+        '$columnExpenseIconType TEXT'
+        ')'
+    );
+
+    await db.execute('CREATE TABLE $incomeTable ('
+        '$columnIncomeId INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,'
+        '$columnIncomeDate TEXT,'
+        '$columnIncomeMonth TEXT,'
+        '$columnIncomeCategory TEXT,'
+        '$columnIncome INTEGER,'
+        '$columnIncomeDescription TEXT,'
+        '$columnIncomeIconType TEXT'
         ')'
     );
   }
 
-  Future<bool> saveExpense(ExpenseModel expense) async {
+  Future<bool> saveIncome(IncomeModel incomeModel) async {
+    print("saveIncome         saveIncome         saveIncome           ${incomeModel.income}      ${incomeModel.incomeMonth}" );
     var dbExpense = await database;
-    await dbExpense.insert(table, expense.toJson());
+    await dbExpense.insert(incomeTable, incomeModel.toJson());
     return true;
   }
 
-  Future<int> updateItem(ExpenseModel expense) async {
+  Future<int> updateIncome(IncomeModel incomeModel) async {
     var dbExpense = await database;
-    return await dbExpense.update(table, expense.toJson(),
-        where: '$columnId = ?', whereArgs: [expense.id]);
+    return await dbExpense.update(incomeTable, incomeModel.toJson(),
+        where: '$columnIncomeId = ?', whereArgs: [incomeModel.id]);
+  }
+
+  Future<int> deleteIncome(int id) async {
+    var dbExpense = await database;
+    return await dbExpense.delete(incomeTable,
+        where: '$columnIncomeId = ?', whereArgs: [id]);
+  }
+
+  Future<List<IncomeModel>> getAllIncomeItems(String date) async {
+    var dbExpense = await database;
+    var listMap = await dbExpense.rawQuery('SELECT * FROM incomeTable WHERE $columnIncomeDate = "$date"');
+    var listIncomeItems = <IncomeModel>[];
+    for (Map<String, dynamic> m in listMap) {
+      listIncomeItems.add(IncomeModel.fromJson(m));
+    }
+    return listIncomeItems;
+  }
+
+  Future<String> fetchIncomePerMonth(String? month) async {
+
+    var dbExpense = await database;
+    var result = await dbExpense.rawQuery("SELECT SUM($columnIncome) FROM incomeTable WHERE $columnIncomeMonth ='$month'");
+    Object? value = result[0]["SUM($columnIncome)"];
+    if (value == null){
+      return '0';
+    }else{
+      print(value);
+      return "$value";
+    }
+  }
+
+//******************************************************************************
+
+  Future<bool> saveExpense(ExpenseModel expense) async {
+    var dbExpense = await database;
+    await dbExpense.insert(expenseTable, expense.toJson());
+    return true;
+  }
+
+  Future<int> updateExpense(ExpenseModel expense) async {
+    var dbExpense = await database;
+    return await dbExpense.update(expenseTable, expense.toJson(),
+        where: '$columnExpenseId = ?', whereArgs: [expense.id]);
   }
 
   Future<int> deleteItem(int id) async {
     var dbExpense = await database;
-    return await dbExpense.delete(table,
-        where: '$columnId = ?', whereArgs: [id]);
+    return await dbExpense.delete(expenseTable,
+        where: '$columnExpenseId = ?', whereArgs: [id]);
   }
 
   Future<List<ExpenseModel>> getAllExpensesItems(String date) async {
     var dbExpense = await database;
-    var listMap = await dbExpense.rawQuery('SELECT * FROM my_table WHERE $columnExpenseDate = "$date"');
+    var listMap = await dbExpense.rawQuery('SELECT * FROM expenseTable WHERE $columnExpenseDate = "$date"');
     var listExpensesItems = <ExpenseModel>[];
     for (Map<String, dynamic> m in listMap) {
       listExpensesItems.add(ExpenseModel.fromJson(m));
@@ -79,7 +146,7 @@ class DatabaseHelper {
   Future<String> calculateDayExpenses(String? day) async {
 
     var dbExpense = await database;
-    var result = await dbExpense.rawQuery("SELECT SUM($columnExpense) FROM my_table WHERE $columnExpenseDate ='$day'");
+    var result = await dbExpense.rawQuery("SELECT SUM($columnExpense) FROM expenseTable WHERE $columnExpenseDate ='$day'");
     Object? value = result[0]["SUM($columnExpense)"];
     if (value == null){
       return '0';
@@ -91,7 +158,7 @@ class DatabaseHelper {
   Future<String> calculateTotalExpenses(String? dateMonth) async {
 
     var dbExpense = await database;
-    var result = await dbExpense.rawQuery("SELECT SUM($columnExpense) FROM my_table WHERE $columnExpenseDateMonth ='$dateMonth'");
+    var result = await dbExpense.rawQuery("SELECT SUM($columnExpense) FROM expenseTable WHERE $columnExpenseMonth ='$dateMonth'");
     Object? value = result[0]["SUM($columnExpense)"];
     if (value == null){
       return '0';
@@ -102,7 +169,7 @@ class DatabaseHelper {
 
   calculateCategoryTypeExpensesPerMonth(String? dateMonth, String categoryPersianName) async {
     var dbExpense = await database;
-    var result = await dbExpense.rawQuery("SELECT SUM($columnExpense) FROM my_table WHERE $columnExpenseDateMonth ='$dateMonth' AND $columnExpenseCategory ='$categoryPersianName' ");
+    var result = await dbExpense.rawQuery("SELECT SUM($columnExpense) FROM expenseTable WHERE $columnExpenseMonth ='$dateMonth' AND $columnExpenseCategory ='$categoryPersianName' ");
     Object? value = result[0]["SUM($columnExpense)"];
     if (value == null){
       return '0';
@@ -113,7 +180,7 @@ class DatabaseHelper {
 
   calculateExpensesInYearPerMonth(String? dateMonth) async {
     var dbExpense = await database;
-    var result = await dbExpense.rawQuery("SELECT SUM($columnExpense) FROM my_table WHERE $columnExpenseDateMonth ='$dateMonth'");
+    var result = await dbExpense.rawQuery("SELECT SUM($columnExpense) FROM expenseTable WHERE $columnExpenseMonth ='$dateMonth'");
     Object? value = result[0]["SUM($columnExpense)"];
     if (value == null){
       return '0';
@@ -125,7 +192,7 @@ class DatabaseHelper {
   Future<String> calculateCash(String? dateMonth, String? income) async {
     late String cash;
     var dbExpense = await database;
-    var result = await dbExpense.rawQuery("SELECT SUM($columnExpense) FROM my_table WHERE $columnExpenseDateMonth ='$dateMonth'");
+    var result = await dbExpense.rawQuery("SELECT SUM($columnExpense) FROM expenseTable WHERE $columnExpenseMonth ='$dateMonth'");
     Object? value = result[0]["SUM($columnExpense)"];
     if(income == null){
       cash = "";

@@ -1,4 +1,5 @@
 import '../../model/expense_model.dart';
+import '../../model/income_model.dart';
 
 abstract class SetDateEvent{
   List<Object> get props => [];
@@ -8,49 +9,49 @@ class InitialDateEvent extends SetDateEvent {}
 
 class ReadDateEvent extends SetDateEvent {}
 
-class ReadDateMonthEvent extends SetDateEvent {}
+class ReadMonthEvent extends SetDateEvent {}
 
 class WriteDateEvent extends SetDateEvent {
   final String date;
-  final String dateMonth;
+  final String month;
 
   WriteDateEvent(
-      {required this.date, required this.dateMonth});
+      {required this.date, required this.month});
 
   @override
-  List<Object> get props => [date, dateMonth];
+  List<Object> get props => [date, month];
 }
 
 class AddToDateEvent extends SetDateEvent{
   final String date;
-  final String dateMonth;
+  final String month;
 
   AddToDateEvent(
-      {required this.date, required this.dateMonth});
+      {required this.date, required this.month});
 
   @override
-  List<Object> get props => [date, dateMonth];
+  List<Object> get props => [date, month];
 }
 
 class ReduceDateEvent extends SetDateEvent{
   final String date;
-  final String dateMonth;
+  final String month;
 
   ReduceDateEvent(
-      {required this.date, required this.dateMonth});
+      {required this.date, required this.month});
 
   @override
-  List<Object> get props => [date, dateMonth];
+  List<Object> get props => [date, month];
 }
 
 class SumExpensePerMonthEvent extends SetDateEvent {
-  final String dateMonth;
+  final String month;
 
   SumExpensePerMonthEvent(
-      {required this.dateMonth});
+      {required this.month});
 
   @override
-  List<Object> get props => [dateMonth];
+  List<Object> get props => [month];
 }
 
 class SumExpensePerDateEvent extends SetDateEvent {
@@ -64,13 +65,13 @@ class SumExpensePerDateEvent extends SetDateEvent {
 }
 
 class CalculateCashPerMonthEvent extends SetDateEvent{
-  final String dateMonth;
+  final String month;
 
   CalculateCashPerMonthEvent(
-      {required this.dateMonth});
+      {required this.month});
 
   @override
-  List<Object> get props => [dateMonth];
+  List<Object> get props => [month];
 }
 
 class FetchIncomeEvent extends SetDateEvent {
@@ -85,14 +86,13 @@ class FetchIncomeEvent extends SetDateEvent {
 
 class AddIncomeEvent extends SetDateEvent {
 
-  final String cash;
-  final String month;
+  final IncomeModel incomeModel;
 
   AddIncomeEvent(
-      {required this.cash, required this.month});
+      {required this.incomeModel});
 
   @override
-  List<Object> get props => [cash, month];
+  List<Object> get props => [incomeModel];
 }
 
 class FetchExpensesItemsEvent extends SetDateEvent {

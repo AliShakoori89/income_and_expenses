@@ -41,7 +41,7 @@ class AppColors{
 
   static const Color chartColor = Color.fromRGBO(8, 142, 255, 1);
 
-  static const Color calenderBoxColor = Color.fromRGBO(245, 245, 245, 1.00);
+  static const Color calenderBoxColor = Color.fromRGBO(255, 255, 255, 1.0);
 
   static const Color snackBarColor = Color.fromRGBO(255, 248, 225, 1.0);
 

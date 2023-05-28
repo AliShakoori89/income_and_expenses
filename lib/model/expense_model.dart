@@ -1,21 +1,21 @@
 class ExpenseModel {
   int? id;
   String? expenseDate;
-  String? expenseDateMonth;
+  String? expenseMonth;
   String? expenseCategory;
   int? expense;
-  String? description;
-  String? iconType;
+  String? expensesDescription;
+  String? expensesIconType;
 
 
   ExpenseModel({
     this.id,
     this.expenseDate,
-    this.expenseDateMonth,
+    this.expenseMonth,
     this.expenseCategory,
     this.expense,
-    this.description,
-    this.iconType
+    this.expensesDescription,
+    this.expensesIconType
   });
 
   static const String tableName = "my_table";
@@ -24,11 +24,11 @@ class ExpenseModel {
     return {
       "id": id,
       "expenseDate": expenseDate,
-      "expenseDateMonth": expenseDateMonth,
+      "expenseMonth": expenseMonth,
       "expenseCategory": expenseCategory,
       "expense": expense,
-      "description": description,
-      "iconType": iconType
+      "expenseDescription": expensesDescription,
+      "expenseIconType": expensesIconType
     };
   }
 
@@ -36,11 +36,11 @@ class ExpenseModel {
     return ExpenseModel(
       id: parsedJson['id'],
       expenseDate: parsedJson['expenseDate'],
-      expenseDateMonth: parsedJson['expenseDateMonth'],
+      expenseMonth: parsedJson['expenseMonth'],
       expenseCategory: parsedJson['expenseCategory'],
       expense: parsedJson['expense'],
-      description: parsedJson['description'],
-      iconType: parsedJson['iconType']
+      expensesDescription: parsedJson['expenseDescription'],
+      expensesIconType: parsedJson['expenseIconType']
     );
   }
 }

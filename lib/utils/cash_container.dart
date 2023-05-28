@@ -1,22 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localization/flutter_localization.dart';
-import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
-import 'package:flutter_multi_formatter/formatters/currency_input_formatter.dart';
 import 'package:income_and_expenses/bloc/change_currency_bloc/event.dart';
 import 'package:income_and_expenses/bloc/change_language_bloc/bloc.dart';
 import 'package:income_and_expenses/bloc/change_language_bloc/state.dart';
 import 'package:income_and_expenses/bloc/set_date_bloc/state.dart';
 import 'package:income_and_expenses/const/app_colors.dart';
 import 'package:income_and_expenses/const/language.dart';
-import 'package:income_and_expenses/utils/widget.dart';
 import 'package:persian_number_utility/persian_number_utility.dart';
 import '../bloc/change_currency_bloc/bloc.dart';
 import '../bloc/change_currency_bloc/state.dart';
 import '../bloc/set_date_bloc/bloc.dart';
-import '../bloc/set_date_bloc/event.dart';
 import '../bloc/them_bloc/bloc.dart';
 import '../bloc/them_bloc/state.dart';
+import '../pages/add_income_page.dart';
 
 class CashContainer extends StatefulWidget {
 
@@ -33,28 +30,12 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
   late AnimationController animationController;
   GlobalKey? keyBottomNavigation1;
 
-  static final  validCharacters = RegExp(r'^[0-9]+$');
-
-
   _CashContainerState(this.keyBottomNavigation1);
 
   @override
   void initState() {
     BlocProvider.of<ChangeCurrencyBloc>(context).add(ReadCurrencyBooleanEvent());
-    animationController = AnimationController(
-      vsync: this,
-      lowerBound: 0.7,
-      duration: const Duration(seconds: 1),
-    )
-      ..forward()
-      ..repeat(reverse: true);
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    animationController.dispose();
-    super.dispose();
   }
 
   @override
@@ -82,16 +63,12 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
 
             return BlocBuilder<SetDateBloc, SetDateState>(
                 builder: (context, state) {
-              String dateMonth = state.date;
-
-              print("month         "+ state.dateMonth);
 
               return Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   leftSideCashContainer(context, englishLanguageBoolean, state, rialCurrencyType),
-                  rightSideCashContainer(context, englishLanguageBoolean, state, rialCurrencyType,
-                      dateMonth, keyBottomNavigation1)
+                  rightSideCashContainer(context, englishLanguageBoolean, state, rialCurrencyType, keyBottomNavigation1)
                 ],
               );
             });
@@ -101,21 +78,19 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
     });
   }
 
-  Expanded rightSideCashContainer(BuildContext context, bool englishLanguageBoolean, SetDateState state, bool rialCurrencyType, String dateMonth, GlobalKey? keyBottomNavigation1) {
+  Expanded rightSideCashContainer(BuildContext context, bool englishLanguageBoolean, SetDateState state, bool rialCurrencyType, GlobalKey? keyBottomNavigation1) {
     return Expanded(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       cashSlice(context, englishLanguageBoolean, state, rialCurrencyType),
-                      incomeSlice(context, dateMonth, englishLanguageBoolean, state, rialCurrencyType, keyBottomNavigation1),
+                      incomeSlice(context, englishLanguageBoolean, state, rialCurrencyType, keyBottomNavigation1),
                     ],
                   ),
                 );
   }
 
-  Align incomeSlice(BuildContext context, String dateMonth, bool englishLanguageBoolean, SetDateState state, bool rialCurrencyType, GlobalKey? keyBottomNavigation1) {
-
-    print("state.income                    "+state.income);
+  Align incomeSlice(BuildContext context, bool englishLanguageBoolean, SetDateState state, bool rialCurrencyType, GlobalKey? keyBottomNavigation1) {
 
     return Align(
       alignment: Alignment.bottomRight,
@@ -137,71 +112,9 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
             )),
         child: GestureDetector(
             onTap: () {
-              TextEditingController cashController = TextEditingController();
-              showDialog(
-                context: context,
-                builder: (ctx) => AlertDialog(
-                  title: Text(
-                    AppLocale.totalInventory.getString(context),
-                    textDirection: TextDirection.rtl,
-                    style: TextStyle(
-                      fontSize: MediaQuery.of(context).size.width / 22,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                  content: Text(
-                      AppLocale.pleaseEnterYourBalanceAmount.getString(context),
-                      textDirection: TextDirection.rtl,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w800,
-                        fontSize: MediaQuery.of(context).size.width / 22,
-                      )),
-                  actions: <Widget>[
-                    Directionality(
-                      textDirection: TextDirection.rtl,
-                      child: SizedBox(
-                        height: MediaQuery.of(context).size.width / 10,
-                        child: TextFormField(
-                          keyboardType: TextInputType.number,
-                          controller: cashController,
-                          inputFormatters: [
-                            CurrencyInputFormatter(
-                              useSymbolPadding: true,
-                              thousandSeparator: ThousandSeparator.Comma,
-                              mantissaLength:
-                                  0, // the length of the fractional side
-                            )
-                          ],
-                          decoration: textInputDecoration.copyWith(
-                              border: InputBorder.none,
-                              suffixText: AppLocale.toman.getString(context)),
-                        ),
-                      ),
-                    ),
-                    TextButton(
-                      onPressed: () {
-
-                        var income = cashController.text.replaceAll(RegExp(','), '');
-
-                        BlocProvider.of<SetDateBloc>(context).add(
-                            AddIncomeEvent(
-                                cash: income, month: dateMonth));
-                        BlocProvider.of<SetDateBloc>(context)
-                            .add(FetchIncomeEvent(month: dateMonth));
-                        BlocProvider.of<SetDateBloc>(context).add(
-                            CalculateCashPerMonthEvent(dateMonth: dateMonth));
-                        Navigator.of(ctx).pop();
-                      },
-                      child: Padding(
-                        padding: EdgeInsets.only(
-                            left: MediaQuery.of(context).size.width / 50),
-                        child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(AppLocale.ok.getString(context))),
-                      ),
-                    ),
-                  ],
-                ),
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const AddIncomePage()),
               );
             },
             child: Column(
@@ -264,7 +177,7 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                              state.income != ""
+                              state.incomePerMonth != ""
                                   ? rialCurrencyType == true
                                       ? AppLocale.rial.getString(context)
                                       : AppLocale.toman.getString(context)
@@ -276,12 +189,12 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                             width: MediaQuery.of(context).size.width / 50,
                           ),
                           Text(
-                              state.income != ""
+                              state.incomePerMonth != ""
                                   ? rialCurrencyType == true
-                                      ? ('${state.income}0')
+                                      ? ('${state.incomePerMonth}0')
                                           .toPersianDigit()
                                           .seRagham()
-                                      : state.income.toPersianDigit().seRagham()
+                                      : state.incomePerMonth.toPersianDigit().seRagham()
                                   : "0".toPersianDigit(),
                               style: TextStyle(
                                 color: Colors.white,
@@ -295,10 +208,10 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                              state.income != ""
+                              state.incomePerMonth != ""
                                   ? rialCurrencyType == true
-                                      ? ("${state.income}0").seRagham()
-                                      : state.income.seRagham()
+                                      ? ("${state.incomePerMonth}0").seRagham()
+                                      : state.incomePerMonth.seRagham()
                                   : "0",
                               style: TextStyle(
                                 color: Colors.white,
@@ -310,7 +223,7 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                             width: MediaQuery.of(context).size.width / 50,
                           ),
                           Text(
-                              state.income != ""
+                              state.incomePerMonth != ""
                                   ? rialCurrencyType == true
                                       ? AppLocale.rial.getString(context)
                                       : AppLocale.toman.getString(context)

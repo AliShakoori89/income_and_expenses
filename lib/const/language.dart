@@ -3,7 +3,8 @@ mixin AppLocale {
   static const String yes = 'بله';
   static const String no = 'خیر';
   static const String expenses = 'هزینه شده';
-  static const String income = 'ورودی';
+  static const String income = 'مبلغ ورودی';
+  static const String stipend = 'حقوق';
   static const String cash = 'موجودی';
   static const String allExpenses = 'هزینه کل';
   static const String notExpenses = 'اطلاعاتی برای نمایش وجود ندارد!';
@@ -28,6 +29,7 @@ mixin AppLocale {
   static const String grouping = "دسته بندی";
   static const String expense = "هزینه";
   static const String newExpense = "هزینه جدید";
+  static const String addIncome = "اضافه کردن درآمد";
   static const String editExpense = "تغییرات";
   static const String applyChange = "اعمال تغییرات";
   static const String description = "توضیحات";
@@ -36,11 +38,14 @@ mixin AppLocale {
   static const String comestible = "خوراکی";
   static const String buyItems = "خرید اقلام";
   static const String installmentsAndDebt = "اقساط و بدهی";
+  static const String yarane = "یارانه";
   static const String treatment = "درمانی";
+  static const String other = "سایر";
   static const String gifts = "هدایا";
+  static const String reward = "جایزه";
+  static const String sale = "فروش";
   static const String renovation = "تعمیرات";
   static const String pastime = "تفریح";
-  static const String etcetera = "سایر";
   static const String toman = "تومان";
   static const String rial = "ریال";
   static const String theme = "پس زمینه";
@@ -60,6 +65,7 @@ mixin AppLocale {
     expenses: 'expenses',
     cash: 'cash',
     income: 'income',
+    stipend: "stipend",
     allExpenses: 'all expenses',
     notExpenses: 'no information!',
     persianDigit: 'toPersianDigit()',
@@ -83,6 +89,7 @@ mixin AppLocale {
     grouping: 'grouping',
     expense: 'expense',
     newExpense: "New Expense",
+    addIncome: "Add Expense",
     editExpense: "Edit Expense",
     applyChange: "Apply Change",
     description: 'description',
@@ -91,11 +98,14 @@ mixin AppLocale {
     comestible: "comestible",
     buyItems: "buy items",
     installmentsAndDebt: "installments and debt",
+    yarane: "yarane",
     treatment: "treatment",
+    other: "other",
     gifts: "gifts",
+    reward: "reward",
+    sale: "sale",
     renovation: "renovation",
     pastime: "pastime",
-    etcetera: 'etcetera',
     toman: 'T',
     rial: 'R',
     theme: "Theme",
@@ -111,7 +121,8 @@ mixin AppLocale {
     no: 'خیر',
     expenses: 'هزینه شده',
     cash: 'موجودی',
-    income: 'ورودی',
+    stipend: "حقوق",
+    income: 'مبلغ ورودی',
     allExpenses: 'هزینه کل روز',
     notExpenses: 'اطلاعاتی برای نمایش وجود ندارد!',
     persianDigit: 'toPersianDigit()',
@@ -134,7 +145,7 @@ mixin AppLocale {
     chooseCurrencyQuestion: 'لطفا واحد پول خود را انتخاب کنید:',
     grouping: 'دسته بندی',
     expense: 'هزینه',
-    newExpense: "هزینه جدید",
+    addIncome: "اضافه کردن درآمد",
     description: 'توضیحات',
     addExpense: 'اضافه کردن هزینه',
     editExpense: 'تغییرات',
@@ -143,11 +154,14 @@ mixin AppLocale {
     comestible: "خوراکی",
     buyItems: "خرید اقلام",
     installmentsAndDebt: "اقساط و بدهی",
+    yarane: "یارانه",
     treatment: "درمانی",
     gifts: "هدایا",
+    reward: "جایزه",
+    sale: "فروش",
     renovation: "تعمیرات",
     pastime: "تفریح",
-    etcetera: 'سایر',
+    other: 'سایر',
     toman: 'تومان',
     rial: 'ریال',
     theme: 'پی زمینه',

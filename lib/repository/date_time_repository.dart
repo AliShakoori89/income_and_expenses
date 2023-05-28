@@ -28,25 +28,24 @@ class SetDateRepository {
   }
 
 
-  writeDate(String date , String dateMonth) async{
+  writeDate(String date , String month) async{
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('date', date);
-    await prefs.setString('dateMonth', dateMonth);
+    await prefs.setString('dateMonth', month);
   }
 
-  Future<String> reduceDate(String date, String dateMonth) async{
+  reduceDate(String date, String month) async{
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('date', date);
-    await prefs.setString('dateMonth', dateMonth);
-    return date;
+    await prefs.setString('dateMonth', month);
   }
 
-  Future<String> readDateMonth() async{
+  Future<String> readMonth() async{
     final prefs = await SharedPreferences.getInstance();
     final String? dateMonth = prefs.getString('dateMonth');
     if(dateMonth == ""){
-      String dateMonthString = '${Jalali.now().year}-${Jalali.now().month}';
-      return dateMonthString;
+      String monthString = '${Jalali.now().year}-${Jalali.now().month}';
+      return monthString;
     }else{
       return dateMonth!;
     }
@@ -63,10 +62,10 @@ class SetDateRepository {
     }
   }
 
-  addToDate(String date, String dateMonth) async{
+  addToDate(String date, String month) async{
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('date', date);
-    await prefs.setString('dateMonth', dateMonth);
+    await prefs.setString('dateMonth', month);
   }
 
   Future<List<ExpenseModel>> getAllExpensesItemsRepo(String date) async {
@@ -83,7 +82,7 @@ class SetDateRepository {
 
   Future<int> updateItem(ExpenseModel expenseModel) async {
     var helper = DatabaseHelper();
-    return await helper.updateItem(expenseModel);
+    return await helper.updateExpense(expenseModel);
   }
 
   addTodayExpensesRepo(int todayExpenses) async {

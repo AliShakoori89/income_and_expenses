@@ -3,16 +3,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:income_and_expenses/const/app_colors.dart';
-import 'package:income_and_expenses/const/app_const.dart';
+import 'package:income_and_expenses/const/expenses_icons.dart';
 import 'package:income_and_expenses/const/language.dart';
 import '../bloc/change_language_bloc/bloc.dart';
 import '../bloc/change_language_bloc/state.dart';
 
-class CategoryIconList extends StatelessWidget {
+class ExpensesCategoryIconList extends StatelessWidget {
 
   TextEditingController controller;
 
-  CategoryIconList({Key? key, required this.controller}) : super(key: key);
+  ExpensesCategoryIconList({Key? key, required this.controller}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +34,8 @@ class CategoryIconList extends StatelessWidget {
               crossAxisCount: 3,
               shrinkWrap: true,
               children:
-                  List.generate(AppConst.iconsPersianName.length, (index) {
-                var groupName = AppConst.iconsPersianName[index];
+                  List.generate(ExpensesIcon.iconsPersianName.length, (index) {
+                var groupName = ExpensesIcon.iconsPersianName[index];
 
                 return BlocBuilder<ChangeLanguageBloc, ChangeLanguageState>(
                     builder: (context, state) {
@@ -44,8 +44,8 @@ class CategoryIconList extends StatelessWidget {
                   return GestureDetector(
                     onTap: () {
                       controller.text = englishLanguageBoolean == false
-                          ? AppConst.iconsPersianName[index]
-                          : AppConst.iconsEnglishName[index];
+                          ? ExpensesIcon.iconsPersianName[index]
+                          : ExpensesIcon.iconsEnglishName[index];
                       Navigator.pop(context);
                     },
                     child: Column(
@@ -60,7 +60,7 @@ class CategoryIconList extends StatelessWidget {
                           child: Container(
                             margin: EdgeInsets.all(MediaQuery.of(context).size.width / 60),
                             child: SvgPicture.asset(
-                                "assets/logos/${AppConst.iconsImage[index]}"),
+                                "assets/icons/expense_category_icons/${ExpensesIcon.iconsImage[index]}"),
                           ),
                         ),
                         Text(groupName == 'حمل و نقل'
@@ -84,7 +84,7 @@ class CategoryIconList extends StatelessWidget {
                                                     : groupName == 'تفریح'
                                                         ? AppLocale.pastime
                                                             .getString(context)
-                                                        : AppLocale.etcetera
+                                                        : AppLocale.other
                                                             .getString(
                                                                 context),
                           overflow: TextOverflow.ellipsis,),

@@ -9,18 +9,17 @@ class CalculateRepository {
     helper = DatabaseHelper();
   }
 
-  Future<String> calculateExpenseRepo(String dateMonth) async {
-    return await helper.calculateTotalExpenses(dateMonth.toString());
+  Future<String> calculateExpenseRepo(String month) async {
+    return await helper.calculateTotalExpenses(month.toString());
   }
 
   Future<String> calculateDayExpenseRepo(String date) async {
     return await helper.calculateDayExpenses(date.toString());
   }
 
-  Future<String> calculateCashRepo(String dateMonth) async {
-    final prefs = await SharedPreferences.getInstance();
-    final String income = prefs.getString('income$dateMonth') ?? "";
-    String cash = await helper.calculateCash(dateMonth.toString() , income);
+  Future<String> calculateCash(String month) async {
+    final String income = await helper.fetchIncomePerMonth(month) ?? "";
+    String cash = await helper.calculateCash(month.toString() , income);
     return cash;
   }
 }

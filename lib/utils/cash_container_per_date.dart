@@ -83,8 +83,7 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                               child: NoDataPage(),
                             )
                       : state.status.isError
-                          ? Container(
-                            )
+                          ? Container()
                           : Container();
             }),
           );
@@ -164,7 +163,7 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                                                   : Colors.white)),
                                       Text(
                                           state.expensesDetails[index]
-                                              .description!,
+                                              .expensesDescription!,
                                           style: TextStyle(
                                               fontSize: MediaQuery.of(context)
                                                       .size
@@ -190,7 +189,7 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                                         MediaQuery.of(context).size.width /
                                             100),
                                     child: SvgPicture.asset(
-                                        state.expensesDetails[index].iconType!),
+                                        state.expensesDetails[index].expensesIconType!),
                                   ),
                                 ),
                               ],
@@ -213,7 +212,7 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                                         MediaQuery.of(context).size.width /
                                             100),
                                     child: SvgPicture.asset(
-                                        state.expensesDetails[index].iconType!),
+                                        state.expensesDetails[index].expensesIconType!),
                                   ),
                                 ),
                                 SizedBox(
@@ -243,7 +242,7 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                                                       : Colors.white)),
                                       Text(
                                           state.expensesDetails[index]
-                                              .description!,
+                                              .expensesDescription!,
                                           maxLines: 1,
                                           style: TextStyle(
                                               fontSize: MediaQuery.of(context)

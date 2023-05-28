@@ -1,4 +1,4 @@
-class AppConst{
+class ExpensesIcon{
   static const List iconsImage = [
     "card_pos.svg",
     "burger_and_cola.svg",

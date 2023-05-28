@@ -51,9 +51,9 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
 
     BlocProvider.of<SetDateBloc>(context).add(FetchIncomeEvent(month: selectedDate));
 
-    BlocProvider.of<SetDateBloc>(context).add(SumExpensePerMonthEvent(dateMonth: selectedDate));
+    BlocProvider.of<SetDateBloc>(context).add(SumExpensePerMonthEvent(month: selectedDate));
 
-    BlocProvider.of<SetDateBloc>(context).add(CalculateCashPerMonthEvent(dateMonth: selectedDate));
+    BlocProvider.of<SetDateBloc>(context).add(CalculateCashPerMonthEvent(month: selectedDate));
 
     super.initState();
   }
@@ -74,32 +74,26 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                   flex: 1,
                   child: GestureDetector(
                     onTap: () {
-                      date = "${DateTime.parse(DateFormat('yyyy-MM-dd').format(DateTime.parse(date)))
-                          .add(const Duration(days: -1))}";
+
+                      date = "${DateTime.parse(DateFormat('yyyy-MM-dd').format(DateTime.parse(date))).add(const Duration(days: -1))}";
 
                       BlocProvider.of<SetDateBloc>(context)
-                          .add(WriteDateEvent(date: date, dateMonth: month));
+                          .add(WriteDateEvent(date: date, month: month));
                       BlocProvider.of<SetDateBloc>(context)
-                          .add(ReduceDateEvent(date: DateFormat('yyyy-MM-dd')
-                          .format(DateTime.parse(date)).toString(),
-                          dateMonth : DateFormat('yyyy-MM')
-                              .format(DateTime.parse(date)).toString()));
+                          .add(AddToDateEvent(date: DateFormat('yyyy-MM-dd').format(DateTime.parse(date)).toString(),
+                          month: DateFormat('yyyy-MM').format(DateTime.parse(date)).toString()));
                       BlocProvider.of<SetDateBloc>(context)
                           .add(ReadDateEvent());
                       BlocProvider.of<SetDateBloc>(context)
-                          .add(ReadDateMonthEvent());
+                          .add(ReadMonthEvent());
                       BlocProvider.of<SetDateBloc>(context)
-                          .add(FetchIncomeEvent(month : DateFormat('yyyy-MM')
-                          .format(DateTime.parse(date)).toString()));
+                          .add(SumExpensePerMonthEvent(month : DateFormat('yyyy-MM').format(DateTime.parse(date)).toString()));
                       BlocProvider.of<SetDateBloc>(context)
-                          .add(SumExpensePerMonthEvent(dateMonth : DateFormat('yyyy-MM')
-                          .format(DateTime.parse(date)).toString()));
+                          .add(CalculateCashPerMonthEvent(month : DateFormat('yyyy-MM').format(DateTime.parse(date)).toString()));
                       BlocProvider.of<SetDateBloc>(context)
-                          .add(CalculateCashPerMonthEvent(dateMonth : DateFormat('yyyy-MM')
-                          .format(DateTime.parse(date)).toString()));
+                          .add(FetchExpensesItemsEvent(date: DateFormat('yyyy-MM-dd').format(DateTime.parse(date)).toString()));
                       BlocProvider.of<SetDateBloc>(context)
-                          .add(FetchExpensesItemsEvent(date: DateFormat('yyyy-MM-dd')
-                          .format(DateTime.parse(date)).toString()));
+                          .add(FetchIncomeEvent(month: DateFormat('yyyy-MM').format(DateTime.parse(date)).toString()));
 
                     },
                     child: SizedBox(
@@ -166,20 +160,13 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                         }
                       }
 
-                      BlocProvider.of<SetDateBloc>(context)
-                          .add(WriteDateEvent(date: date, dateMonth: month));
-                      BlocProvider.of<SetDateBloc>(context)
-                          .add(ReadDateEvent());
-                      BlocProvider.of<SetDateBloc>(context)
-                          .add(ReadDateMonthEvent());
-                      BlocProvider.of<SetDateBloc>(context)
-                          .add(FetchIncomeEvent(month : month));
-                      BlocProvider.of<SetDateBloc>(context)
-                          .add(SumExpensePerMonthEvent(dateMonth : month));
-                      BlocProvider.of<SetDateBloc>(context)
-                          .add(CalculateCashPerMonthEvent(dateMonth : month));
-                      BlocProvider.of<SetDateBloc>(context)
-                          .add(FetchExpensesItemsEvent(date : date));
+                      BlocProvider.of<SetDateBloc>(context).add(WriteDateEvent(date: date, month: month));
+                      BlocProvider.of<SetDateBloc>(context).add(ReadDateEvent());
+                      BlocProvider.of<SetDateBloc>(context).add(ReadMonthEvent());
+                      BlocProvider.of<SetDateBloc>(context).add(SumExpensePerMonthEvent(month : month));
+                      BlocProvider.of<SetDateBloc>(context).add(CalculateCashPerMonthEvent(month : month));
+                      BlocProvider.of<SetDateBloc>(context).add(FetchExpensesItemsEvent(date : date));
+                      BlocProvider.of<SetDateBloc>(context).add(FetchIncomeEvent(month: month));
                     },
                     child: Container(
                       height: MediaQuery.of(context).size.width / 8,
@@ -224,22 +211,22 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                       date = "${DateTime.parse(DateFormat('yyyy-MM-dd').format(DateTime.parse(date))).add(const Duration(days: 1))}";
 
                       BlocProvider.of<SetDateBloc>(context)
-                          .add(WriteDateEvent(date: date, dateMonth: month));
+                          .add(WriteDateEvent(date: date, month: month));
                       BlocProvider.of<SetDateBloc>(context)
                           .add(AddToDateEvent(date: DateFormat('yyyy-MM-dd').format(DateTime.parse(date)).toString(),
-                      dateMonth: DateFormat('yyyy-MM').format(DateTime.parse(date)).toString()));
+                      month: DateFormat('yyyy-MM').format(DateTime.parse(date)).toString()));
                       BlocProvider.of<SetDateBloc>(context)
                           .add(ReadDateEvent());
                       BlocProvider.of<SetDateBloc>(context)
-                          .add(ReadDateMonthEvent());
+                          .add(ReadMonthEvent());
                       BlocProvider.of<SetDateBloc>(context)
-                          .add(FetchIncomeEvent(month : DateFormat('yyyy-MM').format(DateTime.parse(date)).toString()));
+                          .add(SumExpensePerMonthEvent(month : DateFormat('yyyy-MM').format(DateTime.parse(date)).toString()));
                       BlocProvider.of<SetDateBloc>(context)
-                          .add(SumExpensePerMonthEvent(dateMonth : DateFormat('yyyy-MM').format(DateTime.parse(date)).toString()));
-                      BlocProvider.of<SetDateBloc>(context)
-                          .add(CalculateCashPerMonthEvent(dateMonth : DateFormat('yyyy-MM').format(DateTime.parse(date)).toString()));
+                          .add(CalculateCashPerMonthEvent(month : DateFormat('yyyy-MM').format(DateTime.parse(date)).toString()));
                       BlocProvider.of<SetDateBloc>(context)
                           .add(FetchExpensesItemsEvent(date: DateFormat('yyyy-MM-dd').format(DateTime.parse(date)).toString()));
+                      BlocProvider.of<SetDateBloc>(context)
+                          .add(FetchIncomeEvent(month: DateFormat('yyyy-MM').format(DateTime.parse(date)).toString()));
                     },
                     child: SizedBox(
                       width: MediaQuery.of(context).size.width / 15,

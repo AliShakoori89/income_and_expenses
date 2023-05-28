@@ -40,7 +40,7 @@ class _EditedPageState extends State<EditedPage> {
     _editedExpenses = ExpenseModel.fromJson(widget.expenseModel.toJson());
 
     _expensesController.text = _editedExpenses.expense.toString();
-    _descriptionController.text = _editedExpenses.description!;
+    _descriptionController.text = _editedExpenses.expensesDescription!;
   }
 
   @override
@@ -79,7 +79,7 @@ class _EditedPageState extends State<EditedPage> {
               showDialog(
                 context: context,
                 builder: (ctx) => AlertDialog(
-                  shape: RoundedRectangleBorder(
+                  shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(20.0))),
                   title: Text(
                     AppLocale.delete.getString(context),
@@ -179,7 +179,6 @@ class _EditedPageState extends State<EditedPage> {
                     height: MediaQuery.of(context).size.height / 20,
                   ),
                   Text(
-                      // DateTime.parse(_editedExpenses.expenseDate.toString()).day.toString()
                       englishLanguageBoolean == false
                           ? "${DateTime.parse(_editedExpenses.expenseDate.toString()).year.toString().toPersianDigit()}"
                           "-${DateTime.parse(_editedExpenses.expenseDate.toString()).month.toString().toPersianDigit()}"
@@ -221,6 +220,7 @@ class _EditedPageState extends State<EditedPage> {
                         controller: _expensesController,
                         clickable: false,
                         themeBoolean: darkThemeBoolean,
+                        addExpenses: false,
                       ),
                       SizedBox(
                         height: MediaQuery.of(context).size.width / 10,
@@ -230,6 +230,7 @@ class _EditedPageState extends State<EditedPage> {
                         controller: _descriptionController,
                         clickable: false,
                         themeBoolean: darkThemeBoolean,
+                        addExpenses: false,
                       ),
                     ],
                   )
@@ -262,7 +263,7 @@ class _EditedPageState extends State<EditedPage> {
 
                     _editedExpenses.expenseCategory = _editedExpenses.expenseCategory;
                     _editedExpenses.expense = int.parse(_expensesController.text);
-                    _editedExpenses.description = _descriptionController.text;
+                    _editedExpenses.expensesDescription = _descriptionController.text;
 
                     final setDateBloc = BlocProvider.of<SetDateBloc>(context);
 

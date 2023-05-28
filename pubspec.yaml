@@ -99,7 +99,8 @@ flutter:
     - assets/launcher_icon/background.png
     - assets/launcher_icon/foreground.png
     - assets/launcher_icon/icon.png
-    - assets/logos/
+    - assets/icons/expense_category_icons/
+    - assets/icons/income_category_icons/
     - assets/main_page_first_container_logo/
     - assets/main_page_first_container_logo/left_arrow.png
     - assets/main_page_first_container_logo/right_arrow.png

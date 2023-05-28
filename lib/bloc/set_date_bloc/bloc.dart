@@ -15,7 +15,7 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
   SetDateBloc(this.setDateRepository, this.calculateExpensesRepository, this.incomeRepository) : super(
       const SetDateState()){
     on<ReadDateEvent>(_mapReadDateEventToState);
-    on<ReadDateMonthEvent>(_mapReadDateMonthEventToState);
+    on<ReadMonthEvent>(_mapReadDateMonthEventToState);
     on<WriteDateEvent>(_mapWriteDateEventToState);
     on<InitialDateEvent>(_mapInitialDateEventToState);
     on<AddToDateEvent>(_mapAddNextDateEventToState);
@@ -29,7 +29,6 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
     on<AddOneByOneExpenseEvent>(_mapAddExpenseEventToState);
     on<EditItemEvent>(_mapEditExpenseEventToState);
     on<AddTodayExpensesEvent>(_mapAddTodayExpensesEventToState);
-    // on<ReadTodayExpensesEvent>(_mapReadTodayExpensesEventToState);
     on<DeleteItemEvent>(_mapDeleteTodayExpensesEventToState);
   }
 
@@ -50,14 +49,14 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
   }
 
   void _mapReadDateMonthEventToState(
-      ReadDateMonthEvent event, Emitter<SetDateState> emit) async {
+      ReadMonthEvent event, Emitter<SetDateState> emit) async {
     try {
       emit(state.copyWith(status: SetDateStatus.loading));
-      final String dateMonth = await setDateRepository.readDateMonth();
+      final String month = await setDateRepository.readMonth();
       emit(
         state.copyWith(
             status: SetDateStatus.success,
-            dateMonth: dateMonth
+            month: month
         ),
       );
     } catch (error) {
@@ -69,7 +68,7 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
       WriteDateEvent event, Emitter<SetDateState> emit) async {
     try {
       emit(state.copyWith(status: SetDateStatus.loading));
-      await setDateRepository.writeDate(event.date , event.dateMonth);
+      await setDateRepository.writeDate(event.date , event.month);
       emit(
         state.copyWith(
           status: SetDateStatus.success,
@@ -86,12 +85,12 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
       emit(state.copyWith(status: SetDateStatus.loading));
       await setDateRepository.initialDate();
       final String date = await setDateRepository.readDate();
-      final String dateMonth = await setDateRepository.readDateMonth();
+      final String month = await setDateRepository.readMonth();
       emit(
         state.copyWith(
             status: SetDateStatus.success,
             date: date,
-            dateMonth: dateMonth
+            month: month
         ),
       );
     } catch (error) {
@@ -103,7 +102,7 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
       AddToDateEvent event, Emitter<SetDateState> emit) async {
     try {
       emit(state.copyWith(status: SetDateStatus.loading));
-      await setDateRepository.addToDate(event.date, event.dateMonth);
+      await setDateRepository.addToDate(event.date, event.month);
 
       emit(
         state.copyWith(
@@ -120,8 +119,7 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
     try {
       emit(state.copyWith(status: SetDateStatus.loading));
 
-      print("event.date          "+event.date);
-      await setDateRepository.reduceDate(event.date, event.dateMonth);
+      await setDateRepository.reduceDate(event.date, event.month);
 
       emit(
         state.copyWith(
@@ -136,7 +134,6 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
   void _mapFetchExpensesEventToState(
       FetchExpensesItemsEvent event, Emitter<SetDateState> emit) async {
     try {
-      // emit(state.copyWith(status: SetDateStatus.loading));
 
       final List<ExpenseModel> expensesDetails =
       await setDateRepository.getAllExpensesItemsRepo(event.date);
@@ -158,7 +155,7 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
       SumExpensePerMonthEvent event, Emitter<SetDateState> emit) async {
     try {
       emit(state.copyWith(status: SetDateStatus.loading));
-      String expensesPerMonth = await calculateExpensesRepository.calculateExpenseRepo(event.dateMonth);
+      String expensesPerMonth = await calculateExpensesRepository.calculateExpenseRepo(event.month);
       emit(
         state.copyWith(
           status: SetDateStatus.success,
@@ -173,7 +170,6 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
   void _mapSumExpensePerDateEventToState(
       SumExpensePerDateEvent event, Emitter<SetDateState> emit) async {
     try {
-      // emit(state.copyWith(status: SetDateStatus.loading));
       final String expensesPerDate =
       await calculateExpensesRepository.calculateDayExpenseRepo(event.date);
       emit(
@@ -191,7 +187,7 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
       CalculateCashPerMonthEvent event, Emitter<SetDateState> emit) async {
     try {
       emit(state.copyWith(status: SetDateStatus.loading));
-      String calculateCash = await calculateExpensesRepository.calculateCashRepo(event.dateMonth);
+      String calculateCash = await calculateExpensesRepository.calculateCash(event.month);
       emit(
         state.copyWith(
           status: SetDateStatus.success,
@@ -207,7 +203,7 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
       AddIncomeEvent event, Emitter<SetDateState> emit) async {
     try {
       emit(state.copyWith(status: SetDateStatus.loading));
-      await incomeRepository.addIncome(event.cash, event.month);
+      await incomeRepository.addIncome(event.incomeModel);
       emit(
         state.copyWith(
           status: SetDateStatus.success,
@@ -222,11 +218,11 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
       FetchIncomeEvent event, Emitter<SetDateState> emit) async {
     try {
       emit(state.copyWith(status: SetDateStatus.loading));
-      final String? income = await incomeRepository.readIncome(event.month);
+      final String incomePerMonth = await incomeRepository.readIncome(event.month);
       emit(
         state.copyWith(
           status: SetDateStatus.success,
-          income: income,
+          incomePerMonth: incomePerMonth
         ),
       );
     } catch (error) {
@@ -237,7 +233,6 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
   void _mapAddExpenseEventToState(
       AddOneByOneExpenseEvent event, Emitter<SetDateState> emit) async {
     try {
-      // emit(state.copyWith(status: SetDateStatus.loading));
       await setDateRepository.addExpenseRepo(event.expenseModel);
       final List<ExpenseModel> expensesDetails =
       await setDateRepository.getAllExpensesItemsRepo(event.date);
@@ -298,20 +293,4 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
       emit(state.copyWith(status: SetDateStatus.error));
     }
   }
-
-  // void _mapReadTodayExpensesEventToState(
-  //     ReadTodayExpensesEvent event, Emitter<SetDateState> emit) async {
-  //   try {
-  //     emit(state.copyWith(status: SetDateStatus.loading));
-  //     final String? todayExpensesDetails = await setDateRepository.readTodayExpensesRepo();
-  //     emit(
-  //       state.copyWith(
-  //           status: SetDateStatus.success,
-  //           todayExpenses: todayExpensesDetails
-  //       ),
-  //     );
-  //   } catch (error) {
-  //     emit(state.copyWith(status: SetDateStatus.error));
-  //   }
-  // }
 }

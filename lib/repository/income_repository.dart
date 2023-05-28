@@ -1,22 +1,21 @@
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:income_and_expenses/model/income_model.dart';
+
+import '../data_base/data_base.dart';
 
 class IncomeRepository {
 
-  addIncome(String income, String month) async {
-    final prefs = await SharedPreferences.getInstance();
-    print("1111111111         "+ income);
-    print("2222222222222         "+ month);
-    await prefs.setString('income$month', income);
+  late final DatabaseHelper helper;
+
+  IncomeRepository() {
+    helper = DatabaseHelper();
   }
 
-  Future<String?> readIncome(String month) async {
-    final prefs = await SharedPreferences.getInstance();
-    String? income = prefs.getString('income$month');
-    print("333333333333          "+income!);
-    if(income.isEmpty){
-      return '';
-    }else{
-      return income;
-    }
+  addIncome(IncomeModel incomeModel) async{
+    return await helper.saveIncome(incomeModel);
+  }
+
+  Future<String> readIncome(String month) async {
+    final String income = await helper.fetchIncomePerMonth(month) ?? "";
+    return income;
   }
 }
