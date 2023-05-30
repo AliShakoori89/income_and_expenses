@@ -17,30 +17,30 @@ import '../utils/app_text_field.dart';
 import '../utils/arrow_back_icon.dart';
 import '../utils/widget.dart';
 
-class EditedPage extends StatefulWidget {
+class EditedExpensePage extends StatefulWidget {
   final ExpenseModel expenseModel;
-  const EditedPage({Key? key, required this.expenseModel}) : super(key: key);
+  const EditedExpensePage({Key? key, required this.expenseModel}) : super(key: key);
 
   @override
-  _EditedPageState createState() => _EditedPageState();
+  _EditedExpensePageState createState() => _EditedExpensePageState();
 }
 
-class _EditedPageState extends State<EditedPage> {
+class _EditedExpensePageState extends State<EditedExpensePage> {
   final _expensesController = TextEditingController();
-  final _descriptionController = TextEditingController();
+  final _expenseDescriptionController = TextEditingController();
 
   final formKey = GlobalKey<FormState>();
 
-  late ExpenseModel _editedExpenses;
+  late ExpenseModel _editedExpensesModel;
 
   @override
   void initState() {
     super.initState();
 
-    _editedExpenses = ExpenseModel.fromJson(widget.expenseModel.toJson());
+    _editedExpensesModel = ExpenseModel.fromJson(widget.expenseModel.toJson());
 
-    _expensesController.text = _editedExpenses.expense.toString();
-    _descriptionController.text = _editedExpenses.expensesDescription!;
+    _expensesController.text = _editedExpensesModel.expense.toString();
+    _expenseDescriptionController.text = _editedExpensesModel.expensesDescription!;
   }
 
   @override
@@ -180,10 +180,10 @@ class _EditedPageState extends State<EditedPage> {
                   ),
                   Text(
                       englishLanguageBoolean == false
-                          ? "${DateTime.parse(_editedExpenses.expenseDate.toString()).year.toString().toPersianDigit()}"
-                          "-${DateTime.parse(_editedExpenses.expenseDate.toString()).month.toString().toPersianDigit()}"
-                          "-${DateTime.parse(_editedExpenses.expenseDate.toString()).day.toString().toPersianDigit()}"
-                          : _editedExpenses.expenseDate.toString(),
+                          ? "${DateTime.parse(_editedExpensesModel.expenseDate.toString()).year.toString().toPersianDigit()}"
+                          "-${DateTime.parse(_editedExpensesModel.expenseDate.toString()).month.toString().toPersianDigit()}"
+                          "-${DateTime.parse(_editedExpensesModel.expenseDate.toString()).day.toString().toPersianDigit()}"
+                          : _editedExpensesModel.expenseDate.toString(),
                       style: TextStyle(
                           fontSize: MediaQuery.of(context).size.width / 15,
                           color: AppColors.appBarTitleColor)),
@@ -199,7 +199,7 @@ class _EditedPageState extends State<EditedPage> {
                         textDirection: englishLanguageBoolean == false ? TextDirection.rtl : TextDirection.ltr,
                         child: TextFormField(
                             enabled: false,
-                            controller: TextEditingController(text: _editedExpenses.expenseCategory),
+                            controller: TextEditingController(text: _editedExpensesModel.expenseCategory),
                           style: TextStyle(
                               color: darkThemeBoolean == "false"
                                   ? Colors.black
@@ -227,7 +227,7 @@ class _EditedPageState extends State<EditedPage> {
                       ),
                       AppTextField(
                         labelText: AppLocale.description.getString(context),
-                        controller: _descriptionController,
+                        controller: _expenseDescriptionController,
                         clickable: false,
                         themeBoolean: darkThemeBoolean,
                         addExpenses: false,
@@ -261,13 +261,15 @@ class _EditedPageState extends State<EditedPage> {
                 onTap: () {
                   if (formKey.currentState!.validate()) {
 
-                    _editedExpenses.expenseCategory = _editedExpenses.expenseCategory;
-                    _editedExpenses.expense = int.parse(_expensesController.text);
-                    _editedExpenses.expensesDescription = _descriptionController.text;
+
+
+                    _editedExpensesModel.expenseCategory = _editedExpensesModel.expenseCategory;
+                    _editedExpensesModel.expense = int.parse(_expensesController.text.replaceAll(RegExp(','), ''));
+                    _editedExpensesModel.expensesDescription = _expenseDescriptionController.text;
 
                     final setDateBloc = BlocProvider.of<SetDateBloc>(context);
 
-                    setDateBloc.add(EditItemEvent(_editedExpenses));
+                    setDateBloc.add(EditExpenseItemsEvent(_editedExpensesModel));
 
                     Navigator.push(
                       context,

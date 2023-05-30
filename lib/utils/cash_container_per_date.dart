@@ -16,7 +16,7 @@ import '../bloc/set_date_bloc/event.dart';
 import '../bloc/them_bloc/bloc.dart';
 import '../bloc/them_bloc/state.dart';
 import '../const/language.dart';
-import '../pages/edit_page.dart';
+import '../pages/edit_expense_page.dart';
 import 'no_data.dart';
 
 class CashContainerPerDate extends StatefulWidget {
@@ -67,7 +67,7 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
               return state.status.isLoading
                   ? const Center(child: CircularProgressIndicator())
                   : state.status.isSuccess
-                      ? state.expensesDetails.isNotEmpty
+                      ? state.expenseDetails.isNotEmpty
                           ? Column(
                               children: [
                                 englishLanguageBoolean == false
@@ -106,7 +106,7 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
             left: MediaQuery.of(context).size.width / 60),
         shrinkWrap: true,
         itemBuilder: (context, index) {
-          allTodayExpenses += state.expensesDetails[index].expense!;
+          allTodayExpenses += state.expenseDetails[index].expense!;
           BlocProvider.of<SetDateBloc>(context).add(
               AddTodayExpensesEvent(todayExpensesDetails: allTodayExpenses));
 
@@ -123,8 +123,8 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => EditedPage(
-                                expenseModel: state.expensesDetails[index])));
+                            builder: (context) => EditedExpensePage(
+                                expenseModel: state.expenseDetails[index])));
                   },
                   child: englishLanguageBoolean == false
                       ? Row(
@@ -132,8 +132,8 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                           children: [
                             Text(
                                 rialCurrencyType == true
-                                    ? "-${("${state.expensesDetails[index].expense!}0").toPersianDigit().seRagham()}"
-                                    : "-${state.expensesDetails[index].expense!.toString().toPersianDigit().seRagham()}",
+                                    ? "-${("${state.expenseDetails[index].expense!}0").toPersianDigit().seRagham()}"
+                                    : "-${state.expenseDetails[index].expense!.toString().toPersianDigit().seRagham()}",
                                 style: TextStyle(
                                     fontSize:
                                         MediaQuery.of(context).size.width / 22,
@@ -149,7 +149,7 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
                                       Text(
-                                          state.expensesDetails[index]
+                                          state.expenseDetails[index]
                                               .expenseCategory!
                                               .getString(context),
                                           style: TextStyle(
@@ -162,7 +162,7 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                                                   ? AppColors.black
                                                   : Colors.white)),
                                       Text(
-                                          state.expensesDetails[index]
+                                          state.expenseDetails[index]
                                               .expensesDescription!,
                                           style: TextStyle(
                                               fontSize: MediaQuery.of(context)
@@ -189,7 +189,7 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                                         MediaQuery.of(context).size.width /
                                             100),
                                     child: SvgPicture.asset(
-                                        state.expensesDetails[index].expensesIconType!),
+                                        state.expenseDetails[index].expensesIconType!),
                                   ),
                                 ),
                               ],
@@ -212,7 +212,7 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                                         MediaQuery.of(context).size.width /
                                             100),
                                     child: SvgPicture.asset(
-                                        state.expensesDetails[index].expensesIconType!),
+                                        state.expenseDetails[index].expensesIconType!),
                                   ),
                                 ),
                                 SizedBox(
@@ -224,7 +224,7 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                          (state.expensesDetails[index]
+                                          (state.expenseDetails[index]
                                                   .expenseCategory!)
                                               .getString(context),
                                           style: TextStyle(
@@ -241,7 +241,7 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                                                           .mainPageFirstContainerFontColor
                                                       : Colors.white)),
                                       Text(
-                                          state.expensesDetails[index]
+                                          state.expenseDetails[index]
                                               .expensesDescription!,
                                           maxLines: 1,
                                           style: TextStyle(
@@ -260,8 +260,8 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                             ),
                             Text(
                                 rialCurrencyType == true
-                                    ? "-${("${state.expensesDetails[index].expense!}0").seRagham()}"
-                                    : "-${state.expensesDetails[index].expense!.toString().seRagham()}",
+                                    ? "-${("${state.expenseDetails[index].expense!}0").seRagham()}"
+                                    : "-${state.expenseDetails[index].expense!.toString().seRagham()}",
                                 style: TextStyle(
                                     fontSize:
                                         MediaQuery.of(context).size.width / 25,
@@ -279,7 +279,7 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
             ),
           );
         },
-        itemCount: state.expensesDetails.length,
+        itemCount: state.expenseDetails.length,
       ),
     );
   }

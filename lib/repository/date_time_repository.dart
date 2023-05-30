@@ -1,4 +1,5 @@
 import 'package:income_and_expenses/data_base/data_base.dart';
+import 'package:income_and_expenses/model/income_model.dart';
 import 'package:shamsi_date/shamsi_date.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../model/expense_model.dart';
@@ -80,9 +81,14 @@ class SetDateRepository {
     return await helper.deleteItem(id);
   }
 
-  Future<int> updateItem(ExpenseModel expenseModel) async {
+  Future<int> updateExpenseItem(ExpenseModel expenseModel) async {
     var helper = DatabaseHelper();
     return await helper.updateExpense(expenseModel);
+  }
+
+  Future<int> updateIncomeItem(IncomeModel incomeModel) async {
+    var helper = DatabaseHelper();
+    return await helper.updateIncome(incomeModel);
   }
 
   addTodayExpensesRepo(int todayExpenses) async {

@@ -14,7 +14,7 @@ import '../const/app_colors.dart';
 import '../const/language.dart';
 import '../utils/app_text_field.dart';
 import '../utils/arrow_back_icon.dart';
-import 'home_page.dart';
+import 'main_expenses_page.dart';
 
 class AddIncomePage extends StatefulWidget {
   const AddIncomePage({Key? key}) : super(key: key);
@@ -42,6 +42,7 @@ class _AddIncomePageState extends State<AddIncomePage> {
       var darkThemeBoolean = state.darkThemeBoolean;
 
       return Scaffold(
+        resizeToAvoidBottomInset: true,
         backgroundColor: darkThemeBoolean == "false"
             ? Colors.white
             : AppColors.darkThemeColor,
@@ -188,7 +189,7 @@ class _AddIncomePageState extends State<AddIncomePage> {
 
                     Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => MyHomePage()));
+                        MaterialPageRoute(builder: (context) => MainExpensesPage()));
                   }
                 },
                 child: Padding(
@@ -197,7 +198,7 @@ class _AddIncomePageState extends State<AddIncomePage> {
                     margin: EdgeInsets.only(
                       left: MediaQuery.of(context).size.width / 10,
                       right: MediaQuery.of(context).size.width / 10,),
-                    height: MediaQuery.of(context).size.height / 15,
+                    height: MediaQuery.of(context).size.height / 20,
                     decoration: BoxDecoration(
                       color: AppColors.buttonColor,
                       borderRadius: BorderRadius.circular(15),

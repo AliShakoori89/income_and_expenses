@@ -18,4 +18,10 @@ class IncomeRepository {
     final String income = await helper.fetchIncomePerMonth(month) ?? "";
     return income;
   }
+
+  Future<List<IncomeModel>> getAllIncomeItems (String month) async{
+    print("111111111111111111111");
+    final List<IncomeModel> allIncome = await helper.getAllIncomeItems(month);
+    return allIncome;
+  }
 }

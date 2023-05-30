@@ -25,7 +25,7 @@ class DatabaseHelper {
   static const columnIncomeDate = 'incomeDate';
   static const columnIncomeMonth = 'incomeMonth';
   static const columnIncomeCategory = "incomeCategory";
-  static const columnIncome = "Income";
+  static const columnIncome = "income";
   static const columnIncomeDescription = "incomeDescription";
   static const columnIncomeIconType = "incomeIconType";
 
@@ -89,9 +89,9 @@ class DatabaseHelper {
         where: '$columnIncomeId = ?', whereArgs: [id]);
   }
 
-  Future<List<IncomeModel>> getAllIncomeItems(String date) async {
+  Future<List<IncomeModel>> getAllIncomeItems(String month) async {
     var dbExpense = await database;
-    var listMap = await dbExpense.rawQuery('SELECT * FROM incomeTable WHERE $columnIncomeDate = "$date"');
+    var listMap = await dbExpense.rawQuery('SELECT * FROM incomeTable WHERE $columnIncomeMonth = "$month"');
     var listIncomeItems = <IncomeModel>[];
     for (Map<String, dynamic> m in listMap) {
       listIncomeItems.add(IncomeModel.fromJson(m));
@@ -107,7 +107,6 @@ class DatabaseHelper {
     if (value == null){
       return '0';
     }else{
-      print(value);
       return "$value";
     }
   }

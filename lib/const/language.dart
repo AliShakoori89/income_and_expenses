@@ -1,3 +1,5 @@
+import 'dart:math';
+
 mixin AppLocale {
 
   static const String yes = 'بله';
@@ -10,6 +12,7 @@ mixin AppLocale {
   static const String notExpenses = 'اطلاعاتی برای نمایش وجود ندارد!';
   static const String persianDigit = 'toPersianDigit()';
   static const String setting = 'تنظیمات';
+  static const String incomeDetail = 'جزییات درآمد';
   static const String export = 'PDF خروجی';
   static const String chooseCurrency = 'انتخاب واحد پول';
   static const String delete = 'توجه';
@@ -30,7 +33,8 @@ mixin AppLocale {
   static const String expense = "هزینه";
   static const String newExpense = "هزینه جدید";
   static const String addIncome = "اضافه کردن درآمد";
-  static const String editExpense = "تغییرات";
+  static const String editExpense = "اصلاح هزیته";
+  static const String editIncome = "اصلاح درآمد";
   static const String applyChange = "اعمال تغییرات";
   static const String description = "توضیحات";
   static const String addExpense = "اضافه کردن هزینه";
@@ -70,6 +74,7 @@ mixin AppLocale {
     notExpenses: 'no information!',
     persianDigit: 'toPersianDigit()',
     setting: 'Setting',
+    incomeDetail: 'Income Details',
     export: 'export PDF',
     chooseCurrency: 'Choose currency',
     doYouWantTheDesiredItemToBeDeleted: 'Do you want the desired item to be deleted?',
@@ -91,6 +96,7 @@ mixin AppLocale {
     newExpense: "New Expense",
     addIncome: "Add Expense",
     editExpense: "Edit Expense",
+    editIncome: "Edit Income",
     applyChange: "Apply Change",
     description: 'description',
     addExpense: 'Add Expense',
@@ -127,6 +133,7 @@ mixin AppLocale {
     notExpenses: 'اطلاعاتی برای نمایش وجود ندارد!',
     persianDigit: 'toPersianDigit()',
     setting: 'تنظیمات',
+    incomeDetail: 'جزییات درآمد',
     export: 'خروجی',
     chooseCurrency: 'انتخاب واحد پول',
     doYouWantTheDesiredItemToBeDeleted: 'آیا می خواهید که آیتم مورد نظر پاک شود؟',
@@ -148,7 +155,8 @@ mixin AppLocale {
     addIncome: "اضافه کردن درآمد",
     description: 'توضیحات',
     addExpense: 'اضافه کردن هزینه',
-    editExpense: 'تغییرات',
+    editExpense: 'اصلاح هزیته',
+    editIncome: 'اصلاح درآمد',
     applyChange: 'اعمال تغییرات',
     transportation: 'حمل و نقل',
     comestible: "خوراکی",

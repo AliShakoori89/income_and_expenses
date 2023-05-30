@@ -1,6 +1,6 @@
 // import 'package:get/get.dart';
 // import 'package:income_and_expenses/pages/add_expense_page.dart';
-// import 'package:income_and_expenses/pages/frequently_asked_questions.dart';
+// import 'package:income_and_expenses/pages/frequently_asked_questions_page.dart';
 // import 'package:income_and_expenses/pages/home_page.dart';
 // import 'package:income_and_expenses/pages/setting_page.dart';
 // import 'package:income_and_expenses/pages/search_page.dart';

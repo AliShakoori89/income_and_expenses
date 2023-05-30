@@ -23,8 +23,8 @@ class SetDateState extends Equatable {
     String? calculateCash,
     String? incomePerDate,
     String? incomePerMonth,
-    List<IncomeModel>? incomeModel,
-    List<ExpenseModel>? expensesDetails,
+    List<IncomeModel>? incomeDetails,
+    List<ExpenseModel>? expenseDetails,
     String? todayExpenses
   }): date = date ?? '' ,
         month = month ?? '',
@@ -34,8 +34,8 @@ class SetDateState extends Equatable {
         calculateCash = calculateCash ?? "",
         incomePerDate = incomePerDate ?? "",
         incomePerMonth = incomePerMonth?? "",
-        incomeModel = incomeModel ?? const [],
-        expensesDetails = expensesDetails ?? const [];
+        incomeDetails = incomeDetails ?? const [],
+        expenseDetails = expenseDetails ?? const [];
 
   final SetDateStatus status;
   final String date;
@@ -46,12 +46,12 @@ class SetDateState extends Equatable {
   final String calculateCash;
   final String incomePerDate;
   final String incomePerMonth;
-  final List<IncomeModel> incomeModel;
-  final List<ExpenseModel> expensesDetails;
+  final List<IncomeModel> incomeDetails;
+  final List<ExpenseModel> expenseDetails;
 
   @override
   // TODO: implement props
-  List<Object> get props => [status, date, month, selectDate, expensesPerMonth, expensesPerDate, calculateCash, incomePerDate, incomePerMonth, incomeModel, expensesDetails];
+  List<Object> get props => [status, date, month, selectDate, expensesPerMonth, expensesPerDate, calculateCash, incomePerDate, incomePerMonth, incomeDetails, expenseDetails];
 
   SetDateState copyWith({
     SetDateStatus? status,
@@ -63,8 +63,8 @@ class SetDateState extends Equatable {
     String? calculateCash,
     String? incomePerDate,
     String? incomePerMonth,
-    List<IncomeModel>? incomeModel,
-    List<ExpenseModel>? expensesDetails,
+    List<IncomeModel>? incomeDetails,
+    List<ExpenseModel>? expenseDetails,
   }) {
     return SetDateState(
         status: status ?? this.status,
@@ -76,8 +76,8 @@ class SetDateState extends Equatable {
         calculateCash: calculateCash ?? this.calculateCash,
         incomePerDate: incomePerDate ?? this.incomePerDate,
         incomePerMonth: incomePerMonth ?? this.incomePerMonth,
-        incomeModel: incomeModel ?? this.incomeModel,
-        expensesDetails: expensesDetails ?? this.expensesDetails,
+        incomeDetails: incomeDetails ?? this.incomeDetails,
+        expenseDetails: expenseDetails ?? this.expenseDetails,
     );
   }
 }

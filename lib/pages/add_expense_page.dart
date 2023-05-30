@@ -6,6 +6,7 @@ import 'package:income_and_expenses/bloc/set_date_bloc/state.dart';
 import 'package:income_and_expenses/model/expense_model.dart';
 import 'package:income_and_expenses/const/app_colors.dart';
 import 'package:income_and_expenses/pages/home_page.dart';
+import 'package:income_and_expenses/pages/main_expenses_page.dart';
 import 'package:income_and_expenses/utils/app_text_field.dart';
 import 'package:income_and_expenses/utils/arrow_back_icon.dart';
 import 'package:income_and_expenses/utils/date_picker_calendar.dart';
@@ -66,7 +67,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
         backgroundColor: darkThemeBoolean == "false"
             ? Colors.white
             : AppColors.darkThemeColor,
-        resizeToAvoidBottomInset: false,
+        resizeToAvoidBottomInset: true,
         bottomSheet: appButton(darkThemeBoolean),
         body: Container(
           height: double.infinity,
@@ -86,6 +87,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
             child: Form(
               key: formKey,
               child: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
                 child: Column(
                   children: [
                     SizedBox(
@@ -95,42 +97,36 @@ class _AddExpensePageState extends State<AddExpensePage> {
                     SizedBox(
                       height: MediaQuery.of(context).size.width / 20,
                     ),
-                    SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height / 30,
-                          ),
-                          AppTextField(
-                            labelText: AppLocale.grouping.getString(context),
-                            controller: categoryController,
-                            clickable: true,
-                            themeBoolean: darkThemeBoolean,
-                            addExpenses: true,
-                          ),
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height / 30,
-                          ),
-                          AppTextField(
-                            labelText: AppLocale.expense.getString(context),
-                            controller: expensesController,
-                            clickable: false,
-                            themeBoolean: darkThemeBoolean,
-                            addExpenses: true,
-                          ),
-                          SizedBox(
-                            height: MediaQuery.of(context).size.width / 10,
-                          ),
-                          AppTextField(
-                            labelText: AppLocale.description.getString(context),
-                            controller: descriptionController,
-                            clickable: false,
-                            themeBoolean: darkThemeBoolean,
-                            addExpenses: true,
-                          ),
-                        ],
-                      ),
-                    )
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height / 30,
+                    ),
+                    AppTextField(
+                      labelText: AppLocale.grouping.getString(context),
+                      controller: categoryController,
+                      clickable: true,
+                      themeBoolean: darkThemeBoolean,
+                      addExpenses: true,
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height / 30,
+                    ),
+                    AppTextField(
+                      labelText: AppLocale.expense.getString(context),
+                      controller: expensesController,
+                      clickable: false,
+                      themeBoolean: darkThemeBoolean,
+                      addExpenses: true,
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.width / 10,
+                    ),
+                    AppTextField(
+                      labelText: AppLocale.description.getString(context),
+                      controller: descriptionController,
+                      clickable: false,
+                      themeBoolean: darkThemeBoolean,
+                      addExpenses: true,
+                    ),
                   ],
                 ),
               )
@@ -218,7 +214,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
 
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => MyHomePage()));
+                      MaterialPageRoute(builder: (context) => MainExpensesPage()));
                   }
                 },
                 child: Padding(
@@ -227,7 +223,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
                     margin: EdgeInsets.only(
                       left: MediaQuery.of(context).size.width / 10,
                       right: MediaQuery.of(context).size.width / 10,),
-                    height: MediaQuery.of(context).size.height / 15,
+                    height: MediaQuery.of(context).size.height / 20,
                     decoration: BoxDecoration(
                       color: AppColors.buttonColor,
                       borderRadius: BorderRadius.circular(15),

@@ -12,7 +12,7 @@ import '../bloc/them_bloc/bloc.dart';
 import '../bloc/them_bloc/event.dart';
 import '../bloc/them_bloc/state.dart';
 import '../const/language.dart';
-import '../pages/frequently_asked_questions.dart';
+import '../pages/frequently_asked_questions_page.dart';
 import 'setting_items.dart';
 
 class SettingItemList extends StatefulWidget {
