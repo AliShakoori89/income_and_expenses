@@ -14,7 +14,7 @@ import '../const/app_colors.dart';
 import '../const/language.dart';
 import '../utils/app_text_field.dart';
 import '../utils/arrow_back_icon.dart';
-import 'main_expenses_page.dart';
+import 'home_page.dart';
 
 class AddIncomePage extends StatefulWidget {
   const AddIncomePage({Key? key}) : super(key: key);
@@ -189,7 +189,7 @@ class _AddIncomePageState extends State<AddIncomePage> {
 
                     Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => MainExpensesPage()));
+                        MaterialPageRoute(builder: (context) => const MyHomePage()));
                   }
                 },
                 child: Padding(

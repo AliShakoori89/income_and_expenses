@@ -6,7 +6,6 @@ import 'package:income_and_expenses/bloc/set_date_bloc/state.dart';
 import 'package:income_and_expenses/model/expense_model.dart';
 import 'package:income_and_expenses/const/app_colors.dart';
 import 'package:income_and_expenses/pages/home_page.dart';
-import 'package:income_and_expenses/pages/main_expenses_page.dart';
 import 'package:income_and_expenses/utils/app_text_field.dart';
 import 'package:income_and_expenses/utils/arrow_back_icon.dart';
 import 'package:income_and_expenses/utils/date_picker_calendar.dart';
@@ -214,7 +213,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
 
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => MainExpensesPage()));
+                      MaterialPageRoute(builder: (context) => const MyHomePage()));
                   }
                 },
                 child: Padding(
