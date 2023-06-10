@@ -97,9 +97,10 @@ class FetchAllIncomeItemsEvent extends SetDateEvent {
 class AddIncomeEvent extends SetDateEvent {
 
   final IncomeModel incomeModel;
+  final String month;
 
   AddIncomeEvent(
-      {required this.incomeModel});
+      {required this.incomeModel, required this.month});
 
   @override
   List<Object> get props => [incomeModel];
@@ -118,9 +119,10 @@ class FetchExpensesItemsEvent extends SetDateEvent {
 class AddOneByOneExpenseEvent extends SetDateEvent {
   final ExpenseModel expenseModel;
   final String date;
+  final String month;
 
   AddOneByOneExpenseEvent(
-      {required this.expenseModel, required this.date});
+      {required this.expenseModel, required this.date, required this.month});
 
   @override
   List<Object> get props => [expenseModel, date];

@@ -63,12 +63,13 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
   Future checkFirstSeen() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool? seen = (prefs.getBool('seen') == null ? false : true );
+    print("!!!!!!!!!!!!!!1!!!!!     "+prefs.getBool('seen').toString());
+    prefs.getBool('seen') == null || prefs.getBool('seen') == false
+        ? await prefs.setBool('seen', false)
+        : await prefs.setBool('seen', true);
 
-    if (seen == true) {
-    } else {
+    if (prefs.getBool('seen') == false) {
       await prefs.setBool('seen', true);
-      seen = prefs.getBool('seen');
       createTutorial();
       Future.delayed(Duration.zero, showTutorial);
     }

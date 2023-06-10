@@ -23,11 +23,11 @@ import 'const/language.dart';
 
 void main() {
   runApp(
-    // DevicePreview(
-    //   enabled: !kReleaseMode,
-    //   builder: (context) =>
+    DevicePreview(
+      enabled: !kReleaseMode,
+      builder: (context) =>
     const MyApp(), // Wrap your app
-    // ),
+    ),
   );
 }
 
@@ -91,6 +91,9 @@ class _MyAppState extends State<MyApp> {
         localizationsDelegates: _localization.localizationsDelegates,
         debugShowCheckedModeBanner: false,
         title: 'Income and Expenses',
+        routes: <String, WidgetBuilder>{
+          "/home_page": (BuildContext context) => const MyHomePage(),
+        },
         home: const MyHomePage(),
       ),
     );

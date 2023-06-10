@@ -207,9 +207,13 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
     try {
       emit(state.copyWith(status: SetDateStatus.loading));
       await incomeRepository.addIncome(event.incomeModel);
+      final String incomePerMonth = await incomeRepository.readIncome(event.month);
+      String calculateCash = await calculateExpensesRepository.calculateCash(event.month);
       emit(
         state.copyWith(
           status: SetDateStatus.success,
+          incomePerMonth: incomePerMonth,
+          calculateCash: calculateCash
         ),
       );
     } catch (error) {
@@ -235,10 +239,8 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
 
   void _mapFetchAllIncomeItemsEventEventToState(
       FetchAllIncomeItemsEvent event, Emitter<SetDateState> emit) async {
-    print("222222222222222222222222222222");
     try {
       emit(state.copyWith(status: SetDateStatus.loading));
-      print("222222222222222222222222222222");
       final List<IncomeModel> incomeDetails =
       await incomeRepository.getAllIncomeItems(event.month);
       emit(
@@ -258,10 +260,18 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
       await setDateRepository.addExpenseRepo(event.expenseModel);
       final List<ExpenseModel> expensesDetails =
       await setDateRepository.getAllExpensesItemsRepo(event.date);
+      String calculateCash = await calculateExpensesRepository.calculateCash(event.month);
+      final String expensesPerDate =
+      await calculateExpensesRepository.calculateDayExpenseRepo(event.date);
+      String expensesPerMonth = await calculateExpensesRepository.calculateExpenseRepo(event.month);
       emit(
         state.copyWith(
           status: SetDateStatus.success,
           expenseDetails: expensesDetails,
+          calculateCash: calculateCash,
+          expensesPerDate: expensesPerDate,
+          expensesPerMonth: expensesPerMonth,
+
         ),
       );
     } catch (error) {

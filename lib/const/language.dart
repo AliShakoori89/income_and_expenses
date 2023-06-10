@@ -1,5 +1,3 @@
-import 'dart:math';
-
 mixin AppLocale {
 
   static const String yes = 'بله';
@@ -152,6 +150,7 @@ mixin AppLocale {
     chooseCurrencyQuestion: 'لطفا واحد پول خود را انتخاب کنید:',
     grouping: 'دسته بندی',
     expense: 'هزینه',
+    newExpense: "هزینه جدید",
     addIncome: "اضافه کردن درآمد",
     description: 'توضیحات',
     addExpense: 'اضافه کردن هزینه',

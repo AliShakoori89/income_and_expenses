@@ -71,7 +71,7 @@ class _YearChartPageState extends State<YearChartPage> {
 
       return Scaffold(
           backgroundColor: darkThemeBoolean == "false"
-              ? AppColors.mainPageCardBorderColor
+              ? Colors.white
               : AppColors.darkThemeColor,
           body: SafeArea(
             child: Container(

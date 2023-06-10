@@ -59,88 +59,59 @@ class _MainExpensesPageState extends State<MainExpensesPage> {
 
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
       return Scaffold(
-        extendBody: true,
-        resizeToAvoidBottomInset: false,
-        backgroundColor: state.darkThemeBoolean == "false"
-            ? Colors.white
-            : AppColors.darkThemeColor,
-        body:
-        // Stack(
-        //   fit: StackFit.expand,
-        //   children: [
-            SingleChildScrollView(
-              child: Column(
-                children: [
-                  Stack(
-                    children: [
-                      Container(
-                        height: MediaQuery.of(context).size.height / 5,
-                        decoration: BoxDecoration(
-                          gradient: const LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment(0.8, 1),
-                            colors: <Color>[
-                              Color.fromRGBO(248, 187, 208, 1),
-                              Color.fromRGBO(212, 200, 235, 1),
-                              Color.fromRGBO(179, 229, 252, 1),
-                            ],
-                            // Gradient from https://learnui.design/tools/gradient-generator.html
-                            tileMode: TileMode.mirror,
-                          ),
-                          borderRadius: BorderRadius.vertical(
-                              bottom: Radius.elliptical(
-                                  MediaQuery.of(context).size.width, 200)),
+          extendBody: true,
+          resizeToAvoidBottomInset: false,
+          backgroundColor: state.darkThemeBoolean == "false"
+              ? Colors.white
+              : AppColors.darkThemeColor,
+          body: SingleChildScrollView(
+            child: Column(
+              children: [
+                Stack(
+                  children: [
+                    Container(
+                      height: MediaQuery.of(context).size.height / 5,
+                      decoration: BoxDecoration(
+                        gradient: const LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment(0.8, 1),
+                          colors: <Color>[
+                            Color.fromRGBO(248, 187, 208, 1),
+                            Color.fromRGBO(212, 200, 235, 1),
+                            Color.fromRGBO(179, 229, 252, 1),
+                          ],
+                          // Gradient from https://learnui.design/tools/gradient-generator.html
+                          tileMode: TileMode.mirror,
                         ),
+                        borderRadius: BorderRadius.vertical(
+                            bottom: Radius.elliptical(
+                                MediaQuery.of(context).size.width, 200)),
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(top: MediaQuery.of(context).size.height/25),
-                        child: DatePickerCalendar(
-                            keyBottomNavigation2: keyBottomNavigation2,
-                            keyBottomNavigation3: keyBottomNavigation3,
-                            keyBottomNavigation4: keyBottomNavigation4
-                        ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: MediaQuery.of(context).size.height/20),
+                      child: DatePickerCalendar(
+                          keyBottomNavigation2: keyBottomNavigation2,
+                          keyBottomNavigation3: keyBottomNavigation3,
+                          keyBottomNavigation4: keyBottomNavigation4
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(top: MediaQuery.of(context).size.height/7),
-                        child: CashContainer(keyBottomNavigation1: keyBottomNavigation1),
-                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: MediaQuery.of(context).size.height/7),
+                      child: CashContainer(keyBottomNavigation1: keyBottomNavigation1),
+                    ),
 
-                    ],
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: MediaQuery.of(context).size.height/100),
-                    child: const SingleChildScrollView(
-                        child: CashContainerPerDate()),
-                  )
-                ],
-              ),
+                  ],
+                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.height/100,),
+                  child: const SingleChildScrollView(
+                      child: CashContainerPerDate()),
+                ),
+              ],
             ),
-
-            // Column(
-            //   children: [
-            //     Expanded(
-            //       child: SizedBox(
-            //         height: MediaQuery.of(context).size.height / 30,
-            //       ),
-            //     ),
-            //     Expanded(
-            //         flex: 1,
-            //         child: const DatePickerCalendar()),
-            //     SizedBox(
-            //       height: MediaQuery.of(context).size.height / 30,
-            //     ),
-            //     Expanded(
-            //         flex: 5,
-            //         child: CashContainer()),
-            //     Expanded(
-            //       child: const SingleChildScrollView(
-            //         child: CashContainerPerDate(),
-            //       ),
-            //     )
-            //   ],
-            // )
-        //   ],
-        // )
+          )
       );
     });
   }
