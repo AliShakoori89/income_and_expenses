@@ -158,7 +158,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
                         ? "${DateTime.parse(date).year}-${DateTime.parse(date).month}"
                         : "${DateTime.parse(date).year}-0${DateTime.parse(date).month}";
 
-                    expense.expenseCategory = categoryController.text;
+
 
                     expense.expense =
                         int.parse(expensesController.text.replaceAll(RegExp(','), ''));
@@ -168,42 +168,60 @@ class _AddExpensePageState extends State<AddExpensePage> {
                     if (englishLanguageBoolean == true) {
                       if (categoryController.text == "buy items") {
                         expense.expensesIconType = "assets/icons/expense_category_icons/card_pos.svg";
+                        expense.expenseCategory = "خرید اقلام";
                       } else if (categoryController.text == "comestible") {
                         expense.expensesIconType = "assets/icons/expense_category_icons/burger_and_cola.svg";
+                        expense.expenseCategory = "خوراکی";
                       } else if (categoryController.text == "transportation") {
                         expense.expensesIconType = "assets/icons/expense_category_icons/driving.svg";
+                        expense.expenseCategory = "حمل و نقل";
                       } else if (categoryController.text == "gifts") {
                         expense.expensesIconType = "assets/icons/expense_category_icons/gift.svg";
+                        expense.expenseCategory = "هدیه";
                       } else if (categoryController.text == "treatment") {
                         expense.expensesIconType = "assets/icons/expense_category_icons/health.svg";
+                        expense.expenseCategory = "درمانی";
                       } else if (categoryController.text == "installments and debt") {
                         expense.expensesIconType = "assets/icons/expense_category_icons/receipt_item.svg";
+                        expense.expenseCategory = "اقساط و بدهی";
                       } else if (categoryController.text == "renovation") {
                         expense.expensesIconType = "assets/icons/expense_category_icons/repairs.svg";
+                        expense.expenseCategory = "تعمیرات";
                       } else if (categoryController.text == "pastime") {
-                        expense.expensesIconType = "assets/logos/games_and_multimedia.svg";
-                      } else if (categoryController.text == "etcetera") {
-                        expense.expensesIconType = "assets/logos/group_30.svg";
+                        expense.expensesIconType = "assets/icons/expense_category_icons/games_and_multimedia.svg";
+                        expense.expenseCategory = "تفریح";
+                      } else if (categoryController.text == "other") {
+                        expense.expensesIconType = "assets/icons/expense_category_icons/other.svg";
+                        expense.expenseCategory = "سایر";
                       }
                     } else {
                       if (categoryController.text == "خرید اقلام") {
                         expense.expensesIconType = "assets/icons/expense_category_icons/card_pos.svg";
+                        expense.expenseCategory = categoryController.text;
                       } else if (categoryController.text == "خوراکی") {
                         expense.expensesIconType = "assets/icons/expense_category_icons/burger_and_cola.svg";
+                        expense.expenseCategory = categoryController.text;
                       } else if (categoryController.text == "حمل و نقل") {
                         expense.expensesIconType = "assets/icons/expense_category_icons/driving.svg";
+                        expense.expenseCategory = categoryController.text;
                       } else if (categoryController.text == "هدایا") {
                         expense.expensesIconType = "assets/icons/expense_category_icons/gift.svg";
+                        expense.expenseCategory = categoryController.text;
                       } else if (categoryController.text == "درمانی") {
                         expense.expensesIconType = "assets/icons/expense_category_icons/health.svg";
+                        expense.expenseCategory = categoryController.text;
                       } else if (categoryController.text == "اقساط و بدهی") {
                         expense.expensesIconType = "assets/icons/expense_category_icons/receipt_item.svg";
+                        expense.expenseCategory = categoryController.text;
                       } else if (categoryController.text == "تعمیرات") {
                         expense.expensesIconType = "assets/icons/expense_category_icons/repairs.svg";
+                        expense.expenseCategory = categoryController.text;
                       } else if (categoryController.text == "تفریح") {
                         expense.expensesIconType = "assets/icons/expense_category_icons/games_and_multimedia.svg";
+                        expense.expenseCategory = categoryController.text;
                       } else if (categoryController.text == "سایر") {
-                        expense.expensesIconType = "assets/icons/expense_category_icons/group_30.svg";
+                        expense.expensesIconType = "assets/icons/expense_category_icons/other.svg";
+                        expense.expenseCategory = categoryController.text;
                       }
                     }
 

@@ -1,3 +1,4 @@
+// import 'package:device_preview/device_preview.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,7 @@ import 'package:income_and_expenses/repository/date_time_repository.dart';
 import 'package:income_and_expenses/repository/theme_repository.dart';
 import 'bloc/calculate_sf_cartesian_chart/bloc.dart';
 import 'bloc/change_currency_bloc/bloc.dart';
+import 'const/app_colors.dart';
 import 'const/language.dart';
 
 void main() {
@@ -61,10 +63,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -87,13 +85,18 @@ class _MyAppState extends State<MyApp> {
                 CalculateSFCartesianChartBloc(CalculateSFCartesianChartRepository())),
       ],
       child: MaterialApp(
+        theme: ThemeData(
+          // This is the theme of your application.
+          colorScheme: ColorScheme.fromSeed(seedColor: AppColors.cashContainerColor),
+          useMaterial3: true,
+        ),
+        routes: {
+          '/home_page': (context) => MyHomePage()
+        },
         supportedLocales: _localization.supportedLocales,
         localizationsDelegates: _localization.localizationsDelegates,
         debugShowCheckedModeBanner: false,
         title: 'Income and Expenses',
-        routes: <String, WidgetBuilder>{
-          "/home_page": (BuildContext context) => const MyHomePage(),
-        },
         home: const MyHomePage(),
       ),
     );

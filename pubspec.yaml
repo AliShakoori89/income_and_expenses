@@ -39,11 +39,10 @@ dependencies:
   persian_number_utility: ^1.1.2
   device_preview: ^1.1.0
 #  get: ^4.6.5
-  persian_datetimepickers: ^1.0.3
   animated_bottom_navigation_bar: 1.2.0
   circular_reveal_animation: ^2.0.1
   shamsi_date: ^1.0.1
-  intl: 0.17.0
+  intl: 0.18.0
   flutter_svg: 2.0.5
   sqflite: ^2.2.6
   path_provider: 2.0.14

@@ -8,7 +8,7 @@ class ExpensesIcon{
     "receipt_item.svg",
     "repairs.svg",
     "games_and_multimedia.svg",
-    "group_30.svg"
+    "other.svg"
   ];
 
   static const List iconsPersianName = [
@@ -32,6 +32,6 @@ class ExpensesIcon{
     "installments and debt",
     "renovation",
     "pastime",
-    "etcetera"
+    "other"
   ];
 }

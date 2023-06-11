@@ -65,6 +65,7 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
 
             return BlocBuilder<SetDateBloc, SetDateState>(
                 builder: (context, state) {
+              String dateMonth = state.date;
 
               return Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
