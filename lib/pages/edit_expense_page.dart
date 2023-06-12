@@ -199,7 +199,24 @@ class _EditedExpensePageState extends State<EditedExpensePage> {
                         textDirection: englishLanguageBoolean == false ? TextDirection.rtl : TextDirection.ltr,
                         child: TextFormField(
                             enabled: false,
-                            controller: TextEditingController(text: _editedExpensesModel.expenseCategory),
+                            controller: TextEditingController(
+                                text: _editedExpensesModel.expenseCategory == "سایر"
+                                    ? AppLocale.other.getString(context)
+                                    : _editedExpensesModel.expenseCategory == "حمل و نقل"
+                                    ? AppLocale.transportation.getString(context)
+                                    : _editedExpensesModel.expenseCategory == "خوراکی"
+                                    ? AppLocale.comestible.getString(context)
+                                    : _editedExpensesModel.expenseCategory == "خرید اقلام"
+                                    ? AppLocale.buyItems.getString(context)
+                                    : _editedExpensesModel.expenseCategory == "اقساط و بدهی"
+                                    ? AppLocale.installmentsAndDebt.getString(context)
+                                    : _editedExpensesModel.expenseCategory == "درمانی"
+                                    ? AppLocale.treatment.getString(context)
+                                    : _editedExpensesModel.expenseCategory == "هدایا"
+                                    ? AppLocale.gifts.getString(context)
+                                    : _editedExpensesModel.expenseCategory == "تفریح"
+                                    ? AppLocale.pastime.getString(context)
+                                    : AppLocale.renovation.getString(context)),
                           style: TextStyle(
                               color: darkThemeBoolean == "false"
                                   ? Colors.black

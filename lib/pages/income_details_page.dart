@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localization/flutter_localization.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:income_and_expenses/bloc/set_date_bloc/bloc.dart';
 import 'package:income_and_expenses/bloc/set_date_bloc/state.dart';
@@ -91,8 +92,8 @@ class _IncomeDetailsPageState extends State<IncomeDetailsPage> {
                         right: MediaQuery.of(context).size.height / 100,
                       ),
                       decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(15)
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(15)
                       ),
                       child: Container(
                         height: MediaQuery.of(context).size.height / 12,
@@ -100,7 +101,8 @@ class _IncomeDetailsPageState extends State<IncomeDetailsPage> {
                           left: MediaQuery.of(context).size.width / 40,
                           right: MediaQuery.of(context).size.width / 40,
                         ),
-                        child: Row(
+                        child: englishLanguageBoolean == false
+                            ? Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             Expanded(child: Text("${incomeList[index].income}".toPersianDigit().seRagham())),
@@ -123,9 +125,12 @@ class _IncomeDetailsPageState extends State<IncomeDetailsPage> {
                                         overflow: TextOverflow.clip,
                                         maxLines: 1,
                                         softWrap: true,
-                                      style: TextStyle(
-                                        fontSize: MediaQuery.of(context).size.width / 30
-                                      ),))),
+                                        style: TextStyle(
+                                            fontSize: MediaQuery.of(context).size.width / 30
+                                        ),
+                                      )
+                                  )
+                                  ),
                                 ],
                               ),
                             ),
@@ -141,7 +146,50 @@ class _IncomeDetailsPageState extends State<IncomeDetailsPage> {
                                 child: SvgPicture.asset("${incomeList[index].incomeIconType}"),
                               ),
                             ),
-
+                          ],
+                        )
+                            : Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: MediaQuery.of(context).size.width / 8,
+                              height: MediaQuery.of(context).size.width / 8,
+                              margin: EdgeInsets.all(MediaQuery.of(context).size.width / 30),
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: AppColors.colorList[index]),
+                              child: Container(
+                                margin: EdgeInsets.all(MediaQuery.of(context).size.width / 60),
+                                child: SvgPicture.asset("${incomeList[index].incomeIconType}"),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(top: MediaQuery.of(context).size.height / 100),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Flexible(
+                                    child: Text(
+                                      "${incomeList[index].incomeCategory}",
+                                      style: TextStyle(
+                                          fontSize: MediaQuery.of(context).size.width / 25),
+                                    ),
+                                  ),
+                                  Flexible(child: SizedBox(
+                                      width: MediaQuery.of(context).size.width / 4,
+                                      child: Text("${incomeList[index].incomeDescription}",
+                                        overflow: TextOverflow.clip,
+                                        maxLines: 1,
+                                        softWrap: true,
+                                        style: TextStyle(
+                                            fontSize: MediaQuery.of(context).size.width / 30
+                                        ),)
+                                  )),
+                                ],
+                              ),
+                            ),
+                            const Spacer(),
+                            Expanded(child: Text("${incomeList[index].income}".seRagham())),
                           ],
                         ),
                       ),

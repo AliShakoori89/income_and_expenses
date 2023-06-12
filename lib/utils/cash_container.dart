@@ -357,93 +357,96 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
     );
   }
 
-  Column expensesSlice(BuildContext context, bool englishLanguageBoolean, SetDateState state, bool rialCurrencyType) {
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(AppLocale.expenses.getString(context),
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: MediaQuery.of(context).size.width / 22,
-                  fontWeight: FontWeight.w800,
-                )),
-            SizedBox(
-              width: MediaQuery.of(context).size.width / 18,
-            ),
-            // const AnimatedModalBarrierApp(),
-            Image.asset(
-              "assets/main_page_first_container_logo/darkExpenses.png",
-              scale: MediaQuery.of(context).size.width / 500,
-            ),
-          ],
-        ),
-        SizedBox(
-          height: MediaQuery.of(context).size.height / 100,
-        ),
-        englishLanguageBoolean == false
-            ? Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                      (state.expensesPerMonth != "" &&
-                              state.expensesPerMonth != 0.toString())
-                          ? rialCurrencyType == true
-                              ? AppLocale.rial.getString(context)
-                              : AppLocale.toman.getString(context)
-                          : ''.toPersianDigit(),
-                      style: const TextStyle(color: Colors.white)),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width / 25,
-                  ),
-                  Text(
-                      state.expensesPerMonth != ""
-                          ? rialCurrencyType == true
-                              ? ('${state.expensesPerMonth}0')
-                                  .toPersianDigit()
-                                  .seRagham()
-                              : state.expensesPerMonth
-                                  .toPersianDigit()
-                                  .seRagham()
-                          : "0".toPersianDigit(),
-                      style: TextStyle(
-                        fontWeight: FontWeight.w800,
-                        color: Colors.white,
-                        fontSize: MediaQuery.of(context).size.width / 22,
-                      )),
-                ],
-              )
-            : Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                      state.expensesPerMonth != ""
-                          ? rialCurrencyType == true
-                              ? ("${state.expensesPerMonth}0").seRagham()
-                              : state.expensesPerMonth.seRagham()
-                          : "0",
-                      style: TextStyle(
-                        fontWeight: FontWeight.w800,
-                        color: Colors.white,
-                        fontSize: MediaQuery.of(context).size.width / 22,
-                      )),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width / 50,
-                  ),
-                  Text(
-                      state.expensesPerMonth != ""
-                          ? rialCurrencyType == true
-                              ? AppLocale.rial.getString(context)
-                              : AppLocale.toman.getString(context)
-                          : '',
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w800,
-                        color: Colors.white,
-                      )),
-                ],
+  Padding expensesSlice(BuildContext context, bool englishLanguageBoolean, SetDateState state, bool rialCurrencyType) {
+    return Padding(
+      padding: EdgeInsets.only(top: MediaQuery.of(context).size.height / 75),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(AppLocale.expenses.getString(context),
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: MediaQuery.of(context).size.width / 22,
+                    fontWeight: FontWeight.w800,
+                  )),
+              SizedBox(
+                width: MediaQuery.of(context).size.width / 18,
               ),
-      ],
+              // const AnimatedModalBarrierApp(),
+              Image.asset(
+                "assets/main_page_first_container_logo/darkExpenses.png",
+                scale: MediaQuery.of(context).size.width / 500,
+              ),
+            ],
+          ),
+          SizedBox(
+            height: MediaQuery.of(context).size.height / 100,
+          ),
+          englishLanguageBoolean == false
+              ? Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                        (state.expensesPerMonth != "" &&
+                                state.expensesPerMonth != 0.toString())
+                            ? rialCurrencyType == true
+                                ? AppLocale.rial.getString(context)
+                                : AppLocale.toman.getString(context)
+                            : ''.toPersianDigit(),
+                        style: const TextStyle(color: Colors.white)),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 25,
+                    ),
+                    Text(
+                        state.expensesPerMonth != ""
+                            ? rialCurrencyType == true
+                                ? ('${state.expensesPerMonth}0')
+                                    .toPersianDigit()
+                                    .seRagham()
+                                : state.expensesPerMonth
+                                    .toPersianDigit()
+                                    .seRagham()
+                            : "0".toPersianDigit(),
+                        style: TextStyle(
+                          fontWeight: FontWeight.w800,
+                          color: Colors.white,
+                          fontSize: MediaQuery.of(context).size.width / 22,
+                        )),
+                  ],
+                )
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                        state.expensesPerMonth != ""
+                            ? rialCurrencyType == true
+                                ? ("${state.expensesPerMonth}0").seRagham()
+                                : state.expensesPerMonth.seRagham()
+                            : "0",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w800,
+                          color: Colors.white,
+                          fontSize: MediaQuery.of(context).size.width / 22,
+                        )),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 50,
+                    ),
+                    Text(
+                        state.expensesPerMonth != ""
+                            ? rialCurrencyType == true
+                                ? AppLocale.rial.getString(context)
+                                : AppLocale.toman.getString(context)
+                            : '',
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w800,
+                          color: Colors.white,
+                        )),
+                  ],
+                ),
+        ],
+      ),
     );
   }
 

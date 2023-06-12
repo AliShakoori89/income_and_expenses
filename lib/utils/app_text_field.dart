@@ -56,7 +56,9 @@ class _AppTextFieldState extends State<AppTextField> {
           decoration: textInputDecoration.copyWith(
               filled: true, //<-- SEE HERE
               fillColor: Colors.white, //<-- SEE HERE
-              suffixText: widget.labelText == "هزینه" || widget.labelText == "expense" || widget.labelText == "مبلغ ورودی" || widget.labelText == "income" ? "تومان" : "",
+              suffixText: widget.labelText == "هزینه" || widget.labelText == "expense" || widget.labelText == "مبلغ ورودی" || widget.labelText == "income"
+                  ? englishLanguageBoolean == false ? "تومان" : "T"
+                  : "",
               suffixStyle: TextStyle(
                   color: widget.themeBoolean == "false"
                       ? Colors.black

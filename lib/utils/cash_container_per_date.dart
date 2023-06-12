@@ -183,10 +183,10 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                                           color: AppColors.colorList[index]),
                                       child: Container(
                                         margin: EdgeInsets.all(
-                                            MediaQuery.of(context).size.width / 20),
+                                            MediaQuery.of(context).size.width / 50),
                                         child: SvgPicture.asset(
-                                          height: MediaQuery.of(context).size.height / 40,
-                                            width: MediaQuery.of(context).size.width / 40,
+                                          height: MediaQuery.of(context).size.height / 30,
+                                            width: MediaQuery.of(context).size.width / 30,
                                             state.expenseDetails[index].expensesIconType!),
                                       ),
                                     ),
@@ -207,10 +207,10 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                                 color: AppColors.colorList[index]),
                             child: Container(
                               margin: EdgeInsets.all(
-                                  MediaQuery.of(context).size.width / 20),
+                                  MediaQuery.of(context).size.width / 50),
                               child: SvgPicture.asset(
-                                  height: MediaQuery.of(context).size.height / 40,
-                                  width: MediaQuery.of(context).size.width / 40,
+                                  height: MediaQuery.of(context).size.height / 30,
+                                  width: MediaQuery.of(context).size.width / 30,
                                   state.expenseDetails[index].expensesIconType!),
                             ),
                           ),
@@ -248,7 +248,7 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                               : "-${state.expenseDetails[index].expense!.toString().seRagham()}",
                           style: TextStyle(
                               fontSize:
-                              MediaQuery.of(context).size.width / 22,
+                              MediaQuery.of(context).size.width / 26,
                               color: darkThemeBoolean == "false"
                                   ? AppColors.expensesDigitColor
                                   : Colors.white)),
