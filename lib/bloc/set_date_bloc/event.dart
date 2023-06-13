@@ -130,11 +130,13 @@ class AddOneByOneExpenseEvent extends SetDateEvent {
 
 class EditExpenseItemsEvent extends SetDateEvent{
   final ExpenseModel expenseModel;
+  final String date;
+  final String month;
 
-  EditExpenseItemsEvent(this.expenseModel);
+  EditExpenseItemsEvent(this.expenseModel, this.date, this.month);
 
   @override
-  List<Object> get props => [expenseModel];
+  List<Object> get props => [expenseModel, date, month];
 }
 
 class EditIncomeItemsEvent extends SetDateEvent{
@@ -146,14 +148,26 @@ class EditIncomeItemsEvent extends SetDateEvent{
   List<Object> get props => [incomeModel];
 }
 
-class DeleteItemEvent extends SetDateEvent{
+class DeleteExpenseEvent extends SetDateEvent{
   final int id;
   final String date;
+  final String month;
 
-  DeleteItemEvent(this.id, this.date);
+  DeleteExpenseEvent(this.id, this.date, this.month);
 
   @override
-  List<Object> get props => [id, date];
+  List<Object> get props => [id, date, month];
+}
+
+class DeleteIncomeEvent extends SetDateEvent{
+  final int id;
+  final String date;
+  final String month;
+
+  DeleteIncomeEvent(this.id, this.date, this.month);
+
+  @override
+  List<Object> get props => [id, date, month];
 }
 
 class AddTodayExpensesEvent extends SetDateEvent {

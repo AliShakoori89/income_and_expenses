@@ -5,15 +5,13 @@ import 'package:income_and_expenses/model/income_model.dart';
 import 'package:income_and_expenses/repository/date_time_repository.dart';
 import '../../model/expense_model.dart';
 import '../../repository/calculate_repository.dart';
-import '../../repository/income_repository.dart';
 
 class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
 
   SetDateRepository setDateRepository = SetDateRepository();
-  IncomeRepository incomeRepository = IncomeRepository();
   CalculateRepository calculateExpensesRepository = CalculateRepository();
 
-  SetDateBloc(this.setDateRepository, this.calculateExpensesRepository, this.incomeRepository) : super(
+  SetDateBloc(this.setDateRepository, this.calculateExpensesRepository) : super(
       const SetDateState()){
     on<ReadDateEvent>(_mapReadDateEventToState);
     on<ReadMonthEvent>(_mapReadDateMonthEventToState);
@@ -31,7 +29,8 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
     on<EditExpenseItemsEvent>(_mapEditExpenseEventToState);
     on<EditIncomeItemsEvent>(_mapEditIncomeEventToState);
     on<AddTodayExpensesEvent>(_mapAddTodayExpensesEventToState);
-    on<DeleteItemEvent>(_mapDeleteTodayExpensesEventToState);
+    on<DeleteExpenseEvent>(_mapDeleteTodayExpensesEventToState);
+    on<DeleteIncomeEvent>(_mapDeleteTodayIncomeEventToState);
     on<FetchAllIncomeItemsEvent>(_mapFetchAllIncomeItemsEventEventToState);
   }
 
@@ -206,8 +205,8 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
       AddIncomeEvent event, Emitter<SetDateState> emit) async {
     try {
       emit(state.copyWith(status: SetDateStatus.loading));
-      await incomeRepository.addIncome(event.incomeModel);
-      final String incomePerMonth = await incomeRepository.readIncome(event.month);
+      await setDateRepository.addIncome(event.incomeModel);
+      final String incomePerMonth = await setDateRepository.readIncome(event.month);
       String calculateCash = await calculateExpensesRepository.calculateCash(event.month);
       emit(
         state.copyWith(
@@ -225,7 +224,7 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
       FetchIncomeEvent event, Emitter<SetDateState> emit) async {
     try {
       emit(state.copyWith(status: SetDateStatus.loading));
-      final String incomePerMonth = await incomeRepository.readIncome(event.month);
+      final String incomePerMonth = await setDateRepository.readIncome(event.month);
       emit(
         state.copyWith(
           status: SetDateStatus.success,
@@ -242,7 +241,7 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
     try {
       emit(state.copyWith(status: SetDateStatus.loading));
       final List<IncomeModel> incomeDetails =
-      await incomeRepository.getAllIncomeItems(event.month);
+      await setDateRepository.getAllIncomeItems(event.month);
       emit(
         state.copyWith(
             status: SetDateStatus.success,
@@ -284,9 +283,20 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
     try {
       emit(state.copyWith(status: SetDateStatus.loading));
       await setDateRepository.updateExpenseItem(event.expenseModel);
+      final String expensesPerDate =
+      await calculateExpensesRepository.calculateDayExpenseRepo(event.date);
+      final List<ExpenseModel> expensesDetails =
+      await setDateRepository.getAllExpensesItemsRepo(event.date);
+      String calculateCash = await calculateExpensesRepository.calculateCash(event.month);
+      String expensesPerMonth = await calculateExpensesRepository.calculateExpenseRepo(event.month);
       emit(
         state.copyWith(
           status: SetDateStatus.success,
+          expensesPerDate: expensesPerDate,
+          expenseDetails: expensesDetails,
+          calculateCash: calculateCash,
+          expensesPerMonth: expensesPerMonth,
+
         ),
       );
     } catch (error) {
@@ -310,15 +320,45 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
   }
 
   void _mapDeleteTodayExpensesEventToState(
-      DeleteItemEvent event, Emitter<SetDateState> emit) async {
+      DeleteExpenseEvent event, Emitter<SetDateState> emit) async {
     try {
       emit(state.copyWith(status: SetDateStatus.loading));
-      await setDateRepository.deleteExpensesRepo(event.id);
+      await setDateRepository.deleteExpenseRepo(event.id);
       final List<ExpenseModel> expenses = await setDateRepository.getAllExpensesItemsRepo(event.date);
+      String calculateCash = await calculateExpensesRepository.calculateCash(event.month);
+      await calculateExpensesRepository.calculateDayExpenseRepo(event.date);
+      final String incomePerMonth = await setDateRepository.readIncome(event.month);
+      final String expensesPerDate =
+      await calculateExpensesRepository.calculateDayExpenseRepo(event.date);
       emit(
         state.copyWith(
           status: SetDateStatus.success,
           expenseDetails : expenses,
+          calculateCash: calculateCash,
+          incomePerMonth: incomePerMonth,
+          expensesPerDate: expensesPerDate,
+        ),
+      );
+    } catch (error) {
+      emit(state.copyWith(status: SetDateStatus.error));
+    }
+  }
+
+  void _mapDeleteTodayIncomeEventToState(
+      DeleteIncomeEvent event, Emitter<SetDateState> emit) async {
+    try {
+      emit(state.copyWith(status: SetDateStatus.loading));
+      await setDateRepository.deleteIncomeRepo(event.id);
+      final List<IncomeModel> incomes = await setDateRepository.getAllIncomeItems(event.date);
+      String calculateCash = await calculateExpensesRepository.calculateCash(event.month);
+      await calculateExpensesRepository.calculateDayExpenseRepo(event.date);
+      final String incomePerMonth = await setDateRepository.readIncome(event.month);
+      emit(
+        state.copyWith(
+          status: SetDateStatus.success,
+          incomeDetails: incomes,
+          calculateCash: calculateCash,
+          incomePerMonth: incomePerMonth
         ),
       );
     } catch (error) {

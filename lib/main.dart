@@ -1,8 +1,6 @@
-// import 'package:device_preview/device_preview.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:income_and_expenses/bloc/calculate_sf_circular_chart/bloc.dart';
@@ -13,7 +11,6 @@ import 'package:income_and_expenses/pages/home_page.dart';
 import 'package:income_and_expenses/repository/calculate_repository.dart';
 import 'package:income_and_expenses/repository/calculate_sf_cartesian_chart_repository.dart';
 import 'package:income_and_expenses/repository/calculate_sf_circular_chart_repository.dart';
-import 'package:income_and_expenses/repository/income_repository.dart';
 import 'package:income_and_expenses/repository/change_currency_repository.dart';
 import 'package:income_and_expenses/repository/change_language_repository.dart';
 import 'package:income_and_expenses/repository/date_time_repository.dart';
@@ -67,7 +64,7 @@ class _MyAppState extends State<MyApp> {
       providers: [
         BlocProvider(
             create: (BuildContext context) =>
-                SetDateBloc(SetDateRepository(), CalculateRepository(), IncomeRepository())),
+                SetDateBloc(SetDateRepository(), CalculateRepository())),
         BlocProvider(
             create: (BuildContext context) =>
                 ChangeLanguageBloc(ChangeLanguageRepository())),
@@ -86,7 +83,6 @@ class _MyAppState extends State<MyApp> {
       ],
       child: MaterialApp(
         theme: ThemeData(
-          // This is the theme of your application.
           colorScheme: ColorScheme.fromSeed(seedColor: AppColors.cashContainerColor),
           useMaterial3: true,
         ),

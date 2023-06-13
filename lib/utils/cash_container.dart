@@ -7,7 +7,6 @@ import 'package:income_and_expenses/bloc/change_language_bloc/state.dart';
 import 'package:income_and_expenses/bloc/set_date_bloc/state.dart';
 import 'package:income_and_expenses/const/app_colors.dart';
 import 'package:income_and_expenses/const/language.dart';
-import 'package:income_and_expenses/pages/edit.income_page.dart';
 import 'package:income_and_expenses/pages/income_details_page.dart';
 import 'package:persian_number_utility/persian_number_utility.dart';
 import '../bloc/change_currency_bloc/bloc.dart';

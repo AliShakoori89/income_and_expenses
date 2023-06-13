@@ -63,7 +63,6 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
   Future checkFirstSeen() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    print("!!!!!!!!!!!!!!1!!!!!     "+prefs.getBool('seen').toString());
     prefs.getBool('seen') == null || prefs.getBool('seen') == false
         ? await prefs.setBool('seen', false)
         : await prefs.setBool('seen', true);
@@ -118,10 +117,10 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         TargetContent(
           align: ContentAlign.top,
           builder: (context, controller) {
-            return Column(
+            return const Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const <Widget>[
+              children: <Widget>[
                 Text(
                   "صفحه اصلی",
                   style: TextStyle(
@@ -142,10 +141,10 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         TargetContent(
           align: ContentAlign.top,
           builder: (context, controller) {
-            return Column(
+            return const Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const <Widget>[
+              children: <Widget>[
                 Text(
                   "نمودار هزیته های مالانه",
                   style: TextStyle(
@@ -166,10 +165,10 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         TargetContent(
           align: ContentAlign.top,
           builder: (context, controller) {
-            return Column(
+            return const Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: const <Widget>[
+              children: <Widget>[
                 Text(
                   "اضافه کردن هزینه ",
                   style: TextStyle(
@@ -190,10 +189,10 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         TargetContent(
           align: ContentAlign.top,
           builder: (context, controller) {
-            return Column(
+            return const Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.end,
-              children: const <Widget>[
+              children: <Widget>[
                 Text(
                   "نمودار هریبه های سالانه",
                   style: TextStyle(
@@ -214,10 +213,10 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         TargetContent(
           align: ContentAlign.top,
           builder: (context, controller) {
-            return Column(
+            return const Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.end,
-              children: const <Widget>[
+              children: <Widget>[
                 Text(
                   "تنظیمات",
                   style: TextStyle(
@@ -239,10 +238,10 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
           TargetContent(
             align: ContentAlign.bottom,
             builder: (context, controller) {
-              return Column(
+              return const Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.end,
-                children: const <Widget>[
+                children: <Widget>[
                   Text(
                     "وارد کردن درآمد",
                     style: TextStyle(
@@ -374,30 +373,32 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         type: BottomNavigationBarType.fixed,
         backgroundColor: AppColors.calenderBoxColor,
         selectedItemColor: AppColors.mainColor,
-        items: <BottomNavigationBarItem>[
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        items:[
           BottomNavigationBarItem(
+            label: '',
             icon: Icon(
                 key: keyButton,
                 Icons.home),
-            label: '',
           ),
           BottomNavigationBarItem(
+            label: '',
             icon: Icon(
                 key: keyButton1,
                 Icons.pie_chart),
-            label: '',
           ),
           BottomNavigationBarItem(
+            label: '',
             icon: Icon(
                 key: keyButton3,
                 Icons.bar_chart),
-            label: '',
           ),
           BottomNavigationBarItem(
+            label: '',
             icon: Icon(
                 key: keyButton4,
                 Icons.settings),
-            label:'',
           ),
         ],
         currentIndex: _bottomNavIndex,

@@ -77,8 +77,12 @@ class SetDateRepository {
     return await helper.saveExpense(expenseModel);
   }
 
-  deleteExpensesRepo(int id) async {
-    return await helper.deleteItem(id);
+  deleteExpenseRepo(int id) async {
+    return await helper.deleteExpense(id);
+  }
+
+  deleteIncomeRepo(int id) async {
+    return await helper.deleteIncome(id);
   }
 
   Future<int> updateExpenseItem(ExpenseModel expenseModel) async {
@@ -100,5 +104,22 @@ class SetDateRepository {
     final prefs = await SharedPreferences.getInstance();
     final String? todayExpenses = prefs.getString('todayExpenses');
     return todayExpenses;
+  }
+
+  //*************************************************************
+
+  addIncome(IncomeModel incomeModel) async{
+    return await helper.saveIncome(incomeModel);
+  }
+
+  Future<String> readIncome(String month) async {
+    final String income = await helper.fetchIncomePerMonth(month) ?? "";
+    return income;
+  }
+
+  Future<List<IncomeModel>> getAllIncomeItems (String month) async{
+    print("111111111111111111111");
+    final List<IncomeModel> allIncome = await helper.getAllIncomeItems(month);
+    return allIncome;
   }
 }
