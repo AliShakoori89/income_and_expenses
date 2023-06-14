@@ -189,7 +189,7 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         TargetContent(
           align: ContentAlign.top,
           builder: (context, controller) {
-            return const Column(
+            return  const Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: <Widget>[

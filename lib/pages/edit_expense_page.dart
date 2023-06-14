@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:income_and_expenses/pages/home_page.dart';
+import 'package:income_and_expenses/pages/main_expenses_page.dart';
 import 'package:persian_number_utility/persian_number_utility.dart';
 import '../bloc/change_language_bloc/bloc.dart';
 import '../bloc/change_language_bloc/state.dart';
@@ -16,6 +17,7 @@ import '../model/expense_model.dart';
 import '../utils/app_text_field.dart';
 import '../utils/arrow_back_icon.dart';
 import '../utils/widget.dart';
+import 'add_expense_page.dart';
 
 class EditedExpensePage extends StatefulWidget {
   final ExpenseModel expenseModel;
@@ -128,7 +130,10 @@ class _EditedExpensePageState extends State<EditedExpensePage> {
                                       widget.expenseModel.id!,
                                       widget.expenseModel.expenseDate!,
                                       widget.expenseModel.expenseMonth!));
-                                  Navigator.pop(context);
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) =>
+                                      const MyHomePage()));
                                 },
                                 child: Container(
                                   height:

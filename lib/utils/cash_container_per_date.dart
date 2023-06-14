@@ -18,6 +18,7 @@ import '../bloc/them_bloc/state.dart';
 import '../const/language.dart';
 import '../pages/edit_expense_page.dart';
 import 'no_data.dart';
+import 'package:intl/intl.dart' as intl;
 
 class CashContainerPerDate extends StatefulWidget {
 
@@ -153,6 +154,7 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                                         crossAxisAlignment: CrossAxisAlignment.end,
                                         children: [
                                           Text(
+                                              textAlign: TextAlign.end,
                                               state.expenseDetails[index].expenseCategory!.getString(context),
                                               style: TextStyle(
                                                   fontSize: MediaQuery.of(context).size.width / 25,
@@ -161,6 +163,7 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                                                       ? AppColors.black
                                                       : Colors.white)),
                                           Text(
+                                              textAlign: TextAlign.end,
                                               state.expenseDetails[index]
                                                   .expensesDescription!,
                                               style: TextStyle(
@@ -221,6 +224,7 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
+                                  textAlign: TextAlign.start,
                                   state.expenseDetails[index].expenseCategory!.getString(context),
                                   style: TextStyle(
                                       fontSize: MediaQuery.of(context).size.width / 25,
@@ -229,6 +233,7 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                                           ? AppColors.black
                                           : Colors.white)),
                               Text(
+                                  textAlign: TextAlign.start,
                                   state.expenseDetails[index]
                                       .expensesDescription!,
                                   style: TextStyle(
