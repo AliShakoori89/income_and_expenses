@@ -162,7 +162,7 @@ class _MonthChartState extends State<MonthChart> {
                                   : AppColors.darkArrowButtonColor
                           ),
                           dropdownElevation: 0,
-                          scrollbarRadius:  Radius.circular(15),
+                          scrollbarRadius:  const Radius.circular(15),
                           scrollbarThickness: MediaQuery.of(context).size.width / 80,
                           scrollbarAlwaysShow: true,
                           offset: const Offset(-20, 0),

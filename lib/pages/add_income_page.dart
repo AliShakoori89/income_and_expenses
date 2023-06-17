@@ -187,7 +187,10 @@ class _AddIncomePageState extends State<AddIncomePage> {
                     setDateBloc.add(
                         AddIncomeEvent(incomeModel: incomeModel, month: incomeModel.incomeMonth!));
 
-                    Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const MyHomePage()),
+                    );
                   }
                 },
                 child: Padding(

@@ -368,41 +368,44 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     final List<Widget> pages = _pages();
 
     return Scaffold(
+      extendBody: true,
       body: pages[_bottomNavIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: AppColors.calenderBoxColor,
-        selectedItemColor: AppColors.mainColor,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        items:[
-          BottomNavigationBarItem(
-            label: '',
-            icon: Icon(
-                key: keyButton,
-                Icons.home),
-          ),
-          BottomNavigationBarItem(
-            label: '',
-            icon: Icon(
-                key: keyButton1,
-                Icons.pie_chart),
-          ),
-          BottomNavigationBarItem(
-            label: '',
-            icon: Icon(
-                key: keyButton3,
-                Icons.bar_chart),
-          ),
-          BottomNavigationBarItem(
-            label: '',
-            icon: Icon(
-                key: keyButton4,
-                Icons.settings),
-          ),
-        ],
-        currentIndex: _bottomNavIndex,
-        onTap: onTapNav,
+      bottomNavigationBar: SizedBox(
+        child: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: AppColors.calenderBoxColor,
+          selectedItemColor: AppColors.mainColor,
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          items:[
+            BottomNavigationBarItem(
+              label: '',
+              icon: Icon(
+                  key: keyButton,
+                  Icons.home),
+            ),
+            BottomNavigationBarItem(
+              label: '',
+              icon: Icon(
+                  key: keyButton1,
+                  Icons.pie_chart),
+            ),
+            BottomNavigationBarItem(
+              label: '',
+              icon: Icon(
+                  key: keyButton3,
+                  Icons.bar_chart),
+            ),
+            BottomNavigationBarItem(
+              label: '',
+              icon: Icon(
+                  key: keyButton4,
+                  Icons.settings),
+            ),
+          ],
+          currentIndex: _bottomNavIndex,
+          onTap: onTapNav,
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColors.mainColor,

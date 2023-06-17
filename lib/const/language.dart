@@ -40,7 +40,7 @@ mixin AppLocale {
   static const String comestible = "خوراکی";
   static const String buyItems = "خرید اقلام";
   static const String installmentsAndDebt = "اقساط و بدهی";
-  static const String yarane = "یارانه";
+  static const String subsidy = "یارانه";
   static const String treatment = "درمانی";
   static const String other = "سایر";
   static const String gifts = "هدایا";
@@ -102,7 +102,7 @@ mixin AppLocale {
     comestible: 'comestible',
     buyItems: "buy items",
     installmentsAndDebt: "installments and debt",
-    yarane: "narayana",
+    subsidy: "subsidy",
     treatment: "treatment",
     other: "other",
     gifts: "gifts",
@@ -161,7 +161,7 @@ mixin AppLocale {
     comestible: 'خوراکی',
     buyItems: "خرید اقلام",
     installmentsAndDebt: "اقساط و بدهی",
-    yarane: "یارانه",
+    subsidy: "یارانه",
     treatment: "درمانی",
     gifts: "هدایا",
     reward: "جایزه",

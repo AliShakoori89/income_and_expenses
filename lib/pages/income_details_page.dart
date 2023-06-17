@@ -14,6 +14,7 @@ import '../bloc/them_bloc/state.dart';
 import '../const/app_colors.dart';
 import '../const/language.dart';
 import '../utils/arrow_back_icon.dart';
+import 'add_income_page.dart';
 
 class IncomeDetailsPage extends StatefulWidget {
 
@@ -58,7 +59,10 @@ class _IncomeDetailsPageState extends State<IncomeDetailsPage> {
               child: FloatingActionButton(
                 backgroundColor: AppColors.mainColor,
                 onPressed: (){
-
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const AddIncomePage()),
+                  );
                 },
                 child: Icon(Icons.add),
               ),
@@ -115,7 +119,9 @@ class _IncomeDetailsPageState extends State<IncomeDetailsPage> {
                             ? Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            Expanded(child: Text("${incomeList[index].income}".toPersianDigit().seRagham())),
+                            Expanded(child: Text("${incomeList[index].income}".toPersianDigit().seRagham(), style: TextStyle(
+                              fontSize: MediaQuery.of(context).size.width / 20
+                            ),)),
                             const Spacer(),
                             Padding(
                               padding: EdgeInsets.only(top: MediaQuery.of(context).size.height / 100),
@@ -129,16 +135,13 @@ class _IncomeDetailsPageState extends State<IncomeDetailsPage> {
                                           fontSize: MediaQuery.of(context).size.width / 25),
                                     ),
                                   ),
-                                  Flexible(child: SizedBox(
-                                      width: MediaQuery.of(context).size.width / 2.5,
-                                      child: Text("${incomeList[index].incomeDescription}",
-                                        overflow: TextOverflow.clip,
-                                        maxLines: 1,
-                                        softWrap: true,
-                                        style: TextStyle(
-                                            fontSize: MediaQuery.of(context).size.width / 30
-                                        ),
-                                      )
+                                  Flexible(child: Text("${incomeList[index].incomeDescription}",
+                                    overflow: TextOverflow.clip,
+                                    maxLines: 1,
+                                    softWrap: true,
+                                    style: TextStyle(
+                                        fontSize: MediaQuery.of(context).size.width / 30
+                                    ),
                                   )
                                   ),
                                 ],
@@ -178,17 +181,34 @@ class _IncomeDetailsPageState extends State<IncomeDetailsPage> {
                             : Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Container(
-                              width: MediaQuery.of(context).size.width / 8,
-                              height: MediaQuery.of(context).size.width / 8,
-                              margin: EdgeInsets.all(MediaQuery.of(context).size.width / 30),
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: AppColors.colorList[index]),
-                              child: Container(
-                                margin: EdgeInsets.all(MediaQuery.of(context).size.width / 60),
-                                child: SvgPicture.asset("${incomeList[index].incomeIconType}"),
-                              ),
+                            Stack(
+                              alignment: Alignment.topLeft,
+                              children: [
+                                GestureDetector(
+                                  onTap: (){
+                                    final incomeBloc = BlocProvider.of<SetDateBloc>(context);
+                                    incomeBloc.add(DeleteIncomeEvent(incomeList[index].id!, incomeList[index].incomeDate!, incomeList[index].incomeMonth!));
+                                    Navigator.pop(context);
+                                  },
+                                  child: Icon(
+                                    Icons.close,
+                                    size: MediaQuery.of(context).size.width / 20,
+                                    color: Colors.black.withOpacity(0.4),
+                                  ),
+                                ),
+                                Container(
+                                  width: MediaQuery.of(context).size.width / 8,
+                                  height: MediaQuery.of(context).size.width / 8,
+                                  margin: EdgeInsets.all(MediaQuery.of(context).size.width / 30),
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: AppColors.colorList[index]),
+                                  child: Container(
+                                    margin: EdgeInsets.all(MediaQuery.of(context).size.width / 60),
+                                    child: SvgPicture.asset("${incomeList[index].incomeIconType}"),
+                                  ),
+                                ),
+                              ],
                             ),
                             Padding(
                               padding: EdgeInsets.only(top: MediaQuery.of(context).size.height / 100),
@@ -197,13 +217,23 @@ class _IncomeDetailsPageState extends State<IncomeDetailsPage> {
                                 children: [
                                   Flexible(
                                     child: Text(
-                                      "${incomeList[index].incomeCategory}",
+                                      incomeList[index].incomeCategory == "حقوق"
+                                          ? "Stipend"
+                                          : incomeList[index].incomeCategory == "جایزه"
+                                          ? "Reward"
+                                          : incomeList[index].incomeCategory == "هدایا"
+                                          ? "gift"
+                                          : incomeList[index].incomeCategory == "یارانه"
+                                          ? "Subsidy"
+                                          : incomeList[index].incomeCategory == "فروش"
+                                          ? "Sale"
+                                          : "Other",
                                       style: TextStyle(
                                           fontSize: MediaQuery.of(context).size.width / 25),
                                     ),
                                   ),
                                   Flexible(child: SizedBox(
-                                      width: MediaQuery.of(context).size.width / 4,
+                                      width: MediaQuery.of(context).size.width / 5,
                                       child: Text("${incomeList[index].incomeDescription}",
                                         overflow: TextOverflow.clip,
                                         maxLines: 1,
@@ -216,7 +246,11 @@ class _IncomeDetailsPageState extends State<IncomeDetailsPage> {
                               ),
                             ),
                             const Spacer(),
-                            Expanded(child: Text("${incomeList[index].income}".seRagham())),
+                            Expanded(child: Text("${incomeList[index].income}".seRagham(),
+                                style: TextStyle(
+                                fontSize: MediaQuery.of(context).size.width / 27,
+                                  fontWeight: FontWeight.w900
+                            ))),
                           ],
                         ),
                       ),

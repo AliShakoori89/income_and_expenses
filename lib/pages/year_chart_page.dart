@@ -57,15 +57,15 @@ class _YearChartPageState extends State<YearChartPage> {
       return BlocBuilder<CalculateSFCartesianChartBloc, CalculateSFCartesianChartState>(builder: (context, state) {
 
         data = [
-          _ChartData(AppLocale.buyItems.getString(context), double.parse(state.buyItemsExpenses)/100000),
-          _ChartData(AppLocale.comestible.getString(context), double.parse(state.comestibleExpenses)/100000),
-          _ChartData(AppLocale.transportation.getString(context), double.parse(state.transportationExpenses)/100000),
-          _ChartData(AppLocale.installmentsAndDebt.getString(context), double.parse(state.installmentsAndDebtExpenses)/100000),
-          _ChartData(AppLocale.treatment.getString(context), double.parse(state.treatmentExpenses)/100000),
-          _ChartData(AppLocale.gifts.getString(context), double.parse(state.giftsExpenses)/100000),
-          _ChartData(AppLocale.comestible.getString(context), double.parse(state.renovationExpenses)/100000),
-          _ChartData(AppLocale.comestible.getString(context), double.parse(state.pastimeExpenses)/100000),
-          _ChartData(AppLocale.comestible.getString(context), double.parse(state.etceteraExpenses)/100000),
+          _ChartData((AppLocale.buyItems.getString(context)).substring(0,6), double.parse(state.buyItemsExpenses)/100000),
+          _ChartData((AppLocale.comestible.getString(context)).substring(0,6), double.parse(state.comestibleExpenses)/100000),
+          _ChartData((AppLocale.transportation.getString(context)).substring(0,6), double.parse(state.transportationExpenses)/100000),
+          _ChartData((AppLocale.installmentsAndDebt.getString(context)).substring(0,6), double.parse(state.installmentsAndDebtExpenses)/100000),
+          _ChartData((AppLocale.treatment.getString(context)).substring(0,6), double.parse(state.treatmentExpenses)/100000),
+          _ChartData((AppLocale.gifts.getString(context)).substring(0,3), double.parse(state.giftsExpenses)/100000),
+          _ChartData((AppLocale.subsidy.getString(context)).substring(0,6), double.parse(state.renovationExpenses)/100000),
+          _ChartData((AppLocale.treatment.getString(context)).substring(0,6), double.parse(state.pastimeExpenses)/100000),
+          _ChartData((AppLocale.other.getString(context)).substring(0,4), double.parse(state.etceteraExpenses)/100000),
         ];
         _tooltip = TooltipBehavior(enable: true);
 
@@ -145,6 +145,15 @@ class _YearChartPageState extends State<YearChartPage> {
                                 color: Colors.white
                             )),
                         primaryXAxis: CategoryAxis(
+                            labelRotation: 90,
+                            labelStyle: TextStyle(
+                                fontFamily: 'Roboto',
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                              color: darkThemeBoolean == "false"
+                                  ? AppColors.appBarTitleColor
+                                  : Colors.white
+                            )
                         ),
                         primaryYAxis: NumericAxis(minimum: 0, maximum: 100, interval: 10),
                         tooltipBehavior: _tooltip,
@@ -164,7 +173,7 @@ class _YearChartPageState extends State<YearChartPage> {
                                 )),
                             onCreateRenderer: (ChartSeries<_ChartData, String> series) =>
                                 _CustomColumnSeriesRenderer(),
-                            color: AppColors.chartColor,),
+                            color: AppColors.chartColor),
                         ]
                     ),
                   ),

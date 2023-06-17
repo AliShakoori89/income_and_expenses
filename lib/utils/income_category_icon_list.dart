@@ -74,7 +74,7 @@ class IncomeCategoryIconList extends StatelessWidget {
                                   : groupName == 'فروش'
                                   ? AppLocale.sale.getString(context)
                                   : groupName == 'یارانه'
-                                  ? AppLocale.yarane.getString(context)
+                                  ? AppLocale.subsidy.getString(context)
                                   : AppLocale.other.getString(context),
                                 overflow: TextOverflow.ellipsis,),
                             ],
