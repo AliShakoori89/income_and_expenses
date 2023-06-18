@@ -63,6 +63,7 @@ dependencies:
   flutter_linear_datepicker: ^2.0.4
   flutter_launcher_icons: ^0.13.1
   flutter_slidable: ^3.0.0
+  curved_navigation_bar: ^1.0.3
 #  datepicker_dropdown: ^0.0.7+3
 #  flutter_linear_datepicker: ^2.0.4
 #  persian_datepicker:

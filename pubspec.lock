@@ -137,6 +137,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.5"
+  curved_navigation_bar:
+    dependency: "direct main"
+    description:
+      name: curved_navigation_bar
+      sha256: ea6412d00c5d83501bbf1cf9d1ac2ff11a20fbaf910c103c95ace7de82910334
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.3"
   device_frame:
     dependency: transitive
     description:
@@ -226,10 +234,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_linear_datepicker
-      sha256: "5a799a2ffdffd6831e2af9d08fb6045b6535f90b17d8c881581cf0754fc58247"
+      sha256: "3c868801330f6452da69802daa8b6e27a9c308f5e193a1726ed621607cbc6056"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.4"
+    version: "2.0.5"
   flutter_lints:
     dependency: transitive
     description:

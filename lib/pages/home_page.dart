@@ -38,9 +38,9 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   List<Widget> _pages() =>
       [
         MainExpensesPage(keyBottomNavigation1: keyBottomNavigation1,
-        keyBottomNavigation2: keyBottomNavigation2,
-        keyBottomNavigation3: keyBottomNavigation3,
-        keyBottomNavigation4: keyBottomNavigation4),
+            keyBottomNavigation2: keyBottomNavigation2,
+            keyBottomNavigation3: keyBottomNavigation3,
+            keyBottomNavigation4: keyBottomNavigation4),
         const MonthChart(),
         const YearChartPage(),
         const SettingPage(),
