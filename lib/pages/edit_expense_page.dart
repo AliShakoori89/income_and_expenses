@@ -158,9 +158,11 @@ class _EditedExpensePageState extends State<EditedExpensePage> {
                     ),
                   );
                 },
-                child: const Icon(
+                child: Icon(
                   Icons.delete,
-                  color: AppColors.appBarProfileName,
+                  color: darkThemeBoolean == "false"
+                      ? AppColors.appBarTitleColor
+                      : Colors.white,
                 ),
               ),
               SizedBox(
@@ -203,7 +205,9 @@ class _EditedExpensePageState extends State<EditedExpensePage> {
                               : _editedExpensesModel.expenseDate.toString(),
                           style: TextStyle(
                               fontSize: MediaQuery.of(context).size.width / 15,
-                              color: AppColors.appBarTitleColor)),
+                              color: darkThemeBoolean == "false"
+                                  ? AppColors.appBarTitleColor
+                                  : Colors.white)),
                       SizedBox(
                         height: MediaQuery.of(context).size.height / 30,
                       ),
@@ -259,6 +263,10 @@ class _EditedExpensePageState extends State<EditedExpensePage> {
                                 decoration: textInputDecoration.copyWith(
                                   labelText:
                                       AppLocale.grouping.getString(context),
+                                  labelStyle: TextStyle(
+                                    fontSize: MediaQuery.of(context).size.width / 20,
+                                      color: darkThemeBoolean == "false" ? Colors.black : Colors.white70, fontWeight: FontWeight.w900
+                                  )
                                 )),
                           ),
                           SizedBox(

@@ -54,6 +54,9 @@ class _IncomeDetailsPageState extends State<IncomeDetailsPage> {
           var incomeList = state.incomeDetails;
 
           return Scaffold(
+            backgroundColor: darkThemeBoolean == "false"
+                ? Colors.white
+                : AppColors.darkThemeColor,
             floatingActionButton: Align(
               alignment: Alignment.bottomRight,
               child: FloatingActionButton(
@@ -86,7 +89,7 @@ class _IncomeDetailsPageState extends State<IncomeDetailsPage> {
             ),
             body: Container(
                 decoration: BoxDecoration(
-                    color: AppColors.themContainer,
+                  color: AppColors.themContainer,
                     borderRadius: BorderRadius.circular(25)
                 ),
                 margin: EdgeInsets.only(

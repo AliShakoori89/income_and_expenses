@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:income_and_expenses/pages/main_expenses_page.dart';
 import 'package:income_and_expenses/pages/setting_page.dart';
 import 'package:income_and_expenses/pages/year_chart_page.dart';
 import 'package:income_and_expenses/const/app_colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
+import '../bloc/them_bloc/bloc.dart';
+import '../bloc/them_bloc/state.dart';
 import 'add_expense_page.dart';
 import 'month_chart_page.dart';
 
@@ -367,14 +370,23 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
     final List<Widget> pages = _pages();
 
-    return Scaffold(
+    return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
+
+      var darkThemeBoolean = state.darkThemeBoolean;
+
+      return Scaffold(
       extendBody: true,
       body: pages[_bottomNavIndex],
       bottomNavigationBar: SizedBox(
         child: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
-          backgroundColor: AppColors.calenderBoxColor,
+          backgroundColor: darkThemeBoolean == "false"
+              ? Colors.white
+              : AppColors.darkThemeColor,
           selectedItemColor: AppColors.mainColor,
+          unselectedItemColor: darkThemeBoolean == "false"
+              ? Colors.grey
+              : Colors.white,
           showSelectedLabels: false,
           showUnselectedLabels: false,
           items:[
@@ -423,5 +435,5 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       floatingActionButtonLocation:
       FloatingActionButtonLocation.miniCenterDocked,
     );
-  }
+    });}
 }
