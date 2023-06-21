@@ -43,35 +43,32 @@ class _AppTextFieldState extends State<AppTextField> {
       return Directionality(
         textDirection: englishLanguageBoolean == false ? TextDirection.rtl : TextDirection.ltr,
         child: TextFormField(
-          style: TextStyle(
-              color: widget.themeBoolean == "false"
-                  ? Colors.black
-                  : Colors.white70
+          style: const TextStyle(
+              color: Colors.black
           ),
           readOnly: widget.clickable == true ? true : false,
           controller: widget.controller,
-          keyboardType: widget.labelText == "هزینه" || widget.labelText == "expense" || widget.labelText == "مبلغ ورودی" || widget.labelText == "income"
+          keyboardType: widget.labelText == "هزینه" || widget.labelText == "expense" ||
+              widget.labelText == "مبلغ ورودی" || widget.labelText == "income"
               ? TextInputType.number : null,
           maxLines: widget.labelText == "توضیحات" ? 6 : null,
           decoration: textInputDecoration.copyWith(
               filled: true, //<-- SEE HERE
               fillColor: Colors.white, //<-- SEE HERE
-              suffixText: widget.labelText == "هزینه" || widget.labelText == "expense" || widget.labelText == "مبلغ ورودی" || widget.labelText == "income"
+              suffixText: widget.labelText == "هزینه" || widget.labelText == "expense" ||
+                  widget.labelText == "مبلغ ورودی" || widget.labelText == "income"
                   ? englishLanguageBoolean == false ? "تومان" : "T"
                   : "",
-              suffixStyle: TextStyle(
-                  color: widget.themeBoolean == "false"
-                      ? Colors.black
-                      : Colors.white70
+              suffixStyle: const TextStyle(
+                  color: Colors.black
               ),
               labelText: widget.labelText,
-              labelStyle: TextStyle(
-                  color: widget.themeBoolean == "false"
-                      ? Colors.black
-                      : Colors.white70
+              labelStyle: const TextStyle(
+                  color: Colors.black
               )
           ),
-          inputFormatters: widget.labelText == "هزینه" || widget.labelText == "expense" || widget.labelText == "مبلغ ورودی" || widget.labelText == "income"  ? [
+          inputFormatters: widget.labelText == "هزینه" || widget.labelText == "expense" ||
+              widget.labelText == "مبلغ ورودی" || widget.labelText == "income"  ? [
             CurrencyInputFormatter(
               useSymbolPadding: true,
               thousandSeparator: ThousandSeparator.Comma,

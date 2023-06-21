@@ -256,9 +256,12 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
   void _mapAddExpenseEventToState(
       AddOneByOneExpenseEvent event, Emitter<SetDateState> emit) async {
     try {
+      await setDateRepository.initialDate();
+      final String date = await setDateRepository.readDate();
+      final String month = await setDateRepository.readMonth();
       await setDateRepository.addExpenseRepo(event.expenseModel);
       final List<ExpenseModel> expensesDetails =
-      await setDateRepository.getAllExpensesItemsRepo(event.date);
+      await setDateRepository.getAllExpensesItemsRepo(date);
       String calculateCash = await calculateExpensesRepository.calculateCash(event.month);
       final String expensesPerDate =
       await calculateExpensesRepository.calculateDayExpenseRepo(event.date);

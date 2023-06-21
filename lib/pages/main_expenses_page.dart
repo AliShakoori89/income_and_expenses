@@ -45,14 +45,14 @@ class _MainExpensesPageState extends State<MainExpensesPage> {
 
   String date = "";
 
-  @override
-  void initState() {
-
-    BlocProvider.of<SetDateBloc>(context)
-        .add(InitialDateEvent());
-
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //
+  //   BlocProvider.of<SetDateBloc>(context)
+  //       .add(InitialDateEvent());
+  //
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
