@@ -45,13 +45,13 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
 
       return Container(
-        height: MediaQuery.of(context).size.height / 4,
+        height: MediaQuery.of(context).size.height / 3.9,
         margin: EdgeInsets.only(
           left: MediaQuery.of(context).size.width / 15,
           right: MediaQuery.of(context).size.width / 15,
         ),
         decoration: BoxDecoration(
-            color: AppColors.cashContainerColor,
+            color: AppColors.mainColor,
             borderRadius:
                 BorderRadius.circular(MediaQuery.of(context).size.width / 10)),
         child: BlocBuilder<ChangeLanguageBloc, ChangeLanguageState>(
@@ -97,8 +97,15 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
     return Align(
       alignment: Alignment.bottomRight,
       child: Container(
-        height: MediaQuery.of(context).size.height / 9,
+        height: MediaQuery.of(context).size.height / 8.5,
         decoration: BoxDecoration(
+            boxShadow: const [
+              BoxShadow(
+                color: Color.fromRGBO(184, 145, 236, 1.0),
+                blurRadius: 9,
+                offset: Offset(0, 0), // Shadow position
+              ),
+            ],
             border: Border.all(
                 color: AppColors.cashContainerShapeBorderColor, width: 2),
             borderRadius: BorderRadius.only(
@@ -449,6 +456,13 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
       child: Container(
         height: MediaQuery.of(context).size.height / 9,
         decoration: BoxDecoration(
+          boxShadow: const [
+            BoxShadow(
+              color: Color.fromRGBO(184, 145, 236, 1.0),
+              blurRadius: 9,
+              offset: Offset(0, 0), // Shadow position
+            ),
+          ],
             border: Border.all(
                 color: AppColors.cashContainerShapeBorderColor, width: 2),
             borderRadius: BorderRadius.only(

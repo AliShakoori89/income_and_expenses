@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 class AppColors{
-  static const Color mainColor = Color.fromRGBO(120, 111, 192, 1);
+  static const Color mainColor = Color.fromRGBO(197, 170, 236, 1.0);
   static const Color backGroundMainColor = Color.fromRGBO(241, 241, 241, 1.0);
   static const Color iconBackGroundMainColor = Color.fromRGBO(166, 165, 165, 1.0);
   static const Color iconUnSelectedBackGroundMainColor = Color.fromRGBO(185, 185, 185, 1.0);
@@ -51,11 +51,11 @@ class AppColors{
 
   static const Color lightColor = Color.fromRGBO(255, 148, 75, 1.0);
 
-  static const Color cashContainerColor = Color.fromRGBO(209, 184, 255, 1);
+  static const Color cashContainerColor = Color.fromRGBO(110, 180, 238, 1.0);
 
   static const Color cashContainerShapeBorderColor = Color.fromRGBO(236, 236, 236, 0.61);
 
-  static const Color noDataTextColor = Color.fromRGBO(165, 174, 177, 1);
+  static const Color noDataTextColor = Color.fromRGBO(60, 61, 61, 1.0);
 
   static const Color themContainer = Color.fromRGBO(179, 229, 252, 0.3);
 

@@ -22,11 +22,11 @@ import 'const/language.dart';
 
 void main() {
   runApp(
-    // DevicePreview(
-    //   enabled: !kReleaseMode,
-    //   builder: (context) =>
+    DevicePreview(
+      enabled: !kReleaseMode,
+      builder: (context) =>
     const MyApp(), // Wrap your app
-    // ),
+    ),
   );
 }
 
@@ -83,7 +83,7 @@ class _MyAppState extends State<MyApp> {
       ],
       child: MaterialApp(
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: AppColors.cashContainerColor),
+          colorScheme: ColorScheme.fromSeed(seedColor: AppColors.mainColor),
           useMaterial3: true,
         ),
         routes: {
