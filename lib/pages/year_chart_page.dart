@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_linear_datepicker/flutter_datepicker.dart';
 import 'package:flutter_localization/flutter_localization.dart';
+import 'package:persian_datetime_picker/persian_datetime_picker.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import '../bloc/calculate_sf_cartesian_chart/bloc.dart';
 import '../bloc/calculate_sf_cartesian_chart/event.dart';
@@ -41,6 +42,16 @@ class _YearChartPageState extends State<YearChartPage> {
     'اسفند',
   ];
   String? selectedValue;
+
+  @override
+  void initState() {
+    String selectedValue = "${Jalali.now().year}/${Jalali.now().month}";
+    BlocProvider.of<CalculateSFCartesianChartBloc>(context).add(
+        SumExpensesByGroupingTypePerMonthForSFCartesianChartEvent(
+            year: selectedValue.split("/").first,
+            month: selectedValue.split("/").last));
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -90,91 +101,133 @@ class _YearChartPageState extends State<YearChartPage> {
                   SizedBox(height: MediaQuery.of(context).size.height / 50),
                   Expanded(
                     flex: 7,
-                    child: LinearDatePicker(
-                      startDate: "1396/01",
-                      endDate: "1499/12",
-                      dateChangeListener: (String selectedDate) {
-
-                        selectedValue = selectedDate;
-
-                        BlocProvider.of<CalculateSFCartesianChartBloc>(context).add(
-                            SumExpensesByGroupingTypePerMonthForSFCartesianChartEvent(
-                                year: selectedValue!.split("/").first,
-                                month: selectedValue!.split("/").last));
-                      },
-                      showDay: false,
-                      selectedRowStyle: TextStyle(
-                        decoration: TextDecoration.underline,
-                        decorationStyle: TextDecorationStyle.double,
-                        decorationColor: darkThemeBoolean == "false" ? AppColors.mainColor : Colors.white,
-                        fontStyle: FontStyle.italic,
-
-                        fontFamily: 'iran',
-                        fontSize: MediaQuery.of(context).size.width / 20,
-                        color: darkThemeBoolean == "false" ? AppColors.mainColor : Colors.white,
-                        fontWeight: FontWeight.w900,
+                    child: Container(
+                      margin: EdgeInsets.all(
+                        MediaQuery.of(context).size.width / 10
                       ),
-                      yearText: "سال | year",
-                      monthText: "ماه | month",
-                      labelStyle: TextStyle(
-                        color: darkThemeBoolean == "false" ? Colors.black : Colors.white,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(25),
+                        color: Colors.white12,
+                        boxShadow: <BoxShadow>[
+                          BoxShadow(
+                            spreadRadius: 25,
+                            blurStyle: BlurStyle.normal,
+                              color: darkThemeBoolean == "false" ? Colors.black12 : Colors.white12,
+                              blurRadius: 25.0,
+                          )
+                        ],
                       ),
-                      unselectedRowStyle: TextStyle(
-                        color: darkThemeBoolean == "false" ? Colors.black : Colors.white,
+                      child: LinearDatePicker(
+                        startDate: "1396/01",
+                        endDate: "1499/12",
+                        dateChangeListener: (String selectedDate) {
+
+                          selectedValue = selectedDate;
+                          BlocProvider.of<CalculateSFCartesianChartBloc>(context).add(
+                              SumExpensesByGroupingTypePerMonthForSFCartesianChartEvent(
+                                  year: selectedValue!.split("/").first,
+                                  month: selectedValue!.split("/").last));
+                        },
+                        showDay: false,
+                        selectedRowStyle: TextStyle(
+                          decorationStyle: TextDecorationStyle.double,
+                          decorationColor: darkThemeBoolean == "false" ? Colors.black : Colors.white,
+                          fontStyle: FontStyle.italic,
+                          fontFamily: 'iran',
+                          fontSize: MediaQuery.of(context).size.width / 20,
+                          color: darkThemeBoolean == "false" ? Colors.black : Colors.white,
+                          fontWeight: FontWeight.w700,
+                        ),
+                        yearText: "سال | year",
+                        monthText: "ماه | month",
+                        labelStyle: TextStyle(
+                          color: darkThemeBoolean == "false" ? Colors.black : Colors.white,
+                          fontWeight: FontWeight.w700
+                        ),
+                        unselectedRowStyle: TextStyle(
+                          color: darkThemeBoolean == "false" ? Colors.black45 : Colors.white54,
+                        ),
+                        showLabels: true,
+                        columnWidth: MediaQuery.of(context).size.width / 4,
+                        showMonthName: true,
+                        isJalaali: true,
                       ),
-                      showLabels: true,
-                      columnWidth: MediaQuery.of(context).size.width / 4,
-                      showMonthName: true,
-                      isJalaali: true,
                     ),
                   ),
                   SizedBox(height: MediaQuery.of(context).size.height / 100),
                   Expanded(
                     flex: 8,
-                    child: SfCartesianChart(
-                        margin: EdgeInsets.only(
-                          top: MediaQuery.of(context).size.height / 30,
-                          bottom: MediaQuery.of(context).size.height / 30
-                        ),
-                        title: ChartTitle(
-                            text: AppLocale.expensePerYear.getString(context),
-                            textStyle: darkThemeBoolean == "false"
-                                ? const TextStyle(
-                                color: AppColors.appBarTitleColor)
-                                : const TextStyle(
-                                color: Colors.white
-                            )),
-                        primaryXAxis: CategoryAxis(
-                            labelRotation: 90,
-                            labelStyle: TextStyle(
-                                fontFamily: 'Roboto',
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
-                              color: darkThemeBoolean == "false"
-                                  ? AppColors.appBarTitleColor
-                                  : Colors.white
-                            )
-                        ),
-                        primaryYAxis: NumericAxis(minimum: 0, maximum: 100, interval: 10),
-                        tooltipBehavior: _tooltip,
-                        series: <ChartSeries<_ChartData, String>>[
-                          ColumnSeries<_ChartData, String>(
-                            dataSource: data,
-                            xValueMapper: (_ChartData data, _) => data.x,
-                            yValueMapper: (_ChartData data, _) => data.y,
-                            name: 'Gold',
-                            dataLabelSettings: DataLabelSettings(
-                                isVisible: true,
-                                labelAlignment: ChartDataLabelAlignment.middle,
-                                textStyle: TextStyle(
+                    child: Container(
+                      margin: EdgeInsets.all(
+                          MediaQuery.of(context).size.width / 10
+                      ),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(25),
+                        color: Colors.white12,
+                        boxShadow: <BoxShadow>[
+                          BoxShadow(
+                            spreadRadius: 25,
+                            blurStyle: BlurStyle.normal,
+                            color: darkThemeBoolean == "false" ? Colors.black12 : Colors.white12,
+                            blurRadius: 25.0,
+                          )
+                        ],
+                      ),
+                      child: SfCartesianChart(
+                          margin: EdgeInsets.only(
+                            top: MediaQuery.of(context).size.height / 30,
+                            bottom: MediaQuery.of(context).size.height / 30
+                          ),
+                          title: ChartTitle(
+                              text: AppLocale.expensePerYear.getString(context),
+                              textStyle: darkThemeBoolean == "false"
+                                  ? const TextStyle(
+                                  color: Colors.black)
+                                  : const TextStyle(
+                                  color: Colors.white
+                              )),
+                          primaryXAxis: CategoryAxis(
+                              labelRotation: 90,
+                              labelStyle: TextStyle(
+                                  fontFamily: 'Roboto',
+                                  fontSize: MediaQuery.of(context).size.width / 30,
+                                  fontWeight: FontWeight.w500,
+                                color: darkThemeBoolean == "false"
+                                    ? Colors.black
+                                    : Colors.white
+                              )
+                          ),
+                          primaryYAxis: NumericAxis(minimum: 0, maximum: 100, interval: 10,
+                              labelStyle: TextStyle(
+                                  fontFamily: 'Roboto',
+                                  fontSize: MediaQuery.of(context).size.width / 30,
+                                  fontWeight: FontWeight.w300,
                                   color: darkThemeBoolean == "false"
-                                      ? AppColors.appBarTitleColor
-                                      : Colors.white,
-                                )),
-                            onCreateRenderer: (ChartSeries<_ChartData, String> series) =>
-                                _CustomColumnSeriesRenderer(),
-                            color: AppColors.chartColor),
-                        ]
+                                      ? Colors.black
+                                      : Colors.white
+                              )),
+                          tooltipBehavior: _tooltip,
+                          plotAreaBorderWidth: 0,
+                          borderWidth: 0,
+                          series: <ChartSeries<_ChartData, String>>[
+                            ColumnSeries<_ChartData, String>(
+                              borderWidth: 0,
+                              dataSource: data,
+                              xValueMapper: (_ChartData data, _) => data.x,
+                              yValueMapper: (_ChartData data, _) => data.y,
+                              name: 'Gold',
+                              dataLabelSettings: DataLabelSettings(
+                                  isVisible: true,
+                                  labelAlignment: ChartDataLabelAlignment.middle,
+                                  textStyle: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: MediaQuery.of(context).size.width / 30
+                                  )),
+                              onCreateRenderer: (ChartSeries<_ChartData, String> series) =>
+                                  _CustomColumnSeriesRenderer(),
+                              color: AppColors.chartColor),
+                          ]
+                      ),
                     ),
                   ),
                   SizedBox(height: MediaQuery.of(context).size.height / 100),
@@ -192,7 +245,7 @@ class _YearChartPageState extends State<YearChartPage> {
                                   fontSize:
                                       MediaQuery.of(context).size.width / 25,
                                   color: darkThemeBoolean == "false"
-                                      ? AppColors.appBarTitleColor
+                                      ? Colors.black
                                       : Colors.white,
                                 ),
                               ),
@@ -262,7 +315,7 @@ class _CustomColumnSeriesRenderer extends ColumnSeriesRenderer {
 
 class _ColumnCustomPainter extends ColumnSegment {
   final colorList = [
-    const Color.fromRGBO(200, 230, 201, 1),
+    const Color.fromRGBO(102, 210, 106, 1.0),
     const Color.fromRGBO(225, 190, 231, 1),
     const Color.fromRGBO(255, 236, 179, 1),
     const Color.fromRGBO(248, 187, 208, 1),

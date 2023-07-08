@@ -126,8 +126,10 @@ class _MonthChartState extends State<MonthChart> {
                           value: selectedValue,
                           onChanged: (value) {
                             setState(() {
+
                               selectedValue = value as String;
-                              BlocProvider.of<CalculateSFCircularChartBloc>(context).add(SumExpensesPerMonthForCircularChartEvent(selectedValue!));
+                              BlocProvider.of<CalculateSFCircularChartBloc>(context).add(
+                                  SumExpensesPerMonthForCircularChartEvent(selectedValue!));
                             });
                           },
                           buttonHeight: MediaQuery.of(context).size.height / 22,

@@ -118,21 +118,6 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                         lastDate: Jalali(1450, 9),
                         builder: (context, child) {
                           return child!;
-                          //   Theme(
-                          //   data: Theme.of(context).copyWith(
-                          //     colorScheme: const ColorScheme.light(
-                          //       primary: AppColors.cashContainerColor, // header background color
-                          //       onPrimary: Colors.black, // header text color
-                          //       onSurface: Colors.black, // body text color
-                          //     ),
-                          //     textButtonTheme: TextButtonThemeData(
-                          //       style: TextButton.styleFrom(
-                          //         foregroundColor: AppColors.mainColor, // button text color
-                          //       ),
-                          //     ),
-                          //   ),
-                          //   child: child!,
-                          // );
                         },
                       ))!;
                       if (picked != selectedDate) {
