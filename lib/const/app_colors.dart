@@ -57,7 +57,8 @@ class AppColors{
 
   static const Color noDataTextColor = Color.fromRGBO(60, 61, 61, 1.0);
 
-  static const Color themContainer = Color.fromRGBO(179, 229, 252, 0.3);
+  static const Color themContainer = Color.fromRGBO(
+      111, 175, 204, 0.30196078431372547);
 
   static const List colorList = [
     Color.fromRGBO(200, 230, 201, 1),

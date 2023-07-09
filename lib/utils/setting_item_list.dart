@@ -132,51 +132,51 @@ class _SettingItemListState extends State<SettingItemList> {
                   showDialog(
                     context: context,
                     builder: (ctx) => AlertDialog(
-                      backgroundColor: Colors.white,
+                      backgroundColor: darkThemeBoolean == "false"
+                          ? Colors.white : AppColors.themContainer,
                       shape: const RoundedRectangleBorder(
                           borderRadius:
                               BorderRadius.all(Radius.circular(20.0))),
-                      title: englishLanguageBoolean == false
-                        ? Text(AppLocale.chooseCurrency.getString(context),
-                          textDirection: TextDirection.rtl,
-                          style: TextStyle(
-                              fontSize:
-                                  MediaQuery.of(context).size.width / 30,
-                              fontWeight: FontWeight.w900))
-                          : Text(AppLocale.chooseCurrency.getString(context),
-                          textDirection: TextDirection.ltr,
+                      title: Text(AppLocale.chooseCurrency.getString(context),
+                          textDirection: englishLanguageBoolean == false ? TextDirection.rtl : TextDirection.ltr,
                           style: TextStyle(
                               fontSize:
                               MediaQuery.of(context).size.width / 30,
-                              fontWeight: FontWeight.w900)),
-                      content: englishLanguageBoolean == false
-                          ? Text(
+                              fontWeight: FontWeight.w900,
+                              color: darkThemeBoolean == "false"
+                                  ? Colors.black : Colors.white)),
+                      content: Text(
                           AppLocale.chooseCurrencyQuestion.getString(context),
-                          textDirection: TextDirection.rtl,
+                          textDirection: englishLanguageBoolean == false
+                              ? TextDirection.rtl
+                              : TextDirection.ltr,
                           style: TextStyle(
                               fontSize:
-                                  MediaQuery.of(context).size.width / 30))
-                          : Text(
-                          AppLocale.chooseCurrencyQuestion.getString(context),
-                          textDirection: TextDirection.ltr,
-                          style: TextStyle(
-                              fontSize:
-                              MediaQuery.of(context).size.width / 30)),
+                                  MediaQuery.of(context).size.width / 30,
+                          color: darkThemeBoolean == "false"
+                              ? Colors.black : Colors.white,)),
                       actions: <Widget>[
                         Container(
                           margin: EdgeInsets.only(
                               left: MediaQuery.of(context).size.width / 10,
                               right: MediaQuery.of(context).size.width / 10,
-                              bottom:
-                              MediaQuery.of(context).size.height / 100
+                              bottom: MediaQuery.of(context).size.height / 100
                           ),
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               BlocBuilder<ChangeCurrencyBloc,
                                       ChangeCurrencyState>(
                                   builder: (context, state) {
                                 return TextButton(
+                                    style: ButtonStyle(
+                                      elevation: MaterialStateProperty.all(5), //Defines Elevation
+                                      shadowColor: MaterialStateProperty.all(
+                                          darkThemeBoolean == "false"
+                                              ? Colors.black : Colors.white
+                                      ), //Defines shadowColor
+                                      backgroundColor: MaterialStateProperty.all(Colors.white),
+                                    ),
                                     onPressed: () {
                                       BlocProvider.of<ChangeCurrencyBloc>(
                                               context)
@@ -186,12 +186,21 @@ class _SettingItemListState extends State<SettingItemList> {
                                       Navigator.of(ctx).pop();
                                     },
                                     child: Text(
-                                        AppLocale.rial.getString(context)));
+                                        AppLocale.rial.getString(context),
+                                    style: const TextStyle(color: Colors.black),));
                               }),
                               BlocBuilder<ChangeCurrencyBloc,
                                       ChangeCurrencyState>(
                                   builder: (context, state) {
                                 return TextButton(
+                                    style: ButtonStyle(
+                                      elevation: MaterialStateProperty.all(5), //Defines Elevation
+                                      shadowColor: MaterialStateProperty.all(
+                                          darkThemeBoolean == "false"
+                                              ? Colors.black : Colors.white
+                                      ), //Defines shadowColor
+                                      backgroundColor: MaterialStateProperty.all(Colors.white),
+                                    ),
                                     onPressed: () {
                                       BlocProvider.of<ChangeCurrencyBloc>(
                                               context)
@@ -201,7 +210,8 @@ class _SettingItemListState extends State<SettingItemList> {
                                       Navigator.of(ctx).pop();
                                     },
                                     child: Text(
-                                        AppLocale.toman.getString(context)));
+                                        AppLocale.toman.getString(context),
+                                        style: const TextStyle(color: Colors.black)));
                               }),
                             ],
                           ),
@@ -228,7 +238,8 @@ class _SettingItemListState extends State<SettingItemList> {
                   showDialog(
                     context: context,
                     builder: (ctx) => AlertDialog(
-                      backgroundColor: Colors.white,
+                      backgroundColor: darkThemeBoolean == "false"
+                          ? Colors.white : AppColors.themContainer,
                       shape: const RoundedRectangleBorder(
                           borderRadius:
                               BorderRadius.all(Radius.circular(20.0))),
@@ -236,6 +247,8 @@ class _SettingItemListState extends State<SettingItemList> {
                           ? Text(AppLocale.chooseTheme.getString(context),
                         textDirection: TextDirection.rtl,
                         style: TextStyle(
+                          color: darkThemeBoolean == "false"
+                              ? Colors.black : Colors.white,
                           fontWeight: FontWeight.w900,
                           fontSize: MediaQuery.of(context).size.width / 25,
                         ),
@@ -245,18 +258,25 @@ class _SettingItemListState extends State<SettingItemList> {
                         style: TextStyle(
                           fontWeight: FontWeight.w900,
                           fontSize: MediaQuery.of(context).size.width / 25,
+                          color: darkThemeBoolean == "false"
+                              ? Colors.black : Colors.white,
                         ),
                       ),
                       content: englishLanguageBoolean == false
                           ? Text(AppLocale.pleaseChooseYourTheme.getString(context),
                           textDirection: TextDirection.rtl,
                           style: TextStyle(
-                              fontSize: MediaQuery.of(context).size.width / 30))
+                              fontSize: MediaQuery.of(context).size.width / 30,
+                            color: darkThemeBoolean == "false"
+                                ? Colors.black : Colors.white,
+                          ))
                           : Text(AppLocale.pleaseChooseYourTheme.getString(context),
                           textDirection: TextDirection.ltr,
                           style: TextStyle(
                               fontSize:
-                              MediaQuery.of(context).size.width / 30)),
+                              MediaQuery.of(context).size.width / 30,
+                            color: darkThemeBoolean == "false"
+                                ? Colors.black : Colors.white,)),
                       actions: <Widget>[
                         Container(
                           margin: EdgeInsets.only(
@@ -267,9 +287,17 @@ class _SettingItemListState extends State<SettingItemList> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              GestureDetector(
+                              TextButton(
+                                  style: ButtonStyle(
+                                    backgroundColor: MaterialStateProperty.all(Colors.white),
+                                    elevation: MaterialStateProperty.all(3), //Defines Elevation
+                                    shadowColor: MaterialStateProperty.all(
+                                        darkThemeBoolean == "false"
+                                            ? Colors.black : Colors.white
+                                    ), //Defines shadowColor
+                                  ),
                                   child: const Icon(Icons.dark_mode),
-                                  onTap: () {
+                                  onPressed: () {
                                     BlocProvider.of<ThemeBloc>(context).add(
                                         WriteThemeBooleanEvent(
                                             darkThemeBoolean: true));
@@ -277,12 +305,20 @@ class _SettingItemListState extends State<SettingItemList> {
                                         .add(ReadThemeBooleanEvent());
                                     Navigator.of(ctx).pop();
                                   }),
-                              GestureDetector(
+                              TextButton(
+                                  style: ButtonStyle(
+                                    backgroundColor: MaterialStateProperty.all(Colors.white),
+                                    elevation: MaterialStateProperty.all(3), //Defines Elevation
+                                    shadowColor: MaterialStateProperty.all(
+                                        darkThemeBoolean == "false"
+                                            ? Colors.black : Colors.white
+                                    ), //Defines shadowColor
+                                  ),
                                   child: const Icon(
                                     Icons.light_mode,
                                     color: AppColors.lightColor,
                                   ),
-                                  onTap: () {
+                                  onPressed: () {
                                     BlocProvider.of<ThemeBloc>(context).add(
                                         WriteThemeBooleanEvent(
                                             darkThemeBoolean: false));
@@ -315,7 +351,8 @@ class _SettingItemListState extends State<SettingItemList> {
                   showDialog(
                     context: context,
                     builder: (ctx) => AlertDialog(
-                      backgroundColor: Colors.white,
+                      backgroundColor: darkThemeBoolean == "false"
+                          ? Colors.white : AppColors.themContainer,
                       shape: const RoundedRectangleBorder(
                           borderRadius:
                               BorderRadius.all(Radius.circular(20.0))),
@@ -323,12 +360,16 @@ class _SettingItemListState extends State<SettingItemList> {
                           ? Text(AppLocale.chooseLanguage.getString(context),
                         textDirection: TextDirection.rtl,
                         style: TextStyle(
+                            color: darkThemeBoolean == "false"
+                                ? Colors.black : Colors.white,
                             fontWeight: FontWeight.w900,
                             fontSize: MediaQuery.of(context).size.width / 25),
                       )
                           : Text(AppLocale.chooseLanguage.getString(context),
                         textDirection: TextDirection.ltr,
                         style: TextStyle(
+                            color: darkThemeBoolean == "false"
+                                ? Colors.black : Colors.white,
                             fontWeight: FontWeight.w900,
                             fontSize: MediaQuery.of(context).size.width / 25),
                       ),
@@ -338,6 +379,8 @@ class _SettingItemListState extends State<SettingItemList> {
                               .getString(context),
                           textDirection: TextDirection.rtl,
                           style: TextStyle(
+                              color: darkThemeBoolean == "false"
+                                  ? Colors.black : Colors.white,
                               fontSize:
                                   MediaQuery.of(context).size.width / 30))
                           : Text(
@@ -345,6 +388,8 @@ class _SettingItemListState extends State<SettingItemList> {
                               .getString(context),
                           textDirection: TextDirection.ltr,
                           style: TextStyle(
+                              color: darkThemeBoolean == "false"
+                                  ? Colors.black : Colors.white,
                               fontSize:
                               MediaQuery.of(context).size.width / 30)),
                       actions: <Widget>[
@@ -359,6 +404,14 @@ class _SettingItemListState extends State<SettingItemList> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               TextButton(
+                                style: ButtonStyle(
+                                  elevation: MaterialStateProperty.all(5), //Defines Elevation
+                                  shadowColor: MaterialStateProperty.all(
+                                      darkThemeBoolean == "false"
+                                          ? Colors.black : Colors.white
+                                  ), //Defines shadowColor
+                                  backgroundColor: MaterialStateProperty.all(Colors.white),
+                                ),
                                 onPressed: () {
                                   BlocProvider.of<ChangeLanguageBloc>(context)
                                       .add(WriteLanguageBooleanEvent(
@@ -370,9 +423,20 @@ class _SettingItemListState extends State<SettingItemList> {
                                   Navigator.of(ctx).pop();
                                 },
                                 child:
-                                    Text(AppLocale.english.getString(context)),
+                                    Text(AppLocale.english.getString(context),
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                    ),),
                               ),
                               TextButton(
+                                style: ButtonStyle(
+                                  elevation: MaterialStateProperty.all(5), //Defines Elevation
+                                  shadowColor: MaterialStateProperty.all(
+                                      darkThemeBoolean == "false"
+                                          ? Colors.black : Colors.white
+                                  ), //Defines shadowColor
+                                  backgroundColor: MaterialStateProperty.all(Colors.white),
+                                ),
                                 onPressed: () {
                                   BlocProvider.of<ChangeLanguageBloc>(context)
                                       .add(WriteLanguageBooleanEvent(
@@ -384,7 +448,10 @@ class _SettingItemListState extends State<SettingItemList> {
                                   Navigator.of(ctx).pop();
                                 },
                                 child:
-                                    Text(AppLocale.persian.getString(context)),
+                                    Text(AppLocale.persian.getString(context),
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                    ),),
                               ),
                             ],
                           ),

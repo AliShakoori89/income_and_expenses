@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:income_and_expenses/bloc/set_date_bloc/bloc.dart';
-import 'package:income_and_expenses/bloc/set_date_bloc/event.dart';
 import 'package:income_and_expenses/bloc/them_bloc/bloc.dart';
 import 'package:income_and_expenses/bloc/them_bloc/state.dart';
 import 'package:income_and_expenses/const/app_colors.dart';
@@ -44,15 +42,6 @@ class _MainExpensesPageState extends State<MainExpensesPage> {
       this.keyBottomNavigation4);
 
   String date = "";
-
-  // @override
-  // void initState() {
-  //
-  //   BlocProvider.of<SetDateBloc>(context)
-  //       .add(InitialDateEvent());
-  //
-  //   super.initState();
-  // }
 
   @override
   Widget build(BuildContext context) {

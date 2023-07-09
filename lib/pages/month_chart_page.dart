@@ -88,7 +88,7 @@ class _MonthChartState extends State<MonthChart> {
                   left: MediaQuery.of(context).size.width / 30,
                   right: MediaQuery.of(context).size.width / 30,
                   top: MediaQuery.of(context).size.height / 60,
-                  bottom: MediaQuery.of(context).size.height / 30,
+                  bottom: MediaQuery.of(context).size.height / 200,
                 ),
                 child: Column(
                   children: [

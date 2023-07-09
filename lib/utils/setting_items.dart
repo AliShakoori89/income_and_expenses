@@ -62,52 +62,88 @@ class SettingItems extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Icon(Icons.arrow_forward_ios,
+                    Container(
+                      decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              spreadRadius: 5,
+                              color: darkThemeBoolean == "false" ? Colors.black26 : Colors.white12,
+                              blurRadius: 10.0,
+                            )
+                          ],
+                          shape: BoxShape.circle,
                         color: darkThemeBoolean == "false"
-                            ? AppColors.darkArrowButtonColor
-                            : Colors.white,
-                        size:  MediaQuery.of(context).size.width / 25)
+                            ? Colors.white
+                            : AppColors.darkThemeColor,
+                      ),
+                      child: Container(
+                        margin: EdgeInsets.all(MediaQuery.of(context).size.width / 70),
+                        child: Icon(Icons.arrow_forward_ios,
+                            color: darkThemeBoolean == "false"
+                                ? AppColors.black
+                                : Colors.white,
+                            size:  MediaQuery.of(context).size.width / 25),
+                      ),
+                    )
                   ],
                 ),
           )
-            : Container(
-                width: double.infinity / 1.35,
-                height: MediaQuery.of(context).size.height / 10,
-                margin: EdgeInsets.only(
-                  right: MediaQuery.of(context).size.width / 20,
-                  left: MediaQuery.of(context).size.width / 20,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Icon(Icons.arrow_back_ios,
-                        color: darkThemeBoolean == "false"
-                            ? AppColors.darkArrowButtonColor
-                            : Colors.white,
-                        size: MediaQuery.of(context).size.width / 25),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Text(
-                          itemName.getString(context),
-                          textDirection: TextDirection.rtl,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w400,
-                            fontSize: MediaQuery.of(context).size.height / 50,
-                            color: darkThemeBoolean == "false"
-                                ? AppColors.appBarProfileName
-                                : Colors.white,
-                          ),
-                        ),
-                        SizedBox(width: MediaQuery.of(context).size.width / 20),
-                        SizedBox(
-                            width: MediaQuery.of(context).size.width / 20,
-                            child: Image.asset(imagePath)),
+          : Container(
+              width: double.infinity / 1.35,
+              height: MediaQuery.of(context).size.height / 10,
+              margin: EdgeInsets.only(
+                right: MediaQuery.of(context).size.width / 20,
+                left: MediaQuery.of(context).size.width / 20,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          spreadRadius: 5,
+                          color: darkThemeBoolean == "false" ? Colors.black26 : Colors.white12,
+                          blurRadius: 10.0,
+                        )
                       ],
+                      shape: BoxShape.circle,
+                      color: darkThemeBoolean == "false"
+                          ? Colors.white
+                          : AppColors.darkThemeColor,
                     ),
-                  ],
-                ),
-              );
+                    child: Container(
+                      margin: EdgeInsets.all(MediaQuery.of(context).size.width / 70),
+                      child: Icon(Icons.arrow_back_ios,
+                          color: darkThemeBoolean == "false"
+                              ? AppColors.black
+                              : Colors.white,
+                          size: MediaQuery.of(context).size.width / 25),
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text(
+                        itemName.getString(context),
+                        textDirection: TextDirection.rtl,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: MediaQuery.of(context).size.height / 50,
+                          color: darkThemeBoolean == "false"
+                              ? AppColors.appBarProfileName
+                              : Colors.white,
+                        ),
+                      ),
+                      SizedBox(width: MediaQuery.of(context).size.width / 20),
+                      SizedBox(
+                          width: MediaQuery.of(context).size.width / 20,
+                          child: Image.asset(imagePath)),
+                    ],
+                  ),
+                ],
+              ),
+            );
 
     });});
   }

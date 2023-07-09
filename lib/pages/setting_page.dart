@@ -28,8 +28,8 @@ class SettingPage extends StatelessWidget {
             margin: EdgeInsets.only(
               left: MediaQuery.of(context).size.width / 30,
               right: MediaQuery.of(context).size.width / 30,
-              top: MediaQuery.of(context).size.height / 1000,
-              bottom: MediaQuery.of(context).size.height / 30,
+              top: MediaQuery.of(context).size.height / 100,
+              bottom: MediaQuery.of(context).size.height / 200,
             ),
             child: const SettingItemList()),
       ),
