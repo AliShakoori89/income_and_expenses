@@ -110,7 +110,11 @@ class _YearChartPageState extends State<YearChartPage> {
                                       right: MediaQuery.of(context).size.width /
                                           30),
                                   child: Text(
-                                      AppLocale.selectYear.getString(context)),
+                                      AppLocale.selectMonth.getString(context),
+                                    style: TextStyle(
+                                        fontSize: MediaQuery.of(context).size.width /
+                                            30
+                                    ),),
                                 ),
                               ],
                             )
@@ -123,7 +127,11 @@ class _YearChartPageState extends State<YearChartPage> {
                                       right: MediaQuery.of(context).size.width /
                                           30),
                                   child: Text(
-                                      AppLocale.selectYear.getString(context)),
+                                      AppLocale.selectMonth.getString(context),
+                                  style: TextStyle(
+                                    fontSize: MediaQuery.of(context).size.width /
+                                        30
+                                  ),),
                                 ),
                                 selectDateBox(context, darkThemeBoolean),
                               ],
