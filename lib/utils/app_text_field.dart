@@ -6,6 +6,8 @@ import 'package:income_and_expenses/utils/expenses_category_icon_list.dart';
 import 'package:income_and_expenses/utils/widget.dart';
 import '../bloc/change_language_bloc/bloc.dart';
 import '../bloc/change_language_bloc/state.dart';
+import '../bloc/them_bloc/bloc.dart';
+import '../bloc/them_bloc/state.dart';
 import 'income_category_icon_list.dart';
 
 class AppTextField extends StatefulWidget {
@@ -40,7 +42,11 @@ class _AppTextFieldState extends State<AppTextField> {
         builder: (context, state) {
       bool englishLanguageBoolean = state.englishLanguageBoolean;
 
-      return Directionality(
+      return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
+
+        var darkThemeBoolean = state.darkThemeBoolean;
+
+        return Directionality(
         textDirection: englishLanguageBoolean == false ? TextDirection.rtl : TextDirection.ltr,
         child: TextFormField(
           style: const TextStyle(
@@ -53,6 +59,7 @@ class _AppTextFieldState extends State<AppTextField> {
               ? TextInputType.number : null,
           maxLines: widget.labelText == "توضیحات" ? 6 : null,
           decoration: textInputDecoration.copyWith(
+              errorStyle: TextStyle(color: darkThemeBoolean == "false" ? Colors.red : Colors.white),
               filled: true, //<-- SEE HERE
               fillColor: Colors.white, //<-- SEE HERE
               suffixText: widget.labelText == "هزینه" || widget.labelText == "expense" ||
@@ -62,9 +69,14 @@ class _AppTextFieldState extends State<AppTextField> {
               suffixStyle: const TextStyle(
                   color: Colors.black
               ),
-              labelText: widget.labelText,
-              labelStyle: const TextStyle(
-                  color: Colors.black
+              helperText: darkThemeBoolean == "true" ? widget.labelText : "",
+              helperStyle: TextStyle(
+                  color: Colors.white
+              ),
+              labelText: darkThemeBoolean == "false" ? widget.labelText : "",
+              labelStyle: TextStyle(
+                  color: Colors.black,
+
               )
           ),
           inputFormatters: widget.labelText == "هزینه" || widget.labelText == "expense" ||
@@ -108,10 +120,10 @@ class _AppTextFieldState extends State<AppTextField> {
                 return "لطفا هزینه مربوطه را وارد نمایید.";
               }
             }
- return null;
+            return null;
           },
         ),
-      );});
+      );});});
 
   }
 }

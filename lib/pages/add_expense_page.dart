@@ -44,7 +44,8 @@ class _AddExpensePageState extends State<AddExpensePage> {
 
       var darkThemeBoolean = state.darkThemeBoolean;
 
-      return Scaffold(
+      return
+        Scaffold(
         appBar: AppBar(
           backgroundColor: darkThemeBoolean == "false"
               ? Colors.white
@@ -131,7 +132,8 @@ class _AddExpensePageState extends State<AddExpensePage> {
             ),
           ),
         ),
-      );});
+      );
+    });
   }
 
   BlocBuilder<SetDateBloc, SetDateState> appButton(String themeBoolean) {
