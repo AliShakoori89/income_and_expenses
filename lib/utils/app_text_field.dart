@@ -70,11 +70,11 @@ class _AppTextFieldState extends State<AppTextField> {
                   color: Colors.black
               ),
               helperText: darkThemeBoolean == "true" ? widget.labelText : "",
-              helperStyle: TextStyle(
+              helperStyle: const TextStyle(
                   color: Colors.white
               ),
               labelText: darkThemeBoolean == "false" ? widget.labelText : "",
-              labelStyle: TextStyle(
+              labelStyle: const TextStyle(
                   color: Colors.black,
 
               )
