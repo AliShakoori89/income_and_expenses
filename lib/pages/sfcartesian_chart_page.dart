@@ -16,14 +16,14 @@ import '../const/language.dart';
 import  'package:persian_number_utility/persian_number_utility.dart';
 
 
-class YearChartPage extends StatefulWidget {
+class SFCartesianChartPage extends StatefulWidget {
   // ignore: prefer_const_constructors_in_immutables
-  const YearChartPage({Key? key}) : super(key: key);
+  const SFCartesianChartPage({Key? key}) : super(key: key);
   @override
-  _YearChartPageState createState() => _YearChartPageState();
+  _SFCartesianChartPageState createState() => _SFCartesianChartPageState();
 }
 
-class _YearChartPageState extends State<YearChartPage> {
+class _SFCartesianChartPageState extends State<SFCartesianChartPage> {
 
   late List<_ChartData> data;
   late TooltipBehavior _tooltip;
@@ -105,32 +105,32 @@ class _YearChartPageState extends State<YearChartPage> {
                                 selectDateBox(context, darkThemeBoolean),
                                 Padding(
                                   padding: EdgeInsets.only(
-                                      left: MediaQuery.of(context).size.width /
-                                          30,
-                                      right: MediaQuery.of(context).size.width /
-                                          30),
+                                      left: MediaQuery.of(context).size.width / 30,
+                                      right: MediaQuery.of(context).size.width / 30),
                                   child: Text(
                                       AppLocale.selectMonth.getString(context),
                                     style: TextStyle(
-                                        fontSize: MediaQuery.of(context).size.width /
-                                            30
+                                        fontSize: MediaQuery.of(context).size.width / 30,
+                                      color: darkThemeBoolean == "false"
+                                          ? AppColors.darkThemeColor
+                                          : Colors.white,
                                     ),),
                                 ),
                               ],
                             )
-                          : Row(
+                      : Row(
                               children: [
                                 Padding(
                                   padding: EdgeInsets.only(
-                                      left: MediaQuery.of(context).size.width /
-                                          30,
-                                      right: MediaQuery.of(context).size.width /
-                                          30),
+                                      left: MediaQuery.of(context).size.width / 30,
+                                      right: MediaQuery.of(context).size.width / 30),
                                   child: Text(
                                       AppLocale.selectMonth.getString(context),
                                   style: TextStyle(
-                                    fontSize: MediaQuery.of(context).size.width /
-                                        30
+                                    fontSize: MediaQuery.of(context).size.width / 30,
+                                    color: darkThemeBoolean == "false"
+                                        ? AppColors.darkThemeColor
+                                        : Colors.white,
                                   ),),
                                 ),
                                 selectDateBox(context, darkThemeBoolean),

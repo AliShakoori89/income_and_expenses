@@ -110,96 +110,99 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
           BlocProvider.of<SetDateBloc>(context).add(
               AddTodayExpensesEvent(todayExpensesDetails: allTodayExpenses));
 
-          return Container(
-            margin: EdgeInsets.only(
-              left: MediaQuery.of(context).size.width / 60,
-              right: MediaQuery.of(context).size.width / 60,
-              top: MediaQuery.of(context).size.height / 60,
-              // bottom: MediaQuery.of(context).size.height / 60
-            ),
-            decoration: BoxDecoration(
-              color: darkThemeBoolean == "false" ? Colors.white : AppColors.darkThemeColor,
-              borderRadius: BorderRadius.circular(25),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 5,
-                  blurRadius: 7,
-                  offset: Offset(0, 3), // changes position of shadow
-                ),
-              ],
-            ),
-            child: Column(
-              children: [
-                SizedBox(
-                  height: MediaQuery.of(context).size.height / 80,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => EditedExpensePage(
-                                expenseModel: state.expenseDetails[index])));
-                  },
-                  child: englishLanguageBoolean == false
+          return GestureDetector(
+            onTap: (){
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => EditedExpensePage(
+                          expenseModel: state.expenseDetails[index])));
+            },
+            child: Container(
+              margin: EdgeInsets.only(
+                left: MediaQuery.of(context).size.width / 60,
+                right: MediaQuery.of(context).size.width / 60,
+                top: MediaQuery.of(context).size.height / 60,
+                // bottom: MediaQuery.of(context).size.height / 60
+              ),
+              decoration: BoxDecoration(
+                color: darkThemeBoolean == "false" ? Colors.white : AppColors.darkThemeColor,
+                borderRadius: BorderRadius.circular(25),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 5,
+                    blurRadius: 7,
+                    offset: Offset(0, 3), // changes position of shadow
+                  ),
+                ],
+              ),
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height / 80,
+                  ),
+                  englishLanguageBoolean == false
                       ? Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(
+                        flex: 2,
                         child: Container(
                           margin: EdgeInsets.only(
-                            left: MediaQuery.of(context).size.width / 30
-                          ),
+                              left: MediaQuery.of(context).size.width /
+                                  30),
                           child: Text(
                               rialCurrencyType == true
                                   ? "-${("${state.expenseDetails[index].expense!}0").toPersianDigit().seRagham()}"
                                   : "-${state.expenseDetails[index].expense!.toString().toPersianDigit().seRagham()}",
                               style: TextStyle(
-                                  fontSize:
-                                  MediaQuery.of(context).size.width / 22,
+                                  fontSize: MediaQuery.of(context)
+                                      .size
+                                      .width /
+                                      22,
                                   color: darkThemeBoolean == "false"
                                       ? AppColors.expensesDigitColor
                                       : Colors.white)),
                         ),
                       ),
                       Expanded(
+                        flex: 5,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             Expanded(
-                              child: SizedBox(
-                                width: MediaQuery.of(context).size.width / 2.3,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    Text(
-                                        textAlign: TextAlign.end,
-                                        state.expenseDetails[index].expenseCategory!.getString(context),
-                                        style: TextStyle(
-                                            fontSize: MediaQuery.of(context).size.width / 25,
-                                            fontWeight: FontWeight.w700,
-                                            color: darkThemeBoolean == "false"
-                                                ? AppColors.black
-                                                : Colors.white)),
-                                    Text(
-                                        textAlign: TextAlign.end,
-                                        state.expenseDetails[index]
-                                            .expensesDescription!,
-                                        style: TextStyle(
-                                            fontSize: MediaQuery.of(context).size.width / 30,
-                                            fontWeight: FontWeight.w400,
-                                            color: darkThemeBoolean == "false"
-                                                ? AppColors.appBarProfileName
-                                                : Colors.white)),
-                                  ],
-                                ),
+                              flex: 3,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Text(
+                                      textAlign: TextAlign.end,
+                                      state.expenseDetails[index].expenseCategory!.getString(context),
+                                      style: TextStyle(
+                                          fontSize: MediaQuery.of(context).size.width / 25,
+                                          fontWeight: FontWeight.w700,
+                                          color: darkThemeBoolean == "false"
+                                              ? AppColors.black
+                                              : Colors.white)),
+                                  Text(
+                                      textAlign: TextAlign.end,
+                                      state.expenseDetails[index]
+                                          .expensesDescription!,
+                                      style: TextStyle(
+                                          fontSize: MediaQuery.of(context).size.width / 30,
+                                          fontWeight: FontWeight.w400,
+                                          color: darkThemeBoolean == "false"
+                                              ? AppColors.appBarProfileName
+                                              : Colors.white)),
+                                ],
                               ),
                             ),
                             SizedBox(
-                              width: MediaQuery.of(context).size.width / 25,
+                              width: MediaQuery.of(context).size.width / 20,
                             ),
                             Expanded(
+                              flex: 1,
                               child: Container(
                                 decoration: BoxDecoration(
                                     shape: BoxShape.circle,
@@ -222,72 +225,85 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                       : Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: AppColors.colorList[index]),
-                            child: Container(
-                              margin: EdgeInsets.all(
-                                  MediaQuery.of(context).size.width / 50),
-                              child: SvgPicture.asset(
-                                  height: MediaQuery.of(context).size.height / 30,
-                                  width: MediaQuery.of(context).size.width / 30,
-                                  state.expenseDetails[index].expensesIconType!),
+                      Expanded(
+                        flex: 5,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              flex: 1,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: AppColors.colorList[index]),
+                                child: Container(
+                                  margin: EdgeInsets.all(
+                                      MediaQuery.of(context).size.width / 50),
+                                  child: SvgPicture.asset(
+                                      height: MediaQuery.of(context).size.height / 30,
+                                      width: MediaQuery.of(context).size.width / 30,
+                                      state.expenseDetails[index].expensesIconType!),
+                                ),
+                              ),
                             ),
-                          ),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width / 20,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                  textAlign: TextAlign.start,
-                                  state.expenseDetails[index].expenseCategory!.getString(context),
-                                  style: TextStyle(
-                                      fontSize: MediaQuery.of(context).size.width / 25,
-                                      fontWeight: FontWeight.w700,
-                                      color: darkThemeBoolean == "false"
-                                          ? AppColors.black
-                                          : Colors.white)),
-                              Text(
-                                  textAlign: TextAlign.start,
-                                  state.expenseDetails[index]
-                                      .expensesDescription!,
-                                  style: TextStyle(
-                                      fontSize: MediaQuery.of(context).size.width / 30,
-                                      fontWeight: FontWeight.w400,
-                                      color: darkThemeBoolean == "false"
-                                          ? AppColors.appBarProfileName
-                                          : Colors.white)),
-                            ],
-                          ),
-                        ],
-                      ),
-                      SizedBox(width: MediaQuery.of(context).size.width / 8),
-                      Container(
-                        margin: EdgeInsets.only(
-                            left: MediaQuery.of(context).size.width / 30
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width / 20,
+                            ),
+                            Expanded(
+                                flex: 3,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                        textAlign: TextAlign.start,
+                                        state.expenseDetails[index].expenseCategory!.getString(context),
+                                        style: TextStyle(
+                                            fontSize: MediaQuery.of(context).size.width / 25,
+                                            fontWeight: FontWeight.w700,
+                                            color: darkThemeBoolean == "false"
+                                                ? AppColors.black
+                                                : Colors.white)),
+                                    Text(
+                                        textAlign: TextAlign.start,
+                                        state.expenseDetails[index].expensesDescription!,
+                                        style: TextStyle(
+                                            fontSize: MediaQuery.of(context).size.width / 30,
+                                            fontWeight: FontWeight.w400,
+                                            color: darkThemeBoolean == "false"
+                                                ? AppColors.appBarProfileName
+                                                : Colors.white)),
+                                  ],
+                                )
+                            ),
+                          ],
                         ),
-                        child: Text(
-                            rialCurrencyType == true
-                                ? "-${("${state.expenseDetails[index].expense!}0").seRagham()}"
-                                : "-${state.expenseDetails[index].expense!.toString().seRagham()}",
-                            style: TextStyle(
-                                fontSize:
-                                MediaQuery.of(context).size.width / 26,
-                                color: darkThemeBoolean == "false"
-                                    ? AppColors.expensesDigitColor
-                                    : Colors.white)),
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: Container(
+                          margin: EdgeInsets.only(
+                              left: MediaQuery.of(context).size.width /
+                                  30),
+                          child: Text(
+                              rialCurrencyType == true
+                                  ? "-${("${state.expenseDetails[index].expense!}0").seRagham()}"
+                                  : "-${state.expenseDetails[index].expense!.toString().seRagham()}",
+                              style: TextStyle(
+                                  fontSize: MediaQuery.of(context)
+                                      .size
+                                      .width /
+                                      26,
+                                  color: darkThemeBoolean == "false"
+                                      ? AppColors.expensesDigitColor
+                                      : Colors.white)),
+                        ),
                       ),
                     ],
                   ),
-                ),
-                SizedBox(height: MediaQuery.of(context).size.height / 30,)
-              ],
-            )
+                  SizedBox(height: MediaQuery.of(context).size.height / 30,)
+                ],
+              )
+            ),
           );
         },
         itemCount: state.expenseDetails.length,

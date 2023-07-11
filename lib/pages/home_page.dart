@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:income_and_expenses/pages/main_expenses_page.dart';
 import 'package:income_and_expenses/pages/setting_page.dart';
-import 'package:income_and_expenses/pages/year_chart_page.dart';
+import 'package:income_and_expenses/pages/sfcartesian_chart_page.dart';
 import 'package:income_and_expenses/const/app_colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 import '../bloc/them_bloc/bloc.dart';
 import '../bloc/them_bloc/state.dart';
 import 'add_expense_page.dart';
-import 'month_chart_page.dart';
+import 'sf_circular_chart_page.dart';
 
 class MyHomePage extends StatefulWidget {
 
@@ -44,8 +44,8 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
             keyBottomNavigation2: keyBottomNavigation2,
             keyBottomNavigation3: keyBottomNavigation3,
             keyBottomNavigation4: keyBottomNavigation4),
-        const MonthChart(),
-        const YearChartPage(),
+        const SfCircularChartPage(),
+        const SFCartesianChartPage(),
         const SettingPage(),
       ];
 

@@ -15,14 +15,14 @@ import '../const/app_colors.dart';
 import '../const/language.dart';
 import '../utils/no_data.dart';
 
-class MonthChart extends StatefulWidget {
-  const MonthChart({Key? key}) : super(key: key);
+class SfCircularChartPage extends StatefulWidget {
+  const SfCircularChartPage({Key? key}) : super(key: key);
 
   @override
-  State<MonthChart> createState() => _MonthChartState();
+  State<SfCircularChartPage> createState() => _SfCircularChartPageState();
 }
 
-class _MonthChartState extends State<MonthChart> {
+class _SfCircularChartPageState extends State<SfCircularChartPage> {
 
   List<_PieData> pieData= [];
   String? selectedValue;
