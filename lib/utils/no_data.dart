@@ -19,11 +19,12 @@ class NoDataPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset("assets/images/No data.png",
-              width: MediaQuery.of(context).size.width / 1.5),
+              // width: MediaQuery.of(context).size.width / 1.5,
+          scale: MediaQuery.of(context).size.width / 3000),
           Text(
             AppLocale.notExpenses.getString(context),
             style: TextStyle(
-              fontSize: MediaQuery.of(context).size.height / 50,
+              fontSize: MediaQuery.of(context).size.height / 40,
               color: darkThemeBoolean == "false"
                   ? AppColors.noDataTextColor
                   : Colors.white,

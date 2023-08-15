@@ -19,22 +19,30 @@ class ExpensesCategoryIconList extends StatelessWidget {
 
     return Column(
       children: [
-        const Icon(Icons.linear_scale,
-        color: AppColors.appBarTitleColor,),
-        Text(AppLocale.grouping.getString(context),
-          style: const TextStyle(
-              color: AppColors.appBarTitleColor,
-              fontWeight: FontWeight.w500
-          ),),
         Expanded(
+          flex: 1,
+          child: Icon(Icons.linear_scale,
+          size: MediaQuery.of(context).size.width / 25,
+          color: AppColors.appBarTitleColor,),
+        ),
+        Expanded(
+          flex: 1,
+          child: Text(AppLocale.grouping.getString(context),
+            style: TextStyle(
+                color: AppColors.appBarTitleColor,
+                fontWeight: FontWeight.w500,
+                fontSize: MediaQuery.of(context).size.width / 25
+            ),),
+        ),
+        Expanded(
+          flex: 8,
           child: SizedBox(
             child: GridView.count(
-              padding: EdgeInsets.all(MediaQuery.of(context).size.width / 30),
+              // padding: EdgeInsets.all(MediaQuery.of(context).size.width / 30),
               scrollDirection: Axis.vertical,
               crossAxisCount: 3,
               shrinkWrap: true,
-              children:
-                  List.generate(ExpensesIcon.iconsPersianName.length, (index) {
+              children: List.generate(ExpensesIcon.iconsPersianName.length, (index) {
                 var groupName = ExpensesIcon.iconsPersianName[index];
 
                 return BlocBuilder<ChangeLanguageBloc, ChangeLanguageState>(
@@ -50,44 +58,53 @@ class ExpensesCategoryIconList extends StatelessWidget {
                     },
                     child: Column(
                       children: [
-                        Container(
-                          width: MediaQuery.of(context).size.width / 8,
-                          height: MediaQuery.of(context).size.width / 8,
-                          margin: EdgeInsets.all(MediaQuery.of(context).size.width / 30),
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: AppColors.colorList[index]),
+                        Expanded(
+                          flex: 10,
                           child: Container(
-                            margin: EdgeInsets.all(MediaQuery.of(context).size.width / 60),
-                            child: SvgPicture.asset(
-                                "assets/icons/expense_category_icons/${ExpensesIcon.iconsImage[index]}"),
+                            // width: MediaQuery.of(context).size.width / 8,
+                            // height: MediaQuery.of(context).size.width / 8,
+                            margin: EdgeInsets.all(MediaQuery.of(context).size.width / 30),
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: AppColors.colorList[index]),
+                            child: Container(
+                              margin: EdgeInsets.all(MediaQuery.of(context).size.width / 60),
+                              child: SvgPicture.asset(
+                                  "assets/icons/expense_category_icons/${ExpensesIcon.iconsImage[index]}"),
+                            ),
                           ),
                         ),
-                        Text(groupName == 'حمل و نقل'
-                            ? AppLocale.transportation.getString(context)
-                            : groupName == 'خوراکی'
-                                ? AppLocale.comestible.getString(context)
-                                : groupName == 'خرید اقلام'
-                                    ? AppLocale.buyItems.getString(context)
-                                    : groupName == 'اقساط و بدهی'
-                                        ? AppLocale.installmentsAndDebt
-                                            .getString(context)
-                                        : groupName == 'درمانی'
-                                            ? AppLocale.treatment
-                                                .getString(context)
-                                            : groupName == 'هدایا'
-                                                ? AppLocale.gifts
-                                                    .getString(context)
-                                                : groupName == 'تعمیرات'
-                                                    ? AppLocale.renovation
-                                                        .getString(context)
-                                                    : groupName == 'تفریح'
-                                                        ? AppLocale.pastime
-                                                            .getString(context)
-                                                        : AppLocale.other
-                                                            .getString(
-                                                                context),
-                          overflow: TextOverflow.ellipsis,),
+                        Expanded(
+                          flex: 4,
+                          child: Text(groupName == 'حمل و نقل'
+                              ? AppLocale.transportation.getString(context)
+                              : groupName == 'خوراکی'
+                                  ? AppLocale.comestible.getString(context)
+                                  : groupName == 'خرید اقلام'
+                                      ? AppLocale.buyItems.getString(context)
+                                      : groupName == 'اقساط و بدهی'
+                                          ? AppLocale.installmentsAndDebt
+                                              .getString(context)
+                                          : groupName == 'درمانی'
+                                              ? AppLocale.treatment
+                                                  .getString(context)
+                                              : groupName == 'هدایا'
+                                                  ? AppLocale.gifts
+                                                      .getString(context)
+                                                  : groupName == 'تعمیرات'
+                                                      ? AppLocale.renovation
+                                                          .getString(context)
+                                                      : groupName == 'تفریح'
+                                                          ? AppLocale.pastime
+                                                              .getString(context)
+                                                          : AppLocale.other
+                                                              .getString(
+                                                                  context),
+                            overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              fontSize: MediaQuery.of(context).size.width / 25
+                          )),
+                        ),
                       ],
                     ),
                   );

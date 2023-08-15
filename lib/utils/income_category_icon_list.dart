@@ -21,14 +21,23 @@ class IncomeCategoryIconList extends StatelessWidget {
       height: MediaQuery.of(context).size.height / 2.5,
       child: Column(
         children: [
-          const Icon(Icons.linear_scale,
-            color: AppColors.appBarTitleColor,),
-          Text(AppLocale.grouping.getString(context),
-            style: const TextStyle(
-                color: AppColors.appBarTitleColor,
-                fontWeight: FontWeight.w500
-            ),),
           Expanded(
+            flex: 1,
+            child: Icon(Icons.linear_scale,
+              size: MediaQuery.of(context).size.width / 25,
+              color: AppColors.appBarTitleColor,),
+          ),
+          Expanded(
+            flex: 1,
+            child: Text(AppLocale.grouping.getString(context),
+              style: TextStyle(
+                  color: AppColors.appBarTitleColor,
+                  fontSize: MediaQuery.of(context).size.width / 25,
+                  fontWeight: FontWeight.w500
+              ),),
+          ),
+          Expanded(
+            flex: 8,
             child: SizedBox(
               child: GridView.count(
                 padding: EdgeInsets.all(MediaQuery.of(context).size.width / 30),
@@ -52,31 +61,40 @@ class IncomeCategoryIconList extends StatelessWidget {
                           },
                           child: Column(
                             children: [
-                              Container(
-                                width: MediaQuery.of(context).size.width / 8,
-                                height: MediaQuery.of(context).size.width / 8,
-                                margin: EdgeInsets.all(MediaQuery.of(context).size.width / 30),
-                                decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: AppColors.colorList[index]),
+                              Expanded(
+                                flex: 10,
                                 child: Container(
-                                  margin: EdgeInsets.all(MediaQuery.of(context).size.width / 60),
-                                  child: SvgPicture.asset(
-                                      "assets/icons/income_category_icons/${IncomeIcons.iconsImage[index]}"),
+                                  width: MediaQuery.of(context).size.width / 8,
+                                  height: MediaQuery.of(context).size.width / 8,
+                                  margin: EdgeInsets.all(MediaQuery.of(context).size.width / 30),
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: AppColors.colorList[index]),
+                                  child: Container(
+                                    margin: EdgeInsets.all(MediaQuery.of(context).size.width / 60),
+                                    child: SvgPicture.asset(
+                                        "assets/icons/income_category_icons/${IncomeIcons.iconsImage[index]}"),
+                                  ),
                                 ),
                               ),
-                              Text(groupName == 'حقوق'
-                                  ? AppLocale.stipend.getString(context)
-                                  : groupName == 'هدیه'
-                                  ? AppLocale.gifts.getString(context)
-                                  : groupName == 'جایزه'
-                                  ? AppLocale.reward.getString(context)
-                                  : groupName == 'فروش'
-                                  ? AppLocale.sale.getString(context)
-                                  : groupName == 'یارانه'
-                                  ? AppLocale.subsidy.getString(context)
-                                  : AppLocale.other.getString(context),
-                                overflow: TextOverflow.ellipsis,),
+                              Expanded(
+                                flex: 4,
+                                child: Text(groupName == 'حقوق'
+                                    ? AppLocale.stipend.getString(context)
+                                    : groupName == 'هدیه'
+                                    ? AppLocale.gifts.getString(context)
+                                    : groupName == 'جایزه'
+                                    ? AppLocale.reward.getString(context)
+                                    : groupName == 'فروش'
+                                    ? AppLocale.sale.getString(context)
+                                    : groupName == 'یارانه'
+                                    ? AppLocale.subsidy.getString(context)
+                                    : AppLocale.other.getString(context),
+                                  overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                        fontSize: MediaQuery.of(context).size.width / 25
+                                    )),
+                              ),
                             ],
                           ),
                         );

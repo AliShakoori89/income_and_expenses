@@ -51,7 +51,8 @@ class SetDateState extends Equatable {
 
   @override
   // TODO: implement props
-  List<Object> get props => [status, date, month, selectDate, expensesPerMonth, expensesPerDate, calculateCash, incomePerDate, incomePerMonth, incomeDetails, expenseDetails];
+  List<Object> get props => [status, date, month, selectDate, expensesPerMonth,
+    expensesPerDate, calculateCash, incomePerDate, incomePerMonth, incomeDetails, expenseDetails];
 
   SetDateState copyWith({
     SetDateStatus? status,

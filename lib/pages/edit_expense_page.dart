@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:income_and_expenses/pages/home_page.dart';
-import 'package:income_and_expenses/pages/main_expenses_page.dart';
 import 'package:persian_number_utility/persian_number_utility.dart';
 import '../bloc/change_language_bloc/bloc.dart';
 import '../bloc/change_language_bloc/state.dart';
@@ -17,7 +16,6 @@ import '../model/expense_model.dart';
 import '../utils/app_text_field.dart';
 import '../utils/arrow_back_icon.dart';
 import '../utils/widget.dart';
-import 'add_expense_page.dart';
 
 class EditedExpensePage extends StatefulWidget {
   final ExpenseModel expenseModel;
@@ -160,6 +158,7 @@ class _EditedExpensePageState extends State<EditedExpensePage> {
                 },
                 child: Icon(
                   Icons.delete,
+                  size: MediaQuery.of(context).size.width / 30,
                   color: darkThemeBoolean == "false"
                       ? AppColors.appBarTitleColor
                       : Colors.white,
@@ -308,10 +307,6 @@ class _EditedExpensePageState extends State<EditedExpensePage> {
           builder: (context, state) {
 
             return Container(
-              padding: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height / 30
-              ),
-              width: double.infinity,
               color: themeBoolean == "false"
                   ? Colors.white
                   : AppColors.darkThemeColor,
@@ -330,20 +325,25 @@ class _EditedExpensePageState extends State<EditedExpensePage> {
                     Navigator.pop(context);
                   }
                 },
-                child: Container(
-                  margin: EdgeInsets.only(
+                child: Padding(
+                  padding:  EdgeInsets.only(
+                      bottom: MediaQuery.of(context).size.width / 30),
+                  child: Container(
+                    margin: EdgeInsets.only(
                       left: MediaQuery.of(context).size.width / 10,
-                      right: MediaQuery.of(context).size.width / 10,
-                      bottom: MediaQuery.of(context).size.width / 10),
-                  height: MediaQuery.of(context).size.height / 15,
-                  decoration: BoxDecoration(
-                    color: AppColors.buttonColor,
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: Center(
-                    child: Text(AppLocale.applyChange.getString(context),
-                        style: const TextStyle(color: AppColors
-                            .backGroundColor)),
+                      right: MediaQuery.of(context).size.width / 10,),
+                    height: MediaQuery.of(context).size.height / 20,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                      color: AppColors.buttonColor,
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Center(
+                      child: Text(AppLocale.applyChange.getString(context),
+                          style: TextStyle(color: AppColors
+                              .backGroundColor,
+                              fontSize: MediaQuery.of(context).size.width / 30)),
+                    ),
                   ),
                 ),
               ),

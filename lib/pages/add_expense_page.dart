@@ -75,14 +75,14 @@ class _AddExpensePageState extends State<AddExpensePage> {
             borderRadius: BorderRadius.circular(25)
           ),
           margin: EdgeInsets.only(
-              left: MediaQuery.of(context).size.width / 30,
-              right: MediaQuery.of(context).size.width / 30,
-              bottom: MediaQuery.of(context).size.height / 9,
-          top: MediaQuery.of(context).size.height / 40),
+            left: MediaQuery.of(context).size.width / 30,
+            right: MediaQuery.of(context).size.width / 30,
+            bottom: MediaQuery.of(context).size.height / 9,
+            top: MediaQuery.of(context).size.height / 40),
           child: Container(
             margin: EdgeInsets.only(
-                left: MediaQuery.of(context).size.width / 20,
-                right: MediaQuery.of(context).size.width / 20),
+              left: MediaQuery.of(context).size.width / 20,
+              right: MediaQuery.of(context).size.width / 20),
             child: Form(
               key: formKey,
               child: SingleChildScrollView(
@@ -145,7 +145,6 @@ class _AddExpensePageState extends State<AddExpensePage> {
             var englishLanguageBoolean = state.englishLanguageBoolean;
 
             return Container(
-              width: double.infinity,
               color: themeBoolean == "false"
                   ? Colors.white
                   : AppColors.darkThemeColor,
@@ -234,20 +233,22 @@ class _AddExpensePageState extends State<AddExpensePage> {
                   }
                 },
                 child: Padding(
-                  padding: const EdgeInsets.only(bottom: 30),
+                  padding:  EdgeInsets.only(
+                      bottom: MediaQuery.of(context).size.width / 30),
                   child: Container(
                     margin: EdgeInsets.only(
                       left: MediaQuery.of(context).size.width / 10,
                       right: MediaQuery.of(context).size.width / 10,),
                     height: MediaQuery.of(context).size.height / 20,
+                    width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                       color: AppColors.buttonColor,
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: Center(
                       child: Text(AppLocale.addExpense.getString(context),
-                          style: const TextStyle(color: AppColors
-                              .backGroundColor)),
+                          style: TextStyle(color: AppColors.backGroundColor,
+                              fontSize: MediaQuery.of(context).size.width / 30)),
                     ),
                   ),
                 ),

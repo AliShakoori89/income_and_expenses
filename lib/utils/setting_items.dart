@@ -52,7 +52,7 @@ class SettingItems extends StatelessWidget {
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                 fontWeight: FontWeight.w400,
-                                fontSize: MediaQuery.of(context).size.height / 50,
+                                fontSize: MediaQuery.of(context).size.width / 50,
                                 color: darkThemeBoolean == "false"
                                     ? AppColors.appBarProfileName
                                     : Colors.white,
@@ -77,12 +77,12 @@ class SettingItems extends StatelessWidget {
                             : AppColors.darkThemeColor,
                       ),
                       child: Container(
-                        margin: EdgeInsets.all(MediaQuery.of(context).size.width / 70),
+                        margin: EdgeInsets.all(MediaQuery.of(context).size.width / 100),
                         child: Icon(Icons.arrow_forward_ios,
                             color: darkThemeBoolean == "false"
                                 ? AppColors.black
                                 : Colors.white,
-                            size:  MediaQuery.of(context).size.width / 25),
+                            size:  MediaQuery.of(context).size.width / 30),
                       ),
                     )
                   ],
@@ -113,12 +113,12 @@ class SettingItems extends StatelessWidget {
                           : AppColors.darkThemeColor,
                     ),
                     child: Container(
-                      margin: EdgeInsets.all(MediaQuery.of(context).size.width / 70),
+                      margin: EdgeInsets.all(MediaQuery.of(context).size.width / 300),
                       child: Icon(Icons.arrow_back_ios,
                           color: darkThemeBoolean == "false"
                               ? AppColors.black
                               : Colors.white,
-                          size: MediaQuery.of(context).size.width / 25),
+                          size: MediaQuery.of(context).size.width / 30),
                     ),
                   ),
                   Row(
@@ -129,7 +129,7 @@ class SettingItems extends StatelessWidget {
                         textDirection: TextDirection.rtl,
                         style: TextStyle(
                           fontWeight: FontWeight.w400,
-                          fontSize: MediaQuery.of(context).size.height / 50,
+                          fontSize: MediaQuery.of(context).size.width / 30,
                           color: darkThemeBoolean == "false"
                               ? AppColors.appBarProfileName
                               : Colors.white,
@@ -138,7 +138,8 @@ class SettingItems extends StatelessWidget {
                       SizedBox(width: MediaQuery.of(context).size.width / 20),
                       SizedBox(
                           width: MediaQuery.of(context).size.width / 20,
-                          child: Image.asset(imagePath)),
+                          child: Image.asset(imagePath,
+                            scale: MediaQuery.of(context).size.width / 2500,)),
                     ],
                   ),
                 ],

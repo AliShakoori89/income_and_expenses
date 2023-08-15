@@ -97,8 +97,8 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
 
                     },
                     child: SizedBox(
-                      width: MediaQuery.of(context).size.width / 15,
-                      height: MediaQuery.of(context).size.width / 15,
+                      width: MediaQuery.of(context).size.width / 20,
+                      height: MediaQuery.of(context).size.width / 20,
                       child: Image.asset(
                         key: keyBottomNavigation2,
                         // key: keyButton1,
@@ -155,10 +155,10 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                       BlocProvider.of<SetDateBloc>(context).add(FetchIncomeEvent(month: month));
                     },
                     child: Container(
-                      height: MediaQuery.of(context).size.width / 8,
+                      height: MediaQuery.of(context).size.width / 10,
                       margin: EdgeInsets.only(
-                        right: MediaQuery.of(context).size.width / 30,
-                        left: MediaQuery.of(context).size.width / 30,
+                        right: MediaQuery.of(context).size.width / 10,
+                        left: MediaQuery.of(context).size.width / 10,
                       ),
                       // key: keyButton2,
                       decoration: BoxDecoration(
@@ -215,8 +215,8 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                           .add(FetchIncomeEvent(month: DateFormat('yyyy-MM').format(DateTime.parse(date)).toString()));
                     },
                     child: SizedBox(
-                      width: MediaQuery.of(context).size.width / 15,
-                      height: MediaQuery.of(context).size.width / 15,
+                      width: MediaQuery.of(context).size.width / 20,
+                      height: MediaQuery.of(context).size.width / 20,
                       child: Image.asset(
                         key: keyBottomNavigation4,
                         "assets/main_page_first_container_logo/right_arrow.png",

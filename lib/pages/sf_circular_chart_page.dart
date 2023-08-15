@@ -93,85 +93,88 @@ class _SfCircularChartPageState extends State<SfCircularChartPage> {
                 child: Column(
                   children: [
                     SizedBox(height: MediaQuery.of(context).size.height / 20),
-                    Center(
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButton2(
-                          alignment: Alignment.center,
-                          isExpanded: true,
-                          hint: Text(
-                            AppLocale.selectYear.getString(context),
-                            style: TextStyle(
-                                fontSize: MediaQuery.of(context).size.width / 30,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black
-                            ),
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          items: List<String>.generate(200, (i) => '${i+1400}')
-                              .map((item) => DropdownMenuItem<String>(
-                            value: item,
-                            child: Text(
-                              item,
-                              textDirection: TextDirection.rtl,
+                    Expanded(
+                      flex: 1,
+                      child: Center(
+                        child: DropdownButtonHideUnderline(
+                          child: DropdownButton2(
+                            alignment: Alignment.center,
+                            isExpanded: true,
+                            hint: Text(
+                              AppLocale.selectYear.getString(context),
                               style: TextStyle(
                                   fontSize: MediaQuery.of(context).size.width / 30,
                                   fontWeight: FontWeight.bold,
-                                  color: darkThemeBoolean == "false"
-                                      ? Colors.black
-                                      : Colors.white
+                                  color: Colors.black
                               ),
                               overflow: TextOverflow.ellipsis,
                             ),
-                          )).toList(),
-                          value: selectedValue,
-                          onChanged: (value) {
-                            setState(() {
+                            items: List<String>.generate(200, (i) => '${i+1400}')
+                                .map((item) => DropdownMenuItem<String>(
+                              value: item,
+                              child: Text(
+                                item,
+                                textDirection: TextDirection.rtl,
+                                style: TextStyle(
+                                    fontSize: MediaQuery.of(context).size.width / 30,
+                                    fontWeight: FontWeight.bold,
+                                    color: darkThemeBoolean == "false"
+                                        ? Colors.black
+                                        : Colors.white
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            )).toList(),
+                            value: selectedValue,
+                            onChanged: (value) {
+                              setState(() {
 
-                              selectedValue = value as String;
-                              BlocProvider.of<CalculateSFCircularChartBloc>(context).add(
-                                  SumExpensesPerMonthForCircularChartEvent(selectedValue!));
-                            });
-                          },
-                          buttonHeight: MediaQuery.of(context).size.height / 22,
-                          buttonWidth: MediaQuery.of(context).size.width / 3,
-                          buttonPadding: EdgeInsets.only(
-                              left: MediaQuery.of(context).size.width / 70,
-                              right: MediaQuery.of(context).size.width / 70),
-                          buttonDecoration: BoxDecoration(
-                            color: darkThemeBoolean == "false"
-                                ? AppColors.backGroundColor
-                                : AppColors.darkArrowButtonColor,
-                            borderRadius: BorderRadius.circular(15),
-                            border: Border.all(
-                              color: Colors.black26,
-                            ),
-                          ),
-                          buttonElevation: 0,
-                          itemHeight: MediaQuery.of(context).size.height / 25,
-                          itemPadding: EdgeInsets.only(
-                              left: MediaQuery.of(context).size.width / 70,
-                              right: MediaQuery.of(context).size.width / 70),
-                          dropdownMaxHeight: MediaQuery.of(context).size.height / 10,
-                          dropdownWidth: MediaQuery.of(context).size.width / 3,
-                          dropdownPadding: null,
-                          dropdownDecoration: BoxDecoration(
+                                selectedValue = value as String;
+                                BlocProvider.of<CalculateSFCircularChartBloc>(context).add(
+                                    SumExpensesPerMonthForCircularChartEvent(selectedValue!));
+                              });
+                            },
+                            buttonHeight: MediaQuery.of(context).size.height / 22,
+                            buttonWidth: MediaQuery.of(context).size.width / 3,
+                            buttonPadding: EdgeInsets.only(
+                                left: MediaQuery.of(context).size.width / 70,
+                                right: MediaQuery.of(context).size.width / 70),
+                            buttonDecoration: BoxDecoration(
+                              color: darkThemeBoolean == "false"
+                                  ? AppColors.backGroundColor
+                                  : AppColors.darkArrowButtonColor,
                               borderRadius: BorderRadius.circular(15),
                               border: Border.all(
                                 color: Colors.black26,
                               ),
-                              color: darkThemeBoolean == "false"
-                                  ? AppColors.backGroundColor
-                                  : AppColors.darkArrowButtonColor
+                            ),
+                            buttonElevation: 0,
+                            itemHeight: MediaQuery.of(context).size.height / 25,
+                            itemPadding: EdgeInsets.only(
+                                left: MediaQuery.of(context).size.width / 70,
+                                right: MediaQuery.of(context).size.width / 70),
+                            dropdownMaxHeight: MediaQuery.of(context).size.height / 10,
+                            dropdownWidth: MediaQuery.of(context).size.width / 3,
+                            dropdownPadding: null,
+                            dropdownDecoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                border: Border.all(
+                                  color: Colors.black26,
+                                ),
+                                color: darkThemeBoolean == "false"
+                                    ? AppColors.backGroundColor
+                                    : AppColors.darkArrowButtonColor
+                            ),
+                            dropdownElevation: 0,
+                            scrollbarRadius:  const Radius.circular(15),
+                            scrollbarThickness: MediaQuery.of(context).size.width / 80,
+                            scrollbarAlwaysShow: true,
+                            offset: const Offset(-20, 0),
                           ),
-                          dropdownElevation: 0,
-                          scrollbarRadius:  const Radius.circular(15),
-                          scrollbarThickness: MediaQuery.of(context).size.width / 80,
-                          scrollbarAlwaysShow: true,
-                          offset: const Offset(-20, 0),
                         ),
                       ),
                     ),
-                    SizedBox(height: MediaQuery.of(context).size.height / 10),
+                    SizedBox(height: MediaQuery.of(context).size.height / 40),
                     state.farvardinExpenses == '0' &&
                         state.ordibeheshtExpenses == '0' &&
                         state.khordadExpenses == '0' &&
@@ -183,55 +186,66 @@ class _SfCircularChartPageState extends State<SfCircularChartPage> {
                         state.deyExpenses == '0' &&
                         state.bahmanExpenses == '0' &&
                         state.esfandExpenses == '0'
-                        ? const NoDataPage()
-                        :SafeArea(
-                        child: SfCircularChart(
-                            palette: const [
-                              Color.fromRGBO(200, 230, 201, 1),
-                              Color.fromRGBO(225, 190, 231, 1),
-                              Color.fromRGBO(255, 236, 179, 1),
-                              Color.fromRGBO(248, 187, 208, 1),
-                              Color.fromRGBO(178, 235, 242, 1),
-                              Color.fromRGBO(255, 205, 210, 1),
-                              Color.fromRGBO(197, 202, 233, 1),
-                              Color.fromRGBO(222, 178, 138, 1),
-                              Color.fromRGBO(141, 174, 184, 1),
-                              Color.fromRGBO(255, 207, 134, 1),
-                              Color.fromRGBO(165, 222, 138, 1),
-                              Color.fromRGBO(152, 148, 202, 1),
-                            ],
-                            title: ChartTitle(
-                                text: AppLocale.expenseTypePerYear.getString(context),
-                                textStyle: darkThemeBoolean == "false"
-                                    ? const TextStyle(
-                                    color: AppColors.appBarTitleColor)
-                                    : const TextStyle(
-                                    color: Colors.white
-                                )),
-                            legend: Legend(
-                              isVisible: true,
-                              shouldAlwaysShowScrollbar: true,
-                              overflowMode: LegendItemOverflowMode.scroll,
-                              textStyle: darkThemeBoolean == "false"
-                                  ? const TextStyle(
-                                  color: Colors.black)
-                                  : const TextStyle(
-                                  color: Colors.white
-                              ),),
-                            series: <PieSeries<_PieData, String>>[
-                              PieSeries<_PieData, String>(
-                                  explode: true,
-                                  explodeIndex: 0,
-                                  dataSource: pieData,
-                                  xValueMapper: (_PieData data, _) => data.xData,
-                                  yValueMapper: (_PieData data, _) => data.yData,
-                                  dataLabelMapper: (_PieData data, _) => data.text,
-                                  dataLabelSettings: const DataLabelSettings(
-                                    textStyle: TextStyle(
-                                        color: Colors.black),
-                                    isVisible: true,
+                        ? const Expanded(
+                          flex: 10,
+                          child: NoDataPage())
+                        : Expanded(
+                          flex: 10,
+                          child: SafeArea(
+                          child: SfCircularChart(
+                              palette: const [
+                                Color.fromRGBO(200, 230, 201, 1),
+                                Color.fromRGBO(225, 190, 231, 1),
+                                Color.fromRGBO(255, 236, 179, 1),
+                                Color.fromRGBO(248, 187, 208, 1),
+                                Color.fromRGBO(178, 235, 242, 1),
+                                Color.fromRGBO(255, 205, 210, 1),
+                                Color.fromRGBO(197, 202, 233, 1),
+                                Color.fromRGBO(222, 178, 138, 1),
+                                Color.fromRGBO(141, 174, 184, 1),
+                                Color.fromRGBO(255, 207, 134, 1),
+                                Color.fromRGBO(165, 222, 138, 1),
+                                Color.fromRGBO(152, 148, 202, 1),
+                              ],
+                              title: ChartTitle(
+                                  text: AppLocale.expenseTypePerYear.getString(context),
+                                  textStyle: darkThemeBoolean == "false"
+                                      ? TextStyle(
+                                      color: AppColors.appBarTitleColor,
+                                      fontSize: MediaQuery.of(context).size.width / 30,)
+                                      : TextStyle(
+                                      color: Colors.white,
+                                    fontSize: MediaQuery.of(context).size.width / 30,
                                   )),
-                            ]))
+                              legend: Legend(
+                                isVisible: true,
+                                shouldAlwaysShowScrollbar: true,
+                                overflowMode: LegendItemOverflowMode.scroll,
+                                textStyle: darkThemeBoolean == "false"
+                                    ? TextStyle(
+                                    color: Colors.black,
+                                  fontSize: MediaQuery.of(context).size.width / 30,)
+                                    : TextStyle(
+                                    color: Colors.white,
+                                  fontSize: MediaQuery.of(context).size.width / 30,
+                                ),),
+                              series: <PieSeries<_PieData, String>>[
+                                PieSeries<_PieData, String>(
+                                    explode: true,
+                                    explodeIndex: 0,
+                                    dataSource: pieData,
+                                    xValueMapper: (_PieData data, _) => data.xData,
+                                    yValueMapper: (_PieData data, _) => data.yData,
+                                    dataLabelMapper: (_PieData data, _) => data.text,
+                                    dataLabelSettings: DataLabelSettings(
+                                      textStyle: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: MediaQuery.of(context).size.width / 30),
+                                      isVisible: true,
+                                    )),
+                              ]
+                          )),
+                        )
                   ],
                 ),
               ),

@@ -378,6 +378,7 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       extendBody: true,
       body: pages[_bottomNavIndex],
       bottomNavigationBar: SizedBox(
+        height: MediaQuery.of(context).size.width / 6,
         child: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           backgroundColor: darkThemeBoolean == "false"
@@ -389,48 +390,59 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
               : Colors.white,
           showSelectedLabels: false,
           showUnselectedLabels: false,
+          selectedFontSize: 0,
+          unselectedFontSize: 0,
           items:[
             BottomNavigationBarItem(
               label: '',
               icon: Icon(
-                  key: keyButton,
-                  Icons.home),
+                key: keyButton,
+                Icons.home,
+                size: MediaQuery.of(context).size.width / 15),
             ),
             BottomNavigationBarItem(
               label: '',
               icon: Icon(
-                  key: keyButton1,
-                  Icons.pie_chart),
+                key: keyButton1,
+                Icons.pie_chart,
+                size: MediaQuery.of(context).size.width / 15),
             ),
             BottomNavigationBarItem(
               label: '',
               icon: Icon(
-                  key: keyButton3,
-                  Icons.bar_chart),
+                key: keyButton3,
+                Icons.bar_chart,
+                size: MediaQuery.of(context).size.width / 15),
             ),
             BottomNavigationBarItem(
               label: '',
               icon: Icon(
-                  key: keyButton4,
-                  Icons.settings),
+                key: keyButton4,
+                Icons.settings,
+                size: MediaQuery.of(context).size.width / 15),
             ),
           ],
           currentIndex: _bottomNavIndex,
           onTap: onTapNav,
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: AppColors.mainColor,
-        child: Icon(
-            key: keyButton2,
-            Icons.add),
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) =>
-                AddExpensePage()),
-          );
-        },
+      floatingActionButton: SizedBox(
+        height: MediaQuery.of(context).size.width / 9,
+        width: MediaQuery.of(context).size.width / 9,
+        child: FloatingActionButton(
+          backgroundColor: AppColors.mainColor,
+          child: Icon(
+              key: keyButton2,
+              Icons.add,
+          size: MediaQuery.of(context).size.width / 15),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) =>
+                  AddExpensePage()),
+            );
+          },
+        ),
       ),
       floatingActionButtonLocation:
       FloatingActionButtonLocation.miniCenterDocked,

@@ -89,7 +89,6 @@ class _MainExpensesPageState extends State<MainExpensesPage> {
                       padding: EdgeInsets.only(top: MediaQuery.of(context).size.height/7),
                       child: CashContainer(keyBottomNavigation1: keyBottomNavigation1),
                     ),
-
                   ],
                 ),
                 Padding(

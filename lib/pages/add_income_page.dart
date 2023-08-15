@@ -14,7 +14,6 @@ import '../const/app_colors.dart';
 import '../const/language.dart';
 import '../utils/app_text_field.dart';
 import '../utils/arrow_back_icon.dart';
-import 'home_page.dart';
 
 class AddIncomePage extends StatefulWidget {
   const AddIncomePage({Key? key}) : super(key: key);
@@ -73,8 +72,8 @@ class _AddIncomePageState extends State<AddIncomePage> {
           margin: EdgeInsets.only(
               left: MediaQuery.of(context).size.width / 30,
               right: MediaQuery.of(context).size.width / 30,
-              bottom: MediaQuery.of(context).size.height / 80,
-              top: MediaQuery.of(context).size.height / 100),
+              bottom: MediaQuery.of(context).size.height / 9,
+              top: MediaQuery.of(context).size.height / 40),
           child: Container(
             margin: EdgeInsets.only(
                 left: MediaQuery.of(context).size.width / 20,
@@ -131,7 +130,6 @@ class _AddIncomePageState extends State<AddIncomePage> {
             var englishLanguageBoolean = state.englishLanguageBoolean;
 
             return Container(
-              width: double.infinity,
               color: themeBoolean == "false"
                   ? Colors.white
                   : AppColors.darkThemeColor,
@@ -196,8 +194,9 @@ class _AddIncomePageState extends State<AddIncomePage> {
                   }
                 },
                 child: Padding(
-                  padding: const EdgeInsets.only(bottom: 30),
+                  padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.width / 30),
                   child: Container(
+                    width: MediaQuery.of(context).size.width,
                     margin: EdgeInsets.only(
                       left: MediaQuery.of(context).size.width / 10,
                       right: MediaQuery.of(context).size.width / 10,),
@@ -208,8 +207,9 @@ class _AddIncomePageState extends State<AddIncomePage> {
                     ),
                     child: Center(
                       child: Text(AppLocale.addExpense.getString(context),
-                          style: const TextStyle(color: AppColors
-                              .backGroundColor)),
+                          style: TextStyle(color: AppColors
+                              .backGroundColor,
+                              fontSize: MediaQuery.of(context).size.width / 30)),
                     ),
                   ),
                 ),

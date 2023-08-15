@@ -45,7 +45,7 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
 
       return Container(
-        height: MediaQuery.of(context).size.height / 3.9,
+        height: MediaQuery.of(context).size.height / 3.8,
         margin: EdgeInsets.only(
           left: MediaQuery.of(context).size.width / 15,
           right: MediaQuery.of(context).size.width / 15,
@@ -64,8 +64,6 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
 
             return BlocBuilder<SetDateBloc, SetDateState>(
                 builder: (context, state) {
-              String dateMonth = state.date;
-
               return Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -153,11 +151,11 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                       children: [
                         SizedBox(
                           width: MediaQuery.of(context).size.width / 10,
-                          height: MediaQuery.of(context).size.height / 20,
+                          height: MediaQuery.of(context).size.height / 30,
                           child: Image.asset(
                             "assets/main_page_first_container_logo/darkIncome.png",
                             key: keyBottomNavigation1,
-                            scale: MediaQuery.of(context).size.width / 500,
+                            fit: BoxFit.contain,
                           ),
                         ),
                         Container(
@@ -199,9 +197,9 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                           ? AppLocale.rial.getString(context)
                           : AppLocale.toman.getString(context)
                           : '',
-                      style: const TextStyle(
-                          fontWeight: FontWeight.w800,
-                          color: Colors.white)),
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: MediaQuery.of(context).size.width / 22)),
                   SizedBox(
                     width: MediaQuery.of(context).size.width / 50,
                   ),
@@ -215,9 +213,7 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                           : "0".toPersianDigit(),
                       style: TextStyle(
                         color: Colors.white,
-                        fontWeight: FontWeight.w800,
-                        fontSize:
-                        MediaQuery.of(context).size.width / 20,
+                        fontSize: MediaQuery.of(context).size.width / 20,
                       )),
                 ],
               )
@@ -232,7 +228,6 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                           : "0",
                       style: TextStyle(
                         color: Colors.white,
-                        fontWeight: FontWeight.w800,
                         fontSize:
                         MediaQuery.of(context).size.width / 22,
                       )),
@@ -246,7 +241,6 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                           : AppLocale.toman.getString(context)
                           : "",
                       style: TextStyle(
-                        fontWeight: FontWeight.w800,
                         color: Colors.white,
                         fontSize:
                         MediaQuery.of(context).size.width / 30,
@@ -278,8 +272,12 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
             SizedBox(
               width: MediaQuery.of(context).size.width / 18,
             ),
-            Image.asset("assets/main_page_first_container_logo/darkBalance.png",
-                scale: MediaQuery.of(context).size.width / 500),
+            SizedBox(
+              width: MediaQuery.of(context).size.width / 10,
+              height: MediaQuery.of(context).size.height / 30,
+              child: Image.asset("assets/main_page_first_container_logo/darkBalance.png",
+                  fit: BoxFit.contain),
+            ),
           ],
         ),
         SizedBox(
@@ -295,8 +293,9 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                               ? AppLocale.rial.getString(context)
                               : AppLocale.toman.getString(context)
                           : ''.toPersianDigit(),
-                      style: const TextStyle(
-                          fontWeight: FontWeight.w800, color: Colors.white)),
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: MediaQuery.of(context).size.width / 22)),
                   SizedBox(
                     width: MediaQuery.of(context).size.width / 50,
                   ),
@@ -309,7 +308,6 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                               : state.calculateCash.toPersianDigit().seRagham()
                           : "0".toPersianDigit(),
                       style: TextStyle(
-                        fontWeight: FontWeight.w800,
                         color: Colors.white,
                         fontSize: MediaQuery.of(context).size.width / 22,
                       )),
@@ -325,7 +323,6 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                               : state.calculateCash.seRagham()
                           : "0",
                       style: TextStyle(
-                        fontWeight: FontWeight.w800,
                         color: Colors.white,
                         fontSize: MediaQuery.of(context).size.width / 22,
                       )),
@@ -338,9 +335,9 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                               ? AppLocale.rial.getString(context)
                               : AppLocale.toman.getString(context)
                           : '',
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w800,
+                      style: TextStyle(
                         color: Colors.white,
+                        fontSize: MediaQuery.of(context).size.width / 22
                       )),
                 ],
               ),
@@ -380,8 +377,12 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
             SizedBox(
               width: MediaQuery.of(context).size.width / 18,
             ),
-            Image.asset("assets/main_page_first_container_logo/darkBalance.png",
-                scale: MediaQuery.of(context).size.width / 500),
+            SizedBox(
+              width: MediaQuery.of(context).size.width / 10,
+              height: MediaQuery.of(context).size.height / 30,
+              child: Image.asset("assets/main_page_first_container_logo/darkBalance.png",
+                  fit: BoxFit.contain),
+            ),
           ],
         ),
         SizedBox(
@@ -397,8 +398,9 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                     ? AppLocale.rial.getString(context)
                     : AppLocale.toman.getString(context)
                     : ''.toPersianDigit(),
-                style: const TextStyle(
-                    fontWeight: FontWeight.w800, color: Colors.white)),
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: MediaQuery.of(context).size.width / 22)),
             SizedBox(
               width: MediaQuery.of(context).size.width / 50,
             ),
@@ -411,7 +413,7 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                     : state.expensesPerMonth.toPersianDigit().seRagham()
                     : "0".toPersianDigit(),
                 style: TextStyle(
-                  fontWeight: FontWeight.w800,
+                  // fontWeight: FontWeight.w800,
                   color: Colors.white,
                   fontSize: MediaQuery.of(context).size.width / 22,
                 )),
@@ -427,7 +429,6 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                     : state.expensesPerMonth.seRagham()
                     : "0",
                 style: TextStyle(
-                  fontWeight: FontWeight.w800,
                   color: Colors.white,
                   fontSize: MediaQuery.of(context).size.width / 22,
                 )),
@@ -440,9 +441,10 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                     ? AppLocale.rial.getString(context)
                     : AppLocale.toman.getString(context)
                     : '',
-                style: const TextStyle(
-                  fontWeight: FontWeight.w800,
+                style: TextStyle(
+                  // fontWeight: FontWeight.w800,
                   color: Colors.white,
+                  fontSize: MediaQuery.of(context).size.width / 22
                 )),
           ],
         ),

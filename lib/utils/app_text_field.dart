@@ -49,8 +49,9 @@ class _AppTextFieldState extends State<AppTextField> {
         return Directionality(
         textDirection: englishLanguageBoolean == false ? TextDirection.rtl : TextDirection.ltr,
         child: TextFormField(
-          style: const TextStyle(
-              color: Colors.black
+          style: TextStyle(
+              color: Colors.black,
+              fontSize: MediaQuery.of(context).size.width / 25
           ),
           readOnly: widget.clickable == true ? true : false,
           controller: widget.controller,
@@ -59,24 +60,29 @@ class _AppTextFieldState extends State<AppTextField> {
               ? TextInputType.number : null,
           maxLines: widget.labelText == "توضیحات" ? 6 : null,
           decoration: textInputDecoration.copyWith(
-              errorStyle: TextStyle(color: darkThemeBoolean == "false" ? Colors.red : Colors.white),
+              errorStyle: TextStyle(color: darkThemeBoolean == "false"
+                  ? Colors.red
+                  : Colors.white,
+              fontSize: MediaQuery.of(context).size.width / 25),
               filled: true, //<-- SEE HERE
               fillColor: Colors.white, //<-- SEE HERE
               suffixText: widget.labelText == "هزینه" || widget.labelText == "expense" ||
                   widget.labelText == "مبلغ ورودی" || widget.labelText == "income"
                   ? englishLanguageBoolean == false ? "تومان" : "T"
                   : "",
-              suffixStyle: const TextStyle(
-                  color: Colors.black
+              suffixStyle: TextStyle(
+                  color: Colors.black,
+                  fontSize: MediaQuery.of(context).size.width / 25
               ),
               helperText: darkThemeBoolean == "true" ? widget.labelText : "",
-              helperStyle: const TextStyle(
-                  color: Colors.white
+              helperStyle: TextStyle(
+                  color: Colors.white,
+                  fontSize: MediaQuery.of(context).size.width / 25
               ),
               labelText: darkThemeBoolean == "false" ? widget.labelText : "",
-              labelStyle: const TextStyle(
+              labelStyle: TextStyle(
                   color: Colors.black,
-
+                  fontSize: MediaQuery.of(context).size.width / 25
               )
           ),
           inputFormatters: widget.labelText == "هزینه" || widget.labelText == "expense" ||
