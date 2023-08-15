@@ -12,7 +12,7 @@ class ArrowBackIcon extends StatelessWidget {
           Navigator.pop(context);
         },
         icon: Icon(Icons.arrow_back,
-          size: MediaQuery.of(context).size.width / 25,
+          size: MediaQuery.of(context).size.width / 20,
           color: themeBoolean == "false"
               ? AppColors.appBarTitleColor
               : Colors.white,));
