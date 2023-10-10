@@ -31,7 +31,7 @@ class SettingPage extends StatelessWidget {
               top: MediaQuery.of(context).size.height / 100,
               bottom: MediaQuery.of(context).size.height / 200,
             ),
-            child: const SettingItemList()),
+            child: SettingItemList()),
       ),
     );});
   }

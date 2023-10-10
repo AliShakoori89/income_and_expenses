@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_linear_datepicker/flutter_datepicker.dart';
-import 'package:flutter_localization/flutter_localization.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:persian_datetime_picker/persian_datetime_picker.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import '../bloc/calculate_sf_cartesian_chart/bloc.dart';
 import '../bloc/calculate_sf_cartesian_chart/event.dart';
 import '../bloc/calculate_sf_cartesian_chart/state.dart';
-import '../bloc/change_language_bloc/bloc.dart';
-import '../bloc/change_language_bloc/state.dart';
 import '../bloc/them_bloc/bloc.dart';
 import '../bloc/them_bloc/state.dart';
 import '../const/app_colors.dart';
-import '../const/language.dart';
-import  'package:persian_number_utility/persian_number_utility.dart';
 
 
 class SFCartesianChartPage extends StatefulWidget {
@@ -56,119 +52,87 @@ class _SFCartesianChartPageState extends State<SFCartesianChartPage> {
   @override
   Widget build(BuildContext context) {
     
-    return BlocBuilder<ChangeLanguageBloc, ChangeLanguageState>(
-        builder: (context, state) {
-
-      bool englishLanguageBoolean = state.englishLanguageBoolean;
-
-      return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
+    return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
 
       var darkThemeBoolean = state.darkThemeBoolean;
 
       return BlocBuilder<CalculateSFCartesianChartBloc, CalculateSFCartesianChartState>(builder: (context, state) {
 
         data = [
-          _ChartData((AppLocale.buyItems.getString(context)).substring(0,6), double.parse(state.buyItemsExpenses)/100000),
-          _ChartData((AppLocale.comestible.getString(context)).substring(0,6), double.parse(state.comestibleExpenses)/100000),
-          _ChartData((AppLocale.transportation.getString(context)).substring(0,6), double.parse(state.transportationExpenses)/100000),
-          _ChartData((AppLocale.installmentsAndDebt.getString(context)).substring(0,6), double.parse(state.installmentsAndDebtExpenses)/100000),
-          _ChartData((AppLocale.treatment.getString(context)).substring(0,6), double.parse(state.treatmentExpenses)/100000),
-          _ChartData((AppLocale.gifts.getString(context)).substring(0,3), double.parse(state.giftsExpenses)/100000),
-          _ChartData((AppLocale.subsidy.getString(context)).substring(0,6), double.parse(state.renovationExpenses)/100000),
-          _ChartData((AppLocale.treatment.getString(context)).substring(0,6), double.parse(state.pastimeExpenses)/100000),
-          _ChartData((AppLocale.other.getString(context)).substring(0,4), double.parse(state.etceteraExpenses)/100000),
+          _ChartData((AppLocalizations.of(context)!.buyItems).substring(0,6), double.parse(state.buyItemsExpenses)/100000),
+          _ChartData((AppLocalizations.of(context)!.comestible).substring(0,6), double.parse(state.comestibleExpenses)/100000),
+          _ChartData((AppLocalizations.of(context)!.transportation).substring(0,6), double.parse(state.transportationExpenses)/100000),
+          _ChartData((AppLocalizations.of(context)!.installmentsAndDebt).substring(0,6), double.parse(state.installmentsAndDebtExpenses)/100000),
+          _ChartData((AppLocalizations.of(context)!.treatment).substring(0,6), double.parse(state.treatmentExpenses)/100000),
+          _ChartData((AppLocalizations.of(context)!.gifts).substring(0,3), double.parse(state.giftsExpenses)/100000),
+          _ChartData((AppLocalizations.of(context)!.subsidy).substring(0,6), double.parse(state.renovationExpenses)/100000),
+          _ChartData((AppLocalizations.of(context)!.treatment).substring(0,6), double.parse(state.pastimeExpenses)/100000),
+          _ChartData((AppLocalizations.of(context)!.other).substring(0,4), double.parse(state.etceteraExpenses)/100000),
         ];
         _tooltip = TooltipBehavior(enable: true);
 
-      return Scaffold(
-          backgroundColor: darkThemeBoolean == "false"
-              ? Colors.white
-              : AppColors.darkThemeColor,
-          body: SafeArea(
-            child: Container(
-              decoration: BoxDecoration(
-                  color: AppColors.themContainer,
-                  borderRadius: BorderRadius.circular(25)
-              ),
-              margin: EdgeInsets.only(
-                left: MediaQuery.of(context).size.width / 30,
-                right: MediaQuery.of(context).size.width / 30,
-                top: MediaQuery.of(context).size.height / 60,
-                bottom: MediaQuery.of(context).size.height / 200,
-              ),
-              child: Column(
-                children: [
-                  SizedBox(height: MediaQuery.of(context).size.height / 50),
-                  englishLanguageBoolean == false
-                      ? Expanded(
-                    flex: 7,
-                        child: Row(
-                                children: [
-                                  selectDateBox(context, darkThemeBoolean),
-                                  Padding(
-                                    padding: EdgeInsets.only(
-                                        left: MediaQuery.of(context).size.width / 30,
-                                        right: MediaQuery.of(context).size.width / 30),
-                                    child: Text(
-                                        AppLocale.selectMonth.getString(context),
-                                      style: TextStyle(
-                                          fontSize: MediaQuery.of(context).size.width / 25,
-                                        fontWeight: FontWeight.w700,
-                                        color: darkThemeBoolean == "false"
-                                            ? AppColors.darkThemeColor
-                                            : Colors.white,
-                                      ),),
-                                  ),
-                                ],
-                              ),
-                      )
-                      : Expanded(
-                    flex: 7,
-                        child: Row(
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.only(
-                                        left: MediaQuery.of(context).size.width / 30,
-                                        right: MediaQuery.of(context).size.width / 30),
-                                    child: Text(
-                                        AppLocale.selectMonth.getString(context),
-                                    style: TextStyle(
-                                      fontSize: MediaQuery.of(context).size.width / 25,
-                                      fontWeight: FontWeight.w700,
-                                      color: darkThemeBoolean == "false"
-                                          ? AppColors.darkThemeColor
-                                          : Colors.white,
-                                    ),),
-                                  ),
-                                  selectDateBox(context, darkThemeBoolean),
-                                ],
-                              ),
+        return Scaffold(
+            backgroundColor: darkThemeBoolean == "false"
+                ? Colors.white
+                : AppColors.darkThemeColor,
+            body: SafeArea(
+              child: Container(
+                decoration: BoxDecoration(
+                    color: AppColors.themContainer,
+                    borderRadius: BorderRadius.circular(25)
+                ),
+                margin: EdgeInsets.only(
+                  left: MediaQuery.of(context).size.width / 30,
+                  right: MediaQuery.of(context).size.width / 30,
+                  top: MediaQuery.of(context).size.height / 60,
+                  bottom: MediaQuery.of(context).size.height / 200,
+                ),
+                child: Column(
+                  children: [
+                    SizedBox(height: MediaQuery.of(context).size.height / 50),
+                    Expanded(
+                      flex: 7,
+                      child: Row(
+                        children: [
+                          selectDateBox(context, darkThemeBoolean),
+                          Padding(
+                            padding: EdgeInsets.only(
+                                left: MediaQuery.of(context).size.width / 30,
+                                right: MediaQuery.of(context).size.width / 30),
+                            child: Text(
+                              AppLocalizations.of(context)!.selectMonth,
+                              style: TextStyle(
+                                fontSize: MediaQuery.of(context).size.width / 30,
+                                fontWeight: FontWeight.w700,
+                                color: darkThemeBoolean == "false"
+                                    ? AppColors.darkThemeColor
+                                    : Colors.white,
+                              ),),
+                          ),
+                        ],
                       ),
-                  SizedBox(height: MediaQuery.of(context).size.height / 1000),
-                  Expanded(
-                      flex: 8,
-                      child: SFCartesianChart(context, darkThemeBoolean)),
-                  SizedBox(height: MediaQuery.of(context).size.height / 100),
-                  Expanded(
-                    flex: 1,
-                      child: mapScaleText(englishLanguageBoolean, context, darkThemeBoolean)),
-                  SizedBox(height: MediaQuery.of(context).size.height / 100),
-                ],
+                    ),
+                    SizedBox(height: MediaQuery.of(context).size.height / 1000),
+                    Expanded(
+                        flex: 8,
+                        child: SFCartesianChart(context, darkThemeBoolean)),
+                    SizedBox(height: MediaQuery.of(context).size.height / 100),
+                    Expanded(
+                        flex: 1,
+                        child: mapScaleText(context, darkThemeBoolean)),
+                    SizedBox(height: MediaQuery.of(context).size.height / 100),
+                  ],
+                ),
               ),
-            ),
-          ));
-    });});});
+            ));
+      });});
   }
 
-  Row mapScaleText(bool englishLanguageBoolean, BuildContext context, String darkThemeBoolean) {
-    return englishLanguageBoolean == false
-        ? Row(
+  Row mapScaleText(BuildContext context, String darkThemeBoolean) {
+    return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(
-          englishLanguageBoolean == false
-              ? "1/100000".toPersianDigit()
-              : "1/100000",
+        Text("1/100000",
           style: TextStyle(
             fontWeight: FontWeight.w700,
             fontSize:
@@ -179,35 +143,7 @@ class _SFCartesianChartPageState extends State<SFCartesianChartPage> {
           ),
         ),
         Text(
-          " : ${AppLocale.mapScale.getString(context)}",
-          style: TextStyle(
-            fontSize:
-            MediaQuery.of(context).size.width / 25,
-            color: darkThemeBoolean == "false"
-                ? AppColors.appBarTitleColor
-                : Colors.white,
-          ),
-        ),
-      ],
-    )
-        : Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          "${AppLocale.mapScale.getString(context)} : ",
-          style: TextStyle(
-            fontWeight: FontWeight.w700,
-            fontSize:
-            MediaQuery.of(context).size.width / 25,
-            color: darkThemeBoolean == "false"
-                ? AppColors.appBarTitleColor
-                : Colors.white,
-          ),
-        ),
-        Text(
-          englishLanguageBoolean == false
-              ? "1/100000".toPersianDigit()
-              : "1/100000",
+          " : ${AppLocalizations.of(context)!.mapScale}",
           style: TextStyle(
             fontSize:
             MediaQuery.of(context).size.width / 25,
@@ -245,7 +181,7 @@ class _SFCartesianChartPageState extends State<SFCartesianChartPage> {
             top: MediaQuery.of(context).size.height / 30,
           ),
           title: ChartTitle(
-              text: AppLocale.expensePerYear.getString(context),
+              text: AppLocalizations.of(context)!.expensePerYear,
               textStyle: darkThemeBoolean == "false"
                   ? TextStyle(
                   color: Colors.black,

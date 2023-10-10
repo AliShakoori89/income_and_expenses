@@ -4,8 +4,6 @@ import 'package:flutter_multi_formatter/formatters/currency_input_formatter.dart
 import 'package:flutter_multi_formatter/formatters/money_input_enums.dart';
 import 'package:income_and_expenses/utils/expenses_category_icon_list.dart';
 import 'package:income_and_expenses/utils/widget.dart';
-import '../bloc/change_language_bloc/bloc.dart';
-import '../bloc/change_language_bloc/state.dart';
 import '../bloc/them_bloc/bloc.dart';
 import '../bloc/them_bloc/state.dart';
 import 'income_category_icon_list.dart';
@@ -38,16 +36,12 @@ class _AppTextFieldState extends State<AppTextField> {
   @override
   Widget build(BuildContext context) {
 
-    return BlocBuilder<ChangeLanguageBloc, ChangeLanguageState>(
-        builder: (context, state) {
-      bool englishLanguageBoolean = state.englishLanguageBoolean;
+    return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
 
-      return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
+      var darkThemeBoolean = state.darkThemeBoolean;
 
-        var darkThemeBoolean = state.darkThemeBoolean;
-
-        return Directionality(
-        textDirection: englishLanguageBoolean == false ? TextDirection.rtl : TextDirection.ltr,
+      return Directionality(
+        textDirection: TextDirection.rtl,
         child: TextFormField(
           style: TextStyle(
               color: Colors.black,
@@ -63,13 +57,12 @@ class _AppTextFieldState extends State<AppTextField> {
               errorStyle: TextStyle(color: darkThemeBoolean == "false"
                   ? Colors.red
                   : Colors.white,
-              fontSize: MediaQuery.of(context).size.width / 25),
+                  fontSize: MediaQuery.of(context).size.width / 25),
               filled: true, //<-- SEE HERE
               fillColor: Colors.white, //<-- SEE HERE
               suffixText: widget.labelText == "هزینه" || widget.labelText == "expense" ||
                   widget.labelText == "مبلغ ورودی" || widget.labelText == "income"
-                  ? englishLanguageBoolean == false ? "تومان" : "T"
-                  : "",
+                  ? "تومان" : "T",
               suffixStyle: TextStyle(
                   color: Colors.black,
                   fontSize: MediaQuery.of(context).size.width / 25
@@ -129,7 +122,7 @@ class _AppTextFieldState extends State<AppTextField> {
             return null;
           },
         ),
-      );});});
+      );});
 
   }
 }

@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_localization/flutter_localization.dart';
 import 'package:income_and_expenses/bloc/change_currency_bloc/event.dart';
-import 'package:income_and_expenses/bloc/change_language_bloc/bloc.dart';
-import 'package:income_and_expenses/bloc/change_language_bloc/state.dart';
 import 'package:income_and_expenses/bloc/set_date_bloc/state.dart';
 import 'package:income_and_expenses/const/app_colors.dart';
-import 'package:income_and_expenses/const/language.dart';
 import 'package:income_and_expenses/pages/income_details_page.dart';
 import 'package:persian_number_utility/persian_number_utility.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../bloc/change_currency_bloc/bloc.dart';
 import '../bloc/change_currency_bloc/state.dart';
 import '../bloc/set_date_bloc/bloc.dart';
@@ -54,43 +51,38 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
             color: AppColors.mainColor,
             borderRadius:
                 BorderRadius.circular(MediaQuery.of(context).size.width / 10)),
-        child: BlocBuilder<ChangeLanguageBloc, ChangeLanguageState>(
+        child: BlocBuilder<ChangeCurrencyBloc, ChangeCurrencyState>(
             builder: (context, state) {
-          bool englishLanguageBoolean = state.englishLanguageBoolean;
+              bool rialCurrencyType = state.rialCurrencyBoolean;
 
-          return BlocBuilder<ChangeCurrencyBloc, ChangeCurrencyState>(
-              builder: (context, state) {
-            bool rialCurrencyType = state.rialCurrencyBoolean;
-
-            return BlocBuilder<SetDateBloc, SetDateState>(
-                builder: (context, state) {
-              return Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  leftSideCashContainer(context, englishLanguageBoolean, state, rialCurrencyType),
-                  rightSideCashContainer(context, englishLanguageBoolean, state, rialCurrencyType, keyBottomNavigation1)
-                ],
-              );
-            });
-          });
-        }),
+              return BlocBuilder<SetDateBloc, SetDateState>(
+                  builder: (context, state) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        leftSideCashContainer(context, state, rialCurrencyType),
+                        rightSideCashContainer(context, state, rialCurrencyType, keyBottomNavigation1)
+                      ],
+                    );
+                  });
+            }),
       );
     });
   }
 
-  Expanded rightSideCashContainer(BuildContext context, bool englishLanguageBoolean, SetDateState state, bool rialCurrencyType, GlobalKey? keyBottomNavigation1) {
+  Expanded rightSideCashContainer(BuildContext context, SetDateState state, bool rialCurrencyType, GlobalKey? keyBottomNavigation1) {
     return Expanded(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      cashSlice(context, englishLanguageBoolean, state, rialCurrencyType),
-                      incomeSlice(context, englishLanguageBoolean, state, rialCurrencyType, keyBottomNavigation1),
+                      cashSlice(context, state, rialCurrencyType),
+                      incomeSlice(context, state, rialCurrencyType, keyBottomNavigation1),
                     ],
                   ),
                 );
   }
 
-  Align incomeSlice(BuildContext context, bool englishLanguageBoolean, SetDateState state, bool rialCurrencyType, GlobalKey? keyBottomNavigation1) {
+  Align incomeSlice(BuildContext context, SetDateState state, bool rialCurrencyType, GlobalKey? keyBottomNavigation1) {
 
     return Align(
       alignment: Alignment.bottomRight,
@@ -128,7 +120,7 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Flexible(
-                    child: Text(AppLocale.income.getString(context),
+                    child: Text(AppLocalizations.of(context)!.income,
                         style: TextStyle(
                           overflow: TextOverflow.ellipsis,
                           color: Colors.white,
@@ -187,15 +179,14 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                   MaterialPageRoute(builder: (context) => IncomeDetailsPage(month: state.month)),
                 );
               },
-              child: englishLanguageBoolean == false
-                  ? Row(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                       state.incomePerMonth != ""
                           ? rialCurrencyType == true
-                          ? AppLocale.rial.getString(context)
-                          : AppLocale.toman.getString(context)
+                          ? AppLocalizations.of(context)!.rial
+                          : AppLocalizations.of(context)!.toman
                           : '',
                       style: TextStyle(
                           color: Colors.white,
@@ -216,36 +207,6 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                         fontSize: MediaQuery.of(context).size.width / 20,
                       )),
                 ],
-              )
-                  : Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                      state.incomePerMonth != ""
-                          ? rialCurrencyType == true
-                          ? ("${state.incomePerMonth}0").seRagham()
-                          : state.incomePerMonth.seRagham()
-                          : "0",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize:
-                        MediaQuery.of(context).size.width / 22,
-                      )),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width / 50,
-                  ),
-                  Text(
-                      state.incomePerMonth != ""
-                          ? rialCurrencyType == true
-                          ? AppLocale.rial.getString(context)
-                          : AppLocale.toman.getString(context)
-                          : "",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize:
-                        MediaQuery.of(context).size.width / 30,
-                      )),
-                ],
               ),
             ),
           ],
@@ -254,8 +215,9 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
     );
   }
 
-  Column cashSlice(BuildContext context, bool englishLanguageBoolean, SetDateState state, bool rialCurrencyType) {
+  Column cashSlice(BuildContext context, SetDateState state, bool rialCurrencyType) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SizedBox(
           height: MediaQuery.of(context).size.height / 30,
@@ -263,7 +225,7 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(AppLocale.cash.getString(context),
+            Text(AppLocalizations.of(context)!.cash,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: MediaQuery.of(context).size.width / 22,
@@ -283,15 +245,14 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
         SizedBox(
           height: MediaQuery.of(context).size.height / 200,
         ),
-        englishLanguageBoolean == false
-            ? Row(
+        Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                       state.calculateCash != ""
                           ? rialCurrencyType == true
-                              ? AppLocale.rial.getString(context)
-                              : AppLocale.toman.getString(context)
+                              ? AppLocalizations.of(context)!.rial
+                              : AppLocalizations.of(context)!.toman
                           : ''.toPersianDigit(),
                       style: TextStyle(
                           color: Colors.white,
@@ -312,55 +273,28 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                         fontSize: MediaQuery.of(context).size.width / 22,
                       )),
                 ],
-              )
-            : Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                      state.calculateCash != ""
-                          ? rialCurrencyType == true
-                              ? ("${state.calculateCash}0").seRagham()
-                              : state.calculateCash.seRagham()
-                          : "0",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: MediaQuery.of(context).size.width / 22,
-                      )),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width / 50,
-                  ),
-                  Text(
-                      state.calculateCash != ""
-                          ? rialCurrencyType == true
-                              ? AppLocale.rial.getString(context)
-                              : AppLocale.toman.getString(context)
-                          : '',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: MediaQuery.of(context).size.width / 22
-                      )),
-                ],
               ),
       ],
     );
   }
 
-  Expanded leftSideCashContainer(BuildContext context, bool englishLanguageBoolean, SetDateState state, bool rialCurrencyType) {
+  Expanded leftSideCashContainer(BuildContext context, SetDateState state, bool rialCurrencyType) {
     return Expanded(
       child: Column(
         children: [
           shapeSlice(context),
           Expanded(
             child: expensesSlice(
-                context, englishLanguageBoolean, state, rialCurrencyType),
+                context, state, rialCurrencyType),
           ),
         ],
       ),
     );
   }
 
-  Column expensesSlice(BuildContext context, bool englishLanguageBoolean, SetDateState state, bool rialCurrencyType) {
+  Column expensesSlice(BuildContext context, SetDateState state, bool rialCurrencyType) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SizedBox(
           height: MediaQuery.of(context).size.height / 30,
@@ -368,7 +302,7 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(AppLocale.expenses.getString(context),
+            Text(AppLocalizations.of(context)!.expenses,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: MediaQuery.of(context).size.width / 22,
@@ -388,15 +322,14 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
         SizedBox(
           height: MediaQuery.of(context).size.height / 200,
         ),
-        englishLanguageBoolean == false
-            ? Row(
+        Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
                 state.expensesPerMonth != ""
                     ? rialCurrencyType == true
-                    ? AppLocale.rial.getString(context)
-                    : AppLocale.toman.getString(context)
+                    ? AppLocalizations.of(context)!.rial
+                    : AppLocalizations.of(context)!.toman
                     : ''.toPersianDigit(),
                 style: TextStyle(
                     color: Colors.white,
@@ -416,35 +349,6 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                   // fontWeight: FontWeight.w800,
                   color: Colors.white,
                   fontSize: MediaQuery.of(context).size.width / 22,
-                )),
-          ],
-        )
-            : Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-                state.expensesPerMonth != ""
-                    ? rialCurrencyType == true
-                    ? ("${state.expensesPerMonth}0").seRagham()
-                    : state.expensesPerMonth.seRagham()
-                    : "0",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: MediaQuery.of(context).size.width / 22,
-                )),
-            SizedBox(
-              width: MediaQuery.of(context).size.width / 50,
-            ),
-            Text(
-                state.expensesPerMonth != ""
-                    ? rialCurrencyType == true
-                    ? AppLocale.rial.getString(context)
-                    : AppLocale.toman.getString(context)
-                    : '',
-                style: TextStyle(
-                  // fontWeight: FontWeight.w800,
-                  color: Colors.white,
-                  fontSize: MediaQuery.of(context).size.width / 22
                 )),
           ],
         ),

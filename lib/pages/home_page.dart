@@ -112,7 +112,8 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
   List<TargetFocus> _createTargets() {
     List<TargetFocus> targets = [];
-    targets.add(TargetFocus(
+    targets.add(
+      TargetFocus(
       identify: "keyButton",
       keyTarget: keyButton,
       alignSkip: Alignment.topRight,
@@ -136,7 +137,8 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         ),
       ],
     ),);
-    targets.add(TargetFocus(
+    targets.add(
+      TargetFocus(
       identify: "keyButton1",
       keyTarget: keyButton1,
       alignSkip: Alignment.topRight,
@@ -160,7 +162,8 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         ),
       ],
     ),);
-    targets.add(TargetFocus(
+    targets.add(
+      TargetFocus(
       identify: "keyButton2",
       keyTarget: keyButton2,
       alignSkip: Alignment.topRight,
@@ -184,7 +187,8 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         ),
       ],
     ),);
-    targets.add(TargetFocus(
+    targets.add(
+      TargetFocus(
       identify: "keyButton3",
       keyTarget: keyButton3,
       alignSkip: Alignment.topRight,
@@ -208,7 +212,8 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         ),
       ],
     ),);
-    targets.add(TargetFocus(
+    targets.add(
+      TargetFocus(
       identify: "keyButton4",
       keyTarget: keyButton4,
       alignSkip: Alignment.topRight,
@@ -376,7 +381,9 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
       return Scaffold(
       extendBody: true,
-      body: pages[_bottomNavIndex],
+      body: Drawer(
+       width: double.infinity,
+          child: pages[_bottomNavIndex]),
       bottomNavigationBar: SizedBox(
         height: MediaQuery.of(context).size.width / 6,
         child: BottomNavigationBar(

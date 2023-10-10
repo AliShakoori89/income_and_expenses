@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_localization/flutter_localization.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../bloc/them_bloc/bloc.dart';
 import '../bloc/them_bloc/state.dart';
 import '../const/app_colors.dart';
-import '../const/language.dart';
 
 class NoDataPage extends StatelessWidget {
   const NoDataPage({Key? key}) : super(key: key);
@@ -22,7 +21,7 @@ class NoDataPage extends StatelessWidget {
               // width: MediaQuery.of(context).size.width / 1.5,
           scale: MediaQuery.of(context).size.width / 3000),
           Text(
-            AppLocale.notExpenses.getString(context),
+            AppLocalizations.of(context)!.notExpenses,
             style: TextStyle(
               fontSize: MediaQuery.of(context).size.height / 40,
               color: darkThemeBoolean == "false"
