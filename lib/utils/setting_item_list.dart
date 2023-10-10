@@ -19,7 +19,7 @@ class SettingItemList extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
 
-    final appLanguage = Provider.of<AppLanguage>(context);
+    final appLanguage = Provider.of<LanguageProvider>(context);
 
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
 
@@ -311,7 +311,7 @@ class SettingItemList extends StatelessWidget{
               );
   }
 
-  GestureDetector chooseLanguageAlertDialog(BuildContext context, String darkThemeBoolean, AppLanguage appLanguage) {
+  GestureDetector chooseLanguageAlertDialog(BuildContext context, String darkThemeBoolean, LanguageProvider appLanguage) {
 
     return GestureDetector(
                 onTap: () {

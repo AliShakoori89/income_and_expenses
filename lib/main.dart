@@ -20,7 +20,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  AppLanguage appLanguage = AppLanguage();
+  LanguageProvider appLanguage = LanguageProvider();
   await appLanguage.fetchLocale();
   runApp(
     // DevicePreview(
@@ -34,7 +34,7 @@ void main() async{
 }
 
 class MyApp extends StatelessWidget {
-  final AppLanguage appLanguage;
+  final LanguageProvider appLanguage;
 
   MyApp({required this.appLanguage});
 
@@ -42,12 +42,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    AppLanguage language = AppLanguage();
+    LanguageProvider language = LanguageProvider();
     language.fetchLocale();
     
-    return ChangeNotifierProvider<AppLanguage>(
+    return ChangeNotifierProvider<LanguageProvider>(
       create: (_) => appLanguage,
-      child: Consumer<AppLanguage>(builder: (context, model, child) {
+      child: Consumer<LanguageProvider>(builder: (context, model, child) {
             return MultiBlocProvider(
               providers: [
                 BlocProvider(

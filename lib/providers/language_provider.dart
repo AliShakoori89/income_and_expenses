@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class AppLanguage extends ChangeNotifier {
+class LanguageProvider extends ChangeNotifier {
   Locale _appLocale = Locale('fa');
 
   Locale get appLocal => _appLocale;
