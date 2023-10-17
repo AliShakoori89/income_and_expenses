@@ -1,5 +1,4 @@
-import 'package:income_and_expenses/data_base/data_base.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:income_and_expenses/data/data_base/data_base.dart';
 
 class CalculateRepository {
 
