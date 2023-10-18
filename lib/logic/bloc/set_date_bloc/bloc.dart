@@ -189,7 +189,7 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
   void _mapCalculateCashPerMonthEventToState(
       CalculateCashPerMonthEvent event, Emitter<SetDateState> emit) async {
     try {
-      emit(state.copyWith(status: SetDateStatus.loading));
+      emit(state.copyWith(status: SetDateStatus.loading, expenseDetails: []));
       String calculateCash = await calculateExpensesRepository.calculateCash(event.month);
       emit(
         state.copyWith(

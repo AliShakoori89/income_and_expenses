@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:income_and_expenses/bloc/set_date_bloc/event.dart';
-import 'package:income_and_expenses/model/income_model.dart';
-import 'package:income_and_expenses/utils/date_picker_calendar.dart';
-import '../bloc/set_date_bloc/bloc.dart';
-import '../bloc/set_date_bloc/state.dart';
-import '../bloc/them_bloc/bloc.dart';
-import '../bloc/them_bloc/state.dart';
+import 'package:income_and_expenses/data/model/income_model.dart';
+import 'package:income_and_expenses/logic/bloc/set_date_bloc/bloc.dart';
+import 'package:income_and_expenses/logic/bloc/set_date_bloc/event.dart';
+import 'package:income_and_expenses/logic/bloc/set_date_bloc/state.dart';
+import 'package:income_and_expenses/logic/bloc/them_bloc/bloc.dart';
+import 'package:income_and_expenses/logic/bloc/them_bloc/state.dart';
+import 'package:income_and_expenses/presentation/utils/date_picker_calendar.dart';
 import '../const/app_colors.dart';
 import '../utils/app_text_field.dart';
 import '../utils/arrow_back_icon.dart';
@@ -159,29 +159,9 @@ class _AddIncomePageState extends State<AddIncomePage> {
                 } else if (incomeCategoryController.text == "other") {
                   incomeModel.incomeIconType = "assets/icons/income_category_icons/other.svg";
                 }
-              // } else {
-              //   if (incomeCategoryController.text == "حقوق") {
-              //     incomeModel.incomeIconType = "assets/icons/income_category_icons/income.svg";
-              //   } else if (incomeCategoryController.text == "هدیه") {
-              //     incomeModel.incomeIconType = "assets/icons/income_category_icons/gift.svg";
-              //   } else if (incomeCategoryController.text == "جایزه") {
-              //     incomeModel.incomeIconType = "assets/icons/income_category_icons/reward.svg";
-              //   } else if (incomeCategoryController.text == "فروش") {
-              //     incomeModel.incomeIconType = "assets/icons/income_category_icons/sale.svg";
-              //   } else if (incomeCategoryController.text == "یارانه") {
-              //     incomeModel.incomeIconType = "assets/icons/income_category_icons/yarane.svg";
-              //   } else if (incomeCategoryController.text == "سایر") {
-              //     incomeModel.incomeIconType = "assets/icons/income_category_icons/other.svg";
-              //   }
-              // }
 
               setDateBloc.add(
                   AddIncomeEvent(incomeModel: incomeModel, month: incomeModel.incomeMonth!));
-
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => const MyHomePage()),
-              // );
 
               Navigator.of(context).popUntil((route) => route.isFirst);
             }

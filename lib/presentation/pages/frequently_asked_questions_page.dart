@@ -1,10 +1,9 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../bloc/them_bloc/bloc.dart';
-import '../bloc/them_bloc/event.dart';
-import '../bloc/them_bloc/state.dart';
+import 'package:income_and_expenses/logic/bloc/them_bloc/bloc.dart';
+import 'package:income_and_expenses/logic/bloc/them_bloc/event.dart';
+import 'package:income_and_expenses/logic/bloc/them_bloc/state.dart';
 import '../const/app_colors.dart';
 
 class FrequentlyAskedQuestions extends StatelessWidget {

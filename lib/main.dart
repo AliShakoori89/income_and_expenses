@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:income_and_expenses/bloc/calculate_sf_circular_chart/bloc.dart';
-import 'package:income_and_expenses/bloc/set_date_bloc/bloc.dart';
-import 'package:income_and_expenses/bloc/them_bloc/bloc.dart';
-import 'package:income_and_expenses/pages/home_page.dart';
-import 'package:income_and_expenses/providers/language_provider.dart';
-import 'package:income_and_expenses/repository/calculate_repository.dart';
-import 'package:income_and_expenses/repository/calculate_sf_cartesian_chart_repository.dart';
-import 'package:income_and_expenses/repository/calculate_sf_circular_chart_repository.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:income_and_expenses/repository/change_currency_repository.dart';
-import 'package:income_and_expenses/repository/date_time_repository.dart';
-import 'package:income_and_expenses/repository/theme_repository.dart';
+import 'package:income_and_expenses/data/repository/calculate_repository.dart';
+import 'package:income_and_expenses/data/repository/calculate_sf_cartesian_chart_repository.dart';
+import 'package:income_and_expenses/data/repository/calculate_sf_circular_chart_repository.dart';
+import 'package:income_and_expenses/data/repository/change_currency_repository.dart';
+import 'package:income_and_expenses/data/repository/date_time_repository.dart';
+import 'package:income_and_expenses/data/repository/theme_repository.dart';
+import 'package:income_and_expenses/logic/bloc/calculate_sf_cartesian_chart/bloc.dart';
+import 'package:income_and_expenses/logic/bloc/calculate_sf_circular_chart/bloc.dart';
+import 'package:income_and_expenses/logic/bloc/change_currency_bloc/bloc.dart';
+import 'package:income_and_expenses/logic/bloc/set_date_bloc/bloc.dart';
+import 'package:income_and_expenses/logic/bloc/them_bloc/bloc.dart';
+import 'package:income_and_expenses/logic/providers/language_provider.dart';
+import 'package:income_and_expenses/presentation/const/app_colors.dart';
+import 'package:income_and_expenses/presentation/pages/home_page.dart';
 import 'package:provider/provider.dart';
-import 'bloc/calculate_sf_cartesian_chart/bloc.dart';
-import 'bloc/change_currency_bloc/bloc.dart';
-import 'const/app_colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() async{

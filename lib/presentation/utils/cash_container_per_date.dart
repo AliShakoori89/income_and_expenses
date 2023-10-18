@@ -62,14 +62,15 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                         : state.status.isSuccess
                         ? state.expenseDetails.isNotEmpty
                         ? Column(
-                      children: [
-                        persianAllExpenses(rialCurrencyType, state, darkThemeBoolean, context),
-                        SizedBox(
-                            height: MediaQuery.of(context).size.height / 60
-                        ),
-                        expensesList(context, allTodayExpenses, state, rialCurrencyType, darkThemeBoolean),
-                      ],
-                    )
+                            children: [
+                              persianAllExpenses(rialCurrencyType, state,
+                                  darkThemeBoolean, context),
+                              SizedBox(
+                                  height: MediaQuery.of(context).size.height / 60),
+                              expensesList(context, allTodayExpenses, state,
+                                  rialCurrencyType, darkThemeBoolean),
+                            ],
+                          )
                         : const Center(
                       child: NoDataPage(),
                     )
@@ -83,6 +84,7 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
   }
 
   Container expensesList(BuildContext context, int allTodayExpenses, SetDateState state, bool rialCurrencyType, String darkThemeBoolean) {
+
     return Container(
       decoration: BoxDecoration(
           color: AppColors.themContainer,
@@ -112,7 +114,6 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                 left: MediaQuery.of(context).size.width / 60,
                 right: MediaQuery.of(context).size.width / 60,
                 top: MediaQuery.of(context).size.height / 60,
-                // bottom: MediaQuery.of(context).size.height / 60
               ),
               decoration: BoxDecoration(
                 color: darkThemeBoolean == "false" ? Colors.white : AppColors.darkThemeColor,
@@ -122,95 +123,98 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                     color: Colors.grey.withOpacity(0.5),
                     spreadRadius: 5,
                     blurRadius: 7,
-                    offset: Offset(0, 3), // changes position of shadow
+                    offset: const Offset(0, 3), // changes position of shadow
                   ),
                 ],
               ),
-              child: Column(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height / 80,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        flex: 2,
-                        child: Container(
+                  Expanded(
+                    flex: 3,
+                    child: Row(
+                      children: [
+                        Container(
                           margin: EdgeInsets.only(
-                              left: MediaQuery.of(context).size.width /
-                                  30),
-                          child: Text(
-                              rialCurrencyType == true
-                                  ? "-${("${state.expenseDetails[index].expense!}0").toPersianDigit().seRagham()}"
-                                  : "-${state.expenseDetails[index].expense!.toString().toPersianDigit().seRagham()}",
-                              style: TextStyle(
-                                  fontSize: MediaQuery.of(context)
-                                      .size
-                                      .width /
-                                      22,
-                                  color: darkThemeBoolean == "false"
-                                      ? AppColors.expensesDigitColor
-                                      : Colors.white)),
+                              top: MediaQuery.of(context).size.width / 20,
+                              right: MediaQuery.of(context).size.width / 50,
+                              bottom: MediaQuery.of(context).size.width / 20
+                          ),
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: AppColors.colorList[index]),
+                          child: Container(
+                            margin: EdgeInsets.all(
+                                MediaQuery.of(context).size.width / 50),
+                            child: SvgPicture.asset(
+                                height: MediaQuery.of(context).size.height / 30,
+                                width: MediaQuery.of(context).size.width / 30,
+                                state.expenseDetails[index].expensesIconType!
+                            ),
+                          ),
                         ),
-                      ),
-                      Expanded(
-                        flex: 5,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Expanded(
-                              flex: 3,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  Text(
-                                      textAlign: TextAlign.end,
-                                      state.expenseDetails[index].expenseCategory!,
-                                      style: TextStyle(
-                                          fontSize: MediaQuery.of(context).size.width / 25,
-                                          fontWeight: FontWeight.w700,
-                                          color: darkThemeBoolean == "false"
-                                              ? AppColors.black
-                                              : Colors.white)),
-                                  Text(
-                                      textAlign: TextAlign.end,
-                                      state.expenseDetails[index]
-                                          .expensesDescription!,
-                                      style: TextStyle(
-                                          fontSize: MediaQuery.of(context).size.width / 30,
-                                          fontWeight: FontWeight.w400,
-                                          color: darkThemeBoolean == "false"
-                                              ? AppColors.appBarProfileName
-                                              : Colors.white)),
-                                ],
-                              ),
-                            ),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width / 20,
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: AppColors.colorList[index]),
-                                child: Container(
-                                  margin: EdgeInsets.all(
-                                      MediaQuery.of(context).size.width / 50),
-                                  child: SvgPicture.asset(
-                                      height: MediaQuery.of(context).size.height / 30,
-                                      width: MediaQuery.of(context).size.width / 30,
-                                      state.expenseDetails[index].expensesIconType!),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width / 50,
+                        ),
+                        Flexible(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Text(
+                                  textAlign: TextAlign.end,
+                                  state.expenseDetails[index].expenseCategory!,
+                                  style: TextStyle(
+                                      fontSize: MediaQuery.of(context).size.width / 25,
+                                      fontWeight: FontWeight.w700,
+                                      color: darkThemeBoolean == "false"
+                                          ? AppColors.black
+                                          : Colors.white)),
+                              Container(
+                                margin: EdgeInsets.only(
+                                    bottom: MediaQuery.of(context).size.height /50,
+                                    top: MediaQuery.of(context).size.height /50,
+                                  left: MediaQuery.of(context).size.width /50,
                                 ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
+                                child: Text(
+                                    textAlign: TextAlign.justify,
+                                    overflow: TextOverflow.clip,
+                                    state.expenseDetails[index]
+                                        .expensesDescription!,
+                                    style: TextStyle(
+                                        overflow: TextOverflow.ellipsis,
+                                        fontSize: MediaQuery.of(context).size.width / 30,
+                                        fontWeight: FontWeight.w400,
+                                        color: darkThemeBoolean == "false"
+                                            ? AppColors.appBarProfileName
+                                            : Colors.white)),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
                   ),
-                  SizedBox(height: MediaQuery.of(context).size.height / 30,)
+                  Expanded(
+                    flex: 1,
+                    child: Container(
+                      margin: EdgeInsets.only(
+                          left: MediaQuery.of(context).size.width / 30,
+                      right: MediaQuery.of(context).size.width / 30 ),
+                      child: Text(
+                          rialCurrencyType == true
+                              ? "${("${state.expenseDetails[index].expense!}0").toPersianDigit().seRagham()}-"
+                              : "${state.expenseDetails[index].expense!.toString().toPersianDigit().seRagham()}-",
+                          style: TextStyle(
+                              fontSize: MediaQuery.of(context)
+                                  .size
+                                  .width /
+                                  22,
+                              color: darkThemeBoolean == "false"
+                                  ? AppColors.expensesDigitColor
+                                  : Colors.white)),
+                    ),
+                  )
                 ],
               )
             ),
@@ -253,17 +257,6 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          rialCurrencyType == true
-              ? ("${state.expensesPerDate}0").toPersianDigit().seRagham()
-              : state.expensesPerDate.toPersianDigit().seRagham(),
-          style: TextStyle(
-            color: darkThemeBoolean == "false"
-                ? AppColors.appBarTitleColor
-                : Colors.white,
-            fontSize: MediaQuery.of(context).size.width / 20,
-          ),
-        ),
-        Text(
           AppLocalizations.of(context)!.allExpenses,
           style: TextStyle(
               fontWeight: FontWeight.w700,
@@ -271,6 +264,19 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                   ? AppColors.appBarTitleColor
                   : Colors.white,
               fontSize: MediaQuery.of(context).size.width / 25),
+        ),
+        Text(
+          rialCurrencyType == true
+              ? AppLocalizations.of(context)!.language == "زبان"
+              ? ("${state.expensesPerDate}0").toPersianDigit().seRagham()
+              : ("${state.expensesPerDate}0").seRagham()
+              : state.expensesPerDate.seRagham(),
+          style: TextStyle(
+            color: darkThemeBoolean == "false"
+                ? AppColors.appBarTitleColor
+                : Colors.white,
+            fontSize: MediaQuery.of(context).size.width / 20,
+          ),
         ),
       ],
     );

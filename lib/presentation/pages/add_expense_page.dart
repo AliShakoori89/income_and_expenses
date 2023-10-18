@@ -39,7 +39,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
 
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
 
-      var darkThemeBoolean = state?.darkThemeBoolean;
+      var darkThemeBoolean = state.darkThemeBoolean;
 
       return
         Scaffold(
@@ -58,7 +58,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
           title: Align(
               alignment: Alignment.centerRight,
               child: Text(AppLocalizations.of(context)!.newExpense)),
-          leading: ArrowBackIcon(themeBoolean: darkThemeBoolean!),
+          leading: ArrowBackIcon(themeBoolean: darkThemeBoolean),
         ),
         backgroundColor: darkThemeBoolean == "false"
             ? Colors.white
@@ -100,7 +100,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
                       labelText: AppLocalizations.of(context)!.grouping,
                       controller: categoryController,
                       clickable: true,
-                      themeBoolean: darkThemeBoolean!,
+                      themeBoolean: darkThemeBoolean,
                       addExpenses: true,
                     ),
                     SizedBox(
@@ -110,7 +110,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
                       labelText: AppLocalizations.of(context)!.expense,
                       controller: expensesController,
                       clickable: false,
-                      themeBoolean: darkThemeBoolean!,
+                      themeBoolean: darkThemeBoolean,
                       addExpenses: true,
                     ),
                     SizedBox(
@@ -120,7 +120,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
                       labelText: AppLocalizations.of(context)!.description,
                       controller: descriptionController,
                       clickable: false,
-                      themeBoolean: darkThemeBoolean!,
+                      themeBoolean: darkThemeBoolean,
                       addExpenses: true,
                     ),
                   ],
@@ -159,35 +159,34 @@ class _AddExpensePageState extends State<AddExpensePage> {
 
               expense.expensesDescription = descriptionController.text;
 
-              // if (englishLanguageBoolean == true) {
-                if (categoryController.text == "buy items") {
-                  expense.expensesIconType = "assets/icons/expense_category_icons/card_pos.svg";
-                  expense.expenseCategory = "خرید اقلام";
-                } else if (categoryController.text == "comestible") {
-                  expense.expensesIconType = "assets/icons/expense_category_icons/burger_and_cola.svg";
-                  expense.expenseCategory = "خوراکی";
-                } else if (categoryController.text == "transportation") {
-                  expense.expensesIconType = "assets/icons/expense_category_icons/driving.svg";
-                  expense.expenseCategory = "حمل و نقل";
-                } else if (categoryController.text == "gifts") {
-                  expense.expensesIconType = "assets/icons/expense_category_icons/gift.svg";
-                  expense.expenseCategory = "هدیه";
-                } else if (categoryController.text == "treatment") {
-                  expense.expensesIconType = "assets/icons/expense_category_icons/health.svg";
-                  expense.expenseCategory = "درمانی";
-                } else if (categoryController.text == "installments and debt") {
-                  expense.expensesIconType = "assets/icons/expense_category_icons/receipt_item.svg";
-                  expense.expenseCategory = "اقساط و بدهی";
-                } else if (categoryController.text == "renovation") {
-                  expense.expensesIconType = "assets/icons/expense_category_icons/repairs.svg";
-                  expense.expenseCategory = "تعمیرات";
-                } else if (categoryController.text == "pastime") {
-                  expense.expensesIconType = "assets/icons/expense_category_icons/games_and_multimedia.svg";
-                  expense.expenseCategory = "تفریح";
-                } else if (categoryController.text == "other") {
-                  expense.expensesIconType = "assets/icons/expense_category_icons/other.svg";
-                  expense.expenseCategory = "سایر";
-                }
+              if (categoryController.text == "خرید اقلام") {
+                expense.expensesIconType = "assets/icons/expense_category_icons/card_pos.svg";
+                expense.expenseCategory = "خرید اقلام";
+              } else if (categoryController.text == "خوراکی") {
+                expense.expensesIconType = "assets/icons/expense_category_icons/burger_and_cola.svg";
+                expense.expenseCategory = "خوراکی";
+              } else if (categoryController.text == "حمل و نقل") {
+                expense.expensesIconType = "assets/icons/expense_category_icons/driving.svg";
+                expense.expenseCategory = "حمل و نقل";
+              } else if (categoryController.text == "هدیه") {
+                expense.expensesIconType = "assets/icons/expense_category_icons/gift.svg";
+                expense.expenseCategory = "هدیه";
+              } else if (categoryController.text == "درمانی") {
+                expense.expensesIconType = "assets/icons/expense_category_icons/health.svg";
+                expense.expenseCategory = "درمانی";
+              } else if (categoryController.text == "اقساط و بدهی") {
+                expense.expensesIconType = "assets/icons/expense_category_icons/receipt_item.svg";
+                expense.expenseCategory = "اقساط و بدهی";
+              } else if (categoryController.text == "تعمیرات") {
+                expense.expensesIconType = "assets/icons/expense_category_icons/repairs.svg";
+                expense.expenseCategory = "تعمیرات";
+              } else if (categoryController.text == "pastime") {
+                expense.expensesIconType = "assets/icons/expense_category_icons/games_and_multimedia.svg";
+                expense.expenseCategory = "تفریح";
+              } else if (categoryController.text == "other") {
+                expense.expensesIconType = "assets/icons/expense_category_icons/other.svg";
+                expense.expenseCategory = "سایر";
+              }
 
               setDateBloc.add(
                   AddOneByOneExpenseEvent(expenseModel: expense, date: date, month: expense.expenseMonth!));

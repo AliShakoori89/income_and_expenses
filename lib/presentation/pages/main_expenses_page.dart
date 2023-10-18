@@ -7,7 +7,7 @@ import 'package:income_and_expenses/presentation/utils/cash_container.dart';
 import 'package:income_and_expenses/presentation/utils/date_picker_calendar.dart';
 import '../utils/cash_container_per_date.dart';
 
-class MainExpensesPage extends StatefulWidget {
+class MainExpensesPage extends StatelessWidget {
 
   GlobalKey? keyBottomNavigation1;
   GlobalKey? keyBottomNavigation2;
@@ -19,27 +19,6 @@ class MainExpensesPage extends StatefulWidget {
     this.keyBottomNavigation2,
     this.keyBottomNavigation3,
    this.keyBottomNavigation4}) : super(key: key);
-
-  @override
-  State<MainExpensesPage> createState() => _MainExpensesPageState(
-    keyBottomNavigation1,
-    keyBottomNavigation2,
-    keyBottomNavigation3,
-    keyBottomNavigation4
-  );
-}
-
-class _MainExpensesPageState extends State<MainExpensesPage> {
-
-  GlobalKey? keyBottomNavigation1;
-  GlobalKey? keyBottomNavigation2;
-  GlobalKey? keyBottomNavigation3;
-  GlobalKey? keyBottomNavigation4;
-
-  _MainExpensesPageState(this.keyBottomNavigation1,
-      this.keyBottomNavigation2,
-      this.keyBottomNavigation3,
-      this.keyBottomNavigation4);
 
   String date = "";
 

@@ -1,6 +1,6 @@
 import 'dart:io';
-import 'package:income_and_expenses/model/expense_model.dart';
-import 'package:income_and_expenses/model/income_model.dart';
+import 'package:income_and_expenses/data/model/expense_model.dart';
+import 'package:income_and_expenses/data/model/income_model.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
