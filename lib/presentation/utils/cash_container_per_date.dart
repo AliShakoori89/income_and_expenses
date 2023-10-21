@@ -136,9 +136,10 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                       children: [
                         Container(
                           margin: EdgeInsets.only(
-                              top: MediaQuery.of(context).size.width / 20,
+                              top: MediaQuery.of(context).size.height / 30,
                               right: MediaQuery.of(context).size.width / 50,
-                              bottom: MediaQuery.of(context).size.width / 20
+                              left: MediaQuery.of(context).size.width / 50,
+                              bottom: MediaQuery.of(context).size.height / 30
                           ),
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
@@ -161,11 +162,23 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              Text(
+                              AppLocalizations.of(context)!.language == "زبان"
+                                  ? Text(
                                   textAlign: TextAlign.end,
                                   state.expenseDetails[index].expenseCategory!,
                                   style: TextStyle(
-                                      fontSize: MediaQuery.of(context).size.width / 25,
+                                      fontSize: MediaQuery
+                                          .of(context).size.width / 25,
+                                      fontWeight: FontWeight.w700,
+                                      color: darkThemeBoolean == "false"
+                                          ? AppColors.black
+                                          : Colors.white))
+                                  : Text(
+                                  textAlign: TextAlign.end,
+                                  ifLanguageIsEnglish(state.expenseDetails[index].expenseCategory!),
+                                  style: TextStyle(
+                                      fontSize: MediaQuery
+                                          .of(context).size.width / 25,
                                       fontWeight: FontWeight.w700,
                                       color: darkThemeBoolean == "false"
                                           ? AppColors.black
@@ -179,8 +192,7 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                                 child: Text(
                                     textAlign: TextAlign.justify,
                                     overflow: TextOverflow.clip,
-                                    state.expenseDetails[index]
-                                        .expensesDescription!,
+                                    state.expenseDetails[index].expensesDescription!,
                                     style: TextStyle(
                                         overflow: TextOverflow.ellipsis,
                                         fontSize: MediaQuery.of(context).size.width / 30,
@@ -196,23 +208,28 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                     ),
                   ),
                   Expanded(
-                    flex: 1,
-                    child: Container(
-                      margin: EdgeInsets.only(
-                          left: MediaQuery.of(context).size.width / 30,
-                      right: MediaQuery.of(context).size.width / 30 ),
-                      child: Text(
-                          rialCurrencyType == true
-                              ? "${("${state.expenseDetails[index].expense!}0").toPersianDigit().seRagham()}-"
-                              : "${state.expenseDetails[index].expense!.toString().toPersianDigit().seRagham()}-",
-                          style: TextStyle(
-                              fontSize: MediaQuery.of(context)
-                                  .size
-                                  .width /
-                                  22,
-                              color: darkThemeBoolean == "false"
-                                  ? AppColors.expensesDigitColor
-                                  : Colors.white)),
+                    flex: 2,
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: Container(
+                        margin: EdgeInsets.only(
+                            left: MediaQuery.of(context).size.width / 30,
+                        right: MediaQuery.of(context).size.width / 30 ),
+                        child: Text(
+                              rialCurrencyType == true
+                                  ? AppLocalizations.of(context)!.language == "زبان"
+                                      ? "- ${("${state.expenseDetails[index].expense!}0").toPersianDigit().seRagham()}"
+                                      : "- ${state.expenseDetails[index].expense!.toString().seRagham()}"
+                                  : AppLocalizations.of(context)!.language == "زبان"
+                                      ? "- ${("${state.expenseDetails[index].expense!}").toPersianDigit().seRagham()}"
+                                      : "- ${("${state.expenseDetails[index].expense!}").seRagham()}",
+                              style: TextStyle(
+                                  fontSize:
+                                      MediaQuery.of(context).size.width / 25,
+                                  color: darkThemeBoolean == "false"
+                                      ? AppColors.expensesDigitColor
+                                      : Colors.white)),
+                      ),
                     ),
                   )
                 ],
@@ -246,7 +263,7 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
               color: darkThemeBoolean == "false"
                   ? AppColors.appBarTitleColor
                   : Colors.white,
-              fontSize: MediaQuery.of(context).size.width / 30),
+              fontSize: MediaQuery.of(context).size.width / 25),
         ),
       ],
     );
@@ -270,15 +287,42 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
               ? AppLocalizations.of(context)!.language == "زبان"
               ? ("${state.expensesPerDate}0").toPersianDigit().seRagham()
               : ("${state.expensesPerDate}0").seRagham()
+              : AppLocalizations.of(context)!.language == "زبان"
+              ? state.expensesPerDate.toPersianDigit().seRagham()
               : state.expensesPerDate.seRagham(),
           style: TextStyle(
             color: darkThemeBoolean == "false"
                 ? AppColors.appBarTitleColor
                 : Colors.white,
-            fontSize: MediaQuery.of(context).size.width / 20,
+            fontSize: MediaQuery.of(context).size.width / 25,
+              fontWeight: FontWeight.w700
           ),
         ),
       ],
     );
   }
+
+  String ifLanguageIsEnglish(String expensesTypeName){
+    if(expensesTypeName == "حمل و نقل"){
+      return "Transportation";
+    }else if(expensesTypeName == "خوراکی"){
+      return "Comestible";
+    }else if(expensesTypeName == "خرید اقلام"){
+      return "BuyItems";
+    }else if(expensesTypeName == "اقساط و بدهی"){
+      return "InstallmentsAndDebt";
+    }else if(expensesTypeName == "درمانی"){
+      return "Treatment";
+    }else if(expensesTypeName == "هدایا"){
+      return "Gifts";
+    }else if(expensesTypeName == "تعمیرات"){
+      return "Renovation";
+    }else if(expensesTypeName == "تفریح"){
+      return "Pastime";
+    }else{
+      return "Other";
+    }
+  }
 }
+
+

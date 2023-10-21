@@ -123,7 +123,9 @@ class SettingItemList extends StatelessWidget{
                           borderRadius:
                               BorderRadius.all(Radius.circular(20.0))),
                       title: Text(AppLocalizations.of(context)!.chooseCurrency,
-                          textDirection: TextDirection.rtl,
+                          textDirection: AppLocalizations.of(context)!.language == "زبان"
+                              ? TextDirection.rtl
+                              : TextDirection.ltr,
                           style: TextStyle(
                               fontSize:
                               MediaQuery.of(context).size.width / 30,
@@ -132,7 +134,9 @@ class SettingItemList extends StatelessWidget{
                                   ? Colors.black : Colors.white)),
                       content: Text(
                           AppLocalizations.of(context)!.chooseCurrencyQuestion,
-                          textDirection: TextDirection.rtl,
+                          textDirection: AppLocalizations.of(context)!.language == "زبان"
+                              ? TextDirection.rtl
+                              : TextDirection.ltr,
                           style: TextStyle(
                               fontSize:
                                   MediaQuery.of(context).size.width / 30,
@@ -228,7 +232,9 @@ class SettingItemList extends StatelessWidget{
                           borderRadius:
                               BorderRadius.all(Radius.circular(20.0))),
                       title: Text(AppLocalizations.of(context)!.chooseTheme,
-                        textDirection: TextDirection.rtl,
+                        textDirection: AppLocalizations.of(context)!.language == "زبان"
+                            ? TextDirection.rtl
+                            : TextDirection.ltr,
                         style: TextStyle(
                           color: darkThemeBoolean == "false"
                               ? Colors.black : Colors.white,
@@ -237,7 +243,9 @@ class SettingItemList extends StatelessWidget{
                         ),
                       ),
                       content:Text(AppLocalizations.of(context)!.pleaseChooseYourTheme,
-                          textDirection: TextDirection.rtl,
+                          textDirection: AppLocalizations.of(context)!.language == "زبان"
+                              ? TextDirection.rtl
+                              : TextDirection.ltr,
                           style: TextStyle(
                               fontSize: MediaQuery.of(context).size.width / 30,
                             color: darkThemeBoolean == "false"
@@ -324,7 +332,9 @@ class SettingItemList extends StatelessWidget{
                           borderRadius:
                               BorderRadius.all(Radius.circular(20.0))),
                       title: Text(AppLocalizations.of(context)!.chooseLanguage,
-                        textDirection: TextDirection.rtl,
+                        textDirection: AppLocalizations.of(context)!.language == "زبان"
+                            ? TextDirection.rtl
+                            : TextDirection.ltr,
                         style: TextStyle(
                             color: darkThemeBoolean == "false"
                                 ? Colors.black : Colors.white,
@@ -333,7 +343,9 @@ class SettingItemList extends StatelessWidget{
                       ),
                       content: Text(
                           AppLocalizations.of(context)!.pleaseChooseYourLanguage,
-                          textDirection: TextDirection.rtl,
+                          textDirection: AppLocalizations.of(context)!.language == "زبان"
+                              ? TextDirection.rtl
+                              : TextDirection.ltr,
                           style: TextStyle(
                               color: darkThemeBoolean == "false"
                                   ? Colors.black : Colors.white,

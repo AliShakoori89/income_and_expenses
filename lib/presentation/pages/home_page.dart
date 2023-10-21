@@ -237,7 +237,6 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         ),
       ],
     ),);
-
     targets.add(
       TargetFocus(
         identify: "keyBottomNavigation1",
@@ -269,9 +268,7 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
             },
           ),
         ],
-      ),
-    );
-
+      ),);
     targets.add(
       TargetFocus(
         identify: "keyBottomNavigation2",
@@ -299,9 +296,7 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
             },
           ),
         ],
-      ),
-    );
-
+      ),);
     targets.add(
       TargetFocus(
         identify: "keyBottomNavigation3",
@@ -329,9 +324,7 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
             },
           ),
         ],
-      ),
-    );
-
+      ),);
     targets.add(
       TargetFocus(
         identify: "keyBottomNavigation4",
@@ -359,8 +352,7 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
             },
           ),
         ],
-      ),
-    );
+      ),);
     return targets;
   }
 

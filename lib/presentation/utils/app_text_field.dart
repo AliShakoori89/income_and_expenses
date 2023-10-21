@@ -62,7 +62,7 @@ class _AppTextFieldState extends State<AppTextField> {
               fillColor: Colors.white, //<-- SEE HERE
               suffixText: widget.labelText == "هزینه" || widget.labelText == "expense" ||
                   widget.labelText == "مبلغ ورودی" || widget.labelText == "income"
-                  ? "تومان" : "T",
+                  ? "تومان" : widget.labelText == "دسته بندی" || widget.labelText == "توضیحات" ? "" : "T",
               suffixStyle: TextStyle(
                   color: Colors.black,
                   fontSize: MediaQuery.of(context).size.width / 25

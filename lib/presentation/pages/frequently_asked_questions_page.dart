@@ -34,38 +34,52 @@ class FrequentlyAskedQuestions extends StatelessWidget {
           height: height,
           child: Align(
             alignment: Alignment.centerRight,
-            child: Text(question,
-                style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                  color: darkThemeBoolean == "false"
-                      ? Colors.black
-                      : Colors.white
-                ),
-                textDirection: TextDirection.rtl),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(question,
+                  style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                    color: darkThemeBoolean == "false"
+                        ? Colors.black
+                        : Colors.white
+                  ),
+                  textDirection: TextDirection.rtl),
+            ),
           ));
     }
 
     buildCollapsed1(String question, String answer, String darkThemeBoolean) {
       return Align(
         alignment: Alignment.centerRight,
-        child: Column(
-          children: [
-            buildQuestion( MediaQuery.of(context).size.height / 30, question, darkThemeBoolean),
-            Text(answer,
-                style: TextStyle(
-                    fontWeight: FontWeight.w400,
-                    color: darkThemeBoolean == "false"
-                        ? Colors.black
-                        : Colors.white),
-                textDirection: TextDirection.rtl,
-            )
-          ],
+        child: SizedBox(
+          height: 100,
+          child: Column(
+            children: [
+              Expanded(
+                  flex: 1,
+                  child: buildQuestion( MediaQuery.of(context).size.height / 30, question, darkThemeBoolean)),
+              Expanded(
+                flex: 1,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(answer,
+                      style: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          color: darkThemeBoolean == "false"
+                              ? Colors.black
+                              : Colors.white),
+                      textDirection: TextDirection.rtl,
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       );
     }
 
     buildExpanded1(String question, String darkThemeBoolean) {
-      return buildQuestion(MediaQuery.of(context).size.height / 30, question, darkThemeBoolean);
+      return buildQuestion(MediaQuery.of(context).size.height / 20, question, darkThemeBoolean);
     }
 
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
@@ -83,36 +97,45 @@ class FrequentlyAskedQuestions extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
                   child: ScrollOnExpand(
-                    child: Card(
-                      color: state.darkThemeBoolean == "false"
-                          ? Colors.white
-                          : AppColors.darkThemeColor,
-                      clipBehavior: Clip.antiAlias,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Expandable(
-                            collapsed: buildCollapsed1(allQuestion[index], allAnswer[index] , state.darkThemeBoolean),
-                            expanded: buildExpanded1(allQuestion[index], state.darkThemeBoolean),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: <Widget>[
-                              Builder(
-                                builder: (context) {
-                                  var controller =
-                                  ExpandableController.of(context, required: true)!;
-                                  return IconButton(onPressed: () {
-                                    controller.toggle();
-                                  }, icon: Icon(Icons.arrow_drop_down_outlined,
-                                  color: state.darkThemeBoolean == "false"
-                                      ? Colors.black
-                                      : Colors.white));
-                                },
+                    child: SizedBox(
+                      height: 100,
+                      child: Card(
+                        color: state.darkThemeBoolean == "false"
+                            ? Colors.white
+                            : AppColors.darkThemeColor,
+                        clipBehavior: Clip.antiAlias,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Expanded(
+                              flex: 2,
+                              child: Expandable(
+                                collapsed: buildCollapsed1(allQuestion[index], allAnswer[index] , state.darkThemeBoolean),
+                                expanded: buildExpanded1(allQuestion[index], state.darkThemeBoolean),
                               ),
-                            ],
-                          ),
-                        ],
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: <Widget>[
+                                  Builder(
+                                    builder: (context) {
+                                      var controller =
+                                      ExpandableController.of(context, required: true)!;
+                                      return IconButton(onPressed: () {
+                                        controller.toggle();
+                                      }, icon: Icon(Icons.arrow_drop_down_outlined,
+                                      color: state.darkThemeBoolean == "false"
+                                          ? Colors.black
+                                          : Colors.white));
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),

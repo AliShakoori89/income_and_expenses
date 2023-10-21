@@ -84,7 +84,6 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
   }
 
   Align incomeSlice(BuildContext context, SetDateState state, bool rialCurrencyType, GlobalKey? keyBottomNavigation1) {
-
     return Align(
       alignment: Alignment.bottomRight,
       child: Container(
@@ -186,27 +185,31 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                   Text(
                       state.incomePerMonth != ""
                           ? rialCurrencyType == true
-                          ? AppLocalizations.of(context)!.rial
-                          : AppLocalizations.of(context)!.toman
-                          : '',
+                          ? AppLocalizations.of(context)!.language == "زبان"
+                          ? ("${state.incomePerMonth}0").toPersianDigit().seRagham()
+                          : ("${state.incomePerMonth}0").seRagham()
+                          : AppLocalizations.of(context)!.language == "زبان"
+                          ? state.incomePerMonth.toPersianDigit().seRagham()
+                          : state.incomePerMonth.seRagham()
+                          : AppLocalizations.of(context)!.language == "زبان"
+                          ? "0".toPersianDigit()
+                          : "0",
                       style: TextStyle(
-                          color: Colors.white,
-                          fontSize: MediaQuery.of(context).size.width / 22)),
+                        color: Colors.white,
+                        fontSize: MediaQuery.of(context).size.width / 25,
+                      )),
                   SizedBox(
                     width: MediaQuery.of(context).size.width / 50,
                   ),
                   Text(
                       state.incomePerMonth != ""
                           ? rialCurrencyType == true
-                          ? ('${state.incomePerMonth}0')
-                          .toPersianDigit()
-                          .seRagham()
-                          : state.incomePerMonth.toPersianDigit().seRagham()
-                          : "0".toPersianDigit(),
+                          ? AppLocalizations.of(context)!.rial
+                          : AppLocalizations.of(context)!.toman
+                          : '',
                       style: TextStyle(
-                        color: Colors.white,
-                        fontSize: MediaQuery.of(context).size.width / 20,
-                      )),
+                          color: Colors.white,
+                          fontSize: MediaQuery.of(context).size.width / 22)),
                 ],
               ),
             ),
@@ -252,27 +255,31 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                   Text(
                       state.calculateCash != ""
                           ? rialCurrencyType == true
-                              ? AppLocalizations.of(context)!.rial
-                              : AppLocalizations.of(context)!.toman
-                          : ''.toPersianDigit(),
+                          ? AppLocalizations.of(context)!.language == "زبان"
+                          ? ("${state.calculateCash}0").toPersianDigit().seRagham()
+                          : ("${state.calculateCash}0").seRagham()
+                          : AppLocalizations.of(context)!.language == "زبان"
+                          ? state.calculateCash.toPersianDigit().seRagham()
+                          : state.calculateCash.seRagham()
+                          : AppLocalizations.of(context)!.language == "زبان"
+                          ? "0".toPersianDigit()
+                          : "0",
                       style: TextStyle(
-                          color: Colors.white,
-                          fontSize: MediaQuery.of(context).size.width / 22)),
+                        color: Colors.white,
+                        fontSize: MediaQuery.of(context).size.width / 25,
+                      )),
                   SizedBox(
                     width: MediaQuery.of(context).size.width / 50,
                   ),
                   Text(
                       state.calculateCash != ""
                           ? rialCurrencyType == true
-                              ? ('${state.calculateCash}0')
-                                  .toPersianDigit()
-                                  .seRagham()
-                              : state.calculateCash.toPersianDigit().seRagham()
-                          : "0".toPersianDigit(),
+                          ? AppLocalizations.of(context)!.rial
+                          : AppLocalizations.of(context)!.toman
+                          : ''.toPersianDigit(),
                       style: TextStyle(
-                        color: Colors.white,
-                        fontSize: MediaQuery.of(context).size.width / 22,
-                      )),
+                          color: Colors.white,
+                          fontSize: MediaQuery.of(context).size.width / 22)),
                 ],
               ),
       ],
@@ -329,28 +336,31 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
             Text(
                 state.expensesPerMonth != ""
                     ? rialCurrencyType == true
+                    ? AppLocalizations.of(context)!.language == "زبان"
+                    ? ("${state.expensesPerMonth}0").toPersianDigit().seRagham()
+                    : ("${state.expensesPerMonth}0").seRagham()
+                    : AppLocalizations.of(context)!.language == "زبان"
+                    ? state.expensesPerMonth.toPersianDigit().seRagham()
+                    : state.expensesPerMonth.seRagham()
+                    : AppLocalizations.of(context)!.language == "زبان"
+                    ? "0".toPersianDigit()
+                    : "0",
+                style: TextStyle(
+                  // fontWeight: FontWeight.w800,
+                  color: Colors.white,
+                  fontSize: MediaQuery.of(context).size.width / 25,
+                )),
+            SizedBox(
+              width: MediaQuery.of(context).size.width / 50,),
+            Text(
+                state.expensesPerMonth != ""
+                    ? rialCurrencyType == true
                     ? AppLocalizations.of(context)!.rial
                     : AppLocalizations.of(context)!.toman
                     : ''.toPersianDigit(),
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: MediaQuery.of(context).size.width / 22)),
-            SizedBox(
-              width: MediaQuery.of(context).size.width / 50,
-            ),
-            Text(
-                state.expensesPerMonth != ""
-                    ? rialCurrencyType == true
-                    ? ('${state.expensesPerMonth}0')
-                    .toPersianDigit()
-                    .seRagham()
-                    : state.expensesPerMonth.toPersianDigit().seRagham()
-                    : "0".toPersianDigit(),
-                style: TextStyle(
-                  // fontWeight: FontWeight.w800,
-                  color: Colors.white,
-                  fontSize: MediaQuery.of(context).size.width / 22,
-                )),
           ],
         ),
       ],
