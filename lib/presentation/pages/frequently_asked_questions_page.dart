@@ -52,34 +52,37 @@ class FrequentlyAskedQuestions extends StatelessWidget {
       return Align(
         alignment: Alignment.centerRight,
         child: SizedBox(
-          height: 100,
-          child: Column(
-            children: [
-              Expanded(
+          height: MediaQuery.of(context).size.height / 2,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                Expanded(
                   flex: 1,
-                  child: buildQuestion( MediaQuery.of(context).size.height / 30, question, darkThemeBoolean)),
-              Expanded(
-                flex: 1,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(answer,
-                      style: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          color: darkThemeBoolean == "false"
-                              ? Colors.black
-                              : Colors.white),
-                      textDirection: TextDirection.rtl,
+                    child: buildQuestion( MediaQuery.of(context).size.height / 30, question, darkThemeBoolean)),
+                Expanded(
+                  flex: 10,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(answer,
+                        style: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            color: darkThemeBoolean == "false"
+                                ? Colors.black
+                                : Colors.white),
+                        textDirection: TextDirection.rtl,
+                    ),
                   ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
         ),
       );
     }
 
     buildExpanded1(String question, String darkThemeBoolean) {
-      return buildQuestion(MediaQuery.of(context).size.height / 20, question, darkThemeBoolean);
+      return buildQuestion(MediaQuery.of(context).size.height / 8, question, darkThemeBoolean);
     }
 
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
@@ -98,7 +101,7 @@ class FrequentlyAskedQuestions extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
                   child: ScrollOnExpand(
                     child: SizedBox(
-                      height: 100,
+                      height: MediaQuery.of(context).size.height / 7.2,
                       child: Card(
                         color: state.darkThemeBoolean == "false"
                             ? Colors.white
@@ -115,7 +118,7 @@ class FrequentlyAskedQuestions extends StatelessWidget {
                               ),
                             ),
                             Expanded(
-                              flex: 1,
+                              flex: 2,
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: <Widget>[

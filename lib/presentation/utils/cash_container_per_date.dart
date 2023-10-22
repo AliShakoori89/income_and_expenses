@@ -210,7 +210,9 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                   Expanded(
                     flex: 2,
                     child: Align(
-                      alignment: Alignment.centerRight,
+                      alignment: AppLocalizations.of(context)!.language == "زبان"
+                          ? Alignment.centerLeft
+                          : Alignment.centerRight,
                       child: Container(
                         margin: EdgeInsets.only(
                             left: MediaQuery.of(context).size.width / 30,
@@ -218,10 +220,10 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                         child: Text(
                               rialCurrencyType == true
                                   ? AppLocalizations.of(context)!.language == "زبان"
-                                      ? "- ${("${state.expenseDetails[index].expense!}0").toPersianDigit().seRagham()}"
+                                      ? "${("${state.expenseDetails[index].expense!}0").toPersianDigit().seRagham()} -"
                                       : "- ${state.expenseDetails[index].expense!.toString().seRagham()}"
                                   : AppLocalizations.of(context)!.language == "زبان"
-                                      ? "- ${("${state.expenseDetails[index].expense!}").toPersianDigit().seRagham()}"
+                                      ? "${("${state.expenseDetails[index].expense!}").toPersianDigit().seRagham()} -"
                                       : "- ${("${state.expenseDetails[index].expense!}").seRagham()}",
                               style: TextStyle(
                                   fontSize:

@@ -65,9 +65,103 @@ class _EditedExpensePageState extends State<EditedExpensePage> {
           title: Align(
               alignment: Alignment.center,
               child: Text(AppLocalizations.of(context)!.editExpense)),
-          leading: ArrowBackIcon(themeBoolean: darkThemeBoolean),
+          leading: AppLocalizations.of(context)!.language == "زبان"
+              ? GestureDetector(
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (ctx) => AlertDialog(
+                  shape: const RoundedRectangleBorder(
+                      borderRadius:
+                      BorderRadius.all(Radius.circular(20.0))),
+                  title: Text(
+                    AppLocalizations.of(context)!.delete,
+                    textDirection: TextDirection.rtl,
+                    style: TextStyle(
+                        fontSize: MediaQuery.of(context).size.width / 20,
+                        fontWeight: FontWeight.w700),
+                  ),
+                  content: Text(
+                      AppLocalizations.of(context)!.doYouWantTheDesiredItemToBeDeleted,
+                      textDirection: TextDirection.rtl,
+                      style: TextStyle(
+                        fontSize: MediaQuery.of(context).size.width / 25,
+                      )),
+                  actions: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: Container(
+                              height:
+                              MediaQuery.of(context).size.height / 25,
+                              width: MediaQuery.of(context).size.width / 6,
+                              decoration: BoxDecoration(
+                                  color: Colors.red,
+                                  borderRadius: BorderRadius.circular(15)),
+                              child: Center(
+                                child: Text(
+                                  AppLocalizations.of(context)!.no,
+                                  style: TextStyle(
+                                      fontSize: MediaQuery.of(context).size.width / 25,
+                                      color: Colors.white),
+                                ),
+                              ),
+                            )),
+                        TextButton(
+                            onPressed: () {
+                              final expensesBloc =
+                              BlocProvider.of<SetDateBloc>(context);
+                              expensesBloc.add(DeleteExpenseEvent(
+                                  widget.expenseModel.id!,
+                                  widget.expenseModel.expenseDate!,
+                                  widget.expenseModel.expenseMonth!));
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) =>
+                                  const MyHomePage()));
+                            },
+                            child: Container(
+                              height:
+                              MediaQuery.of(context).size.height / 25,
+                              width: MediaQuery.of(context).size.width / 6,
+                              decoration: BoxDecoration(
+                                  color: Colors.green,
+                                  borderRadius: BorderRadius.circular(15)),
+                              child: Center(
+                                child: Text(
+                                  AppLocalizations.of(context)!.yes,
+                                  style: TextStyle(
+                                      fontSize: MediaQuery.of(context).size.width / 25,
+                                      color: Colors.white),
+                                ),
+                              ),
+                            )
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+              );
+            },
+            child: Icon(
+              Icons.delete,
+              size: MediaQuery.of(context).size.width / 25,
+              color: darkThemeBoolean == "false"
+                  ? AppColors.appBarTitleColor
+                  : Colors.white,
+            ),
+          )
+              : ArrowBackIcon(themeBoolean: darkThemeBoolean),
           actions: [
-            GestureDetector(
+            AppLocalizations.of(context)!.language == "زبان"
+                ? RotatedBox(
+                quarterTurns: 90,
+                child: ArrowBackIcon(themeBoolean: darkThemeBoolean))
+                : GestureDetector(
               onTap: () {
                 showDialog(
                   context: context,
@@ -150,7 +244,7 @@ class _EditedExpensePageState extends State<EditedExpensePage> {
               },
               child: Icon(
                 Icons.delete,
-                size: MediaQuery.of(context).size.width / 30,
+                size: MediaQuery.of(context).size.width / 25,
                 color: darkThemeBoolean == "false"
                     ? AppColors.appBarTitleColor
                     : Colors.white,
@@ -206,7 +300,9 @@ class _EditedExpensePageState extends State<EditedExpensePage> {
                           height: MediaQuery.of(context).size.height / 50,
                         ),
                         Directionality(
-                          textDirection: TextDirection.rtl,
+                          textDirection: AppLocalizations.of(context)!.language == "زبان"
+                              ? TextDirection.rtl
+                              : TextDirection.ltr,
                           child: TextFormField(
                               enabled: false,
                               controller: TextEditingController(
@@ -238,7 +334,7 @@ class _EditedExpensePageState extends State<EditedExpensePage> {
                                       : _editedExpensesModel.expenseCategory == "تفریح"
                                       ? AppLocalizations.of(context)!.pastime
                                       : AppLocalizations.of(context)!.renovation),
-                              style: TextStyle(color: darkThemeBoolean == "false" ? Colors.black : Colors.white70, fontWeight: FontWeight.w700),
+                              style: TextStyle(color: darkThemeBoolean == "false" ? Colors.black : Colors.white70, fontWeight: FontWeight.w500),
                               readOnly: true,
                               decoration: textInputDecoration.copyWith(
                                   labelText:

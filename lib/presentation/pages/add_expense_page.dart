@@ -56,9 +56,18 @@ class _AddExpensePageState extends State<AddExpensePage> {
               fontSize: MediaQuery.of(context).size.width / 25,
               fontWeight: FontWeight.w400),
           title: Align(
-              alignment: Alignment.centerRight,
+              alignment: Alignment.center,
               child: Text(AppLocalizations.of(context)!.newExpense)),
-          leading: ArrowBackIcon(themeBoolean: darkThemeBoolean),
+          leading: AppLocalizations.of(context)!.language == "زبان"
+              ? Container()
+              : ArrowBackIcon(themeBoolean: darkThemeBoolean),
+          actions: [
+            AppLocalizations.of(context)!.language == "زبان"
+                ? RotatedBox(
+                quarterTurns: 90,
+                child: ArrowBackIcon(themeBoolean: darkThemeBoolean))
+                : Container()
+          ],
         ),
         backgroundColor: darkThemeBoolean == "false"
             ? Colors.white
