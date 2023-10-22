@@ -46,13 +46,15 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
           builder: (context, state) {
 
             bool rialCurrencyType = state.rialCurrencyBoolean;
+            var height = MediaQuery.of(context).size.height;
+            var width = MediaQuery.of(context).size.width;
 
             return Container(
               margin: EdgeInsets.only(
-                top: MediaQuery.of(context).size.height / 100,
-                bottom: MediaQuery.of(context).size.height / 100,
-                right: MediaQuery.of(context).size.width / 30,
-                left: MediaQuery.of(context).size.width / 30,),
+                top: height / 100,
+                bottom: height / 100,
+                right: width / 30,
+                left: width / 30,),
               child: BlocBuilder<SetDateBloc, SetDateState>(
                   builder: (context, state) {
                     int allTodayExpenses = 0;
@@ -64,11 +66,11 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                         ? Column(
                             children: [
                               persianAllExpenses(rialCurrencyType, state,
-                                  darkThemeBoolean, context),
+                                  darkThemeBoolean, context, width, height),
                               SizedBox(
-                                  height: MediaQuery.of(context).size.height / 60),
+                                  height: height / 60),
                               expensesList(context, allTodayExpenses, state,
-                                  rialCurrencyType, darkThemeBoolean),
+                                  rialCurrencyType, darkThemeBoolean, width, height),
                             ],
                           )
                         : const Center(
@@ -83,18 +85,19 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
     });
   }
 
-  Container expensesList(BuildContext context, int allTodayExpenses, SetDateState state, bool rialCurrencyType, String darkThemeBoolean) {
+  Container expensesList(BuildContext context, int allTodayExpenses, SetDateState state, bool rialCurrencyType, String darkThemeBoolean,
+      double width, double height) {
 
     return Container(
       decoration: BoxDecoration(
           color: AppColors.themContainer,
           borderRadius: BorderRadius.circular(15)),
-      height: MediaQuery.of(context).size.height / 2.1,
+      height: height / 2.1,
       child: ListView.builder(
         scrollDirection: Axis.vertical,
         padding: EdgeInsets.only(
-            right: MediaQuery.of(context).size.width / 60,
-            left: MediaQuery.of(context).size.width / 60),
+            right: width / 60,
+            left: width / 60),
         shrinkWrap: true,
         itemBuilder: (context, index) {
           allTodayExpenses += state.expenseDetails[index].expense!;
@@ -111,9 +114,9 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
             },
             child: Container(
               margin: EdgeInsets.only(
-                left: MediaQuery.of(context).size.width / 60,
-                right: MediaQuery.of(context).size.width / 60,
-                top: MediaQuery.of(context).size.height / 60,
+                left: width / 60,
+                right: width / 60,
+                top: height / 60,
               ),
               decoration: BoxDecoration(
                 color: darkThemeBoolean == "false" ? Colors.white : AppColors.darkThemeColor,
@@ -155,7 +158,7 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                           ),
                         ),
                         SizedBox(
-                          width: MediaQuery.of(context).size.width / 50,
+                          width: width / 50,
                         ),
                         Flexible(
                           child: Column(
@@ -177,17 +180,16 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                                   textAlign: TextAlign.end,
                                   ifLanguageIsEnglish(state.expenseDetails[index].expenseCategory!),
                                   style: TextStyle(
-                                      fontSize: MediaQuery
-                                          .of(context).size.width / 25,
+                                      fontSize: width / 25,
                                       fontWeight: FontWeight.w700,
                                       color: darkThemeBoolean == "false"
                                           ? AppColors.black
                                           : Colors.white)),
                               Container(
                                 margin: EdgeInsets.only(
-                                    bottom: MediaQuery.of(context).size.height /50,
-                                    top: MediaQuery.of(context).size.height /50,
-                                  left: MediaQuery.of(context).size.width /50,
+                                    bottom:height /50,
+                                    top: height /50,
+                                  left: width /50,
                                 ),
                                 child: Text(
                                     textAlign: TextAlign.justify,
@@ -195,7 +197,7 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                                     state.expenseDetails[index].expensesDescription!,
                                     style: TextStyle(
                                         overflow: TextOverflow.ellipsis,
-                                        fontSize: MediaQuery.of(context).size.width / 30,
+                                        fontSize: width / 30,
                                         fontWeight: FontWeight.w400,
                                         color: darkThemeBoolean == "false"
                                             ? AppColors.appBarProfileName
@@ -215,8 +217,8 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                           : Alignment.centerRight,
                       child: Container(
                         margin: EdgeInsets.only(
-                            left: MediaQuery.of(context).size.width / 30,
-                        right: MediaQuery.of(context).size.width / 30 ),
+                            left: width / 30,
+                        right: width / 30 ),
                         child: Text(
                               rialCurrencyType == true
                                   ? AppLocalizations.of(context)!.language == "زبان"
@@ -226,8 +228,7 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
                                       ? "${("${state.expenseDetails[index].expense!}").toPersianDigit().seRagham()} -"
                                       : "- ${("${state.expenseDetails[index].expense!}").seRagham()}",
                               style: TextStyle(
-                                  fontSize:
-                                      MediaQuery.of(context).size.width / 25,
+                                  fontSize: width / 25,
                                   color: darkThemeBoolean == "false"
                                       ? AppColors.expensesDigitColor
                                       : Colors.white)),
@@ -244,34 +245,8 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
     );
   }
 
-  Row englishAllExpenses(BuildContext context, String darkThemeBoolean, bool rialCurrencyType, SetDateState state) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          AppLocalizations.of(context)!.allExpenses,
-          style: TextStyle(
-              color: darkThemeBoolean == "false"
-                  ? AppColors.appBarTitleColor
-                  : Colors.white,
-              fontSize: MediaQuery.of(context).size.width / 25),
-        ),
-        Text(
-          rialCurrencyType == true
-              ? ("${state.expensesPerDate}0").seRagham()
-              : state.expensesPerDate.seRagham(),
-          style: TextStyle(
-              fontWeight: FontWeight.w700,
-              color: darkThemeBoolean == "false"
-                  ? AppColors.appBarTitleColor
-                  : Colors.white,
-              fontSize: MediaQuery.of(context).size.width / 25),
-        ),
-      ],
-    );
-  }
-
-  Row persianAllExpenses(bool rialCurrencyType, SetDateState state, String darkThemeBoolean, BuildContext context) {
+  Row persianAllExpenses(bool rialCurrencyType, SetDateState state, String darkThemeBoolean, BuildContext context,
+      double width, double height) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -282,7 +257,7 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
               color: darkThemeBoolean == "false"
                   ? AppColors.appBarTitleColor
                   : Colors.white,
-              fontSize: MediaQuery.of(context).size.width / 25),
+              fontSize: width / 25),
         ),
         Text(
           rialCurrencyType == true
@@ -296,7 +271,7 @@ class _CashContainerPerDateState extends State<CashContainerPerDate> {
             color: darkThemeBoolean == "false"
                 ? AppColors.appBarTitleColor
                 : Colors.white,
-            fontSize: MediaQuery.of(context).size.width / 25,
+            fontSize: width / 25,
               fontWeight: FontWeight.w700
           ),
         ),

@@ -11,6 +11,9 @@ class SettingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
+
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
 
       var darkThemeBoolean = state.darkThemeBoolean;
@@ -26,10 +29,10 @@ class SettingPage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(25)
             ),
             margin: EdgeInsets.only(
-              left: MediaQuery.of(context).size.width / 30,
-              right: MediaQuery.of(context).size.width / 30,
-              top: MediaQuery.of(context).size.height / 100,
-              bottom: MediaQuery.of(context).size.height / 200,
+              left: width / 30,
+              right: width / 30,
+              top: height / 100,
+              bottom: height / 200,
             ),
             child: SettingItemList()),
       ),

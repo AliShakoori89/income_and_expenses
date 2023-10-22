@@ -12,6 +12,8 @@ class FrequentlyAskedQuestions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    var height = MediaQuery.of(context).size.height;
+
     BlocProvider.of<ThemeBloc>(context)
         .add(ReadThemeBooleanEvent());
 
@@ -30,6 +32,7 @@ class FrequentlyAskedQuestions extends StatelessWidget {
     ];
 
     buildQuestion(double height, String question, String darkThemeBoolean) {
+
       return SizedBox(
           height: height,
           child: Align(
@@ -52,14 +55,14 @@ class FrequentlyAskedQuestions extends StatelessWidget {
       return Align(
         alignment: Alignment.centerRight,
         child: SizedBox(
-          height: MediaQuery.of(context).size.height / 2,
+          height: height / 2,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
                 Expanded(
                   flex: 1,
-                    child: buildQuestion( MediaQuery.of(context).size.height / 30, question, darkThemeBoolean)),
+                    child: buildQuestion( height / 30, question, darkThemeBoolean)),
                 Expanded(
                   flex: 10,
                   child: Padding(
@@ -82,7 +85,7 @@ class FrequentlyAskedQuestions extends StatelessWidget {
     }
 
     buildExpanded1(String question, String darkThemeBoolean) {
-      return buildQuestion(MediaQuery.of(context).size.height / 8, question, darkThemeBoolean);
+      return buildQuestion(height / 8, question, darkThemeBoolean);
     }
 
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
@@ -101,7 +104,7 @@ class FrequentlyAskedQuestions extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
                   child: ScrollOnExpand(
                     child: SizedBox(
-                      height: MediaQuery.of(context).size.height / 7.2,
+                      height: height / 7.2,
                       child: Card(
                         color: state.darkThemeBoolean == "false"
                             ? Colors.white

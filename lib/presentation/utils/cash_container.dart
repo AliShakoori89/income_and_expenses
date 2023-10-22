@@ -42,16 +42,19 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
 
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
 
+      var height = MediaQuery.of(context).size.height;
+      var width = MediaQuery.of(context).size.width;
+
       return Container(
-        height: MediaQuery.of(context).size.height / 3.8,
+        height: height / 3.8,
         margin: EdgeInsets.only(
-          left: MediaQuery.of(context).size.width / 15,
-          right: MediaQuery.of(context).size.width / 15,
+          left: width / 15,
+          right: width / 15,
         ),
         decoration: BoxDecoration(
             color: AppColors.mainColor,
             borderRadius:
-                BorderRadius.circular(MediaQuery.of(context).size.width / 10)),
+                BorderRadius.circular(width / 10)),
         child: BlocBuilder<ChangeCurrencyBloc, ChangeCurrencyState>(
             builder: (context, state) {
               bool rialCurrencyType = state.rialCurrencyBoolean;
@@ -61,8 +64,8 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        leftSideCashContainer(context, state, rialCurrencyType),
-                        rightSideCashContainer(context, state, rialCurrencyType, keyBottomNavigation1)
+                        leftSideCashContainer(context, state, rialCurrencyType, width, height),
+                        rightSideCashContainer(context, state, rialCurrencyType, keyBottomNavigation1, width, height)
                       ],
                     );
                   });
@@ -71,23 +74,23 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
     });
   }
 
-  Expanded rightSideCashContainer(BuildContext context, SetDateState state, bool rialCurrencyType, GlobalKey? keyBottomNavigation1) {
+  Expanded rightSideCashContainer(BuildContext context, SetDateState state, bool rialCurrencyType, GlobalKey? keyBottomNavigation1, double width, double height) {
     return Expanded(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      cashSlice(context, state, rialCurrencyType),
-                      incomeSlice(context, state, rialCurrencyType, keyBottomNavigation1),
+                      cashSlice(context, state, rialCurrencyType, width, height),
+                      incomeSlice(context, state, rialCurrencyType, keyBottomNavigation1, width, height),
                     ],
                   ),
                 );
   }
 
-  Align incomeSlice(BuildContext context, SetDateState state, bool rialCurrencyType, GlobalKey? keyBottomNavigation1) {
+  Align incomeSlice(BuildContext context, SetDateState state, bool rialCurrencyType, GlobalKey? keyBottomNavigation1,  double width, double height) {
     return Align(
       alignment: Alignment.bottomRight,
       child: Container(
-        height: MediaQuery.of(context).size.height / 8.5,
+        height: height / 8.5,
         decoration: BoxDecoration(
             boxShadow: const [
               BoxShadow(
@@ -100,13 +103,13 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                 color: AppColors.cashContainerShapeBorderColor, width: 2),
             borderRadius: BorderRadius.only(
               bottomRight: Radius.circular(
-                MediaQuery.of(context).size.width / 10,
+                width / 10,
               ),
               bottomLeft: Radius.circular(
-                MediaQuery.of(context).size.width / 10,
+                width / 10,
               ),
               topRight: Radius.circular(
-                MediaQuery.of(context).size.width / 10,
+                width / 10,
               ),
             )),
         child: Column(
@@ -114,8 +117,8 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
           children: [
             Padding(
               padding: EdgeInsets.only(
-                  left: MediaQuery.of(context).size.width / 20,
-                  right: MediaQuery.of(context).size.width / 100),
+                  left: width / 20,
+                  right: width / 100),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -125,11 +128,11 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                           overflow: TextOverflow.ellipsis,
                           color: Colors.white,
                           fontWeight: FontWeight.w800,
-                          fontSize: MediaQuery.of(context).size.width / 22,
+                          fontSize: width / 22,
                         )),
                   ),
                   SizedBox(
-                    width: MediaQuery.of(context).size.width / 30,
+                    width: width / 30,
                   ),
                   GestureDetector(
                     onTap: (){
@@ -142,8 +145,8 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                       alignment: Alignment.topRight,
                       children: [
                         SizedBox(
-                          width: MediaQuery.of(context).size.width / 10,
-                          height: MediaQuery.of(context).size.height / 30,
+                          width: width / 10,
+                          height: height / 30,
                           child: Image.asset(
                             "assets/main_page_first_container_logo/darkIncome.png",
                             key: keyBottomNavigation1,
@@ -151,8 +154,8 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                           ),
                         ),
                         Container(
-                          width: MediaQuery.of(context).size.width / 25,
-                          height: MediaQuery.of(context).size.height / 35,
+                          width: width / 25,
+                          height: height / 35,
                           decoration: BoxDecoration(
                               border: Border.all(color: Colors.green),
                               shape: BoxShape.circle,
@@ -161,7 +164,7 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                           child: Align(
                               alignment: Alignment.center,
                               child: Icon(Icons.add, color: Colors.white,
-                                size: MediaQuery.of(context).size.width / 30,)),
+                                size: width / 30,)),
                         )
                       ],
                     ),
@@ -170,7 +173,7 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
               ),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height / 200,
+              height: height / 200,
             ),
             GestureDetector(
               onTap: (){
@@ -196,10 +199,10 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                           : "0",
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: MediaQuery.of(context).size.width / 25,
+                        fontSize: width / 25,
                       )),
                   SizedBox(
-                    width: MediaQuery.of(context).size.width / 50,
+                    width: width / 50,
                   ),
                   Text(
                       state.incomePerMonth != ""
@@ -209,7 +212,7 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                           : '',
                       style: TextStyle(
                           color: Colors.white,
-                          fontSize: MediaQuery.of(context).size.width / 22)),
+                          fontSize: width / 22)),
                 ],
               ),
             ),
@@ -219,12 +222,12 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
     );
   }
 
-  Column cashSlice(BuildContext context, SetDateState state, bool rialCurrencyType) {
+  Column cashSlice(BuildContext context, SetDateState state, bool rialCurrencyType, double width, double height) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SizedBox(
-          height: MediaQuery.of(context).size.height / 30,
+          height: width / 30,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -232,22 +235,22 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
             Text(AppLocalizations.of(context)!.cash,
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: MediaQuery.of(context).size.width / 22,
+                  fontSize: width / 22,
                   fontWeight: FontWeight.w800,
                 )),
             SizedBox(
-              width: MediaQuery.of(context).size.width / 18,
+              width: width / 18,
             ),
             SizedBox(
-              width: MediaQuery.of(context).size.width / 10,
-              height: MediaQuery.of(context).size.height / 30,
+              width: width / 10,
+              height: height / 30,
               child: Image.asset("assets/main_page_first_container_logo/darkBalance.png",
                   fit: BoxFit.contain),
             ),
           ],
         ),
         SizedBox(
-          height: MediaQuery.of(context).size.height / 200,
+          height: height / 200,
         ),
         Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -266,10 +269,10 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                           : "0",
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: MediaQuery.of(context).size.width / 25,
+                        fontSize: width / 25,
                       )),
                   SizedBox(
-                    width: MediaQuery.of(context).size.width / 50,
+                    width: width / 50,
                   ),
                   Text(
                       state.calculateCash != ""
@@ -279,33 +282,33 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                           : ''.toPersianDigit(),
                       style: TextStyle(
                           color: Colors.white,
-                          fontSize: MediaQuery.of(context).size.width / 22)),
+                          fontSize: width / 22)),
                 ],
               ),
       ],
     );
   }
 
-  Expanded leftSideCashContainer(BuildContext context, SetDateState state, bool rialCurrencyType) {
+  Expanded leftSideCashContainer(BuildContext context, SetDateState state, bool rialCurrencyType, double width, double height) {
     return Expanded(
       child: Column(
         children: [
-          shapeSlice(context),
+          shapeSlice(context, width, height),
           Expanded(
             child: expensesSlice(
-                context, state, rialCurrencyType),
+                context, state, rialCurrencyType, width, height),
           ),
         ],
       ),
     );
   }
 
-  Column expensesSlice(BuildContext context, SetDateState state, bool rialCurrencyType) {
+  Column expensesSlice(BuildContext context, SetDateState state, bool rialCurrencyType, double width, double height) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SizedBox(
-          height: MediaQuery.of(context).size.height / 30,
+          height: height / 30,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -313,22 +316,22 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
             Text(AppLocalizations.of(context)!.expenses,
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: MediaQuery.of(context).size.width / 22,
+                  fontSize: width / 22,
                   fontWeight: FontWeight.w800,
                 )),
             SizedBox(
-              width: MediaQuery.of(context).size.width / 18,
+              width: width / 18,
             ),
             SizedBox(
-              width: MediaQuery.of(context).size.width / 10,
-              height: MediaQuery.of(context).size.height / 30,
+              width: width / 10,
+              height: height / 30,
               child: Image.asset("assets/main_page_first_container_logo/darkBalance.png",
                   fit: BoxFit.contain),
             ),
           ],
         ),
         SizedBox(
-          height: MediaQuery.of(context).size.height / 200,
+          height: height / 200,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -348,10 +351,10 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                 style: TextStyle(
                   // fontWeight: FontWeight.w800,
                   color: Colors.white,
-                  fontSize: MediaQuery.of(context).size.width / 25,
+                  fontSize: width / 25,
                 )),
             SizedBox(
-              width: MediaQuery.of(context).size.width / 50,),
+              width: width / 50,),
             Text(
                 state.expensesPerMonth != ""
                     ? rialCurrencyType == true
@@ -360,18 +363,18 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                     : ''.toPersianDigit(),
                 style: TextStyle(
                     color: Colors.white,
-                    fontSize: MediaQuery.of(context).size.width / 22)),
+                    fontSize: width / 22)),
           ],
         ),
       ],
     );
   }
 
-  Align shapeSlice(BuildContext context) {
+  Align shapeSlice(BuildContext context, double width, double height) {
     return Align(
       alignment: Alignment.topLeft,
       child: Container(
-        height: MediaQuery.of(context).size.height / 9,
+        height: height / 9,
         decoration: BoxDecoration(
           boxShadow: const [
             BoxShadow(
@@ -384,9 +387,9 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                 color: AppColors.cashContainerShapeBorderColor, width: 2),
             borderRadius: BorderRadius.only(
               bottomLeft:
-                  Radius.circular(MediaQuery.of(context).size.width / 10),
-              topLeft: Radius.circular(MediaQuery.of(context).size.width / 10),
-              topRight: Radius.circular(MediaQuery.of(context).size.width / 10),
+                  Radius.circular(width / 10),
+              topLeft: Radius.circular(width / 10),
+              topRight: Radius.circular(width / 10),
             )),
       ),
     );

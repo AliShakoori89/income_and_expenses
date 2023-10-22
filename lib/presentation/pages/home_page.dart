@@ -365,6 +365,9 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
 
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
+
     final List<Widget> pages = _pages();
 
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
@@ -377,7 +380,7 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
        width: double.infinity,
           child: pages[_bottomNavIndex]),
       bottomNavigationBar: SizedBox(
-        height: MediaQuery.of(context).size.width / 6,
+        height: width / 6,
         child: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           backgroundColor: darkThemeBoolean == "false"
@@ -397,28 +400,28 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
               icon: Icon(
                 key: keyButton,
                 Icons.home,
-                size: MediaQuery.of(context).size.width / 15),
+                size: width / 15),
             ),
             BottomNavigationBarItem(
               label: '',
               icon: Icon(
                 key: keyButton1,
                 Icons.pie_chart,
-                size: MediaQuery.of(context).size.width / 15),
+                size: width / 15),
             ),
             BottomNavigationBarItem(
               label: '',
               icon: Icon(
                 key: keyButton3,
                 Icons.bar_chart,
-                size: MediaQuery.of(context).size.width / 15),
+                size: width / 15),
             ),
             BottomNavigationBarItem(
               label: '',
               icon: Icon(
                 key: keyButton4,
                 Icons.settings,
-                size: MediaQuery.of(context).size.width / 15),
+                size: width / 15),
             ),
           ],
           currentIndex: _bottomNavIndex,
@@ -426,14 +429,14 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         ),
       ),
       floatingActionButton: SizedBox(
-        height: MediaQuery.of(context).size.width / 9,
-        width: MediaQuery.of(context).size.width / 9,
+        height: height / 18,
+        width: width / 9,
         child: FloatingActionButton(
           backgroundColor: AppColors.mainColor,
           child: Icon(
               key: keyButton2,
               Icons.add,
-          size: MediaQuery.of(context).size.width / 15),
+          size: width / 15),
           onPressed: () {
             Navigator.push(
               context,

@@ -49,6 +49,9 @@ class _SfCircularChartPageState extends State<SfCircularChartPage> {
                 _PieData("اسفند",int.parse(state.esfandExpenses),"${int.parse(state.esfandExpenses)}"),
               ];
 
+              var height = MediaQuery.of(context).size.height;
+              var width = MediaQuery.of(context).size.width;
+
             return Scaffold(
                 backgroundColor: darkThemeBoolean == "false"
                     ? Colors.white
@@ -60,14 +63,14 @@ class _SfCircularChartPageState extends State<SfCircularChartPage> {
                         borderRadius: BorderRadius.circular(25)
                     ),
                     margin: EdgeInsets.only(
-                      left: MediaQuery.of(context).size.width / 30,
-                      right: MediaQuery.of(context).size.width / 30,
-                      top: MediaQuery.of(context).size.height / 60,
-                      bottom: MediaQuery.of(context).size.height / 200,
+                      left: width / 30,
+                      right: width / 30,
+                      top: height / 60,
+                      bottom: height / 200,
                     ),
                     child: Column(
                       children: [
-                        SizedBox(height: MediaQuery.of(context).size.height / 20),
+                        SizedBox(height: height / 20),
                         Expanded(
                           flex: 1,
                           child: Center(
@@ -78,7 +81,7 @@ class _SfCircularChartPageState extends State<SfCircularChartPage> {
                                 hint: Text(
                                   AppLocalizations.of(context)!.selectYear,
                                   style: TextStyle(
-                                      fontSize: MediaQuery.of(context).size.width / 30,
+                                      fontSize: width / 30,
                                       fontWeight: FontWeight.bold,
                                       color: Colors.black
                                   ),
@@ -91,7 +94,7 @@ class _SfCircularChartPageState extends State<SfCircularChartPage> {
                                     item,
                                     textDirection: TextDirection.rtl,
                                     style: TextStyle(
-                                        fontSize: MediaQuery.of(context).size.width / 30,
+                                        fontSize: width / 30,
                                         fontWeight: FontWeight.bold,
                                         color: darkThemeBoolean == "false"
                                             ? Colors.black
@@ -109,11 +112,11 @@ class _SfCircularChartPageState extends State<SfCircularChartPage> {
                                         SumExpensesPerMonthForCircularChartEvent(selectedValue!));
                                   });
                                 },
-                                buttonHeight: MediaQuery.of(context).size.height / 22,
-                                buttonWidth: MediaQuery.of(context).size.width / 3,
+                                buttonHeight: height / 22,
+                                buttonWidth: width / 3,
                                 buttonPadding: EdgeInsets.only(
-                                    left: MediaQuery.of(context).size.width / 70,
-                                    right: MediaQuery.of(context).size.width / 70),
+                                    left: width / 70,
+                                    right: width / 70),
                                 buttonDecoration: BoxDecoration(
                                   color: darkThemeBoolean == "false"
                                       ? AppColors.backGroundColor
@@ -124,12 +127,12 @@ class _SfCircularChartPageState extends State<SfCircularChartPage> {
                                   ),
                                 ),
                                 buttonElevation: 0,
-                                itemHeight: MediaQuery.of(context).size.height / 25,
+                                itemHeight: height / 25,
                                 itemPadding: EdgeInsets.only(
-                                    left: MediaQuery.of(context).size.width / 70,
-                                    right: MediaQuery.of(context).size.width / 70),
-                                dropdownMaxHeight: MediaQuery.of(context).size.height / 10,
-                                dropdownWidth: MediaQuery.of(context).size.width / 3,
+                                    left: width / 70,
+                                    right: width / 70),
+                                dropdownMaxHeight: height / 10,
+                                dropdownWidth: width / 3,
                                 dropdownPadding: null,
                                 dropdownDecoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(15),
@@ -142,7 +145,7 @@ class _SfCircularChartPageState extends State<SfCircularChartPage> {
                                 ),
                                 dropdownElevation: 0,
                                 scrollbarRadius:  const Radius.circular(15),
-                                scrollbarThickness: MediaQuery.of(context).size.width / 80,
+                                scrollbarThickness: width / 80,
                                 scrollbarAlwaysShow: true,
                                 offset: const Offset(-20, 0),
                               ),
@@ -187,10 +190,10 @@ class _SfCircularChartPageState extends State<SfCircularChartPage> {
                                       textStyle: darkThemeBoolean == "false"
                                           ? TextStyle(
                                         color: AppColors.appBarTitleColor,
-                                        fontSize: MediaQuery.of(context).size.width / 30,)
+                                        fontSize: width / 30,)
                                           : TextStyle(
                                         color: Colors.white,
-                                        fontSize: MediaQuery.of(context).size.width / 30,
+                                        fontSize: width / 30,
                                       )),
                                   legend: Legend(
                                     isVisible: true,
@@ -199,10 +202,10 @@ class _SfCircularChartPageState extends State<SfCircularChartPage> {
                                     textStyle: darkThemeBoolean == "false"
                                         ? TextStyle(
                                       color: Colors.black,
-                                      fontSize: MediaQuery.of(context).size.width / 30,)
+                                      fontSize: width / 30,)
                                         : TextStyle(
                                       color: Colors.white,
-                                      fontSize: MediaQuery.of(context).size.width / 30,
+                                      fontSize: width / 30,
                                     ),),
                                   series: <PieSeries<_PieData, String>>[
                                     PieSeries<_PieData, String>(
@@ -215,7 +218,7 @@ class _SfCircularChartPageState extends State<SfCircularChartPage> {
                                         dataLabelSettings: DataLabelSettings(
                                           textStyle: TextStyle(
                                               color: Colors.black,
-                                              fontSize: MediaQuery.of(context).size.width / 30),
+                                              fontSize: width / 30),
                                           isVisible: true,
                                         )),
                                   ]

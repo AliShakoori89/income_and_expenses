@@ -13,14 +13,17 @@ class IncomeCategoryIconList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
+
     return SizedBox(
-      height: MediaQuery.of(context).size.height / 2.5,
+      height: height / 2.5,
       child: Column(
         children: [
           Expanded(
             flex: 1,
             child: Icon(Icons.linear_scale,
-              size: MediaQuery.of(context).size.width / 25,
+              size: width / 25,
               color: AppColors.appBarTitleColor,),
           ),
           Expanded(
@@ -28,7 +31,7 @@ class IncomeCategoryIconList extends StatelessWidget {
             child: Text(AppLocalizations.of(context)!.grouping,
               style: TextStyle(
                   color: AppColors.appBarTitleColor,
-                  fontSize: MediaQuery.of(context).size.width / 25,
+                  fontSize: width / 25,
                   fontWeight: FontWeight.w500
               ),),
           ),
@@ -36,7 +39,7 @@ class IncomeCategoryIconList extends StatelessWidget {
             flex: 8,
             child: SizedBox(
               child: GridView.count(
-                padding: EdgeInsets.all(MediaQuery.of(context).size.width / 30),
+                padding: EdgeInsets.all(width / 30),
                 scrollDirection: Axis.vertical,
                 crossAxisCount: 3,
                 shrinkWrap: true,
@@ -54,14 +57,14 @@ class IncomeCategoryIconList extends StatelessWidget {
                         Expanded(
                           flex: 10,
                           child: Container(
-                            width: MediaQuery.of(context).size.width / 8,
-                            height: MediaQuery.of(context).size.width / 8,
-                            margin: EdgeInsets.all(MediaQuery.of(context).size.width / 30),
+                            width: width / 8,
+                            height: width / 8,
+                            margin: EdgeInsets.all(width / 30),
                             decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: AppColors.colorList[index]),
                             child: Container(
-                              margin: EdgeInsets.all(MediaQuery.of(context).size.width / 60),
+                              margin: EdgeInsets.all(width / 60),
                               child: SvgPicture.asset(
                                   "assets/icons/income_category_icons/${IncomeIcons.iconsImage[index]}"),
                             ),
@@ -82,7 +85,7 @@ class IncomeCategoryIconList extends StatelessWidget {
                               : AppLocalizations.of(context)!.other,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
-                                  fontSize: MediaQuery.of(context).size.width / 25
+                                  fontSize: width / 25
                               )),
                         ),
                       ],

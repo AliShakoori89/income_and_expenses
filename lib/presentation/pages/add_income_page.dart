@@ -34,6 +34,10 @@ class _AddIncomePageState extends State<AddIncomePage> {
 
   @override
   Widget build(BuildContext context) {
+
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
+
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
       var darkThemeBoolean = state.darkThemeBoolean;
 
@@ -52,14 +56,14 @@ class _AddIncomePageState extends State<AddIncomePage> {
               color: darkThemeBoolean == "false"
                   ? AppColors.appBarTitleColor
                   : Colors.white,
-              fontSize: MediaQuery.of(context).size.width / 25,
+              fontSize: width / 25,
               fontWeight: FontWeight.w400),
           title: Align(
               alignment: Alignment.centerRight,
               child: Text(AppLocalizations.of(context)!.addIncome)),
           leading: ArrowBackIcon(themeBoolean: darkThemeBoolean),
         ),
-        bottomSheet: appButton(darkThemeBoolean),
+        bottomSheet: appButton(darkThemeBoolean, width, height),
         body: Container(
           height: double.infinity,
           decoration: BoxDecoration(
@@ -67,22 +71,22 @@ class _AddIncomePageState extends State<AddIncomePage> {
               borderRadius: BorderRadius.circular(25)
           ),
           margin: EdgeInsets.only(
-              left: MediaQuery.of(context).size.width / 30,
-              right: MediaQuery.of(context).size.width / 30,
-              bottom: MediaQuery.of(context).size.height / 9,
-              top: MediaQuery.of(context).size.height / 40),
+              left: width / 30,
+              right: width / 30,
+              bottom: height / 9,
+              top: height / 40),
           child: Container(
             margin: EdgeInsets.only(
-                left: MediaQuery.of(context).size.width / 20,
-                right: MediaQuery.of(context).size.width / 20),
+                left: width / 20,
+                right: width / 20),
             child: Form(
               key: formKey,
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    SizedBox(height: MediaQuery.of(context).size.height / 15,),
+                    SizedBox(height: height / 15,),
                     DatePickerCalendar(),
-                    SizedBox(height: MediaQuery.of(context).size.height / 15,),
+                    SizedBox(height: height / 15,),
                     AppTextField(
                       labelText: AppLocalizations.of(context)!.grouping,
                       controller: incomeCategoryController,
@@ -91,7 +95,7 @@ class _AddIncomePageState extends State<AddIncomePage> {
                       addExpenses: false,
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height / 30,
+                      height: height / 30,
                     ),
                     AppTextField(
                       labelText: AppLocalizations.of(context)!.income,
@@ -100,7 +104,7 @@ class _AddIncomePageState extends State<AddIncomePage> {
                       themeBoolean: darkThemeBoolean,
                       addExpenses: false,
                     ),
-                    SizedBox(height: MediaQuery.of(context).size.height / 30,),
+                    SizedBox(height: height / 30,),
                     AppTextField(
                       labelText: AppLocalizations.of(context)!.description,
                       controller: incomeDescriptionCategoryController,
@@ -118,7 +122,7 @@ class _AddIncomePageState extends State<AddIncomePage> {
     });
   }
 
-  BlocBuilder<SetDateBloc, SetDateState> appButton(String themeBoolean) {
+  BlocBuilder<SetDateBloc, SetDateState> appButton(String themeBoolean, double width, double height) {
     return BlocBuilder<SetDateBloc, SetDateState>(builder: (context, state) {
       var date = state.date;
 
@@ -167,13 +171,13 @@ class _AddIncomePageState extends State<AddIncomePage> {
             }
           },
           child: Padding(
-            padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.width / 30),
+            padding: EdgeInsets.only(bottom: width / 30),
             child: Container(
-              width: MediaQuery.of(context).size.width,
+              width: width,
               margin: EdgeInsets.only(
-                left: MediaQuery.of(context).size.width / 10,
-                right: MediaQuery.of(context).size.width / 10,),
-              height: MediaQuery.of(context).size.height / 20,
+                left: width / 10,
+                right: width / 10,),
+              height: height / 20,
               decoration: BoxDecoration(
                 color: AppColors.buttonColor,
                 borderRadius: BorderRadius.circular(15),
@@ -182,7 +186,7 @@ class _AddIncomePageState extends State<AddIncomePage> {
                 child: Text(AppLocalizations.of(context)!.addExpense,
                     style: TextStyle(color: AppColors
                         .backGroundColor,
-                        fontSize: MediaQuery.of(context).size.width / 30)),
+                        fontSize: width / 30)),
               ),
             ),
           ),

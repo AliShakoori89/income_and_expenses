@@ -37,6 +37,9 @@ class _AddExpensePageState extends State<AddExpensePage> {
   @override
   Widget build(BuildContext context) {
 
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
+
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
 
       var darkThemeBoolean = state.darkThemeBoolean;
@@ -53,7 +56,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
               color: darkThemeBoolean == "false"
                   ? AppColors.appBarTitleColor
                   : Colors.white,
-              fontSize: MediaQuery.of(context).size.width / 25,
+              fontSize: width / 25,
               fontWeight: FontWeight.w400),
           title: Align(
               alignment: Alignment.center,
@@ -73,7 +76,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
             ? Colors.white
             : AppColors.darkThemeColor,
         resizeToAvoidBottomInset: true,
-        bottomSheet: appButton(darkThemeBoolean),
+        bottomSheet: appButton(darkThemeBoolean, width, height),
         body: Container(
           height: double.infinity,
           decoration: BoxDecoration(
@@ -81,14 +84,14 @@ class _AddExpensePageState extends State<AddExpensePage> {
             borderRadius: BorderRadius.circular(25)
           ),
           margin: EdgeInsets.only(
-            left: MediaQuery.of(context).size.width / 30,
-            right: MediaQuery.of(context).size.width / 30,
-            bottom: MediaQuery.of(context).size.height / 9,
-            top: MediaQuery.of(context).size.height / 40),
+            left: width / 30,
+            right: width / 30,
+            bottom: height / 9,
+            top: height / 40),
           child: Container(
             margin: EdgeInsets.only(
-              left: MediaQuery.of(context).size.width / 20,
-              right: MediaQuery.of(context).size.width / 20),
+              left: width / 20,
+              right: width / 20),
             child: Form(
               key: formKey,
               child: SingleChildScrollView(
@@ -96,14 +99,14 @@ class _AddExpensePageState extends State<AddExpensePage> {
                 child: Column(
                   children: [
                     SizedBox(
-                      height: MediaQuery.of(context).size.width / 20,
+                      height: width / 20,
                     ),
                     DatePickerCalendar(),
                     SizedBox(
-                      height: MediaQuery.of(context).size.width / 20,
+                      height: width / 20,
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height / 30,
+                      height: height / 30,
                     ),
                     AppTextField(
                       labelText: AppLocalizations.of(context)!.grouping,
@@ -113,7 +116,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
                       addExpenses: true,
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height / 30,
+                      height: height / 30,
                     ),
                     AppTextField(
                       labelText: AppLocalizations.of(context)!.expense,
@@ -123,7 +126,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
                       addExpenses: true,
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.width / 10,
+                      height: width / 10,
                     ),
                     AppTextField(
                       labelText: AppLocalizations.of(context)!.description,
@@ -142,7 +145,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
     });
   }
 
-  BlocBuilder<SetDateBloc, SetDateState> appButton(String themeBoolean) {
+  BlocBuilder<SetDateBloc, SetDateState> appButton(String themeBoolean, double width, double height) {
     return BlocBuilder<SetDateBloc, SetDateState>(builder: (context, state) {
       var date = state.date;
 
@@ -205,13 +208,13 @@ class _AddExpensePageState extends State<AddExpensePage> {
           },
           child: Padding(
             padding:  EdgeInsets.only(
-                bottom: MediaQuery.of(context).size.width / 30),
+                bottom: width / 30),
             child: Container(
               margin: EdgeInsets.only(
-                left: MediaQuery.of(context).size.width / 10,
-                right: MediaQuery.of(context).size.width / 10,),
-              height: MediaQuery.of(context).size.height / 20,
-              width: MediaQuery.of(context).size.width,
+                left: width / 10,
+                right: width / 10,),
+              height: height / 20,
+              width: width,
               decoration: BoxDecoration(
                 color: AppColors.buttonColor,
                 borderRadius: BorderRadius.circular(15),
@@ -219,7 +222,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
               child: Center(
                 child: Text(AppLocalizations.of(context)!.addExpense,
                     style: TextStyle(color: AppColors.backGroundColor,
-                        fontSize: MediaQuery.of(context).size.width / 30)),
+                        fontSize: width / 30)),
               ),
             ),
           ),

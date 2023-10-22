@@ -13,12 +13,14 @@ class ExpensesCategoryIconList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    var width = MediaQuery.of(context).size.width;
+
     return Column(
       children: [
         Expanded(
           flex: 1,
           child: Icon(Icons.linear_scale,
-          size: MediaQuery.of(context).size.width / 25,
+          size: width / 25,
           color: AppColors.appBarTitleColor,),
         ),
         Expanded(
@@ -27,7 +29,7 @@ class ExpensesCategoryIconList extends StatelessWidget {
             style: TextStyle(
                 color: AppColors.appBarTitleColor,
                 fontWeight: FontWeight.w500,
-                fontSize: MediaQuery.of(context).size.width / 25
+                fontSize: width / 25
             ),),
         ),
         Expanded(
@@ -53,12 +55,12 @@ class ExpensesCategoryIconList extends StatelessWidget {
                         child: Container(
                           // width: MediaQuery.of(context).size.width / 8,
                           // height: MediaQuery.of(context).size.width / 8,
-                          margin: EdgeInsets.all(MediaQuery.of(context).size.width / 30),
+                          margin: EdgeInsets.all(width / 30),
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               color: AppColors.colorList[index]),
                           child: Container(
-                            margin: EdgeInsets.all(MediaQuery.of(context).size.width / 60),
+                            margin: EdgeInsets.all(width / 60),
                             child: SvgPicture.asset(
                                 "assets/icons/expense_category_icons/${ExpensesIcon.iconsImage[index]}"),
                           ),
@@ -85,7 +87,7 @@ class ExpensesCategoryIconList extends StatelessWidget {
                             : AppLocalizations.of(context)!.other,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
-                                fontSize: MediaQuery.of(context).size.width / 25
+                                fontSize: width / 25
                             )),
                       ),
                     ],

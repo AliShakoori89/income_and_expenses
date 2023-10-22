@@ -25,6 +25,9 @@ class MainExpensesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
+
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
       return Scaffold(
           extendBody: true,
@@ -38,7 +41,7 @@ class MainExpensesPage extends StatelessWidget {
                 Stack(
                   children: [
                     Container(
-                      height: MediaQuery.of(context).size.height / 5,
+                      height: height / 5,
                       decoration: BoxDecoration(
                         gradient: const LinearGradient(
                           begin: Alignment.topLeft,
@@ -48,16 +51,14 @@ class MainExpensesPage extends StatelessWidget {
                             Color.fromRGBO(212, 200, 235, 1),
                             Color.fromRGBO(179, 229, 252, 1),
                           ],
-                          // Gradient from https://learnui.design/tools/gradient-generator.html
                           tileMode: TileMode.mirror,
                         ),
                         borderRadius: BorderRadius.vertical(
-                            bottom: Radius.elliptical(
-                                MediaQuery.of(context).size.width, 200)),
+                            bottom: Radius.elliptical(width, 200)),
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(top: MediaQuery.of(context).size.height/20),
+                      padding: EdgeInsets.only(top: height/20),
                       child: DatePickerCalendar(
                           keyBottomNavigation2: keyBottomNavigation2,
                           keyBottomNavigation3: keyBottomNavigation3,
@@ -65,14 +66,14 @@ class MainExpensesPage extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(top: MediaQuery.of(context).size.height/7),
+                      padding: EdgeInsets.only(top: height/7),
                       child: CashContainer(keyBottomNavigation1: keyBottomNavigation1),
                     ),
                   ],
                 ),
                 Padding(
                   padding: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height/100,),
+                      top: height/100,),
                   child: const SingleChildScrollView(
                       child: CashContainerPerDate()),
                 ),

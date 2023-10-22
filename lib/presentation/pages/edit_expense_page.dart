@@ -43,6 +43,9 @@ class _EditedExpensePageState extends State<EditedExpensePage> {
   @override
   Widget build(BuildContext context) {
 
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
+
     BlocProvider.of<SetDateBloc>(context).add(InitialDateEvent());
 
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
@@ -60,7 +63,7 @@ class _EditedExpensePageState extends State<EditedExpensePage> {
               color: darkThemeBoolean == "false"
                   ? AppColors.appBarTitleColor
                   : Colors.white,
-              fontSize: MediaQuery.of(context).size.width / 20,
+              fontSize: width / 20,
               fontWeight: FontWeight.w400),
           title: Align(
               alignment: Alignment.center,
@@ -78,14 +81,14 @@ class _EditedExpensePageState extends State<EditedExpensePage> {
                     AppLocalizations.of(context)!.delete,
                     textDirection: TextDirection.rtl,
                     style: TextStyle(
-                        fontSize: MediaQuery.of(context).size.width / 20,
+                        fontSize: width / 20,
                         fontWeight: FontWeight.w700),
                   ),
                   content: Text(
                       AppLocalizations.of(context)!.doYouWantTheDesiredItemToBeDeleted,
                       textDirection: TextDirection.rtl,
                       style: TextStyle(
-                        fontSize: MediaQuery.of(context).size.width / 25,
+                        fontSize: width / 25,
                       )),
                   actions: <Widget>[
                     Row(
@@ -96,9 +99,8 @@ class _EditedExpensePageState extends State<EditedExpensePage> {
                               Navigator.pop(context);
                             },
                             child: Container(
-                              height:
-                              MediaQuery.of(context).size.height / 25,
-                              width: MediaQuery.of(context).size.width / 6,
+                              height: height / 25,
+                              width: width / 6,
                               decoration: BoxDecoration(
                                   color: Colors.red,
                                   borderRadius: BorderRadius.circular(15)),
@@ -106,7 +108,7 @@ class _EditedExpensePageState extends State<EditedExpensePage> {
                                 child: Text(
                                   AppLocalizations.of(context)!.no,
                                   style: TextStyle(
-                                      fontSize: MediaQuery.of(context).size.width / 25,
+                                      fontSize: width / 25,
                                       color: Colors.white),
                                 ),
                               ),
@@ -125,9 +127,8 @@ class _EditedExpensePageState extends State<EditedExpensePage> {
                                   const MyHomePage()));
                             },
                             child: Container(
-                              height:
-                              MediaQuery.of(context).size.height / 25,
-                              width: MediaQuery.of(context).size.width / 6,
+                              height: height / 25,
+                              width: width / 6,
                               decoration: BoxDecoration(
                                   color: Colors.green,
                                   borderRadius: BorderRadius.circular(15)),
@@ -135,7 +136,7 @@ class _EditedExpensePageState extends State<EditedExpensePage> {
                                 child: Text(
                                   AppLocalizations.of(context)!.yes,
                                   style: TextStyle(
-                                      fontSize: MediaQuery.of(context).size.width / 25,
+                                      fontSize: width / 25,
                                       color: Colors.white),
                                 ),
                               ),
@@ -149,7 +150,7 @@ class _EditedExpensePageState extends State<EditedExpensePage> {
             },
             child: Icon(
               Icons.delete,
-              size: MediaQuery.of(context).size.width / 25,
+              size: width / 25,
               color: darkThemeBoolean == "false"
                   ? AppColors.appBarTitleColor
                   : Colors.white,
@@ -173,14 +174,14 @@ class _EditedExpensePageState extends State<EditedExpensePage> {
                       AppLocalizations.of(context)!.delete,
                       textDirection: TextDirection.rtl,
                       style: TextStyle(
-                          fontSize: MediaQuery.of(context).size.width / 20,
+                          fontSize: width / 20,
                           fontWeight: FontWeight.w700),
                     ),
                     content: Text(
                         AppLocalizations.of(context)!.doYouWantTheDesiredItemToBeDeleted,
                         textDirection: TextDirection.rtl,
                         style: TextStyle(
-                          fontSize: MediaQuery.of(context).size.width / 25,
+                          fontSize: width / 25,
                         )),
                     actions: <Widget>[
                       Row(
@@ -191,9 +192,8 @@ class _EditedExpensePageState extends State<EditedExpensePage> {
                                 Navigator.pop(context);
                               },
                               child: Container(
-                                height:
-                                MediaQuery.of(context).size.height / 25,
-                                width: MediaQuery.of(context).size.width / 6,
+                                height: height / 25,
+                                width: width / 6,
                                 decoration: BoxDecoration(
                                     color: Colors.red,
                                     borderRadius: BorderRadius.circular(15)),
@@ -201,7 +201,7 @@ class _EditedExpensePageState extends State<EditedExpensePage> {
                                   child: Text(
                                     AppLocalizations.of(context)!.no,
                                     style: TextStyle(
-                                        fontSize: MediaQuery.of(context).size.width / 25,
+                                        fontSize: width / 25,
                                         color: Colors.white),
                                   ),
                                 ),
@@ -220,9 +220,8 @@ class _EditedExpensePageState extends State<EditedExpensePage> {
                                     const MyHomePage()));
                               },
                               child: Container(
-                                height:
-                                MediaQuery.of(context).size.height / 25,
-                                width: MediaQuery.of(context).size.width / 6,
+                                height: height / 25,
+                                width: width / 6,
                                 decoration: BoxDecoration(
                                     color: Colors.green,
                                     borderRadius: BorderRadius.circular(15)),
@@ -230,7 +229,7 @@ class _EditedExpensePageState extends State<EditedExpensePage> {
                                   child: Text(
                                     AppLocalizations.of(context)!.yes,
                                     style: TextStyle(
-                                        fontSize: MediaQuery.of(context).size.width / 25,
+                                        fontSize: width / 25,
                                         color: Colors.white),
                                   ),
                                 ),
@@ -244,14 +243,14 @@ class _EditedExpensePageState extends State<EditedExpensePage> {
               },
               child: Icon(
                 Icons.delete,
-                size: MediaQuery.of(context).size.width / 25,
+                size: width / 25,
                 color: darkThemeBoolean == "false"
                     ? AppColors.appBarTitleColor
                     : Colors.white,
               ),
             ),
             SizedBox(
-              width: MediaQuery.of(context).size.width / 20,
+              width: width / 20,
             ),
           ],
         ),
@@ -259,21 +258,21 @@ class _EditedExpensePageState extends State<EditedExpensePage> {
             ? Colors.white
             : AppColors.darkThemeColor,
         resizeToAvoidBottomInset: true,
-        bottomSheet: appButton(darkThemeBoolean),
+        bottomSheet: appButton(darkThemeBoolean, width, height),
         body: Container(
           height: double.infinity,
           decoration: BoxDecoration(
               color: AppColors.themContainer,
               borderRadius: BorderRadius.circular(25)),
           margin: EdgeInsets.only(
-              left: MediaQuery.of(context).size.width / 30,
-              right: MediaQuery.of(context).size.width / 30,
-              bottom: MediaQuery.of(context).size.height / 9,
-              top: MediaQuery.of(context).size.height / 40),
+              left: width / 30,
+              right: width / 30,
+              bottom: height / 9,
+              top: height / 40),
           child: Container(
             margin: EdgeInsets.only(
-                left: MediaQuery.of(context).size.width / 15,
-                right: MediaQuery.of(context).size.width / 15),
+                left: width / 15,
+                right: width / 15),
             child: Form(
               key: formKey,
               child: SingleChildScrollView(
@@ -287,17 +286,17 @@ class _EditedExpensePageState extends State<EditedExpensePage> {
                         "-${DateTime.parse(_editedExpensesModel.expenseDate.toString()).month.toString().toPersianDigit()}"
                         "-${DateTime.parse(_editedExpensesModel.expenseDate.toString()).day.toString().toPersianDigit()}",
                         style: TextStyle(
-                            fontSize: MediaQuery.of(context).size.width / 15,
+                            fontSize: width / 15,
                             color: darkThemeBoolean == "false"
                                 ? AppColors.appBarTitleColor
                                 : Colors.white)),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height / 30,
+                      height: height / 30,
                     ),
                     Column(
                       children: [
                         SizedBox(
-                          height: MediaQuery.of(context).size.height / 50,
+                          height: height / 50,
                         ),
                         Directionality(
                           textDirection: AppLocalizations.of(context)!.language == "زبان"
@@ -340,13 +339,13 @@ class _EditedExpensePageState extends State<EditedExpensePage> {
                                   labelText:
                                   AppLocalizations.of(context)!.grouping,
                                   labelStyle: TextStyle(
-                                      fontSize: MediaQuery.of(context).size.width / 20,
+                                      fontSize: width / 20,
                                       color: darkThemeBoolean == "false" ? Colors.black : Colors.white70, fontWeight: FontWeight.w900
                                   )
                               )),
                         ),
                         SizedBox(
-                          height: MediaQuery.of(context).size.height / 30,
+                          height: height / 30,
                         ),
                         AppTextField(
                           labelText: AppLocalizations.of(context)!.expense,
@@ -356,7 +355,7 @@ class _EditedExpensePageState extends State<EditedExpensePage> {
                           addExpenses: false,
                         ),
                         SizedBox(
-                          height: MediaQuery.of(context).size.width / 10,
+                          height: width / 10,
                         ),
                         AppTextField(
                           labelText: AppLocalizations.of(context)!.description,
@@ -377,7 +376,7 @@ class _EditedExpensePageState extends State<EditedExpensePage> {
     });
   }
 
-  BlocBuilder<SetDateBloc, SetDateState> appButton(String themeBoolean) {
+  BlocBuilder<SetDateBloc, SetDateState> appButton(String themeBoolean, double width, double height) {
     return BlocBuilder<SetDateBloc, SetDateState>(builder: (context, state) {
 
       return Container(
@@ -401,13 +400,13 @@ class _EditedExpensePageState extends State<EditedExpensePage> {
           },
           child: Padding(
             padding:  EdgeInsets.only(
-                bottom: MediaQuery.of(context).size.width / 30),
+                bottom: width / 30),
             child: Container(
               margin: EdgeInsets.only(
-                left: MediaQuery.of(context).size.width / 10,
-                right: MediaQuery.of(context).size.width / 10,),
-              height: MediaQuery.of(context).size.height / 20,
-              width: MediaQuery.of(context).size.width,
+                left: width / 10,
+                right: width / 10,),
+              height: height / 20,
+              width: width,
               decoration: BoxDecoration(
                 color: AppColors.buttonColor,
                 borderRadius: BorderRadius.circular(15),
@@ -416,7 +415,7 @@ class _EditedExpensePageState extends State<EditedExpensePage> {
                 child: Text(AppLocalizations.of(context)!.applyChange,
                     style: TextStyle(color: AppColors
                         .backGroundColor,
-                        fontSize: MediaQuery.of(context).size.width / 30)),
+                        fontSize: width / 30)),
               ),
             ),
           ),

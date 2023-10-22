@@ -38,6 +38,10 @@ class _IncomeDetailsPageState extends State<IncomeDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
+
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
+
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
 
       var darkThemeBoolean = state.darkThemeBoolean;
@@ -73,7 +77,7 @@ class _IncomeDetailsPageState extends State<IncomeDetailsPage> {
                 color: darkThemeBoolean == "false"
                     ? AppColors.appBarTitleColor
                     : Colors.white,
-                fontSize: MediaQuery.of(context).size.width / 25,
+                fontSize: width / 25,
                 fontWeight: FontWeight.w400),
             title: Align(
                 alignment: Alignment.centerRight,
@@ -86,10 +90,10 @@ class _IncomeDetailsPageState extends State<IncomeDetailsPage> {
                   borderRadius: BorderRadius.circular(25)
               ),
               margin: EdgeInsets.only(
-                left: MediaQuery.of(context).size.width / 30,
-                right: MediaQuery.of(context).size.width / 30,
-                top: MediaQuery.of(context).size.height / 60,
-                bottom: MediaQuery.of(context).size.height / 30,
+                left: width / 30,
+                right: width / 30,
+                top: height / 60,
+                bottom: height / 30,
               ),
               child: incomeList.isNotEmpty
                   ? ListView.builder(
@@ -97,29 +101,29 @@ class _IncomeDetailsPageState extends State<IncomeDetailsPage> {
                 itemBuilder: (BuildContext context, int index){
                   return Container(
                     margin: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height / 100,
-                      left: MediaQuery.of(context).size.height / 100,
-                      right: MediaQuery.of(context).size.height / 100,
+                      top: height / 100,
+                      left: height / 100,
+                      right: height / 100,
                     ),
                     decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(15)
                     ),
                     child: Container(
-                      height: MediaQuery.of(context).size.height / 12,
+                      height: height / 12,
                       margin: EdgeInsets.only(
-                        left: MediaQuery.of(context).size.width / 40,
-                        right: MediaQuery.of(context).size.width / 40,
+                        left: width / 40,
+                        right: width / 40,
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Expanded(child: Text("${incomeList[index].income}".toPersianDigit().seRagham(), style: TextStyle(
-                              fontSize: MediaQuery.of(context).size.width / 20
+                              fontSize: width / 20
                           ),)),
                           const Spacer(),
                           Padding(
-                            padding: EdgeInsets.only(top: MediaQuery.of(context).size.height / 100),
+                            padding: EdgeInsets.only(top: height / 100),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
@@ -127,7 +131,7 @@ class _IncomeDetailsPageState extends State<IncomeDetailsPage> {
                                   child: Text(
                                     "${incomeList[index].incomeCategory}",
                                     style: TextStyle(
-                                        fontSize: MediaQuery.of(context).size.width / 25),
+                                        fontSize: width / 25),
                                   ),
                                 ),
                                 Flexible(child: Text("${incomeList[index].incomeDescription}",
@@ -135,7 +139,7 @@ class _IncomeDetailsPageState extends State<IncomeDetailsPage> {
                                   maxLines: 1,
                                   softWrap: true,
                                   style: TextStyle(
-                                      fontSize: MediaQuery.of(context).size.width / 30
+                                      fontSize: width / 30
                                   ),
                                 )
                                 ),
@@ -153,19 +157,19 @@ class _IncomeDetailsPageState extends State<IncomeDetailsPage> {
                                 },
                                 child: Icon(
                                   Icons.close,
-                                  size: MediaQuery.of(context).size.width / 20,
+                                  size: width / 20,
                                   color: Colors.black.withOpacity(0.4),
                                 ),
                               ),
                               Container(
-                                width: MediaQuery.of(context).size.width / 8,
-                                height: MediaQuery.of(context).size.width / 8,
-                                margin: EdgeInsets.all(MediaQuery.of(context).size.width / 30),
+                                width: width / 8,
+                                height: width / 8,
+                                margin: EdgeInsets.all(width / 30),
                                 decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                     color: AppColors.colorList[index]),
                                 child: Container(
-                                  margin: EdgeInsets.all(MediaQuery.of(context).size.width / 60),
+                                  margin: EdgeInsets.all(width / 60),
                                   child: SvgPicture.asset("${incomeList[index].incomeIconType}"),
                                 ),
                               ),

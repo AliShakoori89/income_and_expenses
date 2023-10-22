@@ -71,6 +71,9 @@ class _SFCartesianChartPageState extends State<SFCartesianChartPage> {
         ];
         _tooltip = TooltipBehavior(enable: true);
 
+        var height = MediaQuery.of(context).size.height;
+        var width = MediaQuery.of(context).size.width;
+
         return Scaffold(
             backgroundColor: darkThemeBoolean == "false"
                 ? Colors.white
@@ -82,27 +85,27 @@ class _SFCartesianChartPageState extends State<SFCartesianChartPage> {
                     borderRadius: BorderRadius.circular(25)
                 ),
                 margin: EdgeInsets.only(
-                  left: MediaQuery.of(context).size.width / 30,
-                  right: MediaQuery.of(context).size.width / 30,
-                  top: MediaQuery.of(context).size.height / 60,
-                  bottom: MediaQuery.of(context).size.height / 200,
+                  left: width / 30,
+                  right: width / 30,
+                  top: height / 60,
+                  bottom: height / 200,
                 ),
                 child: Column(
                   children: [
-                    SizedBox(height: MediaQuery.of(context).size.height / 50),
+                    SizedBox(height: height / 50),
                     Expanded(
                       flex: 7,
                       child: Row(
                         children: [
-                          selectDateBox(context, darkThemeBoolean),
+                          selectDateBox(context, darkThemeBoolean, width, height),
                           Padding(
                             padding: EdgeInsets.only(
-                                left: MediaQuery.of(context).size.width / 30,
-                                right: MediaQuery.of(context).size.width / 30),
+                                left: width / 30,
+                                right: width / 30),
                             child: Text(
                               AppLocalizations.of(context)!.selectMonth,
                               style: TextStyle(
-                                fontSize: MediaQuery.of(context).size.width / 30,
+                                fontSize: width / 30,
                                 fontWeight: FontWeight.w700,
                                 color: darkThemeBoolean == "false"
                                     ? AppColors.darkThemeColor
@@ -112,15 +115,15 @@ class _SFCartesianChartPageState extends State<SFCartesianChartPage> {
                         ],
                       ),
                     ),
-                    SizedBox(height: MediaQuery.of(context).size.height / 1000),
+                    SizedBox(height: height / 1000),
                     Expanded(
                         flex: 8,
-                        child: SFCartesianChart(context, darkThemeBoolean)),
-                    SizedBox(height: MediaQuery.of(context).size.height / 100),
+                        child: SFCartesianChart(context, darkThemeBoolean, width, height)),
+                    SizedBox(height: height / 100),
                     Expanded(
                         flex: 1,
-                        child: mapScaleText(context, darkThemeBoolean)),
-                    SizedBox(height: MediaQuery.of(context).size.height / 100),
+                        child: mapScaleText(context, darkThemeBoolean, width, height)),
+                    SizedBox(height: height / 100),
                   ],
                 ),
               ),
@@ -128,15 +131,14 @@ class _SFCartesianChartPageState extends State<SFCartesianChartPage> {
       });});
   }
 
-  Row mapScaleText(BuildContext context, String darkThemeBoolean) {
+  Row mapScaleText(BuildContext context, String darkThemeBoolean, double width, double height) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text("1/100000",
           style: TextStyle(
             fontWeight: FontWeight.w700,
-            fontSize:
-            MediaQuery.of(context).size.width / 25,
+            fontSize: width / 25,
             color: darkThemeBoolean == "false"
                 ? Colors.black
                 : Colors.white,
@@ -145,8 +147,7 @@ class _SFCartesianChartPageState extends State<SFCartesianChartPage> {
         Text(
           " : ${AppLocalizations.of(context)!.mapScale}",
           style: TextStyle(
-            fontSize:
-            MediaQuery.of(context).size.width / 25,
+            fontSize: width / 25,
             color: darkThemeBoolean == "false"
                 ? AppColors.appBarTitleColor
                 : Colors.white,
@@ -156,14 +157,14 @@ class _SFCartesianChartPageState extends State<SFCartesianChartPage> {
     );
   }
 
-  Container SFCartesianChart(BuildContext context, String darkThemeBoolean) {
+  Container SFCartesianChart(BuildContext context, String darkThemeBoolean, double width, double height) {
     return Container(
       margin: EdgeInsets.only(
-        top: MediaQuery.of(context).size.width / 20,
-        right: MediaQuery.of(context).size.width / 100,
-        left: MediaQuery.of(context).size.width / 100
+        top: height / 20,
+        right: width / 100,
+        left: width / 100
       ),
-      height: MediaQuery.of(context).size.height / 2.8,
+      height: height / 2.8,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(25),
         color: darkThemeBoolean == "false" ? Colors.white : AppColors.darkThemeColor,
@@ -178,24 +179,24 @@ class _SFCartesianChartPageState extends State<SFCartesianChartPage> {
       ),
       child: SfCartesianChart(
           margin: EdgeInsets.only(
-            top: MediaQuery.of(context).size.height / 30,
+            top: height / 30,
           ),
           title: ChartTitle(
               text: AppLocalizations.of(context)!.expensePerYear,
               textStyle: darkThemeBoolean == "false"
                   ? TextStyle(
                   color: Colors.black,
-                  fontSize: MediaQuery.of(context).size.width / 30,
+                  fontSize: width / 30,
                   )
                   : TextStyle(
                   color: Colors.white,
-                  fontSize: MediaQuery.of(context).size.width / 30,
+                  fontSize: width / 30,
               )),
           primaryXAxis: CategoryAxis(
               labelRotation: 90,
               labelStyle: TextStyle(
                   fontFamily: 'Roboto',
-                  fontSize: MediaQuery.of(context).size.width / 30,
+                  fontSize: width / 30,
                   fontWeight: FontWeight.w500,
                   color: darkThemeBoolean == "false"
                       ? Colors.black
@@ -205,7 +206,7 @@ class _SFCartesianChartPageState extends State<SFCartesianChartPage> {
           primaryYAxis: NumericAxis(minimum: 0, maximum: 100, interval: 10,
               labelStyle: TextStyle(
                   fontFamily: 'Roboto',
-                  fontSize: MediaQuery.of(context).size.width / 30,
+                  fontSize: width / 30,
                   fontWeight: FontWeight.w300,
                   color: darkThemeBoolean == "false"
                       ? Colors.black
@@ -226,7 +227,7 @@ class _SFCartesianChartPageState extends State<SFCartesianChartPage> {
                     labelAlignment: ChartDataLabelAlignment.middle,
                     textStyle: TextStyle(
                         color: Colors.black,
-                        fontSize: MediaQuery.of(context).size.width / 30
+                        fontSize: width / 30
                     )),
                 onCreateRenderer: (ChartSeries<_ChartData, String> series) =>
                     _CustomColumnSeriesRenderer(),
@@ -236,14 +237,14 @@ class _SFCartesianChartPageState extends State<SFCartesianChartPage> {
     );
   }
 
-  Container selectDateBox(BuildContext context, String darkThemeBoolean) {
+  Container selectDateBox(BuildContext context, String darkThemeBoolean, double width, double height) {
     return Container(
-      height: MediaQuery.of(context).size.width / 2,
+      height: width / 2,
       margin: EdgeInsets.only(
-          top: MediaQuery.of(context).size.height / 25,
-          bottom: MediaQuery.of(context).size.height / 25,
-          left: MediaQuery.of(context).size.width / 15,
-          right: MediaQuery.of(context).size.width / 15
+          top: height / 25,
+          bottom: height / 25,
+          left: width / 15,
+          right: width / 15
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(25),
@@ -273,7 +274,7 @@ class _SFCartesianChartPageState extends State<SFCartesianChartPage> {
           decorationColor: darkThemeBoolean == "false" ? Colors.black : Colors.white,
           fontStyle: FontStyle.italic,
           fontFamily: 'iran',
-          fontSize: MediaQuery.of(context).size.width / 25,
+          fontSize: width / 25,
           color: darkThemeBoolean == "false" ? Colors.black : Colors.white,
           fontWeight: FontWeight.w700,
         ),
@@ -282,15 +283,15 @@ class _SFCartesianChartPageState extends State<SFCartesianChartPage> {
         labelStyle: TextStyle(
             color: darkThemeBoolean == "false" ? Colors.black : Colors.white,
             fontWeight: FontWeight.w700,
-          fontSize: MediaQuery.of(context).size.width / 30
+          fontSize: width / 30
         ),
         unselectedRowStyle: TextStyle(
           color: darkThemeBoolean == "false" ? Colors.black45 : Colors.white54,
-          fontSize: MediaQuery.of(context).size.width / 30,
+          fontSize: width / 30,
         ),
         showLabels: true,
 
-        columnWidth: MediaQuery.of(context).size.width / 4,
+        columnWidth: width / 4,
         showMonthName: true,
         isJalaali: true,
       ),

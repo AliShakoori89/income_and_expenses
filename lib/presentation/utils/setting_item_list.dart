@@ -24,12 +24,14 @@ class SettingItemList extends StatelessWidget{
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
 
       var darkThemeBoolean = state.darkThemeBoolean;
+      var height = MediaQuery.of(context).size.height;
+      var width = MediaQuery.of(context).size.width;
 
       return Container(
           margin: EdgeInsets.only(
-            top: MediaQuery.of(context).size.height / 50,
-            right: MediaQuery.of(context).size.width / 50,
-            left: MediaQuery.of(context).size.width / 50,
+            top: height / 50,
+            right: width / 50,
+            left: width / 50,
           ),
           child: Column(
             children: [
@@ -37,7 +39,7 @@ class SettingItemList extends StatelessWidget{
               GestureDetector(
                 onTap: () async {},
                 child: SizedBox(
-                  height: MediaQuery.of(context).size.height / 20,
+                  height: height / 20,
                   child: SettingItems(
                     imagePath: darkThemeBoolean == "false"
                         ? "assets/profile_icons/export_to_pdf.png"
@@ -73,7 +75,7 @@ class SettingItemList extends StatelessWidget{
                   );
                 },
                 child: SizedBox(
-                  height: MediaQuery.of(context).size.height / 20,
+                  height: height / 20,
                   child: SettingItems(
                     imagePath: darkThemeBoolean == "false"
                         ? "assets/profile_icons/frequently_asked_questions.png"
@@ -98,7 +100,7 @@ class SettingItemList extends StatelessWidget{
                   exit(0);
                 },
                 child: SizedBox(
-                  height: MediaQuery.of(context).size.height / 20,
+                  height: height / 20,
                   child: SettingItems(
                     imagePath: darkThemeBoolean == "false"
                         ? "assets/profile_icons/logout.png"
@@ -112,6 +114,10 @@ class SettingItemList extends StatelessWidget{
   }
 
   GestureDetector chooseCurrencyAlertDialog(BuildContext context, String darkThemeBoolean) {
+
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
+
     return GestureDetector(
                 onTap: () {
                   showDialog(
@@ -127,8 +133,7 @@ class SettingItemList extends StatelessWidget{
                               ? TextDirection.rtl
                               : TextDirection.ltr,
                           style: TextStyle(
-                              fontSize:
-                              MediaQuery.of(context).size.width / 30,
+                              fontSize: width / 30,
                               fontWeight: FontWeight.w900,
                               color: darkThemeBoolean == "false"
                                   ? Colors.black : Colors.white)),
@@ -145,9 +150,9 @@ class SettingItemList extends StatelessWidget{
                       actions: <Widget>[
                         Container(
                           margin: EdgeInsets.only(
-                              left: MediaQuery.of(context).size.width / 10,
-                              right: MediaQuery.of(context).size.width / 10,
-                              bottom: MediaQuery.of(context).size.height / 100
+                              left: width / 10,
+                              right: width / 10,
+                              bottom: height / 100
                           ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -208,7 +213,7 @@ class SettingItemList extends StatelessWidget{
                   );
                 },
                 child: SizedBox(
-                  height: MediaQuery.of(context).size.height / 20,
+                  height: height / 20,
                   child: SettingItems(
                     imagePath: darkThemeBoolean == "false"
                         ? "assets/profile_icons/choose_currency.png"
@@ -220,6 +225,9 @@ class SettingItemList extends StatelessWidget{
   }
 
   GestureDetector chooseThemeAlertDialog(BuildContext context, String darkThemeBoolean) {
+
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
 
     return GestureDetector(
                 onTap: () {
@@ -239,7 +247,7 @@ class SettingItemList extends StatelessWidget{
                           color: darkThemeBoolean == "false"
                               ? Colors.black : Colors.white,
                           fontWeight: FontWeight.w900,
-                          fontSize: MediaQuery.of(context).size.width / 25,
+                          fontSize: width / 25,
                         ),
                       ),
                       content:Text(AppLocalizations.of(context)!.pleaseChooseYourTheme,
@@ -247,17 +255,16 @@ class SettingItemList extends StatelessWidget{
                               ? TextDirection.rtl
                               : TextDirection.ltr,
                           style: TextStyle(
-                              fontSize: MediaQuery.of(context).size.width / 30,
+                              fontSize: width / 30,
                             color: darkThemeBoolean == "false"
                                 ? Colors.black : Colors.white,
                           )),
                       actions: <Widget>[
                         Container(
                           margin: EdgeInsets.only(
-                              left: MediaQuery.of(context).size.width / 10,
-                              right: MediaQuery.of(context).size.width / 10,
-                              bottom:
-                                  MediaQuery.of(context).size.height / 100),
+                              left: width / 10,
+                              right: width / 10,
+                              bottom: height / 100),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -308,7 +315,7 @@ class SettingItemList extends StatelessWidget{
                   );
                 },
                 child: SizedBox(
-                  height: MediaQuery.of(context).size.height / 20,
+                  height: height / 20,
                   child: SettingItems(
                     imagePath: darkThemeBoolean == "false"
                         ? "assets/profile_icons/theme.png"
@@ -320,6 +327,9 @@ class SettingItemList extends StatelessWidget{
   }
 
   GestureDetector chooseLanguageAlertDialog(BuildContext context, String darkThemeBoolean, LanguageProvider appLanguage) {
+
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
 
     return GestureDetector(
                 onTap: () {
@@ -339,7 +349,7 @@ class SettingItemList extends StatelessWidget{
                             color: darkThemeBoolean == "false"
                                 ? Colors.black : Colors.white,
                             fontWeight: FontWeight.w900,
-                            fontSize: MediaQuery.of(context).size.width / 25),
+                            fontSize: width / 25),
                       ),
                       content: Text(
                           AppLocalizations.of(context)!.pleaseChooseYourLanguage,
@@ -349,15 +359,13 @@ class SettingItemList extends StatelessWidget{
                           style: TextStyle(
                               color: darkThemeBoolean == "false"
                                   ? Colors.black : Colors.white,
-                              fontSize:
-                                  MediaQuery.of(context).size.width / 30)),
+                              fontSize: width / 30)),
                       actions: <Widget>[
                         Container(
                           margin: EdgeInsets.only(
-                              left: MediaQuery.of(context).size.width / 10,
-                              right: MediaQuery.of(context).size.width / 10,
-                              bottom:
-                              MediaQuery.of(context).size.height / 100
+                              left: width / 10,
+                              right: width / 10,
+                              bottom: height / 100
                           ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -409,7 +417,7 @@ class SettingItemList extends StatelessWidget{
                   );
                 },
                 child: SizedBox(
-                  height: MediaQuery.of(context).size.height / 20,
+                  height: height / 20,
                   child: SettingItems(
                     imagePath: darkThemeBoolean == "false"
                         ? "assets/profile_icons/choose_language.png"

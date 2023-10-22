@@ -18,13 +18,15 @@ class SettingItems extends StatelessWidget {
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
 
       var darkThemeBoolean = state.darkThemeBoolean;
+      var height = MediaQuery.of(context).size.height;
+      var width = MediaQuery.of(context).size.width;
 
       return Container(
         width: double.infinity / 1.35,
-        height: MediaQuery.of(context).size.height / 10,
+        height: height / 10,
         margin: EdgeInsets.only(
-          right: MediaQuery.of(context).size.width / 20,
-          left: MediaQuery.of(context).size.width / 20,
+          right: width / 20,
+          left: width / 20,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -34,9 +36,9 @@ class SettingItems extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   SizedBox(
-                      width: MediaQuery.of(context).size.width / 10,
+                      width: width / 10,
                       child: Image.asset(imagePath)),
-                  SizedBox(width: MediaQuery.of(context).size.width / 20,),
+                  SizedBox(width: width / 20,),
                   Flexible(
                     child: Text(
                       itemName,
@@ -44,7 +46,7 @@ class SettingItems extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                         fontWeight: FontWeight.w400,
-                        fontSize: MediaQuery.of(context).size.width / 30,
+                        fontSize: width / 30,
                         color: darkThemeBoolean == "false"
                             ? AppColors.appBarProfileName
                             : Colors.white,
@@ -69,12 +71,12 @@ class SettingItems extends StatelessWidget {
                     : AppColors.darkThemeColor,
               ),
               child: Container(
-                margin: EdgeInsets.all(MediaQuery.of(context).size.width / 100),
+                margin: EdgeInsets.all(width / 100),
                 child: Icon(Icons.arrow_forward_ios,
                     color: darkThemeBoolean == "false"
                         ? AppColors.black
                         : Colors.white,
-                    size:  MediaQuery.of(context).size.width / 30),
+                    size: width / 30),
               ),
             )
           ],

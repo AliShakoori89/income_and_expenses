@@ -63,6 +63,9 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
 
     return BlocBuilder<SetDateBloc, SetDateState>(builder: (context, state) {
 
+      var height = MediaQuery.of(context).size.height;
+      var width = MediaQuery.of(context).size.width;
+
       return AppLocalizations.of(context)!.language == "زبان"
           ? Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -109,8 +112,8 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                                   .toString()));
                     },
                     child: SizedBox(
-                      width: MediaQuery.of(context).size.width / 20,
-                      height: MediaQuery.of(context).size.width / 20,
+                      width: width / 20,
+                      height: height / 40,
                       child: Image.asset(
                         key: keyBottomNavigation4,
                         "assets/main_page_first_container_logo/right_arrow.png",
@@ -176,10 +179,10 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                           .add(FetchIncomeEvent(month: month));
                     },
                     child: Container(
-                      height: MediaQuery.of(context).size.width / 10,
+                      height: height / 20,
                       margin: EdgeInsets.only(
-                        right: MediaQuery.of(context).size.width / 10,
-                        left: MediaQuery.of(context).size.width / 10,
+                        right: width / 10,
+                        left: width / 10,
                       ),
                       // key: keyButton2,
                       decoration: BoxDecoration(
@@ -190,11 +193,11 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                         children: [
                           Icon(
                             Icons.calendar_today,
-                            size: MediaQuery.of(context).size.width / 20,
+                            size: width / 20,
                             color: AppColors.calenderBoxIconColor,
                           ),
                           SizedBox(
-                            width: MediaQuery.of(context).size.width / 20,
+                            width: width / 20,
                           ),
                           Text(
                               key: keyBottomNavigation3,
@@ -202,8 +205,7 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                                   .format(DateTime.parse(date))
                                   .toPersianDigit(),
                               style: TextStyle(
-                                  fontSize:
-                                      MediaQuery.of(context).size.width / 20,
+                                  fontSize: width / 20,
                                   color: AppColors.appBarTitleColor)),
                         ],
                       ),
@@ -252,8 +254,8 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                                   .toString()));
                     },
                     child: SizedBox(
-                      width: MediaQuery.of(context).size.width / 20,
-                      height: MediaQuery.of(context).size.width / 20,
+                      width: width / 20,
+                      height: height / 40,
                       child: Image.asset(
                           key: keyBottomNavigation2,
                           // key: keyButton1,
@@ -308,11 +310,10 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                                   .toString()));
                     },
                     child: SizedBox(
-                      width: MediaQuery.of(context).size.width / 20,
-                      height: MediaQuery.of(context).size.width / 20,
+                      width: width / 20,
+                      height: height / 40,
                       child: Image.asset(
                           key: keyBottomNavigation2,
-                          // key: keyButton1,
                           "assets/main_page_first_container_logo/left_arrow.png"),
                     ),
                   ),
@@ -375,10 +376,10 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                           .add(FetchIncomeEvent(month: month));
                     },
                     child: Container(
-                      height: MediaQuery.of(context).size.width / 10,
+                      height: height / 20,
                       margin: EdgeInsets.only(
-                        right: MediaQuery.of(context).size.width / 10,
-                        left: MediaQuery.of(context).size.width / 10,
+                        right: width / 10,
+                        left: width / 10,
                       ),
                       // key: keyButton2,
                       decoration: BoxDecoration(
@@ -451,8 +452,8 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                                   .toString()));
                     },
                     child: SizedBox(
-                      width: MediaQuery.of(context).size.width / 20,
-                      height: MediaQuery.of(context).size.width / 20,
+                      width: width / 20,
+                      height: height / 40,
                       child: Image.asset(
                         key: keyBottomNavigation4,
                         "assets/main_page_first_container_logo/right_arrow.png",

@@ -39,13 +39,14 @@ class _AppTextFieldState extends State<AppTextField> {
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
 
       var darkThemeBoolean = state.darkThemeBoolean;
+      var width = MediaQuery.of(context).size.width;
 
       return Directionality(
         textDirection: TextDirection.rtl,
         child: TextFormField(
           style: TextStyle(
               color: Colors.black,
-              fontSize: MediaQuery.of(context).size.width / 25
+              fontSize: width / 25
           ),
           readOnly: widget.clickable == true ? true : false,
           controller: widget.controller,
@@ -57,7 +58,7 @@ class _AppTextFieldState extends State<AppTextField> {
               errorStyle: TextStyle(color: darkThemeBoolean == "false"
                   ? Colors.red
                   : Colors.white,
-                  fontSize: MediaQuery.of(context).size.width / 25),
+                  fontSize: width / 25),
               filled: true, //<-- SEE HERE
               fillColor: Colors.white, //<-- SEE HERE
               suffixText: widget.labelText == "هزینه" || widget.labelText == "expense" ||
@@ -65,17 +66,17 @@ class _AppTextFieldState extends State<AppTextField> {
                   ? "تومان" : widget.labelText == "دسته بندی" || widget.labelText == "توضیحات" ? "" : "T",
               suffixStyle: TextStyle(
                   color: Colors.black,
-                  fontSize: MediaQuery.of(context).size.width / 25
+                  fontSize: width / 25
               ),
               helperText: darkThemeBoolean == "true" ? widget.labelText : "",
               helperStyle: TextStyle(
                   color: Colors.white,
-                  fontSize: MediaQuery.of(context).size.width / 25
+                  fontSize: width / 25
               ),
               labelText: darkThemeBoolean == "false" ? widget.labelText : "",
               labelStyle: TextStyle(
                   color: Colors.black,
-                  fontSize: MediaQuery.of(context).size.width / 25
+                  fontSize: width / 25
               )
           ),
           inputFormatters: widget.labelText == "هزینه" || widget.labelText == "expense" ||
@@ -122,8 +123,8 @@ class _AppTextFieldState extends State<AppTextField> {
             return null;
           },
         ),
-      );});
-
+      );
+    });
   }
 }
 

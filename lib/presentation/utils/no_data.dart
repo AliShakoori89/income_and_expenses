@@ -12,6 +12,9 @@ class NoDataPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
 
+      var height = MediaQuery.of(context).size.height;
+      var width = MediaQuery.of(context).size.width;
+
       var darkThemeBoolean = state.darkThemeBoolean;
 
       return Column(
@@ -19,11 +22,11 @@ class NoDataPage extends StatelessWidget {
         children: [
           Image.asset("assets/images/No data.png",
               // width: MediaQuery.of(context).size.width / 1.5,
-          scale: MediaQuery.of(context).size.width / 3000),
+          scale: width / 3000),
           Text(
             AppLocalizations.of(context)!.notExpenses,
             style: TextStyle(
-              fontSize: MediaQuery.of(context).size.height / 40,
+              fontSize: height / 40,
               color: darkThemeBoolean == "false"
                   ? AppColors.noDataTextColor
                   : Colors.white,
