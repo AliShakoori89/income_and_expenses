@@ -12,14 +12,9 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import '../const/app_colors.dart';
 
 
-class SFCartesianChartPage extends StatefulWidget {
-  // ignore: prefer_const_constructors_in_immutables
-  const SFCartesianChartPage({Key? key}) : super(key: key);
-  @override
-  _SFCartesianChartPageState createState() => _SFCartesianChartPageState();
-}
+class SFCartesianChartPage extends StatelessWidget {
 
-class _SFCartesianChartPageState extends State<SFCartesianChartPage> {
+  SFCartesianChartPage({Key? key}) : super(key: key);
 
   late List<_ChartData> data;
   late TooltipBehavior _tooltip;
@@ -40,17 +35,13 @@ class _SFCartesianChartPageState extends State<SFCartesianChartPage> {
   String? selectedValue;
 
   @override
-  void initState() {
+  Widget build(BuildContext context) {
+
     String selectedValue = "${Jalali.now().year}/${Jalali.now().month}";
     BlocProvider.of<CalculateSFCartesianChartBloc>(context).add(
         SumExpensesByGroupingTypePerMonthForSFCartesianChartEvent(
             year: selectedValue.split("/").first,
             month: selectedValue.split("/").last));
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
     
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
 

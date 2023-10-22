@@ -45,7 +45,7 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
             keyBottomNavigation3: keyBottomNavigation3,
             keyBottomNavigation4: keyBottomNavigation4),
         const SfCircularChartPage(),
-        const SFCartesianChartPage(),
+        SFCartesianChartPage(),
         const SettingPage(),
       ];
 

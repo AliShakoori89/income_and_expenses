@@ -12,13 +12,7 @@ import 'package:income_and_expenses/presentation/utils/app_text_field.dart';
 import 'package:income_and_expenses/presentation/utils/arrow_back_icon.dart';
 import 'package:income_and_expenses/presentation/utils/date_picker_calendar.dart';
 
-class AddExpensePage extends StatefulWidget {
-
-  @override
-  State<AddExpensePage> createState() => _AddExpensePageState();
-}
-
-class _AddExpensePageState extends State<AddExpensePage> {
+class AddExpensePage extends StatelessWidget {
 
   late TextEditingController categoryController = TextEditingController();
   late TextEditingController expensesController = TextEditingController();
@@ -26,16 +20,10 @@ class _AddExpensePageState extends State<AddExpensePage> {
 
   final formKey = GlobalKey<FormState>();
 
-  _AddExpensePageState();
-
-  @override
-  void initState() {
-    BlocProvider.of<SetDateBloc>(context).add(InitialDateEvent());
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
+
+    BlocProvider.of<SetDateBloc>(context).add(InitialDateEvent());
 
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;

@@ -14,15 +14,10 @@ import '../utils/app_text_field.dart';
 import '../utils/arrow_back_icon.dart';
 import '../utils/widget.dart';
 
-class EditedExpensePage extends StatefulWidget {
+class EditedExpensePage extends StatelessWidget {
   final ExpenseModel expenseModel;
-  const EditedExpensePage({Key? key, required this.expenseModel}) : super(key: key);
+  EditedExpensePage({Key? key, required this.expenseModel}) : super(key: key);
 
-  @override
-  _EditedExpensePageState createState() => _EditedExpensePageState();
-}
-
-class _EditedExpensePageState extends State<EditedExpensePage> {
   final _expensesController = TextEditingController();
   final _expenseDescriptionController = TextEditingController();
 
@@ -31,17 +26,12 @@ class _EditedExpensePageState extends State<EditedExpensePage> {
   late ExpenseModel _editedExpensesModel;
 
   @override
-  void initState() {
-    super.initState();
+  Widget build(BuildContext context) {
 
-    _editedExpensesModel = ExpenseModel.fromJson(widget.expenseModel.toJson());
+    _editedExpensesModel = ExpenseModel.fromJson(expenseModel.toJson());
 
     _expensesController.text = _editedExpensesModel.expense.toString();
     _expenseDescriptionController.text = _editedExpensesModel.expensesDescription!;
-  }
-
-  @override
-  Widget build(BuildContext context) {
 
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
@@ -118,9 +108,9 @@ class _EditedExpensePageState extends State<EditedExpensePage> {
                               final expensesBloc =
                               BlocProvider.of<SetDateBloc>(context);
                               expensesBloc.add(DeleteExpenseEvent(
-                                  widget.expenseModel.id!,
-                                  widget.expenseModel.expenseDate!,
-                                  widget.expenseModel.expenseMonth!));
+                                  expenseModel.id!,
+                                  expenseModel.expenseDate!,
+                                  expenseModel.expenseMonth!));
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(builder: (context) =>
@@ -211,9 +201,9 @@ class _EditedExpensePageState extends State<EditedExpensePage> {
                                 final expensesBloc =
                                 BlocProvider.of<SetDateBloc>(context);
                                 expensesBloc.add(DeleteExpenseEvent(
-                                    widget.expenseModel.id!,
-                                    widget.expenseModel.expenseDate!,
-                                    widget.expenseModel.expenseMonth!));
+                                    expenseModel.id!,
+                                    expenseModel.expenseDate!,
+                                    expenseModel.expenseMonth!));
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(builder: (context) =>

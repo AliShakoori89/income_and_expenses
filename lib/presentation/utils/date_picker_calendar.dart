@@ -70,399 +70,221 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
           ? Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Expanded(
-                  flex: 1,
-                  child: GestureDetector(
-                    onTap: () {
-                      date =
-                      "${DateTime.parse(DateFormat('yyyy-MM-dd').format(DateTime.parse(date))).add(const Duration(days: 1))}";
-
-                      BlocProvider.of<SetDateBloc>(context)
-                          .add(WriteDateEvent(date: date, month: month));
-                      BlocProvider.of<SetDateBloc>(context).add(AddToDateEvent(
-                          date: DateFormat('yyyy-MM-dd')
-                              .format(DateTime.parse(date))
-                              .toString(),
-                          month: DateFormat('yyyy-MM')
-                              .format(DateTime.parse(date))
-                              .toString()));
-                      BlocProvider.of<SetDateBloc>(context)
-                          .add(ReadDateEvent());
-                      BlocProvider.of<SetDateBloc>(context)
-                          .add(ReadMonthEvent());
-                      BlocProvider.of<SetDateBloc>(context).add(
-                          SumExpensePerMonthEvent(
-                              month: DateFormat('yyyy-MM')
-                                  .format(DateTime.parse(date))
-                                  .toString()));
-                      BlocProvider.of<SetDateBloc>(context).add(
-                          CalculateCashPerMonthEvent(
-                              month: DateFormat('yyyy-MM')
-                                  .format(DateTime.parse(date))
-                                  .toString()));
-                      BlocProvider.of<SetDateBloc>(context).add(
-                          FetchExpensesItemsEvent(
-                              date: DateFormat('yyyy-MM-dd')
-                                  .format(DateTime.parse(date))
-                                  .toString()));
-                      BlocProvider.of<SetDateBloc>(context).add(
-                          FetchIncomeEvent(
-                              month: DateFormat('yyyy-MM')
-                                  .format(DateTime.parse(date))
-                                  .toString()));
-                    },
-                    child: SizedBox(
-                      width: width / 20,
-                      height: height / 40,
-                      child: Image.asset(
-                        key: keyBottomNavigation4,
-                        "assets/main_page_first_container_logo/right_arrow.png",
-                      ),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  flex: 4,
-                  child: GestureDetector(
-                    onTap: () async {
-                      picked = (await showPersianDatePicker(
-                        context: context,
-                        initialDate: Jalali.now(),
-                        firstDate: Jalali(1385, 8),
-                        lastDate: Jalali(1450, 9),
-                        builder: (context, child) {
-                          return child!;
-                        },
-                      ))!;
-                      if (picked != selectedDate) {
-                        setState(() {
-                          label = picked.toJalaliDateTime();
-                        });
-                      }
-
-                      if (!mounted) return;
-
-                      if (picked.month.toString().length != 1) {
-                        if (picked.day.toString().length != 1) {
-                          month = "${picked.year}-${picked.month}";
-                          date = "${picked.year}-${picked.month}-${picked.day}";
-                        } else {
-                          month = "${picked.year}-${picked.month}";
-                          date =
-                              "${picked.year}-${picked.month}-0${picked.day}";
-                        }
-                      } else {
-                        if (picked.day.toString().length != 1) {
-                          month = "${picked.year}-0${picked.month}";
-                          date =
-                              "${picked.year}-0${picked.month}-${picked.day}";
-                        } else {
-                          month = "${picked.year}-0${picked.month}";
-                          date =
-                              "${picked.year}-0${picked.month}-0${picked.day}";
-                        }
-                      }
-
-                      BlocProvider.of<SetDateBloc>(context)
-                          .add(WriteDateEvent(date: date, month: month));
-                      BlocProvider.of<SetDateBloc>(context)
-                          .add(ReadDateEvent());
-                      BlocProvider.of<SetDateBloc>(context)
-                          .add(ReadMonthEvent());
-                      BlocProvider.of<SetDateBloc>(context)
-                          .add(SumExpensePerMonthEvent(month: month));
-                      BlocProvider.of<SetDateBloc>(context)
-                          .add(CalculateCashPerMonthEvent(month: month));
-                      BlocProvider.of<SetDateBloc>(context)
-                          .add(FetchExpensesItemsEvent(date: date));
-                      BlocProvider.of<SetDateBloc>(context)
-                          .add(FetchIncomeEvent(month: month));
-                    },
-                    child: Container(
-                      height: height / 20,
-                      margin: EdgeInsets.only(
-                        right: width / 10,
-                        left: width / 10,
-                      ),
-                      // key: keyButton2,
-                      decoration: BoxDecoration(
-                          color: AppColors.calenderBoxColor,
-                          borderRadius: BorderRadius.circular(20)),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.calendar_today,
-                            size: width / 20,
-                            color: AppColors.calenderBoxIconColor,
-                          ),
-                          SizedBox(
-                            width: width / 20,
-                          ),
-                          Text(
-                              key: keyBottomNavigation3,
-                              DateFormat('yyyy-MM-dd')
-                                  .format(DateTime.parse(date))
-                                  .toPersianDigit(),
-                              style: TextStyle(
-                                  fontSize: width / 20,
-                                  color: AppColors.appBarTitleColor)),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: GestureDetector(
-                    onTap: () {
-                      date =
-                      "${DateTime.parse(DateFormat('yyyy-MM-dd').format(DateTime.parse(date))).add(const Duration(days: -1))}";
-
-                      BlocProvider.of<SetDateBloc>(context)
-                          .add(WriteDateEvent(date: date, month: month));
-                      BlocProvider.of<SetDateBloc>(context).add(AddToDateEvent(
-                          date: DateFormat('yyyy-MM-dd')
-                              .format(DateTime.parse(date))
-                              .toString(),
-                          month: DateFormat('yyyy-MM')
-                              .format(DateTime.parse(date))
-                              .toString()));
-                      BlocProvider.of<SetDateBloc>(context)
-                          .add(ReadDateEvent());
-                      BlocProvider.of<SetDateBloc>(context)
-                          .add(ReadMonthEvent());
-                      BlocProvider.of<SetDateBloc>(context).add(
-                          SumExpensePerMonthEvent(
-                              month: DateFormat('yyyy-MM')
-                                  .format(DateTime.parse(date))
-                                  .toString()));
-                      BlocProvider.of<SetDateBloc>(context).add(
-                          CalculateCashPerMonthEvent(
-                              month: DateFormat('yyyy-MM')
-                                  .format(DateTime.parse(date))
-                                  .toString()));
-                      BlocProvider.of<SetDateBloc>(context).add(
-                          FetchExpensesItemsEvent(
-                              date: DateFormat('yyyy-MM-dd')
-                                  .format(DateTime.parse(date))
-                                  .toString()));
-                      BlocProvider.of<SetDateBloc>(context).add(
-                          FetchIncomeEvent(
-                              month: DateFormat('yyyy-MM')
-                                  .format(DateTime.parse(date))
-                                  .toString()));
-                    },
-                    child: SizedBox(
-                      width: width / 20,
-                      height: height / 40,
-                      child: Image.asset(
-                          key: keyBottomNavigation2,
-                          // key: keyButton1,
-                          "assets/main_page_first_container_logo/left_arrow.png"),
-                    ),
-                  ),
-                ),
+                rightArrow(context, width, height),
+                optionalDatePicker(context, height, width),
+                leftArrow(context, width, height),
               ],
             )
           : Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Expanded(
-                  flex: 1,
-                  child: GestureDetector(
-                    onTap: () {
-                      date =
-                      "${DateTime.parse(DateFormat('yyyy-MM-dd').format(DateTime.parse(date))).add(const Duration(days: -1))}";
-
-                      BlocProvider.of<SetDateBloc>(context)
-                          .add(WriteDateEvent(date: date, month: month));
-                      BlocProvider.of<SetDateBloc>(context).add(AddToDateEvent(
-                          date: DateFormat('yyyy-MM-dd')
-                              .format(DateTime.parse(date))
-                              .toString(),
-                          month: DateFormat('yyyy-MM')
-                              .format(DateTime.parse(date))
-                              .toString()));
-                      BlocProvider.of<SetDateBloc>(context)
-                          .add(ReadDateEvent());
-                      BlocProvider.of<SetDateBloc>(context)
-                          .add(ReadMonthEvent());
-                      BlocProvider.of<SetDateBloc>(context).add(
-                          SumExpensePerMonthEvent(
-                              month: DateFormat('yyyy-MM')
-                                  .format(DateTime.parse(date))
-                                  .toString()));
-                      BlocProvider.of<SetDateBloc>(context).add(
-                          CalculateCashPerMonthEvent(
-                              month: DateFormat('yyyy-MM')
-                                  .format(DateTime.parse(date))
-                                  .toString()));
-                      BlocProvider.of<SetDateBloc>(context).add(
-                          FetchExpensesItemsEvent(
-                              date: DateFormat('yyyy-MM-dd')
-                                  .format(DateTime.parse(date))
-                                  .toString()));
-                      BlocProvider.of<SetDateBloc>(context).add(
-                          FetchIncomeEvent(
-                              month: DateFormat('yyyy-MM')
-                                  .format(DateTime.parse(date))
-                                  .toString()));
-                    },
-                    child: SizedBox(
-                      width: width / 20,
-                      height: height / 40,
-                      child: Image.asset(
-                          key: keyBottomNavigation2,
-                          "assets/main_page_first_container_logo/left_arrow.png"),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  flex: 4,
-                  child: GestureDetector(
-                    onTap: () async {
-                      picked = (await showPersianDatePicker(
-                        context: context,
-                        initialDate: Jalali.now(),
-                        firstDate: Jalali(1385, 8),
-                        lastDate: Jalali(1450, 9),
-                        builder: (context, child) {
-                          return child!;
-                        },
-                      ))!;
-                      if (picked != selectedDate) {
-                        setState(() {
-                          label = picked.toJalaliDateTime();
-                        });
-                      }
-
-                      if (!mounted) return;
-
-                      if (picked.month.toString().length != 1) {
-                        if (picked.day.toString().length != 1) {
-                          month = "${picked.year}-${picked.month}";
-                          date = "${picked.year}-${picked.month}-${picked.day}";
-                        } else {
-                          month = "${picked.year}-${picked.month}";
-                          date =
-                              "${picked.year}-${picked.month}-0${picked.day}";
-                        }
-                      } else {
-                        if (picked.day.toString().length != 1) {
-                          month = "${picked.year}-0${picked.month}";
-                          date =
-                              "${picked.year}-0${picked.month}-${picked.day}";
-                        } else {
-                          month = "${picked.year}-0${picked.month}";
-                          date =
-                              "${picked.year}-0${picked.month}-0${picked.day}";
-                        }
-                      }
-
-                      BlocProvider.of<SetDateBloc>(context)
-                          .add(WriteDateEvent(date: date, month: month));
-                      BlocProvider.of<SetDateBloc>(context)
-                          .add(ReadDateEvent());
-                      BlocProvider.of<SetDateBloc>(context)
-                          .add(ReadMonthEvent());
-                      BlocProvider.of<SetDateBloc>(context)
-                          .add(SumExpensePerMonthEvent(month: month));
-                      BlocProvider.of<SetDateBloc>(context)
-                          .add(CalculateCashPerMonthEvent(month: month));
-                      BlocProvider.of<SetDateBloc>(context)
-                          .add(FetchExpensesItemsEvent(date: date));
-                      BlocProvider.of<SetDateBloc>(context)
-                          .add(FetchIncomeEvent(month: month));
-                    },
-                    child: Container(
-                      height: height / 20,
-                      margin: EdgeInsets.only(
-                        right: width / 10,
-                        left: width / 10,
-                      ),
-                      // key: keyButton2,
-                      decoration: BoxDecoration(
-                          color: AppColors.calenderBoxColor,
-                          borderRadius: BorderRadius.circular(20)),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.calendar_today,
-                            size: MediaQuery.of(context).size.width / 20,
-                            color: AppColors.calenderBoxIconColor,
-                          ),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width / 20,
-                          ),
-                          Text(
-                              key: keyBottomNavigation3,
-                              DateFormat('yyyy-MM-dd')
-                                  .format(DateTime.parse(date))
-                                  .toPersianDigit(),
-                              style: TextStyle(
-                                  fontSize:
-                                      MediaQuery.of(context).size.width / 20,
-                                  color: AppColors.appBarTitleColor)),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: GestureDetector(
-                    onTap: () {
-                      date =
-                      "${DateTime.parse(DateFormat('yyyy-MM-dd').format(DateTime.parse(date))).add(const Duration(days: 1))}";
-
-                      BlocProvider.of<SetDateBloc>(context)
-                          .add(WriteDateEvent(date: date, month: month));
-                      BlocProvider.of<SetDateBloc>(context).add(AddToDateEvent(
-                          date: DateFormat('yyyy-MM-dd')
-                              .format(DateTime.parse(date))
-                              .toString(),
-                          month: DateFormat('yyyy-MM')
-                              .format(DateTime.parse(date))
-                              .toString()));
-                      BlocProvider.of<SetDateBloc>(context)
-                          .add(ReadDateEvent());
-                      BlocProvider.of<SetDateBloc>(context)
-                          .add(ReadMonthEvent());
-                      BlocProvider.of<SetDateBloc>(context).add(
-                          SumExpensePerMonthEvent(
-                              month: DateFormat('yyyy-MM')
-                                  .format(DateTime.parse(date))
-                                  .toString()));
-                      BlocProvider.of<SetDateBloc>(context).add(
-                          CalculateCashPerMonthEvent(
-                              month: DateFormat('yyyy-MM')
-                                  .format(DateTime.parse(date))
-                                  .toString()));
-                      BlocProvider.of<SetDateBloc>(context).add(
-                          FetchExpensesItemsEvent(
-                              date: DateFormat('yyyy-MM-dd')
-                                  .format(DateTime.parse(date))
-                                  .toString()));
-                      BlocProvider.of<SetDateBloc>(context).add(
-                          FetchIncomeEvent(
-                              month: DateFormat('yyyy-MM')
-                                  .format(DateTime.parse(date))
-                                  .toString()));
-                    },
-                    child: SizedBox(
-                      width: width / 20,
-                      height: height / 40,
-                      child: Image.asset(
-                        key: keyBottomNavigation4,
-                        "assets/main_page_first_container_logo/right_arrow.png",
-                      ),
-                    ),
-                  ),
-                ),
+                leftArrow(context, width, height),
+                optionalDatePicker(context, height, width),
+                rightArrow(context, width, height),
               ],
             );
     });
+  }
+
+  Expanded optionalDatePicker(BuildContext context, double height, double width) {
+    return Expanded(
+                flex: 4,
+                child: GestureDetector(
+                  onTap: () async {
+                    picked = (await showPersianDatePicker(
+                      context: context,
+                      initialDate: Jalali.now(),
+                      firstDate: Jalali(1385, 8),
+                      lastDate: Jalali(1450, 9),
+                      builder: (context, child) {
+                        return child!;
+                      },
+                    ))!;
+                    if (picked != selectedDate) {
+                      setState(() {
+                        label = picked.toJalaliDateTime();
+                      });
+                    }
+
+                    if (!mounted) return;
+
+                    if (picked.month.toString().length != 1) {
+                      if (picked.day.toString().length != 1) {
+                        month = "${picked.year}-${picked.month}";
+                        date = "${picked.year}-${picked.month}-${picked.day}";
+                      } else {
+                        month = "${picked.year}-${picked.month}";
+                        date =
+                            "${picked.year}-${picked.month}-0${picked.day}";
+                      }
+                    } else {
+                      if (picked.day.toString().length != 1) {
+                        month = "${picked.year}-0${picked.month}";
+                        date =
+                            "${picked.year}-0${picked.month}-${picked.day}";
+                      } else {
+                        month = "${picked.year}-0${picked.month}";
+                        date =
+                            "${picked.year}-0${picked.month}-0${picked.day}";
+                      }
+                    }
+
+                    BlocProvider.of<SetDateBloc>(context)
+                        .add(WriteDateEvent(date: date, month: month));
+                    BlocProvider.of<SetDateBloc>(context)
+                        .add(ReadDateEvent());
+                    BlocProvider.of<SetDateBloc>(context)
+                        .add(ReadMonthEvent());
+                    BlocProvider.of<SetDateBloc>(context)
+                        .add(SumExpensePerMonthEvent(month: month));
+                    BlocProvider.of<SetDateBloc>(context)
+                        .add(CalculateCashPerMonthEvent(month: month));
+                    BlocProvider.of<SetDateBloc>(context)
+                        .add(FetchExpensesItemsEvent(date: date));
+                    BlocProvider.of<SetDateBloc>(context)
+                        .add(FetchIncomeEvent(month: month));
+                  },
+                  child: Container(
+                    height: height / 20,
+                    margin: EdgeInsets.only(
+                      right: width / 10,
+                      left: width / 10,
+                    ),
+                    // key: keyButton2,
+                    decoration: BoxDecoration(
+                        color: AppColors.calenderBoxColor,
+                        borderRadius: BorderRadius.circular(20)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.calendar_today,
+                          size: width / 20,
+                          color: AppColors.calenderBoxIconColor,
+                        ),
+                        SizedBox(
+                          width: width / 20,
+                        ),
+                        Text(
+                            key: keyBottomNavigation3,
+                            DateFormat('yyyy-MM-dd')
+                                .format(DateTime.parse(date))
+                                .toPersianDigit(),
+                            style: TextStyle(
+                                fontSize: width / 20,
+                                color: AppColors.appBarTitleColor)),
+                      ],
+                    ),
+                  ),
+                ),
+              );
+  }
+
+  Expanded leftArrow(BuildContext context, double width, double height) {
+    return Expanded(
+                flex: 1,
+                child: GestureDetector(
+                  onTap: () {
+                    date =
+                    "${DateTime.parse(DateFormat('yyyy-MM-dd').format(DateTime.parse(date))).add(const Duration(days: -1))}";
+
+                    BlocProvider.of<SetDateBloc>(context)
+                        .add(WriteDateEvent(date: date, month: month));
+                    BlocProvider.of<SetDateBloc>(context).add(AddToDateEvent(
+                        date: DateFormat('yyyy-MM-dd')
+                            .format(DateTime.parse(date))
+                            .toString(),
+                        month: DateFormat('yyyy-MM')
+                            .format(DateTime.parse(date))
+                            .toString()));
+                    BlocProvider.of<SetDateBloc>(context)
+                        .add(ReadDateEvent());
+                    BlocProvider.of<SetDateBloc>(context)
+                        .add(ReadMonthEvent());
+                    BlocProvider.of<SetDateBloc>(context).add(
+                        SumExpensePerMonthEvent(
+                            month: DateFormat('yyyy-MM')
+                                .format(DateTime.parse(date))
+                                .toString()));
+                    BlocProvider.of<SetDateBloc>(context).add(
+                        CalculateCashPerMonthEvent(
+                            month: DateFormat('yyyy-MM')
+                                .format(DateTime.parse(date))
+                                .toString()));
+                    BlocProvider.of<SetDateBloc>(context).add(
+                        FetchExpensesItemsEvent(
+                            date: DateFormat('yyyy-MM-dd')
+                                .format(DateTime.parse(date))
+                                .toString()));
+                    BlocProvider.of<SetDateBloc>(context).add(
+                        FetchIncomeEvent(
+                            month: DateFormat('yyyy-MM')
+                                .format(DateTime.parse(date))
+                                .toString()));
+                  },
+                  child: SizedBox(
+                    width: width / 20,
+                    height: height / 40,
+                    child: Image.asset(
+                        key: keyBottomNavigation2,
+                        // key: keyButton1,
+                        "assets/main_page_first_container_logo/left_arrow.png"),
+                  ),
+                ),
+              );
+  }
+
+  Expanded rightArrow(BuildContext context, double width, double height) {
+    return Expanded(
+                flex: 1,
+                child: GestureDetector(
+                  onTap: () {
+                    date =
+                    "${DateTime.parse(DateFormat('yyyy-MM-dd').format(DateTime.parse(date))).add(const Duration(days: 1))}";
+
+                    BlocProvider.of<SetDateBloc>(context)
+                        .add(WriteDateEvent(date: date, month: month));
+                    BlocProvider.of<SetDateBloc>(context).add(AddToDateEvent(
+                        date: DateFormat('yyyy-MM-dd')
+                            .format(DateTime.parse(date))
+                            .toString(),
+                        month: DateFormat('yyyy-MM')
+                            .format(DateTime.parse(date))
+                            .toString()));
+                    BlocProvider.of<SetDateBloc>(context)
+                        .add(ReadDateEvent());
+                    BlocProvider.of<SetDateBloc>(context)
+                        .add(ReadMonthEvent());
+                    BlocProvider.of<SetDateBloc>(context).add(
+                        SumExpensePerMonthEvent(
+                            month: DateFormat('yyyy-MM')
+                                .format(DateTime.parse(date))
+                                .toString()));
+                    BlocProvider.of<SetDateBloc>(context).add(
+                        CalculateCashPerMonthEvent(
+                            month: DateFormat('yyyy-MM')
+                                .format(DateTime.parse(date))
+                                .toString()));
+                    BlocProvider.of<SetDateBloc>(context).add(
+                        FetchExpensesItemsEvent(
+                            date: DateFormat('yyyy-MM-dd')
+                                .format(DateTime.parse(date))
+                                .toString()));
+                    BlocProvider.of<SetDateBloc>(context).add(
+                        FetchIncomeEvent(
+                            month: DateFormat('yyyy-MM')
+                                .format(DateTime.parse(date))
+                                .toString()));
+                  },
+                  child: SizedBox(
+                    width: width / 20,
+                    height: height / 40,
+                    child: Image.asset(
+                      key: keyBottomNavigation4,
+                      "assets/main_page_first_container_logo/right_arrow.png",
+                    ),
+                  ),
+                ),
+              );
   }
 }

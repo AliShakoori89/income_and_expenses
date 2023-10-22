@@ -13,31 +13,17 @@ import 'package:persian_number_utility/persian_number_utility.dart';
 import '../const/app_colors.dart';
 import '../utils/arrow_back_icon.dart';
 
-class IncomeDetailsPage extends StatefulWidget {
+class IncomeDetailsPage extends StatelessWidget {
 
   final String month;
   const IncomeDetailsPage({Key? key, required this.month}) : super(key: key);
 
   @override
-  State<IncomeDetailsPage> createState() => _IncomeDetailsPageState(month);
-}
+  Widget build(BuildContext context) {
 
-class _IncomeDetailsPageState extends State<IncomeDetailsPage> {
-
-  final String month;
-
-  _IncomeDetailsPageState(this.month);
-
-  @override
-  void initState() {
     BlocProvider.of<SetDateBloc>(context).add(InitialDateEvent());
     BlocProvider.of<SetDateBloc>(context).add(
         FetchAllIncomeItemsEvent(month: month));
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
 
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
@@ -61,7 +47,7 @@ class _IncomeDetailsPageState extends State<IncomeDetailsPage> {
               onPressed: (){
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const AddIncomePage()),
+                  MaterialPageRoute(builder: (context) => AddIncomePage()),
                 );
               },
               child: Icon(Icons.add),

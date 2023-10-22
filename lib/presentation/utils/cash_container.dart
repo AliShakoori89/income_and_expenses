@@ -14,31 +14,18 @@ import 'package:persian_number_utility/persian_number_utility.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 
-class CashContainer extends StatefulWidget {
+class CashContainer extends StatelessWidget {
 
   GlobalKey? keyBottomNavigation1;
 
   CashContainer({Key? key, this.keyBottomNavigation1}) : super(key: key);
 
-  @override
-  State<CashContainer> createState() => _CashContainerState(keyBottomNavigation1);
-}
-
-class _CashContainerState extends State<CashContainer> with TickerProviderStateMixin  {
-
   late AnimationController animationController;
-  GlobalKey? keyBottomNavigation1;
-
-  _CashContainerState(this.keyBottomNavigation1);
-
-  @override
-  void initState() {
-    BlocProvider.of<ChangeCurrencyBloc>(context).add(ReadCurrencyBooleanEvent());
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
+
+    BlocProvider.of<ChangeCurrencyBloc>(context).add(ReadCurrencyBooleanEvent());
 
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
 
@@ -138,7 +125,7 @@ class _CashContainerState extends State<CashContainer> with TickerProviderStateM
                     onTap: (){
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const AddIncomePage()),
+                        MaterialPageRoute(builder: (context) => AddIncomePage()),
                       );
                     },
                     child: Stack(

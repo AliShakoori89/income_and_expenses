@@ -12,14 +12,9 @@ import '../const/app_colors.dart';
 import '../utils/app_text_field.dart';
 import '../utils/arrow_back_icon.dart';
 
-class AddIncomePage extends StatefulWidget {
-  const AddIncomePage({Key? key}) : super(key: key);
+class AddIncomePage extends StatelessWidget {
 
-  @override
-  State<AddIncomePage> createState() => _AddIncomePageState();
-}
-
-class _AddIncomePageState extends State<AddIncomePage> {
+  AddIncomePage({Key? key}) : super(key: key);
 
   late TextEditingController incomeCategoryController = TextEditingController();
   late TextEditingController incomeController = TextEditingController();
@@ -27,13 +22,10 @@ class _AddIncomePageState extends State<AddIncomePage> {
 
   final formKey = GlobalKey<FormState>();
 
-  void initState() {
-    BlocProvider.of<SetDateBloc>(context).add(InitialDateEvent());
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
+
+    BlocProvider.of<SetDateBloc>(context).add(InitialDateEvent());
 
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
