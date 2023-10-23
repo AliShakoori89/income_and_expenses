@@ -10,6 +10,7 @@ class ThemeBloc extends Bloc<ThemEvent, ThemeState> {
   ThemeBloc(this.changeThemeRepository) : super( const ThemeState()){
     on<ReadThemeBooleanEvent>(_mapReadThemeBooleanEventToState);
     on<WriteThemeBooleanEvent>(_mapWriteThemeBooleanEventToState);
+    on<ChangeIndexEvent>(_mapChangeHomePageEventToState);
   }
 
   void _mapReadThemeBooleanEventToState(
@@ -38,6 +39,22 @@ class ThemeBloc extends Bloc<ThemEvent, ThemeState> {
       emit(
         state.copyWith(
           status: ThemeStatus.success,
+        ),
+      );
+    } catch (error) {
+      emit(state.copyWith(status: ThemeStatus.error));
+    }
+  }
+
+  void _mapChangeHomePageEventToState(
+      ChangeIndexEvent event, Emitter<ThemeState> emit) async {
+    try {
+      emit(state.copyWith(status: ThemeStatus.loading));
+      final int index = changeThemeRepository.changePage(event.index);
+      emit(
+        state.copyWith(
+          status: ThemeStatus.success,
+          index: index
         ),
       );
     } catch (error) {

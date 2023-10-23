@@ -14,22 +14,27 @@ class ThemeState extends Equatable {
   const ThemeState({
     this.status = ThemeStatus.initial,
     String? themeBoolean,
-  }): darkThemeBoolean = themeBoolean ?? 'false' ;
+    int? index
+  }): darkThemeBoolean = themeBoolean ?? 'false',
+        pageNumber = index ?? 0;
 
   final ThemeStatus status;
   final String darkThemeBoolean;
+  final int pageNumber;
 
   @override
   // TODO: implement props
-  List<Object> get props => [status, darkThemeBoolean];
+  List<Object> get props => [status, darkThemeBoolean, pageNumber];
 
   ThemeState copyWith({
     ThemeStatus? status,
     String? themeBoolean,
+    int? index
   }) {
     return ThemeState(
       status: status ?? this.status,
       themeBoolean: themeBoolean ?? darkThemeBoolean,
+      index: index ?? pageNumber
     );
   }
 }

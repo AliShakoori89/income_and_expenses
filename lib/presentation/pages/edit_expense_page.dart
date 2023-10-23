@@ -113,8 +113,7 @@ class EditedExpensePage extends StatelessWidget {
                                   expenseModel.expenseMonth!));
                               Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) =>
-                                  const MyHomePage()));
+                                  MaterialPageRoute(builder: (context) => MyHomePage()));
                             },
                             child: Container(
                               height: height / 25,
@@ -206,8 +205,7 @@ class EditedExpensePage extends StatelessWidget {
                                     expenseModel.expenseMonth!));
                                 Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) =>
-                                    const MyHomePage()));
+                                    MaterialPageRoute(builder: (context) => MyHomePage()));
                               },
                               child: Container(
                                 height: height / 25,

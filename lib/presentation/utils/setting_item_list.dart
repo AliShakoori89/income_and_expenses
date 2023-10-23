@@ -194,8 +194,7 @@ class SettingItemList extends StatelessWidget{
                                       backgroundColor: MaterialStateProperty.all(Colors.white),
                                     ),
                                     onPressed: () {
-                                      BlocProvider.of<ChangeCurrencyBloc>(
-                                              context)
+                                      BlocProvider.of<ChangeCurrencyBloc>(context)
                                           .add(WriteCurrencyBooleanEvent(
                                         rialCurrencyBoolean: false,
                                       ));
@@ -400,7 +399,6 @@ class SettingItemList extends StatelessWidget{
                                 ),
                                 onPressed: () {
                                   appLanguage.changeLanguage(const Locale('fa'));
-                                  print("121111212121211112112");
                                   Navigator.of(ctx).pop();
                                 },
                                 child:

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:income_and_expenses/logic/bloc/them_bloc/bloc.dart';
+import 'package:income_and_expenses/logic/bloc/them_bloc/event.dart';
 import 'package:income_and_expenses/logic/bloc/them_bloc/state.dart';
 import 'package:income_and_expenses/presentation/const/app_colors.dart';
 import 'package:income_and_expenses/presentation/pages/main_expenses_page.dart';
@@ -13,8 +14,6 @@ import 'sf_circular_chart_page.dart';
 
 class MyHomePage extends StatefulWidget {
 
-  // bool isViewed;
-
   const MyHomePage({Key? key}) : super(key: key);
 
   @override
@@ -22,8 +21,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
-
-  var _bottomNavIndex = 0;//default index of a first screen
 
   GlobalKey keyButton = GlobalKey();
   GlobalKey keyButton1 = GlobalKey();
@@ -55,14 +52,6 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     Icons.bar_chart,
     Icons.settings,
   ];
-
-  @override
-  void initState() {
-    checkFirstSeen();
-    // createTutorial();
-    // Future.delayed(Duration.zero, showTutorial);
-    super.initState();
-  }
 
   Future checkFirstSeen() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -356,17 +345,14 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     return targets;
   }
 
-  void onTapNav(int index) {
-    setState(() {
-      _bottomNavIndex = index;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
 
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
+
+    checkFirstSeen();
 
     final List<Widget> pages = _pages();
 
@@ -378,7 +364,7 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       extendBody: true,
       body: Drawer(
        width: double.infinity,
-          child: pages[_bottomNavIndex]),
+          child: pages[state.pageNumber]),
       bottomNavigationBar: SizedBox(
         height: width / 6,
         child: BottomNavigationBar(
@@ -424,8 +410,10 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                 size: width / 15),
             ),
           ],
-          currentIndex: _bottomNavIndex,
-          onTap: onTapNav,
+          currentIndex: state.pageNumber,
+          onTap: (int? newValue){
+            BlocProvider.of<ThemeBloc>(context).add(ChangeIndexEvent(index: newValue!));
+          }
         ),
       ),
       floatingActionButton: SizedBox(
