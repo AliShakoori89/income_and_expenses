@@ -12,13 +12,36 @@ import 'package:income_and_expenses/presentation/utils/app_text_field.dart';
 import 'package:income_and_expenses/presentation/utils/arrow_back_icon.dart';
 import 'package:income_and_expenses/presentation/utils/date_picker_calendar.dart';
 
-class AddExpensePage extends StatelessWidget {
+class AddExpensePage extends StatefulWidget {
 
-  late TextEditingController categoryController = TextEditingController();
-  late TextEditingController expensesController = TextEditingController();
-  late TextEditingController descriptionController = TextEditingController();
+  @override
+  State<AddExpensePage> createState() => _AddExpensePageState();
+}
+
+class _AddExpensePageState extends State<AddExpensePage> {
+  late TextEditingController categoryController;
+
+  late TextEditingController expensesController;
+
+  late TextEditingController descriptionController;
 
   final formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    categoryController = TextEditingController();
+    expensesController = TextEditingController();
+    descriptionController = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    categoryController.dispose();
+    expensesController.dispose();
+    descriptionController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -14,11 +14,17 @@ import '../utils/app_text_field.dart';
 import '../utils/arrow_back_icon.dart';
 import '../utils/widget.dart';
 
-class EditedExpensePage extends StatelessWidget {
+class EditedExpensePage extends StatefulWidget {
   final ExpenseModel expenseModel;
   EditedExpensePage({Key? key, required this.expenseModel}) : super(key: key);
 
+  @override
+  State<EditedExpensePage> createState() => _EditedExpensePageState();
+}
+
+class _EditedExpensePageState extends State<EditedExpensePage> {
   final _expensesController = TextEditingController();
+
   final _expenseDescriptionController = TextEditingController();
 
   final formKey = GlobalKey<FormState>();
@@ -26,9 +32,16 @@ class EditedExpensePage extends StatelessWidget {
   late ExpenseModel _editedExpensesModel;
 
   @override
+  void dispose() {
+    _expensesController.dispose();
+    _expenseDescriptionController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
 
-    _editedExpensesModel = ExpenseModel.fromJson(expenseModel.toJson());
+    _editedExpensesModel = ExpenseModel.fromJson(widget.expenseModel.toJson());
 
     _expensesController.text = _editedExpensesModel.expense.toString();
     _expenseDescriptionController.text = _editedExpensesModel.expensesDescription!;
@@ -108,9 +121,9 @@ class EditedExpensePage extends StatelessWidget {
                               final expensesBloc =
                               BlocProvider.of<SetDateBloc>(context);
                               expensesBloc.add(DeleteExpenseEvent(
-                                  expenseModel.id!,
-                                  expenseModel.expenseDate!,
-                                  expenseModel.expenseMonth!));
+                                  widget.expenseModel.id!,
+                                  widget.expenseModel.expenseDate!,
+                                  widget.expenseModel.expenseMonth!));
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(builder: (context) => MyHomePage()));
@@ -200,9 +213,9 @@ class EditedExpensePage extends StatelessWidget {
                                 final expensesBloc =
                                 BlocProvider.of<SetDateBloc>(context);
                                 expensesBloc.add(DeleteExpenseEvent(
-                                    expenseModel.id!,
-                                    expenseModel.expenseDate!,
-                                    expenseModel.expenseMonth!));
+                                    widget.expenseModel.id!,
+                                    widget.expenseModel.expenseDate!,
+                                    widget.expenseModel.expenseMonth!));
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(builder: (context) => MyHomePage()));

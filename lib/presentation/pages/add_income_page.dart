@@ -12,15 +12,37 @@ import '../const/app_colors.dart';
 import '../utils/app_text_field.dart';
 import '../utils/arrow_back_icon.dart';
 
-class AddIncomePage extends StatelessWidget {
+class AddIncomePage extends StatefulWidget {
 
   AddIncomePage({Key? key}) : super(key: key);
 
-  late TextEditingController incomeCategoryController = TextEditingController();
-  late TextEditingController incomeController = TextEditingController();
-  late TextEditingController incomeDescriptionCategoryController = TextEditingController();
+  @override
+  State<AddIncomePage> createState() => _AddIncomePageState();
+}
+
+class _AddIncomePageState extends State<AddIncomePage> {
+
+  late TextEditingController incomeCategoryController;
+  late TextEditingController incomeController;
+  late TextEditingController incomeDescriptionCategoryController;
 
   final formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+     incomeCategoryController = TextEditingController();
+     incomeController = TextEditingController();
+     incomeDescriptionCategoryController = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    incomeCategoryController.dispose();
+    incomeController.dispose();
+    incomeDescriptionCategoryController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
