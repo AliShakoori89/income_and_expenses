@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:income_and_expenses/presentation/const/app_colors.dart';
 import 'package:income_and_expenses/presentation/const/expenses_icons.dart';
+
+import '../../l10n/app_localizations.dart';
 
 class ExpensesCategoryIconList extends StatelessWidget {
 

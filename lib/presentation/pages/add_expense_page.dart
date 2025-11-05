@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:income_and_expenses/data/model/expense_model.dart';
 import 'package:income_and_expenses/logic/bloc/set_date_bloc/bloc.dart';
 import 'package:income_and_expenses/logic/bloc/set_date_bloc/event.dart';
@@ -11,6 +10,8 @@ import 'package:income_and_expenses/presentation/const/app_colors.dart';
 import 'package:income_and_expenses/presentation/utils/app_text_field.dart';
 import 'package:income_and_expenses/presentation/utils/arrow_back_icon.dart';
 import 'package:income_and_expenses/presentation/utils/date_picker_calendar.dart';
+
+import '../../l10n/app_localizations.dart';
 
 class AddExpensePage extends StatefulWidget {
 

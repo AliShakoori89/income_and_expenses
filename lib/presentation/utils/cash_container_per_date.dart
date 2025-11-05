@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:income_and_expenses/logic/bloc/change_currency_bloc/bloc.dart';
 import 'package:income_and_expenses/logic/bloc/change_currency_bloc/state.dart';
@@ -15,6 +14,8 @@ import 'package:income_and_expenses/presentation/utils/no_data.dart';
 import 'package:intl/intl.dart';
 import 'package:persian_datetime_picker/persian_datetime_picker.dart';
 import 'package:persian_number_utility/persian_number_utility.dart';
+
+import '../../l10n/app_localizations.dart';
 
 class CashContainerPerDate extends StatelessWidget {
 

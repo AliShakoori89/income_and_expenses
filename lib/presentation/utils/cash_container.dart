@@ -11,7 +11,8 @@ import 'package:income_and_expenses/presentation/const/app_colors.dart';
 import 'package:income_and_expenses/presentation/pages/add_income_page.dart';
 import 'package:income_and_expenses/presentation/pages/income_details_page.dart';
 import 'package:persian_number_utility/persian_number_utility.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../l10n/app_localizations.dart';
 
 
 class CashContainer extends StatelessWidget {
@@ -33,10 +34,10 @@ class CashContainer extends StatelessWidget {
       var width = MediaQuery.of(context).size.width;
 
       return Container(
-        height: height / 3.8,
+        height: 220,
         margin: EdgeInsets.only(
-          left: width / 15,
-          right: width / 15,
+          left: 30,
+          right: 30,
         ),
         decoration: BoxDecoration(
             color: AppColors.mainColor,
@@ -63,148 +64,178 @@ class CashContainer extends StatelessWidget {
 
   Expanded rightSideCashContainer(BuildContext context, SetDateState state, bool rialCurrencyType, GlobalKey? keyBottomNavigation1, double width, double height) {
     return Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      cashSlice(context, state, rialCurrencyType, width, height),
-                      incomeSlice(context, state, rialCurrencyType, keyBottomNavigation1, width, height),
-                    ],
-                  ),
-                );
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                cashSlice(context, state, rialCurrencyType, width, height),
+                incomeSlice(context, state, rialCurrencyType, keyBottomNavigation1, width, height),
+              ],
+            ),
+          );
   }
 
   Align incomeSlice(BuildContext context, SetDateState state, bool rialCurrencyType, GlobalKey? keyBottomNavigation1,  double width, double height) {
     return Align(
       alignment: Alignment.bottomRight,
       child: Container(
-        height: height / 8.5,
+        margin: EdgeInsets.only(
+            right: 5,
+            top:5
+        ),
         decoration: BoxDecoration(
-            boxShadow: const [
-              BoxShadow(
-                color: Color.fromRGBO(184, 145, 236, 1.0),
-                blurRadius: 9,
-                offset: Offset(0, 0), // Shadow position
-              ),
-            ],
-            border: Border.all(
-                color: AppColors.cashContainerShapeBorderColor, width: 2),
-            borderRadius: BorderRadius.only(
-              bottomRight: Radius.circular(
-                width / 10,
-              ),
-              bottomLeft: Radius.circular(
-                width / 10,
-              ),
-              topRight: Radius.circular(
-                width / 10,
-              ),
-            )),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: EdgeInsets.only(
-                  left: width / 20,
-                  right: width / 100),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Flexible(
-                    child: Text(AppLocalizations.of(context)!.income,
-                        style: TextStyle(
-                          overflow: TextOverflow.ellipsis,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w800,
-                          fontSize: width / 22,
-                        )),
-                  ),
-                  SizedBox(
-                    width: width / 30,
-                  ),
-                  GestureDetector(
-                    onTap: (){
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => AddIncomePage()),
-                      );
-                    },
-                    child: Stack(
-                      alignment: Alignment.topRight,
-                      children: [
-                        SizedBox(
-                          width: width / 10,
-                          height: height / 30,
-                          child: Image.asset(
-                            "assets/main_page_first_container_logo/darkIncome.png",
-                            key: keyBottomNavigation1,
-                            fit: BoxFit.contain,
-                          ),
-                        ),
-                        Container(
-                          width: width / 25,
-                          height: height / 35,
-                          decoration: BoxDecoration(
-                              border: Border.all(color: Colors.green),
-                              shape: BoxShape.circle,
-                              color: Colors.green
-                          ),
-                          child: Align(
-                              alignment: Alignment.center,
-                              child: Icon(Icons.add, color: Colors.white,
-                                size: width / 30,)),
-                        )
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: height / 200,
-            ),
-            GestureDetector(
-              onTap: (){
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => IncomeDetailsPage(month: state.month)),
-                );
-              },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                      state.incomePerMonth != ""
-                          ? rialCurrencyType == true
-                          ? AppLocalizations.of(context)!.language == "زبان"
-                          ? ("${state.incomePerMonth}0").toPersianDigit().seRagham()
-                          : ("${state.incomePerMonth}0").seRagham()
-                          : AppLocalizations.of(context)!.language == "زبان"
-                          ? state.incomePerMonth.toPersianDigit().seRagham()
-                          : state.incomePerMonth.seRagham()
-                          : AppLocalizations.of(context)!.language == "زبان"
-                          ? "0".toPersianDigit()
-                          : "0",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: width / 25,
-                      )),
-                  SizedBox(
-                    width: width / 50,
-                  ),
-                  Text(
-                      state.incomePerMonth != ""
-                          ? rialCurrencyType == true
-                          ? AppLocalizations.of(context)!.rial
-                          : AppLocalizations.of(context)!.toman
-                          : '',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: width / 22)),
-                ],
-              ),
+          color: const Color.fromRGBO(195, 169, 234, 1.0),
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(width / 10),
+            topLeft: Radius.circular(width / 10),
+            topRight: Radius.circular(width / 10),
+          ),
+          boxShadow: const [
+            BoxShadow(
+              color: Color.fromRGBO(184, 145, 236, 0.6),
+              blurRadius: 10,
+              offset: Offset(0, 2),
             ),
           ],
-        )
+        ),
+        child: Container(
+            height: 90,
+            width: 175,
+          decoration: BoxDecoration(
+              color: const Color.fromRGBO(184, 145, 236, 1.0),
+              boxShadow: const [
+                BoxShadow(
+                  color: Color.fromRGBO(184, 145, 236, 2.0),
+                  blurRadius: 0,
+                  offset: Offset(1, 1), // Shadow position
+                ),
+              ],
+              borderRadius: BorderRadius.only(
+                bottomRight: Radius.circular(
+                  width / 10,
+                ),
+                bottomLeft: Radius.circular(
+                  width / 10,
+                ),
+                topRight: Radius.circular(
+                  width / 10,
+                ),
+              )),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(
+                    left: width / 20,
+                    right: width / 100),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Flexible(
+                      child: Text(AppLocalizations.of(context)!.income,
+                          style: TextStyle(
+                            overflow: TextOverflow.ellipsis,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w800,
+                            fontSize: width / 22,
+                          )),
+                    ),
+                    SizedBox(
+                      width: width / 30,
+                    ),
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => AddIncomePage()),
+                        );
+                      },
+                      child: Stack(
+                        alignment: Alignment.topRight,
+                        children: [
+                          Container(
+                            width: 30,
+                            height: 50,
+                            child: Center(
+                              child: Container(
+                                margin: EdgeInsets.all(5),
+                                child: Image.asset(
+                                  "assets/main_page_first_container_logo/darkIncome.png",
+                                  key: keyBottomNavigation1,
+                                  fit: BoxFit.contain,
+                                ),
+                              ),
+                            )
+                          ),
+                          Positioned(
+                            left: 15,
+                            top: 5,
+                            child: Container(
+                              width: 15,
+                              height: 15,
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.green),
+                                  shape: BoxShape.circle,
+                                  color: Colors.green
+                              ),
+                              child: Align(
+                                  alignment: Alignment.center,
+                                  child: Icon(Icons.add, color: Colors.white,
+                                    size: 10)),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: height / 200,
+              ),
+              GestureDetector(
+                onTap: (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => IncomeDetailsPage(month: state.month)),
+                  );
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                        state.incomePerMonth != ""
+                            ? rialCurrencyType == true
+                            ? AppLocalizations.of(context)!.language == "زبان"
+                            ? ("${state.incomePerMonth}0").toPersianDigit().seRagham()
+                            : ("${state.incomePerMonth}0").seRagham()
+                            : AppLocalizations.of(context)!.language == "زبان"
+                            ? state.incomePerMonth.toPersianDigit().seRagham()
+                            : state.incomePerMonth.seRagham()
+                            : AppLocalizations.of(context)!.language == "زبان"
+                            ? "0".toPersianDigit()
+                            : "0",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: width / 25,
+                        )),
+                    SizedBox(
+                      width: width / 50,
+                    ),
+                    Text(
+                        state.incomePerMonth != ""
+                            ? rialCurrencyType == true
+                            ? AppLocalizations.of(context)!.rial
+                            : AppLocalizations.of(context)!.toman
+                            : '',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: width / 22)),
+                  ],
+                ),
+              ),
+            ],
+          )
+        ),
       ),
     );
   }
@@ -214,7 +245,7 @@ class CashContainer extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SizedBox(
-          height: width / 30,
+          height: 30,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -229,8 +260,8 @@ class CashContainer extends StatelessWidget {
               width: width / 18,
             ),
             SizedBox(
-              width: width / 10,
-              height: height / 30,
+              width: 20,
+              height: 40,
               child: Image.asset("assets/main_page_first_container_logo/darkBalance.png",
                   fit: BoxFit.contain),
             ),
@@ -295,7 +326,7 @@ class CashContainer extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SizedBox(
-          height: height / 30,
+          height: 30,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -303,15 +334,15 @@ class CashContainer extends StatelessWidget {
             Text(AppLocalizations.of(context)!.expenses,
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: width / 22,
+                  fontSize: 18,
                   fontWeight: FontWeight.w800,
                 )),
             SizedBox(
               width: width / 18,
             ),
             SizedBox(
-              width: width / 10,
-              height: height / 30,
+              width: 20,
+              height: 40,
               child: Image.asset("assets/main_page_first_container_logo/darkBalance.png",
                   fit: BoxFit.contain),
             ),
@@ -361,23 +392,37 @@ class CashContainer extends StatelessWidget {
     return Align(
       alignment: Alignment.topLeft,
       child: Container(
-        height: height / 9,
+        margin: EdgeInsets.only(
+          left: 5,
+          bottom:5
+        ),
         decoration: BoxDecoration(
+          color: const Color.fromRGBO(195, 169, 234, 1.0),
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(width / 10),
+            topLeft: Radius.circular(width / 10),
+            topRight: Radius.circular(width / 10),
+          ),
           boxShadow: const [
             BoxShadow(
-              color: Color.fromRGBO(184, 145, 236, 1.0),
-              blurRadius: 9,
-              offset: Offset(0, 0), // Shadow position
+              color: Color.fromRGBO(184, 145, 236, 0.6),
+              blurRadius: 10,
+              offset: Offset(0, 2),
             ),
           ],
-            border: Border.all(
-                color: AppColors.cashContainerShapeBorderColor, width: 2),
+        ),
+        child: Container(
+          height: 90,
+          width: 175,
+          decoration: BoxDecoration(
+            color: const Color.fromRGBO(184, 145, 236, 1.0),
             borderRadius: BorderRadius.only(
-              bottomLeft:
-                  Radius.circular(width / 10),
+              bottomLeft: Radius.circular(width / 10),
               topLeft: Radius.circular(width / 10),
               topRight: Radius.circular(width / 10),
-            )),
+            ),
+          ),
+        ),
       ),
     );
   }

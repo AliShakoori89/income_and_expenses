@@ -9,7 +9,6 @@ import 'package:income_and_expenses/presentation/pages/setting_page.dart';
 import 'package:income_and_expenses/presentation/pages/sfcartesian_chart_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
-import 'add_expense_page.dart';
 import 'sf_circular_chart_page.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -95,7 +94,9 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       },
       onSkip: () {
         print("skip");
+        return true; // 🔥 اضافه کن
       },
+
     );
   }
 
@@ -356,86 +357,92 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
     final List<Widget> pages = _pages();
 
+    void _incrementTab(index) {
+      setState(() {
+        print('PRESSED floating button');
+        print(index);
+      });
+    }
+
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
 
       var darkThemeBoolean = state.darkThemeBoolean;
 
       return Scaffold(
       extendBody: true,
-      body: Drawer(
-       width: double.infinity,
-          child: pages[state.pageNumber]),
-      bottomNavigationBar: SizedBox(
-        height: width / 6,
-        child: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: darkThemeBoolean == "false"
-              ? Colors.white
-              : AppColors.darkThemeColor,
-          selectedItemColor: AppColors.mainColor,
-          unselectedItemColor: darkThemeBoolean == "false"
-              ? Colors.grey
-              : Colors.white,
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
-          selectedFontSize: 0,
-          unselectedFontSize: 0,
-          items:[
-            BottomNavigationBarItem(
-              label: '',
-              icon: Icon(
-                key: keyButton,
-                Icons.home,
-                size: width / 15),
-            ),
-            BottomNavigationBarItem(
-              label: '',
-              icon: Icon(
-                key: keyButton1,
-                Icons.pie_chart,
-                size: width / 15),
-            ),
-            BottomNavigationBarItem(
-              label: '',
-              icon: Icon(
-                key: keyButton3,
-                Icons.bar_chart,
-                size: width / 15),
-            ),
-            BottomNavigationBarItem(
-              label: '',
-              icon: Icon(
-                key: keyButton4,
-                Icons.settings,
-                size: width / 15),
-            ),
-          ],
-          currentIndex: state.pageNumber,
-          onTap: (int? newValue){
-            BlocProvider.of<ThemeBloc>(context).add(ChangeIndexEvent(index: newValue!));
-          }
-        ),
+      body: Center(
+        // child: _widgetOptions.elementAt(_selectedIndex),
+        child: pages[state.pageNumber],
       ),
-      floatingActionButton: SizedBox(
-        height: height / 18,
-        width: width / 9,
-        child: FloatingActionButton(
-          backgroundColor: AppColors.mainColor,
-          child: Icon(
-              key: keyButton2,
-              Icons.add,
-          size: width / 15),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) =>
-                  AddExpensePage()),
-            );
-          },
-        ),
+          bottomNavigationBar: Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Container(
+              height: 60,
+              decoration: BoxDecoration(
+                color: darkThemeBoolean == "false"
+                    ? AppColors.mainColor
+                    : AppColors.darkThemeColor,
+                borderRadius: BorderRadius.circular(25),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black12,
+                    blurRadius: 8,
+                    offset: Offset(0, 3),
+                  )
+                ],
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(25),
+                child: NavigationBarTheme(
+                  data: NavigationBarThemeData(
+                    iconTheme: WidgetStateProperty.resolveWith((states) {
+                      if (states.contains(WidgetState.selected)) {
+                        return const IconThemeData(color: Colors.purple);
+                      }
+                      return const IconThemeData(color: Colors.grey);
+                    }),
+                  ),
+                  child: NavigationBar(
+                    backgroundColor: Colors.transparent,
+                    indicatorColor: Colors.transparent,
+                    height: 50,
+                    labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
+                    selectedIndex: state.pageNumber,
+                    onDestinationSelected: (index) {
+                      BlocProvider.of<ThemeBloc>(context)
+                          .add(ChangeIndexEvent(index: index));
+                    },
+                    destinations: const [
+                      Padding(
+                        padding: EdgeInsets.only(top: 15.0),
+                        child: NavigationDestination(icon: Icon(Icons.home, size: 26), label: ''),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 15.0),
+                        child: NavigationDestination(icon: Icon(Icons.pie_chart, size: 26), label: ''),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 15.0),
+                        child: NavigationDestination(icon: Icon(Icons.bar_chart, size: 26), label: ''),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 15.0),
+                        child: NavigationDestination(icon: Icon(Icons.settings, size: 26), label: ''),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: new FloatingActionButton(
+        onPressed: () {
+          _incrementTab(1);
+        },
+        tooltip: 'Increment',
+        child: new Icon(Icons.add),
       ),
-      floatingActionButtonLocation:
-      FloatingActionButtonLocation.miniCenterDocked,
     );
     });}
 }

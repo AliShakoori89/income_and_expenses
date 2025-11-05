@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:income_and_expenses/data/model/income_model.dart';
 import 'package:income_and_expenses/logic/bloc/set_date_bloc/bloc.dart';
 import 'package:income_and_expenses/logic/bloc/set_date_bloc/event.dart';
@@ -8,6 +7,7 @@ import 'package:income_and_expenses/logic/bloc/set_date_bloc/state.dart';
 import 'package:income_and_expenses/logic/bloc/them_bloc/bloc.dart';
 import 'package:income_and_expenses/logic/bloc/them_bloc/state.dart';
 import 'package:income_and_expenses/presentation/utils/date_picker_calendar.dart';
+import '../../l10n/app_localizations.dart';
 import '../const/app_colors.dart';
 import '../utils/app_text_field.dart';
 import '../utils/arrow_back_icon.dart';

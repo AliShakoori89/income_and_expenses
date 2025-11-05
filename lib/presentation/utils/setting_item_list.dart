@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:income_and_expenses/logic/bloc/change_currency_bloc/bloc.dart';
 import 'package:income_and_expenses/logic/bloc/change_currency_bloc/event.dart';
 import 'package:income_and_expenses/logic/bloc/change_currency_bloc/state.dart';
@@ -12,6 +11,7 @@ import 'package:income_and_expenses/logic/providers/language_provider.dart';
 import 'package:income_and_expenses/presentation/const/app_colors.dart';
 import 'package:income_and_expenses/presentation/pages/frequently_asked_questions_page.dart';
 import 'package:provider/provider.dart';
+import '../../l10n/app_localizations.dart';
 import 'setting_items.dart';
 
 class SettingItemList extends StatelessWidget{

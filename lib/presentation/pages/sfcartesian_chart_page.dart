@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_linear_datepicker/flutter_datepicker.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:income_and_expenses/logic/bloc/calculate_sf_cartesian_chart/bloc.dart';
 import 'package:income_and_expenses/logic/bloc/calculate_sf_cartesian_chart/event.dart';
 import 'package:income_and_expenses/logic/bloc/calculate_sf_cartesian_chart/state.dart';
@@ -9,6 +8,7 @@ import 'package:income_and_expenses/logic/bloc/them_bloc/bloc.dart';
 import 'package:income_and_expenses/logic/bloc/them_bloc/state.dart';
 import 'package:persian_datetime_picker/persian_datetime_picker.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import '../../l10n/app_localizations.dart';
 import '../const/app_colors.dart';
 
 
@@ -206,7 +206,7 @@ class SFCartesianChartPage extends StatelessWidget {
           tooltipBehavior: _tooltip,
           plotAreaBorderWidth: 0,
           borderWidth: 0,
-          series: <ChartSeries<_ChartData, String>>[
+          series: <CartesianSeries<_ChartData, String>>[
             ColumnSeries<_ChartData, String>(
                 borderWidth: 0,
                 dataSource: data,
@@ -220,8 +220,12 @@ class SFCartesianChartPage extends StatelessWidget {
                         color: Colors.black,
                         fontSize: width / 30
                     )),
-                onCreateRenderer: (ChartSeries<_ChartData, String> series) =>
-                    _CustomColumnSeriesRenderer(),
+                onCreateRenderer: (ChartSeries<_ChartData, String> series) {
+                  return _CustomColumnSeriesRenderer();
+                },
+
+
+
                 color: AppColors.chartColor),
           ]
       ),
@@ -296,17 +300,17 @@ class _ChartData {
   final double y;
 }
 
-class _CustomColumnSeriesRenderer extends ColumnSeriesRenderer {
+class _CustomColumnSeriesRenderer extends ColumnSeriesRenderer<_ChartData, String> {
   _CustomColumnSeriesRenderer();
 
   @override
-  ColumnSegment createSegment() {
+  ColumnSegment<_ChartData, String> createSegment() {
     return _ColumnCustomPainter();
   }
 }
 
-class _ColumnCustomPainter extends ColumnSegment {
-  final colorList = [
+class _ColumnCustomPainter extends ColumnSegment<_ChartData, String> {
+  final List<Color> colorList = [
     const Color.fromRGBO(102, 210, 106, 1.0),
     const Color.fromRGBO(225, 190, 231, 1),
     const Color.fromRGBO(255, 236, 179, 1),
@@ -323,10 +327,19 @@ class _ColumnCustomPainter extends ColumnSegment {
 
   @override
   Paint getFillPaint() {
-    final Paint customerFillPaint = Paint();
-    customerFillPaint.isAntiAlias = false;
-    customerFillPaint.color = colorList[currentSegmentIndex!];
-    customerFillPaint.style = PaintingStyle.fill;
-    return customerFillPaint;
+    final Paint paint = Paint()
+      ..isAntiAlias = true
+      ..style = PaintingStyle.fill
+      ..color = colorList[currentSegmentIndex! % colorList.length];
+    return paint;
+  }
+
+  @override
+  Paint getStrokePaint() {
+    final Paint paint = Paint()
+      ..isAntiAlias = true
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 0;
+    return paint;
   }
 }

@@ -55,14 +55,13 @@ class FrequentlyAskedQuestions extends StatelessWidget {
       return Align(
         alignment: Alignment.centerRight,
         child: SizedBox(
-          height: height / 2,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
                 Expanded(
                   flex: 1,
-                    child: buildQuestion( height / 30, question, darkThemeBoolean)),
+                    child: buildQuestion( 50, question, darkThemeBoolean)),
                 Expanded(
                   flex: 10,
                   child: Padding(
@@ -85,7 +84,7 @@ class FrequentlyAskedQuestions extends StatelessWidget {
     }
 
     buildExpanded1(String question, String darkThemeBoolean) {
-      return buildQuestion(height / 8, question, darkThemeBoolean);
+      return buildQuestion(300, question, darkThemeBoolean);
     }
 
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
@@ -104,7 +103,7 @@ class FrequentlyAskedQuestions extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
                   child: ScrollOnExpand(
                     child: SizedBox(
-                      height: height / 7.2,
+                      height: 300,
                       child: Card(
                         color: state.darkThemeBoolean == "false"
                             ? Colors.white

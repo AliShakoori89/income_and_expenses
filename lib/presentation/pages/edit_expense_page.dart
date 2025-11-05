@@ -8,7 +8,7 @@ import 'package:income_and_expenses/logic/bloc/them_bloc/bloc.dart';
 import 'package:income_and_expenses/logic/bloc/them_bloc/state.dart';
 import 'package:income_and_expenses/presentation/pages/home_page.dart';
 import 'package:persian_number_utility/persian_number_utility.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../l10n/app_localizations.dart';
 import '../const/app_colors.dart';
 import '../utils/app_text_field.dart';
 import '../utils/arrow_back_icon.dart';

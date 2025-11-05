@@ -16,7 +16,8 @@ import 'package:income_and_expenses/logic/providers/language_provider.dart';
 import 'package:income_and_expenses/presentation/const/app_colors.dart';
 import 'package:income_and_expenses/presentation/pages/home_page.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import 'l10n/app_localizations.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();

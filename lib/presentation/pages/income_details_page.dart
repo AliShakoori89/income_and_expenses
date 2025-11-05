@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:income_and_expenses/logic/bloc/set_date_bloc/bloc.dart';
 import 'package:income_and_expenses/logic/bloc/set_date_bloc/event.dart';
@@ -10,6 +9,7 @@ import 'package:income_and_expenses/logic/bloc/them_bloc/state.dart';
 import 'package:income_and_expenses/presentation/pages/add_income_page.dart';
 import 'package:income_and_expenses/presentation/utils/no_data.dart';
 import 'package:persian_number_utility/persian_number_utility.dart';
+import '../../l10n/app_localizations.dart';
 import '../const/app_colors.dart';
 import '../utils/arrow_back_icon.dart';
 

@@ -7,7 +7,8 @@ import 'package:income_and_expenses/presentation/const/app_colors.dart';
 import 'package:intl/intl.dart';
 import 'package:persian_datetime_picker/persian_datetime_picker.dart';
 import 'package:persian_number_utility/persian_number_utility.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../l10n/app_localizations.dart';
 
 
 class DatePickerCalendar extends StatefulWidget {
