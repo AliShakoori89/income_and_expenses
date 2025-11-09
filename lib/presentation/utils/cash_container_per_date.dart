@@ -41,13 +41,12 @@ class CashContainerPerDate extends StatelessWidget {
 
         return Container(
           margin: EdgeInsets.only(
-            top: height / 100,
-            bottom: height / 100,
-            right: width / 30,
-            left: width / 30,
+            top: 10,
+            bottom: 10,
+            right: 10,
+            left: 10,
           ),
-          child:
-              BlocBuilder<SetDateBloc, SetDateState>(builder: (context, state) {
+          child: BlocBuilder<SetDateBloc, SetDateState>(builder: (context, state) {
             int allTodayExpenses = 0;
 
             return state.status.isLoading
@@ -58,7 +57,7 @@ class CashContainerPerDate extends StatelessWidget {
                             children: [
                               persianAllExpenses(rialCurrencyType, state,
                                   darkThemeBoolean, context, width, height),
-                              SizedBox(height: height / 60),
+                              SizedBox(height: 10),
                               expensesList(
                                   context,
                                   allTodayExpenses,
@@ -86,15 +85,24 @@ class CashContainerPerDate extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-          color: AppColors.themContainer,
+          gradient: RadialGradient(
+            stops: [
+              0.05,
+              0.999
+            ],
+              colors: [
+                AppColors.themContainer,
+                Colors.white,
+          ]),
           borderRadius: BorderRadius.circular(15)),
-      height: height / 2.1,
+      height: 400,
       child: ListView.builder(
         scrollDirection: Axis.vertical,
-        padding: EdgeInsets.only(right: width / 60, left: width / 60),
+        padding: EdgeInsets.only(right: width / 60, left: width / 60, bottom: 30, top: 15),
         shrinkWrap: true,
         itemBuilder: (context, index) {
           allTodayExpenses += state.expenseDetails[index].expense!;
+          // print(state.expenseDetails[index].expenseCategory);
           BlocProvider.of<SetDateBloc>(context).add(
               AddTodayExpensesEvent(todayExpensesDetails: allTodayExpenses));
 
@@ -107,11 +115,11 @@ class CashContainerPerDate extends StatelessWidget {
                           expenseModel: state.expenseDetails[index])));
             },
             child: Container(
-              height: height / 10,
+              height: 80,
                 margin: EdgeInsets.only(
-                  left: width / 60,
-                  right: width / 60,
-                  top: height / 60,
+                  left: 10,
+                  right: 10,
+                  top: 20,
                 ),
                 decoration: BoxDecoration(
                   color: darkThemeBoolean == "false"
@@ -128,21 +136,28 @@ class CashContainerPerDate extends StatelessWidget {
                   ],
                 ),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Expanded(
-                      flex: 3,
+                      flex: 6,
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          categoryIcon(height, width, index, state),
+                          Expanded(
+                              flex: 4,
+                              child: categoryIcon(height, width, index, state)),
                           SizedBox(
-                            width: width / 50,
+                            width: 10,
                           ),
-                          expensesDetails(context, state, index, width, darkThemeBoolean, height)
+                          Expanded(
+                              flex: 10,
+                              child: expensesDetails(context, state, index, width, darkThemeBoolean, height))
                         ],
                       ),
                     ),
-                    expensesPrice(context, width, rialCurrencyType, state, index, darkThemeBoolean)
+                    Expanded(
+                        flex: 2,
+                        child: expensesPrice(context, width, rialCurrencyType, state, index, darkThemeBoolean))
                   ],
                 )),
           );
@@ -152,104 +167,116 @@ class CashContainerPerDate extends StatelessWidget {
     );
   }
 
-  Expanded expensesPrice(BuildContext context, double width, bool rialCurrencyType, SetDateState state, int index, String darkThemeBoolean) {
-    return Expanded(
-                    flex: 2,
-                    child: Align(
-                      alignment:
-                          AppLocalizations.of(context)!.language == "زبان"
-                              ? Alignment.centerLeft
-                              : Alignment.centerRight,
-                      child: Container(
-                        margin: EdgeInsets.only(
-                            left: width / 30, right: width / 30),
-                        child: Text(
-                            rialCurrencyType == true
-                                ? AppLocalizations.of(context)!.language ==
-                                        "زبان"
-                                    ? "${("${state.expenseDetails[index].expense!}0").toPersianDigit().seRagham()} -"
-                                    : "- ${state.expenseDetails[index].expense!.toString().seRagham()}"
-                                : AppLocalizations.of(context)!.language ==
-                                        "زبان"
-                                    ? "${("${state.expenseDetails[index].expense!}").toPersianDigit().seRagham()} -"
-                                    : "- ${("${state.expenseDetails[index].expense!}").seRagham()}",
-                            style: TextStyle(
-                                fontSize: width / 25,
-                                color: darkThemeBoolean == "false"
-                                    ? AppColors.expensesDigitColor
-                                    : Colors.white)),
-                      ),
-                    ),
-                  );
+  Widget expensesPrice(
+      BuildContext context,
+      double width,
+      bool rialCurrencyType,
+      SetDateState state,
+      int index,
+      String darkThemeBoolean,
+      ) {
+    return Align(
+      alignment: AppLocalizations.of(context)!.language == "زبان"
+          ? Alignment.centerLeft
+          : Alignment.centerRight,
+      child: Container(
+        margin: EdgeInsets.only(left: width / 30, right: width / 30),
+        child: Text(
+          rialCurrencyType == true
+              ? AppLocalizations.of(context)!.language == "زبان"
+              ? "${("${state.expenseDetails[index].expense!}0").toPersianDigit().seRagham()} -"
+              : "- ${state.expenseDetails[index].expense!.toString().seRagham()}"
+              : AppLocalizations.of(context)!.language == "زبان"
+              ? "${("${state.expenseDetails[index].expense!}").toPersianDigit().seRagham()} -"
+              : "- ${("${state.expenseDetails[index].expense!}").seRagham()}",
+          style: TextStyle(
+            fontSize: 16,
+            color: darkThemeBoolean == "false"
+                ? AppColors.expensesDigitColor
+                : Colors.white,
+          ),
+        ),
+      ),
+    );
   }
 
-  Flexible expensesDetails(BuildContext context, SetDateState state, int index, double width, String darkThemeBoolean, double height) {
-    return Flexible(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              AppLocalizations.of(context)!.language == "زبان"
-                                  ? Text(
-                                      textAlign: TextAlign.end,
-                                      state.expenseDetails[index]
-                                          .expenseCategory!,
-                                      style: TextStyle(
-                                          fontSize: width / 25,
-                                          fontWeight: FontWeight.w700,
-                                          color: darkThemeBoolean == "false"
-                                              ? AppColors.black
-                                              : Colors.white))
-                                  : Text(
-                                      textAlign: TextAlign.end,
-                                      ifLanguageIsEnglish(state
-                                          .expenseDetails[index]
-                                          .expenseCategory!),
-                                      style: TextStyle(
-                                          fontSize: width / 25,
-                                          fontWeight: FontWeight.w700,
-                                          color: darkThemeBoolean == "false"
-                                              ? AppColors.black
-                                              : Colors.white)),
-                              Container(
-                                margin: EdgeInsets.only(
-                                  bottom: height / 50,
-                                  top: height / 50,
-                                  left: width / 50,
-                                ),
-                                child: Text(
-                                    textAlign: TextAlign.justify,
-                                    overflow: TextOverflow.clip,
-                                    state.expenseDetails[index]
-                                        .expensesDescription!,
-                                    style: TextStyle(
-                                        overflow: TextOverflow.ellipsis,
-                                        fontSize: width / 30,
-                                        fontWeight: FontWeight.w400,
-                                        color: darkThemeBoolean == "false"
-                                            ? AppColors.appBarProfileName
-                                            : Colors.white)),
-                              )
-                            ],
-                          ),
-                        );
+  Column expensesDetails(BuildContext context, SetDateState state, int index, double width, String darkThemeBoolean, double height) {
+
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        AppLocalizations.of(context)!.language == "زبان"
+            ? Padding(
+          padding: EdgeInsets.only(top: 20),
+          child: Text(
+              textAlign: TextAlign.end,
+              state.expenseDetails[index].expenseCategory ?? '',
+              overflow: TextOverflow.fade,
+              style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w700,
+                  color: darkThemeBoolean == "false"
+                      ? AppColors.black
+                      : Colors.white)),
+        )
+            : Padding(
+          padding: EdgeInsets.only(top: 20),
+          child: Text(
+              textAlign: TextAlign.end,
+              ifLanguageIsEnglish(
+                  state.expenseDetails[index].expenseCategory!),
+              overflow: TextOverflow.fade,
+              style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w700,
+                  color: darkThemeBoolean == "false"
+                      ? AppColors.black
+                      : Colors.white)),
+        ),
+        Container(
+          margin: EdgeInsets.only(
+            bottom: 10,
+            top: 10,
+          ),
+          child: Text(
+              textAlign: TextAlign.justify,
+              overflow: TextOverflow.clip,
+              state.expenseDetails[index].expensesDescription ?? '',
+              maxLines: 1,
+              style: TextStyle(
+                  overflow: TextOverflow.ellipsis,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400,
+                  color: darkThemeBoolean == "false"
+                      ? AppColors.appBarProfileName
+                      : Colors.white)),
+        )
+      ],
+    );
   }
 
   Container categoryIcon(double height, double width, int index, SetDateState state) {
+    final iconPath = state.expenseDetails[index].expensesIconType;
+
     return Container(
-      margin: EdgeInsets.only(
-          top: height / 100,
-          right: width / 100,
-          left: width / 100,
-          bottom: height / 100),
       decoration: BoxDecoration(
-          shape: BoxShape.circle, color: AppColors.colorList[index]),
+        shape: BoxShape.circle,
+        color: AppColors.colorList[index % AppColors.colorList.length],
+      ),
       child: Container(
-        margin: EdgeInsets.all(width / 50),
-        child: SvgPicture.asset(
-            height: height / 30,
-            width: width / 30,
-            state.expenseDetails[index].expensesIconType!),
+        margin: EdgeInsets.all(10),
+        child: iconPath != null && iconPath.isNotEmpty
+            ? SvgPicture.asset(
+          iconPath,
+          height: height / 30,
+          width: width / 30,
+        )
+            : Icon(
+          Icons.category,
+          size: height / 30,
+          color: Colors.white,
+        ),
       ),
     );
   }

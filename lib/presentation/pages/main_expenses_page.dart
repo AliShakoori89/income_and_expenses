@@ -41,20 +41,20 @@ class MainExpensesPage extends StatelessWidget {
                 Stack(
                   children: [
                     Container(
-                      height: height / 5,
+                      height: 150,
                       decoration: BoxDecoration(
-                        gradient: const LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment(0.8, 1),
-                          colors: <Color>[
-                            Color.fromRGBO(248, 187, 208, 1),
-                            Color.fromRGBO(212, 200, 235, 1),
-                            Color.fromRGBO(179, 229, 252, 1),
+                        gradient: RadialGradient(
+                          center: Alignment.center, // مرکز گرادیان
+                          radius: 2.0, // هرچی بزرگتر باشه، سفیدی زودتر به لبه‌ها می‌رسه
+                          colors: const [
+                            Color.fromRGBO(179, 229, 252, 1), // رنگ اصلی وسط
+                            Colors.white, // محو به سفید در لبه‌ها
                           ],
-                          tileMode: TileMode.mirror,
+                          stops: const [0.0, 1.0],
                         ),
                         borderRadius: BorderRadius.vertical(
-                            bottom: Radius.elliptical(width, 200)),
+                          bottom: Radius.elliptical(400, 200), // یا همون width متغیّرت
+                        ),
                       ),
                     ),
                     Padding(

@@ -142,6 +142,9 @@ class SetDateBloc extends Bloc<SetDateEvent, SetDateState> {
       await setDateRepository.getAllExpensesItemsRepo(event.date);
       final String expensesPerDate =
       await calculateExpensesRepository.calculateDayExpenseRepo(event.date);
+
+      // print('expensesDetails');
+      // print(expensesDetails[0].expenseCategory);
       emit(
         state.copyWith(
           status: SetDateStatus.success,

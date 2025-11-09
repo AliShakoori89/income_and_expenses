@@ -192,9 +192,9 @@ class _AddExpensePageState extends State<AddExpensePage> {
               } else if (categoryController.text == "حمل و نقل") {
                 expense.expensesIconType = "assets/icons/expense_category_icons/driving.svg";
                 expense.expenseCategory = "حمل و نقل";
-              } else if (categoryController.text == "هدیه") {
+              } else if (categoryController.text == "هدایا") {
                 expense.expensesIconType = "assets/icons/expense_category_icons/gift.svg";
-                expense.expenseCategory = "هدیه";
+                expense.expenseCategory = "هدایا";
               } else if (categoryController.text == "درمانی") {
                 expense.expensesIconType = "assets/icons/expense_category_icons/health.svg";
                 expense.expenseCategory = "درمانی";
@@ -204,10 +204,10 @@ class _AddExpensePageState extends State<AddExpensePage> {
               } else if (categoryController.text == "تعمیرات") {
                 expense.expensesIconType = "assets/icons/expense_category_icons/repairs.svg";
                 expense.expenseCategory = "تعمیرات";
-              } else if (categoryController.text == "pastime") {
+              } else if (categoryController.text == "تفریح") {
                 expense.expensesIconType = "assets/icons/expense_category_icons/games_and_multimedia.svg";
                 expense.expenseCategory = "تفریح";
-              } else if (categoryController.text == "other") {
+              } else if (categoryController.text == "سایر") {
                 expense.expensesIconType = "assets/icons/expense_category_icons/other.svg";
                 expense.expenseCategory = "سایر";
               }

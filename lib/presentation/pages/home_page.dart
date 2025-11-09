@@ -4,6 +4,7 @@ import 'package:income_and_expenses/logic/bloc/them_bloc/bloc.dart';
 import 'package:income_and_expenses/logic/bloc/them_bloc/event.dart';
 import 'package:income_and_expenses/logic/bloc/them_bloc/state.dart';
 import 'package:income_and_expenses/presentation/const/app_colors.dart';
+import 'package:income_and_expenses/presentation/pages/add_expense_page.dart';
 import 'package:income_and_expenses/presentation/pages/main_expenses_page.dart';
 import 'package:income_and_expenses/presentation/pages/setting_page.dart';
 import 'package:income_and_expenses/presentation/pages/sfcartesian_chart_page.dart';
@@ -350,17 +351,16 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
 
-    var height = MediaQuery.of(context).size.height;
-    var width = MediaQuery.of(context).size.width;
-
     checkFirstSeen();
 
     final List<Widget> pages = _pages();
 
     void _incrementTab(index) {
       setState(() {
-        print('PRESSED floating button');
-        print(index);
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => AddExpensePage()),
+        );
       });
     }
 

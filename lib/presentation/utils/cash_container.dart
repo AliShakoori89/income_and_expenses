@@ -271,38 +271,47 @@ class CashContainer extends StatelessWidget {
           height: height / 200,
         ),
         Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                      state.calculateCash != ""
-                          ? rialCurrencyType == true
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Flexible(
+              child: Text(
+                textDirection: AppLocalizations.of(context)!.language == "زبان"
+                    ? TextDirection.ltr
+                    : TextDirection.rtl,
+                  state.calculateCash != ""
+                      ? rialCurrencyType == true
                           ? AppLocalizations.of(context)!.language == "زبان"
-                          ? ("${state.calculateCash}0").toPersianDigit().seRagham()
-                          : ("${state.calculateCash}0").seRagham()
+                              ? ("${state.calculateCash}0")
+                                  .toPersianDigit()
+                                  .seRagham()
+                              : ("${state.calculateCash}0").seRagham()
                           : AppLocalizations.of(context)!.language == "زبان"
-                          ? state.calculateCash.toPersianDigit().seRagham()
-                          : state.calculateCash.seRagham()
-                          : AppLocalizations.of(context)!.language == "زبان"
+                              ? state.calculateCash.toPersianDigit().seRagham()
+                              : state.calculateCash.seRagham()
+                      : AppLocalizations.of(context)!.language == "زبان"
                           ? "0".toPersianDigit()
                           : "0",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: width / 25,
-                      )),
-                  SizedBox(
-                    width: width / 50,
-                  ),
-                  Text(
-                      state.calculateCash != ""
-                          ? rialCurrencyType == true
+                  maxLines: 1,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                    fontSize: width / 25,
+                  )),
+            ),
+            SizedBox(
+              width: width / 50,
+            ),
+            Flexible(
+              child: Text(
+                  state.calculateCash != ""
+                      ? rialCurrencyType == true
                           ? AppLocalizations.of(context)!.rial
                           : AppLocalizations.of(context)!.toman
-                          : ''.toPersianDigit(),
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: width / 22)),
-                ],
-              ),
+                      : ''.toPersianDigit(),
+                  style: TextStyle(color: Colors.white, fontSize: width / 22)),
+            ),
+          ],
+        ),
       ],
     );
   }
