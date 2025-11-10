@@ -11,143 +11,92 @@ class FrequentlyAskedQuestions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    BlocProvider.of<ThemeBloc>(context).add(ReadThemeBooleanEvent());
 
-    var height = MediaQuery.of(context).size.height;
-
-    BlocProvider.of<ThemeBloc>(context)
-        .add(ReadThemeBooleanEvent());
-
-    var allQuestion = [
+    final allQuestion = [
       "نحوه استفاده از برنامه به چه گونه می باشد؟",
       "چگونه می توانم از برنامه خروجی بگیرم؟",
       "آیا هزینه ها به تفکیک ماه محاسبه میگردد؟",
-      "آیا امکان اضافه کردن مبلغ به هزینه ورودی در هر کدام از روزهای ماه امکان پذبر است؟"
+      "آیا امکان اضافه کردن مبلغ به هزینه ورودی در هر کدام از روزهای ماه امکان‌پذیر است؟"
     ];
 
-    var allAnswer = [
-      "شما ابتدا قبل از هر چیز باید میزان ورودی که کل موجودی شما می_باشد را وارد نمایید سپس با استفاده از علامت + می توانید هزینه انجام شده را اضافه نمایید",
-      "ابتدا به قسمت تنظیمات رفته سپس از گزینه مربوط به خروجی استفاده نمایید",
-      "بله و گزارشات مربوط به هر ماه در صفحه گزارشات قابل بررسی می باشد",
-      "بله شما می توانید با کلیک بر روی گزینه ورودی ، مبلغ مورد نظر را پس از محاسبه وارد نمایید"
+    final allAnswer = [
+      "شما ابتدا باید میزان ورودی که کل موجودی شما می‌باشد را وارد نمایید سپس با استفاده از علامت + می‌توانید هزینه انجام‌شده را اضافه نمایید.",
+      "ابتدا به قسمت تنظیمات بروید سپس از گزینه مربوط به خروجی استفاده نمایید.",
+      "بله، گزارشات مربوط به هر ماه در صفحه گزارشات قابل بررسی است.",
+      "بله، شما می‌توانید با کلیک بر روی گزینه ورودی، مبلغ مورد نظر را وارد نمایید."
     ];
 
-    buildQuestion(double height, String question, String darkThemeBoolean) {
-
-      return SizedBox(
-          height: height,
-          child: Align(
-            alignment: Alignment.centerRight,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(question,
-                  style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                    color: darkThemeBoolean == "false"
-                        ? Colors.black
-                        : Colors.white
-                  ),
-                  textDirection: TextDirection.rtl),
-            ),
-          ));
-    }
-
-    buildCollapsed1(String question, String answer, String darkThemeBoolean) {
-      return Align(
-        alignment: Alignment.centerRight,
-        child: SizedBox(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                Expanded(
-                  flex: 1,
-                    child: buildQuestion( 50, question, darkThemeBoolean)),
-                Expanded(
-                  flex: 10,
+    return BlocBuilder<ThemeBloc, ThemeState>(
+      builder: (context, state) {
+        final darkTheme = state.darkThemeBoolean == "true";
+        return Scaffold(
+          backgroundColor:
+          darkTheme ? AppColors.darkThemeColor : Colors.white,
+          body: SafeArea(
+            child: ListView.builder(
+              itemCount: allQuestion.length,
+              padding: const EdgeInsets.all(8),
+              itemBuilder: (context, index) {
+                return ExpandableNotifier(
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(answer,
-                        style: TextStyle(
-                            fontWeight: FontWeight.w400,
-                            color: darkThemeBoolean == "false"
-                                ? Colors.black
-                                : Colors.white),
-                        textDirection: TextDirection.rtl,
-                    ),
-                  ),
-                )
-              ],
-            ),
-          ),
-        ),
-      );
-    }
-
-    buildExpanded1(String question, String darkThemeBoolean) {
-      return buildQuestion(300, question, darkThemeBoolean);
-    }
-
-    return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
-      return Scaffold(
-      backgroundColor: state.darkThemeBoolean == "false"
-          ? Colors.white
-          : AppColors.darkThemeColor,
-      body: SafeArea(
-        child:  ListView.builder(
-          itemCount: allQuestion.length,
-          padding: const EdgeInsets.all(8),
-          itemBuilder: (context, index){
-            return ExpandableNotifier(
-                initialExpanded: true,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
-                  child: ScrollOnExpand(
-                    child: SizedBox(
-                      height: 300,
-                      child: Card(
-                        color: state.darkThemeBoolean == "false"
-                            ? Colors.white
-                            : AppColors.darkThemeColor,
-                        clipBehavior: Clip.antiAlias,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Expanded(
-                              flex: 2,
-                              child: Expandable(
-                                collapsed: buildCollapsed1(allQuestion[index], allAnswer[index] , state.darkThemeBoolean),
-                                expanded: buildExpanded1(allQuestion[index], state.darkThemeBoolean),
+                    padding:
+                    const EdgeInsets.only(left: 10, right: 10, bottom: 10),
+                    child: Card(
+                      color: darkTheme
+                          ? AppColors.darkThemeColor
+                          : Colors.white,
+                      elevation: 2,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: ScrollOnExpand(
+                        child: ExpandablePanel(
+                          theme: const ExpandableThemeData(
+                            iconColor: Colors.blueGrey,
+                            headerAlignment:
+                            ExpandablePanelHeaderAlignment.center,
+                            tapHeaderToExpand: true,
+                            hasIcon: true,
+                          ),
+                          header: Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Text(
+                              allQuestion[index],
+                              textAlign: TextAlign.right,
+                              textDirection: TextDirection.rtl,
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                color: darkTheme ? Colors.white : Colors.black,
+                                fontSize: 16,
                               ),
                             ),
-                            Expanded(
-                              flex: 2,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: <Widget>[
-                                  Builder(
-                                    builder: (context) {
-                                      var controller =
-                                      ExpandableController.of(context, required: true)!;
-                                      return IconButton(onPressed: () {
-                                        controller.toggle();
-                                      }, icon: Icon(Icons.arrow_drop_down_outlined,
-                                      color: state.darkThemeBoolean == "false"
-                                          ? Colors.black
-                                          : Colors.white));
-                                    },
-                                  ),
-                                ],
+                          ),
+                          collapsed: const SizedBox.shrink(),
+                          expanded: Padding(
+                            padding: const EdgeInsets.only(
+                                right: 12, left: 12, bottom: 12),
+                            child: Text(
+                              allAnswer[index],
+                              textAlign: TextAlign.right,
+                              textDirection: TextDirection.rtl,
+                              style: TextStyle(
+                                color: darkTheme ? Colors.white70 : Colors.black87,
+                                fontSize: 15,
+                                height: 1.6,
                               ),
                             ),
-                          ],
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ));
-          },
-        )
-      ),
-    );});
+                );
+              },
+            ),
+          ),
+        );
+      },
+    );
   }
 }

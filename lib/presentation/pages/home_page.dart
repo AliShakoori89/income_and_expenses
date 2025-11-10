@@ -399,7 +399,7 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                       if (states.contains(WidgetState.selected)) {
                         return const IconThemeData(color: Colors.purple);
                       }
-                      return const IconThemeData(color: Colors.grey);
+                      return const IconThemeData(color: Colors.white);
                     }),
                   ),
                   child: NavigationBar(

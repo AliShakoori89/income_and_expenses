@@ -166,14 +166,22 @@ class DatePickerCalendarState extends State<DatePickerCalendar> {
                         SizedBox(
                           width: width / 20,
                         ),
-                        Text(
+                        AppLocalizations.of(context)!.language == "زبان"
+                            ? Text(
                             key: keyBottomNavigation3,
                             DateFormat('yyyy-MM-dd')
                                 .format(DateTime.parse(date))
                                 .toPersianDigit(),
                             style: TextStyle(
-                                fontSize: width / 20,
-                                color: AppColors.appBarTitleColor)),
+                                fontSize: 14,
+                                color: AppColors.appBarTitleColor))
+                            : Text(
+                            key: keyBottomNavigation3,
+                            DateFormat('yyyy-MM-dd')
+                                .format(DateTime.parse(date)),
+                            style: TextStyle(
+                                fontSize: 14,
+                                color: AppColors.appBarTitleColor))
                       ],
                     ),
                   ),

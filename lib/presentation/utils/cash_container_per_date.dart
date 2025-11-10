@@ -85,9 +85,9 @@ class CashContainerPerDate extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-          gradient: RadialGradient(
+          gradient: LinearGradient(
             stops: [
-              0.05,
+              0.9,
               0.999
             ],
               colors: [
@@ -119,21 +119,21 @@ class CashContainerPerDate extends StatelessWidget {
                 margin: EdgeInsets.only(
                   left: 10,
                   right: 10,
-                  top: 20,
+                  top: 10,
                 ),
                 decoration: BoxDecoration(
                   color: darkThemeBoolean == "false"
                       ? Colors.white
                       : AppColors.darkThemeColor,
                   borderRadius: BorderRadius.circular(25),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 5,
-                      blurRadius: 7,
-                      offset: const Offset(0, 3), // changes position of shadow
-                    ),
-                  ],
+                  // boxShadow: [
+                  //   BoxShadow(
+                  //     color: Colors.grey.withOpacity(0.5),
+                  //     spreadRadius: 5,
+                  //     blurRadius: 7,
+                  //     offset: const Offset(0, 3), // changes position of shadow
+                  //   ),
+                  // ],
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -281,37 +281,43 @@ class CashContainerPerDate extends StatelessWidget {
     );
   }
 
-  Row persianAllExpenses(bool rialCurrencyType, SetDateState state, String darkThemeBoolean, BuildContext context,
+  Container persianAllExpenses(bool rialCurrencyType, SetDateState state, String darkThemeBoolean, BuildContext context,
       double width, double height) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          AppLocalizations.of(context)!.allExpenses,
-          style: TextStyle(
-              fontWeight: FontWeight.w700,
+    return Container(
+      margin: EdgeInsets.only(
+        left: 20,
+        right: 20
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            AppLocalizations.of(context)!.allExpenses,
+            style: TextStyle(
+                fontWeight: FontWeight.w700,
+                color: darkThemeBoolean == "false"
+                    ? AppColors.appBarTitleColor
+                    : Colors.white,
+                fontSize: width / 25),
+          ),
+          Text(
+            rialCurrencyType == true
+                ? AppLocalizations.of(context)!.language == "زبان"
+                ? ("${state.expensesPerDate}0").toPersianDigit().seRagham()
+                : ("${state.expensesPerDate}0").seRagham()
+                : AppLocalizations.of(context)!.language == "زبان"
+                ? state.expensesPerDate.toPersianDigit().seRagham()
+                : state.expensesPerDate.seRagham(),
+            style: TextStyle(
               color: darkThemeBoolean == "false"
                   ? AppColors.appBarTitleColor
                   : Colors.white,
-              fontSize: width / 25),
-        ),
-        Text(
-          rialCurrencyType == true
-              ? AppLocalizations.of(context)!.language == "زبان"
-              ? ("${state.expensesPerDate}0").toPersianDigit().seRagham()
-              : ("${state.expensesPerDate}0").seRagham()
-              : AppLocalizations.of(context)!.language == "زبان"
-              ? state.expensesPerDate.toPersianDigit().seRagham()
-              : state.expensesPerDate.seRagham(),
-          style: TextStyle(
-            color: darkThemeBoolean == "false"
-                ? AppColors.appBarTitleColor
-                : Colors.white,
-            fontSize: width / 25,
-              fontWeight: FontWeight.w700
+              fontSize: width / 25,
+                fontWeight: FontWeight.w700
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
